@@ -3,32 +3,22 @@
     .input-prepend
       %span.add-on= t 'number.currency.format.unit'
       = f.input_field :price, class: 'input-mini'
+  = f.input :price_unit, as: :select, collection: [], input_html: {'data-initial-value': article.price_unit, class: 'input-medium'}, label: t('articles.form.per'), include_blank: false
+.fold-line
   = f.input :tax do
     .input-append
       = f.input_field :tax, class: 'input-mini'
       %span.add-on %
-.fold-line
   = f.input :deposit do
     .input-prepend
       %span.add-on= t 'number.currency.format.unit'
       = f.input_field :deposit, class: 'input-mini'
+.fold-line
   .control-group
     %label.control-label{for: 'article_fc_price'}
       = Article.human_attribute_name(:fc_price)
     .controls.control-text#article_fc_price
-      = number_to_currency(f.object.fc_price) rescue nil
-
--# do this inline, since it's being used in ajax forms only
-- field = f.object.class.model_name.to_s.underscore
-:javascript
-  var form = $('#article_fc_price').closest('form');
-  $('##{field}_price, ##{field}_tax, ##{field}_deposit', form).on('change keyup', function() {
-    var price = parseFloat($('##{field}_price', form).val());
-    var tax = parseFloat($('##{field}_tax', form).val());
-    var deposit = parseFloat($('##{field}_deposit', form).val());
-    // Article#gross_price and Article#fc_price
-    var gross_price = (price + deposit) * (tax / 100 + 1);
-    var fc_price = gross_price  * (#{FoodsoftConfig[:price_markup].to_f} / 100 + 1);
-    $('#article_fc_price').html($.isNumeric(fc_price) ? I18n.l("currency", fc_price) : '&#133;');
-  });
+      %span.price_value
+      %span.price_per_text=t('articles.form.per')
+      %span.price_unit
 

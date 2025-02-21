@@ -1,3 +1,6 @@
 $('#modalContainer').modal('hide');
 $('#listbody').prepend('#{escape_javascript(render(@article))}');
+const importActionsCell$ = $('#import #search_results td[data-order-number="#{escape_javascript(@article.order_number)}"]');
+importActionsCell$.find('.icon-ok').show();
+importActionsCell$.find('.article_import_btn').hide();
 = render 'import_article_added', article: @article if @article.shared_article

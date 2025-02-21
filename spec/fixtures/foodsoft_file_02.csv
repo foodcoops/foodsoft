@@ -1,2 +1,2 @@
-state;art. nummer;name;note;producer;origin;unit;net price;vat (%);deposit;unit quantity;(reserved);(reserved);category
-;1;Tomatoes;organic;Tommy farm;Somewhere, UK;500 g;1.2;6;0;20;;;Vegetables
+avail.;Order number;Name;Supplier order unit;Unit;Ratios to supplier order unit;Minimum order quantity;Billing unit;Group order granularity;Group order unit;Price (net);Price unit;VAT;Deposit;Note;Category;Origin;Manufacturer
+Yes;1;Tomatoes;;500 g;20 Piece;;;1;;1.2;;6;0;organic;Vegetables;Somewhere, UK;Tommy farm

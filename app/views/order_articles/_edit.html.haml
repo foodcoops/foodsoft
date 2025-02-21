@@ -2,28 +2,33 @@
   .modal-header
     = close_button :modal
     %h3= t '.title'
-  .modal-body
+  .modal-body.article-form
     - if params[:without_units]
       = hidden_field_tag :without_units, true
     - else
       .fold-line
-        = form.input :units_to_order, hint: '', input_html: {class: 'input-nano'}
+        = form.input :units_to_order, hint: '', input_html: {class: 'input-mini', step: 0.001}
         -#= form.input :units_billed, label: 'invoice', input_html: {class: 'input-nano'}
-        = form.input :units_received, input_html: {class: 'input-nano'},
+        = form.input :units_received, input_html: {class: 'input-mini', step: 0.001},
                      label: t('activerecord.attributes.order_article.units_received_short')
         %p.help-block= t 'simple_form.hints.order_article.units_to_order'
 
       .foo{style: 'clear:both'}
 
-    = simple_fields_for :article, @order_article.article do |f|
+    = simple_fields_for @order_article.article_version do |f|
       = f.input :name
 
-      - if @order_article.article.is_a?(StockArticle)
+      - if @order_article.article_version.is_a?(StockArticle)
         %div.alert= t '.stock_alert'
       - else
-        = simple_fields_for :article_price, @order_article.article_price do |fprice|
-          = render partial: 'shared/article_fields_units', locals: {f_unit: f, f_uq: fprice}
-          = render partial: 'shared/article_fields_price', locals: {f: fprice}
+        = simple_fields_for :article_version, @order_article.article_version do |fprice|
+          :javascript
+            const articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: fprice, article_unit_ratio_counter: -1}))}"));
+            const units = #{raw(@all_units.to_json)};
+            new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
+          = render partial: 'shared/js_templates/unit_conversion_popover_template'
+          = render partial: 'shared/article_fields_units', locals: {f: fprice, article: @order_article.article_version}
+          = render partial: 'shared/article_fields_price', locals: {f: fprice, article: @order_article.article_version}
 
       = form.input :update_global_price, as: :boolean
       = f.input :order_number

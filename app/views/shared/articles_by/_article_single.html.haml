@@ -3,11 +3,9 @@
     %tr.list-heading
       %th{:colspan => "4"}>
         %h4.name.pull-left
-          = order_article.article.name
+          - article_version = order_article.article_version
+          = article_version.name
           %small
-            = "(#{order_article.article.unit}, #{number_to_currency order_article.price.fc_price}"
-            - pkg_info = pkg_helper(order_article.price)
-            = ", #{pkg_info}".html_safe unless pkg_info.blank?
-            )
+            = "#{format_billing_unit_with_ratios(article_version)}, #{number_to_currency(article_version.convert_quantity(article_version.fc_price, article_version.billing_unit, article_version.supplier_order_unit))}"
   - for goa in order_article.group_order_articles.ordered
     = render 'shared/articles_by/article_single_goa', goa: goa

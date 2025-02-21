@@ -10,7 +10,7 @@ module DeliveriesHelper
   end
 
   def articles_for_select2(articles, except = [], &block)
-    articles = articles.reorder('articles.name ASC')
+    articles = articles.reorder('article_versions.name ASC')
     articles = articles.reject { |a| !except.index(a.id).nil? } if except
     block_given? or block = proc { |a| "#{a.name} (#{number_to_currency a.price}/#{a.unit})" }
     articles.map do |a|
@@ -19,7 +19,7 @@ module DeliveriesHelper
   end
 
   def articles_for_table(articles)
-    articles.undeleted.reorder('articles.name ASC')
+    articles.undeleted.reorder('article_versions.name ASC')
   end
 
   def stock_change_remove_link(stock_change_form)

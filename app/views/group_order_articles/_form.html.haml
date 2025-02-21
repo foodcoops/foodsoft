@@ -2,10 +2,10 @@
   = form.hidden_field :order_article_id
   .modal-header
     = close_button :modal
-    %h3= t('.amount_change_for', article: @order_article.article.name)
+    %h3= t('.amount_change_for', article: @order_article.article_version.name)
   .modal-body
     = form.input :ordergroup_id, as: :select, collection: Ordergroup.undeleted.map { |g| [g.name, g.id] }
-    = form.input :result, hint: I18n.t('group_order_articles.form.result_hint', unit: @order_article.article.unit) # Why do we need the full prefix?
+    = form.input :result, hint: I18n.t('group_order_articles.form.result_hint', unit: format_group_order_unit_with_ratios(@order_article.article_version)) # Why do we need the full prefix?
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
     = form.submit t('ui.save'), class: 'btn btn-primary'

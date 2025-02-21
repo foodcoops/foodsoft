@@ -1,0 +1,733 @@
+---
+unece_units:
+  XCU:
+    name: Gobelets
+  XCN:
+    name: Récipient
+  XSH:
+    name: Sacs
+  X43:
+    name: Bigbag
+  XST:
+    name: Feuille
+  XOK:
+    name: Bloc
+  XVA:
+    name: Cuve
+  XBX:
+    name: Boîte
+  XBH:
+    name: Confédération
+  XBE:
+    name: Faisceau
+  XCX:
+    name: Boîte
+  XBJ:
+    name: Seau
+  XUN:
+    name: Unité
+  XOS:
+    name: Palette à usage unique
+  XDH:
+    name: Eurobox, CHEP-Box
+  XBA:
+    name: Tonneau
+  XFI:
+    name: Fûts
+  XBO:
+    name: Bouteille
+  XBQ:
+    name: Bouteille en suremballage
+  XFB:
+    name: Flexibag
+  XFT:
+    name: Foodtainer
+  XJR:
+    name: Verre
+  XGR:
+    name: Récipient en verre
+  XOW:
+    name: Grand sac de la taille d'une palette
+  X8B:
+    name: Caisse en bois
+  XCV:
+    name: Étui
+  XWA:
+    name: Conteneur intermédiaire de vrac (IBC)
+  XEI:
+    name: Boîte isotherme
+  XJT:
+    name: Sac en jute
+  XGY:
+    name: Sac en jute
+  XJY:
+    name: Bidons
+  XBD:
+    name: Carton
+  XCR:
+    name: Caisse
+  XAI:
+    name: Emballage à rabat
+  XPA:
+    name: Kollo
+  XBK:
+    name: Panier
+  XBI:
+    name: Benne
+  XOV:
+    name: Palette réutilisable
+  XNT:
+    name: Réseau
+  XPK:
+    name: Emballage
+  XPC:
+    name: Paquet
+  XPX:
+    name: Palette
+  X5M:
+    name: Sac en papier
+  XPR:
+    name: Récipient en plastique
+  XEC:
+    name: Sac en plastique
+  X6H:
+    name: Emballage plastique composite
+  X44:
+    name: Sacs en polyéthylène
+  XBR:
+    name: Verrou
+  XCW:
+    name: Conteneurs roulants
+  XBT:
+    name: Rouleau
+  XSA:
+    name: Sac
+  XBM:
+    name: Bol
+  XSX:
+    name: Set
+  XDN:
+    name: Distributeur
+  XAE:
+    name: Bombe aérosol
+  XSC:
+    name: Montée
+  XLU:
+    name: Escalier
+  X5L:
+    name: Sac en tissu
+  XPP:
+    name: Pièces
+  XPU:
+    name: Bol
+  XBG:
+    name: Sac
+  XP2:
+    name: Creuset
+  XCK:
+    name: Tonne
+  XPT:
+    name: Pot
+  XGI:
+    name: Poutrelles
+  XTU:
+    name: Tube
+  PTN:
+    name: Portion
+    long_name: Portion
+    symbols: []
+  STC:
+    name: Tige
+    long_name: Tige
+    symbols: []
+  DMT:
+    name: Décimètre
+    long_name: Décimètre
+    symbols:
+    - dm
+  CMT:
+    name: Centimètres
+    long_name: Centimètres
+    symbols:
+    - cm
+  4H:
+    name: Micromètre
+    long_name: Micromètre (micron)
+    symbols:
+    - µm
+  MMT:
+    name: Millimètres
+    long_name: Millimètres
+    symbols:
+    - mm
+  HMT:
+    name: Hectomètre
+    long_name: Hectomètre
+    symbols:
+    - hm
+  KMT:
+    name: Kilomètres
+    long_name: Kilomètres
+    symbols:
+    - km
+  A45:
+    name: Décamètre
+    long_name: Décamètre
+    symbols:
+    - dam
+  INH:
+    name: Pouce
+    long_name: Pouce
+    symbols:
+    - "″"
+    - in
+  FOT:
+    name: Pied
+    long_name: Pied
+    symbols:
+    - ft
+  YRD:
+    name: Yard
+    long_name: Yard
+    symbols:
+    - yd
+  SMI:
+    name: Mile
+    long_name: Mile (britannique)
+    symbols:
+    - mile
+  '77':
+    name: Millizoll
+    long_name: Millizoll
+    symbols:
+    - mil
+  MTK:
+    name: Mètres carrés
+    long_name: Mètres carrés
+    symbols:
+    - m²
+    - qm
+  DAA:
+    name: Dekar
+    long_name: Dekar
+    symbols:
+    - daa
+  KMK:
+    name: Kilomètre carré
+    long_name: Kilomètre carré
+    symbols:
+    - km²
+  CMK:
+    name: Centimètres carrés
+    long_name: Centimètres carrés
+    symbols:
+    - cm²
+  DMK:
+    name: Décimètre carré
+    long_name: Décimètre carré
+    symbols:
+    - dm²
+  H16:
+    name: Décamètre carré
+    long_name: Décamètre carré
+    symbols:
+    - dam²
+  H18:
+    name: Hectomètre carré
+    long_name: Hectomètre carré
+    symbols:
+    - hm²
+  MMK:
+    name: Millimètre carré
+    long_name: Millimètre carré
+    symbols:
+    - mm²
+  M47:
+    name: Mils circulaires
+    long_name: Mils circulaires
+    symbols:
+    - cmil
+  ARE:
+    name: Ar
+    long_name: Ar
+    symbols:
+    - a
+  HAR:
+    name: Hectares
+    long_name: Hectares
+    symbols:
+    - ha
+  INK:
+    name: Pouce carré
+    long_name: Pouce carré
+    symbols:
+    - in²
+  FTK:
+    name: Pieds carrés
+    long_name: Pieds carrés
+    symbols:
+    - ft²
+  YDK:
+    name: Mètres carrés
+    long_name: Mètres carrés
+    symbols:
+    - yd²
+  MIK:
+    name: Mille carré
+    long_name: Mille carré (britannique)
+    symbols:
+    - mi²
+  ACR:
+    name: Demain
+    long_name: Demain
+    symbols:
+    - acre
+  KGM:
+    name: Kilogramme
+    long_name: Kilogramme
+    symbols:
+    - kg
+  HGM:
+    name: Hectogramme
+    long_name: Hectogramme
+    symbols:
+    - hg
+  KTN:
+    name: Kilotonne
+    long_name: Kilotonne
+    symbols:
+    - kt
+  DJ:
+    name: Décagramme
+    long_name: Décagramme
+    symbols:
+    - dag
+    - dkg
+  DG:
+    name: Décigramme
+    long_name: Décigramme
+    symbols:
+    - dg
+  CGM:
+    name: Centigramme
+    long_name: Centigramme
+    symbols:
+    - cg
+  DTN:
+    name: Décitonne
+    long_name: Décitonne
+    symbols:
+    - dt
+    - dtn
+  MGM:
+    name: Milligramme
+    long_name: Milligramme
+    symbols:
+    - mg
+  2U:
+    name: Mégagramme
+    long_name: Mégagramme
+    symbols:
+    - Mg
+  MC:
+    name: Microgramme
+    long_name: Microgramme
+    symbols:
+    - µg
+  GRM:
+    name: Grammes
+    long_name: Grammes
+    symbols:
+    - g
+  TNE:
+    name: Tonne
+    long_name: Tonne (métrique)
+    symbols:
+    - t
+  M86:
+    name: Livre
+    long_name: Livre
+    symbols:
+    - pfd
+  LBR:
+    name: Livre anglaise
+    long_name: Livre anglaise
+    symbols:
+    - lb
+  GRN:
+    name: Gran
+    long_name: Gran
+    symbols:
+    - gr
+  ONZ:
+    name: Once
+    long_name: Once (avoirdupois)
+    symbols:
+    - oz
+  CWI:
+    name: Br. centenaire
+    long_name: Hundredweight (britannique)
+    symbols:
+    - cwt
+  CWA:
+    name: Le . Quintaux
+    long_name: Hundredweight (américain)
+    symbols:
+    - cwt
+  LTN:
+    name: Br. tonne
+    long_name: Tonne britannique, Long Ton (américain)
+    symbols:
+    - ton (Br.)
+  STI:
+    name: Pierre
+    long_name: Pierre (britannique)
+    symbols:
+    - st
+  STN:
+    name: Am. Tonne
+    long_name: Tonne américaine, short ton
+    symbols:
+    - ton (Am.)
+  APZ:
+    name: Once troy
+    long_name: Once troy ou once d'apothicaire
+    symbols:
+    - tr oz
+  F13:
+    name: Slug
+    long_name: Slug
+    symbols:
+    - slug
+  SEC:
+    name: Seconde
+    long_name: Seconde [unité de temps]
+    symbols:
+    - s
+  MIN:
+    name: Minute
+    long_name: Minute [unité de temps]
+    symbols:
+    - min
+  HUR:
+    name: Heure
+    long_name: Heure
+    symbols:
+    - h
+  DAY:
+    name: Jour
+    long_name: Jour
+    symbols:
+    - d
+  C26:
+    name: Milliseconde
+    long_name: Milliseconde
+    symbols:
+    - ms
+  WEE:
+    name: Semaine
+    long_name: Semaine
+    symbols:
+    - wk
+  MON:
+    name: Mois
+    long_name: Mois
+    symbols:
+    - mo
+  ANN:
+    name: Année
+    long_name: Année
+    symbols:
+    - "y"
+  MTQ:
+    name: Mètres cubes
+    long_name: Mètres cubes
+    symbols:
+    - m³
+    - cbm
+  LTR:
+    name: Litres
+    long_name: Litres
+    symbols:
+    - l
+  MAL:
+    name: Mégalitre
+    long_name: Mégalitre
+    symbols:
+    - Ml
+  DLT:
+    name: Décilitre
+    long_name: Décilitre
+    symbols:
+    - dl
+  4G:
+    name: Microlitre
+    long_name: Microlitre
+    symbols:
+    - µl
+  K6:
+    name: Kilolitre
+    long_name: Kilolitre
+    symbols:
+    - kl
+  A44:
+    name: Décalitre
+    long_name: Décalitre
+    symbols:
+    - dal
+  MMQ:
+    name: Millimètre cube
+    long_name: Millimètre cube
+    symbols:
+    - mm³
+  CMQ:
+    name: Centimètre cube
+    long_name: Centimètre cube
+    symbols:
+    - cm³
+    - ccm
+  DMQ:
+    name: Décimètre cube
+    long_name: Décimètre cube
+    symbols:
+    - dm³
+  MLT:
+    name: Millilitres
+    long_name: Millilitres
+    symbols:
+    - ml
+  HLT:
+    name: Hectolitre
+    long_name: Hectolitre
+    symbols:
+    - hl
+  CLT:
+    name: Centilitre
+    long_name: Centilitre
+    symbols:
+    - cl
+  DMA:
+    name: Décamètre cube
+    long_name: Décamètre cube
+    symbols:
+    - dam³
+  H19:
+    name: Hectomètre cube
+    long_name: Hectomètre cube
+    symbols:
+    - hm³
+  H20:
+    name: Kilomètre cube
+    long_name: Kilomètre cube
+    symbols:
+    - km³
+  M67:
+    name: acre-pied
+    long_name: acre-foot (basé sur U.S. Survey Foot)
+    symbols:
+    - acre-ft
+  M68:
+    name: Cordon
+    long_name: Cordon (128 ft3)
+    symbols:
+    - cord
+  M69:
+    name: Mille cube
+    long_name: Mille cube (britannique)
+    symbols:
+    - mi³
+  M70:
+    name: Tonneau à registre
+    long_name: Tonneau à registre
+    symbols:
+    - RT
+  5I:
+    name: Pieds cubes
+    long_name: Pieds cubes
+    symbols:
+    - std
+  INQ:
+    name: Pouce cube
+    long_name: Pouce cube
+    symbols:
+    - in³
+  FTQ:
+    name: Pieds cubes
+    long_name: Pieds cubes
+    symbols:
+    - ft³
+  YDQ:
+    name: Mètres cubes
+    long_name: Mètres cubes
+    symbols:
+    - yd³
+  GLI:
+    name: Gallon (Br.)
+    long_name: Gallon (britannique)
+    symbols:
+    - gal
+  GLL:
+    name: Gallon (Am.)
+    long_name: Gallon (américain)
+    symbols:
+    - gal
+  PTI:
+    name: Pint (Br.)
+    long_name: Pint (britannique)
+    symbols:
+    - pt
+  QTI:
+    name: Quart
+    long_name: quart (britannique)
+    symbols:
+    - qt
+  PTL:
+    name: pinte liquide (am.)
+    long_name: pinte liquide (américaine)
+    symbols:
+    - liq pt
+  QTL:
+    name: quart liquide (am.)
+    long_name: quart liquide (américain)
+    symbols:
+    - liq qt
+  PTD:
+    name: pinte sèche (am.)
+    long_name: pinte sèche (américaine)
+    symbols:
+    - dry pt
+  OZI:
+    name: once liquide (br.)
+    long_name: once liquide (britannique)
+    symbols:
+    - fl oz
+  J57:
+    name: Baril (Br.)
+    long_name: Baril (britannique)
+    symbols:
+    - bbl
+  L43:
+    name: Quart de boisseau (Br.)
+    long_name: peck (britannique)
+    symbols:
+    - pk
+  L84:
+    name: Shipping ton (Br.)
+    long_name: ton (UK shipping)
+    symbols:
+    - Shipping ton (Br.)
+  L86:
+    name: Shipping ton (Am.)
+    long_name: ton (US shipping)
+    symbols:
+    - Shipping ton (Am.)
+  OZA:
+    name: Once liquide
+    long_name: Once liquide (américain)
+    symbols:
+    - fl oz
+  BUI:
+    name: Boisseau (Br.)
+    long_name: Boisseau (britannique)
+    symbols:
+    - bushel
+  BUA:
+    name: Boisseau (am.)
+    long_name: Boisseau (américain)
+    symbols:
+    - bu
+  BLL:
+    name: Baril (Am.)
+    long_name: Baril (américain)
+    symbols:
+    - barrel
+  BLD:
+    name: Dry Barrel (Am.)
+    long_name: Dry Barrel (américain)
+    symbols:
+    - bbl
+  GLD:
+    name: Dry Gallon (Am.)
+    long_name: Dry Gallon (américain)
+    symbols:
+    - dry gal
+  QTD:
+    name: Quart sec (Am.)
+    long_name: Dry Quart (américain)
+    symbols:
+    - dry qt
+  G26:
+    name: Ster
+    long_name: Stère (mètre cube en vrac)
+    symbols:
+    - st
+  G21:
+    name: Tasse
+    long_name: Tasse [unité de volume]
+    symbols:
+    - cup
+  G24:
+    name: Cuillère à soupe
+    long_name: Cuillère à soupe
+    symbols:
+    - cs
+  G25:
+    name: Cuillère à café
+    long_name: Cuillère à café
+    symbols:
+    - cc
+  G23:
+    name: Quart de boisseau (Am.)
+    long_name: Quart de boisseau (américain)
+    symbols:
+    - pk
+  JOU:
+    name: Joule
+    long_name: Joule
+    symbols:
+    - J
+  J75:
+    name: Calorie
+    long_name: Calorie
+    symbols:
+    - cal
+  K51:
+    name: Kilocalorie
+    long_name: Kilocalorie
+    symbols:
+    - kcal
+  J55:
+    name: Wattseconde
+    long_name: Wattseconde
+    symbols:
+    - Ws
+  WHR:
+    name: Watt-heure
+    long_name: Watt-heure
+    symbols:
+    - Wh
+  KWH:
+    name: Kilowattheure
+    long_name: Kilowattheure
+    symbols:
+    - kWh
+  GWH:
+    name: Gigawatt-heure
+    long_name: Gigawatt-heure
+    symbols:
+    - GWh
+  WTT:
+    name: Watt
+    long_name: Watt
+    symbols:
+    - W
+  KWT:
+    name: Kilowatt
+    long_name: Kilowatt
+    symbols:
+    - kW
+  MAW:
+    name: Mégawatt
+    long_name: Mégawatt
+    symbols:
+    - MW

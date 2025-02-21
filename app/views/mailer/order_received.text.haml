@@ -3,11 +3,11 @@
 - unless @abundant_articles.empty?
   = raw "===\n" + t('.abundant_articles') + ":"
   - @abundant_articles.each do |order_article|
-    - article = order_article.article
+    - article = order_article.article_version
     = raw t('.article_details', name: article.name, ordered: order_article.units_to_order, received: order_article.units_received, unit: article.unit)
 
 - unless @scarce_articles.empty?
   = raw "===\n" + t('.scarce_articles') + ":"
   - @scarce_articles.each do |order_article|
-    - article = order_article.article
+    - article = order_article.article_version
     = raw t('.article_details', name: article.name, ordered: order_article.units_to_order, received: order_article.units_received, unit: article.unit)

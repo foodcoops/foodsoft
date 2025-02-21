@@ -1,4 +1,5 @@
 class OrderPdf < RenderPdf
+  include ArticlesHelper
   attr_reader :order
 
   def initialize(order, options = {})
@@ -47,19 +48,42 @@ class OrderPdf < RenderPdf
   # @return [Number] Price to show
   # @see https://github.com/foodcoops/foodsoft/issues/445
   def order_article_price(order_article)
-    order_article.price.fc_price
+    order_article.article_version.fc_group_order_price
   end
 
   def order_article_price_per_unit(order_article)
-    "#{number_to_currency(order_article_price(order_article))} / #{order_article.article.unit}"
+    "#{number_to_currency(order_article_price(order_article))} / #{format_group_order_unit_with_ratios(order_article.article_version)}"
   end
 
-  def group_order_article_quantity_with_tolerance(goa)
-    goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity.to_s
+  def price_per_billing_unit(goa)
+    article_version = goa.order_article.article_version
+    "#{number_to_currency(article_version.convert_quantity(article_version.fc_price, article_version.billing_unit,
+                                                           article_version.supplier_order_unit))} / #{format_billing_unit_with_ratios(article_version)}"
+  end
+
+  def billing_quantity_with_tolerance(goa)
+    article_version = goa.order_article.article_version
+    quantity = number_with_precision(
+      article_version.convert_quantity(goa.quantity, article_version.group_order_unit,
+                                       article_version.billing_unit), strip_insignificant_zeros: true, precision: 2
+    )
+    tolerance = number_with_precision(
+      article_version.convert_quantity(goa.tolerance, article_version.group_order_unit,
+                                       article_version.billing_unit), strip_insignificant_zeros: true, precision: 2
+    )
+    goa.tolerance > 0 ? "#{quantity} + #{tolerance}" : quantity
   end
 
   def group_order_article_result(goa)
     number_with_precision goa.result, strip_insignificant_zeros: true
+  end
+
+  def billing_article_result(goa)
+    article_version = goa.order_article.article_version
+    number_with_precision(
+      article_version.convert_quantity(goa.result, article_version.group_order_unit,
+                                       article_version.billing_unit), precision: 2, strip_insignificant_zeros: true
+    )
   end
 
   def group_order_articles(ordergroup)
@@ -71,11 +95,11 @@ class OrderPdf < RenderPdf
   def order_articles
     OrderArticle
       .ordered
-      .includes(article: :supplier)
+      .includes(article_version: { article: :supplier })
       .includes(group_order_articles: { group_order: :ordergroup })
       .where(order: @orders)
-      .order('suppliers.name, articles.name, groups.name')
-      .preload(:article_price)
+      .order('suppliers.name, article_versions.name, groups.name')
+      .preload(:article_version)
   end
 
   def ordergroups(offset = nil, limit = nil)
@@ -88,7 +112,7 @@ class OrderPdf < RenderPdf
              .pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id', 'SUM(group_orders.transport)')
 
     result.map do |item|
-      [item.first || stock_ordergroup_name] + item[1..]
+      [item.first || stock_ordergroup_name] + item[1..-1]
     end
   end
 
@@ -103,7 +127,7 @@ class OrderPdf < RenderPdf
   def each_ordergroup_batch(batch_size)
     offset = 0
 
-    loop do
+    while true
       go_records = ordergroups(offset, batch_size)
 
       break unless go_records.any?
@@ -134,9 +158,9 @@ class OrderPdf < RenderPdf
 
   def each_group_order_article_for_ordergroup(ordergroup, &block)
     group_order_articles(ordergroup)
-      .includes(order_article: { article: [:supplier] })
-      .order('suppliers.name, articles.name')
-      .preload(order_article: %i[article_price order])
+      .includes(order_article: { article_version: { article: :supplier } })
+      .order('suppliers.name, article_versions.name')
+      .preload(order_article: %i[article_version order])
       .each(&block)
   end
 

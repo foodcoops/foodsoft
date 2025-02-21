@@ -44,8 +44,8 @@ class GroupOrder < ApplicationRecord
 
         # Build hash with relevant data
         data[:order_articles][order_article.id] = {
-          price: order_article.article.fc_price,
-          unit: order_article.article.unit_quantity,
+          price: order_article.article_version.fc_group_order_price,
+          unit: order_article.article_version.unit_quantity,
           quantity: (goa ? goa.quantity : 0),
           others_quantity: order_article.quantity - (goa ? goa.quantity : 0),
           used_quantity: (goa ? goa.result(:quantity) : 0),
@@ -54,7 +54,14 @@ class GroupOrder < ApplicationRecord
           used_tolerance: (goa ? goa.result(:tolerance) : 0),
           total_price: (goa ? goa.total_price : 0),
           missing_units: order_article.missing_units,
-          quantity_available: (order.stockit? ? order_article.article.quantity_available : 0)
+          ratio_group_order_unit_supplier_unit: order_article.article_version.convert_quantity(1,
+                                                                                               order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit),
+          quantity_available: (order.stockit? ? order_article.article_version.article.quantity_available : 0),
+          minimum_order_quantity: if order_article.article_version.minimum_order_quantity
+                                    order_article.article_version.convert_quantity(
+                                      order_article.article_version.minimum_order_quantity, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit
+                                    )
+                                  end
         }
       end
     end
@@ -70,7 +77,7 @@ class GroupOrder < ApplicationRecord
       # Get ordered quantities and update group_order_articles/_quantities...
       if group_order_articles_attributes
         quantities = group_order_articles_attributes.fetch(order_article.id.to_s, { quantity: 0, tolerance: 0 })
-        group_order_article.update_quantities(quantities[:quantity].to_i, quantities[:tolerance].to_i)
+        group_order_article.update_quantities(quantities[:quantity].to_f, quantities[:tolerance].to_f)
       end
 
       # Also update results for the order_article
@@ -83,7 +90,7 @@ class GroupOrder < ApplicationRecord
 
   # Updates the "price" attribute.
   def update_price!
-    total = group_order_articles.includes(order_article: %i[article article_price]).to_a.sum(&:total_price)
+    total = group_order_articles.includes(order_article: :article_version).to_a.sum(&:total_price)
     update_attribute(:price, total)
   end
 
@@ -97,12 +104,7 @@ class GroupOrder < ApplicationRecord
   end
 
   def ordergroup_name
-    if ordergroup
-      ordergroup.name
-    else
-      I18n.t('model.group_order.stock_ordergroup_name',
-             user: updated_by.try(:name) || '?')
-    end
+    ordergroup ? ordergroup.name : I18n.t('model.group_order.stock_ordergroup_name', user: updated_by.try(:name) || '?')
   end
 
   def total

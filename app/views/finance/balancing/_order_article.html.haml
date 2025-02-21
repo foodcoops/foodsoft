@@ -1,24 +1,24 @@
 %td.closed.name
-  = link_to order_article.article.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
-%td= order_article.article.order_number
-%td{title: units_history_line(order_article, :plain => true)}
-  = order_article.units
-  = pkg_helper order_article.article_price
-  - if s=order_article.ordered_quantities_different_from_group_orders?
+  = link_to order_article.article_version.name, '#', 'data-toggle-this' => "#group_order_articles_#{order_article.id}"
+%td= order_article.article_version.order_number
+%td{title: units_history_line(order_article, plain: true, unit: order_article.article_version.billing_unit)}
+  = order_article.article_version.convert_quantity(order_article.units, order_article.article_version.supplier_order_unit, order_article.article_version.billing_unit).round(3).to_s
+  = pkg_helper(order_article.article_version, unit: order_article.article_version.billing_unit)
+  - if s=ordered_quantities_different_from_group_orders?(order_article)
     %span{:style => "color:red;font-weight: bold"}= s
-%td #{order_article.article.unit}
+%td #{format_billing_unit_with_ratios(order_article.article_version)}
 %td
-  = number_to_currency(order_article.price.price, :unit => "")
+  = number_to_currency(order_article.article_version.price, :unit => "")
   :plain
     /
   = number_to_currency(order_article.total_price, :unit => "")
 %td
-  = number_to_currency(order_article.price.gross_price, :unit => "")
+  = number_to_currency(order_article.article_version.gross_price, :unit => "")
   :plain
     /
   = number_to_currency(order_article.total_gross_price, :unit => "")
-%td= number_to_percentage(order_article.price.tax) unless order_article.price.tax.zero?
-%td= number_to_currency(order_article.price.deposit, :unit => "") unless order_article.price.deposit.zero?
+%td= number_to_percentage(order_article.article_version.tax) unless order_article.article_version.tax.zero?
+%td= number_to_currency(order_article.article_version.deposit, :unit => "") unless order_article.article_version.deposit.zero?
 %td
   = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article), remote: true,
     class: 'btn btn-mini' unless order_article.order.closed?

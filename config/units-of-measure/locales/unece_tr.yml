@@ -1,0 +1,733 @@
+---
+unece_units:
+  XCU:
+    name: Bardaklar
+  XCN:
+    name: Konteyner
+  XSH:
+    name: Çanta
+  X43:
+    name: Bigbag
+  XST:
+    name: Levha
+  XOK:
+    name: Blok
+  XVA:
+    name: Vat
+  XBX:
+    name: Kutu
+  XBH:
+    name: Bel bandı
+  XBE:
+    name: Paket
+  XCX:
+    name: Can
+  XBJ:
+    name: Kova
+  XUN:
+    name: Birim
+  XOS:
+    name: Tek kullanımlık palet
+  XDH:
+    name: Eurobox, CHEP-Box
+  XBA:
+    name: Fıçı
+  XFI:
+    name: Variller
+  XBO:
+    name: Şişe
+  XBQ:
+    name: Dış ambalajında şişe
+  XFB:
+    name: Flexibag
+  XFT:
+    name: Foodtainer
+  XJR:
+    name: Cam
+  XGR:
+    name: Cam kavanoz
+  XOW:
+    name: Palet boyutunda büyük çuval
+  X8B:
+    name: Ahşap kutu
+  XCV:
+    name: Zarf
+  XWA:
+    name: Ara Dökme Konteyner (IBC)
+  XEI:
+    name: İzotermal kutu
+  XJT:
+    name: Jüt çanta
+  XGY:
+    name: Jüt çuval
+  XJY:
+    name: Teneke Kutu
+  XBD:
+    name: Karton
+  XCR:
+    name: Sandık
+  XAI:
+    name: Menteşeli ambalaj
+  XPA:
+    name: Kollo
+  XBK:
+    name: Sepet
+  XBI:
+    name: Kova
+  XOV:
+    name: İade edilebilir palet
+  XNT:
+    name: Şebeke
+  XPK:
+    name: Paket
+  XPC:
+    name: Paket
+  XPX:
+    name: PALET
+  X5M:
+    name: Kağıt torba
+  XPR:
+    name: Plastik kap
+  XEC:
+    name: Plastik torba
+  X6H:
+    name: Plastik kompozit ambalajlar
+  X44:
+    name: Çoklu Torba
+  XBR:
+    name: Cıvata
+  XCW:
+    name: Rulo konteyner
+  XBT:
+    name: Rulo
+  XSA:
+    name: Çuval
+  XBM:
+    name: Kase
+  XSX:
+    name: Set
+  XDN:
+    name: Dağıtıcı
+  XAE:
+    name: Sprey kutusu
+  XSC:
+    name: Yükseliş
+  XLU:
+    name: Merdiven
+  X5L:
+    name: Bez çanta
+  XPP:
+    name: Parça
+  XPU:
+    name: Tepsi
+  XBG:
+    name: Cep
+  XP2:
+    name: Pota
+  XCK:
+    name: Ton
+  XPT:
+    name: Tencere
+  XGI:
+    name: Taşıyıcı
+  XTU:
+    name: Tüp
+  PTN:
+    name: Porsiyon
+    long_name: Porsiyon
+    symbols: []
+  STC:
+    name: Bar
+    long_name: Bar
+    symbols: []
+  DMT:
+    name: Desimetre
+    long_name: Desimetre
+    symbols:
+    - dm
+  CMT:
+    name: Santimetre
+    long_name: Santimetre
+    symbols:
+    - cm
+  4H:
+    name: Mikrometreler
+    long_name: Mikrometre (mikron)
+    symbols:
+    - µm
+  MMT:
+    name: Milimetre
+    long_name: Milimetre
+    symbols:
+    - mm
+  HMT:
+    name: Hektometre
+    long_name: Hektometre
+    symbols:
+    - hm
+  KMT:
+    name: Kilometre
+    long_name: Kilometre
+    symbols:
+    - km
+  A45:
+    name: Dekametre
+    long_name: Dekametre
+    symbols:
+    - dam
+  INH:
+    name: Inç
+    long_name: Inç
+    symbols:
+    - "″"
+    - in
+  FOT:
+    name: Ayak
+    long_name: Ayak
+    symbols:
+    - ft
+  YRD:
+    name: Bahçe
+    long_name: Bahçe
+    symbols:
+    - yd
+  SMI:
+    name: Mil
+    long_name: Mile (İngiliz)
+    symbols:
+    - mile
+  '77':
+    name: Milli inç
+    long_name: Milli inç
+    symbols:
+    - mil
+  MTK:
+    name: Metrekare
+    long_name: Metrekare
+    symbols:
+    - m²
+    - qm
+  DAA:
+    name: Decar
+    long_name: Decar
+    symbols:
+    - daa
+  KMK:
+    name: Kilometre kare
+    long_name: Kilometre kare
+    symbols:
+    - km²
+  CMK:
+    name: Santimetre kare
+    long_name: Santimetre kare
+    symbols:
+    - cm²
+  DMK:
+    name: Kare desimetre
+    long_name: Kare desimetre
+    symbols:
+    - dm²
+  H16:
+    name: Kare dekametre
+    long_name: Kare dekametre
+    symbols:
+    - dam²
+  H18:
+    name: Hektometre kare
+    long_name: Hektometre kare
+    symbols:
+    - hm²
+  MMK:
+    name: Kare milimetre
+    long_name: Kare milimetre
+    symbols:
+    - mm²
+  M47:
+    name: Dairesel mil
+    long_name: Dairesel mil
+    symbols:
+    - cmil
+  ARE:
+    name: Ar
+    long_name: Ar
+    symbols:
+    - a
+  HAR:
+    name: Hektar
+    long_name: Hektar
+    symbols:
+    - ha
+  INK:
+    name: İnç kare
+    long_name: İnç kare
+    symbols:
+    - in²
+  FTK:
+    name: Fit kare
+    long_name: Fit kare
+    symbols:
+    - ft²
+  YDK:
+    name: Metrekare
+    long_name: Metrekare
+    symbols:
+    - yd²
+  MIK:
+    name: Mil kare
+    long_name: Mil kare (İngiliz)
+    symbols:
+    - mi²
+  ACR:
+    name: Yarın
+    long_name: Yarın
+    symbols:
+    - acre
+  KGM:
+    name: Kilogram
+    long_name: Kilogram
+    symbols:
+    - kg
+  HGM:
+    name: Hektogram
+    long_name: Hektogram
+    symbols:
+    - hg
+  KTN:
+    name: Kiloton
+    long_name: Kiloton
+    symbols:
+    - kt
+  DJ:
+    name: Decagram
+    long_name: Decagram
+    symbols:
+    - dag
+    - dkg
+  DG:
+    name: Decigram
+    long_name: Decigram
+    symbols:
+    - dg
+  CGM:
+    name: Santigram
+    long_name: Santigram
+    symbols:
+    - cg
+  DTN:
+    name: Decitonne
+    long_name: Decitonne
+    symbols:
+    - dt
+    - dtn
+  MGM:
+    name: Miligram
+    long_name: Miligram
+    symbols:
+    - mg
+  2U:
+    name: Megagram
+    long_name: Megagram
+    symbols:
+    - Mg
+  MC:
+    name: Mikrogram
+    long_name: Mikrogram
+    symbols:
+    - µg
+  GRM:
+    name: Grammes
+    long_name: Grammes
+    symbols:
+    - g
+  TNE:
+    name: Ton
+    long_name: Ton (metrik)
+    symbols:
+    - t
+  M86:
+    name: Pound
+    long_name: Pound
+    symbols:
+    - pfd
+  LBR:
+    name: İngiliz Sterlini
+    long_name: İngiliz Sterlini
+    symbols:
+    - lb
+  GRN:
+    name: Büyükanne
+    long_name: Büyükanne
+    symbols:
+    - gr
+  ONZ:
+    name: Ons
+    long_name: Ons (avoirdupois)
+    symbols:
+    - oz
+  CWI:
+    name: Br. centner
+    long_name: Yüzsiklet (İngiliz)
+    symbols:
+    - cwt
+  CWA:
+    name: Am. Zentner
+    long_name: Hundredweight (Amerikan)
+    symbols:
+    - cwt
+  LTN:
+    name: Br. ton
+    long_name: İngiliz tonu, uzun ton (Amerikan)
+    symbols:
+    - ton (Br.)
+  STI:
+    name: Taş
+    long_name: Stone (İngiliz)
+    symbols:
+    - st
+  STN:
+    name: Am. Ton
+    long_name: Amerikan ton, kısa ton
+    symbols:
+    - ton (Am.)
+  APZ:
+    name: Troy ons
+    long_name: Troy ons veya eczacı onsu
+    symbols:
+    - tr oz
+  F13:
+    name: Sümüklüböcek
+    long_name: Sümüklüböcek
+    symbols:
+    - slug
+  SEC:
+    name: Ikinci
+    long_name: Saniye [zaman birimi]
+    symbols:
+    - s
+  MIN:
+    name: Dakika
+    long_name: Dakika [zaman birimi]
+    symbols:
+    - min
+  HUR:
+    name: Saat
+    long_name: Saat
+    symbols:
+    - h
+  DAY:
+    name: Gün
+    long_name: Gün
+    symbols:
+    - d
+  C26:
+    name: Milisaniye
+    long_name: Milisaniye
+    symbols:
+    - ms
+  WEE:
+    name: Hafta
+    long_name: Hafta
+    symbols:
+    - wk
+  MON:
+    name: Ay
+    long_name: Ay
+    symbols:
+    - mo
+  ANN:
+    name: Yıl
+    long_name: Yıl
+    symbols:
+    - "y"
+  MTQ:
+    name: Metreküp
+    long_name: Metreküp
+    symbols:
+    - m³
+    - cbm
+  LTR:
+    name: Litre
+    long_name: Litre
+    symbols:
+    - l
+  MAL:
+    name: Megalitre
+    long_name: Megalitre
+    symbols:
+    - Ml
+  DLT:
+    name: Desilitre
+    long_name: Desilitre
+    symbols:
+    - dl
+  4G:
+    name: Mikrolitre
+    long_name: Mikrolitre
+    symbols:
+    - µl
+  K6:
+    name: Kilolitre
+    long_name: Kilolitre
+    symbols:
+    - kl
+  A44:
+    name: Decalitre
+    long_name: Decalitre
+    symbols:
+    - dal
+  MMQ:
+    name: Milimetre küp
+    long_name: Milimetre küp
+    symbols:
+    - mm³
+  CMQ:
+    name: Santimetre küp
+    long_name: Santimetre küp
+    symbols:
+    - cm³
+    - ccm
+  DMQ:
+    name: Kübik desimetre
+    long_name: Kübik desimetre
+    symbols:
+    - dm³
+  MLT:
+    name: Mililitre
+    long_name: Mililitre
+    symbols:
+    - ml
+  HLT:
+    name: Hektolitre
+    long_name: Hektolitre
+    symbols:
+    - hl
+  CLT:
+    name: Santilitre
+    long_name: Santilitre
+    symbols:
+    - cl
+  DMA:
+    name: Kübik dekametre
+    long_name: Kübik dekametre
+    symbols:
+    - dam³
+  H19:
+    name: Kübik hektometre
+    long_name: Kübik hektometre
+    symbols:
+    - hm³
+  H20:
+    name: Kilometre küp
+    long_name: Kilometre küp
+    symbols:
+    - km³
+  M67:
+    name: akre-ayak
+    long_name: acre-foot (U.S. Survey Foot'a göre)
+    symbols:
+    - acre-ft
+  M68:
+    name: Kordon
+    long_name: Kordon (128 ft3)
+    symbols:
+    - cord
+  M69:
+    name: Kübik mil
+    long_name: Kübik mil (İngiliz)
+    symbols:
+    - mi³
+  M70:
+    name: Kayıt kutusu
+    long_name: Kayıt kutusu
+    symbols:
+    - RT
+  5I:
+    name: Fit küp
+    long_name: Fit küp
+    symbols:
+    - std
+  INQ:
+    name: Kübik inç
+    long_name: Kübik inç
+    symbols:
+    - in³
+  FTQ:
+    name: Fit küp
+    long_name: Fit küp
+    symbols:
+    - ft³
+  YDQ:
+    name: Metreküp
+    long_name: Metreküp
+    symbols:
+    - yd³
+  GLI:
+    name: Galon (Br.)
+    long_name: Galon (İngiliz)
+    symbols:
+    - gal
+  GLL:
+    name: Galon (Am.)
+    long_name: Galon (Amerikan)
+    symbols:
+    - gal
+  PTI:
+    name: Pint (Br.)
+    long_name: Pint (İngiliz)
+    symbols:
+    - pt
+  QTI:
+    name: Quart
+    long_name: quart (İngiliz)
+    symbols:
+    - qt
+  PTL:
+    name: sıvı pint (Am.)
+    long_name: sıvı pint (Amerikan)
+    symbols:
+    - liq pt
+  QTL:
+    name: sıvı litre (Am.)
+    long_name: sıvı quart (amerikan)
+    symbols:
+    - liq qt
+  PTD:
+    name: kuru pint (Am.)
+    long_name: kuru pint (Amerikan)
+    symbols:
+    - dry pt
+  OZI:
+    name: sıvı ons (Br.)
+    long_name: sıvı ons (İngiliz)
+    symbols:
+    - fl oz
+  J57:
+    name: Fıçı (Br.)
+    long_name: Varil (İngiliz)
+    symbols:
+    - bbl
+  L43:
+    name: Çeyrek kile (Br.)
+    long_name: peck (İngiliz)
+    symbols:
+    - pk
+  L84:
+    name: Nakliye tonu (Br.)
+    long_name: ton (Birleşik Krallık nakliye)
+    symbols:
+    - Shipping ton (Br.)
+  L86:
+    name: Nakliye tonu (Am.)
+    long_name: ton (ABD nakliye)
+    symbols:
+    - Shipping ton (Am.)
+  OZA:
+    name: Sıvı ons
+    long_name: Sıvı ons (Amerikan)
+    symbols:
+    - fl oz
+  BUI:
+    name: Buşel (Br.)
+    long_name: Bushel (İngiliz)
+    symbols:
+    - bushel
+  BUA:
+    name: Bushel (Am.)
+    long_name: Bushel (Amerikan)
+    symbols:
+    - bu
+  BLL:
+    name: Varil (Am.)
+    long_name: Varil (Amerikan)
+    symbols:
+    - barrel
+  BLD:
+    name: Kuru Fıçı (Am.)
+    long_name: Dry Barrel (Amerikan)
+    symbols:
+    - bbl
+  GLD:
+    name: Kuru Galon (Am.)
+    long_name: Kuru Galon (Amerikan)
+    symbols:
+    - dry gal
+  QTD:
+    name: Kuru Quart (Am.)
+    long_name: Dry Quart (Amerikan)
+    symbols:
+    - dry qt
+  G26:
+    name: Ster
+    long_name: Ster (dökme metreküp)
+    symbols:
+    - st
+  G21:
+    name: Fincan
+    long_name: Cup [hacim birimi]
+    symbols:
+    - cup
+  G24:
+    name: Yemek Kaşığı
+    long_name: Yemek Kaşığı
+    symbols:
+    - yk
+  G25:
+    name: Çay Kaşığı
+    long_name: Çay Kaşığı
+    symbols:
+    - çk
+  G23:
+    name: Çeyrek kile (Am.)
+    long_name: Çeyrek kile (Amerikan)
+    symbols:
+    - pk
+  JOU:
+    name: Joule
+    long_name: Joule
+    symbols:
+    - J
+  J75:
+    name: Kalori
+    long_name: Kalori
+    symbols:
+    - cal
+  K51:
+    name: Kilokalori
+    long_name: Kilokalori
+    symbols:
+    - kcal
+  J55:
+    name: Watt saniye
+    long_name: Watt saniye
+    symbols:
+    - Ws
+  WHR:
+    name: Watt saat
+    long_name: Watt saat
+    symbols:
+    - Wh
+  KWH:
+    name: Kilowatt saat
+    long_name: Kilowatt saat
+    symbols:
+    - kWh
+  GWH:
+    name: Gigawatt saat
+    long_name: Gigawatt saat
+    symbols:
+    - GWh
+  WTT:
+    name: Watts
+    long_name: Watts
+    symbols:
+    - W
+  KWT:
+    name: Kilowatt
+    long_name: Kilowatt
+    symbols:
+    - kW
+  MAW:
+    name: Megawatt
+    long_name: Megawatt
+    symbols:
+    - MW

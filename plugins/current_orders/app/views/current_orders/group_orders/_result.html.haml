@@ -30,21 +30,21 @@
           - group_order_sum += r[:sub_total]
           %tr{class: cycle('even', 'odd', name: 'articles') + " order-article " + order_article_class_name(r[:quantity], r[:tolerance], r[:result])}
             -# article_info is present in foodcoop-adam only
-            %td.name{style: "width:40%", title: (article_info_title(oa.article) rescue nil)}
-              = article_info_icon oa.article rescue nil
-              = oa.article.name
+            %td.name{style: "width:40%", title: (article_info_title(oa.article_version) rescue nil)}
+              = article_info_icon oa.article_version rescue nil
+              = oa.article_version.name
             %td
-              = oa.article.unit
+              = oa.article_version.unit
               %span{style: 'opacity: 0.4; margin-left: 1em;'}= pkg_helper(oa.price, soft_uq: true)
-            %td= number_to_currency oa.price.fc_price
+            %td= number_to_currency oa.article_version.fc_price
             %td
               = r[:quantity]
-              = "+ #{r[:tolerance]}" if oa.price.unit_quantity > 1
+              = "+ #{r[:tolerance]}" if oa.article_version.unit_quantity > 1
             %td= r[:result] > 0 ? r[:result] : "0"
             %td= number_to_currency(r[:sub_total])
-          - unless oa.article.note.blank?
+          - unless oa.article_version.note.blank?
             %tr{id: "note_#{oa.id}", class: "note even", style: "display:none"}
-              %td{colspan: "6"}=h oa.article.note
+              %td{colspan: "6"}=h oa.article_version.note
       %tr{class: cycle('even', 'odd', name: 'articles')}
         %th{colspan: "5"}= heading_helper GroupOrder, :price
         %th= number_to_currency(group_order_sum)

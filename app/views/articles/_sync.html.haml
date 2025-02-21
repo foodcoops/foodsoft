@@ -1,11 +1,15 @@
+- content_for :javascript do
+  :javascript
+    const units = #{raw(@all_units.to_json)};
+    let articleUnitRatioTemplate$ = undefined;
 - if @outlisted_articles.any?
   %h2= t '.outlist.title'
   %p
     = t('.outlist.body').html_safe
     %ul
-      - for article in @outlisted_articles
+      - @outlisted_articles.each_with_index do |article, index|
         %li
-          = hidden_field_tag "outlisted_articles[#{article.id}]", '1'
+          = hidden_field_tag "outlisted_articles[#{index}]", article.id
           = article.name
           - if article.in_open_order
             .alert= t '.outlist.alert_used', article: article.name
@@ -17,14 +21,14 @@
     %i
       = t '.update.update_msg', count: @updated_article_pairs.size
       = t '.update.body'
-  = render 'sync_table', articles: @updated_article_pairs, field: 'articles', hidden_fields: %w(shared_updated_on)
+  = render 'sync_table', articles: @updated_article_pairs, field: 'articles', hidden_fields: []
   %hr/
 
 - if @new_articles.any?
   %h2= t '.upnew.title'
   %p
     %i= t '.upnew.body_count', count: @new_articles.length
-  = render 'sync_table', articles: @new_articles, field: 'new_articles', hidden_fields: %w(shared_updated_on order_number availability)
+  = render 'sync_table', articles: @new_articles, field: 'new_articles', hidden_fields: %w(order_number availability)
   %hr/
 
 - if ignored_article_count > 0

@@ -95,7 +95,7 @@ class OrdersController < ApplicationController
   # Update an existing order.
   def update
     @order = Order.find params[:id]
-    if @order.update(params[:order].merge(updated_by: current_user))
+    if @order.update params[:order].merge(updated_by: current_user)
       flash[:notice] = I18n.t('orders.update.notice')
       redirect_to action: 'show', id: @order
     else
@@ -145,7 +145,7 @@ class OrdersController < ApplicationController
         redirect_to receive_order_path(@order)
       end
     else
-      @order_articles = @order.order_articles.ordered_or_member.includes(:article).order('articles.order_number, articles.name')
+      @order_articles = @order.order_articles.ordered_or_member.includes(:article_version).order('article_versions.order_number, article_versions.name')
     end
   end
 
@@ -186,8 +186,10 @@ class OrdersController < ApplicationController
       if oa.units_received_changed?
         counts[0] += 1
         if oa.units_received.present?
-          cunits[0] += oa.units_received * oa.article.unit_quantity
-          oacounts = oa.redistribute oa.units_received * oa.price.unit_quantity, rest_to
+          units_received = oa.article_version.convert_quantity(oa.units_received,
+                                                               oa.article_version.supplier_order_unit, oa.article_version.group_order_unit)
+          cunits[0] += units_received
+          oacounts = oa.redistribute units_received, rest_to
           oacounts.each_with_index do |c, i|
             cunits[i + 1] += c
             counts[i + 1] += 1 if c > 0
@@ -213,6 +215,6 @@ class OrdersController < ApplicationController
   end
 
   def remove_empty_article
-    params[:order][:article_ids].compact_blank! if params[:order] && params[:order][:article_ids]
+    params[:order][:article_ids].reject!(&:blank?) if params[:order] && params[:order][:article_ids]
   end
 end

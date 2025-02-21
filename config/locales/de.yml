@@ -22,17 +22,44 @@ de:
         supplier: Lieferantin
         tax: MwSt
         unit: Einheit
+        custom_unit: Benutzerdefinierte Einheit
         unit_quantity: Gebindegröße
         unit_quantity_short: GebGr
         units: Gebinde
+        supplier_order_unit: von Lieferantin bestellbar in (Einheit)
+        ratios_to_supplier_order_unit: Inhalt
+        minimum_order_quantity: Mindestbestellmenge
+        billing_unit: abgerechnet nach (Einheit)
+        group_order_granularity: für Mitglieder bestellbar in (Menge)
+        group_order_unit: für Mitglieder bestellbar in (Einheit)
+        price_unit: pro (Preiseinheit)
+      article_unit:
+        code: Einheitencode gemäß Empfehlung der United Nations Economic Commission (UNECE)
+        code_short: Code
+        symbol: Einheitenzeichen
+        description: Beschreibung (Englisch)
       article_category:
         description: Beschreibung
         name: Name
-      article_price:
+      article_version:
         deposit: Pfand
         price: Nettopreis
         tax: MwSt
         unit_quantity: Gebindegröße
+
+        availability: Artikel ist verfügbar?
+        name: Name
+        note: Notiz
+        origin: Herkunft
+        manufacturer: Produzent
+        order_number: Bestellnummer
+        article_category: Kategorie
+
+        supplier_order_unit: Liefereinheit
+        group_order_granularity: bestellbar per
+        billing_unit: Abrechnungseinheit
+        price_unit: Preiseinheit
+        minimum_order_quantity: Mindestbestellmenge
       bank_account:
         balance: Kontostand
         bank_gateway: Bankgateway
@@ -138,6 +165,7 @@ de:
         updated_by: Zuletzt geändert von
       order_article:
         article: Artikel
+        article_version: Artikel
         missing_units: Fehlende Einheiten
         missing_units_short: Fehlend
         quantity: Gewünschte Einheiten
@@ -191,6 +219,7 @@ de:
         order_howto: Kurzanleitung Bestellen
         phone: Telefon
         phone2: Telefon 2
+        supplier_remote_source: Synchronisierungsquelle
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
       supplier_category:
@@ -239,11 +268,13 @@ de:
     errors:
       has_many_left: ist noch mit einem/r %{collection} verknüpft!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: Name ist bereits vergeben
               taken_with_unit: Name und Einheit sind bereits vergeben
+            minimum_order_quantity:
+              only_integer: Muss eine Ganzzahl sein, wenn die Liefereinheit eine Stückeinheit ist.
         supplier:
           attributes:
             shared_sync_method:
@@ -254,6 +285,7 @@ de:
               exclusion: erledigte Aufgaben können nicht wöchentlich wiederholt werden
     models:
       article: Artikel
+      article_version: Artikel
       article_category: Kategorie
       bank_account: Bankkonto
       bank_gateway: Bankgateway
@@ -481,14 +513,10 @@ de:
         notice: "Es wurden %{count} neue Artikel gespeichert."
       error_invalid: Artikel sind fehlerhaft
       error_nosel: Du hast keine Artikel ausgewählt
-      error_parse: "%{msg} ... in Zeile %{line}"
       error_update: 'Es trat ein Fehler beim Aktualisieren des Artikels ''%{article}'' auf: %{msg}'
       parse_upload:
         no_file: Bitte eine Datei zum hochladen auswählen.
         notice: "%{count} Artikel sind erfolgreich analysiert."
-      sync:
-        notice: Der Katalog ist aktuell
-        shared_alert: "%{supplier} ist nicht mit einer externen Datenbank verknüpft."
       update_all:
         notice: Alle Artikel und Preise wurden aktualisiert
       update_sel:
@@ -498,6 +526,8 @@ de:
         notice_unavail: Alle gewählten Artikel wurden auf "nicht verfügbar" gesetzt
       update_sync:
         notice: Alle Artikel und Preise wurden aktualisiert
+      complete_units_migration:
+        notice: Artikel erfolgreich migriert
     destroy_active_article:
       drop: entfernen
       note: "%{article} wird in laufenden Bestellungen verwendet und kann nicht gelöscht werden. Bitte zuerst den Artikel aus den Bestellungen %{drop_link}."
@@ -509,14 +539,12 @@ de:
     form:
       title_edit: Artikel bearbeiten
       title_new: Neuen Artikel einfügen
-    import_search_results:
-      action_import: importieren
-      already_imported: schon importiert
-      not_found: Keine Artikel gefunden
+      per: pro
     index:
       change_supplier: Lieferant wechseln
       download: Artikel herunterladen
       edit_all: Alle bearbeiten
+      migrate_units: Alte Artikeleinheiten migrieren
       ext_db:
         import: Suchen/Importieren
         sync: Synchronisieren
@@ -530,6 +558,22 @@ de:
       search_placeholder: Name ...
       title: Artikel von %{supplier} (%{count})
       upload: Artikel hochladen
+    prepare_units_migration:
+      title: Artikel von %{supplier} migrieren
+      explanation: |
+        Es wird sehr empfohlen ein Backup herunterzuladen ehe Sie fortfahren:
+      download: Artikel-Backup herunterladen
+      migrate_units: Nächster Schritt
+    migrate_units:
+      title: Artikel von %{supplier} migrieren
+      explanation: |
+        Die Artikeleinheiten werden nun in eine neue, flexiblere Form konvertiert. Passen Sie die Konvertierungsvorschläge an, ehe sie fortfahren.
+      column_headers:
+        apply: Konvertieren
+        original_plaintext_unit: Ursprüngliche Volltext-Einheit
+        affected_articles: Betroffene Artikel
+        contains: Beinhaltet
+      run_migration: Migration jetzt durchführen
     model:
       error_in_use: "%{article} kann nicht gelöscht werden. Der Artikel befindet sich in einer laufenden Bestellung!"
       error_nosel: Du hast keine Artikel ausgewählt
@@ -762,9 +806,8 @@ de:
       rows:
         - BestellNr.
         - Menge
-        - Name
-        - Gebinde
         - Einheit
+        - Name
         - Preis/Einheit
         - Summe
       total: Gesamtpreis
@@ -783,6 +826,15 @@ de:
     not_found:
       text: Diese Seite existiert anscheinend nicht. Entschuldigung!
       title: Seite nicht gefunden
+    step_error: Gib eine Zahl >=%{min} ein, die ein Vielfaches von %{granularity} ist.
+  feedback:
+    create:
+      notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
+    new:
+      first_paragraph: Fehler gefunden? Vorschlag? Idee? Kritik? Wir freuen uns über jegliches Feedback.
+      second_paragraph: Bitte beachte, dass das Foodsoft Team nur die Software wartet. Bei Fragen zur Organisation in Deiner Foodcoop, kontaktiere besser die entsprechenden Ansprechpartner.
+      send: Absenden
+      title: Gib Feedback
   finance:
     balancing:
       close:
@@ -1137,6 +1189,11 @@ de:
     tasks:
       required_users: "Es fehlen %{count} Mitstreiterinnen!"
       task_title: "%{name} (%{duration}h)"
+    unit_conversion_fields:
+      title: Einheiten umrechnen
+      disabled_title: Einheit kann nicht konvertiert werden
+      cancel: Abbrechen
+      apply: Anwenden
   home:
     apple_bar:
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
@@ -1424,6 +1481,7 @@ de:
       stock: Lager
       suppliers: Lieferanten/Artikel
       title: Artikel
+      article_units: Artikeleinheiten
     dashboard: Übersichtsseite
     finances:
       accounts: Konten verwalten
@@ -1485,6 +1543,7 @@ de:
       heading: Bestellung für %{name}
       name: Name
       number: Nummer
+      unit: Einheit
       to_address: Versandaddresse
     finish:
       notice: Die Bestellung wurde beendet.
@@ -1602,6 +1661,15 @@ de:
       ordered_desc: Anzahl der Artikel die durch das Mitglied bestellt wurden (Menge + Toleranz)
       received: Bekommen
       received_desc: Anzahl der Artikel die ein Mitglied erhält
+    article_fields_units:
+      custom_unit: Benutzerdefiniert
+      unit: Einheit
+      unit_ratios: Einheiten-Umrechnung
+      add_ratio: Umrechnung hinzufügen
+      warn_about_needless_custom_unit: Wenn möglich keine benutzerdefinierten Einheiten eintippen, sondern stattdessen das Einheiten-Dropdown verwenden (Das gewährleistet Interoperabilität mit anderen Systemen und erlaubt die automatische Umrechnung in andere Einheiten.)
+    article_unit_ratio:
+      remove: Umrechnung entfernen
+      per: pro
     articles_by:
       price: Gesamtpreis
       price_sum: Summe
@@ -1766,6 +1834,21 @@ de:
       stock_changes: Verlauf des Lagerbestands
     update:
       notice: Lagerartikel »%{name}« aktualisiert.
+  article_units:
+    index:
+      search: Einheit/Symbol suchen
+      only_recommended: Nur empfohlene
+    rows:
+      request_translation: Für diese Einheit existiert noch keine Übersetzung. Wenn Sie der Meinung sind, dass es eine gebräuchliche Einheit ist, klicken Sie hier um ein neues GitHub Issue zu erstellen.
+    create_link:
+      add: Hinzufügen
+    destroy_link:
+      delete: Entfernen
+      confirm: Wollen Sie die Artikeleinheit wirklich entfernen? (Bestehende Artikel, die diese Einheit verwenden, werden nicht verändert, aber man kann die Einheit dann nicht mehr in neuen Artikeln verwenden.)
+    create:
+      success: Artikeleinheit %{name} erfolgreich hinzugefügt.
+    destroy:
+      success: Artikeleinheit %{name} erfolgreich entfernt.
   suppliers:
     create:
       notice: Lieferant wurde erstellt
@@ -1799,8 +1882,19 @@ de:
       last_orders: Letzte Bestellungen
       new_delivery: Neue Lieferung anlegen
       show_deliveries: Zeige alle Lieferungen
+      share: Teilen
+      remove_share: Nicht mehr teilen
+      confirm_remove_share: Willst Du wirklich aufhören die Artikel dieser Lieferantin zu teilen? (Wenn Du sie später wieder freigeben willst, musst du den Link an alle Abonnentinnen schicken, die deiner Meinung nach Zugriff haben sollten.)
     update:
       notice: Lieferant wurde aktualisiert
+    import_search_results:
+      action_import: importieren
+      already_imported: schon importiert
+      not_found: Keine Artikel gefunden
+  supplier_shares:
+    share_link:
+      not_shared: Die Artikel der Lieferantin werden aktuell mit niemandem geteilt.
+      share_link_copied_to_clipboard: Link zum Teilen in die Zwischenablage kopiert.
   tasks:
     accept:
       notice: Du hast die Aufgabe übernommen

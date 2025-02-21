@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_26_083744) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -55,38 +55,54 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
     t.index ["name"], name: "index_article_categories_on_name", unique: true
   end
 
-  create_table "article_prices", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "article_id", null: false
-    t.decimal "price", precision: 8, scale: 2, default: "0.0", null: false
-    t.decimal "tax", precision: 8, scale: 2, default: "0.0", null: false
-    t.decimal "deposit", precision: 8, scale: 2, default: "0.0", null: false
-    t.integer "unit_quantity"
-    t.datetime "created_at", precision: nil
-    t.index ["article_id"], name: "index_article_prices_on_article_id"
+  create_table "article_unit_ratios", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "article_version_id", null: false
+    t.integer "sort", null: false
+    t.decimal "quantity", precision: 38, scale: 3, null: false
+    t.string "unit"
+    t.index ["article_version_id"], name: "index_article_unit_ratios_on_article_version_id"
+    t.index ["sort"], name: "index_article_unit_ratios_on_sort"
   end
 
-  create_table "articles", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "article_units", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "unit", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["unit"], name: "index_article_units_on_unit", unique: true
+  end
+
+  create_table "article_versions", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.decimal "price", precision: 11, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "tax", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "deposit", precision: 8, scale: 2, default: "0.0", null: false
+    t.datetime "created_at"
     t.string "name", default: "", null: false
-    t.integer "supplier_id", default: 0, null: false
     t.integer "article_category_id", default: 0, null: false
-    t.string "unit", default: "", null: false
+    t.string "unit"
     t.string "note"
     t.boolean "availability", default: true, null: false
     t.string "manufacturer"
     t.string "origin"
-    t.datetime "shared_updated_on", precision: nil
-    t.decimal "price", precision: 8, scale: 2
-    t.float "tax"
-    t.decimal "deposit", precision: 8, scale: 2, default: "0.0"
-    t.integer "unit_quantity", default: 1, null: false
     t.string "order_number"
-    t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.string "supplier_order_unit"
+    t.string "price_unit"
+    t.string "billing_unit"
+    t.string "group_order_unit"
+    t.decimal "group_order_granularity", precision: 8, scale: 3, default: "1.0", null: false
+    t.float "minimum_order_quantity"
+    t.index ["article_category_id"], name: "index_article_versions_on_article_category_id"
+    t.index ["article_id", "created_at"], name: "index_article_versions_on_article_id_and_created_at", unique: true
+  end
+
+  create_table "articles", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "supplier_id", default: 0, null: false
+    t.datetime "shared_updated_on", precision: nil
+    t.datetime "created_at", precision: nil
     t.datetime "deleted_at", precision: nil
     t.string "type"
     t.integer "quantity", default: 0
-    t.index ["article_category_id"], name: "index_articles_on_article_category_id"
-    t.index ["name", "supplier_id"], name: "index_articles_on_name_and_supplier_id"
     t.index ["supplier_id"], name: "index_articles_on_supplier_id"
     t.index ["type"], name: "index_articles_on_type"
   end
@@ -181,8 +197,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
 
   create_table "group_order_article_quantities", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "group_order_article_id", default: 0, null: false
-    t.integer "quantity", default: 0
-    t.integer "tolerance", default: 0
+    t.decimal "quantity", precision: 8, scale: 3, default: "0.0", null: false
+    t.decimal "tolerance", precision: 8, scale: 3, default: "0.0", null: false
     t.datetime "created_on", precision: nil, null: false
     t.index ["group_order_article_id"], name: "index_group_order_article_quantities_on_group_order_article_id"
   end
@@ -190,8 +206,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
   create_table "group_order_articles", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "group_order_id", default: 0, null: false
     t.integer "order_article_id", default: 0, null: false
-    t.integer "quantity", default: 0, null: false
-    t.integer "tolerance", default: 0, null: false
+    t.decimal "quantity", precision: 8, scale: 3, default: "0.0", null: false
+    t.decimal "tolerance", precision: 8, scale: 3, default: "0.0", null: false
     t.datetime "updated_on", precision: nil, null: false
     t.decimal "result", precision: 8, scale: 3
     t.decimal "result_computed", precision: 8, scale: 3
@@ -346,15 +362,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
 
   create_table "order_articles", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "order_id", default: 0, null: false
-    t.integer "article_id", default: 0, null: false
-    t.integer "quantity", default: 0, null: false
-    t.integer "tolerance", default: 0, null: false
-    t.integer "units_to_order", default: 0, null: false
+    t.decimal "quantity", precision: 8, scale: 3, default: "0.0", null: false, comment: "stored in `article_versions.group_order_unit`"
+    t.decimal "tolerance", precision: 8, scale: 3, default: "0.0", null: false, comment: "stored in `article_versions.group_order_unit`"
+    t.decimal "units_to_order", precision: 11, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
     t.integer "lock_version", default: 0, null: false
-    t.integer "article_price_id"
-    t.decimal "units_billed", precision: 8, scale: 3
-    t.decimal "units_received", precision: 8, scale: 3
-    t.index ["order_id", "article_id"], name: "index_order_articles_on_order_id_and_article_id", unique: true
+    t.integer "article_version_id", null: false
+    t.decimal "units_billed", precision: 11, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "units_received", precision: 11, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
+    t.index ["article_version_id"], name: "index_order_articles_on_article_version_id"
+    t.index ["order_id", "article_version_id"], name: "index_order_articles_on_order_id_and_article_version_id", unique: true
     t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
 
@@ -520,12 +536,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_26_124329) do
     t.string "delivery_days"
     t.string "order_howto"
     t.string "note"
-    t.integer "shared_supplier_id"
     t.string "min_order_quantity"
     t.datetime "deleted_at", precision: nil
     t.string "shared_sync_method"
     t.string "iban"
-    t.integer "supplier_category_id"
+    t.integer "supplier_category_id", null: false
+    t.string "supplier_remote_source"
+    t.string "external_uuid"
+    t.datetime "unit_migration_completed", precision: nil
+    t.index ["external_uuid"], name: "index_suppliers_on_external_uuid", unique: true
     t.index ["name"], name: "index_suppliers_on_name", unique: true
   end
 

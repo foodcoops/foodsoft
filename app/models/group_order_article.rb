@@ -3,7 +3,6 @@
 #
 class GroupOrderArticle < ApplicationRecord
   include LocalizeInput
-
   belongs_to :group_order
   belongs_to :order_article
   has_many   :group_order_article_quantities, dependent: :destroy
@@ -11,7 +10,7 @@ class GroupOrderArticle < ApplicationRecord
   validates :group_order, :order_article, presence: true
   validates :order_article_id, uniqueness: { scope: :group_order_id } # just once an article per group order
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
-  validates :quantity, :tolerance, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :quantity, :tolerance, numericality: { greater_than_or_equal_to: 0 }
 
   scope :ordered, -> { includes(group_order: :ordergroup).order('groups.name') }
 
@@ -68,14 +67,14 @@ class GroupOrderArticle < ApplicationRecord
         logger.debug("Need to decrease quantities for GroupOrderArticleQuantity[#{quantities[i].id}]")
         if quantity < self.quantity && quantities[i].quantity > 0
           delta = self.quantity - quantity
-          delta = [delta, quantities[i].quantity].min
+          delta = (delta > quantities[i].quantity ? quantities[i].quantity : delta)
           logger.debug("Decreasing quantity by #{delta}")
           quantities[i].quantity -= delta
           self.quantity -= delta
         end
         if tolerance < self.tolerance && quantities[i].tolerance > 0
           delta = self.tolerance - tolerance
-          delta = [delta, quantities[i].tolerance].min
+          delta = (delta > quantities[i].tolerance ? quantities[i].tolerance : delta)
           logger.debug("Decreasing tolerance by #{delta}")
           quantities[i].tolerance -= delta
           self.tolerance -= delta
@@ -125,13 +124,14 @@ class GroupOrderArticle < ApplicationRecord
 
     # Get total
     if !total.nil?
-      logger.debug "<#{order_article.article.name}> => #{total} (given)"
-    elsif order_article.article.is_a?(StockArticle)
-      total = order_article.article.quantity
-      logger.debug "<#{order_article.article.name}> (stock) => #{total}"
+      logger.debug "<#{order_article.article_version.name}> => #{total} (given)"
+    elsif order_article.article_version.is_a?(StockArticle)
+      total = order_article.article_version.quantity
+      logger.debug "<#{order_article.article_version.name}> (stock) => #{total}"
     else
-      total = order_article.units_to_order * order_article.price.unit_quantity
-      logger.debug "<#{order_article.article.name}> units_to_order #{order_article.units_to_order} => #{total}"
+      total = order_article.article_version.convert_quantity(order_article.units_to_order,
+                                                             order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit)
+      logger.debug "<#{order_article.article_version.name}> units_to_order #{order_article.units_to_order} => #{total}"
     end
 
     if total > 0
@@ -197,14 +197,15 @@ class GroupOrderArticle < ApplicationRecord
   # the minimum price depending on configuration. When the order is finished it
   # will be the value depending of the article results.
   def total_price(order_article = self.order_article)
+    group_order_price = order_article.article_version.fc_group_order_price
     if order_article.order.open?
       if FoodsoftConfig[:tolerance_is_costly]
-        order_article.article.fc_price * (quantity + tolerance)
+        group_order_price * (quantity + tolerance)
       else
-        order_article.article.fc_price * quantity
+        group_order_price * quantity
       end
     else
-      order_article.price.fc_price * result
+      group_order_price * result
     end
   end
 

@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class SuppliersController < ApplicationController
   before_action :authenticate_suppliers, except: %i[index list]
   helper :deliveries
@@ -14,14 +16,8 @@ class SuppliersController < ApplicationController
   end
 
   # new supplier
-  # if shared_supplier_id is given, the new supplier will filled whith its attributes
   def new
-    if params[:shared_supplier_id]
-      shared_supplier = SharedSupplier.find(params[:shared_supplier_id])
-      @supplier = shared_supplier.suppliers.new(shared_supplier.autofill_attributes)
-    else
-      @supplier = Supplier.new
-    end
+    @supplier = Supplier.new
   end
 
   def edit
@@ -31,6 +27,8 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
     @supplier.supplier_category ||= SupplierCategory.first
+    @supplier.unit_migration_completed = Time.now
+
     if @supplier.save
       flash[:notice] = I18n.t('suppliers.create.notice')
       redirect_to suppliers_path
@@ -59,18 +57,29 @@ class SuppliersController < ApplicationController
     redirect_to @supplier
   end
 
-  # gives a list with all available shared_suppliers
-  def shared_suppliers
-    @shared_suppliers = SharedSupplier.all
+  def remote_articles
+    @supplier = Supplier.find(remote_articles_params.fetch(:supplier_id))
+    search_params = {}
+    search_params[:name] = params.fetch(:name).split if params.include?(:name)
+    search_params[:origin] = params.fetch(:origin) if params.include?(:origin)
+    search_params[:page] = params.fetch(:page, 1)
+    search_params[:per_page] = @per_page
+    data = @supplier.read_from_remote(search_params)
+    @articles = data[:articles]
+    @pagination = OpenStruct.new(data[:pagination])
   end
 
   private
+
+  def remote_articles_params
+    params.permit(:supplier_id, :name, :origin)
+  end
 
   def supplier_params
     params
       .require(:supplier)
       .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
               :iban, :custom_fields, :delivery_days, :order_howto, :note, :supplier_category_id,
-              :shared_supplier_id, :min_order_quantity, :shared_sync_method)
+              :min_order_quantity, :shared_sync_method, :supplier_remote_source)
   end
 end

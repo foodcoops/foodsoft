@@ -1,11 +1,34 @@
-= simple_form_for stock_article, remote: true, :validate => true do |f|
+= simple_form_for stock_article.latest_article_version, :url => stock_article.new_record? ? stock_articles_path(stock_article, foodcoop: FoodsoftConfig.scope) : stock_article_path(stock_article), remote: true, validate: true do |f|
+  :javascript
+    const articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: f, article_unit_ratio_counter: -1}))}"));
+    const units = #{raw(@all_units.to_json)};
+    new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
+  = render partial: 'shared/js_templates/unit_conversion_popover_template'
   .modal-header
     = close_button :modal
     %h3= title
-  .modal-body
-    = f.association :supplier
+  .modal-body.article-form
+    = f.hidden_field :id
+    = f.simple_fields_for :article do |a|
+      = a.input :supplier_id, collection: Supplier.all, selected: stock_article.supplier_id
     = f.input :name
-    = f.input :unit
+    .fold-line.d-flex
+      = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
+      -# title: unit in which article can be ordered from supplier
+      = f.input :supplier_order_unit, as: :select, collection: @article_units, value: stock_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'input-medium'}
+      -# title: free text unit
+      = f.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
+    .fold-line
+      .control-group
+        %label.control-label{for: 'unit_ratios'}
+          = "Unit ratios"
+        %table#fc_base_price{:class => "controls"}
+          %tbody
+            - ratios = stock_article.article_unit_ratios
+            = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
+          %tfoot
+            %td{:colspan => 6}
+              = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
     = f.input :note
     - if stock_article.new_record?
       = f.input :price

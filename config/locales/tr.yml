@@ -163,7 +163,7 @@ tr:
         last_order: Son sipariş
         last_user_activity: Son etkinlik
         name: Adı
-        user_tokens: Üyeler    
+        user_tokens: Üyeler
       stock_article:
         available: Mevcut
         price: Fiyat
@@ -239,7 +239,7 @@ tr:
     errors:
       has_many_left: Bu %{collection} ile hala ilişkili!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: isim zaten alınmış
@@ -481,14 +481,10 @@ tr:
         notice: "%{count} yeni ürün kaydedildi."
       error_invalid: Ürünlerde hatalar var
       error_nosel: Seçilmiş bir ürün yok
-      error_parse: "%{msg} ... satır %{line}'da"
       error_update: '%{article} ürünleri güncellerken bir hata oluştu: %{msg}'
       parse_upload:
         no_file: Lütfen yüklemek için bir dosya seçin.
         notice: "%{count} ürün başarıyla analiz edildi."
-      sync:
-        notice: Katalog güncel
-        shared_alert: "%{supplier} harici bir veritabanına bağlı değil"
       update_all:
         notice: Tüm ürünler ve fiyatlar güncellendi.
       update_sel:
@@ -509,10 +505,6 @@ tr:
     form:
       title_edit: Ürün düzenle
       title_new: Yeni ürün ekle
-    import_search_results:
-      action_import: İçe aktar
-      already_imported: içe aktarıldı
-      not_found: Ürün bulunamadı
     index:
       change_supplier: Tedarikçi değiştir
       download: Ürünleri indir
@@ -757,9 +749,8 @@ tr:
       rows:
       - Sipariş Numarası
       - Miktar
-      - Ad
-      - Birim miktarı
       - Birim
+      - Ad
       - Birim fiyatı
       - Ara toplam
       total: Toplam
@@ -1026,7 +1017,7 @@ tr:
   group_order_articles:
     form:
       amount_change_for: '%{article} için miktarı değiştirin'
-      result_hint: 'Birim: %{unit}' 
+      result_hint: 'Birim: %{unit}'
   group_orders:
     archive:
       desc: Tüm %{link} burada görüntüleyebilirsiniz.
@@ -1099,7 +1090,7 @@ tr:
     update:
       error_general: Sipariş bir hatadan dolayı güncellenemedi.
       error_stale: Bu sırada başka birisi sipariş vermiş, sipariş güncellenemedi.
-      notice: Sipariş kaydedildi.  
+      notice: Sipariş kaydedildi.
   helpers:
     application:
       edit_user: Kullanıcıyı düzenle
@@ -1288,7 +1279,7 @@ tr:
       text: |
         Sevgili %{user},
 
-        Çalışma grubunun '%{task}' görevi %{when} tarihinde tamamlanacak 
+        Çalışma grubunun '%{task}' görevi %{when} tarihinde tamamlanacak
         ve daha fazla katılımcıya ihtiyaç duyuyor!
 
         Eğer henüz bu göreve atanmadıysanız, şimdi fırsatınız var:
@@ -1342,9 +1333,9 @@ tr:
       text: |
         Merhaba %{user},
 
-        Yeni bir şifre istediniz (veya başka birisi istedi). 
+        Yeni bir şifre istediniz (veya başka birisi istedi).
         Yeni bir şifre belirlemek için bu linke tıklayın: %{link}
-        Bu link sadece bir kez kullanılabilir ve %{expires} tarihinde geçersiz olacaktır. 
+        Bu link sadece bir kez kullanılabilir ve %{expires} tarihinde geçersiz olacaktır.
         Eğer şifrenizi değiştirmek istemiyorsanız, bu mesajı görmezden gelebilirsiniz. Şifreniz henüz değiştirilmedi.
 
 
@@ -1434,7 +1425,7 @@ tr:
       pickups: Teslim Günleri
       title: Siparişler
     tasks: Görevler
-    workgroups: Çalışma Grupları      
+    workgroups: Çalışma Grupları
   number:
     percentage:
       format:
@@ -1793,6 +1784,10 @@ tr:
       show_deliveries: Tümünü göster
     update:
       notice: Tedarikçi güncellendi
+    import_search_results:
+      action_import: İçe aktar
+      already_imported: içe aktarıldı
+      not_found: Ürün bulunamadı
   tasks:
     accept:
       notice: Görevi kabul ettiniz

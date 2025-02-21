@@ -45,11 +45,11 @@ module GroupOrdersHelper
     { group_order_article: goa, quantity: quantity, tolerance: tolerance, result: result, sub_total: sub_total }
   end
 
-  def get_missing_units_css_class(quantity_missing)
-    if quantity_missing == 1
-      'missing-few'
-    elsif quantity_missing == 0
+  def get_missing_units_css_class(quantity_missing, article_version)
+    if quantity_missing == 0
       ''
+    elsif quantity_missing <= article_version.group_order_granularity
+      'missing-few'
     else
       'missing-many'
     end

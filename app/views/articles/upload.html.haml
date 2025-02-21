@@ -5,66 +5,87 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th= t '.field.status'
+      %th= Article.human_attribute_name(:availability_short)
       %th= Article.human_attribute_name(:order_number)
       %th= Article.human_attribute_name(:name)
-      %th= Article.human_attribute_name(:note)
-      %th= Article.human_attribute_name(:manufacturer)
-      %th= Article.human_attribute_name(:origin)
-      %th= Article.human_attribute_name(:unit)
+      %th= Article.human_attribute_name(:supplier_order_unit)
+      %th= Article.human_attribute_name(:custom_unit)
+      %th= Article.human_attribute_name(:ratios_to_supplier_order_unit)
+      %th= Article.human_attribute_name(:minimum_order_quantity)
+      %th= Article.human_attribute_name(:billing_unit)
+      %th= Article.human_attribute_name(:group_order_granularity)
+      %th= Article.human_attribute_name(:group_order_unit)
       %th= Article.human_attribute_name(:price)
+      %th= Article.human_attribute_name(:price_unit)
       %th= Article.human_attribute_name(:tax)
       %th= Article.human_attribute_name(:deposit)
-      %th= Article.human_attribute_name(:unit_quantity)
-      %th.muted= t '.fields.reserved'
-      %th.muted= t '.fields.reserved'
+      %th= Article.human_attribute_name(:note)
       %th= Article.human_attribute_name(:article_category)
+      %th= Article.human_attribute_name(:origin)
+      %th= Article.human_attribute_name(:manufacturer)
   %tbody
+    - kgm = ArticleUnitsLib.get_translated_name_for_code('KGM')
+    - xjy = ArticleUnitsLib.get_translated_name_for_code('XJY')
+    - ltr = ArticleUnitsLib.get_translated_name_for_code('LTR')
+    - xbd = ArticleUnitsLib.get_translated_name_for_code('XBD')
+    - xbo = ArticleUnitsLib.get_translated_name_for_code('XBO')
     %tr
       %td
       %td 1234A
       %td= t '.sample.walnuts'
+      %td= kgm
       %td
-      %td= t '.sample.supplier_1'
-      %td CA
-      %td 500 gr
-      %td 8.90
+      %td
+      %td
+      %td= kgm
+      %td 0.5
+      %td= kgm
+      %td 17.80
+      %td= kgm
       %td= FoodsoftConfig[:tax_default] || 6
       %td 0
-      %td 6
-      %td
       %td
       %td= t '.sample.nuts'
+      %td CA
+      %td= t '.sample.supplier_1'
     %tr
       %td x
       %td 4321Z
       %td= t '.sample.tomato_juice'
-      %td= t '.sample.organic'
-      %td= t '.sample.supplier_2'
-      %td IN
-      %td 1.5 l
+      %td= xjy
+      %td
+      %td= '1.5 ' + ltr
+      %td 4
+      %td= ltr
+      %td 1
+      %td= xjy
       %td 4.35
+      %td= ltr
       %td= FoodsoftConfig[:tax_default] || 6
       %td 0
-      %td 1
-      %td
-      %td
+      %td= t '.sample.organic'
       %td= t '.sample.juices'
+      %td IN
+      %td= t '.sample.supplier_2'
     %tr
       %td
       %td 4322Q
       %td= t '.sample.tomato_juice'
-      %td= t '.sample.organic'
-      %td= t '.sample.supplier_3'
-      %td TR
-      %td 1.2 l
+      %td= xbd
+      %td
+      %td= '6 ' + xbo + ', 1 ' + ltr
+      %td
+      %td= xbd
+      %td 1
+      %td= xbo
       %td 4.02
+      %td= xbo
       %td= FoodsoftConfig[:tax_default] || 6
       %td 0
-      %td 2
-      %td
-      %td
+      %td= t '.sample.organic'
       %td= t '.sample.juices'
+      %td TR
+      %td= t '.sample.supplier_3'
 
 %p= t '.text_2'
 

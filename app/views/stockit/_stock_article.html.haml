@@ -3,7 +3,7 @@
   %td= stock_article.quantity
   %td= stock_article.quantity_ordered
   %td.main_info= stock_article.quantity_available
-  %td= stock_article.unit
+  %td= format_supplier_order_unit(stock_article)
   %td= stock_article.price
   %td= number_to_percentage stock_article.tax
   %td= link_to stock_article.supplier.name, stock_article.supplier

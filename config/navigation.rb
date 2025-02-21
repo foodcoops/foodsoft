@@ -24,9 +24,7 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :ordering, I18n.t('navigation.orders.ordering'), group_orders_path
       subnav.item :ordering_archive, I18n.t('navigation.orders.archive'), archive_group_orders_path
       subnav.item :orders, I18n.t('navigation.orders.manage'), orders_path, if: proc { current_user.role_orders? }
-      subnav.item :pickups, I18n.t('navigation.orders.pickups'), pickups_path, if: proc {
-                                                                                     current_user.role_pickups?
-                                                                                   }
+      subnav.item :pickups, I18n.t('navigation.orders.pickups'), pickups_path, if: proc { current_user.role_pickups? }
     end
 
     primary.item :articles, I18n.t('navigation.articles.title'), '#',
@@ -34,6 +32,7 @@ SimpleNavigation::Configuration.run do |navigation|
       subnav.item :suppliers, I18n.t('navigation.articles.suppliers'), suppliers_path
       subnav.item :stockit, I18n.t('navigation.articles.stock'), stock_articles_path
       subnav.item :categories, I18n.t('navigation.articles.categories'), article_categories_path
+      subnav.item :article_units, I18n.t('navigation.articles.article_units'), article_units_path
     end
 
     primary.item :finance, I18n.t('navigation.finances.title'), '#', if: proc {

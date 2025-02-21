@@ -4,7 +4,7 @@
   %td
     %span.stock_article_name= stock_change.stock_article.name
     = f.association :stock_article, :as => :hidden
-  %td.price{:data => {:toggle => :tooltip, :title => "#{render(:partial => 'shared/article_price_info', :locals => {:article => stock_article})}"}}= number_to_currency stock_article.price
-  %td.unit= stock_change.stock_article.unit
+  %td.price{:data => {:toggle => :tooltip, :title => "#{render(:partial => 'shared/article_version_info', :locals => {:article => stock_article})}"}}= number_to_currency stock_article.price
+  %td.unit= format_supplier_order_unit(stock_change.stock_article)
   %td= f.input :quantity, :wrapper => :intable, :input_html => {:class => 'stock-change-quantity', :autocomplete => :off}
   %td= stock_change_remove_link f

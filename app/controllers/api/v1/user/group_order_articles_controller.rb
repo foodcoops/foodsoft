@@ -65,7 +65,7 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
   def scope
     GroupOrderArticle
       .joins(:group_order)
-      .includes(order_article: :article, group_order: :order)
+      .includes(order_article: :article_version, group_order: :order)
       .where(group_orders: { ordergroup_id: current_ordergroup.id })
   end
 

@@ -1,18 +1,19 @@
-%table.table
+- price_markup = FoodsoftConfig[:price_markup].to_f
+%table.table.sync-table
   %thead
     %tr
       %th= heading_helper Article, :name
       %th= heading_helper Article, :note
       %th= heading_helper Article, :manufacturer
       %th= heading_helper Article, :origin
-      %th= heading_helper Article, :unit
-      %th= heading_helper Article, :unit_quantity, short: true
+      %th= heading_helper Article, :supplier_order_unit
       %th= heading_helper Article, :price
       %th= heading_helper Article, :tax
       %th= heading_helper Article, :deposit
       %th= heading_helper Article, :article_category
   %tbody
-    - articles.each do |changed_article, attrs|
+    - articles.each_with_index do |data, index|
+      - changed_article, attrs = data
       - unless changed_article.new_record?
         - article = Article.find(changed_article.id)
         %tr{:style => 'color:grey'}
@@ -20,27 +21,74 @@
           %td= article.note
           %td= article.manufacturer
           %td= article.origin
-          %td= article.unit
-          %td= article.unit_quantity
-          %td= number_to_currency article.price
+          %td= ArticleUnitsLib.get_translated_name_for_code(article.supplier_order_unit)
+          %td= "#{number_to_currency(article.price_unit_price)} #{t('articles.form.per')} #{format_price_unit(article)}"
           %td= number_to_percentage article.tax
           %td= number_to_currency article.deposit
           %td= article.article_category.name if article.article_category
-      %tr
-        = fields_for "#{field}[]", changed_article do |form|
+      %tr{:id => "article_row_#{field}_#{index}"}
+        = render partial: 'shared/js_templates/unit_conversion_popover_template'
+        = simple_fields_for "#{field}[#{index}]", changed_article.latest_article_version do |form|
+          - content_for :javascript do
+            :javascript
+              articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: form, article_unit_ratio_counter: -1}))}"));
+              new ArticleForm(articleUnitRatioTemplate$, $('#article_row_#{field}_#{index}'), units, #{price_markup}, $('#article_row_#{field}_#{index}').closest('form'), '#{field}_#{index}', '#{field}[#{index}]');
           %td{:style => highlight_new(attrs, :name)}
             = form.text_field 'name', :size => 0
+            = form.input :id, as: :hidden unless changed_article.new_record?
             - hidden_fields.each do |field|
-              = form.hidden_field field
+              = form.input field, as: :hidden
           %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
           %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
           %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
-          %td{:style => highlight_new(attrs, :unit)}= form.text_field 'unit', class: 'input-mini'
-          %td{:style => highlight_new(attrs, :unit_quantity)}= form.text_field 'unit_quantity', class: 'input-mini'
+          %td{:style => highlight_new(attrs, :supplier_order_unit)}
+            .d-flex.gap-1.align-items-center
+              = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'input-medium'}
+              = form.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
+              %div.btn-link.toggle-extra-units.text-decoration-none.default-values
+                %i.icon-cog{:style => highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])}
+            %div.extra-unit-fields.form-horizontal
+              .fold-line
+                .control-group
+                  %label.control-label{for: 'unit_ratios'}
+                    = "Unit ratios"
+                  %table#fc_base_price{:class => "controls"}
+                    %tbody
+                      - ratios = changed_article.article_unit_ratios
+                      = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
+                    %tfoot
+                      %tr
+                        %td{:colspan => 6}
+                          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
+                      - unless changed_article.new_record?
+                        %tr{style: 'color: grey;'}
+                          %td{:colspan => 6}
+                            %ul
+                            - article.article_unit_ratios.each do |ratio|
+                              %li
+                                = "#{ratio.quantity} x #{ArticleUnitsLib.get_translated_name_for_code(ratio.unit)}"
+                                = t 'articles.form.per'
+                                = ArticleUnitsLib.get_translated_name_for_code(article.supplier_order_unit)
+              .fold-line
+                = form.input :minimum_order_quantity, label: "Mininum order quantity" do
+                  .input-append
+                    = form.input_field :minimum_order_quantity, class: 'input-mini', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
+                    %span.add-on
+                    - unless changed_article.new_record?
+                      %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
+              .fold-line
+                = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'input-medium', style: highlight_new(attrs, :billing_unit)}, include_blank: false
+              .fold-line
+                = form.input :group_order_granularity, hint: changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}", hint_html: {style: 'color: grey;'}, label: "Allow orders per", input_html: {class: 'input-mini', style: highlight_new(attrs, :group_order_granularity), title: "steps in which ordergroups can order this article"}
+                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': changed_article.group_order_unit, class: 'input-medium', style: highlight_new(attrs, :group_order_unit)}, label: '&times;'.html_safe, include_blank: false
           %td{:style => highlight_new(attrs, :price)}
-            .input-prepend
-              %span.add-on= t 'number.currency.format.unit'
-              = form.text_field 'price', class: 'input-mini', style: 'width: 45px'
+            .d-flex.gap-1
+              .input-prepend
+                %span.add-on= t 'number.currency.format.unit'
+                = form.text_field 'price', class: 'input-mini', style: 'width: 45px'
+              .input.d-flex.gap-1
+                %label=t('articles.form.per')
+                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'input-medium'}
           %td{:style => highlight_new(attrs, :tax)}
             .input-append
               = form.text_field 'tax', class: 'input-mini', style: 'width: 45px'

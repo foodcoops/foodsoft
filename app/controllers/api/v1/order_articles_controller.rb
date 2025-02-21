@@ -14,7 +14,7 @@ class Api::V1::OrderArticlesController < Api::V1::BaseController
   private
 
   def scope
-    OrderArticle.includes(:article_price, article: :supplier)
+    OrderArticle.includes(article_version: { article: :supplier })
   end
 
   def search_scope

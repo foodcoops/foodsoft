@@ -5,7 +5,7 @@ feature Order, :js do
   let(:article) { create(:article, unit_quantity: 1) }
   let(:order) { create(:order, supplier: article.supplier, article_ids: [article.id]) } # need to ref article
   let(:go1) { create(:group_order, order: order) }
-  let(:oa) { order.order_articles.find_by_article_id(article.id) }
+  let(:oa) { order.order_articles.find_by_article_version_id(article.latest_article_version.id) }
   let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa) }
 
   before { login admin }

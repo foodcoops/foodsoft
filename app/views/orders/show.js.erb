@@ -1,4 +1,11 @@
 $('#articles_table').html('<%= j render(@partial, order: @order) %>');
+$('*[name="group_order_article[result]"]').each(function() {
+  $(this).unitConversionField({
+    units: unitsData,
+    popoverTemplate$: $('#unit_conversion_popover_content_template'),
+    useTargetUnitForStep: false
+  });
+});
 
 $('.view_buttons a').each(function() {
   $(this).toggleClass('active', $(this).attr('id') == 'view_<%= j params[:view] %>_btn');

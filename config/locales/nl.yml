@@ -28,7 +28,7 @@ nl:
       article_category:
         description: Namen importeren
         name: Naam
-      article_price:
+      article_version:
         deposit: Statiegeld
         price: Nettoprijs
         tax: BTW
@@ -239,7 +239,7 @@ nl:
     errors:
       has_many_left: is nog met een %{collection} verbonden!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: naam bestaat al
@@ -481,14 +481,10 @@ nl:
         notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: "%{msg} … in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
         no_file: Een bestand om te uploaden kiezen.
         notice: "%{count} artikelen zijn geanalyseerd"
-      sync:
-        notice: Catalogus is bijgewerkt
-        shared_alert: "%{supplier} is niet aan een externe database gekoppeld"
       update_all:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
@@ -509,10 +505,6 @@ nl:
     form:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
-    import_search_results:
-      action_import: importeren
-      already_imported: geïmporteerd
-      not_found: Geen artikelen gevonden
     index:
       change_supplier: Leverancier wisselen
       download: Artikelen downloaden
@@ -758,9 +750,8 @@ nl:
       rows:
         - Nummer
         - Aantal
-        - Naam
-        - Colli
         - Eenheid
+        - Naam
         - Prijs/eenh.
         - Subtotaal
       total: Totaal
@@ -1790,6 +1781,10 @@ nl:
       show_deliveries: Alle leveringen tonen
     update:
       notice: Leverancier is bijgewerkt
+    import_search_results:
+      action_import: importeren
+      already_imported: geïmporteerd
+      not_found: Geen artikelen gevonden
   tasks:
     accept:
       notice: Je hebt de taak geaccepteerd

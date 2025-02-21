@@ -18,26 +18,26 @@
           %i.icon-tag
         %td{:colspan => "9"}
       - order_articles.each do |order_article|
-        - net_price = order_article.price.price
-        - gross_price = order_article.price.gross_price
-        - unit_quantity = order_article.price.unit_quantity
+        - article = order_article.price
+        - net_price = article.price
+        - gross_price = article.gross_price
         - units = order_article.units
-        - total_net += units * unit_quantity * net_price
-        - total_gross += units * unit_quantity * gross_price
+        - total_net += units * article.price
+        - total_gross += units * article.gross_price
         %tr{:class => cycle('even', 'odd', :name => 'articles') + ' ' + order_article_class(order_article)}
-          %td.name=h order_article.article.name
-          %td= order_article.article.unit
+          %td.name=h order_article.article_version.name
+          %td= format_group_order_unit_with_ratios(order_article.article_version)
           %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
           - if order.stockit?
-            %td= units
+            %td= = number_with_precision(units, precision: 3, strip_insignificant_zeros: true)
           - else
-            - if unit_quantity > 1 or order_article.tolerance > 0
-              %td= "#{order_article.quantity} + #{order_article.tolerance}"
+            - if order_article.tolerance > 0
+              %td= "#{number_with_precision(order_article.quantity, precision: 3, strip_insignificant_zeros: true)} + #{number_with_precision(order_article.tolerance, precision: 3, strip_insignificant_zeros: true)}"
             - else
-              %td= "#{order_article.quantity}"
+              %td= "#{number_with_precision(order_article.quantity, precision: 3, strip_insignificant_zeros: true)}"
             %td{title: units_history_line(order_article, plain: true)}
-              = units
-              = pkg_helper order_article.price
+              = number_with_precision(units, precision: 3, strip_insignificant_zeros: true)
+              = pkg_helper article
 %p
   = t '.prices_sum'
   = "#{number_to_currency(total_net)} / #{number_to_currency(total_gross)}"

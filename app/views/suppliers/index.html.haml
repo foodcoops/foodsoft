@@ -2,8 +2,6 @@
 
 - content_for :actionbar do
   = link_to t('.action_new'), new_supplier_path, class: 'btn btn-primary'
-  - if FoodsoftConfig[:shared_lists]
-    = link_to t('.action_import'), shared_suppliers_suppliers_path, class: 'btn'
 %table.table.table-striped
   %thead
     %tr

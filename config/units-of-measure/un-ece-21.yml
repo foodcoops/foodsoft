@@ -1,0 +1,1202 @@
+# downloaded json from https://datahub.io/core/unece-package-codes and manually converted to yaml using
+# `ruby -ryaml -rjson -e 'puts YAML.dump(JSON.parse(STDIN.read))' <input.json`
+---
+- Code: 1A
+  Description:
+  Name: Drum, steel
+- Code: 1B
+  Description:
+  Name: Drum, aluminium
+- Code: 1D
+  Description:
+  Name: Drum, plywood
+- Code: 1F
+  Description: A packaging container of flexible construction.
+  Name: Container, flexible
+- Code: 1G
+  Description:
+  Name: Drum, fibre
+- Code: 1W
+  Description:
+  Name: Drum, wooden
+- Code: 2C
+  Description:
+  Name: Barrel, wooden
+- Code: 3A
+  Description:
+  Name: Jerrican, steel
+- Code: 3H
+  Description:
+  Name: Jerrican, plastic
+- Code: '43'
+  Description: A cloth plastic or paper based bag having the dimensions of the pallet
+    on which it is constructed.
+  Name: Bag, super bulk
+- Code: '44'
+  Description: A type of plastic bag, typically used to wrap promotional pieces, publications,
+    product samples, and/or catalogues.
+  Name: Bag, polybag
+- Code: 4A
+  Description:
+  Name: Box, steel
+- Code: 4B
+  Description:
+  Name: Box, aluminium
+- Code: 4C
+  Description:
+  Name: Box, natural wood
+- Code: 4D
+  Description:
+  Name: Box, plywood
+- Code: 4F
+  Description:
+  Name: Box, reconstituted wood
+- Code: 4G
+  Description:
+  Name: Box, fibreboard
+- Code: 4H
+  Description:
+  Name: Box, plastic
+- Code: 5H
+  Description:
+  Name: Bag, woven plastic
+- Code: 5L
+  Description:
+  Name: Bag, textile
+- Code: 5M
+  Description:
+  Name: Bag, paper
+- Code: 6H
+  Description:
+  Name: Composite packaging, plastic receptacle
+- Code: 6P
+  Description:
+  Name: Composite packaging, glass receptacle
+- Code: 7A
+  Description: A type of portable container designed to store equipment for carriage
+    in an automobile.
+  Name: Case, car
+- Code: 7B
+  Description: A case made of wood for retaining substances or articles.
+  Name: Case, wooden
+- Code: 8A
+  Description: A platform or open-ended box, made of wood, on which goods are retained
+    for ease of mechanical handling during transport and storage.
+  Name: Pallet, wooden
+- Code: 8B
+  Description: A receptacle, made of wood, on which goods are retained for ease of
+    mechanical handling during transport and storage.
+  Name: Crate, wooden
+- Code: 8C
+  Description: Loose or unpacked pieces of wood tied or wrapped together.
+  Name: Bundle, wooden
+- Code: AA
+  Description:
+  Name: Intermediate bulk container, rigid plastic
+- Code: AB
+  Description: Containment vessel made of fibre used for retaining substances or articles.
+  Name: Receptacle, fibre
+- Code: AC
+  Description: Containment vessel made of paper for retaining substances or articles.
+  Name: Receptacle, paper
+- Code: AD
+  Description: Containment vessel made of wood for retaining substances or articles.
+  Name: Receptacle, wooden
+- Code: AE
+  Description:
+  Name: Aerosol
+- Code: AF
+  Description: Standard sized pallet of dimensions 80 centimeters by 60 centimeters
+    (cms).
+  Name: Pallet, modular, collars 80cms * 60cms
+- Code: AG
+  Description: Pallet load secured with transparent plastic film that has been wrapped
+    around and then shrunk tightly.
+  Name: Pallet, shrinkwrapped
+- Code: AH
+  Description: Standard sized pallet of dimensions 100centimeters by 110 centimeters
+    (cms).
+  Name: Pallet, 100cms * 110cms
+- Code: AI
+  Description:
+  Name: Clamshell
+- Code: AJ
+  Description: Container used in the transport of linear material such as yarn.
+  Name: Cone
+- Code: AL
+  Description: A spherical containment vessel for retaining substances or articles.
+  Name: Ball
+- Code: AM
+  Description:
+  Name: Ampoule, non-protected
+- Code: AP
+  Description:
+  Name: Ampoule, protected
+- Code: AT
+  Description:
+  Name: Atomizer
+- Code: AV
+  Description:
+  Name: Capsule
+- Code: B4
+  Description: A band use to retain multiple articles together.
+  Name: Belt
+- Code: BA
+  Description:
+  Name: Barrel
+- Code: BB
+  Description:
+  Name: Bobbin
+- Code: BC
+  Description:
+  Name: Bottlecrate / bottlerack
+- Code: BD
+  Description:
+  Name: Board
+- Code: BE
+  Description:
+  Name: Bundle
+- Code: BF
+  Description:
+  Name: Balloon, non-protected
+- Code: BG
+  Description: A receptacle made of flexible material with an open or closed top.
+  Name: Bag
+- Code: BH
+  Description:
+  Name: Bunch
+- Code: BI
+  Description:
+  Name: Bin
+- Code: BJ
+  Description:
+  Name: Bucket
+- Code: BK
+  Description:
+  Name: Basket
+- Code: BL
+  Description:
+  Name: Bale, compressed
+- Code: BM
+  Description:
+  Name: Basin
+- Code: BN
+  Description:
+  Name: Bale, non-compressed
+- Code: BO
+  Description: A narrow-necked cylindrical shaped vessel without external protective
+    packing material.
+  Name: Bottle, non-protected, cylindrical
+- Code: BP
+  Description:
+  Name: Balloon, protected
+- Code: BQ
+  Description: A narrow-necked cylindrical shaped vessel with external protective
+    packing material.
+  Name: Bottle, protected cylindrical
+- Code: BR
+  Description:
+  Name: Bar
+- Code: BS
+  Description: A narrow-necked bulb shaped vessel without external protective packing
+    material.
+  Name: Bottle, non-protected, bulbous
+- Code: BT
+  Description:
+  Name: Bolt
+- Code: BU
+  Description:
+  Name: Butt
+- Code: BV
+  Description: A narrow-necked bulb shaped vessel with external protective packing
+    material.
+  Name: Bottle, protected bulbous
+- Code: BW
+  Description:
+  Name: Box, for liquids
+- Code: BX
+  Description:
+  Name: Box
+- Code: BY
+  Description:
+  Name: Board, in bundle/bunch/truss
+- Code: BZ
+  Description:
+  Name: Bars, in bundle/bunch/truss
+- Code: CA
+  Description:
+  Name: Can, rectangular
+- Code: CB
+  Description:
+  Name: Crate, beer
+- Code: CC
+  Description:
+  Name: Churn
+- Code: CD
+  Description:
+  Name: Can, with handle and spout
+- Code: CE
+  Description:
+  Name: Creel
+- Code: CF
+  Description:
+  Name: Coffer
+- Code: CG
+  Description:
+  Name: Cage
+- Code: CH
+  Description:
+  Name: Chest
+- Code: CI
+  Description:
+  Name: Canister
+- Code: CJ
+  Description:
+  Name: Coffin
+- Code: CK
+  Description:
+  Name: Cask
+- Code: CL
+  Description:
+  Name: Coil
+- Code: CM
+  Description: A flat package usually made of fibreboard from/to which product is
+    often hung or attached.
+  Name: Card
+- Code: CN
+  Description:
+  Name: Container, not otherwise specified as transport equipment
+- Code: CO
+  Description:
+  Name: Carboy, non-protected
+- Code: CP
+  Description:
+  Name: Carboy, protected
+- Code: CQ
+  Description: Package containing a charge such as propelling explosive for firearms
+    or ink toner for a printer.
+  Name: Cartridge
+- Code: CR
+  Description:
+  Name: Crate
+- Code: CS
+  Description:
+  Name: Case
+- Code: CT
+  Description:
+  Name: Carton
+- Code: CU
+  Description:
+  Name: Cup
+- Code: CV
+  Description:
+  Name: Cover
+- Code: CW
+  Description:
+  Name: Cage, roll
+- Code: CX
+  Description:
+  Name: Can, cylindrical
+- Code: CY
+  Description:
+  Name: Cylinder
+- Code: CZ
+  Description:
+  Name: Canvas
+- Code: DA
+  Description:
+  Name: Crate, multiple layer, plastic
+- Code: DB
+  Description:
+  Name: Crate, multiple layer, wooden
+- Code: DC
+  Description:
+  Name: Crate, multiple layer, cardboard
+- Code: DG
+  Description:
+  Name: Cage, Commonwealth Handling Equipment Pool  (CHEP)
+- Code: DH
+  Description: A box mounted on a pallet base under the control of CHEP.
+  Name: Box, Commonwealth Handling Equipment Pool (CHEP), Eurobox
+- Code: DI
+  Description:
+  Name: Drum, iron
+- Code: DJ
+  Description:
+  Name: Demijohn, non-protected
+- Code: DK
+  Description:
+  Name: Crate, bulk, cardboard
+- Code: DL
+  Description:
+  Name: Crate, bulk, plastic
+- Code: DM
+  Description:
+  Name: Crate, bulk, wooden
+- Code: DN
+  Description:
+  Name: Dispenser
+- Code: DP
+  Description:
+  Name: Demijohn, protected
+- Code: DR
+  Description:
+  Name: Drum
+- Code: DS
+  Description:
+  Name: Tray, one layer no cover, plastic
+- Code: DT
+  Description:
+  Name: Tray, one layer no cover, wooden
+- Code: DU
+  Description:
+  Name: Tray, one layer no cover, polystyrene
+- Code: DV
+  Description:
+  Name: Tray, one layer no cover, cardboard
+- Code: DW
+  Description:
+  Name: Tray, two layers no cover, plastic tray
+- Code: DX
+  Description:
+  Name: Tray, two layers no cover, wooden
+- Code: DY
+  Description:
+  Name: Tray, two layers no cover, cardboard
+- Code: EC
+  Description:
+  Name: Bag, plastic
+- Code: ED
+  Description:
+  Name: Case, with pallet base
+- Code: EE
+  Description:
+  Name: Case, with pallet base, wooden
+- Code: EF
+  Description:
+  Name: Case, with pallet base, cardboard
+- Code: EG
+  Description:
+  Name: Case, with pallet base, plastic
+- Code: EH
+  Description:
+  Name: Case, with pallet base, metal
+- Code: EI
+  Description:
+  Name: Case, isothermic
+- Code: EN
+  Description:
+  Name: Envelope
+- Code: FB
+  Description: A flexible containment bag made of plastic, typically for the transportation
+    bulk non-hazardous cargoes using standard size shipping containers.
+  Name: Flexibag
+- Code: FC
+  Description:
+  Name: Crate, fruit
+- Code: FD
+  Description:
+  Name: Crate, framed
+- Code: FE
+  Description: A flexible containment tank made of plastic, typically for the transportation
+    bulk non-hazardous cargoes using standard size shipping containers.
+  Name: Flexitank
+- Code: FI
+  Description:
+  Name: Firkin
+- Code: FL
+  Description:
+  Name: Flask
+- Code: FO
+  Description:
+  Name: Footlocker
+- Code: FP
+  Description:
+  Name: Filmpack
+- Code: FR
+  Description:
+  Name: Frame
+- Code: FT
+  Description:
+  Name: Foodtainer
+- Code: FW
+  Description: Wheeled flat bedded device on which trays or other regular shaped items
+    are packed for transportation purposes.
+  Name: Cart, flatbed
+- Code: FX
+  Description:
+  Name: Bag, flexible container
+- Code: GB
+  Description: A narrow-necked metal cylinder for retention of liquefied or compressed
+    gas.
+  Name: Bottle, gas
+- Code: GI
+  Description:
+  Name: Girder
+- Code: GL
+  Description: A container with a capacity of one gallon.
+  Name: Container, gallon
+- Code: GR
+  Description: Containment vessel made of glass for retaining substances or articles.
+  Name: Receptacle, glass
+- Code: GU
+  Description: Tray containing flat items stacked on top of one another.
+  Name: Tray, containing horizontally stacked flat items
+- Code: GY
+  Description: A sack made of gunny or burlap, used for transporting coarse commodities,
+    such as grains, potatoes, and other agricultural products.
+  Name: Bag, gunny
+- Code: GZ
+  Description:
+  Name: Girders, in bundle/bunch/truss
+- Code: HA
+  Description:
+  Name: Basket, with handle, plastic
+- Code: HB
+  Description:
+  Name: Basket, with handle, wooden
+- Code: HC
+  Description:
+  Name: Basket, with handle, cardboard
+- Code: HG
+  Description:
+  Name: Hogshead
+- Code: HN
+  Description: A purpose shaped device with a hook at the top for hanging items from
+    a rail.
+  Name: Hanger
+- Code: HR
+  Description:
+  Name: Hamper
+- Code: IA
+  Description:
+  Name: Package, display, wooden
+- Code: IB
+  Description:
+  Name: Package, display, cardboard
+- Code: IC
+  Description:
+  Name: Package, display, plastic
+- Code: ID
+  Description:
+  Name: Package, display, metal
+- Code: IE
+  Description:
+  Name: Package, show
+- Code: IF
+  Description: A flexible tubular package or skin, possibly transparent, often used
+    for containment of foodstuffs (e.g. salami sausage).
+  Name: Package, flow
+- Code: IG
+  Description:
+  Name: Package, paper wrapped
+- Code: IH
+  Description:
+  Name: Drum, plastic
+- Code: IK
+  Description: Packaging material made out of cardboard that facilitates the separation
+    of individual glass or plastic bottles.
+  Name: Package, cardboard, with bottle grip-holes
+- Code: IL
+  Description: Lidded stackable rigid tray compliant with CEN TS 14482:2002.
+  Name: Tray, rigid, lidded stackable (CEN TS 14482:2002)
+- Code: IN
+  Description:
+  Name: Ingot
+- Code: IZ
+  Description:
+  Name: Ingots, in bundle/bunch/truss
+- Code: JB
+  Description: A flexible containment bag, widely used for storage, transportation
+    and handling of powder, flake or granular materials. Typically constructed from
+    woven polypropylene (PP) fabric in the form of cubic bags.
+  Name: Bag, jumbo
+- Code: JC
+  Description:
+  Name: Jerrican, rectangular
+- Code: JG
+  Description:
+  Name: Jug
+- Code: JR
+  Description:
+  Name: Jar
+- Code: JT
+  Description:
+  Name: Jutebag
+- Code: JY
+  Description:
+  Name: Jerrican, cylindrical
+- Code: KG
+  Description:
+  Name: Keg
+- Code: KI
+  Description: A set of articles or implements used for a specific purpose.
+  Name: Kit
+- Code: LE
+  Description: A collection of bags, cases and/or containers which hold personal belongings
+    for a journey.
+  Name: Luggage
+- Code: LG
+  Description:
+  Name: Log
+- Code: LT
+  Description:
+  Name: Lot
+- Code: LU
+  Description: A wooden box for the transportation and storage of fruit or vegetables.
+  Name: Lug
+- Code: LV
+  Description: A wooden or metal container used for packing household goods and personal
+    effects.
+  Name: Liftvan
+- Code: LZ
+  Description:
+  Name: Logs, in bundle/bunch/truss
+- Code: MA
+  Description: Containment box made of metal for retaining substances or articles.
+  Name: Crate, metal
+- Code: MB
+  Description:
+  Name: Bag, multiply
+- Code: MC
+  Description:
+  Name: Crate, milk
+- Code: ME
+  Description: A type of containment box made of metal for retaining substances or
+    articles, not otherwise specified as transport equipment.
+  Name: Container, metal
+- Code: MR
+  Description: Containment vessel made of metal for retaining substances or articles.
+  Name: Receptacle, metal
+- Code: MS
+  Description:
+  Name: Sack, multi-wall
+- Code: MT
+  Description:
+  Name: Mat
+- Code: MW
+  Description: Containment vessel wrapped with plastic for retaining substances or
+    articles.
+  Name: Receptacle, plastic wrapped
+- Code: MX
+  Description:
+  Name: Matchbox
+- Code: NA
+  Description:
+  Name: Not available
+- Code: NE
+  Description:
+  Name: Unpacked or unpackaged
+- Code: NF
+  Description:
+  Name: Unpacked or unpackaged, single unit
+- Code: NG
+  Description:
+  Name: Unpacked or unpackaged, multiple units
+- Code: NS
+  Description:
+  Name: Nest
+- Code: NT
+  Description:
+  Name: Net
+- Code: NU
+  Description:
+  Name: Net, tube, plastic
+- Code: NV
+  Description:
+  Name: Net, tube, textile
+- Code: OA
+  Description: Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions
+    40 centimeters x 60 centimeters.
+  Name: Pallet, CHEP 40 cm x 60 cm
+- Code: OB
+  Description: Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions
+    80 centimeters x 120 centimeters.
+  Name: Pallet, CHEP 80 cm x 120 cm
+- Code: OC
+  Description: Commonwealth Handling Equipment Pool (CHEP) standard pallet of dimensions
+    100 centimeters x 120 centimeters.
+  Name: Pallet, CHEP 100 cm x 120 cm
+- Code: OD
+  Description: Australian standard pallet of dimensions 115.5 centimeters x 116.5
+    centimeters.
+  Name: Pallet, AS 4068-1993
+- Code: OE
+  Description: ISO standard pallet of dimensions 110 centimeters x 110 centimeters,
+    prevalent in Asia - Pacific region.
+  Name: Pallet, ISO T11
+- Code: OF
+  Description: A pallet equivalent shipping platform of unknown dimensions or unknown
+    weight.
+  Name: Platform, unspecified weight or dimension
+- Code: OK
+  Description: A solid piece of a hard substance, such as granite, having one or more
+    flat sides.
+  Name: Block
+- Code: OT
+  Description: A standard cardboard container of large dimensions for storing for
+    example vegetables, granules of plastics or other dry products.
+  Name: Octabin
+- Code: OU
+  Description: A type of containment box that serves as the outer shipping container,
+    not otherwise specified as transport equipment.
+  Name: Container, outer
+- Code: P2
+  Description: A shallow, wide, open container, usually of metal.
+  Name: Pan
+- Code: PA
+  Description: Small package.
+  Name: Packet
+- Code: PB
+  Description:
+  Name: Pallet, box Combined open-ended box and pallet
+- Code: PC
+  Description:
+  Name: Parcel
+- Code: PD
+  Description: Standard sized pallet of dimensions 80 centimeters by 100 centimeters
+    (cms).
+  Name: Pallet, modular, collars 80cms * 100cms
+- Code: PE
+  Description: Standard sized pallet of dimensions 80 centimeters by 120 centimeters
+    (cms).
+  Name: Pallet, modular, collars 80cms * 120cms
+- Code: PF
+  Description: A small open top enclosure for retaining animals.
+  Name: Pen
+- Code: PG
+  Description:
+  Name: Plate
+- Code: PH
+  Description:
+  Name: Pitcher
+- Code: PI
+  Description:
+  Name: Pipe
+- Code: PJ
+  Description:
+  Name: Punnet
+- Code: PK
+  Description: Standard packaging unit.
+  Name: Package
+- Code: PL
+  Description:
+  Name: Pail
+- Code: PN
+  Description:
+  Name: Plank
+- Code: PO
+  Description:
+  Name: Pouch
+- Code: PP
+  Description: A loose or unpacked article.
+  Name: Piece
+- Code: PR
+  Description: Containment vessel made of plastic for retaining substances or articles.
+  Name: Receptacle, plastic
+- Code: PT
+  Description:
+  Name: Pot
+- Code: PU
+  Description:
+  Name: Tray
+- Code: PV
+  Description:
+  Name: Pipes, in bundle/bunch/truss
+- Code: PX
+  Description: Platform or open-ended box, usually made of wood, on which goods are
+    retained for ease of mechanical handling during transport and storage.
+  Name: Pallet
+- Code: PY
+  Description:
+  Name: Plates, in bundle/bunch/truss
+- Code: PZ
+  Description:
+  Name: Planks, in bundle/bunch/truss
+- Code: QA
+  Description:
+  Name: Drum, steel, non-removable head
+- Code: QB
+  Description:
+  Name: Drum, steel, removable head
+- Code: QC
+  Description:
+  Name: Drum, aluminium, non-removable head
+- Code: QD
+  Description:
+  Name: Drum, aluminium, removable head
+- Code: QF
+  Description:
+  Name: Drum, plastic, non-removable head
+- Code: QG
+  Description:
+  Name: Drum, plastic, removable head
+- Code: QH
+  Description:
+  Name: Barrel, wooden, bung type
+- Code: QJ
+  Description:
+  Name: Barrel, wooden, removable head
+- Code: QK
+  Description:
+  Name: Jerrican, steel, non-removable head
+- Code: QL
+  Description:
+  Name: Jerrican, steel, removable head
+- Code: QM
+  Description:
+  Name: Jerrican, plastic, non-removable head
+- Code: QN
+  Description:
+  Name: Jerrican, plastic, removable head
+- Code: QP
+  Description:
+  Name: Box, wooden, natural wood, ordinary
+- Code: QQ
+  Description:
+  Name: Box, wooden, natural wood, with sift proof walls
+- Code: QR
+  Description:
+  Name: Box, plastic, expanded
+- Code: QS
+  Description:
+  Name: Box, plastic, solid
+- Code: RD
+  Description:
+  Name: Rod
+- Code: RG
+  Description:
+  Name: Ring
+- Code: RJ
+  Description:
+  Name: Rack, clothing hanger
+- Code: RK
+  Description:
+  Name: Rack
+- Code: RL
+  Description: Cylindrical rotatory device with a rim at each end on which materials
+    are wound.
+  Name: Reel
+- Code: RO
+  Description:
+  Name: Roll
+- Code: RT
+  Description: Containment material made of red mesh netting for retaining articles
+    (e.g. trees).
+  Name: Rednet
+- Code: RZ
+  Description:
+  Name: Rods, in bundle/bunch/truss
+- Code: SA
+  Description:
+  Name: Sack
+- Code: SB
+  Description:
+  Name: Slab
+- Code: SC
+  Description:
+  Name: Crate, shallow
+- Code: SD
+  Description:
+  Name: Spindle
+- Code: SE
+  Description:
+  Name: Sea-chest
+- Code: SH
+  Description:
+  Name: Sachet
+- Code: SI
+  Description: A low movable platform or pallet to facilitate the handling and transport
+    of goods.
+  Name: Skid
+- Code: SK
+  Description:
+  Name: Case, skeleton
+- Code: SL
+  Description: Hard plastic sheeting primarily used as the base on which to stack
+    goods to optimise the space within a container. May be used as an alternative
+    to a palletized packaging.
+  Name: Slipsheet
+- Code: SM
+  Description:
+  Name: Sheetmetal
+- Code: SO
+  Description: A packaging container used in the transport of such items as wire,
+    cable, tape and yarn.
+  Name: Spool
+- Code: SP
+  Description:
+  Name: Sheet, plastic wrapping
+- Code: SS
+  Description:
+  Name: Case, steel
+- Code: ST
+  Description:
+  Name: Sheet
+- Code: SU
+  Description:
+  Name: Suitcase
+- Code: SV
+  Description:
+  Name: Envelope, steel
+- Code: SW
+  Description: Goods retained in a transparent plastic film that has been wrapped
+    around and then shrunk tightly on to the goods.
+  Name: Shrinkwrapped
+- Code: SY
+  Description:
+  Name: Sleeve
+- Code: SZ
+  Description:
+  Name: Sheets, in bundle/bunch/truss
+- Code: T1
+  Description: A loose or unpacked article in the form of a bar, block or piece.
+  Name: Tablet
+- Code: TB
+  Description:
+  Name: Tub
+- Code: TC
+  Description:
+  Name: Tea-chest
+- Code: TD
+  Description:
+  Name: Tube, collapsible
+- Code: TE
+  Description: A ring made of rubber and/or metal surrounding a wheel.
+  Name: Tyre
+- Code: TG
+  Description: A specially constructed container for transporting liquids and gases
+    in bulk.
+  Name: Tank container, generic
+- Code: TI
+  Description:
+  Name: Tierce
+- Code: TK
+  Description:
+  Name: Tank, rectangular
+- Code: TL
+  Description:
+  Name: Tub, with lid
+- Code: TN
+  Description:
+  Name: Tin
+- Code: TO
+  Description:
+  Name: Tun
+- Code: TR
+  Description:
+  Name: Trunk
+- Code: TS
+  Description:
+  Name: Truss
+- Code: TT
+  Description: A capacious bag or basket.
+  Name: Bag, tote
+- Code: TU
+  Description:
+  Name: Tube
+- Code: TV
+  Description: A tube made of plastic, metal or cardboard fitted with a nozzle, containing
+    a liquid or semi-liquid product, e.g. silicon.
+  Name: Tube, with nozzle
+- Code: TW
+  Description: A lightweight pallet made from heavy duty corrugated board.
+  Name: Pallet, triwall
+- Code: TY
+  Description:
+  Name: Tank, cylindrical
+- Code: TZ
+  Description:
+  Name: Tubes, in bundle/bunch/truss
+- Code: UC
+  Description:
+  Name: Uncaged
+- Code: UN
+  Description: A type of package composed of a single item or object, not otherwise
+    specified as a unit of transport equipment.
+  Name: Unit
+- Code: VA
+  Description:
+  Name: Vat
+- Code: VG
+  Description:
+  Name: Bulk, gas (at 1031 mbar and 15¡C)
+- Code: VI
+  Description:
+  Name: Vial
+- Code: VK
+  Description: A type of wooden crate.
+  Name: Vanpack
+- Code: VL
+  Description:
+  Name: Bulk, liquid
+- Code: VO
+  Description:
+  Name: Bulk, solid, large particles (ÒnodulesÓ)
+- Code: VP
+  Description:
+  Name: Vacuum-packed
+- Code: VQ
+  Description:
+  Name: Bulk, liquefied gas (at abnormal temperature/pressure)
+- Code: VN
+  Description: A self-propelled means of conveyance.
+  Name: Vehicle
+- Code: VR
+  Description:
+  Name: Bulk, solid, granular particles (ÒgrainsÓ)
+- Code: VS
+  Description: Loose or unpacked scrap metal transported in bulk form.
+  Name: Bulk, scrap metal
+- Code: VY
+  Description:
+  Name: Bulk, solid, fine particles (ÒpowdersÓ)
+- Code: WA
+  Description: A reusable container made of metal, plastic, textile, wood or composite
+    materials used to facilitate transportation of bulk solids and liquids in manageable
+    volumes.
+  Name: Intermediate bulk container
+- Code: WB
+  Description:
+  Name: Wickerbottle
+- Code: WC
+  Description:
+  Name: Intermediate bulk container, steel
+- Code: WD
+  Description:
+  Name: Intermediate bulk container, aluminium
+- Code: WF
+  Description:
+  Name: Intermediate bulk container, metal
+- Code: WG
+  Description:
+  Name: Intermediate bulk container, steel, pressurised > 10 kpa
+- Code: WH
+  Description:
+  Name: Intermediate bulk container, aluminium, pressurised > 10 kpa
+- Code: WJ
+  Description:
+  Name: Intermediate bulk container, metal, pressure 10 kpa
+- Code: WK
+  Description:
+  Name: Intermediate bulk container, steel, liquid
+- Code: WL
+  Description:
+  Name: Intermediate bulk container, aluminium, liquid
+- Code: WM
+  Description:
+  Name: Intermediate bulk container, metal, liquid
+- Code: WN
+  Description:
+  Name: Intermediate bulk container, woven plastic, without coat/liner
+- Code: WP
+  Description:
+  Name: Intermediate bulk container, woven plastic, coated
+- Code: WQ
+  Description:
+  Name: Intermediate bulk container, woven plastic, with liner
+- Code: WR
+  Description:
+  Name: Intermediate bulk container, woven plastic, coated and liner
+- Code: WS
+  Description:
+  Name: Intermediate bulk container, plastic film
+- Code: WT
+  Description:
+  Name: Intermediate bulk container, textile with out coat/liner
+- Code: WU
+  Description:
+  Name: Intermediate bulk container, natural wood, with inner liner
+- Code: WV
+  Description:
+  Name: Intermediate bulk container, textile, coated
+- Code: WW
+  Description:
+  Name: Intermediate bulk container, textile, with liner
+- Code: WX
+  Description:
+  Name: Intermediate bulk container, textile, coated and liner
+- Code: WY
+  Description:
+  Name: Intermediate bulk container, plywood, with inner liner
+- Code: WZ
+  Description:
+  Name: Intermediate bulk container, reconstituted wood, with inner liner
+- Code: XA
+  Description:
+  Name: Bag, woven plastic, without inner coat/liner
+- Code: XB
+  Description:
+  Name: Bag, woven plastic, sift proof
+- Code: XC
+  Description:
+  Name: Bag, woven plastic, water resistant
+- Code: XD
+  Description:
+  Name: Bag, plastics film
+- Code: XF
+  Description:
+  Name: Bag, textile, without inner coat/liner
+- Code: XG
+  Description:
+  Name: Bag, textile, sift proof
+- Code: XH
+  Description:
+  Name: Bag, textile, water resistant
+- Code: XJ
+  Description:
+  Name: Bag, paper, multi-wall
+- Code: XK
+  Description:
+  Name: Bag, paper, multi-wall, water resistant
+- Code: YA
+  Description:
+  Name: Composite packaging, plastic receptacle in steel drum
+- Code: YB
+  Description:
+  Name: Composite packaging, plastic receptacle in steel crate box
+- Code: YC
+  Description:
+  Name: Composite packaging, plastic receptacle in aluminium drum
+- Code: YD
+  Description:
+  Name: Composite packaging, plastic receptacle in aluminium crate
+- Code: YF
+  Description:
+  Name: Composite packaging, plastic receptacle in wooden box
+- Code: YG
+  Description:
+  Name: Composite packaging, plastic receptacle in plywood drum
+- Code: YH
+  Description:
+  Name: Composite packaging, plastic receptacle in plywood box
+- Code: YJ
+  Description:
+  Name: Composite packaging, plastic receptacle in fibre drum
+- Code: YK
+  Description:
+  Name: Composite packaging, plastic receptacle in fibreboard box
+- Code: YL
+  Description:
+  Name: Composite packaging, plastic receptacle in plastic drum
+- Code: YM
+  Description:
+  Name: Composite packaging, plastic receptacle in solid plastic box
+- Code: YN
+  Description:
+  Name: Composite packaging, glass receptacle in steel drum
+- Code: YP
+  Description:
+  Name: Composite packaging, glass receptacle in steel crate box
+- Code: YQ
+  Description:
+  Name: Composite packaging, glass receptacle in aluminium drum
+- Code: YR
+  Description:
+  Name: Composite packaging, glass receptacle in aluminium crate
+- Code: YS
+  Description:
+  Name: Composite packaging, glass receptacle in wooden box
+- Code: YT
+  Description:
+  Name: Composite packaging, glass receptacle in plywood drum
+- Code: YV
+  Description:
+  Name: Composite packaging, glass receptacle in wickerwork hamper
+- Code: YW
+  Description:
+  Name: Composite packaging, glass receptacle in fibre drum
+- Code: YX
+  Description:
+  Name: Composite packaging, glass receptacle in fibreboard box
+- Code: YY
+  Description:
+  Name: Composite packaging, glass receptacle in expandable plastic pack
+- Code: YZ
+  Description:
+  Name: Composite packaging, glass receptacle in solid plastic pack
+- Code: ZA
+  Description:
+  Name: Intermediate bulk container, paper, multi-wall
+- Code: ZB
+  Description:
+  Name: Bag, large
+- Code: ZC
+  Description:
+  Name: Intermediate bulk container, paper, multi-wall, water resistant
+- Code: ZD
+  Description:
+  Name: Intermediate bulk container, rigid plastic, with structural equipment, solids
+- Code: ZF
+  Description:
+  Name: Intermediate bulk container, rigid plastic, freestanding, solids
+- Code: ZG
+  Description:
+  Name: Intermediate bulk container, rigid plastic, with structural equipment, pressurised
+- Code: ZH
+  Description:
+  Name: Intermediate bulk container, rigid plastic, freestanding, pressurised
+- Code: ZJ
+  Description:
+  Name: Intermediate bulk container, rigid plastic, with structural equipment, liquids
+- Code: ZK
+  Description:
+  Name: Intermediate bulk container, rigid plastic, freestanding, liquids
+- Code: ZL
+  Description:
+  Name: Intermediate bulk container, composite, rigid plastic, solids
+- Code: ZM
+  Description:
+  Name: Intermediate bulk container, composite, flexible plastic, solids
+- Code: ZN
+  Description:
+  Name: Intermediate bulk container, composite, rigid plastic, pressurised
+- Code: ZP
+  Description:
+  Name: Intermediate bulk container, composite, flexible plastic, pressurised
+- Code: ZQ
+  Description:
+  Name: Intermediate bulk container, composite, rigid plastic, liquids
+- Code: ZR
+  Description:
+  Name: Intermediate bulk container, composite, flexible plastic, liquids
+- Code: ZS
+  Description:
+  Name: Intermediate bulk container, composite
+- Code: ZT
+  Description:
+  Name: Intermediate bulk container, fibreboard
+- Code: ZU
+  Description:
+  Name: Intermediate bulk container, flexible
+- Code: ZV
+  Description:
+  Name: Intermediate bulk container, metal, other than steel
+- Code: ZW
+  Description:
+  Name: Intermediate bulk container, natural wood
+- Code: ZX
+  Description:
+  Name: Intermediate bulk container, plywood
+- Code: ZY
+  Description:
+  Name: Intermediate bulk container, reconstituted wood
+- Code: ZZ
+  Description:
+  Name: Mutually defined
+- Code: '13'
+  Description:
+  Name: Flexible IBC for solids, filled or discharged by gravity (liquids and solids
+    under pressure [>0.1 bar] are not permitted)
+- Code: 13H1
+  Description:
+  Name: Woven PP fabric without coating or inner liner
+- Code: 13H2
+  Description:
+  Name: Woven PP fabric, coated
+- Code: 13H3
+  Description:
+  Name: Woven PP fabric with inner liner
+- Code: 13H4
+  Description:
+  Name: Woven PP fabric, coated and with inner liner

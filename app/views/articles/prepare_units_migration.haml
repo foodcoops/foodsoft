@@ -1,0 +1,8 @@
+- title t('.title', supplier: @supplier.name)
+%p.mb-1
+  =simple_format(t('.explanation'))
+= link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn'
+%br/
+%br/
+%p.mt-1
+  = link_to t('.migrate_units') + '...', migrate_units_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?

@@ -2,3 +2,6 @@
   $('#article_#{@article.id}').after('#{escape_javascript(render("destroy_active_article"))}');
 - else
   $('#article_#{@article.id}').remove();
+  const importActionsCell$ = $('#import #search_results td[data-order-number="#{escape_javascript(@article.order_number)}"]');
+  importActionsCell$.find('.icon-ok').hide();
+  importActionsCell$.find('.article_import_btn').show();

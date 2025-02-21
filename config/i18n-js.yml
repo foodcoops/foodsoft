@@ -7,5 +7,7 @@ translations:
    '*.number.*',
    '*.date.formats.*',
    # foodsoft-specific texts to keep js with normal translations
-   '*.orders.edit_amount.*'
+   '*.orders.edit_amount.*',
+   '*.orders.receive.*',
+   'no_articles_available'
   ]

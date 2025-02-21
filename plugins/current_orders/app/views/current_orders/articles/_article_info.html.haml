@@ -1,22 +1,22 @@
 #article_info
   %h2{style: 'margin-bottom: 0'}
-    = t('current_orders.articles.show.title', name: order_article.article.name)
-    %span.normal= order_article.article.unit
+    = t('current_orders.articles.show.title', name: order_article.article_version.name)
+    %span.normal= order_article.article_version.unit
   -# @todo unduplicate from group_orders's order_article_info
   %p
-    - if order_article.article.manufacturer.blank?
+    - if order_article.article_version.manufacturer.blank?
       = raw t '.supplied_by', supplier: content_tag(:em, supplier_link(order_article.order))
-    - elsif order_article.article.supplier && order_article.article.supplier.name == order_article.article.manufacturer
+    - elsif order_article.article_version.article.supplier && order_article.article_version.article.supplier.name == order_article.article_version.manufacturer
       = raw t '.supplied_and_made_by', manufacturer: content_tag(:em, supplier_link(order_article.order))
     - else
-      = raw t '.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.order)), manufacturer: content_tag(:em, order_article.article.manufacturer)
-    - unless order_article.article.origin.blank?
-      = raw t '.origin_in', origin: content_tag(:em, order_article.article.origin)
+      = raw t '.supplied_by_made_by', supplier: content_tag(:em, supplier_link(order_article.order)), manufacturer: content_tag(:em, order_article.article_version.manufacturer)
+    - unless order_article.article_version.origin.blank?
+      = raw t '.origin_in', origin: content_tag(:em, order_article.article_version.origin)
 
     - pkg_info = pkg_helper(order_article.price)
     = ", #{pkg_info}".html_safe unless pkg_info.blank?
 
     = ", "
     = Article.human_attribute_name(:fc_price_short) + ": "
-    = number_to_currency(order_article.price.fc_price)
-    = t '.unit', unit: order_article.article.unit
+    = number_to_currency(order_article.article_version.fc_price)
+    = t '.unit', unit: order_article.article_version.unit

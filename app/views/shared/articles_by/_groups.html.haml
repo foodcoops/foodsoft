@@ -11,7 +11,6 @@
       %th= heading_helper Article, :fc_price, short: true
       %th.symbol
       %th= t 'shared.articles_by.price'
-      %th= #heading_helper Article, :unit_quantity, short: true
 
   - for group_order in order.group_orders.ordered
     = render 'shared/articles_by/group_single', group_order: group_order

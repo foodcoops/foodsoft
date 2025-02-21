@@ -65,7 +65,7 @@ class GroupOrderArticlesController < ApplicationController
     # Update the price attribute of new GroupOrder
     group_order_article.group_order.update_price!
     # Update units_to_order of order_article
-    group_order_article.order_article.update_results! if group_order_article.order_article.article.is_a?(StockArticle)
+    group_order_article.order_article.update_results! if group_order_article.order_article.article_version.is_a?(StockArticle)
   end
 
   def find_group_order_article

@@ -1,12 +1,12 @@
 -# output row
 %tr{:class => [cycle('even', 'odd', :name => 'articles'), if goa.result == 0 then 'unavailable' end], id: "goa_#{goa.id}"}
-  %td.name= goa.order_article.article.name
+  %td.name= goa.order_article.article_version.name
   %td{title: goa.order_article.order.name}= link_to goa.order_article.order.name.truncate(15), goa.order_article.order
-  %td= goa.order_article.article.unit
+  %td= goa.order_article.article_version.unit
   %td.center= "#{goa.quantity} + #{goa.tolerance}"
   %td.center.input-delta= group_order_article_edit_result(goa)
   %td.symbol
     &times;
-  %td= number_to_currency goa.order_article.price.fc_price
+  %td= number_to_currency goa.order_article.article_version.fc_price
   %td.symbol =
   %td.price{data: {value: goa.total_price}}= number_to_currency goa.total_price

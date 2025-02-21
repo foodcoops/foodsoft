@@ -3,9 +3,9 @@
   %td{'data-check-this' => "#checkbox_#{article.id}", :class => 'click-me'}= article.name
   %td= article.origin
   %td= truncate(article.article_category.name, :length => 11) if article.article_category
-  %td= article.unit
+  %td= format_group_order_unit_with_ratios(article)
   %td= truncate(article.note, :length => 11)
-  %td= article.unit_quantity
+  %td= format_supplier_order_unit_with_ratios(article)
   %td{:class => "currency"}
     %acronym{:title => t('.last_update', last_update: format_date(article.updated_at), gross_price: number_to_currency(article.gross_price))}
       = number_to_currency(article.price)
@@ -13,7 +13,7 @@
   %td= number_to_currency(article.deposit) if article.deposit != 0
   %td
     = link_to t('ui.edit'), edit_supplier_article_path(@supplier, article),
-      remote: true, class: 'btn btn-mini'
+      remote: true, class: 'btn btn-mini', data: {'e2e-edit-article': article.id}
     = link_to t('ui.copy'), supplier_article_copy_path(@supplier, article),
       remote: true, class: 'btn btn-mini'
     = link_to t('ui.delete'), [@supplier, article],

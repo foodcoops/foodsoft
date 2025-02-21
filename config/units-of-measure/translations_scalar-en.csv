@@ -1,0 +1,121 @@
+common code,full name,short name,symbol,alt. Symbols,aliases,description
+DMT,decimetre,decimetre,dm,,,
+CMT,centimetre,centimetre,cm,,,
+4H,micrometre (micron),micrometre,µm,,,
+MMT,millimetre,millimetre,mm,,,
+HMT,hectometre,hectometre,hm,,,
+KMT,kilometre,kilometre,km,,,
+A45,decametre,decametre,dam,,,
+INH,inch,inch,in,,,
+FOT,foot,foot,ft,,,
+YRD,yard,yard,yd,,,
+SMI,mile (statute mile),mile,mile,,,
+77,milli-inch,milli-inch,mil,,,
+MTK,square metre,square metre,m²,sq m,,
+DAA,decare,decare,daa,,,
+KMK,square kilometre,square kilometre,km²,sq km,,
+CMK,square centimetre,square centimetre,cm²,sq cm,,
+DMK,square decimetre,square decimetre,dm²,sq dm,,
+H16,square decametre,square decametre,dam²,sq dam,,Synonym: are
+H18,square hectometre,square hectometre,hm²,sq hm,,Synonym: hectare
+MMK,square millimetre,square millimetre,mm²,sq mm,,
+M47,circular mil ,circular mil ,cmil,,,"Unit of an area, of which the size is given by a diameter of length of 1 mm (0,001 in) based on the formula: area = p·(diameter/2)²."
+ARE,are,are,a,,,Synonym: square decametre
+HAR,hectare,hectare,ha,,,Synonym: square hectometre
+INK,square inch,square inch,in²,sq in,,
+FTK,square foot,square foot,ft²,sq ft,,
+YDK,square yard,square yard,yd²,sq yd,,
+MIK,square mile (statute mile),square mile,mi²,sq mi,,
+ACR,acre,acre,acre,,,
+KGM,kilogram,kilogram,kg,,kilo,A unit of mass equal to one thousand grams.
+HGM,hectogram,hectogram,hg,,,
+KTN,kilotonne,kilotonne,kt,,,
+DJ,decagram,decagram,dag,dkg,,
+DG,decigram,decigram,dg,,,
+CGM,centigram,centigram,cg,,,
+DTN,decitonne,decitonne,dt,dtn,,"Synonym: centner, metric 100 kg; quintal, metric 100 kg"
+MGM,milligram,milligram,mg,,,
+2U,megagram,megagram,Mg,,,
+MC,microgram,microgram,µg,,,
+GRM,gram,gram,g,,"gr, grm",
+TNE,tonne (metric),metric ton,t,mt,,
+M86,pfund,pfund,pfd,,,Outdated unit of the mass used in Germany.
+LBR,pound,pound,lb,,,
+GRN,grain,grain,gr,,,
+ONZ,ounce (avoirdupois),ounce,oz,,,
+CWI,hundred weight (UK),hundred weight,cwt,,,
+CWA,hundred pound (cwt) / hundred weight (US),hundred pound (cwt) / hundred weight (US),cwt,,,
+LTN,ton (UK) or long ton (US),ton (UK) or long ton (US),ton (UK),,,Synonym: gross ton (2240 lb)
+STI,stone (UK),stone,st,,,
+STN,ton (US) or short ton (UK/US),ton (US) or short ton (UK/US),ton (US),,,Synonym: net ton (2000 lb)
+APZ,troy ounce or apothecary ounce,troy ounce,tr oz,,,
+F13,slug,slug,slug,,,A unit of mass. One slug is the mass accelerated at 1 foot per second per second by a force of 1 pound.
+SEC,second [unit of time],second,s,,,
+MIN,minute [unit of time],minute,min,,,
+HUR,hour,hour,h,,,
+DAY,day,day,d,,,
+C26,millisecond,millisecond,ms,,,
+WEE,week,week,wk,,,
+MON,month,month,mo,,,"Unit of time equal to 1/12 of a year of 365,25 days."
+ANN,year,year,y,,,"Unit of time equal to 365,25 days.
+Synonym: Julian year"
+MTQ,cubic metre,cubic metre,m³,,,Synonym: metre cubed
+LTR,litre,litre,l,,,
+MAL,megalitre,megalitre,Ml,,,
+DLT,decilitre,decilitre,dl,,,
+4G,microlitre,microlitre,µl,,,
+K6,kilolitre,kilolitre,kl,,,
+A44,decalitre,decalitre,dal,,,
+MMQ,cubic millimetre,cubic millimetre,mm³,,,
+CMQ,cubic centimetre,cubic centimetre,cm³,"cc, ccm",,
+DMQ,cubic decimetre,cubic decimetre,dm³,,,
+MLT,millilitre,millilitre,ml,,,
+HLT,hectolitre,hectolitre,hl,,,
+CLT,centilitre,centilitre,cl,,,
+DMA,cubic decametre,cubic decametre,dam³,,,
+H19,cubic hectometre,cubic hectometre,hm³,,,
+H20,cubic kilometre,cubic kilometre,km³,,,
+M67,acre-foot (based on U.S. survey foot),acre-foot,acre-ft,,,"Unit of the volume, which is used in the United States to measure/gauge the capacity of reservoirs."
+M68,cord (128 ft3),cord,cord,,,Traditional unit of the volume of stacked firewood which has been measured with a cord.
+M69,cubic mile (UK statute),cubic mile,mi³,,,Unit of volume according to the Imperial system of units.
+M70,register ton,register ton,RT,,,Traditional unit of the cargo capacity.
+5I,standard cubic foot,standard cubic foot,std,,,Use standard (common code WSD)
+INQ,cubic inch,cubic inch,in³,,,Synonym: inch cubed
+FTQ,cubic foot,cubic foot,ft³,,,
+YDQ,cubic yard,cubic yard,yd³,,,
+GLI,gallon (UK),gallon (UK),gal,,,
+GLL,gallon (US),gallon (US),gal,,,
+PTI,pint (UK),pint (UK),pt,,,
+QTI,quart (UK),quart (UK),qt,,,
+PTL,liquid pint (US),liquid pint (US),liq pt,,,
+QTL,liquid quart (US),liquid quart (US),liq qt,,,
+PTD,dry pint (US),dry pint (US),dry pt,,,
+OZI,fluid ounce (UK),fluid ounce (UK),fl oz,,,
+J57,barrel (UK petroleum),barrel (UK petroleum),bbl,,,
+L43,peck (UK),peck (UK),pk (UK),,,
+L84,ton (UK shipping),ton (UK shipping),British shipping ton,,,
+L86,ton (US shipping),ton (US shipping),(US) shipping ton,,,
+OZA,fluid ounce (US),fluid ounce (US),fl oz,,,
+BUI,bushel (UK),bushel (UK),bushel,,,
+BUA,bushel (US),bushel (US),bu,,,
+BLL,barrel (US),barrel (US),barrel,,,
+BLD,dry barrel (US),dry barrel (US),bbl,,,
+GLD,dry gallon (US),dry gallon (US),dry gal,,,
+QTD,dry quart (US),dry quart (US),dry qt,,,
+G26,stere,stere,st,,,cubic metre
+G21,cup [unit of volume],cup,cup,,,
+G24,tablespoon (US),tablespoon,tbsp.,,,
+G25,teaspoon (US),teaspoon,tsp.,,,
+G23,peck (US),peck (US),pk (US),,,
+JOU,joule,joule,J,,,
+J75,calorie (mean),calorie,cal,,,
+K51,kilocalorie (mean),kilocalorie,kcal,,,
+J55,watt second,watt second,Ws,,,
+WHR,watt hour,watt hour,Wh,,,
+KWH,kilowatt hour,kilowatt hour,kWh,,,
+GWH,gigawatt hour,gigawatt hour,GWh,,,
+WTT,watt,watt,W,,,
+KWT,kilowatt,kilowatt,kW,,,
+MAW,megawatt,megawatt,MW,,,A unit of power defining the rate of energy transferred or consumed when a current of 1000 amperes flows due to a potential of 1000 volts at unity power factor.
+PTN,portion,portion,,,,
+STC,stick,stick,,,,

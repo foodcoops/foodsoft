@@ -8,7 +8,7 @@
         %acronym{:title => t('shared.articles.received_desc')}= t 'shared.articles.received'
       %th= t 'shared.articles_by.price'
 
-  - for order_article in order.order_articles.ordered.includes([:article, :article_price])
+  - for order_article in order.order_articles.ordered.includes(:article_version)
     = render 'shared/articles_by/article_single', order_article: order_article
     %tr
       %td{colspan: 4}

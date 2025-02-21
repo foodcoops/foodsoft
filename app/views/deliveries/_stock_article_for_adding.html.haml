@@ -4,8 +4,8 @@
 
 %tr{:id => "stock_article_#{article.id}", :class => css_class}
   %td= article.name
-  %td{:data => {:toggle => :tooltip, :title => "#{render(:partial => 'shared/article_price_info', :locals => {:article => article})}"}}= number_to_currency article.price
-  %td= article.unit
+  %td{:data => {:toggle => :tooltip, :title => "#{render(:partial => 'shared/article_version_info', :locals => {:article => article})}"}}= number_to_currency article.price
+  %td= format_supplier_order_unit(article)
   %td= article.article_category.name
   %td
     = link_to t('.action_edit'), edit_stock_article_path(article), remote: true, class: 'btn btn-mini'

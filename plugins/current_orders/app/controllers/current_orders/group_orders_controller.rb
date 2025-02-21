@@ -9,7 +9,7 @@ class CurrentOrders::GroupOrdersController < ApplicationController
                              .where(group_orders: { order_id: @order_ids, ordergroup_id: @ordergroup.id }).ordered
     @articles_grouped_by_category = @goas.includes(order_article: { article: :article_category })
                                          .order('articles.name')
-                                         .group_by { |a| a.order_article.article.article_category.name }
+                                         .group_by { |a| a.order_article.article_version.article_category.name }
                                          .sort { |a, b| a[0] <=> b[0] }
   end
 

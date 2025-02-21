@@ -1,0 +1,16 @@
+- if external_uuid.nil?
+  = t('.not_shared')
+- else
+  - share_url = api_v1_shared_supplier_articles_url(external_uuid)
+  %div#copy-share-link-button.user-select-none{:role => 'button'}
+    %span= share_url
+    %i.icon-copy
+
+  :javascript
+    document
+      .getElementById('copy-share-link-button')
+      .addEventListener('click', () => {
+        navigator.clipboard.writeText('#{share_url}');
+        alert('#{t(".share_link_copied_to_clipboard")}');
+      });
+

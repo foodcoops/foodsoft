@@ -20,107 +20,113 @@ class Article < ApplicationRecord
   #   @see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
   # @!attribute price
   #   @return [Number] Net price
-  #   @see ArticlePrice#price
+  #   @see ArticleVersion#price
   # @!attribute tax
   #   @return [Number] VAT percentage (10 is 10%).
-  #   @see ArticlePrice#tax
+  #   @see ArticleVersion#tax
   # @!attribute deposit
   #   @return [Number] Deposit
-  #   @see ArticlePrice#deposit
+  #   @see ArticleVersion#deposit
   # @!attribute unit_quantity
   #   @return [Number] Number of units in wholesale package (box).
-  #   @see ArticlePrice#unit_quantity
+  #   @see ArticleVersion#unit_quantity
   # @!attribute order_number
   # Order number, this can be used by the supplier to identify articles.
   # This is required when using the shared database functionality.
   #   @return [String] Order number.
   # @!attribute article_category
   #   @return [ArticleCategory] Category this article is in.
-  belongs_to :article_category
   # @!attribute supplier
   #   @return [Supplier] Supplier this article belongs to.
   belongs_to :supplier
-  # @!attribute article_prices
-  #   @return [Array<ArticlePrice>] Price history (current price first).
-  has_many :article_prices, -> { order('created_at DESC') }
-  # @!attribute order_articles
-  #   @return [Array<OrderArticle>] Order articles for this article.
-  has_many :order_articles
+  # @!attribute article_versions
+  #   @return [Array<ArticleVersion>] Price history (current price first).
+  has_many :article_versions, -> { order('created_at DESC') }
+
   # @!attribute order
   #   @return [Array<Order>] Orders this article appears in.
   has_many :orders, through: :order_articles
 
-  # Replace numeric seperator with database format
-  localize_input_of :price, :tax, :deposit
-  # Get rid of unwanted whitespace. {Unit#new} may even bork on whitespace.
-  normalize_attributes :name, :unit, :note, :manufacturer, :origin, :order_number
+  has_one :latest_article_version, lambda {
+                                     merge(ArticleVersion.latest)
+                                   }, foreign_key: :article_id, class_name: :ArticleVersion
 
   scope :undeleted, -> { where(deleted_at: nil) }
-  scope :available, -> { undeleted.where(availability: true) }
+  scope :available, -> { undeleted.with_latest_versions_and_categories.where(article_versions: { availability: true }) }
   scope :not_in_stock, -> { where(type: nil) }
 
-  # Validations
-  validates :name, :unit, :price, :tax, :deposit, :unit_quantity, :supplier_id, :article_category, presence: true
-  validates :name, length: { in: 4..60 }
-  validates :unit, length: { in: 1..15 }
-  validates :note, length: { maximum: 255 }
-  validates :origin, length: { maximum: 255 }
-  validates :manufacturer, length: { maximum: 255 }
-  validates :order_number, length: { maximum: 255 }
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
-  validates :unit_quantity, numericality: { greater_than: 0 }
-  validates :deposit, :tax, numericality: true
-  # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
-  # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
-  validate :uniqueness_of_name
+  scope :with_latest_versions_and_categories, lambda {
+    includes(:latest_article_version)
+      .joins(article_versions: [:article_category])
+      .joins(ArticleVersion.latest_outer_join_sql("#{table_name}.#{primary_key}"))
+      .where(later_article_versions: { id: nil })
+  }
+
+  scope :with_latest_versions, lambda {
+    includes(:latest_article_version)
+      .joins(:article_versions)
+      .joins(ArticleVersion.latest_outer_join_sql("#{table_name}.#{primary_key}"))
+      .where(later_article_versions: { id: nil })
+  }
+
+  accepts_nested_attributes_for :latest_article_version
+
+  # TODO: Remove these (see https://github.com/foodcoopsat/foodsoft_hackathon/issues/91):
+  begin
+    ArticleVersion.column_names.each do |column_name|
+      next if column_name == ArticleVersion.primary_key
+      next if column_name == 'article_id'
+
+      delegate column_name, "#{column_name}=", to: :latest_article_version, allow_nil: true
+    end
+  rescue StandardError
+    # Ignore if these delegates cannot be created (can happen if table article_versions doesn't yet exist in migrations)
+  end
+
+  delegate :article_category, to: :latest_article_version, allow_nil: true
+  delegate :article_unit_ratios, to: :latest_article_version, allow_nil: true
 
   # Callbacks
-  before_save :update_price_history
+  before_save :update_or_create_article_version
   before_destroy :check_article_in_use
+  after_save :reload_article_on_version_change
 
   def self.ransackable_attributes(_auth_object = nil)
+    # TODO: - see https://github.com/foodcoopsat/foodsoft_hackathon/issues/92
     %w[id name supplier_id article_category_id unit note manufacturer origin unit_quantity order_number]
   end
 
   def self.ransackable_associations(_auth_object = nil)
+    # TODO: - see https://github.com/foodcoopsat/foodsoft_hackathon/issues/92
     %w[article_category supplier order_articles orders]
   end
 
   # Returns true if article has been updated at least 2 days ago
   def recently_updated
-    updated_at > 2.days.ago
+    latest_article_version.updated_at > 2.days.ago
   end
 
   # If the article is used in an open Order, the Order will be returned.
   def in_open_order
     @in_open_order ||= begin
       order_articles = OrderArticle.where(order_id: Order.open.collect(&:id))
-      order_article = order_articles.detect { |oa| oa.article_id == id }
-      order_article&.order
+      order_article = order_articles.detect { |oa| oa.article_version.article_id == id }
+      order_article ? order_article.order : nil
     end
   end
 
   # Returns true if the article has been ordered in the given order at least once
   def ordered_in_order?(order)
-    order.order_articles.where(article_id: id).where('quantity > 0').one?
+    order.order_articles.includes(:article_version).where(article_version: { article_id: id }).where('quantity > 0').one?
   end
 
-  # this method checks, if the shared_article has been changed
-  # unequal attributes will returned in array
-  # if only the timestamps differ and the attributes are equal,
-  # false will returned and self.shared_updated_on will be updated
-  def shared_article_changed?(supplier = self.supplier)
-    # skip early if the timestamp hasn't changed
-    shared_article = self.shared_article(supplier)
-    return if shared_article.nil? || shared_updated_on == shared_article.updated_on
-
-    attrs = unequal_attributes(shared_article)
-    if attrs.empty?
-      # when attributes not changed, update timestamp of article
-      update_attribute(:shared_updated_on, shared_article.updated_on)
-      false
-    else
-      attrs
+  # to get the correspondent shared article
+  def shared_article(supplier = self.supplier)
+    order_number.blank? and return nil
+    @shared_article ||= begin
+                          supplier.shared_supplier.find_article_by_number(order_number)
+    rescue StandardError
+                          nil
     end
   end
 
@@ -144,51 +150,52 @@ class Article < ApplicationRecord
       new_unit = new_article.unit
     end
 
-    Article.compare_attributes(
+    ret = ArticleVersion.compare_attributes(
       {
-        name: [name, new_article.name],
-        manufacturer: [manufacturer, new_article.manufacturer.to_s],
-        origin: [origin, new_article.origin],
-        unit: [unit, new_unit],
-        price: [price.to_f.round(2), new_price.to_f.round(2)],
-        tax: [tax, new_article.tax],
-        deposit: [deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
-        # take care of different num-objects.
-        unit_quantity: [unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
-        note: [note.to_s, new_article.note.to_s]
+        name: [latest_article_version.name, new_article.name],
+        manufacturer: [latest_article_version.manufacturer, new_article.manufacturer.to_s],
+        origin: [latest_article_version.origin, new_article.origin],
+        unit: [latest_article_version.unit, new_unit],
+        supplier_order_unit: [latest_article_version.supplier_order_unit, new_article.supplier_order_unit],
+        minimum_order_quantity: [latest_article_version.minimum_order_quantity, new_article.minimum_order_quantity],
+        billing_unit: [latest_article_version.billing_unit || latest_article_version.supplier_order_unit,
+                       new_article.billing_unit || new_article.supplier_order_unit],
+        group_order_granularity: [latest_article_version.group_order_granularity, new_article.group_order_granularity],
+        group_order_unit: [latest_article_version.group_order_unit, new_article.group_order_unit],
+        price: [latest_article_version.price.to_f.round(2), new_price.to_f.round(2)],
+        tax: [latest_article_version.tax, new_article.tax],
+        deposit: [latest_article_version.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
+        note: [latest_article_version.note.to_s, new_article.note.to_s]
       }
     )
-  end
 
-  # Compare attributes from two different articles.
-  #
-  # This is used for auto-synchronization
-  # @param attributes [Hash<Symbol, Array>] Attributes with old and new values
-  # @return [Hash<Symbol, Object>] Changed attributes with new values
-  def self.compare_attributes(attributes)
-    unequal_attributes = attributes.select do |_name, values|
-      values[0] != values[1] && !(values[0].blank? && values[1].blank?)
-    end
-    unequal_attributes.to_a.map { |a| [a[0], a[1].last] }.to_h
-  end
+    ratios_differ = latest_article_version.article_unit_ratios.length != new_article.article_unit_ratios.length ||
+                    latest_article_version.article_unit_ratios.each_with_index.any? do |article_unit_ratio, index|
+                      new_article.article_unit_ratios[index].unit != article_unit_ratio.unit ||
+                        new_article.article_unit_ratios[index].quantity != article_unit_ratio.quantity
+                    end
 
-  # to get the correspondent shared article
-  def shared_article(supplier = self.supplier)
-    order_number.blank? and return nil
-    @shared_article ||= begin
-      supplier.shared_supplier.find_article_by_number(order_number)
-    rescue StandardError
-      nil
+    if ratios_differ
+      ratio_attribs = new_article.article_unit_ratios.map(&:attributes)
+      ret[:article_unit_ratios_attributes] = ratio_attribs
     end
+
+    if options[:convert_units] && latest_article_version.article_unit_ratios.length < 2 && new_article.article_unit_ratios.length < 2 && !new_unit_quantity.nil?
+      ret[:article_unit_ratios_attributes] = [new_article.article_unit_ratios.build(unit: 'XPP', quantity: new_unit_quantity, sort: 1).attributes]
+      # TODO: Either remove this aspect of the :convert_units feature or extend it to also work for the new units system (see https://github.com/foodcoopsat/foodsoft_hackathon/issues/90)
+    end
+
+    ret
   end
 
   # convert units in foodcoop-size
   # uses unit factors in app_config.yml to calc the price/unit_quantity
-  # returns new price and unit_quantity in array, when calc is possible => [price, unit_quanity]
+  # returns new price and unit_quantity in array, when calc is possible => [price, unit_quantity]
   # returns false if units aren't foodsoft-compatible
   # returns nil if units are eqal
   def convert_units(new_article = shared_article)
     return unless unit != new_article.unit
+
     return false if new_article.unit.include?(',')
 
     # legacy, used by foodcoops in Germany
@@ -232,6 +239,19 @@ class Article < ApplicationRecord
     update_column :deleted_at, Time.now
   end
 
+  def current_article_units
+    [supplier_order_unit, group_order_unit, billing_unit, price_unit, article_unit_ratios.map(&:unit)]
+      .flatten
+      .uniq
+      .compact
+  end
+
+  def duplicate_including_latest_version_and_ratios
+    article = dup
+    article.latest_article_version = latest_article_version.duplicate_including_article_unit_ratios
+    article
+  end
+
   protected
 
   # Checks if the article is in use before it will deleted
@@ -239,33 +259,35 @@ class Article < ApplicationRecord
     raise I18n.t('articles.model.error_in_use', article: name.to_s) if in_open_order
   end
 
-  # Create an ArticlePrice, when the price-attr are changed.
-  def update_price_history
-    return unless price_changed?
+  # Create an ArticleVersion, when the price-attr are changed.
+  def update_or_create_article_version
+    @version_changed_before_save = false
+    return unless version_dup_required?
 
-    article_prices.build(
-      price: price,
-      tax: tax,
-      deposit: deposit,
-      unit_quantity: unit_quantity
-    )
+    old_version = latest_article_version
+    new_version = old_version.duplicate_including_article_unit_ratios
+    article_versions << new_version
+
+    OrderArticle.belonging_to_open_order
+                .joins(:article_version)
+                .where(article_versions: { article_id: id })
+                .update_all(article_version_id: new_version.id)
+
+    # reload old version to avoid updating it too (would automatically happen after before_save):
+    old_version.reload
+
+    @version_changed_before_save = true
   end
 
-  def price_changed?
-    changed.detect { |attr| attr == 'price' || 'tax' || 'deposit' || 'unit_quantity' } ? true : false
+  def reload_article_on_version_change
+    reload if @version_changed_before_save
+    @version_changed_before_save = false
   end
 
-  # We used have the name unique per supplier+deleted_at+type. With the addition of shared_sync_method all,
-  # this came in the way, and we now allow duplicate names for the 'all' methods - expecting foodcoops to
-  # make their own choice among products with different units by making articles available/unavailable.
-  def uniqueness_of_name
-    matches = Article.where(name: name, supplier_id: supplier_id, deleted_at: deleted_at, type: type)
-    matches = matches.where.not(id: id) unless new_record?
-    # supplier should always be there - except, perhaps, on initialization (on seeding)
-    if supplier && (supplier.shared_sync_method.blank? || supplier.shared_sync_method == 'import')
-      errors.add :name, :taken if matches.any?
-    elsif matches.where(unit: unit, unit_quantity: unit_quantity).any?
-      errors.add :name, :taken_with_unit
-    end
+  def version_dup_required?
+    return false if latest_article_version.nil?
+    return false unless latest_article_version.self_or_ratios_changed?
+
+    OrderArticle.belonging_to_finished_order.exists?(article_version_id: latest_article_version.id)
   end
 end
