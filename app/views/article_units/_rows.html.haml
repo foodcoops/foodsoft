@@ -7,7 +7,7 @@
       - if article_unit[:untranslated]
         %a{title: t('.request_translation'), href: "https://github.com/foodcoops/foodsoft/issues/new?title=Add%20translations%20for%20article%20unit%20%27#{article_unit[:code]}%27", target: '_blank'}
           %i.icon-mail-forward
-    %td= article_unit[:description]
+    %td{lang: 'en'}= article_unit[:description]
     %td
       - if article_unit[:record].nil?
         = render partial: 'create_link', locals: {unit: article_unit[:code]}

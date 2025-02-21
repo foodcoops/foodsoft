@@ -59,7 +59,8 @@ namespace :units do
   end
 
   task build_i18n_from_csv: :environment do
-    translations = { de: {}, en: {} }
+    languages = %i[en de nl]
+    translations = languages.index_with { {} }
     csv_options = { csv_options: { col_sep: ',' } }
     SpreadsheetFile.parse 'config/units-of-measure/translations_piece.csv', csv_options do |row, index|
       next if index == 0
@@ -67,18 +68,16 @@ namespace :units do
       code = row[0]
       next if code.nil? # empty csv row
 
-      translation_en = { name: row[2].strip }
-      translation_en[:abbreviation] = row[3].strip if row[3].present?
-      translation_en[:aliases] = row[4].split(', ') if row[4].present?
-      translations[:en][code] = translation_en
-
-      translation_de = { name: row[5].strip }
-      translation_de[:abbreviation] = row[6].strip if row[6].present?
-      translation_de[:aliases] = row[7].split(', ') if row[7].present?
-      translations[:de][code] = translation_de
+      languages.each_with_index do |locale, lang_index|
+        i = 2 + (lang_index * 3)
+        current_translation = { name: row[i].strip }
+        current_translation[:abbreviation] = row[i + 1].strip if row[i + 1].present?
+        current_translation[:aliases] = row[i + 2].split(', ') if row[i + 2].present?
+        translations[locale][code] = current_translation
+      end
     end
 
-    %i[en de].each do |locale|
+    languages.each do |locale|
       SpreadsheetFile.parse "config/units-of-measure/translations_scalar-#{locale}.csv", csv_options do |row, index|
         next if index == 0
 
