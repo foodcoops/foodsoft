@@ -168,7 +168,7 @@
           %th.center#col_required= heading_helper GroupOrderArticle, :quantity
         %th.right{style: "width:15px;"}= heading_helper GroupOrderArticle, :total_price
     %tbody.list
-      - groupings = @order.order_articles.count < 100 ? @order.articles_grouped_by_category : @order.articles_grouped_by_category_and_ordered_amount
+      - groupings = @order.order_articles.count < 75 ? @order.articles_grouped_by_category : @order.articles_grouped_by_category_and_ordered_amount
       - groupings.each do |category, order_articles|
         %tr.list-heading.article-category
           %td
