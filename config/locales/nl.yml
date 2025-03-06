@@ -1660,6 +1660,8 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
+        article:
+          supplier_id: Leverancier
     'no': 'Nee'
     options:
       settings:

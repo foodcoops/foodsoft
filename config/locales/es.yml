@@ -1665,6 +1665,8 @@ es:
         settings_group:
           messages: Mensajes
           privacy: Privacidad
+        article:
+          supplier_id: Proveedor
     'no': 'No'
     options:
       settings:

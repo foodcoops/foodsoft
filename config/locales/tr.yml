@@ -1663,6 +1663,8 @@ tr:
         settings_group:
           messages: Mesajlar
           privacy: Gizlilik
+        article:
+          supplier_id: Tedarikçi
       'hayir': 'Hayir'
     options:
       settings:

@@ -54,14 +54,21 @@ class StockitController < ApplicationController
   end
 
   def create
+    valid = false
     StockArticle.transaction do
       @stock_article = StockArticle.create(quantity: 0, supplier_id: @supplier_id)
       @stock_article.attributes = { latest_article_version_attributes: params[:article_version] }
-      @stock_article.save
+      raise ActiveRecord::Rollback unless @stock_article.valid?
+
+      valid = @stock_article.save
     end
-    render layout: false
-  rescue ActiveRecord::RecordInvalid
-    render action: 'new', layout: false
+
+    if valid
+      render layout: false
+    else
+      load_article_units(@stock_article.current_article_units)
+      render action: 'new', layout: false
+    end
   end
 
   def update
@@ -97,8 +104,9 @@ class StockitController < ApplicationController
     @stock_article = StockArticle.find(params[:id])
   end
 
-  def load_article_units
-    additional_units = @stock_article&.current_article_units || []
+  def load_article_units(additional_units = [])
+    additional_units = @stock_article.current_article_units unless @stock_article.nil?
+
     @article_units = ArticleUnit.as_options(additional_units: additional_units)
     @all_units = ArticleUnit.as_hash(additional_units: additional_units)
   end

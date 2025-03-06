@@ -1168,6 +1168,8 @@ fr:
           phone_is_public: Permettre aux autres membres de voir ton numéro de téléphone.
         settings_group:
           privacy: Confidentialité
+        article:
+          supplier_id: Fournisseu-r-se
     'no': 'Non'
     options:
       settings:

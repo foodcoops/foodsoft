@@ -1753,6 +1753,8 @@ en:
         settings_group:
           messages: Messages
           privacy: Privacy
+        article:
+          supplier_id: Supplier
     'no': 'No'
     options:
       settings:

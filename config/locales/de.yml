@@ -1748,6 +1748,8 @@ de:
         settings_group:
           messages: Nachrichten
           privacy: Privatsphäre
+      article:
+        supplier_id: Lieferantin
     'no': 'Nein'
     options:
       settings:
