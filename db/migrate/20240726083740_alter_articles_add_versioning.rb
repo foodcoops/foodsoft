@@ -33,6 +33,46 @@ class AlterArticlesAddVersioning < ActiveRecord::Migration[5.2]
       ))
     end
 
+    # insert article_versions for articles lacking them (assumed db inconsistencies due to bugs in older foodsoft versions):
+    articles = select_all('SELECT articles.* FROM articles LEFT JOIN article_versions ON article_versions.article_id = articles.id WHERE article_versions.id IS NULL')
+    articles.each do |article|
+      insert(%(
+        INSERT INTO article_versions (
+          article_id,
+          price,
+          tax,
+          deposit,
+          name,
+          article_category_id,
+          unit,
+          note,
+          availability,
+          manufacturer,
+          origin,
+          order_number,
+          unit_quantity,
+          created_at,
+          updated_at
+        ) VALUES (
+          #{quote article['id']},
+          #{quote article['price']},
+          #{quote article['tax']},
+          #{quote article['deposit']},
+          #{quote article['name']},
+          #{quote article['article_category_id']},
+          #{quote article['unit']},
+          #{quote article['note']},
+          #{quote article['availability']},
+          #{quote article['manufacturer']},
+          #{quote article['origin']},
+          #{quote article['order_number']},
+          #{quote article['unit_quantity']},
+          #{quote article['created_at']},
+          #{quote article['updated_at']}
+        )
+      ))
+    end
+
     remove_index :articles, %i[name supplier_id]
 
     # drop article columns (now superfluous as they exist in article_versions):
