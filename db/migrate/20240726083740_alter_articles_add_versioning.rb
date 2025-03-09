@@ -170,7 +170,7 @@ class AlterArticlesAddVersioning < ActiveRecord::Migration[5.2]
       t.string :origin
       t.string :order_number
       t.datetime :updated_at
-      t.decimal :price, precision: 8, scale: 2
+      t.decimal :price, precision: 8, scale: 2, default: '0.0'
       t.float :tax
       t.decimal :deposit, precision: 8, scale: 2, default: '0.0'
       t.integer :unit_quantity, null: false, default: 0

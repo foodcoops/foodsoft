@@ -12,13 +12,15 @@ class CreateArticleUnits < ActiveRecord::Migration[5.2]
 
     unit_codes += ArticleUnitsLib::DEFAULT_IMPERIAL_SCALAR_UNIT_CODES if imperial_plain_text_units_exist?
 
+    now_sql_str = ActiveRecord::Base.connection.quoted_date(Time.now)
+
     unit_codes.each do |unit_code|
       insert(%{
         INSERT INTO article_units (unit, created_at, updated_at)
         VALUES (
           #{quote unit_code},
-          NOW(),
-          NOW()
+          #{quote now_sql_str},
+          #{quote now_sql_str}
         )
       })
     end
