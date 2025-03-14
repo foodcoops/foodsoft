@@ -26,14 +26,11 @@ class OrderArticlesController < ApplicationController
   end
 
   def update
-    # begin
     version_params = params.require(:article_version).permit(:id, :unit, :supplier_order_unit, :minimum_order_quantity,
                                                              :billing_unit, :group_order_granularity, :group_order_unit, :price, :price_unit, :tax, :deposit, article_unit_ratios_attributes: %i[id sort quantity unit _destroy])
     @order_article.update_handling_versioning!(params[:order_article], version_params)
-    # TODO-article-version
-    # rescue
-    #   render action: :edit
-    # end
+  rescue StandardError
+    render action: :edit
   end
 
   def destroy
