@@ -1,0 +1,11 @@
+de:
+  navigation:
+    planned_tasks:
+      title: Dienste
+      all: Alle Dienste
+  config:
+    hints:
+      use_pyapp: moderne PyApp Adaptierung verwenden
+    keys:
+      use_pyapp: PyApp verwenden
+

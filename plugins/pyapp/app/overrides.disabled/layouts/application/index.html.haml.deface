@@ -1,0 +1,4 @@
+/ insert_after 'erb[silent]:contains("<dashboard_top_mark>")'
+- if FoodsoftPyapp.enabled?
+    %li= link_to 'meine Dienste', "/#{FoodsoftConfig.scope}/app/users/#{current_user.id}" if FoodsoftConfig[:use_pyapp] 
+

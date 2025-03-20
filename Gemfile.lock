@@ -67,6 +67,12 @@ PATH
       rails
 
 PATH
+  remote: plugins/pyapp
+  specs:
+    foodsoft_pyapp (0.1.0)
+      rails (>= 7.0.8)
+
+PATH
   remote: plugins/wiki
   specs:
     foodsoft_wiki (0.0.1)
@@ -758,6 +764,7 @@ DEPENDENCIES
   foodsoft_messages!
   foodsoft_polls!
   foodsoft_printer!
+  foodsoft_pyapp!
   foodsoft_wiki!
   gaffe
   haml (~> 5.2, >= 5.2.2)

@@ -11,6 +11,7 @@
         = show_user current_user
         %b.caret
       %ul.dropdown-menu
+        %li= link_to 'meine Dienste', "/#{FoodsoftConfig.scope}/app/users/#{current_user.id}" if FoodsoftConfig[:use_pyapp]
         %li= link_to t('.profile'), my_profile_path
         %li= link_to t('.ordergroup'), my_ordergroup_path
         - if BankAccount.any? && FinancialTransactionType.with_name_short.any?

@@ -1,0 +1,2 @@
+/ insert_after 'erb[silent]:contains("<dashboard_top_mark>")'
+- if FoodsoftPyapp.enabled? && (page = Page.dashboard)

@@ -1,0 +1,3 @@
+/ insert_after 'noscript'
+- if FoodsoftPyapp.enabled? && (page = Page.public_front_page)
+  = wikified_body page.body, page.title

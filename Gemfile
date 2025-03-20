@@ -75,6 +75,7 @@ gem 'foodsoft_links', path: 'plugins/links'
 gem 'foodsoft_messages', path: 'plugins/messages'
 gem 'foodsoft_polls', path: 'plugins/polls'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
+gem 'foodsoft_pyapp', path: 'plugins/pyapp'
 
 # plugins not enabled by default
 # gem 'foodsoft_b85', path: 'plugins/b85'
