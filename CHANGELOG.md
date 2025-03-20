@@ -1,3 +1,18 @@
+
+# [Foodsoft 4.9.1](https://github.com/foodcoops/foodsoft/compare/v4.9...v4.9.1)
+(2025-03-20)
+
+### Bug Fixes
+
+* List attributes to allow to search for SharedArticles ([69de2a8](https://github.com/foodcoops/foodsoft/commit/69de2a885eb7fc1cc8b27ecf75fb6b7c8bf0321b))
+* set correct scope for all jobs in a generic way also for retries ([e91fc18](https://github.com/foodcoops/foodsoft/commit/e91fc18ef040f2bc8d6d0e27636108d5c03cf9f7))
+* remove max_quantity from schema.rb ([cd3141c](https://github.com/foodcoops/foodsoft/commit/cd3141ce5a3bf3fbb2a031b8f779241b2d972e46))
+
+### Features
+
+* group_order form show a button to my_order_group when insufficient funds ([b2deb0e](https://github.com/foodcoops/foodsoft/commit/b2deb0ed1f93b970a53685580802fed9e6c0e5c1))
+
+
 # [Foodsoft 4.9](https://github.com/foodcoops/foodsoft/compare/v4.8.1-rc2...v4.9) 
 (2024-07-10)
 
