@@ -49,15 +49,15 @@
     - for order_article in @articles.select { |oa| oa.units > 0 }
       = render :partial => "order_article_result", :locals => {:order_article => order_article}
 
-    %tr
-      %td{ colspan: 10 } The following were not ordered
-
-    - for order_article in @articles.select { |oa| oa.units == 0 }
-      = render :partial => "order_article_result", :locals => {:order_article => order_article}
-
     - if @order.transport
       %tr
         %td{ colspan: 5 }= heading_helper Order, :transport
         %td{ colspan: 3, data: {value: @order.transport} }= number_to_currency(@order.transport)
         %td= link_to t('ui.edit'), edit_transport_finance_order_path(@order), remote: true,
           class: 'btn btn-mini' unless order_article.order.closed?
+
+    %tr
+      %td{ colspan: 10 } The following were not ordered
+
+    - for order_article in @articles.select { |oa| oa.units == 0 }
+      = render :partial => "order_article_result", :locals => {:order_article => order_article}
