@@ -1,24 +1,29 @@
-= simple_form_for [@supplier, @article], :validate => true, :remote => true do |f|
-  = f.hidden_field :shared_updated_on
-  = f.hidden_field :supplier_id
+- url = @article.new_record? ? supplier_articles_path(@supplier, @article, foodcoop: FoodsoftConfig.scope) : supplier_article_path(@supplier, @article)
+= simple_form_for [@supplier, @article.latest_article_version], :url => url, :validate => true, :remote => true do |f|
+  :javascript
+    const articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: f, article_unit_ratio_counter: -1}))}"));
+    const units = #{raw(@all_units.to_json)};
+    new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
+
+  = render partial: 'shared/js_templates/unit_conversion_popover_template'
   .modal-header
     = close_button :modal
     %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
-  .modal-body
+  .modal-body.article-form
+    = f.hidden_field :id
     = f.input :availability
     = f.input :name
 
-    = render partial: 'shared/article_fields_units', locals: {f: f}
+    = render partial: 'shared/article_fields_units', locals: {f: f, article: @article}
+
+    = render partial: 'shared/article_fields_price', locals: {f: f, article: @article}
 
     = f.input :note
     = f.association :article_category
     / TODO labels
-
-    = render partial: 'shared/article_fields_price', locals: {f: f}
-
     = f.input :origin
     = f.input :manufacturer
     = f.input :order_number
   .modal-footer
     = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
-    = f.submit class: 'btn btn-primary'
+    = f.submit class: 'btn btn-primary', disabled: true

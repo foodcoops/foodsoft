@@ -16,13 +16,31 @@
 //= require i18n
 //= require i18n/translations
 //= require_self
-//= require ordering
+//= require big
+//= require units-converter
+//= require migrate-units-form
+//= require article-form
+//= require unit-conversion-field
+//= require group-order-form
+//= require receive-order-form
 //= require stupidtable
 //= require touchclick
 //= require delta_input
 //= require recurring_select
 
 $.fn.select2.defaults.set('theme', 'bootstrap');
+
+// on first focus (bubbles up to document), open the menu
+$(document).on('focus', '.select2-selection.select2-selection--single', function () {
+  $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+});
+
+// steal focus during close - only capture once and stop propogation
+$('select.select2').on('select2:closing', function (e) {
+  $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+    e.stopPropagation();
+  });
+});
 
 // Load following statements, when DOM is ready
 $(function() {
@@ -81,7 +99,7 @@ $(function() {
     // Submission will be done after 500ms of not typed, unless data-submit-onchange=changed,
     // in which case it happens when the input box loses its focus ('changed' event).
     // (changeDate is for bootstrap-datepicker)
-    $(document).on('changed keyup focusin changeDate', 'form[data-submit-onchange] input[type=text]:not([data-ignore-onchange])', function(e) {
+    $(document).on('changed keyup focusin changeDate', 'form[data-submit-onchange] input[type=number]:not([data-ignore-onchange])', function(e) {
         var input = $(this);
         // when form has data-submit-onchange=changed, don't do updates while typing
         if (e.type!='changed' && e.type!='changeDate' && input.parents('form[data-submit-onchange=changed]').length>0) {
@@ -95,6 +113,10 @@ $(function() {
         // trigger timeout to submit form when value was changed
         clearTimeout(input.data('submit-timeout-id'));
         input.data('submit-timeout-id', setTimeout(function() {
+          if (input.data('multiply-before-submit')) {
+            input.parents('form').find(`input[type="hidden"][name="${input.attr('name')}"]`).remove();
+            input.parents('form').append(`<input type="hidden" name="${input.attr('name')}" value="${Big(input.val()).mul(input.data('multiply-before-submit')).round(8)}" />`);
+          }
           if (input.val() != input.data('old-value')) input.parents('form').submit();
           input.removeData('submit-timeout-id');
           input.removeData('old-value');
@@ -122,6 +144,10 @@ $(function() {
     // Handle ajax errors
     //     render json: {error: "can't except this!"}, status: :unprocessable_entity
     $(document).ajaxError(function(ev, xhr, settings, exception) {
+        if (xhr.statusText === 'abort') {
+          return;
+        }
+
         try {
             msg = xhr.responseJSON.error;
         } catch(err) {

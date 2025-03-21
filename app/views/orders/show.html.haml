@@ -1,3 +1,4 @@
+= render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
 - title t('.title', name: @order.name)
 
 - if current_user.role_finance? || current_user.role_invoices?
@@ -98,3 +99,5 @@
 
 = render 'show_js'
 = render 'shared/articles_by/common', order: @order
+
+

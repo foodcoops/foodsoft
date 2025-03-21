@@ -3,8 +3,9 @@
   %i= t '.note'
 = form_tag(update_all_supplier_articles_path(@supplier)) do
   = render 'edit_all_table'
+  = hidden_field_tag :complete_migration, true unless @original_units.nil?
   %br/
   %i= t '.warning'
   .form-actions
-    = submit_tag t('.submit'), class: 'btn btn-primary'
+    = submit_tag t('.submit'), class: 'btn btn-primary', disabled: true
     = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

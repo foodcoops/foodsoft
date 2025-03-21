@@ -1,91 +1,15 @@
+= render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
 - new_articles = (@order.supplier.articles.undeleted rescue @order.articles)
-- new_article_data = articles_for_select2(new_articles, @order_articles.map(&:article_id)) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
+- current_article_ids = @order_articles.map { |oa| oa.article_version.article_id }
+- new_article_data = articles_for_select2(new_articles, current_article_ids) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
 - content_for :javascript do
   :javascript
-
-    function update_delta(input) {
-      var units = $(input).val();
-      var expected = $(input).data('units-expected');
-      var delta = Math.round((units-expected)*100)/100.0;
-      var html;
-
-      if (units.replace(/\s/g,"")=="") {
-        // no value
-        html = '';
-      } else if (isNaN(units)) {
-        html = '<i class="icon-remove" style="color: red"></i>';
-      } else if (delta == 0) {
-        // equal value
-        html = '<i class="icon-ok" style="color: green"></i>';
-      } else {
-        if (delta < 0) {
-          html = '<span style="color: red">- '+(-delta)+'</span>';
-        } else /*if (units> expected)*/ {
-          html = '<span style="color: green">+ '+(delta)+'</span>';
-        }
-        // show package icon only if the receive field has one
-        if ($(input).hasClass('package')) {
-          html += '#{j pkg_helper_icon}';
-        }
-      }
-
-      $(input).closest('tr').find('.units_delta').html(html);
-
-      // un-dim row when received is nonzero
-      $(input).closest('tr').toggleClass('unavailable', expected == 0 && html=='');
-    }
-
-    $(document).on('change keyup', 'input[data-units-expected]', function() {
-      update_delta(this);
-    });
-
-    $(document).on('touchclick', '#order_articles .unlocker', unlock_receive_input_field);
-
-    $(document).on('click', '#set_all_to_zero', function() {
-      $('tbody input').each(function(i, input) {
-        $(input).val(0);
-        update_delta(input);
-      });
-    })
-
-    $(function() {
-      $('input[data-units-expected]').each(function() {
-        update_delta(this);
-      });
-
-      init_add_article('#add_article');
-    });
-
-    function init_add_article(sel) {
-      $(sel).removeAttr('disabled').select2({
-        placeholder: '#{j t('orders.receive.add_article')}',
-        formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
-        // TODO implement adding a new article, like in deliveries
-      }).on('change', function(e) {
-        var $input = $(e.target);
-        var selectedArticleId = $input.val();
-        if(!selectedArticleId) {
-          return false;
-        }
-
-        $.ajax({
-          url: '#{order_order_articles_path(@order)}',
-          type: 'post',
-          data: JSON.stringify({order_article: {article_id: selectedArticleId}}),
-          contentType: 'application/json; charset=UTF-8'
-        });
-
-        $input.val('').trigger('change');
-      });
-      $(sel).val('').trigger('change');
-    }
-
-    function unlock_receive_input_field() {
-      $('.units_received', $(this).closest('tr')).prop('disabled', false).focus();
-      $(this).closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
-      $(this).replaceWith('<i class="icon icon-warning-sign add-on"></i>');
-    }
-
+    $('.units_received').each((_, field) => $(field).unitConversionField({
+      units: unitsData,
+      popoverTemplate$: $('#unit_conversion_popover_content_template'),
+      useTargetUnitForStep: false
+    }));
+    $('table#order_articles').parents('form').receiveOrderForm({packageHelperIcon: '#{j pkg_helper_icon}', newOrderArticlePath:'#{order_order_articles_path(@order)}'});
 %table#order_articles.ordered-articles.table.table-striped.stupidtable{style: 'margin-bottom: 0'}
   %thead
     %tr

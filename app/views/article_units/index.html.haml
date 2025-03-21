@@ -1,0 +1,60 @@
+=form_with url: search_article_units_path, method: :get, id: :article_unit_search_form, html: {'data-remote': true} do |form|
+  .d-flex.align-items-center
+    = form.text_field :q, id: :article_unit_search, placeholder: t('.search'), class: 'm-0'
+    = form.check_box :only_recommended, id: :only_recommended, class: 'm-0 ml-2', checked: true
+    = form.label :only_recommended, t('.only_recommended'), class: 'm-0 ml-1', for: :only_recommended
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper ArticleUnit, :code, short: true
+      %th= heading_helper ArticleUnit, :symbol
+      %th= heading_helper ArticleUnit, :name
+      %th= heading_helper ArticleUnit, :description
+      %th
+      %th
+
+  %tbody#article_units_search_results
+%br
+
+
+- content_for :javascript do
+  :javascript
+    let timer;
+    function debounce(timeout, func){
+      return (...args) => {
+        if (timer !== undefined) {
+          clearTimeout(timer);
+          timer = undefined;
+        }
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, timeout);
+      };
+    }
+
+    $(document).ready(function () {
+      $('#article_unit_search, #only_recommended').on('input', debounce(250, () => {
+        $('#article_unit_search_form').submit();
+      }));
+    });
+
+    let currentXhr;
+
+    $(document).on('ajax:send', function(_event, xhr) {
+      if (timer !== undefined) {
+        clearTimeout(timer);
+        timer = undefined;
+      }
+      if (currentXhr) {
+        currentXhr.abort();
+      }
+      currentXhr = xhr;
+      return true;
+    });
+
+    $(document).on('ajax:complete', function(_event, _xhr, _status) {
+      currentXhr = null;
+    });
+
+    $('#article_unit_search_form').submit();

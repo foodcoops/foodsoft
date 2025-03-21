@@ -4,25 +4,25 @@
   - cssclass += " unavailable" if (order_article.units_billed||order_article.units_to_order)==0 and order_article.units_received.nil?
   %tr{id: "order_article_#{order_article.id}", class: cssclass, valign: "top"}
     - order_title = []
-    - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article.manufacturer unless order_article.article.manufacturer.to_s.empty?
-    - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article.note unless order_article.article.note.to_s.empty?
-    %td= order_article.article.order_number
-    %td.name{title: order_title.join("\n")}= order_article.article.name
-    %td.unit= order_article.article.unit
-    %td.article_price
-      = number_to_currency order_article.article_price.price
-      = article_price_change_hint(order_article)
+    - order_title.append Article.human_attribute_name(:manufacturer)+': ' + order_article.article_version.manufacturer unless order_article.article_version.manufacturer.to_s.empty?
+    - order_title.append Article.human_attribute_name(:note)+': ' + order_article.article_version.note unless order_article.article_version.note.to_s.empty?
+    %td= order_article.article_version.order_number
+    %td.name{title: order_title.join("\n")}= order_article.article_version.name
+    %td.unit= format_group_order_unit_with_ratios(order_article.article_version)
+    %td.article_version
+      = number_to_currency order_article.article_version.group_order_price
+      = article_version_change_hint(order_article)
     %td #{order_article.quantity} + #{order_article.tolerance}
     %td
       = order_article.units_to_order
-      = pkg_helper order_article.article
+      = pkg_helper order_article.price
     -#%td # TODO implement invoice screen
       - unless order_article.units_billed.nil?
         = order_article.units_billed
-        = pkg_helper order_article.article, soft_uq: true
+        = pkg_helper order_article.article_version, soft_uq: true
     %td.units_received_cell
       = receive_input_field(form)
-      = pkg_helper order_article.article_price, icon: false, soft_uq: true
+      = pkg_helper order_article.article_version, icon: false, soft_uq: true, unit: order_article.article_version.billing_unit
       / TODO add almost invisible text_field for entering single units
     %td.units_delta
     %td

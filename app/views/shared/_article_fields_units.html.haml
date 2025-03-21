@@ -1,6 +1,33 @@
--# use the local 'f', or supply 'f_uq' and 'f_unit' for more control (like in balancing)
+-# var parcel = $($.parseHTML("#{escape_javascript(render('shared/parcel'))}"));
+-# var parcels = #{raw @parcels.to_json};
+
+.fold-line.d-flex
+  = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
+  -# title: unit in which article can be ordered from supplier
+  - supplier_order_unit_override = article.supplier_order_unit
+  - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && article.unit.nil?
+  = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, include_blank: t('.custom_unit'), input_html: {class: 'input-medium'}
+  -# title: free text unit
+  = f.input :unit, input_html: {class: 'input-mini ml-1', placeholder: t('.unit')}, label: false
+  %i.icon-warning-sign{title: t('.warn_about_needless_custom_unit')}
 .fold-line
-  = (f_uq rescue f).input :unit_quantity, label: Article.human_attribute_name(:unit),
-    input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit_quantity)}
-  = (f_unit rescue f).input :unit, label: '&times;'.html_safe,
-    input_html: {class: 'input-mini', title: Article.human_attribute_name(:unit)}
+  .control-group
+    %label.control-label
+      = t('.unit_ratios')
+    %table#fc_base_price{:class => "controls"}
+      %tbody
+        - ratios = article.article_unit_ratios
+        = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
+      %tfoot
+        %td{:colspan => 6}
+          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
+.fold-line
+  = f.input :minimum_order_quantity do
+    .input-append
+      = f.input_field :minimum_order_quantity, class: 'input-mini'
+      %span.add-on
+.fold-line
+  = f.input :billing_unit, as: :select, collection: [], input_html: {'data-initial-value': article.billing_unit, class: 'input-medium'}, include_blank: false
+.fold-line
+  = f.input :group_order_granularity, input_html: {class: 'input-mini', step: 0.001}
+  = f.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': article.group_order_unit, class: 'input-medium'}, label: '&times;'.html_safe, include_blank: false

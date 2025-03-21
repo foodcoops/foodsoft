@@ -7,7 +7,7 @@
 
 .row-fluid
   .span6
-    - if shared_supplier = @supplier.shared_supplier
+    - unless @supplier.shared_sync_method.nil?
       .alert.alert-info
         = t 'suppliers.shared_supplier_note'
         = t "suppliers.shared_supplier_methods.#{@supplier.shared_sync_method}"
@@ -43,6 +43,11 @@
       %dd= simple_format(@supplier.note)
       %dt= heading_helper(Supplier, :min_order_quantity) + ':'
       %dd= @supplier.min_order_quantity
+      %dt= heading_helper(Supplier, :share_link) + ':'
+      %dd
+        %div#share_link= render partial: 'supplier_shares/share_link', locals: { external_uuid: @supplier.external_uuid }
+        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn share', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
+        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn share', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
 
     .clearfix
     - if @current_user.role_suppliers?

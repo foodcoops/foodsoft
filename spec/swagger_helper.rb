@@ -77,6 +77,105 @@ RSpec.configure do |config|
               }
             }
           },
+          ExternalArticle: {
+            description: 'article for external client with the data of its latest version',
+            type: :object,
+            properties: {
+              price: { type: :float },
+              tax: { type: :float },
+              deposit: { type: :float },
+              created_at: {
+                type: :string,
+                format: 'date-time'
+              },
+              name: { type: :string },
+              unit: {
+                type: :string,
+                deprecated: true,
+                nullable: true,
+                description: 'old style plain text amount of each unit, e.g. "100 g" or "kg"'
+              },
+              note: {
+                type: :string,
+                nullable: true,
+                description: 'generic note'
+              },
+              availability: {
+                type: :boolean,
+                description: 'whether the article can be used in active orders'
+              },
+              manufacturer: {
+                type: :string,
+                nullable: true,
+                description: 'manufacturer'
+              },
+              origin: {
+                type: :string,
+                nullable: true,
+                description: 'origin, preferably (starting with a) 2-letter ISO country code'
+              },
+              order_number: {
+                type: :string,
+                nullable: true,
+                description: 'number uniquely identifying the article amongst other articles of this supplier'
+              },
+              updated_at: {
+                type: :string,
+                format: 'date-time'
+              },
+              supplier_order_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article is delivered in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              price_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article\'s price is displayed in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              billing_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article\'s price is billed in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              group_order_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article can be ordered in by distinct order groups (if null, the deprecated plain text `unit` is used instead)'
+              },
+              group_order_granularity: {
+                type: :float,
+                description: 'the granularity in which order groups may order this article (measured in `group_order_unit`)'
+              },
+              minimum_order_quantity: {
+                type: :float,
+                description: 'minimum quantity that needs to be achieved for the article to be ordered at all (measured in `group_order_unit`)'
+              },
+              article_unit_ratios: {
+                type: :array,
+                items: {
+                  '$ref': '#/components/schemas/ExternalArticleUnitRatio'
+                }
+              }
+            }
+          },
+          ExternalArticleUnitRatio: {
+            type: :object,
+            properties: {
+              unit: {
+                type: :string,
+                description: 'the UN/ECE unit of this ratio'
+              },
+              quantity: {
+                type: :float,
+                description: 'the quantity of this ratio relative to `supplier_order_unit` (or `unit` if `supplier_order_unit` is null)'
+              },
+              sort: {
+                type: :integer,
+                description: 'sort index'
+              }
+            }
+          },
           Article: {
             type: :object,
             properties: {
@@ -146,15 +245,15 @@ RSpec.configure do |config|
                 description: 'foodcoop price'
               },
               quantity: {
-                type: :integer,
+                type: :float,
                 description: 'number of units ordered by members'
               },
               tolerance: {
-                type: :integer,
+                type: :float,
                 description: 'number of extra units that members are willing to buy to fill a box'
               },
               units_to_order: {
-                type: :integer,
+                type: :float,
                 description: 'number of units to order from the supplier'
               },
               article: {
@@ -298,12 +397,12 @@ RSpec.configure do |config|
             properties: {
               quantity:
               {
-                type: :integer,
+                type: :float,
                 description: 'number of units ordered by the users ordergroup'
               },
               tolerance:
               {
-                type: :integer,
+                type: :float,
                 description: 'number of extra units the users ordergroup is willing to buy for filling a box'
               }
             }
@@ -333,8 +432,7 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   result: {
-                    type: :number,
-                    format: :float,
+                    type: :float,
                     description: 'number of units the users ordergroup will receive or has received'
                   },
                   total_price:
@@ -403,6 +501,38 @@ RSpec.configure do |config|
               },
               required: ['name'],
               minProperties: 2 # name+url or name+items
+            }
+          },
+          Pagination: {
+            type: :object,
+            nullable: true,
+            properties: {
+              current_page: {
+                type: :integer,
+                description: 'page number of the returned collection'
+              },
+              previous_page: {
+                type: :integer,
+                nullable: true,
+                description: 'previous page'
+              },
+              next_page: {
+                type: :integer,
+                nullable: true,
+                description: 'next page'
+              },
+              per_page: {
+                type: :integer,
+                description: 'number of items per page'
+              },
+              total_pages: {
+                type: :integer,
+                description: 'total number of pages'
+              },
+              number: {
+                type: :integer,
+                description: 'total number of items in the collection'
+              }
             }
           },
           Error: {

@@ -1,1 +1,2 @@
 $('#results').html('#{j(render(balancing_view_partial, order: @order))}');
+$('*[name="group_order_article[result]"]').each((_, field) => $(field).unitConversionField({units: unitsData, popoverTemplate$: $('#unit_conversion_popover_content_template'), useTargetUnitForStep: false}));

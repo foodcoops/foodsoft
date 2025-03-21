@@ -31,7 +31,7 @@
       - total_gross += quantity * stock_change.stock_article.gross_price
       %tr
         %td= stock_change.stock_article.name
-        %td= stock_change.stock_article.unit
+        %td= format_supplier_order_unit_with_ratios(stock_change.stock_article)
         %td.numeric= quantity
         %td.numeric= number_to_currency stock_change.stock_article.price
         %td.numeric= number_to_currency sum

@@ -1,0 +1,12 @@
+- if defined?(set_units_data) && set_units_data
+  - content_for :javascript do
+    :javascript
+      const unitsData = #{raw(ArticleUnit.as_hash.to_json)};
+%template#unit_conversion_popover_content_template
+  %div.popover_contents.text-right{"data-title" => t('helpers.unit_conversion_fields.title'), "data-disabled-title" => t('helpers.unit_conversion_fields.disabled_title')}
+    .d-flex
+      %select.unit.mr-1{"data-ignore-onchange" => true}
+      %input.quantity.input-mini.numeric{:type => 'number', :min => 0}
+    .conversion-result.mt-1.mb-1
+    %input.cancel.btn{:type => 'button', :value => t('helpers.unit_conversion_fields.cancel')}
+    %input.apply.btn.btn-primary{:type => 'button', :value => t('helpers.unit_conversion_fields.apply')}

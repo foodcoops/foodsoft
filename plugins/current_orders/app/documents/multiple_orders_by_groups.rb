@@ -28,18 +28,18 @@ class MultipleOrdersByGroups < OrderPdf
       has_tolerance = false
 
       each_group_order_article_for(ordergroup) do |goa|
-        has_tolerance = true if goa.order_article.price.unit_quantity > 1
-        price = goa.order_article.price.fc_price
+        has_tolerance = true if goa.order_article.article_version.unit_quantity > 1
+        price = goa.order_article.article_version.fc_price
         sub_total = goa.total_price
         total += sub_total
-        rows <<  [goa.order_article.article.name,
+        rows <<  [goa.order_article.article_version.name,
                   goa.group_order.order.name.truncate(10, omission: ''),
                   number_to_currency(price),
-                  goa.order_article.article.unit,
+                  goa.order_article.article_version.unit,
                   goa.tolerance > 0 ? "#{goa.quantity} + #{goa.tolerance}" : goa.quantity,
                   group_order_article_result(goa),
                   number_to_currency(sub_total),
-                  goa.order_article.price.unit_quantity]
+                  goa.order_article.article_version.unit_quantity]
         dimrows << rows.length if goa.result == 0
       end
       next if rows.length == 0
@@ -121,7 +121,7 @@ class MultipleOrdersByGroups < OrderPdf
                                    .where(group_orders: { ordergroup_id: ordergroups.map(&:id) })
                                    .order('group_orders.order_id, group_order_articles.id')
                                    .preload(group_orders: { order: :supplier })
-                                   .preload(order_article: %i[article article_price order])
+                                   .preload(order_article: %i[article article_version order])
       ordergroups.each(&block)
     end
   end

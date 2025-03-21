@@ -1,0 +1,74 @@
+- title t('.title', supplier: @supplier.name)
+%span= simple_format(t('.explanation'))
+- content_for :javascript do
+  :javascript
+    const units = #{raw(@all_units.to_json)};
+- content_for :javascript do
+  = simple_fields_for "samples[TEMPLATEREPLACEMARKER]" do |form|
+    :javascript
+      const ratioTemplateHtml = "#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: form, article_unit_ratio_counter: -1}))}";
+  :javascript
+    $(document).ready(() => new MigrateUnitsForm(ratioTemplateHtml, $('#migrate-units'), units));
+- price_markup = FoodsoftConfig[:price_markup].to_f
+= render partial: 'shared/js_templates/unit_conversion_popover_template'
+
+= form_with url: complete_units_migration_supplier_articles_path do |f|
+  %table.table#migrate-units
+    %thead
+      %tr
+        %th= t('.column_headers.apply')
+        %th= t('.column_headers.original_plaintext_unit')
+        %th= t('.column_headers.affected_articles')
+        %th= heading_helper ArticleVersion, :supplier_order_unit
+        %th= t('.column_headers.contains')
+        %th= heading_helper ArticleVersion, :group_order_granularity
+    %tbody
+      - @samples.each_with_index do |sample, index|
+        %tr{:id => "sample_row_#{index}"}
+          = simple_fields_for "samples[#{index}]", sample do |form|
+            %td
+              = yield form # allow to add hidden fields to form
+              = form.input :apply_migration, as: :boolean, label: false, input_html: { value: true, checked: 'checked' }
+            %td
+              - sample[:articles].each do |article|
+                = hidden_field_tag "samples[#{index}][article_ids][]", article.id
+              = "\"#{sample[:unit]}\""
+            %td
+              %span.articles-list
+                %span.expander{role: :button}
+                  %i.icon-chevron-sign-right
+                %span.collapser.d-none{role: :button}
+                  %i.icon-chevron-sign-down
+                %span
+                  = sample[:articles].length
+                %ul.list.d-none
+                  - sample[:articles].each do |article|
+                    %li
+                      - if article.availability
+                        = article.name
+                      - else
+                        %s=article.name
+
+            %td
+              = form.input :supplier_order_unit, as: :select, collection: [], label: false, include_blank: t('.custom_unit'), input_html: {class: 'input-medium', 'data-initial-value': sample[:conversion_result][:supplier_order_unit]}
+            %td
+              .d-flex.gap-1
+                = field_with_preset_value_and_errors(form: form,
+                  field: :first_ratio_quantity,
+                  value: sample[:conversion_result][:first_ratio]&.dig(:quantity),
+                  errors: sample[:errors]&.messages&.dig(:"latest_article_version.article_unit_ratios.quantity"),
+                  input_html: { type: :number, class: 'input-mini', required: true, step: 'any' })
+                %span
+                  = '&times;'.html_safe
+                = form.input :first_ratio_unit, as: :select, include_blank: true, collection: [], required: false, label: false, input_html: {class: 'input-medium', 'data-initial-value': sample[:conversion_result][:first_ratio]&.dig(:unit)}
+            %td
+              .d-flex.gap-1
+                = field_with_preset_value_and_errors(form: form,
+                    field: :group_order_granularity,
+                    value: sample[:conversion_result][:group_order_granularity],
+                    errors: sample[:errors]&.messages&.dig(:"latest_article_version.group_order_granularity"),
+                    input_html: { type: :number, class: 'input-mini', required: true, step: 0.001, title: "steps in which ordergroups can order this article" })
+                %span
+                  = '&times;'.html_safe
+                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': sample[:conversion_result][:group_order_unit], class: 'input-medium'}, label: false, include_blank: false
+  = f.submit t('.run_migration'), class: 'btn btn-primary'

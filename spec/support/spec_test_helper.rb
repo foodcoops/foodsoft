@@ -12,9 +12,21 @@ module SpecTestHelper
     User.find(session[:user_id])
   end
 
-  def get_with_defaults(action, params: {}, xhr: false, format: nil)
+  def get_with_defaults(action, **args)
+    get(action, **default_request_args(**args))
+  end
+
+  def post_with_defaults(action, **args)
+    post(action, **default_request_args(**args))
+  end
+
+  def delete_with_defaults(action, **args)
+    delete(action, **default_request_args(**args))
+  end
+
+  def default_request_args(params: {}, xhr: false, format: nil)
     params['foodcoop'] = FoodsoftConfig[:default_scope]
-    get action, params: params, xhr: xhr, format: format
+    { params: params, xhr: xhr, format: format }
   end
 end
 
