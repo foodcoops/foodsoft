@@ -1,7 +1,7 @@
 - title t('.title'), false
 
-.row-fluid
-  .span4
+.row
+  .col-md-4
     %h2= @ordergroup.name
     .well
       - unless @ordergroup.description.blank?
@@ -24,7 +24,7 @@
       - unless FoodsoftConfig[:disable_invite]
         = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
       - '<home_ordergroup_well_mark>'
-  .span8
+  .col-md-8
     %h2= t('.account_summary')
     .well.well-small
       = form_tag my_ordergroup_path, :method => :get, :remote => true,
