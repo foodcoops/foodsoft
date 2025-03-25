@@ -65,8 +65,8 @@ gem 'psych', '3.3.2'
 gem 'mutex_m'
 gem 'csv'
 
-# we use the git version of acts_as_versioned, and need to include it in this Gemfile
-gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
+# we use a fork with Ruby 3 support of acts_as_versioned, and need to include it in this Gemfile
+gem 'acts_as_versioned', git: 'https://github.com/assembla/acts_as_versioned.git'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
 gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_links', path: 'plugins/links'
