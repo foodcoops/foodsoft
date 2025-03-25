@@ -534,6 +534,10 @@ GEM
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.37.0)
       parser (>= 3.3.1.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
+    rubocop-factory_bot (2.26.1)
+      rubocop (~> 1.61)
     rubocop-rails (2.29.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -541,6 +545,9 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (3.4.0)
       rubocop (~> 1.61)
+    rubocop-rspec_rails (2.30.0)
+      rubocop (~> 1.61)
+      rubocop-rspec (~> 3, >= 3.0.1)
     ruby-filemagic (0.7.3)
     ruby-graphviz (1.2.5)
       rexml
@@ -733,8 +740,11 @@ DEPENDENCIES
   rswag-specs
   rswag-ui
   rubocop
+  rubocop-capybara
+  rubocop-factory_bot
   rubocop-rails
   rubocop-rspec
+  rubocop-rspec_rails
   ruby-filemagic
   ruby-prof
   ruby-units
