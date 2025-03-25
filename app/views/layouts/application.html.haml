@@ -29,11 +29,11 @@
         = render_navigation expand_all: true, renderer: :bootstrap3
 
   .container-fluid
-    .row-fluid
+    .row
       - if content_for?(:sidebar)
-        .span3
+        .col-md-3
           = yield(:sidebar)
-        .span9
+        .col-md-9
           = bootstrap_flash_patched
           - if content_for?(:actionbar)
             .btn-toolbar.pull-right= yield(:actionbar)
