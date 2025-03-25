@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/assembla/acts_as_versioned.git
+  revision: a77b55662a8f382d1c3848f451623cf31eeac9ad
+  specs:
+    acts_as_versioned (0.6.0)
+      activerecord (>= 3.0.9)
+
+GIT
   remote: https://github.com/gregschmit/recurring_select
   revision: 3c8f24084ae3b85bbcc532499246f1257a231e31
   specs:
@@ -6,13 +13,6 @@ GIT
       ice_cube (>= 0.11)
       rails (>= 6.1)
       sass-rails (>= 5.0)
-
-GIT
-  remote: https://github.com/technoweenie/acts_as_versioned.git
-  revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
-  specs:
-    acts_as_versioned (0.6.0)
-      activerecord (>= 3.0.9)
 
 PATH
   remote: plugins/discourse
@@ -334,7 +334,7 @@ GEM
     mime-types-data (3.2025.0107)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (5.25.4)
+    minitest (5.25.5)
     mono_logger (1.1.2)
     msgpack (1.7.5)
     multi_json (1.15.0)
