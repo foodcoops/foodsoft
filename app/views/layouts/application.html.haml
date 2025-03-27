@@ -42,13 +42,14 @@
               %h1= yield(:title)
           = yield
       - else
-        = bootstrap_flash_patched
-        - if content_for?(:actionbar)
-          .btn-toolbar.pull-right= yield(:actionbar)
-        - if show_title?
-          .page-header
-            %h1= yield(:title)
-        = yield
+        .col-md-12
+          = bootstrap_flash_patched
+          - if content_for?(:actionbar)
+            .btn-toolbar.pull-right= yield(:actionbar)
+          - if show_title?
+            .page-header
+              %h1= yield(:title)
+          = yield
 
     = render 'layouts/footer'
   #modalContainer.modal.hide.fade(tabindex="-1" role="dialog")
