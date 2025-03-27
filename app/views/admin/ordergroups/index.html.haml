@@ -3,7 +3,7 @@
 - content_for :actionbar do
   = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'btn btn-primary'
   = link_to url_for(search: params[:q], format: :csv), class: 'btn' do
-    = glyph :download
+    = fa_icon :download
     CSV
 
 - content_for :sidebar do
