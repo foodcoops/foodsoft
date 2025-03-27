@@ -1,7 +1,7 @@
 .pull-right
   .btn-group
     = link_to url_for(query: params[:query], format: :csv), class: 'btn' do
-      = glyph :download
+      = fa_icon :download
       CSV
   - if @bank_transactions.total_pages > 1
     .btn-group= items_per_page wrap: false
