@@ -22,7 +22,7 @@
       - if invoice.attachments.attached?
         - for attachment in invoice.attachments
           = link_to attachment.filename, url_for(attachment)
-          = glyph :download
+          = fa_icon :download
       - if invoice.note?
         = '(' + invoice.note + ')'
       %br/

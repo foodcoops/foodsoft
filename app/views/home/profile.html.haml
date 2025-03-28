@@ -1,7 +1,7 @@
 - title t('.title'), false
 
-.row-fluid
-  .span7
+.row
+  .col-md-7
     %h3
       = h(t('.user.title', user: show_user))
       %small= t '.user.since', when: distance_of_time_in_words(Time.now, @current_user.created_on)
@@ -10,7 +10,7 @@
       .form-actions
         = submit_tag t('ui.save'), class: 'btn'
 
-  .span5
+  .col-md-5
     - if @current_user.ordergroup
       %h3= User.human_attribute_name(:ordergroup, count: 1)
       %table.table.table-striped
