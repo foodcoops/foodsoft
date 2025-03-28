@@ -4,43 +4,45 @@
     const units = #{raw(@all_units.to_json)};
     new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
   = render partial: 'shared/js_templates/unit_conversion_popover_template'
-  .modal-header
-    = close_button :modal
-    %h3= title
-  .modal-body.article-form
-    = f.hidden_field :id
-    = f.simple_fields_for :article do |a|
-      = a.input :supplier_id, collection: Supplier.all, selected: stock_article.supplier_id
-    = f.input :name
-    .fold-line.d-flex
-      = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
-      - supplier_order_unit_override = stock_article.supplier_order_unit
-      - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
-      -# title: unit in which article can be ordered from supplier
-      = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'input-medium'}
-      -# title: free text unit
-      = f.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
-    .fold-line
-      .control-group
-        %label.control-label{for: 'unit_ratios'}
-          = t('shared.article_fields_units.unit_ratios')
-        %table#fc_base_price{:class => "controls"}
-          %tbody
-            - ratios = stock_article.article_unit_ratios
-            = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
-          %tfoot
-            %td{:colspan => 6}
-              = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
-    = f.input :note
-    - if stock_article.new_record?
-      = f.input :price
-      = f.input :tax, :wrapper => :append do
-        = f.input_field :tax
-        %span.add-on %
-      = f.input :deposit
-    - else
-      = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
-    = f.association :article_category
-  .modal-footer
-    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
-    = f.submit :class => 'btn btn-primary', 'data-disable-with' => t('ui.please_wait')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = close_button :modal
+        %h3= title
+      .modal-body.article-form
+        = f.hidden_field :id
+        = f.simple_fields_for :article do |a|
+          = a.input :supplier_id, collection: Supplier.all, selected: stock_article.supplier_id
+        = f.input :name
+        .fold-line.d-flex
+          = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
+          - supplier_order_unit_override = stock_article.supplier_order_unit
+          - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
+          -# title: unit in which article can be ordered from supplier
+          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'input-medium'}
+          -# title: free text unit
+          = f.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
+        .fold-line
+          .control-group
+            %label.control-label{for: 'unit_ratios'}
+              = t('shared.article_fields_units.unit_ratios')
+            %table#fc_base_price{:class => "controls"}
+              %tbody
+                - ratios = stock_article.article_unit_ratios
+                = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
+              %tfoot
+                %td{:colspan => 6}
+                  = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: "add ratio"
+        = f.input :note
+        - if stock_article.new_record?
+          = f.input :price
+          = f.input :tax, :wrapper => :append do
+            = f.input_field :tax
+            %span.add-on %
+          = f.input :deposit
+        - else
+          = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
+        = f.association :article_category
+      .modal-footer
+        = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
+        = f.submit :class => 'btn btn-primary', 'data-disable-with' => t('ui.please_wait')
