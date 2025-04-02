@@ -228,9 +228,12 @@ class Order < ApplicationRecord
         when :groups
           total += go.total
         when :groups_without_markup
+          go_price_without_markup = 0
           for goa in go.group_order_articles
-            total += goa.result * goa.order_article.article_version.gross_group_order_price
+            go_price_without_markup += goa.result * goa.order_article.article_version.gross_group_order_price
           end
+          total += go_price_without_markup.round(2) || 0
+          total += go.transport if go.transport
         end
       end
     end
