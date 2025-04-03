@@ -1,0 +1,58 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: Foodsoft
+url: 'https://github.com/foodcoops/foodsoft.git'
+landingURL: 'https://foodcoops.net'
+releaseDate: '2025-03-20'
+softwareVersion: v4.9.1
+developmentStatus: stable
+platforms:
+  - web
+softwareType: standalone/web
+categories:
+  - e-commerce
+  - business-process-management
+  - project-collaboration
+  - warehouse-management
+maintenance:
+  type: community
+legal:
+  license: AGPL-3.0-or-later
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - de
+    - en
+    - es
+    - fr
+    - nl
+    - tr
+description:
+  en:
+    genericName: Webshop
+    shortDescription: >-
+      Foodsoft is a web-based tool for organizing food coops and aiding small
+      producers in managing orders and distributing local products efficiently
+    longDescription: >
+      Foodsoft is a web-based software designed to help food cooperatives manage
+      their operations more effectively. It provides tools for small regional
+      producers to distribute their products directly to consumers. With
+      Foodsoft, cooperatives can handle orders, keep track of inventory, and
+      communicate with their members easily. The platform allows producers to
+      list their products, making it simple for consumers to find and purchase
+      fresh, local food. By connecting producers and consumers, Foodsoft
+      supports local businesses and encourages the use of locally sourced
+      ingredients.
+    features:
+      - Order management system
+      - Inventory tracking
+      - Member communication tools
+      - Product listing for producers
+      - Payment processing integration
+      - Delivery scheduling options
+      - Membership management
+      - Access control for different user roles
+      - Community engagement features
