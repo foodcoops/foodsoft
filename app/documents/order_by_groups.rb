@@ -23,11 +23,11 @@ class OrderByGroups < OrderPdf
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
-        rows << [goa.order_article.article.name,
+        rows << [goa.order_article.article_version.name,
                  goa.group_order.order.name,
-                 group_order_article_quantity_with_tolerance(goa),
-                 group_order_article_result(goa),
-                 order_article_price_per_unit(goa.order_article),
+                 billing_quantity_with_tolerance(goa),
+                 billing_article_result(goa),
+                 price_per_billing_unit(goa),
                  number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1

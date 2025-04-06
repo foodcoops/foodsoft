@@ -114,8 +114,15 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :article_units do
+      collection do
+        get :search
+      end
+    end
+
     resources :suppliers do
-      get :shared_suppliers, on: :collection
+      get :remote_articles
+      resource :share, only: %i[create destroy], controller: :supplier_shares
 
       resources :deliveries do
         collection do
@@ -131,12 +138,13 @@ Rails.application.routes.draw do
         collection do
           post :update_selected
           get :edit_all
+          get :prepare_units_migration
+          get :migrate_units
+          post :complete_units_migration
           post :update_all
           get :upload
           post :parse_upload
           post :create_from_upload
-          get :shared
-          get :import
           post :sync
           post :update_synchronized
         end
@@ -285,6 +293,10 @@ Rails.application.routes.draw do
         resources :order_articles, only: %i[index show]
         resources :group_order_articles
         resources :article_categories, only: %i[index show]
+
+        resources :shared_suppliers, param: :uuid, only: [] do
+          resources :articles, only: [:index]
+        end
       end
     end
 
@@ -293,4 +305,3 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end # End of /:foodcoop scope
 end
-# rubocop:enable Metrics/BlockLength

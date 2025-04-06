@@ -50,9 +50,7 @@
             %td= truncate article.origin, length: 15, tooltip: true
             %td= truncate article.manufacturer, length: 15, tooltip: true
             %td
-              = article.unit
-              - if article.unit_quantity > 1
-                %span{style: 'color: grey'} &times; #{article.unit_quantity}#{pkg_helper_icon}
+              = format_supplier_order_unit_with_ratios(article)
           %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
     %tr
       %td

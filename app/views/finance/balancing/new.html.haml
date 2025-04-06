@@ -1,3 +1,4 @@
+= render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
 - content_for :javascript do
   :javascript
     $(function() {
@@ -11,7 +12,7 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
-      
+
       $(document).on('OrderArticle#create', function(e) {
         $.ajax({
           url: '#{new_on_order_article_create_finance_order_path(@order)}',
@@ -20,6 +21,12 @@
           contentType: 'application/json; charset=UTF-8'
         });
       });
+
+      $('*[name="group_order_article[result]"]').each((_, field) => $(field).unitConversionField({
+        units: unitsData,
+        popoverTemplate$: $('#unit_conversion_popover_content_template'),
+        useTargetUnitForStep: false
+      }));
     });
 = render 'shared/articles_by/common', order: @order
 
@@ -40,7 +47,7 @@
       - unless @order.note.blank?
         = simple_format @order.note
       - else
-        %p= t('.comment_on_transaction') 
+        %p= t('.comment_on_transaction')
     = link_to t('.edit_note'), edit_note_finance_order_path(@order), remote: true
 
   .well.well-small

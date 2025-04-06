@@ -10,6 +10,7 @@ class OrderByArticles < OrderPdf
 
   def body
     each_order_article do |order_article|
+      article_version = order_article.article_version
       dimrows = []
       rows = [[
         GroupOrder.human_attribute_name(:ordergroup),
@@ -21,13 +22,16 @@ class OrderByArticles < OrderPdf
       each_group_order_article_for_order_article(order_article) do |goa|
         dimrows << rows.length if goa.result == 0
         rows << [goa.group_order.ordergroup_name,
-                 group_order_article_quantity_with_tolerance(goa),
-                 goa.result,
+                 billing_quantity_with_tolerance(goa),
+                 number_with_precision(article_version.convert_quantity(goa.result, article_version.group_order_unit,
+                                                  article_version.billing_unit)),
                  number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1
 
-      name = "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.fc_price)})"
+      name = "#{article_version.name}, #{format_billing_unit_with_ratios(article_version)}, #{number_to_currency(article_version.convert_quantity(
+                                                                                                                   article_version.fc_price, article_version.billing_unit, article_version.supplier_order_unit
+                                                                                                                 ))}"
       name += " #{order_article.order.name}" if @options[:show_supplier]
       nice_table name, rows, dimrows do |table|
         table.column(0).width = bounds.width / 2

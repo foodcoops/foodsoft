@@ -1,14 +1,14 @@
 $('div.container-fluid').prepend(
-  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @order_article.article.name)})) %>'
+  '<%= j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.notice', :name => @order_article.article_version.name)})) %>'
 );
 
 (function() {
   $('.ordered-articles tr').removeClass('success');
-  
+
   var article_for_adding = $(
     '<%= j(render(:partial => 'edit_amount', :locals => {:order_article => @order_article})) %>'
   ).addClass('success');
-  
+
   $('.ordered-articles tbody').append(article_for_adding);
   updateSort('.ordered-articles');
 

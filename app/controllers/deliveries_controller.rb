@@ -7,7 +7,7 @@ class DeliveriesController < ApplicationController
 
   def show
     @delivery = Delivery.find(params[:id])
-    @stock_changes = @delivery.stock_changes.includes(:stock_article).order('articles.name ASC')
+    @stock_changes = @delivery.stock_changes.includes(stock_article: :latest_article_version).order('article_versions.name ASC')
   end
 
   def new

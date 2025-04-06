@@ -4,11 +4,17 @@
   $('#order_article_<%= @order_article.id %>').html(
     '<%= j render('finance/balancing/order_article', order_article: @order_article) %>'
   );
-  
+
   $('#group_order_articles_<%= @order_article.id %>').html(
     '<%= j render('finance/balancing/group_order_articles', order_article: @order_article) %>'
   );
-  
+
   $('#summaryChangedWarning').show();
+
+  $('#group_order_articles_<%= @order_article.id %> *[name="group_order_article[result]"]').each((_, field) => $(field).unitConversionField({
+    units: unitsData,
+    popoverTemplate$: $('#unit_conversion_popover_content_template'),
+    useTargetUnitForStep: false
+  }));
 })(window);
 

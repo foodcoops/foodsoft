@@ -40,8 +40,8 @@ class MultipleOrdersByArticles < OrderPdf
                sum[:quantity],
                nil] # number_to_currency(sum[:price])]
 
-      text "<b>#{order_article.article.name}</b> " +
-           "(#{order_article.article.unit}; #{number_to_currency order_article.price.fc_price}; " +
+      text "<b>#{order_article.article_version.name}</b> " +
+           "(#{order_article.article_version.unit}; #{number_to_currency order_article.article_version.fc_price}; " +
            units_history_line(order_article, plain: true) + ')',
            size: fontsize(10), inline_format: true
       table rows, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
@@ -76,7 +76,7 @@ class MultipleOrdersByArticles < OrderPdf
     OrderArticle.where(order_id: order).ordered
                 .includes(:article).references(:article)
                 .reorder('order_articles.order_id, articles.name')
-                .preload(:article_price) # preload not join, just in case it went missing
+                .preload(:article_version) # preload not join, just in case it went missing
                 .preload(:order, group_order_articles: { group_order: :ordergroup })
   end
 

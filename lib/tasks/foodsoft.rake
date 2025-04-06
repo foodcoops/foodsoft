@@ -1,6 +1,6 @@
 # put in here all foodsoft tasks
 # => :environment loads the environment an gives easy access to the application
-namespace :foodsoft do # rubocop:disable Metrics/BlockLength
+namespace :foodsoft do
   desc 'Finish ended orders'
   task finish_ended_orders: :environment do
     Order.finish_ended!

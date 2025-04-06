@@ -16,29 +16,31 @@
       = text_field_tag :query, params[:query], class: 'input-medium search-query',
         placeholder: t('.search_placeholder')
 
-    - if @supplier.shared_supplier
+    - unless @supplier.supplier_remote_source.blank?
       .btn-group
         - if @supplier.shared_sync_method == 'import'
           = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
         = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
 
     .btn-group
-      = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' unless @supplier.shared_supplier}"
+      = link_to t('.migrate_units') + '...', prepare_units_migration_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?
+    .btn-group
+      = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' if @supplier.supplier_remote_source.nil?}"
       = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn'
       = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn'
       = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn'
       - if current_user.role_orders?
         = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn'
 
-- unless @supplier.shared_supplier.nil?
+- unless @supplier.supplier_remote_source.blank?
   #import.well.well-small(style="display:none;")
-    = form_tag shared_supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
+    = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
       'data-submit-onchange' => true do
       %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em;'}= t('.import.title') + ' '
-      = text_field_tag "name_cont_all_joined", "", class: 'input-medium search-query',
+      = text_field_tag "name", "", class: 'input-medium search-query',
         placeholder: t('.import.placeholder')
       %label.checkbox
-        = check_box_tag "q[origin_eq]", "REG", false
+        = check_box_tag "origin", "REG", false
         = t '.import.restrict_region'
       .pull-right{style: 'line-height: 40px'}
         = label_tag :article_category_id, t('.import.category')
@@ -63,12 +65,4 @@
         // select category when form is shown, to avoid errors
         $('#import #article_category_id').val('');
       }
-    });
-    // propagate category select to article import
-    // XXX quite a url hack
-    $(document).on('touchclick', '#import .actions a[href]', function() {
-      var category_id = $('#import #article_category_id').children(':selected').val();
-      var url = $(this).attr('href');
-      url = url.replace(/(&article_category_id=[0-9]*)?$/, '&article_category_id='+category_id);
-      $(this).attr('href', url);
     });

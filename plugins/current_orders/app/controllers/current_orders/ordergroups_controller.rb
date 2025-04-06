@@ -36,13 +36,12 @@ class CurrentOrders::OrdergroupsController < ApplicationController
     @ordergroup = Ordergroup.find(params[:id]) unless params[:id].nil?
     return if @ordergroup.nil?
 
-    @goas = GroupOrderArticle.includes(:group_order, order_article: %i[article article_price])
-                             .where(group_orders: { order_id: @order_ids,
-                                                    ordergroup_id: @ordergroup.id }).ordered.all
+    @goas = GroupOrderArticle.includes(:group_order, order_article: %i[article article_version])
+                             .where(group_orders: { order_id: @order_ids, ordergroup_id: @ordergroup.id }).ordered.all
   end
 
   helper_method \
     def articles_for_adding
-    OrderArticle.includes(:article, :article_price).where(order_id: @order_ids)
+    OrderArticle.includes(:article, :article_version).where(order_id: @order_ids)
   end
 end

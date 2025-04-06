@@ -24,7 +24,7 @@ describe GroupOrderArticle do
 
   describe do
     let(:article) { create(:article, supplier: order.supplier, unit_quantity: 1) }
-    let(:oa) { order.order_articles.create(article: article) }
+    let(:oa) { order.order_articles.create(article_version: article.latest_article_version) }
     let(:goa) { create(:group_order_article, group_order: go, order_article: oa) }
 
     it 'can be ordered by piece' do
@@ -65,7 +65,7 @@ describe GroupOrderArticle do
 
   describe 'distribution strategy' do
     let(:article) { create(:article, supplier: order.supplier, unit_quantity: 1) }
-    let(:oa) { order.order_articles.create(article: article) }
+    let(:oa) { order.order_articles.create(article_version: article.latest_article_version) }
     let(:goa) { create(:group_order_article, group_order: go, order_article: oa) }
     let!(:goaq) { create(:group_order_article_quantity, group_order_article: goa, quantity: 4, tolerance: 6) }
 

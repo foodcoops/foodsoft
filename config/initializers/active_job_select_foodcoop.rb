@@ -10,9 +10,24 @@ module FoodsoftActiveJobArguments
       end
 
       def deserialize(arguments)
-        FoodsoftConfig.select_multifoodcoop arguments.shift
+        FoodsoftConfig.select_multifoodcoop arguments[0]
         orig_deserialize(arguments)
       end
+    end
+  end
+end
+
+module ActiveJob
+  module Execution
+    # Store the original `_perform_job` method
+    original_perform_job = instance_method(:_perform_job)
+
+    # Override the `_perform_job` method
+    define_method(:_perform_job) do
+      foodsoft_scope = @arguments.shift
+      FoodsoftConfig.select_foodcoop foodsoft_scope if FoodsoftConfig[:multi_coop_install]
+      # Call the original `_perform_job` method
+      original_perform_job.bind(self).call
     end
   end
 end

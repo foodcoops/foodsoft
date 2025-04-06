@@ -1,0 +1,22 @@
+:plain
+  $('#search_results').html("#{j(render("import_search_results"))}");
+  const remoteArticleData = #{raw(@articles.to_json)};
+  $("#search_results .article_import_btn").click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const index = $(this).data('index');
+    const article = remoteArticleData[index];
+    const categoryId = $('#import #article_category_id').children(':selected').val();
+    if (categoryId !== '') {
+      article.article_category_id = categoryId;
+    }
+    article.article_unit_ratios_attributes = article.article_unit_ratios;
+    delete article.article_unit_ratios;
+    delete article.created_at;
+    delete article.updated_at;
+    $.post($(this).attr('href'), {article_version: article},
+        function(result) {
+            alter('success', result);
+        }
+    );
+  });

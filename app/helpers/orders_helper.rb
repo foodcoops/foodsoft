@@ -23,21 +23,50 @@ module OrdersHelper
     options_for_select(options)
   end
 
+  def format_units_to_order(order_article, strip_insignificant_zeros: false)
+    format_amount(order_article.units_to_order, order_article, strip_insignificant_zeros: strip_insignificant_zeros)
+  end
+
   # "1×2 ordered, 2×2 billed, 2×2 received"
   def units_history_line(order_article, options = {})
     if order_article.order.open?
       nil
     else
       units_info = []
+      price = order_article.price
       %i[units_to_order units_billed units_received].map do |unit|
         next unless n = order_article.send(unit)
 
-        line = n.to_s + ' '
-        line += pkg_helper(order_article.price, options) + ' ' unless n == 0
-        line += OrderArticle.human_attribute_name("#{unit}_short", count: n)
+        converted_quantity = price.convert_quantity(n, price.supplier_order_unit, options[:unit].presence || price.supplier_order_unit)
+        line = converted_quantity.round(3).to_s + ' '
+        line += pkg_helper(price, options) + ' ' unless n == 0
+        line += OrderArticle.human_attribute_name("#{unit}_short", count: converted_quantity)
         units_info << line
       end
       units_info.join(', ').html_safe
+    end
+  end
+
+  def ordered_quantities_different_from_group_orders?(order_article, ordered_mark = '!', billed_mark = '?',
+                                                      received_mark = '?')
+    price = order_article.price
+    group_orders_sum_quantity = order_article.group_orders_sum[:quantity]
+    if !order_article.units_received.nil?
+      if price.convert_quantity(order_article.units_received, price.supplier_order_unit,
+                                price.group_order_unit).round(3) == group_orders_sum_quantity
+        false
+      else
+        received_mark
+      end
+    elsif !order_article.units_billed.nil?
+      order_article.units_billed == group_orders_sum_quantity ? false : billed_mark
+    elsif !order_article.units_to_order.nil?
+      if price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
+                                price.group_order_unit).round(3) == group_orders_sum_quantity
+        false
+      else
+        ordered_mark
+      end
     end
   end
 
@@ -48,9 +77,20 @@ module OrdersHelper
   #   Sensible in tables with multiple columns.
   # @return [String] Text showing unit and unit quantity when applicable.
   def pkg_helper(article, options = {})
-    return '' if !article || article.unit_quantity == 1
+    unit_code = options[:unit] || article.supplier_order_unit
+    if unit_code == article.supplier_order_unit
+      first_ratio = article&.article_unit_ratios&.first
+      if first_ratio.nil? || first_ratio.quantity == 1
+        return "x #{article.unit}" if unit_code.nil?
 
-    uq_text = "× #{article.unit_quantity}"
+        return ArticleUnitsLib.human_readable_unit(unit_code)
+      end
+
+      uq_text = "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
+    else
+      uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
+    end
+
     uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
     if options[:plain]
       uq_text
@@ -73,36 +113,55 @@ module OrdersHelper
     content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
 
-  def article_price_change_hint(order_article, gross = false)
-    return nil if order_article.article.price == order_article.price.price
+  def article_version_change_hint(order_article, gross = false)
+    return nil if order_article.article_version.price == order_article.article_version.price
 
-    title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article.price}"
-    title += " / #{number_to_currency order_article.article.gross_price}" if gross
+    title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article_version.price}"
+    title += " / #{number_to_currency order_article.article_version.gross_price}" if gross
     content_tag(:i, nil, class: 'icon-asterisk', title: j(title)).html_safe
   end
 
   def receive_input_field(form)
     order_article = form.object
-    units_expected = (order_article.units_billed || order_article.units_to_order) *
-                     1.0 * order_article.article.unit_quantity / order_article.article_price.unit_quantity
+    price = order_article.article_version
+    quantity = order_article.units_billed || order_article.units_to_order
+    # units_expected = (order_article.units_billed || order_article.units_to_order) *
+    #                  1.0 * order_article.article_version.unit_quantity / order_article.article_version.unit_quantity
+    units_expected = price.convert_quantity(quantity, price.supplier_order_unit, price.billing_unit)
 
     input_classes = 'input input-nano units_received'
-    input_classes += ' package' unless order_article.article_price.unit_quantity == 1
+    input_classes += ' package' unless price.unit_quantity == 1 || price.supplier_order_unit != price.billing_unit
+    data = { units_expected: units_expected, billing_unit: price.billing_unit }
+    data.merge!(ratio_quantity_data(order_article, price.billing_unit))
     input_html = form.text_field :units_received, class: input_classes,
-                                                  data: { 'units-expected' => units_expected },
+                                                  data: data,
                                                   disabled: order_article.result_manually_changed?,
                                                   autocomplete: 'off'
+    span_html = if order_article.result_manually_changed?
+                  content_tag(:span, class: 'input-prepend input-append intable',
+                                     title: t('orders.edit_amount.field_locked_title', default: '')) do
+                    button_tag(nil, type: :button, class: 'btn unlocker') {
+                      content_tag(:i, nil, class: 'icon icon-unlock')
+                    } + input_html
+                  end
+                else
+                  content_tag(:span, class: 'input-append intable') { input_html }
+                end
 
-    if order_article.result_manually_changed?
-      input_html = content_tag(:span, class: 'input-prepend intable',
-                                      title: t('orders.edit_amount.field_locked_title', default: '')) do
-        button_tag(nil, type: :button, class: 'btn unlocker') {
-          content_tag(:i, nil, class: 'icon icon-unlock')
-        } + input_html
-      end
+    span_html.html_safe
+  end
+
+  def ratio_quantity_data(order_article, default_unit = nil)
+    data = {}
+    data['supplier-order-unit'] = order_article.article_version.supplier_order_unit
+    data['default-unit'] = default_unit
+    data['custom-unit'] = order_article.article_version.unit
+    order_article.article_version.article_unit_ratios.each_with_index do |ratio, index|
+      data["ratio-quantity-#{index}"] = ratio.quantity
+      data["ratio-unit-#{index}"] = ratio.unit
     end
 
-    input_html.html_safe
+    data
   end
 
   # @param order [Order]
@@ -154,5 +213,12 @@ module OrdersHelper
       link_to t('orders.index.action_receive'), receive_order_path(order),
               class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
     end
+  end
+
+  private
+
+  def format_amount(amount, order_article, strip_insignificant_zeros: false)
+    strip_insignificant_zeros = true unless order_article.article_version.supplier_order_unit_is_si_convertible
+    number_with_precision(amount, precision: 3, strip_insignificant_zeros: strip_insignificant_zeros)
   end
 end

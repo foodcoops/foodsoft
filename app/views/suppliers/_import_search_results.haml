@@ -1,0 +1,29 @@
+- if @articles.empty?
+  %p= t '.not_found'
+- else
+  = pagination_links_remote @pagination
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= heading_helper Article, :name
+        %th= heading_helper Article, :origin
+        %th= heading_helper Article, :manufacturer
+        %th= heading_helper Article, :note
+        %th{:style => "width:4em"}= heading_helper Article, :price
+        %th= heading_helper Article, :supplier_order_unit
+        %th
+    %tbody
+      - @articles.each_with_index do |article, index|
+        %tr
+          %td= highlight article[:name], params.fetch(:name, '').split(' ')
+          %td= article[:origin]
+          %td= article[:manufacturer]
+          %td{title: article[:note]}= truncate(article[:note], length: 11)
+          %td= number_to_currency(article[:price])
+          %td= ArticleUnitsLib.get_translated_name_for_code(article[:supplier_order_unit])
+          %td.actions.import-actions{:data => {order_number: article[:order_number]}}
+            - article_exists = @supplier.articles.includes(:latest_article_version).undeleted.where(article_versions: {order_number: article[:order_number]}).exists?
+            %i.icon-ok{:style => article_exists ? '' : 'display:none;'}= t '.already_imported'
+            = link_to t('.action_import'), supplier_articles_path(@supplier),
+              remote: true, class: 'btn btn-small btn-success article_import_btn', data: {index: index},
+              style: article_exists ? 'display:none;' : ''

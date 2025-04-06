@@ -1,0 +1,2 @@
+$('div.container-fluid').prepend('#{j(render(:partial => 'shared/alert_success', :locals => {:alert_message => t('.success', name: @available_units[@article_unit.unit][:name])}))}')
+$('a[data-for-unit="#{@article_unit.unit}"]').replaceWith('#{j(render(partial: "destroy_link", locals: {article_unit: @article_unit}))}')
