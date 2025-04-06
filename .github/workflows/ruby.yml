@@ -58,6 +58,6 @@ jobs:
           DATABASE_URL: mysql2://user:password@127.0.0.1/test
           RAILS_ENV: test
       - name: Upload coverage report to Coveralls
-        uses: coverallsapp/github-action@v1.1.2
+        uses: coverallsapp/github-action@v2.3.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
