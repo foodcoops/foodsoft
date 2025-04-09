@@ -613,6 +613,7 @@ de:
       options:
         convert_units: Derzeitige Einheiten beibehalten, berechne Mengeneinheit und Preis (wie Synchronisieren).
         outlist_absent: Artikel löschen, die nicht in der hochgeladenen Datei sind.
+        activate_unit_migration: "Einheitenmigration erneut freischalten."
       sample:
         juices: Säfte
         nuts: Nüsse
