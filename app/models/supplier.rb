@@ -126,7 +126,7 @@ class Supplier < ApplicationRecord
       article = articles.includes(:latest_article_version).undeleted.where(article_versions: { order_number: new_attrs[:order_number] }).first
       new_article = foodsoft_file_attrs_to_article(new_attrs)
 
-      if new_attrs[:availability]
+      if new_attrs[:availability] || !(options[:delete_unavailable])
         if article.nil?
           new_articles << new_article
         else
