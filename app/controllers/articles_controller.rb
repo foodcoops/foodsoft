@@ -252,6 +252,7 @@ class ArticlesController < ApplicationController
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
     options = { filename: uploaded_file.original_filename }
+    options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @supplier.update_attribute(:unit_migration_completed, nil) if params[:articles]['activate_unit_migration'] == '1'
