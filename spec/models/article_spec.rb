@@ -89,6 +89,20 @@ describe Article do
       expect(new_unit_quantity).to eq 1.5
       expect(new_price).to eq 120
     end
+
+    it 'does not exceed limits when converting from 100ml to 0.1ml' do
+      article_version_copy1 = article.latest_article_version.dup
+      article1 = build(:article, supplier: supplier, latest_article_version: article_version_copy1)
+      article_version_copy1.unit = '0.1ml'
+
+      article_version_copy2 = article.latest_article_version.dup
+      article2 = build(:article, supplier: supplier, latest_article_version: article_version_copy2)
+      article_version_copy2.unit = '100ml'
+      _, new_unit_quantity = article1.convert_units(article2)
+      expect(new_unit_quantity).to eq 1000
+      _, new_unit_quantity2 = article2.convert_units(article1)
+      expect(new_unit_quantity2).to eq 0.001
+    end
   end
 
   it 'computes changed article attributes' do
