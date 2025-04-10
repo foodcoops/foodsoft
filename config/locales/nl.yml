@@ -631,7 +631,9 @@ nl:
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
+      use_financial_links: Als actief, optie om financiële link te maken wordt getoond, waarbij financiële transacties, facturen en banktransacties worden gegroepeerd. Ook de optie om foodcoop transacties aan te makenm wordt getoond. Dit betreft transacties die niet aan een ordergroep zijn verbonden maar dienen als grootboek regels.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      profile_data_public_by_default: Wanneer een nieuwe gebruiker wordt aangemaakt, worden de privacy opties "Telefoonnummer / E-mail / Naam is zichtbaar voor andere leden", standaard geactiveerd. Als de "Bijnaam" optie niet actief is, wordt de "Naam" altijd getoond.
       use_self_service: Wanneer dit aan staat, kan iedereen zelf financiële transacties toevoegen.
       webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
@@ -928,6 +930,8 @@ nl:
         new_financial_transaction: Nieuwe financiële transactie
         title: Financiële link %{number}
         type: Type
+        remove_from_link: Verwijder link
+        remove_from_link_confirm: De transactie zelf wordt niet verwijderd, alleen de link. Wil je doorgaan?
     financial_transactions:
       controller:
         create:
@@ -943,6 +947,7 @@ nl:
         last_updated_at: "(laatst bijgewerkt %{when} geleden)"
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
+        title_foodcoop: Foodcoop rekeningoverzicht
       index_collection:
         show_groups: Tegoeden
         title: Financiële transacties
@@ -1061,7 +1066,7 @@ nl:
       search_article: Artikelen zoeken...
       sum_amount: Huidig totaalbedrag
       title: Bestellen
-      total_sum_amount: Totalbedrag
+      total_sum_amount: Totaalbedrag
       total_tolerance: Totale tolerantie
       units: Eenheden
       units_full: Volle eenheden
