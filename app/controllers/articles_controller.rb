@@ -311,8 +311,8 @@ class ArticlesController < ApplicationController
 
         a.latest_article_version.article_unit_ratios.clear
         a.latest_article_version.assign_attributes(current_params)
-        a.save
-      end or has_error = true
+        a.save or (has_error = true)
+      end
       # Add new articles
       @new_articles.each { |a| a.save or has_error = true }
 
