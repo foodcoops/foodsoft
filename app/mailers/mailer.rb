@@ -149,9 +149,10 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now
     message = yield
-    message.deliver_now
+    message.deliver_now!
   rescue StandardError => e
     MailDeliveryStatus.create email: message.to[0], message: e.message
+    raise StandardError, e.message
   end
 
   # separate method to allow plugins to mess with the attachments
