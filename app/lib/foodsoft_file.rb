@@ -26,7 +26,7 @@ class FoodsoftFile
                   article_category: row[15],
                   origin: row[16],
                   manufacturer: row[17],
-                  id: row[18]}
+                  id: row[18] }
       articles << article
     end
 
