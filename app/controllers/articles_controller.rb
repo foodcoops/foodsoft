@@ -305,8 +305,8 @@ class ArticlesController < ApplicationController
         has_error = true
       end
       # Update articles
-      @updated_articles.each_with_index do |a, index|
-        current_params = params[:articles][index.to_s]
+      @updated_articles.each do |a|
+        current_params = params[:articles].values.detect { |p| p[:id] == a.latest_article_version.id.to_s }
         current_params.delete(:id)
 
         a.latest_article_version.article_unit_ratios.clear
