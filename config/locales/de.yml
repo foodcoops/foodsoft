@@ -12,6 +12,7 @@ de:
         fc_share: FoodCoop-Aufschlag
         fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
+        id: Foodsoft-ID
         manufacturer: Produzent
         name: Name
         note: Notiz
