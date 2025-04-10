@@ -12,6 +12,7 @@ en:
         fc_share: FoodCoop margin
         fc_share_short: FC margin
         gross_price: Gross price
+        id: Foodsoft id
         manufacturer: Manufacturer
         name: Name
         note: Note
