@@ -262,7 +262,7 @@ class ArticlesController < ApplicationController
 
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier),
-                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data[:articles].length)
+                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data.length)
     end
     @ignored_article_count = 0
   rescue StandardError => e
