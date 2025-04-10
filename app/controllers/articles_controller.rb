@@ -115,7 +115,7 @@ class ArticlesController < ApplicationController
     @samples = []
 
     Article.transaction do
-      params[:samples].values.each do |sample|
+      params[:samples]&.values&.each do |sample|
         next unless sample[:apply_migration] == '1'
 
         original_unit = nil
