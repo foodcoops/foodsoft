@@ -115,7 +115,7 @@ class ArticlesController < ApplicationController
     @samples = []
 
     Article.transaction do
-      params[:samples].values.each do |sample|
+      params[:samples]&.values&.each do |sample|
         next unless sample[:apply_migration] == '1'
 
         original_unit = nil
@@ -252,8 +252,10 @@ class ArticlesController < ApplicationController
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
     options = { filename: uploaded_file.original_filename }
+    options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
+    @supplier.update_attribute(:unit_migration_completed, nil) if params[:articles]['activate_unit_migration'] == '1'
     @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_file(uploaded_file.tempfile,
                                                                                                        options)
 
@@ -262,7 +264,7 @@ class ArticlesController < ApplicationController
 
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier),
-                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data[:articles].length)
+                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data.length)
     end
     @ignored_article_count = 0
   rescue StandardError => e
@@ -305,14 +307,14 @@ class ArticlesController < ApplicationController
         has_error = true
       end
       # Update articles
-      @updated_articles.each_with_index do |a, index|
-        current_params = params[:articles][index.to_s]
+      @updated_articles.each do |a|
+        current_params = params[:articles].values.detect { |p| p[:id] == a.latest_article_version.id.to_s }
         current_params.delete(:id)
 
         a.latest_article_version.article_unit_ratios.clear
         a.latest_article_version.assign_attributes(current_params)
-        a.save
-      end or has_error = true
+        a.save or (has_error = true)
+      end
       # Add new articles
       @new_articles.each { |a| a.save or has_error = true }
 
