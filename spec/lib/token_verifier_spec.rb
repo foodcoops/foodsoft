@@ -1,17 +1,17 @@
 require_relative '../spec_helper'
 
 describe TokenVerifier do
-  let (:prefix) { 'xyz' }
-  let (:v) { TokenVerifier.new(prefix) }
-  let (:msg) { v.generate }
+  let(:prefix) { 'xyz' }
+  let(:v) { TokenVerifier.new(prefix) }
+  let(:msg) { v.generate }
 
   it 'validates' do
-    expect{ v.verify(msg) }.to_not raise_error
+    expect { v.verify(msg) }.not_to raise_error
   end
 
   it 'validates when recreated' do
     v2 = TokenVerifier.new(prefix)
-    expect{ v2.verify(msg) }.to_not raise_error
+    expect { v2.verify(msg) }.not_to raise_error
   end
 
   it 'does not validate with a different prefix' do
@@ -25,20 +25,21 @@ describe TokenVerifier do
     begin
       FoodsoftConfig.scope = Faker::Lorem.words(number: 1)
       v2 = TokenVerifier.new(prefix)
-      expect{ v2.verify(msg) }.to raise_error(TokenVerifier::InvalidScope)
+      expect { v2.verify(msg) }.to raise_error(TokenVerifier::InvalidScope)
     ensure
       FoodsoftConfig.scope = oldscope
     end
   end
 
   it 'does not validate a random string' do
-    expect{ v.verify(Faker::Lorem.characters(number: 100)) }.to raise_error(ActiveSupport::MessageVerifier::InvalidSignature)
+    expect do
+      v.verify(Faker::Lorem.characters(number: 100))
+    end.to raise_error(ActiveSupport::MessageVerifier::InvalidSignature)
   end
 
   it 'returns the message' do
-    data = [5, {'hi' => :there}, 'bye', []]
+    data = [5, { 'hi' => :there }, 'bye', []]
     msg = v.generate(data)
     expect(v.verify(msg)).to eq data
   end
-
 end

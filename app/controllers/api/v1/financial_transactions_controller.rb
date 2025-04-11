@@ -1,7 +1,7 @@
 class Api::V1::FinancialTransactionsController < Api::V1::BaseController
   include Concerns::CollectionScope
 
-  before_action ->{ doorkeeper_authorize! 'finance:read', 'finance:write' }
+  before_action -> { doorkeeper_authorize! 'finance:read', 'finance:write' }
 
   def index
     render_collection search_scope
@@ -14,11 +14,10 @@ class Api::V1::FinancialTransactionsController < Api::V1::BaseController
   private
 
   def scope
-    FinancialTransaction.includes(:user)
+    FinancialTransaction.includes(:user, :financial_transaction_type)
   end
 
   def ransack_auth_object
     :finance
   end
-
 end

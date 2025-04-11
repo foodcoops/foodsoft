@@ -1,0 +1,5 @@
+# Fixes line endings for Windows (Docker) environment, which are by default converted to crlf
+* text=auto
+*.sh text eol=lf
+proc-start text eol=lf
+Rakefile text eol=lf

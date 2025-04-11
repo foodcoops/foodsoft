@@ -2,7 +2,7 @@
 
 The recommended way to run Foodsoft in production is using docker. Alternative options are
 discussed [in the wiki](https://github.com/foodcoops/foodsoft/wiki/Deployment-notes). If you
-have any questions, please contact the mailing list [foodsoft-discuss](http://foodsoft.51229.x6.nabble.com/foodsoft-discuss-f5.html).
+have any questions, please have a look at the [forum](https://forum.foodsoft.net).
 
 ## Docker
 
@@ -50,7 +50,7 @@ To run the worker (recommended!), supply a different command
       foodsoft:latest  ./proc-start worker
 
 To also run the cronjobs, start the previous command but substituting
-`mail` with `cron`. That should give you the ingredients for a production-setup.
+`worker` with `cron`. That should give you the ingredients for a production-setup.
 With the help of a front-end webserver doing ssl, of course.
 
 

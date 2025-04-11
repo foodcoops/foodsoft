@@ -1,0 +1,14 @@
+= simple_form_for @financial_transaction, url: create_financial_transaction_finance_link_path(@financial_link),
+  :validate => true do |f|
+  .modal-header
+    = close_button :modal
+    %h3= t('.title')
+  .modal-body
+    - if FinancialTransactionType.has_multiple_types
+      = f.association :financial_transaction_type, include_blank: false
+    = f.input :amount
+    = f.association :ordergroup, collection: Ordergroup.undeleted.order(:name)
+    = f.input :note, :as => :text
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'

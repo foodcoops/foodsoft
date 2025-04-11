@@ -1,0 +1,12 @@
+= yield
+\
+%hr
+%ul
+  %li
+    %a{href: root_url} Foodsoft
+  - if FoodsoftConfig[:homepage]
+    %li
+      %a{href: FoodsoftConfig[:homepage]} Foodcoop
+  - if FoodsoftConfig[:help_url]
+    %li
+      %a{href: FoodsoftConfig[:help_url]}= t '.help'

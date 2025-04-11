@@ -9,7 +9,7 @@
     - @bank_accounts.each do |bank_account|
       %tr
         %td= bank_account.name
-        %td= bank_account.iban
+        %td= format_iban bank_account.iban
         %td= truncate bank_account.description, length: 50
         %td
           = link_to t('ui.edit'), edit_admin_bank_account_path(bank_account), remote: true, class: 'btn btn-mini'

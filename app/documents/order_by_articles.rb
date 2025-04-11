@@ -1,13 +1,11 @@
-# encoding: utf-8
 class OrderByArticles < OrderPdf
-
   def filename
-    I18n.t('documents.order_by_articles.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_by_articles.filename', name: order.name, date: order.ends.to_date) + '.pdf'
   end
 
   def title
-    I18n.t('documents.order_by_articles.title', :name => order.name,
-      :date => order.ends.strftime(I18n.t('date.formats.default')))
+    I18n.t('documents.order_by_articles.title', name: order.name,
+                                                date: order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
@@ -30,7 +28,7 @@ class OrderByArticles < OrderPdf
       next unless rows.length > 1
 
       name = "#{order_article.article.name} (#{order_article.article.unit} | #{order_article.price.unit_quantity} | #{number_to_currency(order_article.price.fc_price)})"
-      name += " #{order_article.article.supplier.name}" if @options[:show_supplier]
+      name += " #{order_article.order.name}" if @options[:show_supplier]
       nice_table name, rows, dimrows do |table|
         table.column(0).width = bounds.width / 2
         table.columns(1..-1).align = :right

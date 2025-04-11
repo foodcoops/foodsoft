@@ -2,7 +2,12 @@
 
 - content_for :actionbar do
   = link_to t('.add_bank_transaction'), index_bank_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
-  = link_to t('.add_financial_transaction'), index_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
+  .btn-group
+    = link_to t('.add_financial_transaction'), index_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to t('.new_financial_transaction'), new_financial_transaction_finance_link_path(@financial_link), remote: true
   = link_to t('.add_invoice'), index_invoice_finance_link_path(@financial_link), remote: true, class: 'btn'
 
 %table.table.table-striped

@@ -1,59 +1,9 @@
 require_relative '../spec_helper'
 
 describe FoodsoftMailReceiver do
-
   before :all do
-    @server = FoodsoftMailReceiver.new 2525, '127.0.0.1', 4, logger_severity: 5
+    @server = FoodsoftMailReceiver.new(ports: '2525', hosts: '127.0.0.1', max_processings: 4, logger_severity: 5)
     @server.start
-  end
-
-  it 'does not accept empty addresses' do
-    begin
-      FoodsoftMailReceiver.received('', 'body')
-    rescue => error
-      expect(error.to_s).to include 'missing'
-    end
-  end
-
-  it 'does not accept invalid addresses' do
-    begin
-      FoodsoftMailReceiver.received('invalid', 'body')
-    rescue => error
-      expect(error.to_s).to include 'has an invalid format'
-    end
-  end
-
-  it 'does not accept invalid scope in address' do
-    begin
-      FoodsoftMailReceiver.received('invalid.invalid', 'body')
-    rescue => error
-      expect(error.to_s).to include 'could not be found'
-    end
-  end
-
-  it 'does not accept address without handler' do
-    begin
-      address = "#{FoodsoftConfig[:default_scope]}.invalid"
-      FoodsoftMailReceiver.received(address, 'body')
-    rescue => error
-      expect(error.to_s).to include 'invalid format for recipient'
-    end
-  end
-
-  it 'does not accept invalid addresses via SMTP' do
-    expect {
-      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
-        smtp.send_message 'body', 'from@example.com', 'invalid'
-      end
-    }.to raise_error(Net::SMTPFatalError)
-  end
-
-  it 'does not accept invalid addresses via SMTP' do
-    expect {
-      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
-        smtp.send_message 'body', 'from@example.com', 'invalid'
-      end
-    }.to raise_error(Net::SMTPFatalError)
   end
 
   # TODO: Reanable this test.
@@ -76,4 +26,44 @@ describe FoodsoftMailReceiver do
     @server.shutdown
   end
 
+  it 'does not accept empty addresses' do
+    FoodsoftMailReceiver.received('', 'body')
+  rescue StandardError => e
+    expect(e.to_s).to include 'missing'
+  end
+
+  it 'does not accept invalid addresses' do
+    FoodsoftMailReceiver.received('invalid', 'body')
+  rescue StandardError => e
+    expect(e.to_s).to include 'has an invalid format'
+  end
+
+  it 'does not accept invalid scope in address' do
+    FoodsoftMailReceiver.received('invalid.invalid', 'body')
+  rescue StandardError => e
+    expect(e.to_s).to include 'could not be found'
+  end
+
+  it 'does not accept address without handler' do
+    address = "#{FoodsoftConfig[:default_scope]}.invalid"
+    FoodsoftMailReceiver.received(address, 'body')
+  rescue StandardError => e
+    expect(e.to_s).to include 'invalid format for recipient'
+  end
+
+  it 'does not accept invalid addresses via SMTP' do
+    expect do
+      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
+        smtp.send_message 'body', 'from@example.com', 'invalid'
+      end
+    end.to raise_error(Net::SMTPFatalError)
+  end
+
+  it 'does not accept invalid addresses via SMTP' do
+    expect do
+      Net::SMTP.start(@server.hosts.first, @server.ports.first) do |smtp|
+        smtp.send_message 'body', 'from@example.com', 'invalid'
+      end
+    end.to raise_error(Net::SMTPFatalError)
+  end
 end

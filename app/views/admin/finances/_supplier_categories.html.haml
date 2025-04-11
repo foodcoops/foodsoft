@@ -1,0 +1,13 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= heading_helper SupplierCategory, :name
+      %th
+    %tbody
+      - @supplier_categories.each do |supplier_category|
+        %tr
+          %td= supplier_category.name
+          %td
+            = link_to t('ui.edit'), edit_admin_supplier_category_path(supplier_category), remote: true, class: 'btn btn-mini'
+            = link_to t('ui.delete'), [:admin, supplier_category], :method => :delete, :data => {:confirm => t('ui.confirm_delete', name: supplier_category.name)},
+            remote: true, class: 'btn btn-mini btn-danger'

@@ -17,6 +17,7 @@ de:
     wiki:
       all_pages: Alle Seiten
       home: Startseite
+      title: Wiki
   pages:
     all:
       new_page: Neue Seite anlegen
@@ -67,6 +68,7 @@ de:
         section_table: Tabellenformatierung
         see_tables: siehe %{tables_link}
         tables_link: Tabellen
+        text: Text
         title: Schnelle Formatierungshilfe
         unordered_list: Listen mit Punkten
         wiki_link_ex: Foodsoft Wiki Seite
@@ -94,9 +96,11 @@ de:
       description: Variablen geben Informationen wieder, die an anderer Stelle definiert wurden. Wenn Du die Variable benutzt, wird sie mit ihrem Wert ersetzt, wenn sie angezeigt wird. Foodsoft hat eine Reihe von vordefinierten Variablen, wie zum Beispiel Name und Adresse deiner Foodcoop, Softwareversion und die Anzahl der Mitglieder und Lieferanten. In der Tabelle unten sind alle Variablen aufgeführt. Du kannst diese in Wiki-Seiten und der Fusszeile (in den Einstellungen) nutzen.
       title: Foodsoft-Variablen
       value: Aktueller Wert
+      variable: Variable
     version:
       author: ! 'Autor: %{user}'
       date_format: ! '%a, %d.%m.%Y, %H:%M Uhr'
       revert: Auf diese Version zurücksetzen
       title: ! '%{title} - Version %{version}'
+      title_version: Version
       view_current: Aktuelle Version sehen

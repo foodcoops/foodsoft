@@ -19,6 +19,7 @@ es:
   documents:
     create:
       error: 'El documento no puede ser creado: %{error}'
+      not_allowed_mime: El tipo de archivo "%{mime}" no está permitido. Póngase en contacto con un administrador/a para incluirlo en la lista blanca.
       notice: Se ha creado el documento
     destroy:
       error: 'El documento no puede ser borrado: %{error}'
@@ -26,6 +27,14 @@ es:
       notice: Se ha borrado el documento
     form:
       new: Nuevo Documento
+      new_folder: Carpeta nueva
+      submit: Crear
     index:
       new: Sube nuevo documento
+      new_folder: Crear una nueva carpeta
       title: Documentos
+    move:
+      root_folder: Iniciar
+      title: Mover
+    update:
+      notice: Documento o carpeta fue movido

@@ -8,14 +8,20 @@
     - invoices_text = []
     %p
     - for invoice in invoices
+      - invoice_amount_diff = invoice.expected_amount - invoice.net_amount
       - invoices_sum += invoice.amount
       - invoices_text << invoice.number
       = link_to finance_invoice_path(invoice) do
         = format_date invoice.date
         = ' ' + invoice.number
       = ' ' + number_to_currency(invoice.amount)
-      - if invoice.attachment_data?
-        = link_to finance_invoice_attachment_path(invoice) do
+      - if invoice_amount_diff != 0
+        %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
+          = invoice_amount_diff > 0 ? '+' : '-'
+          = number_to_currency(invoice_amount_diff.abs)
+      - if invoice.attachments.attached?
+        - for attachment in invoice.attachments
+          = link_to attachment.filename, url_for(attachment)
           = glyph :download
       - if invoice.note?
         = '(' + invoice.note + ')'
@@ -23,7 +29,7 @@
     %p
       - if supplier.iban.present?
         %b= heading_helper(Supplier, :iban) + ':'
-        = supplier.iban
+        = format_iban supplier.iban
         %br/
       %b= t('.invoices_text') + ':'
       = invoices_text.join(', ')

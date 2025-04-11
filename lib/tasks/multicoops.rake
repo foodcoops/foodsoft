@@ -3,35 +3,30 @@
 # for each foodcoop is used.
 
 namespace :multicoops do
-
   desc 'Runs a specific rake task for each registered foodcoop, use rake multicoops:run TASK=db:migrate'
-  task :run => :environment do
-    task_to_run = ENV['TASK']
+  task run: :environment do
+    task_to_run = ENV.fetch('TASK', nil)
     last_error = nil
     FoodsoftConfig.each_coop do |coop|
-      begin
-        rake_say "Run '#{task_to_run}' for #{coop}"
-        Rake::Task[task_to_run].execute
-      rescue => error
-        last_error = error
-        ExceptionNotifier.notify_exception(error, data: {foodcoop: coop})
-      end
+      rake_say "Run '#{task_to_run}' for #{coop}"
+      Rake::Task[task_to_run].execute
+    rescue StandardError => e
+      last_error = e
+      ExceptionNotifier.notify_exception(e, data: { foodcoop: coop })
     end
     raise last_error if last_error
   end
 
   desc 'Runs a specific rake task for a single coop, use rake mutlicoops:run_single TASK=db:migrate FOODCOOP=demo'
-  task :run_single => :environment do
-    task_to_run = ENV['TASK']
-    FoodsoftConfig.select_foodcoop ENV['FOODCOOP']
-    rake_say "Run '#{task_to_run}' for #{ENV['FOODCOOP']}"
+  task run_single: :environment do
+    task_to_run = ENV.fetch('TASK', nil)
+    FoodsoftConfig.select_foodcoop ENV.fetch('FOODCOOP', nil)
+    rake_say "Run '#{task_to_run}' for #{ENV.fetch('FOODCOOP', nil)}"
     Rake::Task[task_to_run].execute
   end
-
 end
-
 
 # Helper
 def rake_say(message)
-    puts message unless Rake.application.options.silent
+  puts message unless Rake.application.options.silent
 end

@@ -5,20 +5,20 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Foodsoft::Application.config.secret_key_base = begin
-  if (token = ENV['SECRET_KEY_BASE']).present?
+  if (token = ENV.fetch('SECRET_KEY_BASE', nil)).present?
     token
   elsif Rails.env.production? || Rails.env.staging?
-    raise "You must set SECRET_KEY_BASE"
+    raise 'You must set SECRET_KEY_BASE'
   elsif Rails.env.test?
     SecureRandom.hex(30) # doesn't really matter
   else
-    sf = Rails.root.join('tmp', 'secret_key_base')
-    if File.exists?(sf)
+    sf = Rails.root.join('tmp/secret_key_base')
+    if File.exist?(sf)
       File.read(sf)
     else
       puts "=> Generating initial SECRET_KEY_BASE in #{sf}"
       token = SecureRandom.hex(30)
-      File.open(sf, 'w') { |f| f.write(token) }
+      File.write(sf, token)
       token
     end
   end

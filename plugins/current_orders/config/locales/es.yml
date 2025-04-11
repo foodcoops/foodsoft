@@ -1,5 +1,7 @@
 es:
   config:
+    hints:
+      use_current_orders: Activar el plugin de current_orders. Permite a los miembros con el permiso de la orden cambiar la cantidad de miembros en múltiples pedidos, usando tres nuevas pantallas en el menú de pedidos. Especialmente útil para los días de recogida.
     keys:
       use_current_orders: Pantallas extra de distribución
   current_orders:
@@ -23,6 +25,8 @@ es:
         piece: pieza
         unit: unidad
         add_new: Añade un grupo de pedido...
+      show:
+        title: ! '%{name}'
     navigation:
       receive: Recibe
       articles: Distribuye
@@ -40,6 +44,7 @@ es:
         title: Artículos por grupo de pedido
       payment_bar:
         account_balance: Balance de cuenta
+        new_pin: PIN
         new_transaction: Nueva transacción
         payment: ! 'Pago:'
       show:

@@ -36,9 +36,8 @@ class PrinterController < ApplicationController
     json = JSON.parse data, symbolize_names: true
     job = PrinterJob.unfinished.find_by_id(json[:id])
     return unless job
-    if json[:state]
-      job.add_update! json[:state], json[:message]
-    end
+
+    job.add_update! json[:state], json[:message] if json[:state]
     job.finish! if json[:finish]
   end
 
@@ -52,7 +51,7 @@ class PrinterController < ApplicationController
 
   def authenticate_printer
     return head(:unauthorized) unless bearer_token
-    return head(:forbidden) if bearer_token != FoodsoftConfig[:printer_token]
-  end
 
+    head(:forbidden) if bearer_token != FoodsoftConfig[:printer_token]
+  end
 end

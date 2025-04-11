@@ -1,5 +1,4 @@
 class Poll < ActiveRecord::Base
-
   # @!attribute required_ordergroup_custom_fields
   #   A list of custom_fileds, which are required to poll.
   #   If the required field on the ordergroup of the user
@@ -29,6 +28,7 @@ class Poll < ActiveRecord::Base
 
   def available_points
     return 0...0 if min_points.nil? || max_points.nil?
+
     min_points..max_points
   end
 

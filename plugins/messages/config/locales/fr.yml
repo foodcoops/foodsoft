@@ -67,6 +67,9 @@ fr:
         Répondre: %{reply_url}
         Afficher ce message dans ton navigateur: %{msg_url}
         Préférences des messages: %{profile_url}
+      reply: Répondre
+      see_message_online: Afficher ce message dans ton navigateur
+      messaging_options: Préférences des messages
   simple_form:
     labels:
       settings:

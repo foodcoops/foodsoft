@@ -35,9 +35,15 @@ en:
         unit_quantity: Unit quantity
       bank_account:
         balance: Balance
+        bank_gateway: Bank gateway
         description: Description
         iban: IBAN
         name: Name
+      bank_gateway:
+        authorization: Authorization-Header
+        name: Name
+        unattended_user: Unattended user
+        url: URL
       bank_transaction:
         amount: Amount
         date: Date
@@ -65,6 +71,7 @@ en:
         ordergroup: Ordergroup
         user: Entered by
       financial_transaction_class:
+        ignore_for_account_balance: Ignore for account balance
         name: Name
       financial_transaction_type:
         bank_account: Bank Account
@@ -90,7 +97,7 @@ en:
         created_by: Created by
         date: Billing date
         delete_attachment: Delete attachment
-        deliveries: Delivery
+        deliveries: Stock delivery
         deposit: Deposit charged
         deposit_credit: Deposit returned
         financial_link: Financial link
@@ -186,6 +193,11 @@ en:
         phone2: Phone 2
         shared_sync_method: How to synchronize
         url: Homepage
+      supplier_category:
+        name: Name
+        description: Description
+        financial_transaction_class: Financial transaction class
+        bank_account: Bank account
       task:
         created_by: Created by
         created_on: Created at
@@ -243,6 +255,8 @@ en:
     models:
       article: Article
       article_category: Category
+      bank_account: Bank account
+      bank_gateway: Bank gateway
       bank_transaction: Bank transaction
       delivery: Delivery
       financial_transaction: Financial transaction
@@ -258,6 +272,7 @@ en:
       stock_article: Stock article
       stock_taking: Stock taking
       supplier: Supplier
+      supplier_category: Supplier category
       task: Task
       user: User
       workgroup: Workgroup
@@ -281,6 +296,14 @@ en:
         title: Administration
         type: type
         username: username
+    bank_accounts:
+      form:
+        title_edit: Edit bank account
+        title_new: Add new bank account
+    bank_gateways:
+      form:
+        title_edit: Edit bank gateway
+        title_new: Add new bank gateway
     configs:
       list:
         key: Key
@@ -311,8 +334,11 @@ en:
         first_paragraph: Here you can manage the financial transaction classes and the corresponding financial transaction types. Every financial transaction has a type, which you have to select at every transaction, if you created more than one type. The financial transaction classes can be use to group the financial transaction types and will be shown as additional columns in the account overview, if there have been created more than one.
         new_bank_account: Add new bank account
         new_financial_transaction_class: Add new financial transaction class
+        new_bank_gateway: Add new bank gateway
         title: Finances
         transaction_types: Financial transaction types
+        supplier_categories: Supplier categories
+        new_supplier_category: New supplier category
       transaction_types:
         name: Name
         new_financial_transaction_type: Add new financial transaction type
@@ -411,6 +437,10 @@ en:
       workgroups:
         members: members
         name: name
+    supplier_categories:
+      form:
+        title_new: Add supplier category
+        title_edit: Edit supplier category
   application:
     controller:
       error_authn: Authentication required!
@@ -418,6 +448,7 @@ en:
       error_denied_sign_in: sign in as another user
       error_feature_disabled: This feature is currently disabled.
       error_members_only: This action is only available to members of the group!
+      error_minimum_balance: Sorry, your account balance is below the minimum of %{min}.
       error_token: Access denied (invalid token)!
   article_categories:
     create:
@@ -483,7 +514,7 @@ en:
       already_imported: imported
       not_found: No articles found
     index:
-      change_supplier: Change supplier ...
+      change_supplier: Change supplier
       download: Download articles
       edit_all: Edit all
       ext_db:
@@ -597,10 +628,12 @@ en:
       tasks_upfront_days: For how many days in advance you would like to schedule periodic tasks.
       tax_default: Default VAT percentage for new articles.
       tolerance_is_costly: Order as much of the member tolerance as possible (compared to only as much needed to fill the last box). Enabling this also includes the tolerance in the total price of the open member order.
+      distribution_strategy: How articles should be distributed after an order has been received.
       use_apple_points: When the apple point system is enabled, members are required to do some tasks to be able to keep ordering.
       use_boxfill: When enabled, near end of an order, members are only able to change their order when increases the total amount ordered. This helps to fill any remaining boxes. You still need to set a box-fill date for the orders.
       use_iban: When enabled, supplier and user provide an additonal field for storing the international bank account number.
       use_nick: Show and use nicknames instead of real names. When enabling this, please check that each user has a nickname.
+      use_self_service: When enabled, members are able to use selected balancing functions on their own.
       webstats_tracking_code: Tracking code for web analytics (like Piwik or Google analytics). Leave empty for no tracking.
     keys:
       applepear_url: Apple system help URL
@@ -623,6 +656,7 @@ en:
       default_role_pickups: Pickup days
       default_role_suppliers: Suppliers
       disable_invite: Disable invites
+      disable_members_overview: Disable members list
       email_from: From address
       email_replyto: Reply-to address
       email_sender: Sender address
@@ -650,10 +684,15 @@ en:
       tax_default: Default VAT
       time_zone: Time zone
       tolerance_is_costly: Tolerance is costly
+      distribution_strategy: Distribution strategy
+      distribution_strategy_options:
+        first_order_first_serve: First distribute to those who ordered first
+        no_automatic_distribution: No automatic distribution
       use_apple_points: Apple points
       use_boxfill: Box-fill phase
       use_iban: Use IBAN
       use_nick: Use nicknames
+      use_self_service: Use self service
       webstats_tracking_code: Tracking code
     tabs:
       applications: Apps
@@ -740,14 +779,6 @@ en:
     not_found:
       text: This page does not appear to exist, sorry!
       title: Page not found
-  feedback:
-    create:
-      notice: Your feedback was sent successfully. Thanks a lot!
-    new:
-      first_paragraph: Found a bug? Suggestions? Ideas? Reviews? We are happy to hear any feedback.
-      second_paragraph: Please be aware that the Foodsoft Team is only responsible for the maintenance of the software. For questions regarding the organisation of your Foodcoop, please contact the appropriate contact person.
-      send: Send
-      title: Give feedback
   finance:
     balancing:
       close:
@@ -862,12 +893,16 @@ en:
         notice: Link to the invoice has been added.
       create:
         notice: A new financial link has been created.
+      create_financial_transaction:
+        notice: Financial transaction has been added.
       index_bank_transaction:
         title: Add bank transaction
       index_financial_transaction:
         title: Add financial transaction
       index_invoice:
         title: Add invoice
+      new_financial_transaction:
+        title: Add financial transaction
       remove_bank_transaction:
         notice: Link to the bank transaction has been removed.
       remove_financial_transaction:
@@ -881,6 +916,7 @@ en:
         amount: Amount
         date: Date
         description: Description
+        new_financial_transaction: New financial transaction
         title: Financial link %{number}
         type: Type
     financial_transactions:
@@ -936,7 +972,7 @@ en:
       edit:
         title: Edit invoice
       form:
-        attachment_hint: Only JPEG and PDF are allowed.
+        attachment_hint: Only JPEG, PNG and PDF are allowed.
       index:
         action_new: Create new invoice
         show_unpaid: Show unpaid invoices
@@ -951,6 +987,7 @@ en:
         title: Unpaid invoices
     ordergroups:
       index:
+        new_financial_link: New financial link
         new_transaction: Add new transactions
         show_all: All transactions
         show_foodcoop: Foodcoop transaktions
@@ -1134,6 +1171,7 @@ en:
         since: "(member for %{when})"
         title: "%{user}"
     reference_calculator:
+      transaction_types_headline: Purpose
       placeholder: Please enter the amounts you want to tranfser in every field first, to see the reference you should use for that transaction.
       text0: Please transfer
       text1: with the reference
@@ -1173,19 +1211,19 @@ en:
   js:
     ordering:
       confirm_change: Modifications to this order will be lost when you change the order. Do you want to lose the changes you made and continue?
+    trix_editor:
+      file_size_alert: The file is to large! The supported file size is 512Mb!
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Help: %{url}'
+      help: 'Help'
     foodsoft: Foodsoft
     footer:
       revision: revision %{revision}
     header:
-      feedback:
-        desc: Found a bug? Suggestions? Ideas? Review?
-        title: Feedback
       help: Help
       logout: Logout
       ordergroup: My ordergroup
@@ -1220,9 +1258,6 @@ en:
       title: New password
   mailer:
     dateformat: "%d %b"
-    feedback:
-      header: "%{user} wrote at %{date}:"
-      subject: Feedback for Foodsoft
     from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Invitation to the Foodcoop
@@ -1279,6 +1314,18 @@ en:
 
 
         Kind regards from %{foodcoop}.
+    order_received:
+      subject: 'Order delivery registered: %{name}'
+      text0: |
+        Dear %{ordergroup},
+
+        the order for "%{order}" has been received.
+      abundant_articles: Received too much
+      scarce_articles: Received too little
+      article_details: |
+        o %{name}:
+        -- Ordered: %{ordered} x %{unit}
+        -- Received: %{received} x %{unit}
     order_result_supplier:
       subject: New order for %{name}
       text: |
@@ -1324,7 +1371,7 @@ en:
       text1: |
         In order to choose a new password follow this link: %{link}
         This link works only once and expires on %{expires}.
-        You can always use "Forgot password?" to get an new link.
+        You can always use "Forgot password?" to get a new link.
 
 
         Kind regards from %{foodcoop}.
@@ -1423,6 +1470,7 @@ en:
       field_unlocked_title: The distribution of this article among the ordergroups was changed manually. When you change the amount, those manual changes will be overwritten.
     edit_amounts:
       no_articles_available: No articles to add.
+      set_all_to_zero: Set all to zero
     fax:
       amount: Amount
       articles: Articles
@@ -1512,6 +1560,7 @@ en:
       closed: settled
       finished: closed
       open: open
+      received: received
     update:
       notice: The order was updated.
     update_order_amounts:
@@ -1614,6 +1663,7 @@ en:
         notify:
           negative_balance: Inform me when my ordergroup has a negative balance.
           order_finished: Inform me about my order result (when the order is closed).
+          order_received: Inform me about delivery details (after order has been received).
           upcoming_tasks: Remind me of upcoming tasks.
         profile:
           email_is_public: Email is visible for other members.
@@ -1633,6 +1683,7 @@ en:
             es: Spanish
             fr: French
             nl: Dutch
+            tr: Turkish
     required:
       mark: "*"
       text: required
@@ -1842,3 +1893,6 @@ en:
       title: Workgroups
     update:
       notice: Workgroup was updated
+  time:
+    formats:
+      foodsoft_datetime: "%Y-%m-%d %H:%M"

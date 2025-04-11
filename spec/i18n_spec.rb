@@ -7,6 +7,6 @@ Dir.glob('config/locales/??{-*,}.yml').each do |locale_file|
     # We're currently allowing both German and English as source language
     # besides, we're using localeapp, so that it's ok if pull requests
     # don't have this - a localapp pull will fix that right away.
-    #it { expect(locale_file).to be_a_subset_of 'config/locales/en.yml' }
+    # it { expect(locale_file).to be_a_subset_of 'config/locales/en.yml' }
   end
 end

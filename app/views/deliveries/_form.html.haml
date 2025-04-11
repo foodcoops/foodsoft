@@ -21,7 +21,7 @@
       $('#new_stock_article').removeAttr('disabled').select2({
         tags: true,
         placeholder: '#{t '.create_stock_article'}',
-        data: #{raw articles_for_select2(@supplier.articles).to_json},
+        data: #{raw articles_for_select2(@supplier.articles.undeleted).to_json},
         createTag: function(data) {
           return {
             id: 'new',

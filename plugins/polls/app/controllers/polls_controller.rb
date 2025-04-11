@@ -27,9 +27,9 @@ class PollsController < ApplicationController
   def edit
     @poll = Poll.find(params[:id])
 
-    if user_has_no_right
-      redirect_to polls_path, alert: t('.no_right')
-    end
+    return unless user_has_no_right
+
+    redirect_to polls_path, alert: t('.no_right')
   end
 
   def update
@@ -37,7 +37,7 @@ class PollsController < ApplicationController
 
     if user_has_no_right
       redirect_to polls_path, alert: t('.no_right')
-    elsif @poll.update_attributes(poll_params)
+    elsif @poll.update(poll_params)
       redirect_to @poll, notice: t('.notice')
     else
       render action: 'edit'
@@ -53,8 +53,8 @@ class PollsController < ApplicationController
       @poll.destroy
       redirect_to polls_path, notice: t('.notice')
     end
-  rescue => error
-    redirect_to polls_path, alert: t('.error', error: error.message)
+  rescue StandardError => e
+    redirect_to polls_path, alert: t('.error', error: e.message)
   end
 
   def vote
@@ -63,6 +63,7 @@ class PollsController < ApplicationController
     if @poll.one_vote_per_ordergroup
       ordergroup = current_user.ordergroup
       return redirect_to polls_path, alert: t('.no_ordergroup') unless ordergroup
+
       attributes = { ordergroup: ordergroup }
     else
       attributes = { user: current_user }
@@ -72,25 +73,25 @@ class PollsController < ApplicationController
 
     @poll_vote = @poll.poll_votes.where(attributes).first_or_initialize
 
-    if request.post?
-      @poll_vote.update!(note: params[:note], user: current_user)
+    return unless request.post?
 
-      if @poll.single_select?
-        choices = {}
-        choice = params[:choice]
-        choices[choice] = '1' if choice
-      else
-        choices = params[:choices].try(:to_h) || {}
-      end
+    @poll_vote.update!(note: params[:note], user: current_user)
 
-      @poll_vote.poll_choices = choices.map do |choice, value|
-        poll_choice = @poll_vote.poll_choices.where(choice: choice).first_or_initialize
-        poll_choice.update!(value: value)
-        poll_choice
-      end
-
-      redirect_to @poll
+    if @poll.single_select?
+      choices = {}
+      choice = params[:choice]
+      choices[choice] = '1' if choice
+    else
+      choices = params[:choices].try(:to_h) || {}
     end
+
+    @poll_vote.poll_choices = choices.map do |choice, value|
+      poll_choice = @poll_vote.poll_choices.where(choice: choice).first_or_initialize
+      poll_choice.update!(value: value)
+      poll_choice
+    end
+
+    redirect_to @poll
   end
 
   private
@@ -103,8 +104,8 @@ class PollsController < ApplicationController
     params
       .require(:poll)
       .permit(:name, :starts_date_value, :starts_time_value, :ends_date_value,
-        :ends_time_value, :description, :one_vote_per_ordergroup, :voting_method,
-        :multi_select_count, :min_points, :max_points, choices: [],
-        required_ordergroup_custom_fields: [], required_user_custom_fields: [])
+              :ends_time_value, :description, :one_vote_per_ordergroup, :voting_method,
+              :multi_select_count, :min_points, :max_points, choices: [],
+                                                             required_ordergroup_custom_fields: [], required_user_custom_fields: [])
   end
 end

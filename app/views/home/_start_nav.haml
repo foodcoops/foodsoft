@@ -2,7 +2,8 @@
   %h3= t '.title'
   %ul.nav.nav-list
     %li.nav-header= t '.foodcoop'
-    %li= link_to t('.members'), foodcoop_users_path
+    - unless FoodsoftConfig[:disable_members_overview]
+      %li= link_to t('.members'), foodcoop_users_path
     %li= link_to t('.tasks'), user_tasks_path
 
     - has_ordergroup = !@current_user.ordergroup.nil?

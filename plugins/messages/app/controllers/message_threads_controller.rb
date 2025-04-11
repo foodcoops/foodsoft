@@ -1,5 +1,4 @@
 class MessageThreadsController < ApplicationController
-
   before_action -> { require_plugin_enabled FoodsoftMessages }
 
   def index

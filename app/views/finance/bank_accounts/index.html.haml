@@ -11,6 +11,6 @@
     - for account in @bank_accounts
       %tr
         %td= link_to account.name, finance_bank_account_transactions_path(account)
-        %td= account.iban
+        %td= format_iban account.iban
         %td= truncate account.description, length: 50
         %td.numeric{style: 'width:5em'}= format_currency account.balance

@@ -1,4 +1,8 @@
 .pull-right
+  .btn-group
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn' do
+      = glyph :download
+      CSV
   - if @bank_transactions.total_pages > 1
     .btn-group= items_per_page wrap: false
 = pagination_links_remote @bank_transactions
@@ -15,7 +19,7 @@
       %tr
         %td= h link_to format_date(t.date), finance_bank_transaction_path(t)
         %td= h(t.text).gsub("\n", "<br>").html_safe
-        %td= h t.reference
+        %td= h(t.reference).gsub("\n", "<br>").html_safe
         %td.numeric{style: 'width:5em'}= format_currency t.amount
         %td
           - if t.financial_link

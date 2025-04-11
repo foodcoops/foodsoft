@@ -3,13 +3,14 @@
 module ActionDispatch
   module Session
     class SlugCookieStore < CookieStore
-      alias_method :orig_set_cookie, :set_cookie
+      alias orig_set_cookie set_cookie
 
       def set_cookie(request, session_id, cookie)
         if script_name = FoodsoftConfig[:script_name]
           path = request.original_fullpath[script_name.size..-1]
           slug = path.split('/', 2).first
           return if slug.blank?
+
           cookie[:path] = script_name + slug
         end
         orig_set_cookie request, session_id, cookie

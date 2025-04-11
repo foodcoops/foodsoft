@@ -1,3 +1,55 @@
+# Foodsoft 4.8.1
+(15 February 2024)
+
+
+### Bug Fixes
+
+* article convert_unit will fail when unit contains a comma character ([b1fa97d](https://github.com/foodcoops/foodsoft/commit/b1fa97d34d66d140e197107867251db93360f8a5))
+* documents sort sql needs Arel.sql ([4df78de](https://github.com/foodcoops/foodsoft/commit/4df78def01fc395f7902deb6f0d11d1d8b8efda7))
+* incompatible uri gem ([bae984b](https://github.com/foodcoops/foodsoft/commit/bae984bb3e760bb863410374216c7f6ef50fe93a))
+* update ruby image, fix bundler version ([c450368](https://github.com/foodcoops/foodsoft/commit/c45036810eeced044a58dac615a629a7b1fb78d0))
+* bug on saving config, fixes [#801](https://github.com/foodcoops/foodsoft/issues/801) ([8b152bf](https://github.com/foodcoops/foodsoft/commit/8b152bfbc0ef375f1f180c92006b62d241c83a2d))
+
+### Features
+
+* **messages:** show recipients in thread view ([9ee8a8f](https://github.com/foodcoops/foodsoft/commit/9ee8a8f85bf4d912276dbfac58bbbaa1e14cde1d))
+* use active storage for invoice attachments ([0ff74e8](https://github.com/foodcoops/foodsoft/commit/0ff74e8a46c1c46be1574f74f4365f2e6870a386)), closes [#1037](https://github.com/foodcoops/foodsoft/issues/1037)
+* remove the feedback form ([9c81aa3](https://github.com/foodcoops/foodsoft/commit/9c81aa3b7e3b4b045ab32ba58a9b653458382169))
+
+
+# Foodsoft 4.8.0
+
+* feat: Show total sums for ordergroup finances [#1017](https://github.com/foodcoops/foodsoft/pull/1017)
+* feat: Richtext Messages and Attachments with Actiontext [#918](https://github.com/foodcoops/foodsoft/issues/918)
+* feat: Make date configurable via locales [#997](https://github.com/foodcoops/foodsoft/pull/997)
+* feat: Turkish language support added [#995](https://github.com/foodcoops/foodsoft/pull/995)
+* feat: Disable member list via configuration [#990](https://github.com/foodcoops/foodsoft/pull/990)
+* feat: Specify an URL to redirect after logout via settings #989
+* feat: introduce importmaps [#983](https://github.com/foodcoops/foodsoft/pull/983)
+* feat: ruby 2.7.2 and rails 7 upgrade [#979](https://github.com/foodcoops/foodsoft/pull/979)
+* feat: Add home controller test [#972](https://github.com/foodcoops/foodsoft/pull/972)
+* feat: Replace apivore with rswag for api tests [#969](https://github.com/foodcoops/foodsoft/pull/969)
+* feat: increase test coverage [#966](https://github.com/foodcoops/foodsoft/pull/966)
+* feat: Show order note as tooltip [#965](https://github.com/foodcoops/foodsoft/pull/965)
+* feat: Add sd_notify [#961](https://github.com/foodcoops/foodsoft/pull/961)
+* feat: Show instance name at login screen [#957](https://github.com/foodcoops/foodsoft/pull/957)
+* feat: Enabled systemd socket activation [#942](https://github.com/foodcoops/foodsoft/pull/942)
+* feat: Add table_print gem for debugging ActiveRecord queries in the console [#935](https://github.com/foodcoops/foodsoft/pull/935)
+* feat: Add admin UI for SupplierCategories (supplier_categories) [#930](https://github.com/foodcoops/foodsoft/pull/930)
+
+* fix: add null checks for articles convert_units [33034e6](https://github.com/foodcoops/foodsoft/commit/33034e66b88968dedc5289425e1eff847ee67e12)
+* fix: downgrade haml to make deface work [#1003](https://github.com/foodcoops/foodsoft/pull/1003)
+* fix: dutch translation errors [#954](https://github.com/foodcoops/foodsoft/pull/954)
+* fix: Fixe filtering of active ordergroups [#934](https://github.com/foodcoops/foodsoft/pull/934)
+* fix: Change password validation to allow longer passwords [#923](https://github.com/foodcoops/foodsoft/pull/923)
+* fix: Invoice: change label "delivery" to "stock delivery" [#922](https://github.com/foodcoops/foodsoft/pull/922)
+* fix: Allow decimal numbers in transaction collections [#921](https://github.com/foodcoops/foodsoft/pull/921)
+* fix: Add validation of more article fields [#917](https://github.com/foodcoops/foodsoft/pull/917/files)
+* fix: Add default time_zone [#912](https://github.com/foodcoops/foodsoft/pull/912)
+* fix: Rename Piwik to Matomo [#911](https://github.com/foodcoops/foodsoft/pull/911/files)
+* fix: Change instructions to rbenv [#910](https://github.com/foodcoops/foodsoft/pull/910/files)
+
+
 # Foodsoft 4.7.1
 (31 December 2020)
 

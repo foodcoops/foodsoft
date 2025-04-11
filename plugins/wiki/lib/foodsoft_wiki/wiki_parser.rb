@@ -1,6 +1,5 @@
 module FoodsoftWiki
   class WikiParser < WikiCloth::Parser
-
     template do |template|
       Foodsoft::ExpansionVariables.get(template)
     end
@@ -11,7 +10,7 @@ module FoodsoftWiki
 
     link_attributes_for do |page|
       permalink = Page.permalink(page)
-      if Page.exists?(:permalink => permalink)
+      if Page.exists?(permalink: permalink)
         { href: url_for(:wiki_page_path, permalink: permalink) }
       elsif page.include? '#'
         # If "Foo#Bar" does not exist then consider "Foo" with anchor.
@@ -21,8 +20,8 @@ module FoodsoftWiki
       end
     end
 
-    section_link do |section|
-      ""
+    section_link do |_section|
+      ''
     end
 
     def to_html(render_options = {})
@@ -31,19 +30,18 @@ module FoodsoftWiki
       super(render_options)
     end
 
-
     private
 
     def link_attributes_if_number_sign_contained_in_nonexistent(page, referer)
       # Interpret the part after the last number sign as anchor.
-      arr = page.split('#', -1)# `-1` preserves empty anchor
+      arr = page.split('#', -1) # `-1` preserves empty anchor
       page = arr[0...-1].join('#')
       anchor = arr[-1]
 
       return { href: '#' + anchor } if page.empty?
 
       permalink = Page.permalink(page)
-      if Page.exists?(:permalink => permalink)
+      if Page.exists?(permalink: permalink)
         { href: url_for(:wiki_page_path, permalink: permalink, anchor: anchor) }
       else
         # Do not suggest to use number signs in the title.
@@ -52,9 +50,8 @@ module FoodsoftWiki
       end
     end
 
-    def url_for(path_name, options={})
-      Rails.application.routes.url_helpers.send path_name, options.merge({foodcoop: FoodsoftConfig.scope})
+    def url_for(path_name, options = {})
+      Rails.application.routes.url_helpers.send path_name, options.merge({ foodcoop: FoodsoftConfig.scope })
     end
-
   end
 end

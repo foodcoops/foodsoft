@@ -50,7 +50,7 @@
         = t '.new_delivery'
         %span.caret
       %ul.dropdown-menu
-        - Supplier.order(:name).each do |supplier|
+        - Supplier.undeleted.order(:name).each do |supplier|
           %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1
 
 %table.table.table-hover#articles

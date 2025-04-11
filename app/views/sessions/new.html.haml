@@ -6,6 +6,8 @@
 
 - title t('.title')
 
+.lead= FoodsoftConfig[:name]
+
 %noscript
   .alert.alert-error
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")

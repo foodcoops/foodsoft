@@ -1,5 +1,4 @@
 class CurrentOrders::OrdersController < ApplicationController
-
   before_action :authenticate_orders, except: :my
 
   def show
@@ -14,8 +13,8 @@ class CurrentOrders::OrdersController < ApplicationController
     respond_to do |format|
       format.pdf do
         pdf = case params[:document]
-                  when 'groups' then MultipleOrdersByGroups.new(@order_ids, @doc_options)
-                  when 'articles' then MultipleOrdersByArticles.new(@order_ids, @doc_options)
+              when 'groups' then MultipleOrdersByGroups.new(@order_ids, @doc_options)
+              when 'articles' then MultipleOrdersByArticles.new(@order_ids, @doc_options)
               end
         send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf'
       end
@@ -36,5 +35,4 @@ class CurrentOrders::OrdersController < ApplicationController
   def receive
     @orders = Order.finished_not_closed.includes(:supplier)
   end
-
 end

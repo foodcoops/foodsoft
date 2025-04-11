@@ -5,7 +5,7 @@ class CreatePages < ActiveRecord::Migration[4.2]
       t.string :title
       t.text :body
       t.string :permalink
-      t.integer :lock_version, :default => 0
+      t.integer :lock_version, default: 0
       t.integer :updated_by
       t.integer :redirect
       t.integer :parent_id

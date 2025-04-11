@@ -1,0 +1,32 @@
+tr:
+  config:
+    keys:
+      printer_print_order_articles: Sipariş makbuzu PDF'lerini yazdır
+      printer_print_order_fax: Fax PDF'lerini yazdır
+      printer_print_order_groups: Grup PDF'lerini yazdır
+      printer_print_order_matrix: Matris PDF'lerini yazdır
+      printer_token: Gizli token
+      use_printer: Yazıcı kullan
+  helpers:
+    submit:
+      printer_job:
+        create: Yazıcı görevi oluştur
+  navigation:
+    orders:
+      printer_jobs: Yazıcı görevleri
+  orders:
+    show:
+      confirm_create_printer_job: Bu sipariş için bir yazıcı görevi zaten oluşturuldu. Yeni bir tane oluşturmak istiyor musunuz?
+  printer_jobs:
+    create:
+      notice: '%{count} yazıcı görevi oluşturuldu.'
+    destroy:
+      notice: Yazıcı görevi silindi.
+    index:
+      finished: Tamamlandı
+      pending: Beklemede
+      queued: Siparişin kapatılması bekleniyor
+      requeued: Yeniden sıraya konuldu
+      title: Yazıcı görevleri
+    show:
+      title: Yazıcı görevi %{id}

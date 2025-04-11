@@ -11,6 +11,7 @@
       %th= heading_helper(PrinterJob, :document)
       %th= heading_helper(PrinterJob, :last_update_state)
       %th= heading_helper(PrinterJob, :finished_at)
+      %th
   %tbody
     - @finished_jobs.each do |j|
       %tr
@@ -20,3 +21,4 @@
         %td= link_to j.document, document_printer_job_path(j)
         %td= j.last_update_state
         %td= format_time j.finished_at
+        %td= link_to t('.requeue'), requeue_printer_job_path(j), method: :post, class: 'btn btn-mini'

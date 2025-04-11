@@ -32,6 +32,9 @@ default: &defaults
   # custom foodsoft software URL (used in footer)
   #foodsoft_url: https://github.com/foodcoops/foodsoft
 
+  # URL to redirect to after logging out
+  # logout_redirect_url: https://foodcoop.test
+
   # Default language
   #default_locale: en
   # By default, foodsoft takes the language from the webbrowser/operating system.
@@ -90,6 +93,9 @@ default: &defaults
   #use_wiki: true
   #use_messages: true
 
+  # When enabled only administrators can access the member list.
+  #disable_members_overview: true
+
   # Base font size for generated PDF documents
   #pdf_font_size: 12
   # Page size for generated PDF documents
@@ -118,9 +124,9 @@ default: &defaults
   #      label: Birthday
   #      as: date_picker
 
-  # Uncomment to add tracking code for web statistics, e.g. for Piwik. (Added to bottom of page)
+  # Uncomment to add tracking code for web statistics, e.g. for Matomo. (Added to bottom of page)
   #webstats_tracking_code: |
-  #  <!-- Piwik -->
+  #  <!-- Matomo -->
   #  ......
 
   # email address to be used as sender
@@ -164,6 +170,9 @@ default: &defaults
 
   # default to allow automatically adding new articles on sync only when less than 200 articles in total
   #shared_supplier_article_sync_limit: 200
+
+  # number of days after which attachment files get deleted
+  #attachment_retention_days: 365
 
 development:
   <<: *defaults

@@ -6,5 +6,4 @@ class Admin::BaseController < ApplicationController
     @groups = Group.where(deleted_at: nil).order('created_on DESC').limit(10)
     @users = User.order('created_on DESC').limit(10)
   end
-
 end

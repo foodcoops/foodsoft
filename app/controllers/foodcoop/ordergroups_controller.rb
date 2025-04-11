@@ -1,21 +1,16 @@
 class Foodcoop::OrdergroupsController < ApplicationController
-  
   def index
-    @ordergroups = Ordergroup.undeleted.order('name')
+    @ordergroups = Ordergroup.undeleted.sort_by_param(params['sort'])
 
-    unless params[:name].blank? # Search by name
-      @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%")
-    end
+    @ordergroups = @ordergroups.where('name LIKE ?', "%#{params[:name]}%") if params[:name].present? # Search by name
 
-    if params[:only_active] # Select only active groups
-      @ordergroups = @ordergroups.joins(:orders).where("orders.starts >= ?", Time.now.months_ago(3)).uniq
-    end
+    @ordergroups = @ordergroups.active if params[:only_active] # Select only active groups
 
     @ordergroups = @ordergroups.page(params[:page]).per(@per_page)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js { render :layout => false }
+      format.js { render layout: false }
     end
   end
 end

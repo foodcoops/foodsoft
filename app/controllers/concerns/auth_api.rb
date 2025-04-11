@@ -36,9 +36,9 @@ module Concerns::AuthApi
   # Make sure that at least one the given OAuth scopes is valid for the current user's permissions.
   # @raise Api::Errors::PermissionsRequired
   def doorkeeper_authorize_roles!(*scopes)
-    unless scopes.any? {|scope| doorkeeper_scope_permitted?(scope) }
-      raise Api::Errors::PermissionRequired.new('Forbidden, no permission')
-    end
+    return if scopes.any? { |scope| doorkeeper_scope_permitted?(scope) }
+
+    raise Api::Errors::PermissionRequired, 'Forbidden, no permission'
   end
 
   # Check whether a given OAuth scope is permitted for the current user.
@@ -48,19 +48,22 @@ module Concerns::AuthApi
   def doorkeeper_scope_permitted?(scope)
     scope_parts = scope.split(':')
     # user sub-scopes like +config:user+ are always permitted
-    if scope_parts.last == 'user'
-      return true
-    end
+    return true if scope_parts.last == 'user'
 
     case scope_parts.first
-    when 'user'           then true # access to the current user's own profile
-    when 'config'         then current_user.role_admin?
-    when 'users'          then current_user.role_admin?
-    when 'workgroups'     then current_user.role_admin?
-    when 'suppliers'      then current_user.role_suppliers?
-    when 'group_orders'   then current_user.role_orders?
-    when 'finance'        then current_user.role_finance?
-    # please note that offline_access does not belong here, since it is not used for permission checking
+    when 'user'           then return true # access to the current user's own profile
+    when 'config'         then return current_user.role_admin?
+    when 'users'          then return current_user.role_admin?
+    when 'workgroups'     then return current_user.role_admin?
+    when 'suppliers'      then return current_user.role_suppliers?
+    when 'group_orders'   then return current_user.role_orders?
+    when 'finance'        then return current_user.role_finance?
+      # please note that offline_access does not belong here, since it is not used for permission checking
+    end
+
+    case scope
+    when 'orders:read'    then true
+    when 'orders:write'   then current_user.role_orders?
     end
   end
 end

@@ -12,7 +12,7 @@
         $('input[data-has-name-short]').each(function() {
           var bank_account = $(this).attr('data-bank-account') || default_bank_account;
           var name = $(this).attr('name');
-          var value = Math.ceil(parseFloat($(this).val()) * 100) / 100;
+          var value = Math.round(parseFloat($(this).val()) * 100) / 100;
           if (value > 0) {
             var item = items[bank_account];
             if (!item) {
@@ -32,7 +32,7 @@
           console.dir(item);
           if (item) {
             ele.show();
-            ele.find('.amount').text(item.amount);
+            ele.find('.amount').text(item.amount.toFixed(2));
             ele.find('.reference').text((#{raw BankTransactionReference.js_code_for_user(@current_user)})(item.values));
           } else {
             ele.hide();
@@ -55,13 +55,16 @@
     %table#ordergroups
       %thead
         %tr
-          %th= heading_helper FinancialTransactionType, :name
+          %th= t('.transaction_types_headline')
           %th= heading_helper FinancialTransaction, :amount
       %tbody
         - for t in @types
           %tr
             %td= "#{t.name} (#{t.name_short}):"
-            %td= text_field_tag t.name_short, nil, class: 'input-small',
+            %td
+              .input-prepend
+                %span.add-on= t 'number.currency.format.unit'
+                = text_field_tag t.name_short, nil, class: 'input-small',
               'data-has-name-short' => true, 'data-bank-account' => t.bank_account.try(:id),
               step: 0.01, type: :number
   %p#placeholder
@@ -70,7 +73,8 @@
     %p{'data-text' => ba.id}
       = t('.text0')
       %b.amount= '?'
+      %b= t 'number.currency.format.unit'
       = t('.text1')
       %b.reference= '?'
       = t('.text2')
-      %b= ba.iban
+      %b= format_iban ba.iban

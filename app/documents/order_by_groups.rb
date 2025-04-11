@@ -1,17 +1,16 @@
-# encoding: utf-8
 class OrderByGroups < OrderPdf
-
   def filename
-    I18n.t('documents.order_by_groups.filename', :name => order.name, :date => order.ends.to_date) + '.pdf'
+    I18n.t('documents.order_by_groups.filename', name: order.name, date: order.ends.to_date) + '.pdf'
   end
 
   def title
-    I18n.t('documents.order_by_groups.title', :name => order.name,
-      :date => order.ends.strftime(I18n.t('date.formats.default')))
+    I18n.t('documents.order_by_groups.title', name: order.name,
+                                              date: order.ends.strftime(I18n.t('date.formats.default')))
   end
 
   def body
-    each_ordergroup do |oa_name, oa_total, oa_id|
+    each_ordergroup do |oa_name, oa_total, oa_id, oa_transport|
+      has_transport = !oa_transport.nil? && oa_transport > 0
       dimrows = []
       rows = [[
         OrderArticle.human_attribute_name(:article),
@@ -24,19 +23,29 @@ class OrderByGroups < OrderPdf
 
       each_group_order_article_for_ordergroup(oa_id) do |goa|
         dimrows << rows.length if goa.result == 0
-        rows <<  [goa.order_article.article.name,
-                  goa.order_article.article.supplier.name,
-                  group_order_article_quantity_with_tolerance(goa),
-                  group_order_article_result(goa),
-                  order_article_price_per_unit(goa.order_article),
-                  number_to_currency(goa.total_price)]
+        rows << [goa.order_article.article.name,
+                 goa.group_order.order.name,
+                 group_order_article_quantity_with_tolerance(goa),
+                 group_order_article_result(goa),
+                 order_article_price_per_unit(goa.order_article),
+                 number_to_currency(goa.total_price)]
       end
       next unless rows.length > 1
+
       rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total)]
+      if has_transport
+        rows << [GroupOrder.human_attribute_name(:transport), nil, nil, nil, nil, number_to_currency(oa_transport)]
+        rows << [nil, nil, nil, nil, nil, number_to_currency(oa_total + oa_transport)]
+      end
 
       rows.each { |row| row.delete_at 1 } unless @options[:show_supplier]
 
       nice_table oa_name || stock_ordergroup_name, rows, dimrows do |table|
+        if has_transport
+          table.row(-4).border_width = 1
+          table.row(-4).border_color = '666666'
+        end
+
         table.row(-2).border_width = 1
         table.row(-2).border_color = '666666'
         table.row(-1).borders = []
@@ -54,5 +63,4 @@ class OrderByGroups < OrderPdf
       end
     end
   end
-
 end

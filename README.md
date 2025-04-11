@@ -1,10 +1,11 @@
 Foodsoft
 =========
+
 [![Build Status](https://github.com/foodcoops/foodsoft/workflows/Ruby/badge.svg)](https://github.com/foodcoops/foodsoft/actions)
 [![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
 [![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
 [![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.svg)](https://codeclimate.com/github/foodcoops/foodsoft)
-[![Docker Status](https://img.shields.io/docker/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
+[![Docker Status](https://img.shields.io/docker/cloud/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
 [![Documentation](https://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/foodcoops/foodsoft)
 
 Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
@@ -15,21 +16,31 @@ If you're a food coop considering to use foodsoft, please have a look at the [wi
 
 More information about using this software and contributing can be found on the [wiki](https://github.com/foodcoops/foodsoft/wiki).
 
+Roadmap
+-------
+
+If you'd like to see what is currently bring prioritised for development, check [our roadmap](https://github.com/orgs/foodcoops/projects/1). If you'd like to influence the roadmap, please join our [monthly community call](https://forum.foodcoops.net/t/foodsoft-monthly-community-call/573/6). As of March 2023, Foodsoft has limited development capacity but we are trying to build this up once more. For now, we try to prioritise what we work on, in order to focus our efforts. If your proposed changes are waiting for some time without review, please join the community call to discuss.
 
 Developing
 ----------
+
+> Foodsoft development needs your help! If you want to hack/triage/organise to improve the software, please consider joining our monthly community calls which are announced on [this forum thread](https://forum.foodcoops.net/t/foodsoft-monthly-community-call/573/6). In these calls, we check in with each other, discuss what to prioritise and try to make progress with development and community issues together.
 
 Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
 then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
 page on the wiki.
 
+Get a foodsoft dev-environment running in the browser with Gitpod
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/foodcoops/foodsoft)
+
+Follow these [instructions](doc/SETUP_DEVELOPMENT_GITPOD.md) to complete setup from within the Gitpod workspace. 
 
 Deploying
 ---------
 
 Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
-[hosting platform](https://foodcoops.github.io/foodsoft-hosting/).
-
+[hosting platform](https://foodcoops.net/foodsoft-hosting/).
 
 License
 -------
@@ -51,8 +62,8 @@ install and configure Foodsoft without having to publish your changes. These
 files are marked as public domain in the file header.
 
 If you have any remaining questions, please
-[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or contact
-the [mailing list](http://foodsoft.51229.x6.nabble.com/foodsoft-discuss-f5.html).
+[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or open a new
+topic at the [forum](https://forum.foodcoops.net).
 
 Please see [LICENSE](LICENSE.md) for the full and authoritative text. Some
 bundled third-party components have [other licenses](vendor/README.md).

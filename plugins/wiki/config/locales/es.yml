@@ -16,24 +16,36 @@ es:
   navigation:
     wiki:
       all_pages: Todas las páginas
+      home: Inicio
+      title: Wiki
   pages:
     all:
       new_page: Crea nueva página
       recent_changes: Cambios recientes
       search:
         action: Busca
+        placeholder: Título de página ..
+      site_map: Mapa web
+      title: Todas las páginas Wiki
       title_list: Lista de páginas
     body:
       title_toc: Contenido
+      wikicloth_exception: 'Sentimos informar de que ha ocurrido un error al interpretar la página wiki: %{msg}. Por favor, intenta arreglarla y guarda la página de nuevo.'
     create:
       notice: La página ha sido creada
     cshow:
       error_noexist: La página no existe
+      redirect_notice: Redirigido desde %{page}...
+    destroy:
+      notice: La página '%{page}' y todas las subpáginas se han eliminado correctamente.
+    diff:
+      title: "%{title} - cambios de versión %{old} a %{new}"
     edit:
       title: Editar página
     error_stale_object: Cuidado, la página ha sido editada por otra persona. Por favor, intenta de nuevo.
     form:
       help:
+        bold: negrita
         external_link_ex: Enlace externo
         external_links: Externo
         heading: nivel %{level}
@@ -41,18 +53,54 @@ es:
         image_link_title: Título de la imagen
         image_links: Imágenes
         italic: itálicas
+        link_lists: Más en listas
+        link_table: Formato de tabla
+        link_templates: Plantillas
+        link_variables: Variables Foodsoft
+        list_item_1: Primer elemento de lista
+        list_item_2: Segundo elemento de lista
+        noformat: Sin Formato
         ordered_list: Lista numerada
         section_block: Estilo del párrafo
         section_character: Estilo de las letras
         section_link: Estilo de los enlaces
         section_more: Más temas
+        section_table: Formato de tabla
+        see_tables: ver %{tables_link}
+        tables_link: Tablas
+        text: texto
+        title: Ayuda de formato rápido
+        unordered_list: Lista de artículos
+        wiki_link_ex: Página Wiki de Foodsoft
+        wiki_links: Enlaces Wiki
       preview: Previsualizar
+    last_updated: Última actualización
     new:
       title: Crear una nueva página en la wiki
+    page_list_item:
+      date_format: ! '%a, %d %B %Y %H:%M:%S'
     show:
+      date_format: ! '%d-%m-%y %H:%M'
       delete: Eliminar página
+      delete_confirm: ! 'Advertencia: todas las subpáginas serán eliminadas también. ¿Estás seguro?'
+      diff: Comparar versiones
+      edit: Editar página
+      last_updated: Última actualización por <b>%{user}</b> el %{when}
+      subpages: subpáginas
+      title_versions: Versiones
+      versions: Versiones (%{count})
     title: Título
+    update:
+      notice: La página fue actualizada
+    variables:
+      description: Las variables devuelven información de otro lugar. Cuando utilice la variable, se reemplazará por su valor cuando se muestre. Foodsoft tiene un número de variables predefinidas, como el nombre y la dirección de tu cooperativa, la versión del software, y el número de miembros y proveedores. Vea la siguiente tabla para todas las variables. Puede usarlas en páginas wiki así como en el pie de página (desde la pantalla de configuración).
+      title: Variables Foodsoft
+      value: Valor actual
+      variable: Variable
     version:
       author: ! 'Autor/a: %{user}'
+      date_format: ! '%a, %d-%m-%Y, %H:%M'
+      revert: Revertir a esta versión
+      title: ! '%{title} - versión %{version}'
       title_version: Versión
       view_current: Ver versión actual

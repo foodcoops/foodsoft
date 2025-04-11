@@ -15,7 +15,7 @@ jobs:
           MYSQL_DATABASE: test
           MYSQL_ROOT_PASSWORD: password
         options: >-
-          --health-cmd "mysqladmin ping"
+          --health-cmd "mariadb-admin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -35,7 +35,9 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Setup chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.1
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: '115.0.5790.170' # https://github.com/nanasess/setup-chromedriver/issues/200
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -50,6 +52,10 @@ jobs:
       - name: Run tests
         run: bundle exec rake rspec-rerun:spec
         env:
-          COVERALLS: 1
+          COVERAGE: lcov
           DATABASE_URL: mysql2://user:password@127.0.0.1/test
           RAILS_ENV: test
+      - name: Upload coverage report to Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

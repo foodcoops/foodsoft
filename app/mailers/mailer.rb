@@ -1,4 +1,3 @@
-# encoding: utf-8
 # ActionMailer class that handles all emails for Foodsoft.
 class Mailer < ActionMailer::Base
   # XXX Quick fix to allow the use of show_user. Proper take would be one of
@@ -7,7 +6,7 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
-  layout 'email'  # Use views/layouts/email.txt.erb
+  layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",
           'X-Auto-Response-Suppress' => 'All'
@@ -61,6 +60,19 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.order_result.subject', name: group_order.order.name)
   end
 
+  # Sends order received info for specific Ordergroup
+  def order_received(user, group_order)
+    @order        = group_order.order
+    @group_order  = group_order
+
+    order_articles = @order.order_articles.reject { |oa| oa.units_received.nil? }
+    @abundant_articles = order_articles.select { |oa| oa.difference_received_ordered.positive? }
+    @scarce_articles = order_articles.select { |oa| oa.difference_received_ordered.negative? }
+
+    mail to: user,
+         subject: I18n.t('mailer.order_received.subject', name: group_order.order.name)
+  end
+
   # Sends order result to the supplier
   def order_result_supplier(user, order, options = {})
     @user     = user
@@ -69,7 +81,7 @@ class Mailer < ActionMailer::Base
 
     add_order_result_attachments order, options
 
-    subject = I18n.t('mailer.order_result_supplier.subject', :name => order.supplier.name)
+    subject = I18n.t('mailer.order_result_supplier.subject', name: order.supplier.name)
     subject += " (#{I18n.t('activerecord.attributes.order.pickup')}: #{format_date(order.pickup)})" if order.pickup
 
     mail to: order.supplier.email,
@@ -79,21 +91,12 @@ class Mailer < ActionMailer::Base
   end
 
   # Notify user if account balance is less than zero
-  def negative_balance(user,transaction)
+  def negative_balance(user, transaction)
     @group        = user.ordergroup
     @transaction  = transaction
 
     mail to: user,
          subject: I18n.t('mailer.negative_balance.subject')
-  end
-
-  def feedback(user, feedback)
-    @user = user
-    @feedback = feedback
-
-    mail to: FoodsoftConfig[:notification][:error_recipients],
-         from: user,
-         subject: I18n.t('mailer.feedback.subject')
   end
 
   def not_enough_users_assigned(task, user)
@@ -110,10 +113,11 @@ class Mailer < ActionMailer::Base
 
     if args[:from].is_a? User
       args[:reply_to] ||= args[:from]
-      args[:from] = format_address(FoodsoftConfig[:email_sender], I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from])))
+      args[:from] =
+        format_address(FoodsoftConfig[:email_sender], I18n.t('mailer.from_via_foodsoft', name: show_user(args[:from])))
     end
 
-    [:bcc, :cc, :reply_to, :sender, :to].each do |k|
+    %i[bcc cc reply_to sender to].each do |k|
       user = args[k]
       args[k] = format_address(user.email, show_user(user)) if user.is_a? User
     end
@@ -133,21 +137,21 @@ class Mailer < ActionMailer::Base
 
   def self.deliver_now_with_user_locale(user, &block)
     I18n.with_locale(user.settings['profile']['language']) do
-      self.deliver_now &block
+      deliver_now(&block)
     end
   end
 
   def self.deliver_now_with_default_locale(&block)
     I18n.with_locale(FoodsoftConfig[:default_locale]) do
-      self.deliver_now &block
+      deliver_now(&block)
     end
   end
 
   def self.deliver_now
     message = yield
     message.deliver_now
-  rescue => error
-    MailDeliveryStatus.create email: message.to[0], message: error.message
+  rescue StandardError => e
+    MailDeliveryStatus.create email: message.to[0], message: e.message
   end
 
   # separate method to allow plugins to mess with the attachments
@@ -157,8 +161,7 @@ class Mailer < ActionMailer::Base
   end
 
   # separate method to allow plugins to mess with the text
-  def additonal_welcome_text(user)
-  end
+  def additonal_welcome_text(user); end
 
   private
 
@@ -167,5 +170,4 @@ class Mailer < ActionMailer::Base
     address.display_name = name
     address.format
   end
-
 end

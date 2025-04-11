@@ -34,13 +34,13 @@
         %dd= @supplier.supplier_category.try(:name)
       - if FoodsoftConfig[:use_iban]
         %dt= heading_helper(Supplier, :iban) + ':'
-        %dd= @supplier.iban
+        %dd= format_iban @supplier.iban
       %dt= heading_helper(Supplier, :delivery_days) + ':'
       %dd= @supplier.delivery_days
       %dt= heading_helper(Supplier, :order_howto) + ':'
-      %dd= @supplier.order_howto
+      %dd= simple_format(@supplier.order_howto)
       %dt= heading_helper(Supplier, :note) + ':'
-      %dd= @supplier.note
+      %dd= simple_format(@supplier.note)
       %dt= heading_helper(Supplier, :min_order_quantity) + ':'
       %dd= @supplier.min_order_quantity
 

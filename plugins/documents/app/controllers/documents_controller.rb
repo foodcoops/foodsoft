@@ -4,17 +4,17 @@ class DocumentsController < ApplicationController
   before_action -> { require_plugin_enabled FoodsoftDocuments }
 
   def index
-    if params["sort"]
-      sort = case params["sort"]
-               when "name" then "data IS NULL DESC, name"
-               when "created_at" then "created_at"
-               when "name_reverse" then "data IS NULL, name DESC"
-               when "created_at_reverse" then "created_at DESC"
+    sort = if params['sort']
+             case params['sort']
+             when 'name' then 'data IS NULL DESC, name'
+             when 'created_at' then 'created_at'
+             when 'name_reverse' then 'data IS NULL, name DESC'
+             when 'created_at_reverse' then 'created_at DESC'
              end
-    else
-      sort = "data IS NULL DESC, name"
-    end
-
+           else
+             'data IS NULL DESC, name'
+           end
+    sort = Arel.sql(sort) # this is okay as we don't use user params directly
     @documents = Document.where(parent: @document).page(params[:page]).per(@per_page).order(sort)
   end
 
@@ -31,24 +31,25 @@ class DocumentsController < ApplicationController
       @document.data = data.read
       @document.mime = FileMagic.new(FileMagic::MAGIC_MIME).buffer(@document.data)
       raise t('.not_allowed_mime', mime: @document.mime) unless allowed_mime? @document.mime
+
       if @document.name.empty?
         name = File.basename(data.original_filename)
-        @document.name = name.gsub(/[^\w\.\-]/, '_')
+        @document.name = name.gsub(/[^\w.-]/, '_')
       end
     end
     @document.created_by = current_user
     @document.save!
     redirect_to @document.parent || documents_path, notice: t('.notice')
-  rescue => error
-    redirect_to @document.parent || documents_path, alert: t('.error', error: error.message)
+  rescue StandardError => e
+    redirect_to @document.parent || documents_path, alert: t('.error', error: e.message)
   end
 
   def update
     @document = Document.find(params[:id])
     @document.update_attribute(:parent_id, params[:parent_id])
     redirect_to @document.parent || documents_path, notice: t('.notice')
-  rescue => error
-    redirect_to @document.parent || documents_path, alert: t('errors.general_msg', msg: error.message)
+  rescue StandardError => e
+    redirect_to @document.parent || documents_path, alert: t('errors.general_msg', msg: e.message)
   end
 
   def destroy
@@ -59,8 +60,8 @@ class DocumentsController < ApplicationController
     else
       redirect_to documents_path, alert: t('.no_right')
     end
-  rescue => error
-    redirect_to documents_path, alert: t('.error', error: error.message)
+  rescue StandardError => e
+    redirect_to documents_path, alert: t('.error', error: e.message)
   end
 
   def show

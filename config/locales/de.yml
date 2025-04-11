@@ -35,9 +35,15 @@ de:
         unit_quantity: Gebindegröße
       bank_account:
         balance: Kontostand
+        bank_gateway: Bankgateway
         description: Beschreibung
         iban: IBAN
         name: Name
+      bank_gateway:
+        authorization: Authorization-Header
+        name: Name
+        unattended_user: Bedienerlos-Benutzer_in
+        url: URL
       bank_transaction:
         amount: Betrag
         date: Datum
@@ -65,6 +71,7 @@ de:
         ordergroup: Bestellgruppe
         user: Eingetragen von
       financial_transaction_class:
+        ignore_for_account_balance: Für Kontostand ignorieren
         name: Name
       financial_transaction_type:
         bank_account: Bankkonto
@@ -90,7 +97,7 @@ de:
         created_by: Erstellt von
         date: Rechnungsdatum
         delete_attachment: Anhang löschen
-        deliveries: Lieferung
+        deliveries: Lager-Lieferung
         deposit: Pfand berechnet
         deposit_credit: Pfand gutgeschrieben
         financial_link: Finanzlink
@@ -186,6 +193,11 @@ de:
         phone2: Telefon 2
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
+      supplier_category:
+        name: Name
+        description: Beschreibung
+        financial_transaction_class: Kontotransaktionsklasse
+        bank_account: Bankkonto
       task:
         created_by: Erstellt von
         created_on: Erstellt am
@@ -195,7 +207,7 @@ de:
         duration: Dauer
         name: Aufgabe
         required_users: Anzahl
-        user_list: Verantwortlichen
+        user_list: Verantwortliche
         workgroup: Arbeitsgruppe
       user:
         email: E-Mail
@@ -243,6 +255,8 @@ de:
     models:
       article: Artikel
       article_category: Kategorie
+      bank_account: Bankkonto
+      bank_gateway: Bankgateway
       bank_transaction: Banktransaktion
       delivery: Lieferung
       financial_transaction: Kontotransaktion
@@ -258,6 +272,7 @@ de:
       stock_article: Lagerartikel
       stock_taking: Inventur
       supplier: Lieferant
+      supplier_category: Lieferantenkategorie
       task: Aufgabe
       user: Benutzerinnen
       workgroup: Arbeitsgruppe
@@ -281,6 +296,14 @@ de:
         title: Administration
         type: Typ
         username: Benutzername
+    bank_accounts:
+      form:
+        title_edit: Bankkonto bearbeiten
+        title_new: Bankkonto anlegen
+    bank_gateways:
+      form:
+        title_edit: Bankgateway bearbeiten
+        title_new: Bankgateway anlegen
     configs:
       list:
         key: Schlüssel
@@ -311,8 +334,11 @@ de:
         first_paragraph: Hier kannst du die Kontotransaktionsklassen und die dazugehörigen Kontotransaktionstypen verwalten. Jede Finanztansaktion hat einen bestimmten Typ, den du bei jeder Transaktion auswählen muss, falls du mehr als einen Typ angelegt hast. Die Kontotransaktionsklassen können zur Gruppierung der Kontotransaktionstypen verwendet werden und werden in der Kontoübersicht als weitere Spalten angezeigt, falls mehrere angelegt wurden.
         new_bank_account: Neues Bankkonto anlegen
         new_financial_transaction_class: Neue Kontotransaktionsklasse anlegen
+        new_bank_gateway: Neuen Bank Gateway anlegen
         title: Finanzen
         transaction_types: Kontotransaktionstypen
+        supplier_categories: Lieferantenkategorien
+        new_supplier_category: Neue Lieferantenkategorie anlegen
       transaction_types:
         name: Name
         new_financial_transaction_type: Neuen Kontotransaktionstyp anlegen
@@ -411,6 +437,10 @@ de:
       workgroups:
         members: Mitglieder
         name: Name
+    supplier_categories:
+      form:
+        title_new: Neue Lieferantenkategorie anlegen
+        title_edit: Lieferantenkategorie bearbeiten
   application:
     controller:
       error_authn: Anmeldung erforderlich!
@@ -418,6 +448,7 @@ de:
       error_denied_sign_in: als ein anderer Benutzer anmelden
       error_feature_disabled: Diese Funktion ist derzeit nicht aktiviert.
       error_members_only: Diese Aktion ist nur für Mitglieder der Gruppe erlaubt!
+      error_minimum_balance: Ihr Kontostand liegt leider unter dem Minimum von %{min}.
       error_token: Zugriff verweigert (ungültiger Token)!
   article_categories:
     create:
@@ -483,7 +514,7 @@ de:
       already_imported: schon importiert
       not_found: Keine Artikel gefunden
     index:
-      change_supplier: Lieferant wechseln ...
+      change_supplier: Lieferant wechseln
       download: Artikel herunterladen
       edit_all: Alle bearbeiten
       ext_db:
@@ -597,10 +628,12 @@ de:
       tasks_upfront_days: Anzahl der Tage, für welche du im Voraus wiederkehrende Aufgaben definieren möchtest
       tax_default: Standard Mehrwertsteuersatz für neue Artikel
       tolerance_is_costly: Eine möglichst große Menge im Rahmen der Tolerenz bestellen. Wenn dies nicht aktiviert ist, wird im Rahmen der Toleranz nur so viel bestellt, dass damit komplette Einheiten (Boxen) bestellt werden können. Die Option wirkt sich auch auf die Toleranz des Gesamtpreises einer offenen Mitgliederbestellung aus.
+      distribution_strategy: Wie bei der Verteilung von Artikeln nach dem Empfangen einer Bestellung vorgegangen werden soll.
       use_apple_points: Wenn das Apfel Punktesystem aktiviert ist, ist es erforderlich, dass Mitglieder Aufgaben erledigen um bestellen zu können.
       use_boxfill: Wenn aktiviert, können Benutzer nahe am Ende der Bestellung diese nur mehr so verändern, dass sich die Gesamtsumme erhöht. Dies hilft beim auffüllen der verbleibenden Kisten. Es muss trotzdem noch das Kistenauffülldatum bei der Bestellung gesetzt werden.
       use_iban: Zusätzlich Feld für die internationale Kontonummer bei Benutzern und Lieferanten anzeigen
       use_nick: Benutzernamen anstatt reale Namen zeigen und verwenden, jeder Benutzer muss dazu einen Benutzernamen (Spitznamen) haben.
+      use_self_service: Wenn aktiviert, können Benutzer_innen selbständig dafür freigegebene Abrechungsfunktionen nutzen.
       webstats_tracking_code: Tracking Code für Webseitenanalyse (wie Piwik oder Google Analytics), leer lassen wenn keine Analyse erfolgt
     keys:
       applepear_url: Hilfe URL für das Äpfel Punktesystem zum Engagement
@@ -623,6 +656,7 @@ de:
       default_role_pickups: Abholtage
       default_role_suppliers: Lieferanten
       disable_invite: Einladungen deaktivieren
+      disable_members_overview: Mitgliederliste deaktivieren
       email_from: Absenderadresse
       email_replyto: Antwortadresse
       email_sender: Senderadresse
@@ -650,15 +684,21 @@ de:
       tax_default: Mehrwertsteuer
       time_zone: Zeitzone
       tolerance_is_costly: Bestelltoleranz maximal ausnutzen, um möglichst große Mengen zu bestellen
+      distribution_strategy: Verteilungs-Strategie
+      distribution_strategy_options:
+        first_order_first_serve: Zuerst an die verteilen, die zuerst bestellt haben
+        no_automatic_distribution: Keine automatische Verteilung
       use_apple_points: Apfelpunkte verwenden
       use_boxfill: Kistenauffüllphase
       use_iban: IBAN verwenden
       use_nick: Benutzernamen verwenden
+      use_self_service: Selbstbedienung verwenden
       webstats_tracking_code: Code für Websiteanalysetool
     tabs:
       applications: Apps
       foodcoop: Foodcoop
       language: Sprache
+      layout: Layout
       list: Liste
       messages: Nachrichten
       others: Sonstiges
@@ -733,20 +773,12 @@ de:
     general_again: Ein Fehler ist aufgetreten. Bitte erneut versuchen.
     general_msg: 'Ein Fehler ist aufgetreten: %{msg}'
     internal_server_error:
-      text1: Ein unerwarteter Fehler ist aufgretreten. Entschuldigung!
+      text1: Ein unerwarteter Fehler ist aufgetreten. Entschuldigung!
       text2: Wir wurden benachrichtigt. Fall das Problem weiterhin besteht, gib uns bitte bescheid.
       title: Interner Server Fehler
     not_found:
       text: Diese Seite existiert anscheinend nicht. Entschuldigung!
       title: Seite nicht gefunden
-  feedback:
-    create:
-      notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
-    new:
-      first_paragraph: Fehler gefunden? Vorschlag? Idee? Kritik? Wir freuen uns über jegliches Feedback.
-      second_paragraph: Bitte beachte, dass das Foodsoft Team nur die Software wartet. Bei Fragen zur Organisation in Deiner Foodcoop, kontaktiere besser die entsprechenden Ansprechpartner.
-      send: Absenden
-      title: Gib Feedback
   finance:
     balancing:
       close:
@@ -861,12 +893,16 @@ de:
         notice: Verlinkung wurde zu der Rechnung wurde hinzugefügt.
       create:
         notice: Ein neuer Finanzlink wurde erstellt.
+      create_financial_transaction:
+        notice: Neue Kontotransaktion wurde hinzugefügt.
       index_bank_transaction:
         title: Banktransaktion hinzufügen
       index_financial_transaction:
         title: Kontotransaktion hinzufügen
       index_invoice:
         title: Rechnung hinzufügen
+      new_financial_transaction:
+        title: Neue Kontotransaktion hinzufügen
       remove_bank_transaction:
         notice: Verlinkung wurde zu der Banktransaktion wurde entfernt.
       remove_financial_transaction:
@@ -880,6 +916,7 @@ de:
         amount: Betrag
         date: Datum
         description: Beschreibung
+        new_financial_transaction: Neue Kontotransaktion hinzufügen
         title: Finanzlink %{number}
         type: Typ
     financial_transactions:
@@ -911,7 +948,7 @@ de:
         create_foodcoop_transaction: Erstelle einen Transaktion mit der der invertieten Summe für die Foodcoop (für den Fall der "doppelte Buchführung")
         new_ordergroup: Weitere Bestellgruppe hinzufügen
         save: Transaktionen speichern
-        set_balance: Setze den Kontostand der Bestellgrupppe auf den eingegebenen Betrag.
+        set_balance: Setze den Kontostand der Bestellgruppe auf den eingegebenen Betrag.
         sidebar: Hier kannst Du mehrere Konten gleichzeitig aktualsieren. Z.B. alle Überweisungen der Bestellgruppen aus einem Kontoauszug.
         title: Mehrere Konten aktualisieren
       ordergroup:
@@ -935,7 +972,7 @@ de:
       edit:
         title: Rechnung bearbeiten
       form:
-        attachment_hint: Es sind nur JPEG und PDF erlaubt.
+        attachment_hint: Es sind nur JPEG, PNG und PDF erlaubt.
       index:
         action_new: Neue Rechnung anlegen
         show_unpaid: Unbezahlte Rechnungen anzeigen
@@ -950,6 +987,7 @@ de:
         title: Unbezahlte Rechnungen
     ordergroups:
       index:
+        new_financial_link: Neuer Finanzlink
         new_transaction: Neue Überweisungen eingeben
         show_all: Alle Transaktionen
         show_foodcoop: Foodcoop Transaktionen
@@ -1073,6 +1111,7 @@ de:
       role_orders: Bestellung
       role_pickups: Abholtage
       role_suppliers: Lieferanten
+      show_google_maps: Auf Google Maps anzeigen
       sort_by: Nach %{text} sortieren
     deliveries:
       new_invoice: Rechnung anlegen
@@ -1087,6 +1126,7 @@ de:
         create: Einladung verschicken
     tasks:
       required_users: "Es fehlen %{count} Mitstreiterinnen!"
+      task_title: "%{name} (%{duration}h)"
   home:
     apple_bar:
       desc: 'Abgebildet ist das Verhältnis von erledigten Aufgaben zu dem Bestellvolumen Deiner Bestellgruppe im Vergleich zum Durchschnitt in der Foodcoop. Konkret: Pro %{amount} Bestellsumme solltest Du eine Aufgabe machen!'
@@ -1131,16 +1171,19 @@ de:
         since: "(Mitglied seit %{when})"
         title: "%{user}"
     reference_calculator:
+      transaction_types_headline: Zweck
       placeholder: Bitte fülle zuerst die einzelnen Felder mit den gewünschten Beträgen für die Überweisung aus, um die Zahlungsreferenz für diese Transaktion anzuzeigen.
       text0: Bitte überweise
       text1: mit der Zahlungsreferenz
       text2: auf das Bankkonto
       title: Zahlungsreferenz-Rechner
     start_nav:
+      admin: Administration
       finances:
         accounts: Konten aktualisieren
         settle: Bestellungen abrechnen
         title: Finanzbereich
+      foodcoop: Foodcoop
       members: Mitglieder
       new_ordergroup: Neue Bestellgruppe
       new_user: Neues Mitglied
@@ -1168,18 +1211,19 @@ de:
   js:
     ordering:
       confirm_change: Änderungen an dieser Bestellung gehen verloren, wenn zu einer anderen Bestellung gewechselt wird. Möchtest Du trotzdem wechseln?
+    trix_editor:
+      file_size_alert: Der Dateianhang ist zu groß! Die maximale Größe beträgt 512Mb
   layouts:
     email:
       footer_1_separator: "--"
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
+      help: 'Hilfe'
     foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}
     header:
-      feedback:
-        desc: Fehler gefunden? Vorschlag? Idee? Kritik?
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
@@ -1214,9 +1258,7 @@ de:
       title: Neues Passwort
   mailer:
     dateformat: "%d. %b"
-    feedback:
-      header: "%{user} schrieb am %{date}:"
-      subject: Feedback zur Foodsoft
+    from_via_foodsoft: "%{name} via Foodsoft"
     invite:
       subject: Einladung in die Foodcoop
       text: |
@@ -1269,6 +1311,18 @@ de:
 
 
         Viele Grüße von %{foodcoop}
+    order_received:
+      subject: 'Bestellung entgegengenommen: %{name}'
+      text0: |
+        Liebe Bestellgruppe %{ordergroup},
+
+        die Bestellung für "%{order}" wurde geliefert.
+      abundant_articles: Zuviel geliefert
+      scarce_articles: Zuwenig geliefert
+      article_details: |
+        o %{name}:
+        -- Bestellt: %{ordered} x %{unit}
+        -- Geliefert: %{received} x %{unit}
     order_result_supplier:
       subject: Neue Bestellung für %{name}
       text: |
@@ -1311,7 +1365,7 @@ de:
       text0: |
         Liebe(r) %{user},
 
-        für dich wure ein neuer Foodsoft-Zugang erstellt.
+        für dich wurde ein neuer Foodsoft-Zugang erstellt.
       text1: |
         Um ein neues Passwort einzugeben, gehe zu: %{link}
         Dieser Link kann nur einmal aufgerufen werden und läuft am %{expires} ab.
@@ -1352,6 +1406,7 @@ de:
       home: Übersicht
       mail_delivery_status: E-Mail Probleme
       ordergroups: Bestellgruppen
+      title: Administration
       users: Benutzer/innen
       workgroups: Arbeitsgruppen
     articles:
@@ -1359,6 +1414,7 @@ de:
       stock: Lager
       suppliers: Lieferanten/Artikel
       title: Artikel
+    dashboard: Übersichtsseite
     finances:
       accounts: Konten verwalten
       balancing: Bestellungen abrechnen
@@ -1366,6 +1422,7 @@ de:
       home: Übersicht
       invoices: Rechnungen
       title: Finanzen
+    foodcoop: Foodcoop
     members: Mitglieder
     ordergroups: Bestellgruppen
     orders:
@@ -1410,11 +1467,13 @@ de:
       field_unlocked_title: Die Verteilung dieses Artikels auf die einzelnen Bestellgruppen wurde manuell angepasst. Wenn du die gelieferte Menge änderst, werden die vorherigen manuellen Änderungen überschrieben.
     edit_amounts:
       no_articles_available: Keine Artikel zum hinzufügen verfügbar
+      set_all_to_zero: Alle auf Null setzen
     fax:
       amount: Menge
       articles: Artikel
       delivery_day: Liefertag
       heading: Bestellung für %{name}
+      name: Name
       number: Nummer
       to_address: Versandaddresse
     finish:
@@ -1498,6 +1557,7 @@ de:
       closed: abgerechnet
       finished: beendet
       open: laufend
+      received: in Empfang genommen
     update:
       notice: Die Bestellung wurde aktualisiert.
     update_order_amounts:
@@ -1513,6 +1573,7 @@ de:
     index:
       article_pdf: Artikel PDF
       group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
       title: Abholtage
   sessions:
     logged_in: Angemeldet!
@@ -1523,6 +1584,7 @@ de:
       forgot_password: Passwort vergessen?
       login: Anmelden
       nojs: Achtung, Cookies und Javascript müssen aktiviert sein! %{link} bitte abschalten.
+      noscript: NoScript
       title: Foodsoft anmelden
   shared:
     articles:
@@ -1551,8 +1613,13 @@ de:
       who_ordered: Wer hat bestellt?
     order_download_button:
       article_pdf: Artikel PDF
+      download_file: Datei herunterladen
+      fax_csv: Fax CSV
+      fax_pdf: Fax PDF
       fax_txt: Fax Text
       group_pdf: Gruppen PDF
+      matrix_pdf: Matrix PDF
+      title: Herunterladen
     task_list:
       accept_task: Aufgabe übernehmen
       done: Erledigt
@@ -1593,6 +1660,7 @@ de:
         notify:
           negative_balance: Informiere mich, falls meine Bestellgruppe ins Minus rutscht.
           order_finished: Informiere mich über meine Bestellergebnisse (nach Ende der Bestellung).
+          order_received: Informiere mich über Lieferdetails (nachdem die Ware entgegengenommen wurde).
           upcoming_tasks: Erinnere mich an anstehende Aufgaben.
         profile:
           email_is_public: E-Mail ist für Mitglieder sichtbar.
@@ -1608,9 +1676,11 @@ de:
         profile:
           language:
             de: Deutsch
+            en: Englisch
             es: Spanisch
             fr: Französisch
             nl: Niederländisch
+            tr: Türkisch
     required:
       mark: "*"
       text: benötigt
@@ -1767,6 +1837,7 @@ de:
       confirm_delete_single_from_group: Bist Du sicher, dass Du diese Aufgabe löschen möchtest (und in Bezug stehende wiederkehrende Aufgabe behalten möchtest)?
       delete_group: Aufgabe und folgende löschen
       edit_group: Wiederkehrende ändern
+      hours: "%{count}h"
       mark_done: Als erledigt markieren
       reject_task: Aufgabe ablehnen
       title: Aufgabe anzeigen
@@ -1793,6 +1864,9 @@ de:
     delete: Löschen
     download: Herunterladen
     edit: Bearbeiten
+    marks:
+      close: "&times;"
+      success: <i class="icon icon-ok"></i>
     move: Verschieben
     or_cancel: oder abbrechen
     please_wait: Bitte warten...
@@ -1802,6 +1876,10 @@ de:
     show: Anzeigen
   views:
     pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      next: "&rsaquo;"
+      previous: "&lsaquo;"
       truncate: "..."
   workgroups:
     edit:
@@ -1812,3 +1890,6 @@ de:
       title: Arbeitsgruppen
     update:
       notice: Arbeitsgruppe wurde aktualisiert
+  time:
+    formats:
+      foodsoft_datetime: "%d.%m.%Y %H:%M"

@@ -14,7 +14,7 @@ class CreateMessageRecipients < ActiveRecord::Migration[4.2]
       t.datetime :read_at
     end
 
-    add_index :message_recipients, [:user_id, :read_at]
+    add_index :message_recipients, %i[user_id read_at]
 
     Message.all.each do |m|
       recipients = YAML.load(m.recipients_ids).map do |r|

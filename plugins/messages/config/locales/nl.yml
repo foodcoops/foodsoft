@@ -119,6 +119,7 @@ nl:
     thread:
       all_message_threads: Alle conversaties
       reply: Antwoord
+      recipients: Geadresseerden
     toggle_private:
       not_allowed: Je kunt de zichtbaarheid van het bericht niet wijzigen.
   message_threads:
@@ -140,6 +141,9 @@ nl:
         Antwoorden: %{reply_url}
         Bericht online lezen: %{msg_url}
         Berichtinstellingen: %{profile_url}
+      reply: Antwoorden
+      see_message_online: Bericht online lezen
+      messaging_options: Berichtinstellingen
       footer_group: |
         Verzenden aan groep: %{group}
   navigation:

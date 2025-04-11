@@ -1,6 +1,5 @@
 class Admin::ConfigsController < Admin::BaseController
-
-  before_action :get_tabs, only: [:show, :list]
+  before_action :get_tabs, only: %i[show list]
 
   def show
     @current_tab = @tabs.include?(params[:tab]) ? params[:tab] : @tabs.first
@@ -11,13 +10,13 @@ class Admin::ConfigsController < Admin::BaseController
     @current_tab = 'list'
     @cfg = FoodsoftConfig
     @dfl = FoodsoftConfig.config
-    @keys = FoodsoftConfig.keys.select {|k| FoodsoftConfig.allowed_key?(k)}.sort
+    @keys = FoodsoftConfig.keys.select { |k| FoodsoftConfig.allowed_key?(k) }.sort
   end
 
   def update
     parse_recurring_selects! params[:config][:order_schedule]
     ActiveRecord::Base.transaction do
-      # TODO support nested configuration keys
+      # TODO: support nested configuration keys
       params[:config].each do |key, val|
         FoodsoftConfig[key] = convert_config_value val
       end
@@ -30,7 +29,7 @@ class Admin::ConfigsController < Admin::BaseController
 
   # Set configuration tab names as `@tabs`
   def get_tabs
-    @tabs = %w(foodcoop payment tasks messages layout language security others)
+    @tabs = %w[foodcoop payment tasks messages layout language security others]
     # allow engines to modify this list
     engines = Rails::Engine.subclasses.map(&:instance).select { |e| e.respond_to?(:configuration) }
     engines.each { |e| e.configuration(@tabs, self) }
@@ -39,16 +38,17 @@ class Admin::ConfigsController < Admin::BaseController
 
   # turn recurring rules into something palatable
   def parse_recurring_selects!(config)
-    if config
-      for k in [:pickup, :boxfill, :ends] do
-        if config[k]
-          # allow clearing it using dummy value '{}' ('' would break recurring_select)
-          if config[k][:recurr].present? && config[k][:recurr] != '{}'
-            config[k][:recurr] = ActiveSupport::JSON.decode(config[k][:recurr])
-            config[k][:recurr] = FoodsoftDateUtil.rule_from(config[k][:recurr]).to_ical if config[k][:recurr]
-          else
-            config[k] = nil
-          end
+    return unless config
+
+    for k in %i[pickup boxfill ends] do
+      if config[k]
+        # allow clearing it using dummy value '{}' ('' would break recurring_select)
+        if config[k][:recurr].present? && config[k][:recurr] != '{}' && !config[k][:recurr].nil?
+          config[k][:recurr] = ActiveSupport::JSON.decode(config[k][:recurr])
+          date = FoodsoftDateUtil.rule_from(config[k][:recurr])
+          config[k][:recurr] = date.to_ical if date
+        else
+          config[k][:recurr] = ''
         end
       end
     end
@@ -56,10 +56,9 @@ class Admin::ConfigsController < Admin::BaseController
 
   def convert_config_value(value)
     if value.is_a? ActionController::Parameters
-      value.transform_values{ |v| convert_config_value(v) }.to_hash
+      value.transform_values { |v| convert_config_value(v) }.to_hash
     else
       value
     end
   end
-
 end

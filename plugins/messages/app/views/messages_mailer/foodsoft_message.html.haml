@@ -1,0 +1,11 @@
+= raw @message.body
+%hr
+%ul
+  - if @message.group
+    %li= t '.footer_group', group: @message.group.name
+  %li
+    %a{href: new_message_url('message[reply_to]' => @message.id)}= t '.reply'
+  %li
+    %a{href: message_url(@message)}= t '.see_message_online'
+  %li
+    %a{href: my_profile_url}= t '.messaging_options'

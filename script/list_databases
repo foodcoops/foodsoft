@@ -1,0 +1,22 @@
+require 'mysql2'
+
+def get_env_or_file_content(name)
+  ENV.fetch('FOODSOFT_DB_' + name) do |full_name|
+    file_name = ENV.fetch(full_name + '_FILE', nil)
+    file_name ? File.read(file_name).strip : ''
+  end
+end
+
+prefix = get_env_or_file_content('PREFIX')
+host = get_env_or_file_content('HOST')
+database = get_env_or_file_content('NAME')
+username = get_env_or_file_content('USER')
+password = get_env_or_file_content('PASSWORD')
+
+client = Mysql2::Client.new(host: host, database: database, username: username, password: password)
+escaped_prefix = client.escape(prefix)
+results = client.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE '#{escaped_prefix}%'")
+results.each do |row|
+  puts row["schema_name"][prefix.length..]
+end
+client.close

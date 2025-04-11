@@ -2,6 +2,8 @@ Doorkeeper.configure do
   # Change the ORM that doorkeeper will use (needs plugins)
   orm :active_record
 
+  base_controller 'ApplicationController'
+
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
     authenticate
@@ -49,10 +51,11 @@ Doorkeeper.configure do
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Using-Scopes
 
   # default is a collection of read-only scopes
-  default_scopes 'config:user', 'finance:user', 'user:read'
+  default_scopes 'config:user', 'finance:user', 'user:read', 'orders:read', 'group_orders:user'
 
   optional_scopes 'config:read', 'config:write',
                   'finance:read', 'finance:write',
+                  'orders:write',
                   'user:write',
                   'offline_access'
 
@@ -97,7 +100,7 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
-  grant_flows %w(authorization_code implicit password)
+  grant_flows %w[authorization_code implicit password]
 
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
@@ -109,11 +112,4 @@ Doorkeeper.configure do
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   realm 'Foodsoft'
-end
-
-# my take on https://github.com/doorkeeper-gem/doorkeeper/issues/465
-ActiveSupport.on_load(:after_initialize) do
-  Doorkeeper::ApplicationController.send :include, Concerns::Locale
-  Doorkeeper::ApplicationController.send :include, Concerns::FoodcoopScope
-  Doorkeeper::ApplicationController.send :include, Concerns::Auth
 end

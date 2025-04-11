@@ -7,18 +7,19 @@
 %p
   %b= heading_helper(BankTransaction, :amount) + ':'
   = number_to_currency(@bank_transaction.amount)
-%p
-  %b= heading_helper(BankTransaction, :iban) + ':'
-  = @bank_transaction.iban
-  - if user = @bank_transaction.user
-    = t('.belongs_to_user')
-    = user.display
-    - if user.ordergroup
-      = t('.in_ordergroup')
-      = link_to user.ordergroup.name, finance_ordergroup_transactions_path(user.ordergroup)
-  - elsif supplier = @bank_transaction.supplier
-    = t('.belongs_to_supplier')
-    = link_to supplier.name, supplier_path(supplier)
+- if @bank_transaction.iban?
+  %p
+    %b= heading_helper(BankTransaction, :iban) + ':'
+    = format_iban @bank_transaction.iban
+    - if user = @bank_transaction.user
+      = t('.belongs_to_user')
+      = user.display
+      - if user.ordergroup
+        = t('.in_ordergroup')
+        = link_to user.ordergroup.name, finance_ordergroup_transactions_path(user.ordergroup)
+    - elsif supplier = @bank_transaction.supplier
+      = t('.belongs_to_supplier')
+      = link_to supplier.name, supplier_path(supplier)
 %p
   %b= heading_helper(BankTransaction, :reference) + ':'
   = @bank_transaction.reference

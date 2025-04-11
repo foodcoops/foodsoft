@@ -1,6 +1,4 @@
-# encoding: utf-8
 class HomeController < ApplicationController
-
   def index
     # unaccepted tasks
     @unaccepted_tasks = Task.order(:due_date).unaccepted_tasks_for(current_user)
@@ -11,8 +9,7 @@ class HomeController < ApplicationController
     @unassigned_tasks = Task.order(:due_date).next_unassigned_tasks_for(current_user)
   end
 
-  def profile
-  end
+  def profile; end
 
   def reference_calculator
     if current_user.ordergroup
@@ -25,8 +22,8 @@ class HomeController < ApplicationController
   end
 
   def update_profile
-    if @current_user.update_attributes(user_params)
-      @current_user.ordergroup.update_attributes(ordergroup_params) if ordergroup_params
+    if @current_user.update(user_params)
+      @current_user.ordergroup.update(ordergroup_params) if ordergroup_params
       session[:locale] = @current_user.locale
       redirect_to my_profile_url, notice: I18n.t('home.changes_saved')
     else
@@ -38,40 +35,43 @@ class HomeController < ApplicationController
     @user = @current_user
     @ordergroup = @user.ordergroup
 
-    unless @ordergroup.nil?
+    if @ordergroup.nil?
+      redirect_to root_path, alert: I18n.t('home.no_ordergroups')
+    else
 
       @ordergroup = Ordergroup.include_transaction_class_sum.find(@ordergroup.id)
 
-      if params['sort']
-        sort = case params['sort']
-        when "date"  then "created_on"
-        when "note"   then "note"
-        when "amount" then "amount"
-        when "date_reverse"  then "created_on DESC"
-        when "note_reverse" then "note DESC"
-        when "amount_reverse" then "amount DESC"
-        end
-      else
-        sort = "created_on DESC"
-      end
+      sort = if params['sort']
+               case params['sort']
+               when 'date' then 'created_on'
+               when 'note'   then 'note'
+               when 'amount' then 'amount'
+               when 'date_reverse' then 'created_on DESC'
+               when 'note_reverse' then 'note DESC'
+               when 'amount_reverse' then 'amount DESC'
+               end
+             else
+               'created_on DESC'
+             end
 
       @financial_transactions = @ordergroup.financial_transactions.visible.page(params[:page]).per(@per_page).order(sort)
-      @financial_transactions = @financial_transactions.where('financial_transactions.note LIKE ?', "%#{params[:query]}%") if params[:query].present?
+      if params[:query].present?
+        @financial_transactions = @financial_transactions.where('financial_transactions.note LIKE ?',
+                                                                "%#{params[:query]}%")
+      end
 
-    else
-      redirect_to root_path, alert: I18n.t('home.no_ordergroups')
     end
   end
 
   # cancel personal memberships direct from the myProfile-page
   def cancel_membership
-    if params[:membership_id]
-      membership = @current_user.memberships.find!(params[:membership_id])
-    else
-      membership = @current_user.memberships.find_by_group_id!(params[:group_id])
-    end
+    membership = if params[:membership_id]
+                   @current_user.memberships.find(params[:membership_id])
+                 else
+                   @current_user.memberships.find_by_group_id!(params[:group_id])
+                 end
     membership.destroy
-    redirect_to my_profile_path, notice: I18n.t('home.ordergroup_cancelled', :group => membership.group.name)
+    redirect_to my_profile_path, notice: I18n.t('home.ordergroup_cancelled', group: membership.group.name)
   end
 
   protected
@@ -84,9 +84,8 @@ class HomeController < ApplicationController
   end
 
   def ordergroup_params
-    if params[:user][:ordergroup]
-      params.require(:user).require(:ordergroup).permit(:contact_address)
-    end
-  end
+    return unless params[:user][:ordergroup]
 
+    params.require(:user).require(:ordergroup).permit(:contact_address)
+  end
 end

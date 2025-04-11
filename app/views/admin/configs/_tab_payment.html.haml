@@ -12,6 +12,7 @@
     = config_input_field form, :minimum_balance, as: :decimal, class: 'input-small'
 = config_input form, :charge_members_manually, as: :boolean
 = config_input form, :use_iban, as: :boolean
+= config_input form, :use_self_service, as: :boolean
 
 %h4= t '.schedule_title'
 = form.simple_fields_for :order_schedule do |fields|

@@ -1,6 +1,8 @@
 class CreateSupplierCategories < ActiveRecord::Migration[4.2]
   class FinancialTransactionClass < ActiveRecord::Base; end
+
   class SupplierCategory < ActiveRecord::Base; end
+
   class Supplier < ActiveRecord::Base; end
 
   def change

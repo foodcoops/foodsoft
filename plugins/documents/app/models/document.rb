@@ -27,5 +27,4 @@ class Document < ApplicationRecord
 
     "#{name}.#{types.first.preferred_extension}"
   end
-
 end

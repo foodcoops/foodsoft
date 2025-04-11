@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Foodsoft
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 7.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -28,13 +28,15 @@ module Foodsoft
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Internationalization.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml')]
-    config.i18n.available_locales = Pathname.glob(Rails.root.join('config', 'locales', '{??,???}{-*,}.yml')).map{|p| p.basename('.yml').to_s }
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml')]
+    config.i18n.available_locales = Pathname.glob(Rails.root.join('config/locales/{??,???}{-*,}.yml')).map do |p|
+      p.basename('.yml').to_s
+    end
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -44,8 +46,11 @@ module Foodsoft
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-    # TODO Disable this. Uncommenting this line will currently cause rspec to fail.
+    # TODO: Disable this. Uncommenting this line will currently cause rspec to fail.
     config.action_controller.permit_all_parameters = true
+
+    config.active_job.queue_adapter     = :resque
+    config.active_job.queue_name_prefix = ENV.fetch('JOB_QUEUE_PREFIX', "foodsoft_#{Rails.env}")
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -58,20 +63,21 @@ module Foodsoft
     config.assets.initialize_on_precompile = true
 
     # Load legacy scripts from vendor
-    config.assets.precompile += [ 'vendor/assets/javascripts/*.js' ]
+    config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
-    # CORS for API
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        # this restricts Foodsoft scopes to certain characters - let's discuss it when it becomes an actual problem
-        resource %r{\A/[-a-zA-Z0-9_]+/api/v1/}, headers: :any, methods: :any
-      end
-    end
+    config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
+
+    config.autoloader = :zeitwerk
+
+    config.active_storage.variant_processor = :mini_magick
   end
 
   # Foodsoft version
-  VERSION = File.read(Rails.root.join('VERSION')).strip
+  VERSION = Rails.root.join('VERSION').read.strip
   # Current revision, or +nil+
-  REVISION = (File.read(Rails.root.join('REVISION')).strip rescue nil)
+  REVISION = begin
+    Rails.root.join('REVISION').read.strip
+  rescue StandardError
+    nil
+  end
 end

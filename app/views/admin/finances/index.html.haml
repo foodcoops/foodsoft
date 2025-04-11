@@ -3,6 +3,8 @@
 - content_for :actionbar do
   = link_to t('.new_financial_transaction_class'), new_admin_financial_transaction_class_path, remote: true, class: 'btn btn-primary'
   = link_to t('.new_bank_account'), new_admin_bank_account_path, remote: true, class: 'btn'
+  = link_to t('.new_bank_gateway'), new_admin_bank_gateway_path, remote: true, class: 'btn'
+  = link_to t('.new_supplier_category'), new_admin_supplier_category_path, remote: true, class: 'btn'
 
 - content_for :sidebar do
   %p= t('.first_paragraph').html_safe
@@ -12,3 +14,9 @@
 
 %h2= t('.bank_accounts')
 #bank_accounts_table= render 'bank_accounts'
+
+%h2= t('.bank_gateways')
+#bank_gateways_table= render 'bank_gateways'
+
+%h2= t('.supplier_categories')
+#supplier_categories_table= render 'supplier_categories'

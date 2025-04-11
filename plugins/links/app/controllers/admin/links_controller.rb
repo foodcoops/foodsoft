@@ -25,7 +25,7 @@ class Admin::LinksController < Admin::BaseController
   def update
     @link = Link.find(params[:id])
 
-    if @link.update_attributes!(link_params)
+    if @link.update!(link_params)
       index
       render action: :update_links
     else
@@ -37,8 +37,8 @@ class Admin::LinksController < Admin::BaseController
     link = Link.find(params[:id])
     link.destroy!
     redirect_to admin_links_path
-  rescue => error
-    redirect_to admin_links_path, I18n.t('errors.general_msg', msg: error.message)
+  rescue StandardError => e
+    redirect_to admin_links_path, I18n.t('errors.general_msg', msg: e.message)
   end
 
   private

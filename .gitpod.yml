@@ -1,0 +1,32 @@
+# This configuration file was mainly inspired by ./doc/SETUP_DEVELOPMENT_DOCKER.md
+tasks:
+  - name: Docker
+    init: |
+      # init docker containers
+      docker-compose -f docker-compose-dev.yml pull
+      docker-compose -f docker-compose-dev.yml up -d mariadb
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle install
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake foodsoft:setup_development_docker
+      # setup test database
+      docker-compose -f docker-compose-dev.yml run --rm mariadb mariadb --host=mariadb --password=secret --execute="CREATE DATABASE test"
+      docker-compose -f docker-compose-dev.yml run --rm foodsoft bundle exec rake db:schema:load RAILS_ENV=test DATABASE_URL=mysql2://root:secret@mariadb/test?encoding=utf8mb4
+    command: |
+      # start docker containers
+      docker-compose -f docker-compose-dev.yml up
+      
+  - name: Rails
+    command: |
+      echo "The rails application is started in docker containers (see docker-compose-dev.yml)."
+      echo "For executing rails commands, open up a bash terminal inside the foodsoft container via 'docker-compose -f docker-compose-dev.yml exec foodsoft bash'"
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 2080
+    onOpen: notify
+  - port: 1080
+    onOpen: notify
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker

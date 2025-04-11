@@ -1,0 +1,12 @@
+= simple_form_for [:admin, @supplier_category], :validate => true, :remote => true do |f|
+  .modal-header
+    = close_button :modal
+    %h3= @supplier_category.new_record? ? t('.title_new') : t('.title_edit')
+  .modal-body
+    = f.input :name
+    = f.input :description
+    = f.association :financial_transaction_class, :include_blank => false
+    = f.association :bank_account, :include_blank => false
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'

@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   skip_before_action :authenticate
   layout 'login'
 
@@ -13,16 +12,20 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:nick], params[:password])
     if user
       user.update_attribute(:last_login, Time.now)
-      login_and_redirect_to_return_to user, :notice => I18n.t('sessions.logged_in')
+      login_and_redirect_to_return_to user, notice: I18n.t('sessions.logged_in')
     else
       flash.now.alert = I18n.t(FoodsoftConfig[:use_nick] ? 'sessions.login_invalid_nick' : 'sessions.login_invalid_email')
-      render "new"
+      render 'new'
     end
   end
 
   def destroy
     logout
-    redirect_to login_url, :notice => I18n.t('sessions.logged_out')
+    if FoodsoftConfig[:logout_redirect_url].present?
+      redirect_to FoodsoftConfig[:logout_redirect_url], allow_other_host: true
+    else
+      redirect_to login_url, notice: I18n.t('sessions.logged_out')
+    end
   end
 
   # redirect to root, going to default foodcoop when none given
@@ -30,5 +33,4 @@ class SessionsController < ApplicationController
   def redirect_to_foodcoop
     redirect_to root_path
   end
-
 end

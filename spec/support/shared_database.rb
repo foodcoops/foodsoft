@@ -4,7 +4,7 @@ ActiveSupport.on_load(:after_initialize) do
   #   But take care when designing tests using the shared database.
   SharedSupplier.establish_connection Rails.env.to_sym
   SharedArticle.establish_connection Rails.env.to_sym
-  # hack for different structure of shared database
+  # HACK: for different structure of shared database
   SharedArticle.class_eval do
     belongs_to :supplier, class_name: 'SharedSupplier'
     alias_attribute :number, :order_number
@@ -12,6 +12,7 @@ ActiveSupport.on_load(:after_initialize) do
     def category
       ArticleCategory.where(id: article_category_id).first
     end
+
     def self.find_by_number(n)
       find_by_order_number(n)
     end

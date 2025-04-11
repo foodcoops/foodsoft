@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       get :socket, on: :collection
     end
 
-    resources :printer_jobs, only: [:index, :create, :show, :destroy] do
+    resources :printer_jobs, only: %i[index create show destroy] do
+      post :requeue, on: :member
       get :document, on: :member
     end
   end
