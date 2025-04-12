@@ -11,13 +11,17 @@ SupplierCategory.create!(id: 1, name: 'Other', financial_transaction_class_id: 1
 
 Supplier.create!([
                    { id: 1, name: 'Beautiful bakery', supplier_category_id: 1,
-                     address: 'Smallstreet 1, Cookilage', phone: '0123456789', email: 'info@bbakery.test', min_order_quantity: '100' },
+                     address: 'Smallstreet 1, Cookilage', phone: '0123456789', email: 'info@bbakery.test', min_order_quantity: '100', unit_migration_completed: Time.now },
                    { id: 2, name: 'Chocolatiers', supplier_category_id: 1,
-                     address: 'Multatuliroad 1, Amsterdam', phone: '0123456789', email: 'info@chocolatiers.test', url: 'http://www.chocolatiers.test/', contact_person: 'Max Pure', delivery_days: 'Tue, Fr (Amsterdam)' },
+                     address: 'Multatuliroad 1, Amsterdam', phone: '0123456789', email: 'info@chocolatiers.test', url: 'http://www.chocolatiers.test/', contact_person: 'Max Pure', delivery_days: 'Tue, Fr (Amsterdam)', unit_migration_completed: Time.now },
                    { id: 3, name: 'Cheesemaker', supplier_category_id: 1,
-                     address: 'Cheesestreet 5, London', phone: '0123456789', url: 'http://www.cheesemaker.test/' },
+                     address: 'Cheesestreet 5, London', phone: '0123456789', url: 'http://www.cheesemaker.test/', unit_migration_completed: Time.now },
                    { id: 4, name: 'The Nuthome', supplier_category_id: 1,
-                     address: 'Alexanderplatz, Berlin', phone: '0123456789', email: 'info@thenuthome.test', url: 'http://www.thenuthome.test/', note: 'delivery in Berlin; €9 delivery costs for orders under €123' }
+                     address: 'Alexanderplatz, Berlin', phone: '0123456789', email: 'info@thenuthome.test', url: 'http://www.thenuthome.test/', note: 'delivery in Berlin; €9 delivery costs for orders under €123', unit_migration_completed: Time.now },
+                   { id: 5, name: 'Farmer John', supplier_category_id: 1, address: 'Smallstreet 1, Cookilage',
+                     phone: '0123456789', email: 'info@john.com', min_order_quantity: '100', unit_migration_completed: Time.now },
+                   { id: 6, name: 'Unit migration test', supplier_category_id: 1, address: 'Smallstreet 2, Cookilage',
+                     phone: '0123456789', email: 'info@bbakery.test', min_order_quantity: '100', unit_migration_completed: nil }
                  ])
 
 ArticleCategory.create!(id: 1, name: 'Other', description: 'other, misc, unknown')
