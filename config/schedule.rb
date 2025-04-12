@@ -22,3 +22,8 @@ end
 every :day, :at => '2:20 am' do
   command '/bin/bash -l -c "/home/foodsoft/restart.sh >> /home/foodsoft/cron-restarts.log"'
 end
+
+# charge dues at the start of every month
+every 1.month, at: 'start of the month' do
+  rake "ordergroup:charge"
+end

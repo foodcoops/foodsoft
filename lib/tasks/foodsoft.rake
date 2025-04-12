@@ -26,6 +26,33 @@ namespace :foodsoft do
     end
   end
 
+  desc "Report on fees paid"
+  task :report_fees => :environment do
+    Ordergroup.order(:name).each do |ordergroup|
+      transactions_by_year = ordergroup.financial_transactions
+                                       .where("note LIKE ?", "%dues%")
+                                       .group_by { |t| t.created_on.year }
+                                       .sort
+
+      transactions_by_year.each do |year, transactions|
+        sum = transactions.sum(&:amount)
+        puts "#{ordergroup.name},#{year},#{sum}"
+      end
+    end
+  end
+
+  namespace :ordergroup do
+    desc "Charges each Ordergroup $5 at the start of each month, excluding certain groups"
+    task dues: :environment do
+      excludes = ['ZZZ', 'Leaving', 'Paused', 'Z - Group']
+
+      Ordergroup.where.not("name LIKE ?", "%#{excludes.join('%')}%" ).find_each do |ordergroup|
+        due_note = "Monthly dues for #{Date.today.strftime('%B %Y')}"
+        ordergroup.financial_transactions.create(amount: -5, note: due_note)
+      end
+    end
+  end
+
   desc "Notify workgroup of upcoming weekly task"
   task :notify_users_of_weekly_task => :environment do
     tasks = Task.where(done: false, due_date: 7.day.from_now.to_date)
