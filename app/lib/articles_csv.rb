@@ -21,7 +21,7 @@ class ArticlesCsv < RenderCsv
       Article.human_attribute_name(:article_category),
       Article.human_attribute_name(:origin),
       Article.human_attribute_name(:manufacturer),
-      Article.human_attribute_name(:id)
+      @options[:foodsoft_url]
     ]
   end
 
