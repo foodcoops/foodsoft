@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+# foodsoft_article_import/Gemfile
+
+source 'http://rubygems.org'
+
+gemspec
