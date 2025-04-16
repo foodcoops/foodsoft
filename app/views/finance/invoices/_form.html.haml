@@ -39,7 +39,7 @@
           %hr
   = f.input :note
   .form-actions
-    = f.submit class: 'btn'
+    = f.button :submit
     = link_to t('ui.or_cancel'), :back
 
 = render :partial => 'form_js', :locals => {:invoice_id => invoice_id}

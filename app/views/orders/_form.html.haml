@@ -63,7 +63,7 @@
     = render :partial => 'template_orders_script'
 
   .form-actions
-    = f.submit class: 'btn'
+    = f.button :submit
     = link_to t('ui.or_cancel'), orders_path
     - unless @order.erroneous_article_ids.empty?
       &nbsp;

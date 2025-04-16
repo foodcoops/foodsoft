@@ -4,5 +4,5 @@
   - unless @user.ordergroup
     = f.input :create_ordergroup, as: :boolean, label: false, inline_label: t('.create_ordergroup')
   .form-actions
-    = f.submit
+    = f.button :submit
     = link_to t('ui.or_cancel'), :back

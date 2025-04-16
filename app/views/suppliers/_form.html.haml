@@ -24,5 +24,5 @@
   = f.input :remote_order_url
   = render 'shared/custom_form_fields', f: f, type: :supplier
   .form-actions
-    = f.submit class: 'btn'
+    = f.button :submit
     = link_to t('ui.or_cancel'), suppliers_path

@@ -529,15 +529,15 @@ i.package.icon-only {
 // multiple-column layout in forms (landscape tablet and wider only)
 @media (min-width: 768px) {
   .form-horizontal .fold-line {
-    .control-group {
+    .form-group {
       float: left;
     }
-    .control-group + .control-group {
+    .form-group + .form-group {
       .control-label {
         width: auto;
         margin: 0 10px;
       }
-      .controls {
+      div {
         float: left;
         margin-left: 0;
       }
@@ -549,9 +549,9 @@ i.package.icon-only {
         margin-bottom: 20px;
       }
     }
-    .control-group:last-child {
+    .form-group:last-child {
       float: none;
-      .controls {
+      div {
         float: none;
       }
     }
