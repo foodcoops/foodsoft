@@ -22,6 +22,7 @@ gem 'bootstrap-sass', '~> 3.4.1'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
+gem 'font-awesome-rails'
 gem 'haml', '~> 6.0'
 gem 'haml-rails'
 gem 'ice_cube'
@@ -38,11 +39,10 @@ gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 http
 gem 'ransack'
 gem 'resque'
 gem 'ruby-units'
-gem 'simple_form'
 gem 'simple-navigation'
+gem 'simple_form'
 gem 'simple_navigation_bootstrap'
 gem 'sprockets', '< 4'
-gem 'font-awesome-rails'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
 gem 'concurrent-ruby', '1.3.4'
@@ -104,10 +104,10 @@ group :development, :test do
   gem 'rails-erd', '~> 1.7'
   gem 'rubocop', require: false
   gem 'rubocop-capybara', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rspec_rails', require: false
-  gem 'rubocop-factory_bot', require: false
   gem 'ruby-prof', require: false
 
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue
