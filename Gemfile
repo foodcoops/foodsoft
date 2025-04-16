@@ -66,6 +66,7 @@ gem 'terser', '~> 1.1'
 
 # we use the git version of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
+gem 'foodsoft_article_import', path: 'plugins/article_import'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
 gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_links', path: 'plugins/links'

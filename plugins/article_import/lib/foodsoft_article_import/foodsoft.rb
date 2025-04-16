@@ -37,23 +37,26 @@ module FoodsoftArticleImport
           next
         end
 
-        article = { order_number: row[1],
+        article = { availability: row[0]&.strip == I18n.t('simple_form.yes'),
+                    order_number: row[1],
                     name: row[2],
-                    note: row[3],
-                    manufacturer: row[4],
-                    origin: row[5],
-                    unit: row[6],
-                    price: row[7],
-                    tax: row[8],
-                    unit_quantity: row[10],
-                    article_category: row[13] }
-        article.merge!(deposit: row[9]) unless row[9].nil?
+                    supplier_order_unit: ArticleUnitsLib.get_code_for_unit_name(row[3]),
+                    unit: row[4],
+                    article_unit_ratios: FoodsoftFile.parse_ratios_cell(row[5]),
+                    minimum_order_quantity: row[6],
+                    billing_unit: ArticleUnitsLib.get_code_for_unit_name(row[7]),
+                    group_order_granularity: row[8],
+                    group_order_unit: ArticleUnitsLib.get_code_for_unit_name(row[9]),
+                    price: row[10],
+                    price_unit: ArticleUnitsLib.get_code_for_unit_name(row[11]),
+                    tax: row[12],
+                    deposit: (row[13].nil? ? '0' : row[13]),
+                    note: row[14],
+                    article_category: row[15],
+                    origin: row[16],
+                    manufacturer: row[17] }
         FoodsoftArticleImport.generate_number(article) if article[:order_number].to_s.strip.empty?
-        if row[6].nil? || row[7].nil? || row[8].nil?
-          yield article, 'Error: unit, price and tax must be entered', i
-        else
-          yield article, (row[0] == 'x' ? :outlisted : nil), i
-        end
+        yield article, (article[:availability] ? :outlisted : nil), i
       end
     end
   end

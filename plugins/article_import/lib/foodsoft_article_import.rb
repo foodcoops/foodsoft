@@ -37,7 +37,7 @@ module FoodsoftArticleImport
   # @return [File, Roo::Spreadsheet] file with encoding set if needed
   def self.parse(file, custom_file_path: nil, type: nil, &blk)
     custom_file_path ||= nil
-    type ||= 'bnn'
+    type ||= 'foodsoft'
     parser = file_formats[type]
     if block_given?
       parser.parse(file, custom_file_path: custom_file_path, &blk)
