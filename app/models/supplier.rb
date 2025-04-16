@@ -42,11 +42,11 @@ class Supplier < ApplicationRecord
   # Synchronise articles with spreadsheet.
   #
   # @param file [File] Spreadsheet file to parse
-  # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
+  # @param options [Hash] Options passed to {FoodsoftArticleImport#parse} except when listed here.
   # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
   # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
   def sync_from_file(file, options = {})
-    data = FoodsoftFile.parse(file, options)
+    data = FoodsoftArticleImport.parse(file, options.except(:convert_units, :outlist_absent))
     data.each do |new_attrs|
       new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
       new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
