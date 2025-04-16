@@ -39,8 +39,8 @@ gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 http
 gem 'ransack'
 gem 'resque'
 gem 'ruby-units'
-gem 'simple-navigation'
 gem 'simple_form'
+gem 'simple-navigation'
 gem 'simple_navigation_bootstrap'
 gem 'sprockets', '< 4'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb

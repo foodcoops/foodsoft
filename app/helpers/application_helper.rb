@@ -230,10 +230,10 @@ module ApplicationHelper
   end
 
   # allow truncate to add title when tooltip option is given
-  def truncate(text, options = {}, &block)
+  def truncate(text, options = {}, &)
     return text if !text || text.length <= (options[:length] || 30)
 
-    text_truncated = super(text, options, &block)
+    text_truncated = super
     if options[:tooltip]
       content_tag :span, text_truncated, title: text
     else
