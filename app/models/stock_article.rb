@@ -10,11 +10,11 @@ class StockArticle < Article
   ransack_alias :quantity_available, :quantity # in-line with {StockArticleSerializer}
 
   def self.ransackable_attributes(auth_object = nil)
-    super(auth_object) - %w[supplier_id] + %w[quantity]
+    super - %w[supplier_id] + %w[quantity]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    super(auth_object) - %w[supplier]
+    super - %w[supplier]
   end
 
   # Update the quantity of items in stock

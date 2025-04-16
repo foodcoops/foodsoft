@@ -38,7 +38,7 @@ module PagesHelper
   end
 
   def generate_toc(body)
-    toc = String.new
+    toc = ''
     body.gsub(/^(={1,6})\s*(.*?)\s*(\1)/) do
       number = ::Regexp.last_match(1).length - 1
       name = ::Regexp.last_match(2)

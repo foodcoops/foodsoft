@@ -130,7 +130,7 @@ class MultipleOrdersByGroups < OrderPdf
     @group_order_article_batch.select { |goa| goa.group_order.ordergroup_id == ordergroup.id }
   end
 
-  def each_group_order_article_for(ordergroup, &block)
-    group_order_articles_for(ordergroup).each(&block)
+  def each_group_order_article_for(ordergroup, &)
+    group_order_articles_for(ordergroup).each(&)
   end
 end

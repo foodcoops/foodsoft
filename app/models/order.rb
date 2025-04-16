@@ -15,8 +15,8 @@ class Order < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', foreign_key: 'updated_by_user_id'
   belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id'
 
-  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
-  enum transport_distribution: { skip: 0, ordergroup: 1, price: 2, articles: 3 }
+  enum :end_action, { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+  enum :transport_distribution, { skip: 0, ordergroup: 1, price: 2, articles: 3 }
 
   # Validations
   validates :starts, presence: true
@@ -104,7 +104,7 @@ class Order < ApplicationRecord
   end
 
   def finished?
-    state == 'finished' || state == 'received'
+    %w[finished received].include?(state)
   end
 
   def received?
