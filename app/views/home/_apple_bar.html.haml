@@ -1,6 +1,6 @@
 = t '.points', points: apple_bar.apples
 .progress
-  %div{class: "bar bar-#{apple_bar.group_bar_state}", style: "width: #{apple_bar.group_bar_width}%"}
+  %div{class: "progress-bar progress-bar-#{apple_bar.group_bar_state}", style: "width: #{apple_bar.group_bar_width}%"}
 
 %span.description
   = t '.desc', amount: number_to_currency(apple_bar.mean_order_amount_per_job, :precision=>0)
