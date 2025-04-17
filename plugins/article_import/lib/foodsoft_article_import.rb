@@ -21,7 +21,7 @@ module FoodsoftArticleImport
   #   #parse             parse the data
   #
   def self.file_formats
-    @@file_formats ||= {
+    @@file_formats ||= { # rubocop:todo Style/ClassVars
       'bnn' => FoodsoftArticleImport::Bnn,
       'foodsoft' => FoodsoftArticleImport::Foodsoft,
       'dnb_xml' => FoodsoftArticleImport::Odin,
@@ -72,13 +72,13 @@ module FoodsoftArticleImport
     opts[:csv_options][:liberal_parsing] = true if liberal_parsing
     opts[:extension] = File.extname(File.basename(filename)) if filename
     puts "
-    " + "______________" + "
-    " + "______________" + "
-    " + "______ext________" + "
-    " + "#{opts[:extension]}" + "
-    " + "______________"+ "
-    " + "______________"+ "
-    " + "______________"
+    " + '______________' + "
+    " + '______________' + "
+    " + '______ext________' + "
+    " + opts[:extension].to_s + "
+    " + '______________' + "
+    " + '______________' + "
+    " + '______________'
     begin
       Roo::Spreadsheet.open(file, **opts)
     rescue StandardError => e

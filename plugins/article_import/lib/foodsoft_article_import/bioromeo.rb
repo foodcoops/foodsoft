@@ -28,13 +28,11 @@ module FoodsoftArticleImport
                      RES_PARSE_UNIT_LIST.map { |r| /#{r}\s*$/ } +
                      RES_PARSE_UNIT_LIST.map { |r| /-#{r}/ }
 
-    def self.parse(file, custom_file_path: nil)
-      custom_file_path ||= nil
+    def self.parse(file, custom_file_path: nil) # rubocop:todo Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Lint/UnusedMethodArgument
       opts = OPTIONS.dup
       opts[:liberal_parsing] = true
       opts[:col_sep] = ','
       ss = FoodsoftArticleImport.open_spreadsheet(file, **opts)
-      header_row = true
       sheet = ss.sheet(0).parse(clean: true,
                                 order_number: /Artnr./,
                                 name: /Product/,
@@ -47,7 +45,7 @@ module FoodsoftArticleImport
       linenum = 0
       category = nil
 
-      sheet.each do |row|
+      sheet.each do |row| # rubocop:todo Metrics/BlockLength
         linenum += 1
         row[:name].to_s.strip.empty? and next
         # (sub)categories are in first two content cells - assume if there's a price it's a product
@@ -109,7 +107,7 @@ module FoodsoftArticleImport
         elsif (m = unit.match(/^(.*)\b\s*(st|bos|bossen|bosjes?)\.?\s*$/i))
           unit_quantity, unit = m[1..2]
           unit_quantity.blank? and unit_quantity = 1
-        else
+        else # rubocop:todo Lint/DuplicateBranch
           unit_quantity = 1
         end
         # there may be a more informative unit in the line
@@ -166,9 +164,9 @@ module FoodsoftArticleImport
       # perhaps unit price is kg-price
       kgprice = case what
                 when /^kg/i
-                  pack_price.to_f / amount.to_f
+                  pack_price.to_f / amount.to_f # rubocop:todo Style/FloatDivision
                 when /^gr/
-                  pack_price.to_f / amount.to_f * 1000
+                  pack_price.to_f / amount.to_f * 1000 # rubocop:todo Style/FloatDivision
                 end
       return unless kgprice.to_s.strip.empty? && (kgprice - unit_price.to_f).abs < 1e-2
 
@@ -176,7 +174,7 @@ module FoodsoftArticleImport
       return unless (unit_price_computed - unit_price.to_f).abs > 1e-2
 
       "price per unit given #{unit_price.round(3)} does not match computed " \
-        "#{pack_price.round(3)}/#{unit_quantity}=#{unit_price_computed.round(3)}" +
+      "#{pack_price.round(3)}/#{unit_quantity}=#{unit_price_computed.round(3)}" +
         (kgprice ? " (nor is it a kg-price #{kgprice.round(3)})" : '')
     end
 
@@ -184,7 +182,7 @@ module FoodsoftArticleImport
       unit = unit.sub(/1\s*x\s*/, '')
       unit = unit.sub(/,([0-9])/, '.\1').gsub(/^per\s*/, '').sub(/^1\s*([^0-9.])/, '\1').sub(/^a\b\s*/, '')
       unit = unit.sub(/(bossen|bosjes?)/, 'bos').sub(/(liter|l\.|L\.)/, 'ltr').sub(/stuks?/, 'st').sub('gram', 'gr')
-      unit = unit.sub(/\s*\.\s*$/, '').sub(/\s+/, ' ').strip
+      unit.sub(/\s*\.\s*$/, '').sub(/\s+/, ' ').strip
     end
   end
 end

@@ -28,7 +28,7 @@ module FoodsoftArticleImport
         unit = row.search('eenheid').text
         unit = case unit.strip
                when '' then 'st'
-               when 'stuk' then 'st'
+               when 'stuk' then 'st' # rubocop:todo Lint/DuplicateBranch
                when 'g'    then 'gr' # need at least 2 chars
                when 'l'    then 'ltr'
                else             unit
@@ -62,18 +62,18 @@ module FoodsoftArticleImport
       end
     end
 
-    @@codes = {}
+    @@codes = {} # rubocop:todo Style/ClassVars
 
     def self.load_codes(custom_file_path = nil)
       @gem_lib = File.expand_path '..', __dir__
       dir = File.join @gem_lib, 'foodsoft_article_import'
       begin
-        @@codes = YAML.safe_load(File.open(File.join(dir, 'dnb_codes.yml'))).symbolize_keys
+        @@codes = YAML.safe_load(File.open(File.join(dir, 'dnb_codes.yml'))).symbolize_keys # rubocop:todo Style/ClassVars
         if custom_file_path
           custom_codes = YAML.safe_load(File.open(custom_file_path)).symbolize_keys
           custom_codes.each_key do |key|
             custom_codes[key] = custom_codes[key].merge @@codes[key] if @@codes.keys.include?(key)
-            @@codes = @@codes.merge custom_codes
+            @@codes = @@codes.merge custom_codes # rubocop:todo Style/ClassVars
           end
         end
         @@codes
