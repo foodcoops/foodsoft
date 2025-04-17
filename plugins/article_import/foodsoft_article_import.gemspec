@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = ['README.md']
 
   spec.add_dependency 'roo', '~> 2.9.0'
-  spec.add_development_dependency 'simplecov'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
