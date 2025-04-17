@@ -28,7 +28,7 @@
       %small
         = link_to tasks_path do
           = t '.tasks_open.view_all'
-          %i.icon.icon-chevron-right
+          = fa_icon 'chevron-right'
     = render 'shared/task_list', tasks: @unassigned_tasks
 
 - if current_user.ordergroup
@@ -63,7 +63,7 @@
         %small
           = link_to my_ordergroup_path do
             = t '.my_ordergroup.transactions.view'
-            %i.icon.icon-chevron-right
+            = fa_icon 'chevron-right'
           - '<dashboard_ordergroup_mark>'
       %table.table.table-striped
         - financial_transactions = current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)
