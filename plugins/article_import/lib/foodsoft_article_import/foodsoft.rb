@@ -17,8 +17,7 @@ module FoodsoftArticleImport
 
     # Parses Foodsoft file
     # the yielded article is a simple hash
-    def self.parse(file, custom_file_path: nil)
-      custom_file_path ||= nil
+    def self.parse(file, custom_file_path: nil) # rubocop:todo Lint/UnusedMethodArgument
       opts = OPTIONS.dup
 
       ss = FoodsoftArticleImport.open_spreadsheet(file, **opts)

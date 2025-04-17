@@ -4,28 +4,28 @@
 #
 module FoodsoftArticleImport
   module Bnn
-    @@codes = {}
-    @@midgard = {}
+    @@codes = {} # rubocop:todo Style/ClassVars
+    @@midgard = {} # rubocop:todo Style/ClassVars
     # Loads the codes_file config/bnn_codes.yml into the class variable @@codes
     def self.load_codes(custom_file_path = nil)
       @gem_lib = File.expand_path '..', __dir__
       dir = File.join @gem_lib, 'foodsoft_article_import'
       begin
-        @@codes = YAML.safe_load(File.open(File.join(dir, 'bnn_codes.yml'))).symbolize_keys
+        @@codes = YAML.safe_load(File.open(File.join(dir, 'bnn_codes.yml'))).symbolize_keys # rubocop:todo Style/ClassVars
         if custom_file_path
           custom_codes = YAML.safe_load(File.open(custom_file_path)).symbolize_keys
           custom_codes.each_key do |key|
             custom_codes[key] = custom_codes[key].merge @@codes[key] if @@codes.keys.include?(key)
-            @@codes = @@codes.merge custom_codes
+            @@codes = @@codes.merge custom_codes # rubocop:todo Style/ClassVars
           end
         end
-        @@midgard = YAML.safe_load(File.open(File.join(dir, 'midgard_codes.yml'))).symbolize_keys
+        @@midgard = YAML.safe_load(File.open(File.join(dir, 'midgard_codes.yml'))).symbolize_keys # rubocop:todo Style/ClassVars
       rescue StandardError => e
         raise "Failed to load bnn_codes: #{dir}/{bnn,midgard}_codes.yml: #{e.message}"
       end
     end
 
-    $missing_bnn_codes = []
+    $missing_bnn_codes = [] # rubocop:todo Style/GlobalVars
 
     # translates codes from BNN to foodsoft-code
     def self.translate(key, value)
@@ -34,7 +34,7 @@ module FoodsoftArticleImport
       elsif @@midgard[key]
         @@midgard[key][value]
       elsif !value.nil?
-        $missing_bnn_codes << value
+        $missing_bnn_codes << value # rubocop:todo Style/GlobalVars
         nil
       end
     end
