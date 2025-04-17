@@ -10,12 +10,10 @@ describe FoodsoftArticleImport do
   dummy_article = { order_number: '1', name: 'Wilde aardappels', article_category: 'Aardappels "nieuwe oogst"',
                     deposit: 0, manufacturer: nil, origin: 'Noordoostpolder, NL', price: 5.0, tax: 6, unit: '5kg', unit_quantity: 1, note: 'Skal 1234; 123456; Demeter 123456; (Kopervrij)' }
 
-  empty = {}
-
-  context 'bioromeo' do
+  context 'with type bioromeo' do
     it 'parses file correctly with type parameter bioromeo' do
-      FoodsoftArticleImport.parse(File.open(File.join(bioromeo_files_path, 'bioromeo_flawless.csv')),
-                                  type: 'bioromeo') do |new_attrs, _status, _line|
+      described_class.parse(File.open(File.join(bioromeo_files_path, 'bioromeo_flawless.csv')),
+                            type: 'bioromeo') do |new_attrs, _status, _line|
         next if new_attrs.nil?
 
         expect(new_attrs).to eq dummy_article
