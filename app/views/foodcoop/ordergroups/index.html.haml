@@ -2,12 +2,13 @@
 
 .well
   = form_tag foodcoop_ordergroups_path, :method => :get, :remote => true, 'data-submit-onchange' => true,
-    class: 'form-search' do
-    = text_field_tag :name, params[:name], class: 'input-medium search-query', placeholder: t('.name')
-    %label{:for => 'only_active'}
-      = check_box_tag 'only_active', 1, params[:only_active]
-      = t '.only_active'
-      %small= t '.only_active_desc'
+    class: 'form-inline' do
+    = text_field_tag :name, params[:name], class: 'form-control search-query', placeholder: t('.name')
+    .checkbox
+      %label{:for => 'only_active'}
+        = check_box_tag 'only_active', 1, params[:only_active]
+        = t '.only_active'
+        %small= t '.only_active_desc'
 
 #ordergroups
   = render :partial => "ordergroups"
