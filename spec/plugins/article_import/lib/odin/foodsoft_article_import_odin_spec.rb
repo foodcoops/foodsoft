@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../../lib/foodsoft_article_import'
+require 'foodsoft_article_import'
 
 describe FoodsoftArticleImport do
   files_path = File.expand_path '../../files', __dir__
