@@ -1,3 +1,3 @@
-status;number;name;note;manufacturer;origin;unit ;clear price;tax;deposit;unit quantity;scale quantity;scale price;category
-;1;product;bio;someone;eu;1 kg;1.23;6;0;10;;;coolstuff
-;12;other product;bio;someone;eu;2 kg;3.45;6;0;10;;;coolstuff
+status;number;name;supplier order unit;unit;article unit ratios;min order quantity;billing unit;group order granularity;group order unit;price;price unit;tax;deposit;note;category;origin;manufacturer
+;1;product;;1 kg;;;;;;1.23;;6;0;bio;coolstuff;eu;someone
+;12;other product;;2 kg;;;;;;3.45;;6;0;bio;coolstuff;eu;someone

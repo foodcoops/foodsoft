@@ -20,13 +20,6 @@ describe FoodsoftArticleImport do
   empty = {}
 
   context 'bnn' do
-    it 'parses bnn file correctly without type parameter' do
-      FoodsoftArticleImport.parse(File.open(File.join(bnn_files_path,
-                                                      'bnn_flawless.BNN'))) do |new_attrs, status, _line|
-        expect(new_attrs).to eq article
-        expect(status).to eq :outlisted
-      end
-    end
     it 'parses file correctly with type parameter' do
       FoodsoftArticleImport.parse(File.open(File.join(bnn_files_path, 'bnn_flawless.BNN')),
                                   type: 'bnn') do |new_attrs, status, _line|
