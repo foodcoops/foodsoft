@@ -97,6 +97,9 @@
     = f.file_field "file"
 
   .control-group
+    %label(for="articles_delete_unavailable")
+      = f.check_box "delete_unavailable"
+      = t '.options.delete_unavailable'
     %label(for="articles_outlist_absent")
       = f.check_box "outlist_absent"
       = t '.options.outlist_absent'
