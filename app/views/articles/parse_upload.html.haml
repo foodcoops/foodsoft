@@ -2,6 +2,7 @@
 
 = form_tag update_synchronized_supplier_articles_path(@supplier) do
   = hidden_field_tag :from_action, 'parse_upload'
+  = hidden_field_tag :enable_unit_migration, @enable_unit_migration ? '1' : '0'
   = render 'sync'
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'

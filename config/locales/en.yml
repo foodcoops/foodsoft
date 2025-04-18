@@ -615,6 +615,7 @@ en:
       options:
         convert_units: Keep current units, recompute unit quantity and price (like synchronize).
         outlist_absent: Delete articles not in uploaded file.
+        activate_unit_migration: "Re-enable unit migration."
       sample:
         juices: Juices
         nuts: Nuts
