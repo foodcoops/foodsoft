@@ -288,14 +288,7 @@ class ArticlesController < ApplicationController
     @updated_articles = Article.includes(:latest_article_version).where(article_versions: { id: params[:articles]&.values&.map do |v|
                                                                                                   v[:id]
                                                                                                 end || [] })
-    @new_articles = (params[:new_articles]&.values || []).map do |a|
-      article = @supplier.articles.build
-      article_version = article.article_versions.build(a)
-      article.article_versions << article_version
-      article.latest_article_version = article_version
-      article_version.article = article
-      article
-    end
+    @new_articles = build_articles_from_params_array(params[:new_articles]&.values || [])
 
     has_error = false
     Article.transaction do
@@ -337,6 +330,17 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def build_articles_from_params_array(params)
+    params.map do |a|
+      article = @supplier.articles.build
+      article_version = article.article_versions.build(a)
+      article.article_versions << article_version
+      article.latest_article_version = article_version
+      article_version.article = article
+      article
+    end
+  end
 
   def build_article_migration_samples
     articles = @supplier.articles.with_latest_versions_and_categories.undeleted.includes(latest_article_version: [:article_unit_ratios])
