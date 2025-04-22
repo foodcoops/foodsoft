@@ -4,7 +4,7 @@ describe Supplier do
   let(:supplier) { create(:supplier) }
 
   context 'syncs from file' do
-    it 'imports and updates articles' do
+    it 'imports and updates articles in foodsoft format' do
       article1 = create(:article, supplier: supplier, order_number: 177_813, unit: '250 g', price: 0.1)
       article2 = create(:article, supplier: supplier, order_number: 12_345)
       supplier.articles = [article1, article2]
@@ -17,6 +17,24 @@ describe Supplier do
       expect(new_articles.length).to be > 0
       expect(updated_article_pairs.first[1][:name]).to eq 'Tomaten'
       expect(outlisted_articles.first).to eq article2
+    end
+
+    it 'imports articles in BNN format' do
+      changed_articles, missing_articles, new_articles = supplier.sync_from_file(
+        File.open(Rails.root.join('spec/fixtures/bnn_file_01.bnn')), 'bnn'
+      )
+      expect(changed_articles.empty?).to be true
+      expect(missing_articles.empty?).to be true
+      expect(new_articles.length).to be 4
+    end
+
+    it 'imports articles in ODIN format' do
+      changed_articles, missing_articles, new_articles = supplier.sync_from_file(
+        File.open(Rails.root.join('spec/fixtures/odin_file_01.xml')), 'odin'
+      )
+      expect(changed_articles.empty?).to be true
+      expect(missing_articles.empty?).to be true
+      expect(new_articles.length).to be 4
     end
   end
 
