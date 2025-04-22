@@ -12,6 +12,7 @@ de:
         fc_share: FoodCoop-Aufschlag
         fc_share_short: FC-Aufschlag
         gross_price: Bruttopreis
+        id: Foodsoft-ID
         manufacturer: Produzent
         name: Name
         note: Notiz
@@ -614,6 +615,7 @@ de:
         convert_units: Derzeitige Einheiten beibehalten, berechne Mengeneinheit und Preis (wie Synchronisieren).
         outlist_absent: Artikel löschen, die nicht in der hochgeladenen Datei sind.
         activate_unit_migration: "Einheitenmigration erneut freischalten."
+        delete_unavailable: "Nicht verfügbare Artikel löschen."
       sample:
         juices: Säfte
         nuts: Nüsse

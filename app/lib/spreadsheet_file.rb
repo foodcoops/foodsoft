@@ -10,11 +10,8 @@ class SpreadsheetFile
 
     row_index = 1
     s.each do |row|
-      if row_index == 1
-        # @todo try to detect headers; for now using the index is ok
-      else
-        yield row, row_index
-      end
+      # header detection must be done by using code (e.g. based on index)
+      yield row, row_index
       row_index += 1
     end
     row_index

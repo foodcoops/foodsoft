@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
                                                                                         type: nil)
 
     if request.format.csv?
-      send_data ArticlesCsv.new(@articles, encoding: 'utf-8').to_csv, filename: 'articles.csv', type: 'text/csv'
+      send_data ArticlesCsv.new(@articles, encoding: 'utf-8', foodsoft_url: root_url).to_csv, filename: 'articles.csv', type: 'text/csv'
       return
     end
 
@@ -251,7 +251,8 @@ class ArticlesController < ApplicationController
   # Update articles from a spreadsheet
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
-    options = { filename: uploaded_file.original_filename }
+    options = { filename: uploaded_file.original_filename, foodsoft_url: root_url }
+    options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @enable_unit_migration = (params[:articles]['activate_unit_migration'] == '1')

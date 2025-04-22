@@ -4,9 +4,11 @@ class FoodsoftFile
   # returns two arrays with articles and outlisted_articles
   # the parsed article is a simple hash
   def self.parse(file, options = {})
+    foodsoft_url = nil
     articles = []
-    SpreadsheetFile.parse file, options do |row|
-      next if row[2].blank?
+    SpreadsheetFile.parse file, options do |row, index|
+      foodsoft_url = row[18] if index == 1
+      next if index == 1 || row[2].blank?
 
       article = { availability: row[0]&.strip == I18n.t('simple_form.yes'),
                   order_number: row[1],
@@ -26,6 +28,7 @@ class FoodsoftFile
                   article_category: row[15],
                   origin: row[16],
                   manufacturer: row[17] }
+      article[:id] = row[18] unless foodsoft_url.blank? || foodsoft_url != options[:foodsoft_url]
       articles << article
     end
 
