@@ -20,7 +20,8 @@ class ArticlesCsv < RenderCsv
       Article.human_attribute_name(:note),
       Article.human_attribute_name(:article_category),
       Article.human_attribute_name(:origin),
-      Article.human_attribute_name(:manufacturer)
+      Article.human_attribute_name(:manufacturer),
+      @options[:foodsoft_url]
     ]
   end
 
@@ -44,7 +45,8 @@ class ArticlesCsv < RenderCsv
         article.note,
         article.article_category.try(:name),
         article.origin,
-        article.manufacturer
+        article.manufacturer,
+        article.id
       ]
     end
   end
