@@ -251,12 +251,14 @@ class ArticlesController < ApplicationController
   # Update articles from a spreadsheet
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
+    uploaded_file_type = params[:articles][:file_type]
     options = { foodsoft_url: root_url }
     options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @enable_unit_migration = (params[:articles]['activate_unit_migration'] == '1')
     @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_file(uploaded_file.tempfile,
+                                                                                                       uploaded_file_type,
                                                                                                        options)
 
     @articles = @updated_article_pairs.pluck(0) + @new_articles

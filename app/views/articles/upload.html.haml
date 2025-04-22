@@ -95,6 +95,8 @@
   .control-group
     %label(for="articles_file")= t '.file_label'
     = f.file_field "file"
+    %label(for="articles_file_type")= t '.file_type_label'
+    = f.collection_select :file_type, %w(foodsoft bioromeo bnn odin), :to_s, :to_s
 
   .control-group
     %label(for="articles_delete_unavailable")
