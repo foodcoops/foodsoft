@@ -1,101 +1,14 @@
 - title t('.title', supplier: @supplier.name)
 
-%p= t '.text_1', supplier: @supplier.name
-
-%table.table.table-bordered
-  %thead
-    %tr
-      %th= Article.human_attribute_name(:availability_short)
-      %th= Article.human_attribute_name(:order_number)
-      %th= Article.human_attribute_name(:name)
-      %th= Article.human_attribute_name(:supplier_order_unit)
-      %th= Article.human_attribute_name(:custom_unit)
-      %th= Article.human_attribute_name(:ratios_to_supplier_order_unit)
-      %th= Article.human_attribute_name(:minimum_order_quantity)
-      %th= Article.human_attribute_name(:billing_unit)
-      %th= Article.human_attribute_name(:group_order_granularity)
-      %th= Article.human_attribute_name(:group_order_unit)
-      %th= Article.human_attribute_name(:price)
-      %th= Article.human_attribute_name(:price_unit)
-      %th= Article.human_attribute_name(:tax)
-      %th= Article.human_attribute_name(:deposit)
-      %th= Article.human_attribute_name(:note)
-      %th= Article.human_attribute_name(:article_category)
-      %th= Article.human_attribute_name(:origin)
-      %th= Article.human_attribute_name(:manufacturer)
-  %tbody
-    - kgm = ArticleUnitsLib.get_translated_name_for_code('KGM')
-    - xjy = ArticleUnitsLib.get_translated_name_for_code('XJY')
-    - ltr = ArticleUnitsLib.get_translated_name_for_code('LTR')
-    - xbd = ArticleUnitsLib.get_translated_name_for_code('XBD')
-    - xbo = ArticleUnitsLib.get_translated_name_for_code('XBO')
-    %tr
-      %td
-      %td 1234A
-      %td= t '.sample.walnuts'
-      %td= kgm
-      %td
-      %td
-      %td
-      %td= kgm
-      %td 0.5
-      %td= kgm
-      %td 17.80
-      %td= kgm
-      %td= FoodsoftConfig[:tax_default] || 6
-      %td 0
-      %td
-      %td= t '.sample.nuts'
-      %td CA
-      %td= t '.sample.supplier_1'
-    %tr
-      %td= t 'simple_form.yes'
-      %td 4321Z
-      %td= t '.sample.tomato_juice'
-      %td= xjy
-      %td
-      %td= '1.5 ' + ltr
-      %td 4
-      %td= ltr
-      %td 1
-      %td= xjy
-      %td 4.35
-      %td= ltr
-      %td= FoodsoftConfig[:tax_default] || 6
-      %td 0
-      %td= t '.sample.organic'
-      %td= t '.sample.juices'
-      %td IN
-      %td= t '.sample.supplier_2'
-    %tr
-      %td
-      %td 4322Q
-      %td= t '.sample.tomato_juice'
-      %td= xbd
-      %td
-      %td= '6 ' + xbo + ', 1 ' + ltr
-      %td
-      %td= xbd
-      %td 1
-      %td= xbo
-      %td 4.02
-      %td= xbo
-      %td= FoodsoftConfig[:tax_default] || 6
-      %td 0
-      %td= t '.sample.organic'
-      %td= t '.sample.juices'
-      %td TR
-      %td= t '.sample.supplier_3'
-
-%p= t '.text_2'
-
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
    :html => { multipart: true, class: "form-horizontal" } do |f|
 
   .control-group
-    %label(for="articles_file")= t '.file_label'
+    %label(for="articles_file")
+      %strong= t '.file_label'
     = f.file_field "file"
-    %label(for="articles_file_type")= t '.file_type_label'
+    %label(for="articles_file_type")
+      %strong= t '.file_type_label'
     = f.collection_select :file_type, %w(foodsoft bioromeo bnn odin), :to_s, :to_s
 
   .control-group
