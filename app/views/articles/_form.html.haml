@@ -13,7 +13,7 @@
         %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
       .modal-body.article-form
         = f.hidden_field :id
-        = f.input :availability
+        = f.input :availability, label_html: { style: 'padding-left: 0Px' }
         = f.input :name
     
         = render partial: 'shared/article_fields_units', locals: {f: f, article: @article}
@@ -28,4 +28,4 @@
         = f.input :order_number
       .modal-footer
         = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
-        = f.submit class: 'btn btn-primary', disabled: true
+        = f.submit class: 'btn btn-default btn-primary', disabled: true

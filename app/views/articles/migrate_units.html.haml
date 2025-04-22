@@ -50,25 +50,25 @@
                         %s=article.name
 
             %td
-              = form.input :supplier_order_unit, as: :select, collection: [], label: false, include_blank: t('.custom_unit'), input_html: {class: 'input-medium', 'data-initial-value': sample[:conversion_result][:supplier_order_unit]}
+              = form.input :supplier_order_unit, as: :select, collection: [], label: false, include_blank: t('.custom_unit'), input_html: {class: 'form-control', 'data-initial-value': sample[:conversion_result][:supplier_order_unit]}
             %td
-              .d-flex.gap-1
+              .d-flex.gap-1.align-items-center
                 = field_with_preset_value_and_errors(form: form,
                   field: :first_ratio_quantity,
                   value: sample[:conversion_result][:first_ratio]&.dig(:quantity),
                   errors: sample[:errors]&.messages&.dig(:"latest_article_version.article_unit_ratios.quantity"),
-                  input_html: { type: :number, class: 'input-mini', required: true, step: 'any' })
+                  input_html: { type: :number, class: 'form-control', required: true, step: 'any' })
                 %span
                   = '&times;'.html_safe
-                = form.input :first_ratio_unit, as: :select, include_blank: true, collection: [], required: false, label: false, input_html: {class: 'input-medium', 'data-initial-value': sample[:conversion_result][:first_ratio]&.dig(:unit)}
+                = form.input :first_ratio_unit, as: :select, include_blank: true, collection: [], required: false, label: false, input_html: {class: 'form-control', 'data-initial-value': sample[:conversion_result][:first_ratio]&.dig(:unit)}, wrapper: :inline_form
             %td
-              .d-flex.gap-1
+              .d-flex.gap-1.align-items-center
                 = field_with_preset_value_and_errors(form: form,
                     field: :group_order_granularity,
                     value: sample[:conversion_result][:group_order_granularity],
                     errors: sample[:errors]&.messages&.dig(:"latest_article_version.group_order_granularity"),
-                    input_html: { type: :number, class: 'input-mini', required: true, step: 0.001, title: "steps in which ordergroups can order this article" })
+                    input_html: { type: :number, class: 'form-control', required: true, step: 0.001, title: "steps in which ordergroups can order this article" })
                 %span
                   = '&times;'.html_safe
-                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': sample[:conversion_result][:group_order_unit], class: 'input-medium'}, label: false, include_blank: false
+                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': sample[:conversion_result][:group_order_unit], class: 'form-control'}, label: false, include_blank: false, wrapper: :inline_form
   = f.submit t('.run_migration'), class: 'btn btn-primary'
