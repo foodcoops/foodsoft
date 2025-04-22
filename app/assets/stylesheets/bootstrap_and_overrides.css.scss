@@ -647,6 +647,10 @@ input.with-conversion-popover-opener {
   display: flex;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .d-none {
   display: none;
 }
@@ -722,3 +726,7 @@ td.mr-1 > *:last-child {
   display: block;
 }
 
+
+.form-group .select2-container {
+  width: 200px;
+}

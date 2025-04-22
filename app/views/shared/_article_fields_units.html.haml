@@ -1,33 +1,38 @@
 -# var parcel = $($.parseHTML("#{escape_javascript(render('shared/parcel'))}"));
 -# var parcels = #{raw @parcels.to_json};
 
-.fold-line.d-flex
+.d-flex
   = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
   -# title: unit in which article can be ordered from supplier
   - supplier_order_unit_override = article.supplier_order_unit
   - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && article.unit.nil?
-  = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, include_blank: t('.custom_unit'), input_html: {class: 'input-medium'}
+  = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-full' }
+  %i.glyphicon.glyphicon-warning-sign{title: t('.warn_about_needless_custom_unit')}
   -# title: free text unit
-  = f.input :unit, input_html: {class: 'input-mini ml-1', placeholder: t('.unit')}, label: false
-  %i.icon-warning-sign{title: t('.warn_about_needless_custom_unit')}
-.fold-line
-  .control-group
-    %label.control-label
+%div
+  .col-sm-3
+    = ""
+  .col-sm-9
+    = f.input :unit, input_html: {class: 'form-control ml-1', placeholder: t('.unit')}, label: false, wrapper: :inline_form
+    
+%div
+  .control-group.d-flex.w-full
+    %label.control-label.col-sm-3
       = t('.unit_ratios')
-    %table#fc_base_price{:class => "controls"}
+    %table#fc_base_price{:class => "controls col-sm-9 "}
       %tbody
         - ratios = article.article_unit_ratios
         = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
       %tfoot
-        %td{:colspan => 6}
-          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
-.fold-line
+        %td{:colspan => 9, :style => 'padding-left: 22Px; padding-bottom: 16Px; padding-top: 16Px'}
+          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: "add ratio"
+%div
   = f.input :minimum_order_quantity do
-    .input-append
-      = f.input_field :minimum_order_quantity, class: 'input-mini'
-      %span.add-on
-.fold-line
-  = f.input :billing_unit, as: :select, collection: [], input_html: {'data-initial-value': article.billing_unit, class: 'input-medium'}, include_blank: false
-.fold-line
-  = f.input :group_order_granularity, input_html: {class: 'input-mini', step: 0.001}
-  = f.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': article.group_order_unit, class: 'input-medium'}, label: '&times;'.html_safe, include_blank: false
+    .input-group
+      = f.input_field :minimum_order_quantity, class: 'form-control'
+      %span.input-group-addon
+%div
+  = f.input :billing_unit, as: :select, collection: [], input_html: {'data-initial-value': article.billing_unit, class: 'input-group'}, include_blank: false, wrapper_html: { class: 'd-flex' }
+%div
+  = f.input :group_order_granularity, input_html: {class: 'form-control', step: 0.001}, wrapper_html: { class: 'd-flex' }
+  = f.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': article.group_order_unit, class: 'input-group'}, label: '&times;'.html_safe, include_blank: false, wrapper_html: { class: 'd-flex' }

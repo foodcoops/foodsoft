@@ -46,7 +46,7 @@ module ArticlesHelper
   def field_with_preset_value_and_errors(options)
     form, field, value, field_errors, input_html = options.values_at(:form, :field, :value, :errors, :input_html)
     form.input field, label: false, wrapper_html: { class: field_errors.blank? ? '' : 'error' },
-                      input_html: input_html do
+                      input_html: input_html, wrapper: :inline_form do
       output = [form.input_field(field, { value: value }.merge(input_html))]
       if field_errors.present?
         errors = tag.span(class: 'help-inline') do

@@ -47,7 +47,7 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({ per_page: per_page })
-      link_class = 'btn'
+      link_class = 'btn btn-default'
       link_class << ' disabled' if per_page == current
       link_to(per_page, params, remote: true, class: link_class)
     end
@@ -55,7 +55,7 @@ module ApplicationHelper
     if options[:wrap] == false
       links.join.html_safe
     else
-      content_tag :div, class: 'btn-group pull-right' do
+      content_tag :div, class: 'btn-group btn-group-sm pull-right' do
         links.join.html_safe
       end
     end
