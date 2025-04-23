@@ -97,19 +97,14 @@
     = f.file_field "file"
 
   .control-group
-    %label(for="articles_delete_unavailable")
-      = f.check_box "delete_unavailable"
-      = t '.options.delete_unavailable'
-    %label(for="articles_outlist_absent")
-      = f.check_box "outlist_absent"
-      = t '.options.outlist_absent'
-    %label(for="articles_convert_units")
-      = f.check_box "convert_units"
-      = t '.options.convert_units'
-    - unless @supplier.unit_migration_completed.nil?
-      %label(for="articles_activate_unit_migration")
-        = f.check_box "activate_unit_migration"
-        = t '.options.activate_unit_migration'
+    .form-group
+      %label(for="articles_outlist_absent")
+        = f.check_box "outlist_absent", style: 'margin-left: 15px; margin-top: 20px'
+        = t '.options.outlist_absent'
+    .form-group
+      %label(for="articles_convert_units")
+        = f.check_box "convert_units", style: 'margin-left: 15px;'
+        = t '.options.convert_units'
 
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'
