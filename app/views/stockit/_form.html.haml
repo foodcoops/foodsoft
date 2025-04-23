@@ -14,31 +14,43 @@
         = f.simple_fields_for :article do |a|
           = a.input :supplier_id, collection: Supplier.all, selected: stock_article.supplier_id
         = f.input :name
-        .fold-line.d-flex
+        .d-flex
           = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
           - supplier_order_unit_override = stock_article.supplier_order_unit
           - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
           -# title: unit in which article can be ordered from supplier
-          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'input-medium'}
-          -# title: free text unit
-          = f.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
-        .fold-line
-          .control-group
-            %label.control-label{for: 'unit_ratios'}
+          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-full' }
+        -# title: free text unit
+        %div
+          .col-sm-3
+            = ""
+          .col-sm-9
+            = f.input :unit, input_html: {class: 'form-control ml-1'}, label: false, wrapper: :inline_form
+        %div
+          .form-group.d-flex.w-full
+            %label.control-label.col-sm-3{for: 'unit_ratios'}
               = t('shared.article_fields_units.unit_ratios')
-            %table#fc_base_price{:class => "controls"}
+            %table#fc_base_price{:class => 'controls col-sm-9'}
               %tbody
                 - ratios = stock_article.article_unit_ratios
                 = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
               %tfoot
-                %td{:colspan => 6}
+                %td{:colspan => 9, :style => 'padding-left: 22Px; padding-bottom: 16Px; padding-top: 16Px'}
                   = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: "add ratio"
         = f.input :note
         - if stock_article.new_record?
           = f.input :price
-          = f.input :tax, :wrapper => :append do
-            = f.input_field :tax
-            %span.add-on %
+          = f.input :tax do
+            .input-group
+              = f.input_field :tax, class: 'form-control', wrapper: :inline_form
+              %span.input-group-addon %
+          -# = f.input :tax, 
+          -#   label_html: { class: 'col-sm-3' },
+          -#   input_html: { class: 'col-sm-9' },
+          -#   :wrapper => :append do
+          -#   .input-group
+          -#     = f.input_field :tax
+          -#     %span.input-group-addon %
           = f.input :deposit
         - else
           = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
