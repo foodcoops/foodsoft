@@ -3,18 +3,22 @@
 <ul>
   <% @order.nearly_full_order_articles.each do |order_article| %>
     <li>
+      <%= order_article.percent_of_full_case %>%
+      <strong>How many to fill:
+        <%= order_article.quantity_left_to_fill_case %>
+      </strong>
+      <%= order_article.article.unit %>
+      |
       <%= order_article.article.name %>,
       How many in a case: <%= order_article.article.unit_quantity %>,
+
 
       Quantity: <%= order_article.quantity %>
       Tolerance: <%= order_article.tolerance %>
 
-      <strong>How many needed to fill:
-        <%= order_article.quantity_left_to_fill_case %>
-        <%= order_article.article.unit %>
-      </strong>
-      -
-      <%= order_article.percent_of_full_case %>% FULL
+
+
+      <%= order_article.article.note.include?('splittable') ? '(case splittable)' :'' %>
     </li>
   <% end %>
 </ul>
