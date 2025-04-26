@@ -1,0 +1,22 @@
+<h1>Nearly Full Cases</h1>
+
+<ul>
+  <% @order.nearly_full_order_articles.each do |order_article| %>
+    <li>
+      <%= order_article.article.name %>,
+      How many in a case: <%= order_article.article.unit_quantity %>,
+
+      Quantity: <%= order_article.quantity %>
+      Tolerance: <%= order_article.tolerance %>
+
+      <strong>How many needed to fill:
+        <%= order_article.quantity_left_to_fill_case %>
+        <%= order_article.article.unit %>
+      </strong>
+      -
+      <%= order_article.percent_of_full_case %>% FULL
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Orders', orders_path %>

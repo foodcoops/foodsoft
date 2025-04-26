@@ -14,9 +14,9 @@ class OrderArticle < ApplicationRecord
   validates_uniqueness_of :article_id, scope: :order_id
 
   _ordered_sql = "order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received != 0"
-  scope :ordered, -> {where(_ordered_sql)}
-  scope :ordered_or_member, -> {includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity != 0 OR group_order_articles.result != 0")}
-  default_scope {includes(:article).order('articles.name')}
+  scope :ordered, -> { where(_ordered_sql) }
+  scope :ordered_or_member, -> { includes(:group_order_articles).where("#{_ordered_sql} OR order_articles.quantity != 0 OR group_order_articles.result != 0") }
+  default_scope { includes(:article).order('articles.name') }
 
   before_create :init_from_balancing
   after_destroy :update_ordergroup_prices
@@ -38,9 +38,9 @@ class OrderArticle < ApplicationRecord
   # In balancing this can differ from ordered (by supplier) quantity for this article.
   def group_orders_sum
     @group_orders_sum ||= begin
-      quantity = group_order_articles.collect(&:result).sum
-      @group_orders_sum = {:quantity => quantity, :price => quantity * price.fc_price, :net_price => quantity * price.price}
-    end
+                            quantity = group_order_articles.collect(&:result).sum
+                            @group_orders_sum = { :quantity => quantity, :price => quantity * price.fc_price, :net_price => quantity * price.price }
+                          end
   end
 
   # Update quantity/tolerance/units_to_order from group_order_articles
@@ -79,6 +79,24 @@ class OrderArticle < ApplicationRecord
     units = quantity / unit_size
     remainder = quantity % unit_size
     units += ((remainder > 0) && (remainder + tolerance >= unit_size) ? 1 : 0)
+  end
+
+  def quantity_left_to_fill_case
+    unit_size = price.unit_quantity
+    units_to_order = calculate_units_to_order(quantity, tolerance)
+    quantity_ordered = units_to_order * unit_size
+    quantity_short = quantity - quantity_ordered
+    if quantity_short > 0
+      [unit_size - (quantity_short + tolerance), 0].max
+    else
+      0
+    end
+
+  end
+
+  def percent_of_full_case
+    unit_size = price.unit_quantity
+    ((1 - (quantity_left_to_fill_case.to_f / unit_size)) * 100).round if quantity_left_to_fill_case
   end
 
   # Calculate amount charged to members for ordered quantity.
@@ -195,9 +213,9 @@ class OrderArticle < ApplicationRecord
     # notifications
     notify_changed_set.each do |group_order_id|
       UserNotifier.queue_order_updated_email(
-          delay: 30.seconds,
-          group_order_id: group_order_id,
-          message: 'The amounts you will receive have been updated')
+        delay: 30.seconds,
+        group_order_id: group_order_id,
+        message: 'The amounts you will receive have been updated')
     end
 
     counts
@@ -254,7 +272,7 @@ class OrderArticle < ApplicationRecord
 
   # Check if the result of any associated GroupOrderArticle was overridden manually
   def result_manually_changed?
-    group_order_articles.any? {|goa| goa.result_manually_changed?}
+    group_order_articles.any? { |goa| goa.result_manually_changed? }
   end
 
   private
@@ -289,8 +307,8 @@ class OrderArticle < ApplicationRecord
     delta_mis = missing_units - missing_units_was
     delta_box = units_to_order - units_to_order_was
     unless (delta_q == 0 && delta_t >= 0) ||
-        (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
-        (delta_q > 0 && delta_q == -delta_t)
+      (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
+      (delta_q > 0 && delta_q == -delta_t)
       raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
     end
   end

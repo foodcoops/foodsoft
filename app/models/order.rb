@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   belongs_to :updated_by, :class_name => 'User', :foreign_key => 'updated_by_user_id'
   belongs_to :created_by, :class_name => 'User', :foreign_key => 'created_by_user_id'
 
-  enum end_action: {no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3}
+  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
 
   # Validations
   validates_presence_of :starts
@@ -164,9 +164,8 @@ class Order < ApplicationRecord
       includes([:article_price, :group_order_articles, :article => :article_category]).
       order('articles.name').
       group_by(&method(:category_name_and_quantity))
-                                                    .sort { |a, b| a[0] <=> b[0] }
+                                                                       .sort { |a, b| a[0] <=> b[0] }
   end
-
 
   def articles_sort_by_category
     order_articles.includes(:article).order('articles.name').sort do |a, b|
@@ -176,7 +175,7 @@ class Order < ApplicationRecord
 
   # Returns the defecit/benefit for the foodcoop
   # Requires a valid invoice, belonging to this order
-  #FIXME: Consider order.foodcoop_result
+  # FIXME: Consider order.foodcoop_result
   def profit(options = {})
     markup = options[:without_markup] || false
     if invoice
@@ -195,7 +194,7 @@ class Order < ApplicationRecord
     a = [:net, :gross, :fc, :gross_price_supplier, :rounding_error, :tax, :deposit]
     if a.include?(type)
       for oa in order_articles.ordered.includes(:article, :article_price)
-        quantity = oa.group_orders_sum[:quantity] #oa.units * oa.price.unit_quantity
+        quantity = oa.group_orders_sum[:quantity] # oa.units * oa.price.unit_quantity
         case type
         when :net
           total += quantity * oa.price.price
@@ -215,7 +214,7 @@ class Order < ApplicationRecord
         end
       end
     elsif type == :groups || type == :groups_without_markup
-      for go in group_orders.includes(group_order_articles: {order_article: [:article, :article_price]})
+      for go in group_orders.includes(group_order_articles: { order_article: [:article, :article_price] })
         for goa in go.group_order_articles
           case type
           when :groups
@@ -249,7 +248,7 @@ class Order < ApplicationRecord
             #    A: Yes, we do - for redistributing articles when the number of articles
             #       delivered changes, and for statistics on popular articles. Records
             #       with both tolerance and quantity zero can be deleted.
-            #goa.group_order_article_quantities.clear
+            # goa.group_order_article_quantities.clear
           end
         end
 
@@ -278,7 +277,8 @@ class Order < ApplicationRecord
     gos = group_orders.includes(:ordergroup) # Fetch group_orders
     gos.each { |group_order| group_order.update_price! } # Update prices of group_orders
 
-    transaction do # Start updating account balances
+    transaction do
+      # Start updating account balances
       for group_order in gos
         if group_order.ordergroup
           price = group_order.price * -1 # decrease! account balance
@@ -323,7 +323,8 @@ class Order < ApplicationRecord
     gos = group_orders.includes(:ordergroup) # Fetch group_orders
     # gos.each { |group_order| group_order.update_price! }  # Update prices of group_orders
 
-    transaction do # Start updating account balances
+    transaction do
+      # Start updating account balances
       for group_order in gos
         if group_order.ordergroup
           price = group_order.price # increase account balance
@@ -368,7 +369,7 @@ class Order < ApplicationRecord
       begin
         order.do_end_action!
       rescue => error
-        ExceptionNotifier.notify_exception(error, data: {order_id: order.id})
+        ExceptionNotifier.notify_exception(error, data: { order_id: order.id })
       end
     end
   end
@@ -383,7 +384,7 @@ class Order < ApplicationRecord
 
   def distribute_charge(surcharge_name, distribute_amount)
     # is there an existing 'article'
-    surcharge_name = "Extra Charges" if surcharge_name.blank? #default name
+    surcharge_name = "Extra Charges" if surcharge_name.blank? # default name
     surcharge_article = supplier.articles
                                 .find_or_create_by!(
                                   name: surcharge_name,
@@ -397,7 +398,7 @@ class Order < ApplicationRecord
                                 )
     total_amount = GroupOrder.where(order_id: id).sum(:price)
     oa_surcharge = order_articles.find_or_create_by!(article_id: surcharge_article.id)
-    oa_surcharge.update_attributes!({units_billed: distribute_amount, units_received: distribute_amount})
+    oa_surcharge.update_attributes!({ units_billed: distribute_amount, units_received: distribute_amount })
     oa_surcharge.group_order_articles.delete_all
     GroupOrder.where(order_id: id).each do |group_order|
       share_of_cost = round_up_in_cent (distribute_amount * (group_order.price / total_amount))
@@ -426,6 +427,12 @@ class Order < ApplicationRecord
         end
       end
     end
+  end
+
+  def nearly_full_order_articles
+    self.order_articles
+        .select { |oa| oa.quantity_left_to_fill_case > 0 }
+        .sort_by { |oa| -oa.percent_of_full_case }
   end
 
   protected

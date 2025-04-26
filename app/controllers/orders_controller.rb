@@ -196,6 +196,10 @@ class OrdersController < ApplicationController
     render :layout => false
   end
 
+  def nearly_full_articles
+    @order = Order.find(params[:id])
+  end
+
   protected
 
   def update_order_amounts

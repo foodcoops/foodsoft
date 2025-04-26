@@ -37,6 +37,8 @@ Foodsoft::Application.routes.draw do
     post  '/home/cancel_membership' => 'home#cancel_membership', as: 'cancel_membership'
 
     ############ Orders, ordering
+    #
+    get 'orders/:id/nearly_full_articles', to: 'orders#nearly_full_articles', as: :nearly_full
 
     resources :orders do
       member do
