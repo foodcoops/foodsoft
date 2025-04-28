@@ -1,7 +1,7 @@
 - title t('.title'), false
 
 .row
-  .col-md-7
+  .col-md-4
     %h3
       = h(t('.user.title', user: show_user))
       %small= t '.user.since', when: distance_of_time_in_words(Time.now, @current_user.created_on)
@@ -9,7 +9,7 @@
       = render :partial => 'shared/user_form_fields', :locals => {:f => f, :password_autocomplete => 'store-only', with_address: true}
       .form-actions
         = submit_tag t('ui.save'), class: 'btn'
-
+  .col-md-3
   .col-md-5
     - if @current_user.ordergroup
       %h3= User.human_attribute_name(:ordergroup, count: 1)

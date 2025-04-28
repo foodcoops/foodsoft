@@ -10,6 +10,6 @@
         %td= link.name
         %td= link.url
         %td
-          = link_to t('ui.edit'), edit_admin_link_path(link), remote: true, class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_admin_link_path(link), remote: true, class: 'btn btn-default btn-xs'
           = link_to t('ui.delete'), admin_link_path(link), :data => {:confirm => t('admin.confirm', name: link.name)},
-            :method => :delete, class: 'btn btn-mini btn-danger'
+            :method => :delete, class: 'btn btn-xs btn-danger'
