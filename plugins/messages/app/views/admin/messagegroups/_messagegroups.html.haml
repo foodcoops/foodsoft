@@ -13,6 +13,6 @@
         %td= link_to messagegroup.name, [:admin, messagegroup]
         %td= messagegroup.users.size
         %td
-          = link_to t('ui.edit'), edit_admin_messagegroup_path(messagegroup), class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_admin_messagegroup_path(messagegroup), class: 'btn btn-default btn-xs'
           = link_to t('ui.delete'), [:admin, messagegroup], :data => {:confirm => t('admin.confirm', name: messagegroup.name)},
-            :method => :delete, class: 'btn btn-mini btn-danger'
+            :method => :delete, class: 'btn btn-xs btn-danger'
