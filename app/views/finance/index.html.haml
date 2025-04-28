@@ -1,8 +1,8 @@
 - title t('.title')
 - with_payment = @financial_transactions.with_payment_plugin.any?
 
-.row-fluid
-  .span6
+.row
+  .col-md-6
     %h2
       = t('.unpaid_invoices')
       %small= link_to t('.show_all'), unpaid_finance_invoices_path
@@ -19,7 +19,7 @@
             %td= link_to h(format_date(invoice.date)), finance_invoice_path(invoice)
             %td.numeric= number_to_currency(invoice.amount)
             %td= invoice.supplier.name
-            %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-mini'
+            %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-default btn-xs'
 
     %h2
       = t('.last_transactions')
@@ -42,7 +42,7 @@
             - if with_payment
               %td= ft.payment_state
             %td.numeric= format_currency(ft.amount)
-  .span6
+  .col-md-6
     %h2
       = t('.open_transactions')
       %small= link_to t('.show_all'), finance_order_index_path
@@ -60,6 +60,6 @@
               %td= order.name
               %td= format_date(order.ends)
               %td.numeric= number_to_currency(order.sum(:fc))
-              %td= link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-mini'
+              %td= link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-default btn-xs'
     - else
       = t('.everything_cleared')
