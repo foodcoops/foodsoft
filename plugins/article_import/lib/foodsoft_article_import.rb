@@ -35,15 +35,15 @@ module FoodsoftArticleImport
   # @param file [File, Tempfile]
   # @option opts [String] type file format (required) (see {.file_formats})
   # @return [File, Roo::Spreadsheet] file with encoding set if needed
-  def self.parse(file, custom_file_path: nil, type: nil, &blk)
+  def self.parse(file, custom_file_path: nil, type: nil, foodsoft_url: nil, &blk)
     custom_file_path ||= nil
     type ||= 'foodsoft'
     parser = file_formats[type]
     if block_given?
-      parser.parse(file, custom_file_path: custom_file_path, &blk)
+      parser.parse(file, custom_file_path: custom_file_path, foodsoft_url: foodsoft_url, &blk)
     else
       data = []
-      parser.parse(file, custom_file_path: custom_file_path) { |a| data << a }
+      parser.parse(file, custom_file_path: custom_file_path, foodsoft_url: foodsoft_url) { |a| data << a }
       data
     end
   end

@@ -28,7 +28,7 @@ module FoodsoftArticleImport
                      RES_PARSE_UNIT_LIST.map { |r| /#{r}\s*$/ } +
                      RES_PARSE_UNIT_LIST.map { |r| /-#{r}/ }
 
-    def self.parse(file, custom_file_path: nil) # rubocop:todo Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Lint/UnusedMethodArgument
+    def self.parse(file, _options = {}) # rubocop:todo Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       opts = OPTIONS.dup
       opts[:liberal_parsing] = true
       opts[:col_sep] = ','
