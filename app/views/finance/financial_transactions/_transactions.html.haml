@@ -62,5 +62,5 @@
             - unless t.hidden? || t.amount.nil?
               = link_to finance_transaction_path(t), method: :delete,
                 data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
-                class: 'btn btn-danger btn-mini' do
+                class: 'btn btn-danger btn-xs' do
                 = fa_icon :remove

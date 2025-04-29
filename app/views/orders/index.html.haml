@@ -36,13 +36,13 @@
               %td= truncate(order.note, length: 25, tooltip: true)
               %td= link_to t('.action_end'), finish_order_path(order),
                 data: {confirm: t('.confirm_end', order: order.name)}, method: :post,
-                class: 'btn btn-small btn-success'
+                class: 'btn btn-sm btn-success'
 
               %td
-                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-small'
-                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-default btn-sm'
+                = link_to t('ui.show'), order, class: 'btn btn-default btn-sm'
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
-                  class: 'btn btn-small btn-danger'
+                  class: 'btn btn-sm btn-danger'
 
         - unless @finished_orders.empty?
           - unless @open_orders.empty?
@@ -57,15 +57,15 @@
               %td= truncate(order.note)
               %td
                 - unless order.stockit?
-                  = receive_button order, class: 'btn-small'
+                  = receive_button order, class: 'btn btn-default btn-sm'
                 - if current_user.role_finance?
-                  = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-small btn-primary'
+                  = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-sm btn-primary'
 
               %td
-                = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-small'
-                = link_to t('ui.show'), order, class: 'btn btn-small'
+                = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-default btn-sm'
+                = link_to t('ui.show'), order, class: 'btn btn-default btn-sm'
                 = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
-                  class: 'btn btn-small btn-danger'
+                  class: 'btn btn-sm btn-danger'
 
 %h2= t '.orders_settled'
 #orders_table
