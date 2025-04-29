@@ -1,14 +1,29 @@
 = simple_form_for @order do |f|
   = f.hidden_field :supplier_id
-  .fold-line
-    = f.input :starts, as: :date_picker_time
-    = f.input :boxfill, as: :date_picker_time if @order.is_boxfill_useful?
-    = f.input :ends, as: :date_picker_time
-    = f.input :pickup, as: :date_picker, input_html: {class: 'input-small'}
-  = f.input :end_action, collection: Order.end_actions,include_blank: false,
-    input_html: {class: 'input-xxlarge'}, value_method: ->(k){ k.first },
-    label_method: ->(k){ t("activerecord.attributes.order.end_actions.#{k.first}") }
-  = f.input :note, input_html: {rows: 2, class: 'input-xxlarge'}
+  .row
+    .col-md-3
+      = f.input :starts, as: :date_picker_time, wrapper: :custom_form, label_html: {class: "col-sm-3"}
+  - if @order.is_boxfill_useful?
+    .row
+      .col-md-3
+        = f.input :boxfill, as: :date_picker_time
+  .row
+    .col-md-3
+      = f.input :ends, as: :date_picker_time, wrapper: :custom_form, label_html: {class: "col-sm-3"}
+  .row
+    .col-md-3
+      = f.input :pickup, as: :date_picker, wrapper: :custom_form, label_html: {class: "col-sm-3"}
+  .row
+    .col-md-3
+      = f.input :end_action, 
+          collection: Order.end_actions, 
+          include_blank: false, 
+          input_html: { style: 'width: 500Px' }  ,
+          wrapper: :custom_form,
+          label_html: {class: "col-sm-3"}
+  .row
+    .col-md-3
+      = f.input :note, input_html: {rows: 5, class: 'form-control'}, wrapper: :custom_form, label_html: {class: "col-sm-3"}
 
   %h2= t '.title'
   - if @order.errors.has_key?(:articles)
