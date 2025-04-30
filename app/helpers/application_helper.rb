@@ -188,7 +188,7 @@ module ApplicationHelper
     flash_messages = []
     flash.each do |type, message|
       type = :success if type == 'notice'
-      type = :error   if type == 'alert'
+      type = :danger   if type == 'alert'
       text = content_tag(:div,
                          content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
                              message, class: "alert fade in alert-#{type}")
