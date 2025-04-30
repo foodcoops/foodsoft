@@ -8,7 +8,7 @@
     = simple_form_for(@current_user, :url => update_profile_path) do |f|
       = render :partial => 'shared/user_form_fields', :locals => {:f => f, :password_autocomplete => 'store-only', with_address: true}
       .form-actions
-        = submit_tag t('ui.save'), class: 'btn'
+        = submit_tag t('ui.save'), class: 'btn btn-default'
   .col-md-3
   .col-md-5
     - if @current_user.ordergroup
