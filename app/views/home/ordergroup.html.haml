@@ -28,7 +28,7 @@
     %h2= t('.account_summary')
     .well.well-small
       = form_tag my_ordergroup_path, :method => :get, :remote => true,
-        'data-submit-onchange' => true, class: 'form-search' do
-        = text_field_tag :query, params[:query], class: 'input-medium search-query',
+        'data-submit-onchange' => true, class: 'form-inline' do
+        = text_field_tag :query, params[:query], class: 'form-control search-query',
           placeholder: t('.search')
     #transactions= render "finance/financial_transactions/transactions", with_csv: false, with_grouporder_links: true
