@@ -139,7 +139,7 @@ SimpleForm.setup do |config|
 
     b.wrapper tag: 'div', class: 'col-sm-offset-3 col-sm-9' do |wr|
       wr.wrapper tag: 'div', class: 'checkbox' do |ba|
-        ba.use :label_input, class: 'col-sm-9'
+        ba.use :label_input
       end
 
       wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
@@ -186,6 +186,7 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
+
 
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)

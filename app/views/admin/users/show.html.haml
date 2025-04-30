@@ -1,7 +1,7 @@
 - title show_user(@user)
 
 .row
-  .span3
+  .col-md-3
     .well
       %h4= t '.person'
       %p= t '.member_since', time: distance_of_time_in_words(Time.now, @user.created_on)
@@ -15,7 +15,7 @@
         %dd
           = @user.email
           - if @user.mail_delivery_status.any?
-            = link_to t('.show_email_problems'), admin_mail_delivery_status_index_path(email: @user.email), class: 'btn btn-warning btn-mini'
+            = link_to t('.show_email_problems'), admin_mail_delivery_status_index_path(email: @user.email), class: 'btn btn-warning btn-xs'
         %dt= heading_helper User, :phone
         %dd= @user.phone
         %dt= heading_helper User, :last_login
@@ -24,7 +24,7 @@
         %dd= format_time(@user.last_activity)
         %dt= t 'admin.access_to'
         %dd= format_roles(@user)
-  .span5
+  .col-md-6
     .well
       %h4= t '.preference'
       %table.table
@@ -32,7 +32,7 @@
           %tr
             %td= t("simple_form.labels.settings.profile.#{key}")
             %td= (setting != true and setting != false) ? setting : (setting === true ? t('simple_form.yes') : t('simple_form.no'))
-  .span3
+  .col-md-3
     .well
       %h4= t '.groupabos'
       %ul.unstyled
@@ -41,8 +41,8 @@
 
 %hr/
 %p
-  = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn'
+  = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn btn-default'
   = link_to t('ui.delete'), [:admin, @user], method: :delete, class: 'btn btn-danger',
       data: {confirm: t('ui.confirm_delete', name: @user.first_name)}
-  = link_to t('.sudo'), sudo_admin_user_path(@user), method: :post, class: 'btn',
+  = link_to t('.sudo'), sudo_admin_user_path(@user), method: :post, class: 'btn btn-default',
       data: {confirm: t('.confirm_sudo', user: @user.first_name)}

@@ -1,8 +1,14 @@
-= simple_form_for([:admin, @user]) do |f|
-  = render 'shared/user_form_fields', f: f, password_autocomplete: false
-  = f.input :send_welcome_mail, as: :boolean, label: false, inline_label: t('.send_welcome_mail')
-  - unless @user.ordergroup
-    = f.input :create_ordergroup, as: :boolean, label: false, inline_label: t('.create_ordergroup')
-  .form-actions
-    = f.button :submit
-    = link_to t('ui.or_cancel'), :back
+.col-md-4
+  = simple_form_for([:admin, @user]) do |f|
+    = render 'shared/user_form_fields', f: f, password_autocomplete: false
+    .settings
+      .settings-group
+        .row
+          .col-sm-3
+        .row
+          = f.input :send_welcome_mail, as: :boolean, label: false, inline_label: t('.send_welcome_mail'), wrapper: :horizontal_boolean
+          - unless @user.ordergroup
+            = f.input :create_ordergroup, as: :boolean, label: false, inline_label: t('.create_ordergroup'), wrapper: :horizontal_boolean
+    .form-actions
+      = f.button :submit
+      = link_to t('ui.or_cancel'), :back

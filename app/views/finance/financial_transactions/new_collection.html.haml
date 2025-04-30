@@ -45,41 +45,42 @@
 - content_for :sidebar do
   .well.well-small= t('.sidebar')
 
-= form_tag finance_create_transaction_collection_path do
-  - if FinancialTransactionType.has_multiple_types
+.col-md-4
+  = form_tag finance_create_transaction_collection_path do
+    - if FinancialTransactionType.has_multiple_types
+      %p
+        %b= heading_helper FinancialTransaction, :financial_transaction_type
+        = select_tag :type_id, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }, params[:type_id])
     %p
-      %b= heading_helper FinancialTransaction, :financial_transaction_type
-      = select_tag :type_id, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }, params[:type_id])
-  %p
-    %b= heading_helper FinancialTransaction, :note
-    = text_field_tag :note, params[:note], class: 'input-xlarge', required: 'required'
-  %p
-    %label
-      = check_box_tag :set_balance, true, params[:set_balance]
-      = t('.set_balance')
-  %p
-    %table#ordergroups{:style => "width:20em"}
-      %thead
-        %tr
-          %th= heading_helper FinancialTransaction, :ordergroup
-          %th= heading_helper FinancialTransaction, :amount
-      %tbody
-        = render :partial => 'ordergroup', :collection => [1, 2, 3]
-  %p
-    = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn'
-    = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn'
-  - if FoodsoftConfig[:use_financial_links]
+      %b= heading_helper FinancialTransaction, :note
+      = text_field_tag :note, params[:note], class: 'form-control', required: 'required'
     %p
       %label
-        = check_box_tag :create_financial_link, true, params.fetch(:create_financial_link, true)
-        = t('.create_financial_link')
-      %label
-        = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true)
-        = t('.create_foodcoop_transaction')
-  %p
-    - Ordergroup.custom_fields.each do |f|
-      - if f[:financial_transaction_source]
-        = link_to t('.add_all_ordergroups_custom_field', label: f[:label]), '#', 'data-custom-field' => f[:name], 'data-add-all-ordergroups' => true, class: 'btn'
-  .form-actions
-    = submit_tag t('.save'), class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), finance_ordergroups_path
+        = check_box_tag :set_balance, true, params[:set_balance]
+        = t('.set_balance')
+    %p
+      %table#ordergroups{:style => "width:40em"}
+        %thead
+          %tr
+            %th= heading_helper FinancialTransaction, :ordergroup
+            %th= heading_helper FinancialTransaction, :amount
+        %tbody
+          = render :partial => 'ordergroup', :collection => [1, 2, 3]
+    %p
+      = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn btn-default'
+      = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn btn-default'
+    - if FoodsoftConfig[:use_financial_links]
+      %p
+        %label
+          = check_box_tag :create_financial_link, true, params.fetch(:create_financial_link, true)
+          = t('.create_financial_link')
+        %label
+          = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true)
+          = t('.create_foodcoop_transaction')
+    %p
+      - Ordergroup.custom_fields.each do |f|
+        - if f[:financial_transaction_source]
+          = link_to t('.add_all_ordergroups_custom_field', label: f[:label]), '#', 'data-custom-field' => f[:name], 'data-add-all-ordergroups' => true, class: 'btn'
+    .form-actions
+      = submit_tag t('.save'), class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), finance_ordergroups_path

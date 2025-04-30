@@ -21,10 +21,10 @@
           = highlighted_required_users task
         %td
           - if !task.is_accepted?(current_user)
-            = link_to t('.accept_task'), accept_task_path(task), method: :post, class: 'btn btn-small'
-            = link_to t('.reject_task'), reject_task_path(task), method: :post, class: 'btn btn-small' if task.is_assigned?(current_user)
+            = link_to t('.accept_task'), accept_task_path(task), method: :post, class: 'btn btn-default btn-sm'
+            = link_to t('.reject_task'), reject_task_path(task), method: :post, class: 'btn btn-default btn-sm' if task.is_assigned?(current_user)
           - elsif !task.done
-            = link_to set_done_task_path(task), method: :post, class: 'btn btn-small',
+            = link_to set_done_task_path(task), method: :post, class: 'btn btn-default btn-sm',
               title: t('.mark_done') do
               %i.icon-ok= t '.done_q'
           - else

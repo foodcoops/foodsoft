@@ -229,7 +229,7 @@ table {
 
   #total-sum {
     width: 22em;
-    margin: .5em 2em 0 0;
+    margin: 1em 2em 1em 2em;
     float: right;
     #order-button {
       margin: .5em 0;
@@ -238,6 +238,18 @@ table {
         background-color: red; }
     }
   }
+}
+
+// search bars
+.reset-search {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.search-query .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 200px;
 }
 
 /* Hide the orders article info for small screens
@@ -429,6 +441,7 @@ table.table {
     margin-bottom: 10px;
     .control-label {
       margin: 5px 0 0 0;
+
     }
   }
   .control-group {
@@ -647,6 +660,10 @@ input.with-conversion-popover-opener {
   display: flex;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .d-none {
   display: none;
 }
@@ -676,6 +693,10 @@ td.ml-1 > *:first-child {
   margin-right: 3px !important;
 }
 
+.mr-2 {
+  margin-right: 6px !important;
+}
+
 td.mr-1 > *:last-child {
   margin-right: 3px;
 }
@@ -701,6 +722,10 @@ td.mr-1 > *:last-child {
   gap: .25rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 *[role="button"] {
   cursor: pointer;
 }
@@ -722,3 +747,7 @@ td.mr-1 > *:last-child {
   display: block;
 }
 
+
+.form-group .select2-container {
+  width: 200px;
+}

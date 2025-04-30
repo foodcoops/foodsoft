@@ -6,7 +6,7 @@
 .pull-right
   - if with_csv
     .btn-group
-      = link_to url_for(search: params[:q], format: :csv), class: 'btn' do
+      = link_to url_for(search: params[:q], format: :csv), class: 'btn btn-default' do
         = fa_icon :download
         CSV
   - if @financial_transactions.total_pages > 1
@@ -62,5 +62,5 @@
             - unless t.hidden? || t.amount.nil?
               = link_to finance_transaction_path(t), method: :delete,
                 data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
-                class: 'btn btn-danger btn-mini' do
+                class: 'btn btn-danger btn-xs' do
                 = fa_icon :remove
