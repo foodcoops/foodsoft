@@ -334,6 +334,7 @@ GEM
     mime-types-data (3.2025.0107)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.8)
     minitest (5.25.5)
     mono_logger (1.1.2)
     msgpack (1.7.5)
@@ -596,7 +597,10 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
+    sqlite3 (1.7.3)
+      mini_portile2 (~> 2.8.0)
+    sqlite3-ruby (1.3.3)
+      sqlite3 (>= 1.3.3)
     table_print (1.5.7)
     temple (0.10.3)
     terser (1.2.5)
@@ -653,8 +657,10 @@ PLATFORMS
   arm-linux-musl
   arm64-darwin
   armv7l-linux
+  ruby
   universal-darwin
   x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -751,7 +757,7 @@ DEPENDENCIES
   simplecov-lcov
   spreadsheet
   sprockets (< 4)
-  sqlite3 (~> 1.3.6)
+  sqlite3 (~> 1.4)
   table_print
   terser (~> 1.1)
   web-console

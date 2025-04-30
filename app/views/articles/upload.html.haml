@@ -49,7 +49,7 @@
       %td CA
       %td= t '.sample.supplier_1'
     %tr
-      %td x
+      %td= t 'simple_form.yes'
       %td 4321Z
       %td= t '.sample.tomato_juice'
       %td= xjy
@@ -98,13 +98,22 @@
 
   .control-group
     .form-group
+      %label(for="articles_delete_unavailable")
+        = f.check_box "delete_unavailable"
+        = t '.options.delete_unavailable'
+    .form-group
       %label(for="articles_outlist_absent")
-        = f.check_box "outlist_absent", style: 'margin-left: 15px; margin-top: 20px'
+        = f.check_box "outlist_absent"
         = t '.options.outlist_absent'
     .form-group
       %label(for="articles_convert_units")
-        = f.check_box "convert_units", style: 'margin-left: 15px;'
+        = f.check_box "convert_units"
         = t '.options.convert_units'
+    - unless @supplier.unit_migration_completed.nil?
+      .form-group
+        %label(for="articles_activate_unit_migration")
+          = f.check_box "activate_unit_migration"
+          = t '.options.activate_unit_migration'
 
   .form-actions
     = submit_tag t('.submit'), class: 'btn btn-primary'

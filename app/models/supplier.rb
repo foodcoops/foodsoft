@@ -123,10 +123,15 @@ class Supplier < ApplicationRecord
     new_articles = []
 
     data[:articles].each do |new_attrs|
-      article = articles.includes(:latest_article_version).undeleted.where(article_versions: { order_number: new_attrs[:order_number] }).first
+      undeleted_articles = articles.includes(:latest_article_version).undeleted
+      article = if new_attrs[:id]
+                  undeleted_articles.where(id: new_attrs[:id]).first
+                else
+                  undeleted_articles.where(article_versions: { order_number: new_attrs[:order_number] }).first
+                end
       new_article = foodsoft_file_attrs_to_article(new_attrs)
 
-      if new_attrs[:availability]
+      if new_attrs[:availability] || !(options[:delete_unavailable])
         if article.nil?
           new_articles << new_article
         else

@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
                                                                                         type: nil)
 
     if request.format.csv?
-      send_data ArticlesCsv.new(@articles, encoding: 'utf-8').to_csv, filename: 'articles.csv', type: 'text/csv'
+      send_data ArticlesCsv.new(@articles, encoding: 'utf-8', foodsoft_url: root_url).to_csv, filename: 'articles.csv', type: 'text/csv'
       return
     end
 
@@ -115,7 +115,7 @@ class ArticlesController < ApplicationController
     @samples = []
 
     Article.transaction do
-      params[:samples].values.each do |sample|
+      params[:samples]&.values&.each do |sample|
         next unless sample[:apply_migration] == '1'
 
         original_unit = nil
@@ -251,9 +251,11 @@ class ArticlesController < ApplicationController
   # Update articles from a spreadsheet
   def parse_upload
     uploaded_file = params[:articles]['file'] or raise I18n.t('articles.controller.parse_upload.no_file')
-    options = { filename: uploaded_file.original_filename }
+    options = { filename: uploaded_file.original_filename, foodsoft_url: root_url }
+    options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
     options[:convert_units] = (params[:articles]['convert_units'] == '1')
+    @enable_unit_migration = (params[:articles]['activate_unit_migration'] == '1')
     @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_file(uploaded_file.tempfile,
                                                                                                        options)
 
@@ -262,7 +264,7 @@ class ArticlesController < ApplicationController
 
     if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
       redirect_to supplier_articles_path(@supplier),
-                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data[:articles].length)
+                  notice: I18n.t('articles.controller.parse_upload.notice', count: import_data.length)
     end
     @ignored_article_count = 0
   rescue StandardError => e
@@ -282,21 +284,17 @@ class ArticlesController < ApplicationController
 
   # Updates, deletes articles when upload or sync form is submitted
   def update_synchronized
+    @enable_unit_migration = (params[:enable_unit_migration] == '1')
     @outlisted_articles = Article.includes(:latest_article_version).where(article_versions: { id: params[:outlisted_articles]&.values || [] })
     @updated_articles = Article.includes(:latest_article_version).where(article_versions: { id: params[:articles]&.values&.map do |v|
                                                                                                   v[:id]
                                                                                                 end || [] })
-    @new_articles = (params[:new_articles]&.values || []).map do |a|
-      article = @supplier.articles.build
-      article_version = article.article_versions.build(a)
-      article.article_versions << article_version
-      article.latest_article_version = article_version
-      article_version.article = article
-      article
-    end
+    @new_articles = build_articles_from_params_array(params[:new_articles]&.values || [])
 
     has_error = false
     Article.transaction do
+      # re-enable unit migration
+      @supplier.update_attribute(:unit_migration_completed, nil) if @enable_unit_migration
       # delete articles
       begin
         @outlisted_articles.each(&:mark_as_deleted)
@@ -305,14 +303,14 @@ class ArticlesController < ApplicationController
         has_error = true
       end
       # Update articles
-      @updated_articles.each_with_index do |a, index|
-        current_params = params[:articles][index.to_s]
+      @updated_articles.each do |a|
+        current_params = params[:articles].values.detect { |p| p[:id] == a.latest_article_version.id.to_s }
         current_params.delete(:id)
 
         a.latest_article_version.article_unit_ratios.clear
         a.latest_article_version.assign_attributes(current_params)
-        a.save
-      end or has_error = true
+        a.save or (has_error = true)
+      end
       # Add new articles
       @new_articles.each { |a| a.save or has_error = true }
 
@@ -333,6 +331,17 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def build_articles_from_params_array(params)
+    params.map do |a|
+      article = @supplier.articles.build
+      article_version = article.article_versions.build(a)
+      article.article_versions << article_version
+      article.latest_article_version = article_version
+      article_version.article = article
+      article
+    end
+  end
 
   def build_article_migration_samples
     articles = @supplier.articles.with_latest_versions_and_categories.undeleted.includes(latest_article_version: [:article_unit_ratios])
