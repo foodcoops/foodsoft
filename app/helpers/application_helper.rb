@@ -188,7 +188,7 @@ module ApplicationHelper
     flash_messages = []
     flash.each do |type, message|
       type = :success if type == 'notice'
-      type = :danger   if type == 'alert'
+      type = :danger if type == 'alert'
       text = content_tag(:div,
                          content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
                              message, class: "alert fade in alert-#{type}")
@@ -249,7 +249,7 @@ module ApplicationHelper
 
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
-  def close_button(dismiss)
+  def close_button(_dismiss)
     content_tag :button, type: 'button', class: 'close', data: { dismiss: 'alert' } do
       I18n.t('ui.marks.close').html_safe
     end
