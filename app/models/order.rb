@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   after_save :save_order_articles, :update_price_of_group_orders!
 
   # Finders
-  scope :started, -> { where('starts <= ?', Time.now) }
+  scope :started, -> { where(starts: ..Time.now) }
   scope :closed, -> { where(state: 'closed').order(ends: :desc) }
   scope :stockit, -> { where(supplier_id: nil).order(ends: :desc) }
   scope :recent, -> { order(starts: :desc).limit(10) }
@@ -326,8 +326,7 @@ class Order < ApplicationRecord
   end
 
   def self.finish_ended!
-    orders = Order.where.not(end_action: Order.end_actions[:no_end_action]).where(state: 'open').where('ends <= ?',
-                                                                                                       DateTime.now)
+    orders = Order.where.not(end_action: Order.end_actions[:no_end_action]).where(state: 'open').where(ends: ..DateTime.now)
     orders.each do |order|
       order.do_end_action!
     rescue StandardError => e

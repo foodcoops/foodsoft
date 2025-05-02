@@ -77,19 +77,19 @@ class ArticleUnitsLib
   def self.get_translated_name_for_code(code, default_nil: false)
     return nil if code.blank?
 
-    unit_translations&.dig('unece_units')&.dig(code)&.dig('name') || (default_nil ? nil : untranslated_units[code][:name])
+    unit_translations&.dig('unece_units', code, 'name') || (default_nil ? nil : untranslated_units[code][:name])
   end
 
   def self.get_translated_symbol_for_code(code)
     return nil if code.blank?
 
-    unit_translations&.dig('unece_units')&.dig(code)&.dig('symbols')&.dig(0) || untranslated_units[code][:symbol]
+    unit_translations&.dig('unece_units', code, 'symbols', 0) || untranslated_units[code][:symbol]
   end
 
   def self.get_translated_aliases_for_code(code)
     return nil if code.blank?
 
-    unit_translations&.dig('unece_units')&.dig(code)&.dig('aliases')
+    unit_translations&.dig('unece_units', code, 'aliases')
   end
 
   def self.get_code_for_unit_name(name)
@@ -180,14 +180,14 @@ class ArticleUnitsLib
   def self.matches_unit(unit_code, unit, unit_str)
     return true if unit[:symbol] == unit_str
 
-    translation_data = unit_translations&.dig('unece_units')&.dig(unit_code)
+    translation_data = unit_translations&.dig('unece_units', unit_code)
 
     return true if translation_data&.dig('symbols')&.include?(unit_str)
 
     name = translation_data&.dig('name')&.downcase
     return true if !name.nil? && name == unit_str
 
-    aliases = translation_data&.dig('aliases')&.map(&:strip)&.map(&:downcase)
+    aliases = translation_data&.dig('aliases')&.map { |a| a.strip.downcase }
     !aliases.nil? && aliases.any? { |a| a == unit_str || "#{a}." == unit_str }
   end
 end

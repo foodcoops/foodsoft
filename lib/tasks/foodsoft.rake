@@ -84,8 +84,7 @@ namespace :foodsoft do
   task prune_old_attachments: :environment do
     if FoodsoftConfig[:attachment_retention_days]
       rake_say "Pruning attachments older than #{FoodsoftConfig[:attachment_retention_days]} days"
-      ActiveStorage::Attachment.where('created_at < ?',
-                                      FoodsoftConfig[:attachment_retention_days].days.ago).each do |attachment|
+      ActiveStorage::Attachment.where(created_at: ...FoodsoftConfig[:attachment_retention_days].days.ago).each do |attachment|
         rake_say attachment.inspect
         attachment.purge_later
       end
