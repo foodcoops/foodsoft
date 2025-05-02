@@ -9,6 +9,9 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
 
 Gemspec/OrderedDependencies:
   Exclude:
