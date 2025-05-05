@@ -92,29 +92,27 @@
 = form_for :articles, :url => parse_upload_supplier_articles_path(@supplier),
    :html => { multipart: true, class: "form-horizontal" } do |f|
 
-  .control-group
+  .input-group
     %label(for="articles_file")= t '.file_label'
     = f.file_field "file"
+  .input-group.mt-1
+    %label(for="articles_delete_unavailable")
+      = f.check_box "delete_unavailable", { style: "margin-top: 20px" }
+      = t '.options.delete_unavailable'
+  .input-group.mt-1
+    %label(for="articles_outlist_absent")
+      = f.check_box "outlist_absent", { style: "margin-top: 10px" }
+      = t '.options.outlist_absent'
+  .input-group.mt-1
+    %label(for="articles_convert_units")
+      = f.check_box "convert_units", { style: "margin-top: 10px" }
+      = t '.options.convert_units'
+  - unless @supplier.unit_migration_completed.nil?
+    .input-group.mt-1
+      %label(for="articles_activate_unit_migration")
+        = f.check_box "activate_unit_migration", { style: "margin-top: 10px; margin-bottom: 10px" }
+        = t '.options.activate_unit_migration'
 
-  .control-group
-    .form-group
-      %label(for="articles_delete_unavailable")
-        = f.check_box "delete_unavailable"
-        = t '.options.delete_unavailable'
-    .form-group
-      %label(for="articles_outlist_absent")
-        = f.check_box "outlist_absent"
-        = t '.options.outlist_absent'
-    .form-group
-      %label(for="articles_convert_units")
-        = f.check_box "convert_units"
-        = t '.options.convert_units'
-    - unless @supplier.unit_migration_completed.nil?
-      .form-group
-        %label(for="articles_activate_unit_migration")
-          = f.check_box "activate_unit_migration"
-          = t '.options.activate_unit_migration'
-
-  .form-actions
+  .form-actions.mt-1
     = submit_tag t('.submit'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)
