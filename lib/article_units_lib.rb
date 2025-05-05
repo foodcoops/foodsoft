@@ -105,7 +105,7 @@ class ArticleUnitsLib
       unit[:name] == name
     end
 
-    matching_unit[0]
+    matching_unit[0] unless matching_unit.nil?
   end
 
   def self.convert_old_unit(old_compound_unit_str, unit_quantity)
