@@ -43,17 +43,25 @@ module FoodsoftArticleImport
         ].compact.join(' - ')
 
         status = row.search('status').text == 'Actief' ? nil : :outlisted
+        piece_unit_code = ArticleUnitsLib.get_code_for_unit_name('XPP')
         article = {}
         unless row.search('bestelnummer').text == ''
           article = { order_number: row.search('bestelnummer').text,
+                      availability: status.nil?,
                       # :ean => row.search('eancode').text,
                       name: row.search('omschrijving').text,
                       note: row.search('kwaliteit').text,
                       manufacturer: row.search('merk').text,
                       origin: row.search('herkomst').text,
                       unit: unit,
+                      article_unit_ratios: [{ sort: 1, quantity: row.search('sve').text, unit: piece_unit_code }],
+                      minimum_order_quantity: 1,
+                      group_order_granularity: 1,
+                      billing_unit: piece_unit_code,
+                      group_order_unit: piece_unit_code,
+                      supplier_order_unit: nil,
+                      price_unit: piece_unit_code,
                       price: row.search('prijs inkoopprijs').text,
-                      unit_quantity: row.search('sve').text,
                       tax: row.search('btw').text,
                       deposit: deposit,
                       article_category: category }
