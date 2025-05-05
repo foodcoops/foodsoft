@@ -52,37 +52,39 @@ module FoodsoftArticleImport
       encoding = opts[:encoding] || OPTIONS[:encoding]
       col_sep = opts[:col_sep] || OPTIONS[:col_sep]
       load_codes(custom_file_path)
+      piece_unit_code = ArticleUnitsLib.get_code_for_unit_name('XPP')
       CSV.foreach(file, { col_sep: col_sep, encoding: encoding, headers: true }).with_index(1) do |row, i|
         # check if the line is empty
         unless row[0] == '' || row[0].nil?
           article = {
+            availability: %w[X V].include?(row[1]),
             name: UTF8Encoder.clean(row[6]),
             order_number: row[0],
+            unit: row[21],
+            article_unit_ratios: [{ sort: 1, quantity: row[22], unit: piece_unit_code }],
+            minimum_order_quantity: row[20],
+            group_order_granularity: 1,
+            billing_unit: piece_unit_code,
+            group_order_unit: piece_unit_code,
+            supplier_order_unit: nil,
+            price: row[37],
+            price_unit: piece_unit_code,
             note: UTF8Encoder.clean(row[7]),
             manufacturer: translate(:manufacturer, row[10]),
             origin: row[12],
             article_category: translate(:category, row[16]),
-            unit: row[23],
-            price: row[37],
-            tax: translate(:tax, row[33]),
-            unit_quantity: row[22]
+            tax: translate(:tax, row[33])
           }
 
           # TODO: Complete deposit list....
           article.merge!(deposit: translate(:deposit, row[26])) if translate(:deposit, row[26])
 
-          if !row[62].nil?
+          if row[62].nil?
+            yield article, (article[:availability] ? :outlisted : nil), i
+          else
             # consider special prices
             article[:note] = "Sonderpreis: #{article[:price]} von #{row[62]} bis #{row[63]}"
             yield article, :special, i
-
-            # Check now for article status, we only consider outlisted articles right now
-            # N=neu, A=Änderung, X=ausgelistet, R=Restbestand,
-            # V=vorübergehend ausgelistet, W=wiedergelistet
-          elsif row[1] == 'X' || row[1] == 'V'
-            yield article, :outlisted, i
-          else
-            yield article, nil, i
           end
         end
       end
