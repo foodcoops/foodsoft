@@ -25,6 +25,9 @@
       = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-control'}, allow_blank: true
       = config_input fields, 'time', input_html: {class: 'form-control'}
     -# can't use collapse and tooltip on same element :/
-    = config_input form, :use_boxfill, as: :boolean do
-      = config_tooltip form, :use_boxfill do
-        = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}, wrapper: :horizontal_boolean
+    .row
+      .col-sm-3
+      .col-sm-9
+        = config_tooltip form, :use_boxfill do
+          = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}, wrapper: :horizontal_boolean
+        = fields.label :use_boxfill
