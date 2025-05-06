@@ -39,35 +39,28 @@ class Supplier < ApplicationRecord
     %w[articles stock_articles orders]
   end
 
-  # Synchronise articles with spreadsheet.
-  #
-  # @param file [File] Spreadsheet file to parse
-  # @param options [Hash] Options passed to {FoodsoftArticleImport#parse} except when listed here.
-  # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
-  # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
-  def sync_from_file(file, file_type, options = {})
-    data = FoodsoftArticleImport.parse(file, type: file_type, **options.except(:convert_units, :outlist_absent, :delete_unavailable))
-    data.each do |new_attrs|
-      new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
-      new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+  def sync(options = {})
+    articles = read_external_article_data(options)[:articles]
+    parse_import_data(articles, options) + [articles]
+  end
+
+  def read_external_article_data(options = {})
+    data = {}
+    unless options[:file]
+      url = URI(supplier_remote_source)
+      url.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params)
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = url.scheme == 'https'
+      request = Net::HTTP::Get.new(url)
+
+      response = http.request(request)
+      data = JSON.parse(response.body, symbolize_names: true)
     end
-    parse_import_data({ articles: data }, options) + [data]
-  end
-
-  def read_from_remote(search_params = {})
-    url = URI(supplier_remote_source)
-    url.query = URI.encode_www_form(search_params) unless search_params.nil?
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = url.scheme == 'https'
-    request = Net::HTTP::Get.new(url)
-
-    response = http.request(request)
-    JSON.parse(response.body, symbolize_names: true)
-  end
-
-  def sync_from_remote(options = {})
-    data = read_from_remote(options[:search_params])
-    parse_import_data(data, options) + [data]
+    if options[:file]
+      data[:articles] = FoodsoftArticleImport.parse(options[:file], type: options[:format], foodsoft_url: options[:foodsoft_url])
+      normalize_price(data[:articles])
+    end
+    data
   end
 
   def deleted?
@@ -122,7 +115,7 @@ class Supplier < ApplicationRecord
     outlisted_articles = []
     new_articles = []
 
-    data[:articles].each do |new_attrs|
+    data.each do |new_attrs|
       undeleted_articles = articles.includes(:latest_article_version).undeleted
       article = if new_attrs[:id]
                   undeleted_articles.where(id: new_attrs[:id]).first
@@ -167,5 +160,14 @@ class Supplier < ApplicationRecord
     new_article.latest_article_version = new_article_version
 
     new_article
+  end
+
+  private
+
+  def normalize_price(data)
+    data.each do |new_attrs|
+      new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
+      new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+    end
   end
 end

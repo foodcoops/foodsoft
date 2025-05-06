@@ -64,7 +64,7 @@ class SuppliersController < ApplicationController
     search_params[:origin] = params.fetch(:origin) if params.include?(:origin)
     search_params[:page] = params.fetch(:page, 1)
     search_params[:per_page] = @per_page
-    data = @supplier.read_from_remote(search_params)
+    data = @supplier.read_external_article_data(search_params: search_params)
     @articles = data[:articles]
     @pagination = OpenStruct.new(data[:pagination])
   end
