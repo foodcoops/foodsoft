@@ -8,7 +8,9 @@ describe FoodsoftArticleImport do
   odin_files_path = File.join(files_path, 'odin')
 
   dummy_article = { order_number: '0109', name: 'nucli rose', note: 'Biologisch', manufacturer: 'NELEMAN',
-                    origin: 'ES', unit: '750gr', price: '4.52', unit_quantity: '6', tax: '21', deposit: '0', article_category: '' }
+                    origin: 'ES', unit: '750gr', price: '4.52', tax: '21', deposit: '0', article_category: '',
+                    minimum_order_quantity: 1, group_order_granularity: 1, availability: true, article_unit_ratios: [{ sort: 1, quantity: '6', unit: 'XPP' }],
+                    billing_unit: 'XPP', supplier_order_unit: nil, price_unit: 'XPP', group_order_unit: 'XPP' }
 
   empty = {}
 

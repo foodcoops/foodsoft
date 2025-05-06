@@ -8,14 +8,16 @@ describe FoodsoftArticleImport do
   bnn_files_path = File.join(files_path, 'bnn')
 
   dummy_article = { name: 'Greek Dressing - Kräuter Mix', order_number: '64721', note: 'Oregano, Basilikum und Minze',
-                    manufacturer: 'Medousa, Griechenland Importe', origin: 'GR', article_category: 'Kräutermischungen', unit: '35g', price: '2,89', tax: 7.0, unit_quantity: '6' }
+                    manufacturer: 'Medousa, Griechenland Importe', origin: 'GR', article_category: 'Kräutermischungen', unit: '6 x35g', price: '2,89', tax: 7.0,
+                    minimum_order_quantity: '1', group_order_granularity: 1, availability: true, article_unit_ratios: [{ sort: 1, quantity: '6', unit: 'XPP' }],
+                    billing_unit: 'XPP', supplier_order_unit: nil, price_unit: 'XPP', group_order_unit: 'XPP' }
 
-  article = dummy_article.merge({ deposit: 0.08 })
-  article_special = article.merge(note: 'Sonderpreis: 2,89 von 20230101 bis 20230201')
+  article = dummy_article.merge({ deposit: 0.08, availability: false })
+  article_special = article.merge({ note: 'Sonderpreis: 2,89 von 20230101 bis 20230201', availability: true })
 
   article2 = dummy_article.merge({ manufacturer: nil, article_category: nil })
 
-  article_custom_code = article.merge(article_category: 'Schuhe')
+  article_custom_code = article.merge({ article_category: 'Schuhe', availability: true })
 
   empty = {}
 

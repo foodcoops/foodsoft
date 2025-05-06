@@ -52,12 +52,12 @@ module FoodsoftArticleImport
       encoding = opts[:encoding] || OPTIONS[:encoding]
       col_sep = opts[:col_sep] || OPTIONS[:col_sep]
       load_codes(custom_file_path)
-      piece_unit_code = ArticleUnitsLib.get_code_for_unit_name('XPP')
+      piece_unit_code = 'XPP'
       CSV.foreach(file, { col_sep: col_sep, encoding: encoding, headers: true }).with_index(1) do |row, i|
         # check if the line is empty
         unless row[0] == '' || row[0].nil?
           article = {
-            availability: %w[X V].include?(row[1]),
+            availability: %w[X V].exclude?(row[1]),
             name: UTF8Encoder.clean(row[6]),
             order_number: row[0],
             unit: row[21],
@@ -80,7 +80,7 @@ module FoodsoftArticleImport
           article.merge!(deposit: translate(:deposit, row[26])) if translate(:deposit, row[26])
 
           if row[62].nil?
-            yield article, (article[:availability] ? :outlisted : nil), i
+            yield article, (article[:availability] ? nil : :outlisted), i
           else
             # consider special prices
             article[:note] = "Sonderpreis: #{article[:price]} von #{row[62]} bis #{row[63]}"

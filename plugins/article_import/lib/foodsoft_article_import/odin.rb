@@ -43,7 +43,7 @@ module FoodsoftArticleImport
         ].compact.join(' - ')
 
         status = row.search('status').text == 'Actief' ? nil : :outlisted
-        piece_unit_code = ArticleUnitsLib.get_code_for_unit_name('XPP')
+        piece_unit_code = 'XPP'
         article = {}
         unless row.search('bestelnummer').text == ''
           article = { order_number: row.search('bestelnummer').text,
