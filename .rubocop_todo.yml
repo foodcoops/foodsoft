@@ -255,7 +255,7 @@ Metrics/AbcSize:
 # AllowedMethods: refine
 Metrics/BlockLength:
   Max: 80
-  AllowedMethods: ['setup']
+  # AllowedMethods: ['setup']
 
 # Offense count: 5
 # Configuration parameters: CountBlocks.
