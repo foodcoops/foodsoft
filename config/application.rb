@@ -17,7 +17,7 @@ module Foodsoft
     # the framework and any gems in your application.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.eager_load_paths << Rails.root.join('lib')
+    config.autoload_lib(ignore: %w[tasks])
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
