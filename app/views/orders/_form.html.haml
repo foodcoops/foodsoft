@@ -1,86 +1,75 @@
 = simple_form_for @order do |f|
-  = f.hidden_field :supplier_id
   .row
-    .col-md-3
-      = f.input :starts, as: :date_picker_time, wrapper: :custom_form, label_html: {class: "col-sm-3"}
-  - if @order.is_boxfill_useful?
-    .row
-      .col-md-3
+    .col-md-4
+      = f.hidden_field :supplier_id
+      = f.input :starts, as: :date_picker_time
+      - if @order.is_boxfill_useful?
         = f.input :boxfill, as: :date_picker_time
-  .row
-    .col-md-3
-      = f.input :ends, as: :date_picker_time, wrapper: :custom_form, label_html: {class: "col-sm-3"}
-  .row
-    .col-md-3
-      = f.input :pickup, as: :date_picker, wrapper: :custom_form, label_html: {class: "col-sm-3"}
-  .row
-    .col-md-3
+      = f.input :ends, as: :date_picker_time
+      = f.input :pickup, as: :date_picker
       = f.input :end_action, 
-          collection: Order.end_actions, 
-          include_blank: false, 
-          input_html: { style: 'width: 500Px' }  ,
-          wrapper: :custom_form,
-          label_html: {class: "col-sm-3"}
+        collection: Order.end_actions, 
+        include_blank: false, 
+        input_html: { style: 'width: 100%' }
+      = f.input :note, input_html: {rows: 5, class: 'form-control'}
   .row
-    .col-md-3
-      = f.input :note, input_html: {rows: 5, class: 'form-control'}, wrapper: :custom_form, label_html: {class: "col-sm-3"}
-
-  %h2= t '.title'
-  - if @order.errors.has_key?(:articles)
-    .alert.alert-error
-      = @order.errors.messages[:articles].join(" ")
-  %table.table.table-hover#articleList
-    %tr
-      %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-      %th= heading_helper Article, :name
-      %th= heading_helper Article, :note
-      - if @order.stockit?
-        %th= t '.stockit'
-      - else
-        %th= heading_helper Article, :origin
-        %th= heading_helper Article, :manufacturer
-        %th= heading_helper Article, :units
-      %th= t '.prices'
-    - for category_name, articles in @order.articles_for_ordering
-      %tr.article-category
-        %td
-        %td{:colspan => "6", :style => "text-align:left"}
-          = category_name
-          %i.icon-tag
-      - for article in articles
-        / check if the article is selected or has an error
-        - included = @order.article_ids.include?(article.id.to_s)
-        - row_class = ''
-        - if @order.erroneous_article_ids.include?(article.id)
-          - row_class = 'error'
-        - elsif included
-          - row_class = 'selected'
-        %tr{class: row_class, id: article.id}
-          %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
-          %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
-          %td= truncate article.note, length: 25, tooltip: true
+    .col-md-12
+      %h2= t '.title'
+      - if @order.errors.has_key?(:articles)
+        .alert.alert-error
+          = @order.errors.messages[:articles].join(" ")
+      %table.table.table-hover#articleList
+        %tr
+          %th= check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
+          %th= heading_helper Article, :name
+          %th= heading_helper Article, :note
           - if @order.stockit?
-            %td= "#{article.quantity_available} * #{article.unit}"
+            %th= t '.stockit'
           - else
-            %td= truncate article.origin, length: 15, tooltip: true
-            %td= truncate article.manufacturer, length: 15, tooltip: true
+            %th= heading_helper Article, :origin
+            %th= heading_helper Article, :manufacturer
+            %th= heading_helper Article, :units
+          %th= t '.prices'
+        - for category_name, articles in @order.articles_for_ordering
+          %tr.article-category
             %td
-              = format_supplier_order_unit_with_ratios(article)
-          %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
-    %tr
-      %td
-        = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
-        -# also when all are deselected, make sure this parameter is sent (controller removes empty values again)
-        = hidden_field_tag "order[article_ids][]", nil
-      %td{:colspan => "6"}= t '.select_all'
+            %td{:colspan => "6", :style => "text-align:left"}
+              = category_name
+              %i.icon-tag
+          - for article in articles
+            / check if the article is selected or has an error
+            - included = @order.article_ids.include?(article.id.to_s)
+            - row_class = ''
+            - if included
+              - row_class = 'selected'
+            - elsif @order.erroneous_article_ids.include?(article.id)
+              - row_class = 'error'
+            %tr{class: row_class, id: article.id}
+              %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
+              %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name
+              %td= truncate article.note, length: 25, tooltip: true
+              - if @order.stockit?
+                %td= "#{article.quantity_available} * #{article.unit}"
+              - else
+                %td= truncate article.origin, length: 15, tooltip: true
+                %td= truncate article.manufacturer, length: 15, tooltip: true
+                %td
+                  = format_supplier_order_unit_with_ratios(article)
+              %td= "#{number_to_currency(article.price)} / #{number_to_currency(article.fc_price)}"
+        %tr
+          %td
+            = check_box_tag 'checkall', "1", false, { 'data-check-all' => '#articleList' }
+            -# also when all are deselected, make sure this parameter is sent (controller removes empty values again)
+            = hidden_field_tag "order[article_ids][]", nil
+          %td{:colspan => "6"}= t '.select_all'
 
-  - if (@template_orders && !@template_orders.empty?)
-    = render :partial => 'template_orders_script'
+      - if (@template_orders && !@template_orders.empty?)
+        = render :partial => 'template_orders_script'
 
-  .form-actions
-    = f.button :submit
-    = link_to t('ui.or_cancel'), orders_path
-    - unless @order.erroneous_article_ids.empty?
-      &nbsp;
-      = check_box_tag 'order[ignore_warnings]'
-      = t '.ignore_warnings'
+      .form-actions
+        = f.button :submit
+        = link_to t('ui.or_cancel'), orders_path
+        - unless @order.erroneous_article_ids.empty?
+          &nbsp;
+          = check_box_tag 'order[ignore_warnings]'
+          = t '.ignore_warnings'
