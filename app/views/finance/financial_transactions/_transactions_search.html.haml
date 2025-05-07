@@ -1,10 +1,9 @@
 .well.well-small.row
   = search_form_for @q, url: url,
-        html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'form-search'} do |f|
+        html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'from-inline'} do |f|
     .col-md-3
       = f.text_field :note_cont, class: 'form-control search-query', placeholder: t('ui.search_placeholder'),
         style: 'width: 200px'
-
     .col-md-3.d-flex.align-items-center
       = label_tag 'q_created_on_gteq', FinancialTransaction.human_attribute_name(:created_on), style: 'margin-bottom: 0px; margin-right: 10px'
       .input-group
@@ -21,7 +20,6 @@
         = f.text_field :amount_lteq, class: 'form-control search-query', style: 'width: 100px'
 
     .col-md-3.d-flex.align-items-center
-      .pull-right
-        %label{for: 'show_hidden'}
-          = check_box_tag 'show_hidden', 1, params[:show_hidden]
-          = t '.show_hidden'
+      %label{for: 'show_hidden', style:'padding-left: 30px' }
+        = check_box_tag 'show_hidden', 1, params[:show_hidden]
+        = t '.show_hidden'

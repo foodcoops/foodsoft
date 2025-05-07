@@ -8,8 +8,8 @@
   %p= t '.second_paragraph'
 .well.well-small
   = form_tag admin_messagegroups_path, :method => :get, :remote => true,
-    'data-submit-onchange' => true, class: 'form-search' do
+    'data-submit-onchange' => true, class: 'form-inline' do
     = text_field_tag :query, params[:query], class: 'form-control search-query',
-      placeholder: t('admin.search_placeholder'), style: 'width: 200px'
+      placeholder: t('admin.search_placeholder')
 #messagegroups
   = render "messagegroups"

@@ -60,7 +60,7 @@
 
 .row
   .well.clear
-    .form-search
+    .form-inline
       .input-group.d-flex
         = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable form-control', style: "width:200px"
         %button.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
