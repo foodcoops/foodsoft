@@ -53,7 +53,7 @@
 
 .well.well-small
   .btn-toolbar
-    .form-search.pull-right
+    .pull-right
       .input-group.d-flex
         = text_field_tag :query, params[:query], class: 'form-control search-query delayed-search resettable'
         %button.btn.reset-search{:type => :button, :title => t('.search_reset')}
