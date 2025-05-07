@@ -5,14 +5,14 @@
 
   .well
     = form_tag foodcoop_users_path, :method => :get, :remote => true,
-      'data-submit-onchange' => true, class: 'form-search' do
+      'data-submit-onchange' => true, class: 'form-inline' do
 
-      = text_field_tag :user_name, params[:user_name], class: 'input-medium search-query',
+      = text_field_tag :user_name, params[:user_name], class: 'form-control search-query',
         placeholder: t('.ph_name')
-      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'input-medium search-query',
+      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'form-control search-query',
         placeholder: t('.ph_ordergroup')
-      %button.btn
-        %i.icon-search
+      %button.btn.btn-default
+        = fa_icon :search
 
   #users
     = render :partial => "users"

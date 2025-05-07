@@ -1,17 +1,17 @@
 - title t('.title')
 
 - content_for :actionbar do
-  = link_to t('.show_all'), finance_transactions_path, class: 'btn'
+  = link_to t('.show_all'), finance_transactions_path, class: 'btn btn-default'
   - if FoodsoftConfig[:use_financial_links]
-    = link_to t('.show_foodcoop'), finance_foodcoop_financial_transactions_path, class: 'btn'
-    = link_to t('.new_financial_link'), finance_links_path, method: :post, class: 'btn'
+    = link_to t('.show_foodcoop'), finance_foodcoop_financial_transactions_path, class: 'btn btn-default'
+    = link_to t('.new_financial_link'), finance_links_path, method: :post, class: 'btn btn-default'
   = link_to t('.new_transaction'), finance_new_transaction_collection_path, class: 'btn btn-primary'
 
 .well.well-small
   = form_tag finance_ordergroups_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-search' do
-    = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: t('ui.search_placeholder')
+    = text_field_tag :query, params[:query], class: 'form-control search-query',
+      placeholder: t('ui.search_placeholder'), style: 'width: 200px'
 
 #ordergroupsTable
   = render :partial => "ordergroups"

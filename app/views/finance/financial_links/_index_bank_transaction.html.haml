@@ -1,20 +1,22 @@
-.modal-header
-  = close_button :modal
-  %h3= t('.title')
-.modal-body
-  %table.table.table-striped
-    %thead
-      %tr
-        %th= heading_helper BankTransaction, :date
-        %th= heading_helper BankTransaction, :text
-        %th= heading_helper BankTransaction, :reference
-        %th= heading_helper BankTransaction, :amount
-    %tbody
-      - for t in @bank_transactions
-        %tr
-          %td= link_to format_time(t.date), add_bank_transaction_finance_link_path(@financial_link, bank_transaction: t.id), method: :put
-          %td= t.text
-          %td= t.reference
-          %td= number_to_currency t.amount
-.modal-footer
-  = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+.modal-dialog
+  .modal-content
+    .modal-header
+      = close_button :modal
+      %h3= t('.title')
+    .modal-body
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= heading_helper BankTransaction, :date
+            %th= heading_helper BankTransaction, :text
+            %th= heading_helper BankTransaction, :reference
+            %th= heading_helper BankTransaction, :amount
+        %tbody
+          - for t in @bank_transactions
+            %tr
+              %td= link_to format_time(t.date), add_bank_transaction_finance_link_path(@financial_link, bank_transaction: t.id), method: :put
+              %td= t.text
+              %td= t.reference
+              %td= number_to_currency t.amount
+    .modal-footer
+      = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}

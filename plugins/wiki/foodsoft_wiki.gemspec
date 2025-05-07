@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'content_for_in_controllers'
   s.add_development_dependency 'sqlite3'
   s.metadata['rubygems_mfa_required'] = 'true'
+  s.required_ruby_version = '>= 3.3'
 end

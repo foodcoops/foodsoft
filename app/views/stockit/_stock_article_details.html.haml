@@ -23,4 +23,4 @@
     %dt= heading_helper(StockArticle, :quantity_available)
     %dd= stock_article.quantity_available
   .form-actions
-    = link_to t('ui.edit'), edit_stock_article_path(stock_article), remote: true, class: 'btn'
+    = link_to t('ui.edit'), edit_stock_article_path(stock_article), remote: true, class: 'btn btn-default'

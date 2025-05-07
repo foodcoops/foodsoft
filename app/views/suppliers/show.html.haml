@@ -1,9 +1,9 @@
 - title @supplier.name
 
 - content_for :actionbar do
-  = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn'
+  = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn btn-default'
   - if @supplier.stock_articles.undeleted.any?
-    = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn'
+    = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn btn-default'
 
 .row-fluid
   .span6
@@ -46,20 +46,20 @@
       %dt= heading_helper(Supplier, :share_link) + ':'
       %dd
         %div#share_link= render partial: 'supplier_shares/share_link', locals: { external_uuid: @supplier.external_uuid }
-        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn share', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
-        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn share', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
+        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-default btn-xs', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
+        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-default btn-xs', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
 
     .clearfix
     - if @current_user.role_suppliers?
       .form-actions
-        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn'
+        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn btn-default'
         = link_to t('ui.delete'), @supplier, :data => {:confirm => t('ui.confirm_delete', name: @supplier.name)}, :method => :delete, class: 'btn btn-danger'
 
   - if @deliveries.any?
     .span6
       .pull-right
-        = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn'
-        = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn'
+        = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn btn-default'
+        = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn btn-default'
       %h2= t '.last_deliveries'
       %table.table.table-horizontal
         %thead

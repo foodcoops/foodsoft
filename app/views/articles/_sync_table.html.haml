@@ -38,13 +38,13 @@
             = form.input :id, as: :hidden unless changed_article.new_record?
             - hidden_fields.each do |field|
               = form.input field, as: :hidden
-          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'input-small'
-          %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'input-small'
-          %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'input-mini'
+          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'form-control'
+          %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'form-control'
+          %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'form-control'
           %td{:style => highlight_new(attrs, :supplier_order_unit)}
             .d-flex.gap-1.align-items-center
-              = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'input-medium'}
-              = form.input :unit, input_html: {class: 'input-mini ml-1'}, label: false
+              = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
+              = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 %i.icon-cog{:style => highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])}
             %div.extra-unit-fields.form-horizontal
@@ -59,7 +59,7 @@
                     %tfoot
                       %tr
                         %td{:colspan => 6}
-                          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn', title: "add ratio"
+                          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: "add ratio"
                       - unless changed_article.new_record?
                         %tr{style: 'color: grey;'}
                           %td{:colspan => 6}
@@ -71,34 +71,34 @@
                                 = ArticleUnitsLib.get_translated_name_for_code(article.supplier_order_unit)
               .fold-line
                 = form.input :minimum_order_quantity, label: "Mininum order quantity" do
-                  .input-append
-                    = form.input_field :minimum_order_quantity, class: 'input-mini', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
-                    %span.add-on
+                  .input-group
+                    = form.input_field :minimum_order_quantity, class: 'form-control', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
+                    %span.input-group-addon
                     - unless changed_article.new_record?
                       %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
               .fold-line
-                = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'input-medium', style: highlight_new(attrs, :billing_unit)}, include_blank: false
+                = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'form-control', style: highlight_new(attrs, :billing_unit)}, include_blank: false
               .fold-line
-                = form.input :group_order_granularity, hint: changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}", hint_html: {style: 'color: grey;'}, label: "Allow orders per", input_html: {class: 'input-mini', style: highlight_new(attrs, :group_order_granularity), title: "steps in which ordergroups can order this article"}
-                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': changed_article.group_order_unit, class: 'input-medium', style: highlight_new(attrs, :group_order_unit)}, label: '&times;'.html_safe, include_blank: false
+                = form.input :group_order_granularity, hint: changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}", hint_html: {style: 'color: grey;'}, label: "Allow orders per", input_html: {class: 'form-control', style: highlight_new(attrs, :group_order_granularity), title: "steps in which ordergroups can order this article"}
+                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': changed_article.group_order_unit, class: 'form-control', style: highlight_new(attrs, :group_order_unit)}, label: '&times;'.html_safe, include_blank: false
           %td{:style => highlight_new(attrs, :price)}
             .d-flex.gap-1
               .input-prepend
-                %span.add-on= t 'number.currency.format.unit'
-                = form.text_field 'price', class: 'input-mini', style: 'width: 45px'
+                %span.input-group-addon= t 'number.currency.format.unit'
+                = form.text_field 'price', class: 'form-control', style: 'width: 45px'
               .input.d-flex.gap-1
                 %label=t('articles.form.per')
-                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'input-medium'}
+                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
           %td{:style => highlight_new(attrs, :tax)}
-            .input-append
-              = form.text_field 'tax', class: 'input-mini', style: 'width: 45px'
-              %span.add-on %
+            .input-group
+              = form.text_field 'tax', class: 'form-control', style: 'width: 45px'
+              %span.input-group-addon %
           %td{:style => highlight_new(attrs, :deposit)}
             .input-prepend
-              %span.add-on= t 'number.currency.format.unit'
-              = form.text_field 'deposit', class: 'input-mini', style: 'width: 45px'
+              %span.input-group-addon= t 'number.currency.format.unit'
+              = form.text_field 'deposit', class: 'form-control', style: 'width: 45px'
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
-            {include_blank: true}, class: 'input-small'
+            {include_blank: true}, class: 'form-control'
       - unless changed_article.errors.empty?
         %tr.alert
           %td(colspan=11)= changed_article.errors.full_messages.join(', ')

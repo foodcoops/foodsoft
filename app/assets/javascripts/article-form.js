@@ -237,8 +237,8 @@ class ArticleForm {
       : undefined;
     const unitVal = $(`#${this.unitFieldsIdPrefix}_unit`).val();
     this.minimumOrderQuantity$
-      .parents('.input-append')
-      .find('.add-on')
+      .parents('.input-group')
+      .find('.input-group-addon')
       .text(chosenOptionLabel !== undefined ? chosenOptionLabel : unitVal);
 
     const converter = this.getUnitsConverter();
@@ -428,10 +428,10 @@ class ArticleForm {
 
     unitSelect$.trigger('change');
 
-    unitSelect$.parents('.control-group').find('.immutable_unit_label').remove();
+    unitSelect$.parents('.form-group').find('.immutable_unit_label').remove();
     if (units.length === 1) {
       unitSelect$.hide();
-      unitSelect$.parents('.control-group').append($(`<div class="immutable_unit_label control-label">${units[0].label}</div>`))
+      unitSelect$.after($(`<div class="immutable_unit_label control-label pull-left">${units[0].label}</div>`))
     } else {
       unitSelect$.show();
     }

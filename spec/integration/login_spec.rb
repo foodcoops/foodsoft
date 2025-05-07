@@ -36,7 +36,7 @@ feature LoginController do
       let(:token) { 'foobar' }
 
       it 'is not accessible' do
-        expect(page).to have_css '.alert-error'
+        expect(page).to have_css '.alert-danger'
         expect(page).to have_no_css 'input[type=password]'
       end
     end

@@ -27,7 +27,7 @@
             %td= format_time j.last_update_at
             %td= j.last_update_state
             %td= link_to t('ui.delete'), j, method: :delete, data: {:confirm => t('ui.confirm_delete', name: j.id)},
-                  class: 'btn btn-mini btn-danger'
+                  class: 'btn btn-xs btn-danger'
         - if @pending_jobs.any?
           %tr
             %td{colspan: 7}
@@ -41,7 +41,7 @@
             %td= format_time j.last_update_at
             %td= j.last_update_state
             %td= link_to t('ui.delete'), j, method: :delete, data: {:confirm => t('ui.confirm_delete', name: j.id)},
-                  class: 'btn btn-mini btn-danger'
+                  class: 'btn btn-xs btn-danger'
 
 %h2= t '.finished'
 #jobsTable= render 'jobs'

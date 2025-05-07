@@ -101,8 +101,7 @@ class Ordergroup < Group
     # Get hours for every job of each user in period
     jobs = users.to_a.sum { |u| u.tasks.done.where('updated_on > ?', APPLE_MONTH_AGO.month.ago).sum(:duration) }
     # Get group_order.price for every finished order in this period
-    orders_sum = group_orders.includes(:order).merge(Order.finished).where('orders.ends >= ?',
-                                                                           APPLE_MONTH_AGO.month.ago).references(:orders).sum(:price)
+    orders_sum = group_orders.includes(:order).merge(Order.finished).where(orders: { ends: APPLE_MONTH_AGO.month.ago.. }).references(:orders).sum(:price)
 
     @readonly = false # Dirty hack, avoid getting RecordReadOnly exception when called in task after_save callback. A rails bug?
     update_attribute(:stats, { jobs_size: jobs, orders_sum: orders_sum })
@@ -140,7 +139,7 @@ class Ordergroup < Group
       !ignore_apple_restriction &&
       apples < FoodsoftConfig[:stop_ordering_under] &&
       group_orders.count > 5 &&
-      group_orders.joins(:order).merge(Order.finished).where('orders.ends >= ?', APPLE_MONTH_AGO.month.ago).count > 2
+      group_orders.joins(:order).merge(Order.finished).where(orders: { ends: APPLE_MONTH_AGO.month.ago.. }).count > 2
   end
 
   # Global average
