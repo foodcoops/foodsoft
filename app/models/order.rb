@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
   attr_accessor :ignore_warnings, :transport_distribution
 
+  attribute :transport_distribution, :integer
+
   # Associations
   has_many :order_articles, dependent: :destroy
   has_many :article_versions, through: :order_articles
