@@ -1,7 +1,7 @@
 - if @articles.empty?
   %p= t '.not_found'
 - else
-  = pagination_links_remote @pagination
+  = pagination_links_remote @articles
   %table.table.table-striped
     %thead
       %tr

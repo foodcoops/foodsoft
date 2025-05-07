@@ -162,7 +162,7 @@ class Supplier < ApplicationRecord
     if format == 'foodsoft_json'
       JSON.parse(file.read, symbolize_names: true)
     else
-      { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]) }.tap do |data|
+      { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]), pagination: nil }.tap do |data|
         data[:articles].each do |new_attrs|
           new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
           new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
