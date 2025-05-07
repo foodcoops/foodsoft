@@ -9,7 +9,7 @@ require_relative 'foodsoft_article_import/bioromeo'
 require_relative 'foodsoft_article_import/bnn'
 require_relative 'foodsoft_article_import/utf8_encoder'
 require_relative 'foodsoft_article_import/odin'
-require_relative 'foodsoft_article_import/foodsoft'
+require_relative 'foodsoft_article_import/foodsoft_spreadsheet'
 module FoodsoftArticleImport
   class ConversionFailedException < StandardError; end
 
@@ -23,7 +23,7 @@ module FoodsoftArticleImport
   def self.file_formats
     @@file_formats ||= { # rubocop:todo Style/ClassVars
       'bnn' => FoodsoftArticleImport::Bnn,
-      'foodsoft' => FoodsoftArticleImport::Foodsoft,
+      'foodsoft_spreadsheet' => FoodsoftArticleImport::FoodsoftSpreadsheet,
       'dnb_xml' => FoodsoftArticleImport::Odin,
       'odin' => FoodsoftArticleImport::Odin,
       'bioromeo' => FoodsoftArticleImport::Bioromeo
@@ -36,8 +36,7 @@ module FoodsoftArticleImport
   # @option opts [String] type file format (required) (see {.file_formats})
   # @return [File, Roo::Spreadsheet] file with encoding set if needed
   def self.parse(file, custom_file_path: nil, type: nil, foodsoft_url: nil, &blk)
-    custom_file_path ||= nil
-    type ||= 'foodsoft'
+    type ||= 'foodsoft_spreadsheet'
     parser = file_formats[type]
     if block_given?
       parser.parse(file, custom_file_path: custom_file_path, foodsoft_url: foodsoft_url, &blk)

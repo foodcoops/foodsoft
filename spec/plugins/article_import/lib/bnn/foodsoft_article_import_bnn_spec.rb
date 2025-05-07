@@ -33,7 +33,7 @@ describe FoodsoftArticleImport do
     it 'raises error wenn wrong type (except dnb_xml) specified' do
       expect do
         described_class.parse(File.open(File.join(bnn_files_path, 'bnn_flawless.BNN')),
-                              type: 'foodsoft')
+                              type: 'foodsoft_spreadsheet')
       end.to raise_error(RuntimeError)
       expect do
         described_class.parse(File.open(File.join(bnn_files_path, 'bnn_flawless.BNN')),

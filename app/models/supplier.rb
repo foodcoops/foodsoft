@@ -48,11 +48,7 @@ class Supplier < ApplicationRecord
     uri = URI(supplier_remote_source)
     uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params)
     uri.open do |f|
-      if uri.scheme == 'ftp'
-        read_external_article_data_file(f, 'bnn', options)
-      else
-        JSON.parse(f.read, symbolize_names: true)
-      end
+      read_external_article_data_file(f, 'foodsoft_json', options)
     end
   end
 
@@ -163,10 +159,14 @@ class Supplier < ApplicationRecord
   private
 
   def read_external_article_data_file(file, format, options)
-    { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]) }.tap do |data|
-      data[:articles].each do |new_attrs|
-        new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
-        new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+    if format == 'foodsoft_json'
+      JSON.parse(file.read, symbolize_names: true)
+    else
+      { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]) }.tap do |data|
+        data[:articles].each do |new_attrs|
+          new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
+          new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+        end
       end
     end
   end

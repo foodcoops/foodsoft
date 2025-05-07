@@ -37,7 +37,7 @@ describe FoodsoftArticleImport do
     it 'parses file correctly with type parameter foodsoft' do
       count = 0
       described_class.parse(File.open(File.join(foodsoft_files_path, 'foodsoft_flawless.csv')),
-                            type: 'foodsoft') do |new_attrs, status, _line|
+                            type: 'foodsoft_spreadsheet') do |new_attrs, status, _line|
         expect(new_attrs).to eq articles[count]
         expect(status).to be_nil
         count += 1
@@ -58,7 +58,7 @@ describe FoodsoftArticleImport do
 
     it 'parses missing entries correctly' do
       described_class.parse(File.open(File.join(foodsoft_files_path, 'foodsoft_missing_entries.csv')),
-                            type: 'foodsoft') do |new_attrs, status, _line|
+                            type: 'foodsoft_spreadsheet') do |new_attrs, status, _line|
         expect(status).to be_nil
         expect(new_attrs[:unit]).to eq '1 kg'
         expect(new_attrs[:manufacturer]).to be_nil
@@ -68,7 +68,7 @@ describe FoodsoftArticleImport do
     it 'generates order numbers for articles without order number' do
       count = 0
       described_class.parse(File.open(File.join(foodsoft_files_path, 'foodsoft_generate_order_number.csv')),
-                            type: 'foodsoft') do |new_attrs, _status, _line|
+                            type: 'foodsoft_spreadsheet') do |new_attrs, _status, _line|
         expect(new_attrs).to eq articles_number_generated[count]
         count += 1
       end

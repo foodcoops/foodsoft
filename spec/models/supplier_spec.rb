@@ -12,7 +12,7 @@ describe Supplier do
       options[:outlist_absent] = true
       options[:convert_units] = true
       updated_article_pairs, outlisted_articles, new_articles = supplier.sync_from_file(
-        Rails.root.join('spec/fixtures/foodsoft_file_01.csv').open, 'foodsoft', **options
+        Rails.root.join('spec/fixtures/foodsoft_file_01.csv').open, 'foodsoft_spreadsheet', **options
       )
       expect(new_articles.length).to be > 0
       expect(updated_article_pairs.first[1][:name]).to eq 'Tomaten'

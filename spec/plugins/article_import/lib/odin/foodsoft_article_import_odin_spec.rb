@@ -34,7 +34,7 @@ describe FoodsoftArticleImport do
     it 'raises error wenn wrong type specified' do
       expect do
         described_class.parse(File.open(File.join(odin_files_path, 'odin_flawless.xml')),
-                              type: 'foodsoft')
+                              type: 'foodsoft_spreadsheet')
       end.to raise_error(RuntimeError)
       expect do
         described_class.parse(File.open(File.join(odin_files_path, 'odin_flawless.xml')),

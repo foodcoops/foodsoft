@@ -7,7 +7,7 @@ require 'roo'
 require 'roo-xls'
 
 module FoodsoftArticleImport
-  module Foodsoft
+  module FoodsoftSpreadsheet
     NAME = 'Foodsoft (CSV, ODS, XLS, XLSX)'
     OUTLIST = false
     OPTIONS = {
