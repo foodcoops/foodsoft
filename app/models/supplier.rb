@@ -1,4 +1,4 @@
-require 'net/http'
+require 'open-uri'
 
 class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
@@ -24,7 +24,7 @@ class Supplier < ApplicationRecord
   validate :uniqueness_of_name
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
-  validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
+  validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
 
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
@@ -39,28 +39,26 @@ class Supplier < ApplicationRecord
     %w[articles stock_articles orders]
   end
 
-  def sync(options = {})
-    articles = read_external_article_data(options)[:articles]
+  def sync_from_file(file, format, options = {})
+    articles = read_external_article_data_file(file, format, options)[:articles]
     parse_import_data(articles, options) + [articles]
   end
 
-  def read_external_article_data(options = {})
-    data = {}
-    unless options[:file]
-      url = URI(supplier_remote_source)
-      url.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params)
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = url.scheme == 'https'
-      request = Net::HTTP::Get.new(url)
+  def read_from_remote(options = {})
+    uri = URI(supplier_remote_source)
+    uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params)
+    uri.open do |f|
+      if uri.scheme == 'ftp'
+        read_external_article_data_file(f, 'bnn', options)
+      else
+        JSON.parse(f.read, symbolize_names: true)
+      end
+    end
+  end
 
-      response = http.request(request)
-      data = JSON.parse(response.body, symbolize_names: true)
-    end
-    if options[:file]
-      data[:articles] = FoodsoftArticleImport.parse(options[:file], type: options[:format], foodsoft_url: options[:foodsoft_url])
-      normalize_price(data[:articles])
-    end
-    data
+  def sync_from_remote(options = {})
+    data = read_from_remote(options)
+    parse_import_data(data[:articles], options) + [data[:articles]]
   end
 
   def deleted?
@@ -164,10 +162,12 @@ class Supplier < ApplicationRecord
 
   private
 
-  def normalize_price(data)
-    data.each do |new_attrs|
-      new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
-      new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+  def read_external_article_data_file(file, format, options)
+    { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]) }.tap do |data|
+      data[:articles].each do |new_attrs|
+        new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
+        new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)
+      end
     end
   end
 end

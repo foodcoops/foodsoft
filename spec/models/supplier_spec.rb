@@ -11,8 +11,8 @@ describe Supplier do
       options = {}
       options[:outlist_absent] = true
       options[:convert_units] = true
-      updated_article_pairs, outlisted_articles, new_articles = supplier.sync(
-        file: Rails.root.join('spec/fixtures/foodsoft_file_01.csv').open, format: 'foodsoft', **options
+      updated_article_pairs, outlisted_articles, new_articles = supplier.sync_from_file(
+        Rails.root.join('spec/fixtures/foodsoft_file_01.csv').open, 'foodsoft', **options
       )
       expect(new_articles.length).to be > 0
       expect(updated_article_pairs.first[1][:name]).to eq 'Tomaten'
@@ -20,8 +20,8 @@ describe Supplier do
     end
 
     it 'imports articles in BNN format' do
-      changed_articles, missing_articles, new_articles = supplier.sync(
-        file: Rails.root.join('spec/fixtures/bnn_file_01.bnn').open, format: 'bnn'
+      changed_articles, missing_articles, new_articles = supplier.sync_from_file(
+        Rails.root.join('spec/fixtures/bnn_file_01.bnn').open, 'bnn'
       )
       expect(changed_articles.empty?).to be true
       expect(missing_articles.empty?).to be true
@@ -29,8 +29,8 @@ describe Supplier do
     end
 
     it 'imports articles in ODIN format' do
-      changed_articles, missing_articles, new_articles = supplier.sync(
-        file: Rails.root.join('spec/fixtures/odin_file_01.xml').open, format: 'odin'
+      changed_articles, missing_articles, new_articles = supplier.sync_from_file(
+        Rails.root.join('spec/fixtures/odin_file_01.xml').open, 'odin'
       )
       expect(changed_articles.empty?).to be true
       expect(missing_articles.empty?).to be true
