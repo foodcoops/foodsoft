@@ -22,10 +22,12 @@ class Supplier < ApplicationRecord
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
+  validates :remote_source_format, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
 
+  enum remote_source_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }
@@ -46,9 +48,9 @@ class Supplier < ApplicationRecord
 
   def read_from_remote(options = {})
     uri = URI(supplier_remote_source)
-    uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params)
+    uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params) && uri.scheme != 'ftp'
     uri.open do |f|
-      read_external_article_data_file(f, 'foodsoft_json', options)
+      read_external_article_data_file(f, remote_source_format, options)
     end
   end
 
@@ -162,7 +164,7 @@ class Supplier < ApplicationRecord
     if format == 'foodsoft_json'
       JSON.parse(file.read, symbolize_names: true)
     else
-      { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]), pagination: nil }.tap do |data|
+      { articles: FoodsoftArticleImport.parse(file, type: format, foodsoft_url: options[:foodsoft_url]), pagination: {} }.tap do |data|
         data[:articles].each do |new_attrs|
           new_article = foodsoft_file_attrs_to_article(new_attrs.dup)
           new_attrs[:price] = new_attrs[:price].to_d / new_article.convert_quantity(1, new_article.price_unit, new_article.supplier_order_unit)

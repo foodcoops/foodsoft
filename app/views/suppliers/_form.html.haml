@@ -18,6 +18,7 @@
   = f.input :note, as: :text, input_html: {rows: 5}
   = f.input :min_order_quantity
   = f.input :supplier_remote_source
+  = f.input :remote_source_format, collection: Supplier.remote_source_formats.keys, include_blank: true
   = render 'shared/custom_form_fields', f: f, type: :supplier
   = f.input :shared_sync_method, collection: shared_sync_method_collection, input_html: {class: 'input-xlarge'}, include_blank: true
   .form-actions

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_22_103203) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_07_110714) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -544,6 +544,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_103203) do
     t.string "supplier_remote_source"
     t.string "external_uuid"
     t.datetime "unit_migration_completed", precision: nil
+    t.string "remote_source_format"
     t.index ["external_uuid"], name: "index_suppliers_on_external_uuid", unique: true
     t.index ["name"], name: "index_suppliers_on_name", unique: true
   end
