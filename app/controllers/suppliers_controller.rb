@@ -65,6 +65,8 @@ class SuppliersController < ApplicationController
     search_params[:page] = params.fetch(:page, 1)
     search_params[:per_page] = @per_page
     data = @supplier.read_from_remote(search_params: search_params)
+    # we remove the category for now, as it cannot be imported safely
+    data[:articles].each { |a| a.delete(:article_category) }
     @articles = Kaminari.paginate_array(data[:articles], total_count: data[:pagination][:number])
                         .page(search_params[:page]).per(search_params[:per_page])
   end
