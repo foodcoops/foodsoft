@@ -5,11 +5,12 @@
 
 = render 'form_sidebar'
 
-= simple_form_for @task do |form|
-  = render 'form', form: form, periodic: @periodic
-  .form-actions
-    - if @periodic
-      = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-primary'
-    - else
-      = form.submit class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), :back
+.col-md-7
+  = simple_form_for @task do |form|
+    = render 'form', form: form, periodic: @periodic
+    .form-actions
+      - if @periodic
+        = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-primary'
+      - else
+        = form.submit class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), :back
