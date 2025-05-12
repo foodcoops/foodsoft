@@ -401,7 +401,7 @@ class ArticleForm {
     }
 
     this.updateUnitsInSelect(availableUnits, this.billingUnit$);
-    this.billingUnit$.parents('.fold-line').css('display', availableUnits.length > 1 ? 'block' : 'none');
+    this.billingUnit$.parents('.form-group').css('display', availableUnits.length > 1 ? 'block' : 'none');
     this.updateUnitsInSelect(availableUnits, this.groupOrderUnit$);
     this.updateUnitsInSelect(availableUnits, this.priceUnit$);
   }
@@ -443,7 +443,7 @@ class ArticleForm {
 
     const supplierOrderUnitSet = !!this.unit$.val() || !!this.supplierUnitSelect$.val();
     const unitRatiosVisible = supplierOrderUnitSet || this.unitRatiosTable$.find('tbody tr').length > 0;
-    this.unitRatiosTable$.parents('.fold-line').toggle(unitRatiosVisible);
+    this.unitRatiosTable$.parents('.form-group').toggle(unitRatiosVisible);
 
     if (!unitRatiosVisible) {
       $('tbody tr', this.unitRatiosTable$).remove();
