@@ -22,8 +22,15 @@ module ApplicationHelper
   def format_currency(amount)
     return nil if amount.nil?
 
-    class_name = amount < 0 ? 'negative_amout' : 'positive_amount'
+    class_name = amount < 0 ? 'negative_amount' : 'positive_amount'
     content_tag :span, number_to_currency(amount), class: class_name
+  end
+
+  def format_state(state)
+    return nil if state.nil?
+
+    class_name = state["paid"] ? 'state_paid' : 'state_fail'
+    content_tag :span, I18n.t(state), class: class_name
   end
 
   # Splits an IBAN into groups of 4 digits displayed with margins in between

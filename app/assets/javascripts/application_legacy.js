@@ -148,7 +148,7 @@ $(function() {
         if (xhr.statusText === 'abort') {
           return;
         }
-
+        console.log(exception.message)
         try {
             msg = xhr.responseJSON.error;
         } catch(err) {
