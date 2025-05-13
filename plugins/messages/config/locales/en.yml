@@ -32,6 +32,21 @@ en:
     users:
       show:
         send_message: Send message
+    messagegroups:
+      index:
+        title: Message groups
+        first_paragraph: Here you can administer Foodsoft message groups. You can %{url}, edit or remove them.
+        second_paragraph: ' '
+        new_messagegroup: Add
+        new_messagegroups: add message groups
+      new:
+        title: New message group
+      edit:
+        title: Edit message group
+      show:
+        title: Message group %{name}
+        send_message: Send message
+    confirm: Are you sure you want to delete %{name}?
   config:
     hints:
       mailing_list: Mailing-list email address to use instead of the messaging system for mail to all members.
