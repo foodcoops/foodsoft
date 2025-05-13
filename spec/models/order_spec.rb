@@ -187,4 +187,22 @@ describe Order do
       expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
+
+  describe 'sending to supplier' do
+    let(:user) { create(:user) }
+    let(:order) { create(:order) }
+    let(:current_time) { Time.current }
+
+    before do
+      allow(Time).to receive(:now).and_return(current_time)
+    end
+
+    it 'sends email and updates timestamp' do
+      order.send_to_supplier!(user)
+
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+    end
+  end
 end
+
