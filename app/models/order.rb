@@ -307,10 +307,25 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    Mailer.deliver_now_with_default_locale do
-      Mailer.order_result_supplier(user, self)
+    uri = URI(supplier.supplier_remote_source || '')
+    if uri.scheme == 'ftp'
+      upload_via_ftp
+    else
+      Mailer.deliver_now_with_default_locale do
+        Mailer.order_result_supplier(user, self)
+      end
     end
     update!(last_sent_mail: Time.now)
+  end
+
+  def upload_via_ftp
+    require 'net/ftp'
+    order_b85_io = StringIO.new(OrderB85.new(self).to_b85)
+    uri = URI(supplier.supplier_remote_source)
+    Net::FTP.open(uri.host) do |ftp|
+      ftp.login(uri.user, uri.password)
+      ftp.putbinaryfile(order_b85_io, uri.path)
+    end
   end
 
   def do_end_action!

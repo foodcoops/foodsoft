@@ -195,14 +195,54 @@ describe Order do
 
     before do
       allow(Time).to receive(:now).and_return(current_time)
+      ActionMailer::Base.deliveries.clear
     end
 
-    it 'sends email and updates timestamp' do
-      order.send_to_supplier!(user)
+    context 'with empty remote source' do
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
 
-      expect(ActionMailer::Base.deliveries.count).to eq 1
-      expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with other protocol than FTP' do
+      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'https://example.com', remote_source_format: 'foodsoft_json', shared_sync_method: 'import') }
+      let(:order) { create(:order, supplier: supplier) }
+
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
+
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with FTP upload' do
+      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_source_format: 'foodsoft_json', shared_sync_method: 'import') }
+      let(:order) { create(:order, supplier: supplier) }
+      let(:ftp_mock) { instance_double(Net::FTP) }
+      let(:b85_content) { "D#000000000000 \r\n\r\n".encode(Encoding::ISO8859_1) }
+
+      before do
+        allow(Net::FTP).to receive(:open).with('example.com').and_yield(ftp_mock)
+        allow(ftp_mock).to receive(:login)
+        allow(ftp_mock).to receive(:putbinaryfile)
+      end
+
+      it 'uploads order via FTP in B85 format and does not send email' do
+        order.send_to_supplier!(user)
+
+        expect(Net::FTP).to have_received(:open).with('example.com')
+        expect(ftp_mock).to have_received(:login).with('user', 'pass')
+        expect(ftp_mock).to have_received(:putbinaryfile) do |file, filename|
+          expect(file.read).to eq b85_content
+          expect(filename).to eq 'path'
+        end
+        expect(ActionMailer::Base.deliveries.count).to eq 0
+        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+      end
     end
   end
 end
-
