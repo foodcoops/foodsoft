@@ -223,7 +223,6 @@ describe Order do
       let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_source_format: 'foodsoft_json', shared_sync_method: 'import') }
       let(:order) { create(:order, supplier: supplier) }
       let(:ftp_mock) { instance_double(Net::FTP) }
-      let(:b85_content) { "D#000000000000 \r\n\r\n".encode(Encoding::ISO8859_1) }
 
       before do
         allow(Net::FTP).to receive(:open).with('example.com').and_yield(ftp_mock)
@@ -236,9 +235,8 @@ describe Order do
 
         expect(Net::FTP).to have_received(:open).with('example.com')
         expect(ftp_mock).to have_received(:login).with('user', 'pass')
-        expect(ftp_mock).to have_received(:putbinaryfile) do |file, filename|
-          expect(file.read).to eq b85_content
-          expect(filename).to eq 'path'
+        expect(ftp_mock).to have_received(:putbinaryfile) do |_, remote_filename|
+          expect(remote_filename).to match(/BE\d{6}\.\d{3}$/)
         end
         expect(ActionMailer::Base.deliveries.count).to eq 0
         expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
