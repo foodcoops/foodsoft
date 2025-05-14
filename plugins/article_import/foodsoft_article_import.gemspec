@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
                    'Gemfile', 'Rakefile']
   spec.extra_rdoc_files = ['README.md']
 
-  spec.add_dependency 'roo', '~> 2.9.0'
+  spec.add_dependency 'roo', '~> 2.10.1'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end
