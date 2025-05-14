@@ -1,5 +1,6 @@
 ##
 # Export order as "Biofakt B85 Mailbox Order Format"
+# https://n-bnn.de/leistungen-services/markt-und-produktdaten/schnittstelle
 #
 # This format is used by German organic wholesalers for remote ordering via FTP.
 #
@@ -41,7 +42,7 @@ class OrderB85
     b85 = header
     b85 += data.join(end_of_dataset)
     b85 += end_of_dataset
-    b85.encode(Encoding::ISO8859_1)
+    b85.encode('ISO-8859-1')
   end
 
   private
@@ -55,15 +56,15 @@ class OrderB85
   def header
     [
       # identification
-      "D#",
+      'D#',
       # customer number
-      '%06i' % @order.supplier.customer_number.to_i,
+      format('%06i', @order.supplier.customer_number.to_i),
       # delivery date: we might want to use @order.pickup
-      "000000",
+      '000000',
       # delivery
-      " ",
+      ' ',
       # optional: we might want to add foodsoft order number
-      end_of_dataset,
+      end_of_dataset
     ].join
   end
 
@@ -75,15 +76,15 @@ class OrderB85
         # article number
         article.article_version.order_number.strip.ljust(13),
         # sign for order quantity
-        "+",
+        '+',
         # order quantity (in packaging units)
-        ("%08.3f" % article.units_to_order).delete("."),
+        format('%08.3f', article.units_to_order).delete('.'),
         # article description
         article.article_version.name[0, 30].ljust(30),
         # packaging quantity
-        ("%08.3f" % unit_ratio.quantity).delete("."),
+        format('%08.3f', unit_ratio.quantity).delete('.'),
         # packaging text (used for unit name)
-        ArticleUnitsLib.get_translated_name_for_code(unit_ratio.unit)[0, 12].ljust(12),
+        ArticleUnitsLib.get_translated_name_for_code(unit_ratio.unit)[0, 12].ljust(12)
         # optional fields might be added
       ].join
     end
