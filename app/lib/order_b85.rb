@@ -39,7 +39,7 @@ class OrderB85
   end
 
   def to_b85
-    b85 = header
+    b85 = header + end_of_dataset
     b85 += data.join(end_of_dataset)
     b85 += end_of_dataset
     b85.encode('ISO-8859-1')
@@ -62,9 +62,8 @@ class OrderB85
       # delivery date: we might want to use @order.pickup
       '000000',
       # delivery
-      ' ',
+      ' '
       # optional: we might want to add foodsoft order number
-      end_of_dataset
     ].join
   end
 
