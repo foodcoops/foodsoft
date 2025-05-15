@@ -22,10 +22,10 @@ class Supplier < ApplicationRecord
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
-  validates :remote_data_format, presence: true, unless: -> { supplier_remote_source.blank? }
-  validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
-  validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
-  validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
+  validates :remote_data_format, presence: true, unless: -> { remote_location_uri.blank? }
+  validates :shared_sync_method, presence: true, unless: -> { remote_location_uri.blank? }
+  validates :shared_sync_method, absence: true, if: -> { remote_location_uri.blank? }
+  validates :remote_location_uri, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
 
   enum remote_data_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
@@ -47,7 +47,7 @@ class Supplier < ApplicationRecord
   end
 
   def read_from_remote(options = {})
-    uri = URI(supplier_remote_source)
+    uri = URI(remote_location_uri)
     uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params) && uri.scheme != 'ftp'
     uri.open do |f|
       read_external_article_data_file(f, remote_data_format, options)
@@ -77,9 +77,9 @@ class Supplier < ApplicationRecord
   end
 
   # TODO: Maybe use the `nilify_blanks` gem instead of the following two methods? (see https://github.com/foodcoopsat/foodsoft_hackathon/issues/93):
-  def supplier_remote_source=(value)
+  def remote_location_uri=(value)
     if value.blank?
-      self[:supplier_remote_source] = nil
+      self[:remote_location_uri] = nil
     else
       super
     end

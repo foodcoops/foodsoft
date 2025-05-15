@@ -307,7 +307,7 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    uri = URI(supplier.supplier_remote_source || '')
+    uri = URI(supplier.remote_location_uri || '')
     if uri.scheme == 'ftp' && supplier.remote_data_format == 'bnn'
       upload_via_ftp
     else
@@ -327,7 +327,7 @@ class Order < ApplicationRecord
       local_temp_file.rewind
       # BE + 6-digit customer number + last 3 digits of order ID
       remote_filename = "BE#{format('%06d', supplier.customer_number.to_i)}.#{format('%03d', id % 1000)}"
-      uri = URI(supplier.supplier_remote_source)
+      uri = URI(supplier.remote_location_uri)
       Net::FTP.open(uri.host) do |ftp|
         ftp.login(uri.user, uri.password)
         ftp.putbinaryfile(local_temp_file.path, remote_filename)

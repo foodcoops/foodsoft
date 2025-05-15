@@ -171,7 +171,7 @@ describe ArticleVersion do
     end
 
     describe 'articles in suppliers with shared_sync_method = all*' do
-      let(:supplier) { create(:supplier, shared_sync_method: 'all_available', supplier_remote_source: 'https://dummy.com') }
+      let(:supplier) { create(:supplier, shared_sync_method: 'all_available', remote_location_uri: 'https://dummy.com', remote_data_format: 'foodsoft_json') }
       let(:first_article) { create(:article, supplier: supplier, name: 'One') }
       let(:second_article) { create(:article, supplier: supplier, name: 'Two') }
       let(:order) { create(:order, supplier: supplier, article_ids: [first_article.id, second_article.id]) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_15_093129) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_15_112038) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -541,7 +541,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_15_093129) do
     t.string "shared_sync_method"
     t.string "iban"
     t.integer "supplier_category_id", null: false
-    t.string "supplier_remote_source"
+    t.string "remote_location_uri"
     t.string "external_uuid"
     t.datetime "unit_migration_completed", precision: nil
     t.string "remote_data_format"
