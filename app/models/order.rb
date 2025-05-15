@@ -308,7 +308,7 @@ class Order < ApplicationRecord
 
   def send_to_supplier!(user)
     uri = URI(supplier.supplier_remote_source || '')
-    if uri.scheme == 'ftp'
+    if uri.scheme == 'ftp' && supplier.remote_data_format == 'bnn'
       upload_via_ftp
     else
       Mailer.deliver_now_with_default_locale do

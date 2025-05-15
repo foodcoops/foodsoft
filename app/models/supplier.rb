@@ -50,7 +50,7 @@ class Supplier < ApplicationRecord
     uri = URI(supplier_remote_source)
     uri.query = URI.encode_www_form(options[:search_params]) if options.include?(:search_params) && uri.scheme != 'ftp'
     uri.open do |f|
-      read_external_article_data_file(f, remote_source_format, options)
+      read_external_article_data_file(f, remote_data_format, options)
     end
   end
 

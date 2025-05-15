@@ -219,13 +219,13 @@ describe Order do
       end
     end
 
-    context 'with FTP upload' do
-      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_data_format: 'foodsoft_json', shared_sync_method: 'import') }
+    context 'with FTP upload and BNN/B85 format' do
+      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_data_format: 'bnn', shared_sync_method: 'import') }
       let(:order) { create(:order, supplier: supplier) }
       let(:ftp_mock) { instance_double(Net::FTP) }
 
       before do
-        allow(Net::FTP).to receive(:open).with('example.com').and_yield(ftp_mock)
+        allow(Net::FTP).to receive(:open).and_yield(ftp_mock)
         allow(ftp_mock).to receive(:login)
         allow(ftp_mock).to receive(:putbinaryfile)
       end
