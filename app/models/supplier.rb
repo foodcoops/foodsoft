@@ -22,12 +22,12 @@ class Supplier < ApplicationRecord
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
-  validates :remote_source_format, presence: true, unless: -> { supplier_remote_source.blank? }
+  validates :remote_data_format, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
 
-  enum remote_source_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
+  enum remote_data_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }

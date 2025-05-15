@@ -208,7 +208,7 @@ describe Order do
     end
 
     context 'with other protocol than FTP' do
-      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'https://example.com', remote_source_format: 'foodsoft_json', shared_sync_method: 'import') }
+      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'https://example.com', remote_data_format: 'foodsoft_json', shared_sync_method: 'import') }
       let(:order) { create(:order, supplier: supplier) }
 
       it 'sends email and updates timestamp' do
@@ -220,7 +220,7 @@ describe Order do
     end
 
     context 'with FTP upload' do
-      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_source_format: 'foodsoft_json', shared_sync_method: 'import') }
+      let(:supplier) { create(:supplier, article_count: 1, supplier_remote_source: 'ftp://user:pass@example.com/path', remote_data_format: 'foodsoft_json', shared_sync_method: 'import') }
       let(:order) { create(:order, supplier: supplier) }
       let(:ftp_mock) { instance_double(Net::FTP) }
 
