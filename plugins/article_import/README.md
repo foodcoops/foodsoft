@@ -15,7 +15,7 @@ example for foodsoft file:
 ||4322Q|Tomato juice|Organic|Greenfields|TR|1.2 l|4.02|7.0|0|2|||Juices|
 
 bnn file reference:
-https://n-bnn.de/fileadmin/user_upload/Leistungen_Services/Markt-_und_Produktdaten/BNN3_1Schnittstelle_20.08.21.pdf
+https://n-bnn.de/leistungen-services/markt-und-produktdaten/schnittstelle
 
 Information about Manufacturer, article category, tax and deposit are conveyed through "bnn codes".
 A "bnn code" is a mapping of some abbreviation or number to the relevant data.
