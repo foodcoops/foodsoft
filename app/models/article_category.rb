@@ -5,12 +5,12 @@ class ArticleCategory < ApplicationRecord
   # @!attrubute description
   #   @return [String] Description (currently unused)
 
-  # @!attribute articles
-  #   @return [Array<Article>] Articles with this category.
-  has_many :articles
+  # @!attribute article_versions
+  #   @return [Array<ArticleVersion>] ArticleVersions with this category.
+  has_many :article_versions
   # @!attribute order_articles
   #   @return [Array<OrderArticle>] Order articles with this category.
-  has_many :order_articles, through: :articles
+  has_many :order_articles, through: :article_versions
   # @!attribute orders
   #   @return [Array<Order>] Orders with articles in this category.
   has_many :orders, through: :order_articles
@@ -52,9 +52,9 @@ class ArticleCategory < ApplicationRecord
 
   protected
 
-  # Deny deleting the category when there are associated articles.
+  # Deny deleting the category when there are associated undeleted article_versions.
   def check_for_associated_articles
-    return unless articles.undeleted.exists?
+    return unless article_versions.latest.undeleted.exists?
 
     raise I18n.t('activerecord.errors.has_many_left',
                  collection: Article.model_name.human)
