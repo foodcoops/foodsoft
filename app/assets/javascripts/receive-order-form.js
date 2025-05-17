@@ -113,15 +113,15 @@
         // TODO implement adding a new article, like in deliveries
       }).on('change', (e) => {
         var $input = $(e.target);
-        var selectedArticleId = $input.val();
-        if(!selectedArticleId) {
+        var selectedArticleVersionId = $input.val();
+        if(!selectedArticleVersionId) {
           return false;
         }
 
         $.ajax({
           url: this.newOrderArticlePath,
           type: 'post',
-          data: JSON.stringify({order_article: {article_version: {article_id: selectedArticleId}}}),
+          data: JSON.stringify({order_article: {article_version_id: selectedArticleVersionId}}),
           contentType: 'application/json; charset=UTF-8'
         });
 
