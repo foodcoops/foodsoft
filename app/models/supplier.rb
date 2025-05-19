@@ -28,6 +28,7 @@ class Supplier < ApplicationRecord
   validates :remote_location_uri, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
 
   enum remote_data_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
+  enum remote_order_method: { email: 'email', ftp: 'ftp' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }
