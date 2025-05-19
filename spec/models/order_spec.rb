@@ -220,7 +220,11 @@ describe Order do
     end
 
     context 'with FTP upload and BNN/B85 format' do
-      let(:supplier) { create(:supplier, article_count: 1, remote_location_uri: 'ftp://user:pass@example.com/path', remote_data_format: 'bnn', shared_sync_method: 'import') }
+      let(:supplier) do
+        create(:supplier, article_count: 1, remote_location_uri: 'ftp://user:pass@example.com/path',
+                          remote_data_format: 'bnn', shared_sync_method: 'import', remote_order_method: 'ftp',
+                          customer_number: '12345')
+      end
       let(:order) { create(:order, supplier: supplier) }
       let(:ftp_mock) { instance_double(Net::FTP) }
 

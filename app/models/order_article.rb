@@ -283,6 +283,6 @@ class OrderArticle < ApplicationRecord
       article_version.order_number.length <= 13 &&
       article_version.article_unit_ratios.exists? &&
       article_version.article_unit_ratios.first.quantity <= 10_000 &&
-      article_version.units_to_order <= 10_000
+      units_to_order <= 10_000
   end
 end
