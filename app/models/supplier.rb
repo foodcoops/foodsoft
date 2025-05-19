@@ -18,6 +18,7 @@ class Supplier < ApplicationRecord
   validates :name, presence: true, length: { in: 4..30 }
   validates :phone, presence: true, length: { in: 8..25 }
   validates :address, presence: true, length: { in: 8..50 }
+  validates :customer_number, length: { in: 1..6 }, numericality: { only_integer: true }, if: -> { remote_order_method == 'ftp' }
   validates :iban, format: { with: /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, allow_blank: true }
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }

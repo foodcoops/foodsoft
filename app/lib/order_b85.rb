@@ -47,18 +47,14 @@ class OrderB85
 
   private
 
-  # Checks needed in controller:
-  # - supplier must have a customer number: <= 6 digits, numerical
-  # - all ordered articles must have an order number: <= 13 digits
-  # - units to order must be greater than 0 and less than 10.000
-  # - the first article unit ratio must be set (packaging quantity)
-
   def header
+    # validation takes place in Supplier
+    customer_number = @order.supplier.customer_number || ''
     [
       # identification
       'D#',
-      # customer number
-      format('%06i', @order.supplier.customer_number.to_i),
+      # customer number (validation takes place in Supplier)
+      format('%06i', customer_number[0, 6].to_i),
       # delivery date: we might want to use @order.pickup
       '000000',
       # delivery
@@ -71,17 +67,20 @@ class OrderB85
     order_articles = @order.order_articles.ordered.includes(:article_version)
     order_articles.map do |article|
       unit_ratio = article.article_version.article_unit_ratios.first
+      # validation takes place in OrderArticle
+      order_quantity = article.units_to_order < 10_000 ? article.units_to_order : 0
+      packaging_quantity = unit_ratio.quantity < 10_000 ? unit_ratio.quantity : 0
       [
-        # article number
-        article.article_version.order_number.strip.ljust(13),
+        # article number (validation takes place in OrderArticle)
+        article.article_version.order_number[0, 13].ljust(13),
         # sign for order quantity
         '+',
         # order quantity (in packaging units)
-        format('%08.3f', article.units_to_order).delete('.'),
+        format('%08.3f', order_quantity).delete('.'),
         # article description
         article.article_version.name[0, 30].ljust(30),
         # packaging quantity
-        format('%08.3f', unit_ratio.quantity).delete('.'),
+        format('%08.3f', packaging_quantity).delete('.'),
         # packaging text (used for unit name)
         ArticleUnitsLib.get_translated_name_for_code(unit_ratio.unit)[0, 12].ljust(12)
         # optional fields might be added
