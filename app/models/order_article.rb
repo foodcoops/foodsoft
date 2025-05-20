@@ -11,7 +11,6 @@ class OrderArticle < ApplicationRecord
   validates :order_id, :article_version_id, presence: true
   validate :article_version_and_price_exist
   validates :article_version_id, uniqueness: { scope: :order_id }
-  validate :ftp_uploadable, if: ->(oa) { oa.order.supplier.remote_order_method == Supplier.remote_order_methods[:ftp] }
 
   _ordered_sql = 'order_articles.units_to_order > 0 OR order_articles.units_billed > 0 OR order_articles.units_received > 0'
   scope :ordered, -> { where(_ordered_sql) }
@@ -272,17 +271,5 @@ class OrderArticle < ApplicationRecord
     units = 0 if units < 0
     units = 0 if units == unit_ratio
     units
-  end
-
-  def ftp_uploadable
-    # - all ordered articles must have an order number <= 13 digits
-    # - the article must have at least one unit ratio (packaging quantity)
-    # - the packaging quantity must be less than 10'000 (4 digits)
-    # - the order quantity must be less than 10'000 (4 digits)
-    article_version.order_number.present? &&
-      article_version.order_number.length <= 13 &&
-      article_version.article_unit_ratios.exists? &&
-      article_version.article_unit_ratios.first.quantity <= 10_000 &&
-      units_to_order <= 10_000
   end
 end
