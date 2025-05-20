@@ -222,9 +222,10 @@ en:
         order_howto: How to order
         phone: Phone
         phone2: Phone 2
-        remote_location_uri: Synchronization location
+        remote_location_uri: Synchronization/order URI
         remote_data_format: Data format
         shared_sync_method: Synchronization method
+        remote_order_method: Order method
         url: Homepage
       supplier_category:
         name: Name
@@ -1738,6 +1739,8 @@ en:
           price: "<ul><li>Price changes are forbidden.</li><li>If necessary, %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: The minimum amount which has to be ordered will be shown during the order process and should motivate ordering
+        remote_location_uri: A URI such as “https://example.org/articles” or “ftp://user:password@example.org”.
+        remote_order_method: How the order can be automatically sent to the supplier.
       task:
         duration: How long will the task take, 1-3 hours
         required_users: How many users will be needed in total?
@@ -1902,6 +1905,9 @@ en:
       action_import: import
       already_imported: imported
       not_found: No articles found
+    remote_order_methods:
+      email: E-mail
+      ftp: FTP
   supplier_shares:
     share_link:
       not_shared: Supplier's articles are currently not shared with anyone.
