@@ -203,7 +203,7 @@ describe Order do
         order.send_to_supplier!(user)
 
         expect(ActionMailer::Base.deliveries.count).to eq 1
-        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
       end
     end
 
@@ -215,7 +215,7 @@ describe Order do
         order.send_to_supplier!(user)
 
         expect(ActionMailer::Base.deliveries.count).to eq 1
-        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
       end
     end
 
@@ -243,7 +243,7 @@ describe Order do
           expect(remote_filename).to match(/BE\d{6}\.\d{3}$/)
         end
         expect(ActionMailer::Base.deliveries.count).to eq 0
-        expect(order.last_sent_mail.to_i).to eq(current_time.to_i)
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
       end
     end
   end
