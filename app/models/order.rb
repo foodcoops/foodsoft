@@ -315,7 +315,7 @@ class Order < ApplicationRecord
         Mailer.order_result_supplier(user, self)
       end
     end
-    update!(remote_ordered_at: Time.now)
+    update_attribute(:remote_ordered_at, Time.now)
   end
 
   def upload_via_ftp
