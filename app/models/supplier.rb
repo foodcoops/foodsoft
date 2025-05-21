@@ -27,6 +27,8 @@ class Supplier < ApplicationRecord
   validates :shared_sync_method, presence: true, unless: -> { remote_location_uri.blank? }
   validates :shared_sync_method, absence: true, if: -> { remote_location_uri.blank? }
   validates :remote_location_uri, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp http https]), allow_blank: true }
+  validates :remote_location_uri, presence: true, if: -> { remote_order_method == 'ftp' }
+  validate :no_open_orders, if: -> { remote_order_method == 'ftp' && remote_order_method_changed? }
 
   enum remote_data_format: { foodsoft_json: 'foodsoft_json', bnn: 'bnn' }
   enum remote_order_method: { email: 'email', ftp: 'ftp' }
@@ -105,6 +107,10 @@ class Supplier < ApplicationRecord
 
     message = supplier.first.deleted? ? :taken_with_deleted : :taken
     errors.add :name, message
+  end
+
+  def no_open_orders
+    errors.add :remote_order_method, :no_open_orders if orders.open.exists?
   end
 
   def parse_import_data(data, options = {})

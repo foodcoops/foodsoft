@@ -41,6 +41,10 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
     if @supplier.update(supplier_params)
       flash[:notice] = I18n.t('suppliers.update.notice')
+      if @supplier.remote_order_method == 'ftp'
+        @supplier.orders.finished_not_closed.each { |o| o.update_attribute(:last_sent_mail, Time.now) if o.last_sent_mail.nil? }
+        flash[:notice] += ", #{I18n.t('suppliers.update.remote_ordered_at_notice')}"
+      end
       redirect_to @supplier
     else
       render action: 'edit'
