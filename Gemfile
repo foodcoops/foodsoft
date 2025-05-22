@@ -1,7 +1,7 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.1.5'
+gem 'rails', '~> 7.2.2'
 
 gem 'sassc-rails', '>= 2.1.0'
 
