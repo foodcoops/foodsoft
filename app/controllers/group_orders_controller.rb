@@ -3,7 +3,7 @@
 class GroupOrdersController < ApplicationController
   # Security
   before_action :ensure_ordergroup_member
-  before_action :ensure_open_order, only: %i[new create edit update order stock_order saveOrder]
+  before_action :ensure_open_order, only: %i[new create edit update]
   before_action :ensure_my_group_order, only: %i[show edit update]
   before_action :enough_apples?, only: %i[new create]
 
