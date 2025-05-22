@@ -5,6 +5,6 @@
   = config_input form, :time_zone, as: :time_zone, include_blank: true, input_html: {class: 'form-control'}
   = config_input form, :currency_unit do
     = config_input_field form, :currency_unit, class: 'form-control'
-    %label.inline
+    %label
       = config_input_label form, :currency_space
       = config_input_field form, :currency_space, as: :boolean

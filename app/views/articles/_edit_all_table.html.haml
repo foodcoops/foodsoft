@@ -38,29 +38,27 @@
               = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
               = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
-                %i.icon-cog
+                = fa_icon :cog
             %div.extra-unit-fields.form-horizontal
-              .fold-line
-                .form-group
-                  %label.control-label{for: 'unit_ratios'}
-                    = "Unit ratios"
-                  %table#fc_base_price{:class => "controls"}
-                    %tbody
-                      - ratios = article.article_unit_ratios
-                      = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
-                    %tfoot
-                      %tr
-                        %td{:colspan => 6}
-                          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: t(".add_ratio")
-              .fold-line
-                = form.input :minimum_order_quantity, label: "Mininum order quantity" do
-                  .input-append
-                    = form.input_field :minimum_order_quantity, class: 'form', title: "total minimum order quantity for this article"
-              .fold-line
-                = form.input :billing_unit, as: :select, collection: [], input_html: {'data-initial-value': article.billing_unit, class: 'form-control'}, include_blank: false
-              .fold-line
-                = form.input :group_order_granularity, label: "Allow orders per", input_html: {class: 'form-control', title: "steps in which ordergroups can order this article"}
-                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': article.group_order_unit, class: 'form-control'}, label: '&times;'.html_safe, include_blank: false
+              .form-group.d-flex.w-full
+                %label.col-sm-3.control-label{for: 'unit_ratios'}
+                  = "Unit ratios"
+                %table#fc_base_price{:class => "controls col-sm-9 "}
+                  %tbody
+                    - ratios = article.article_unit_ratios
+                    = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
+                  %tfoot
+                    %tr
+                      %td{:colspan => 9, :style => 'padding-left: 15Px; padding-bottom: 16Px; padding-top: 16Px'}
+                        = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: t(".add_ratio")
+              = form.input :minimum_order_quantity, label: "Mininum order quantity" do
+                = form.input_field :minimum_order_quantity, class: 'form form-control', title: "total minimum order quantity for this article"
+              %div
+              = form.input :billing_unit, as: :select, collection: [], input_html: {'data-initial-value': article.billing_unit, class: 'form-control'}, include_blank: false
+              .row
+                = form.input :group_order_granularity, label: "Allow orders per", input_html: {class: 'form-control col-sm-5', title: "steps in which ordergroups can order this article"}, wrapper_html: {class: 'col-sm-9'}
+                .col-sm-3
+                  = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': article.group_order_unit, class: 'form-control'}, label: '&times;'.html_safe, include_blank: false
           %td
             .d-flex.gap-1.align-items-center
               .input-group.ml-1

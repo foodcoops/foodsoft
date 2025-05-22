@@ -11,7 +11,7 @@
 
 .well.well-small.d-flex.gap-1.align-items-center
   = form_tag admin_users_path, :method => :get, :remote => true,
-    'data-submit-onchange' => true, class: 'form-search' do
+    'data-submit-onchange' => true do
     = text_field_tag :user_name, params[:user_name], class: 'form-control search-query',
       placeholder: t('admin.search_placeholder')
   %label{:for => 'show_deleted'}

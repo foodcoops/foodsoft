@@ -539,44 +539,6 @@ i.package.icon-only {
   margin: 0 auto;
 }
 
-// multiple-column layout in forms (landscape tablet and wider only)
-@media (min-width: 768px) {
-  .form-horizontal .fold-line {
-    .form-group {
-      float: left;
-    }
-    .form-group + .form-group {
-      .control-label {
-        width: auto;
-        margin: 0 10px;
-      }
-      div {
-        float: left;
-        margin-left: 0;
-      }
-      // fix margin somehow off
-      // XXX there must be a better way
-      margin-bottom: 0;
-      .help-block {
-        margin-top: 0;
-        margin-bottom: 20px;
-      }
-    }
-    .form-group:last-child {
-      float: none;
-      div {
-        float: none;
-      }
-    }
-    // allow to add a hint for the whole line
-    > .help-block {
-      clear: both;
-      margin-left: 180px;
-      position: relative;
-      top: -2.5ex;
-    }
-  }
-}
 // allow to have indicator text instead of input with same markup
 .control-text {
   margin-top: 5px;
