@@ -62,7 +62,7 @@
     }
 
     initializeOpenListener() {
-      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'bottom', trigger: 'manual'});
+      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'left', trigger: 'manual'});
 
       this.opener$.click((e) => {
         e.preventDefault();
