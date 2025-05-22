@@ -18,7 +18,6 @@
 
         = simple_fields_for @order_article.article_version do |f|
           = f.input :name
-
           - if @order_article.article_version.is_a?(StockArticle)
             %div.alert= t '.stock_alert'
           - else
