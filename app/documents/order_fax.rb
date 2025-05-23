@@ -125,12 +125,12 @@ class OrderFax < OrderPdf
          .preload(article_version: :article)
   end
 
-  def each_order_article(&block)
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &block)
+  def each_order_article(&)
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &)
   end
 
   def get_header_labels(exclude_order_number)
-    labels = I18n.t('documents.order_fax.rows').clone
+    labels = I18n.t('documents.order_fax.rows').dup
     labels.delete_at(0) if exclude_order_number
     labels
   end

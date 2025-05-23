@@ -8,8 +8,8 @@
   %p= t('.second_paragraph', url: link_to(t('.ordergroup'), admin_ordergroups_path)).html_safe
 .well.well-small
   = form_tag admin_workgroups_path, :method => :get, :remote => true,
-    'data-submit-onchange' => true, class: 'form-search' do
-    = text_field_tag :query, params[:query], class: 'input-medium search-query',
-      placeholder: t('admin.search_placeholder')
+    'data-submit-onchange' => true do
+    = text_field_tag :query, params[:query], class: 'form-control search-query',
+      placeholder: t('admin.search_placeholder'), style: 'width: 200px'
 #workgroups
   = render "workgroups"

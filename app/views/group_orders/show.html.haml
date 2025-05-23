@@ -6,7 +6,7 @@
 
 - title t('.title', order: @order.name)
 
-.row-fluid
+.row
   .well.pull-left
     // Order summary
     %dl.dl-horizontal
@@ -34,7 +34,7 @@
         %dd= show_user_link @order.updated_by
         %p= link_to t('.comment'), "#comments"
 
-  .well.pull-right
+  .well.pull-right.alert
     = close_button :alert
     = render 'switch_order', current_order: @order
 

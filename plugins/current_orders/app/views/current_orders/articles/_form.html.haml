@@ -4,7 +4,7 @@
     .well
       %ul.nav.nav-list#article_list
         %li.keep
-          = search_form_for @q, url: current_orders_articles_path, method: 'get', html: {data: {'submit-onchange' => true}, class: 'form-search'}, remote: true do |f|
+          = search_form_for @q, url: current_orders_articles_path, method: 'get', html: {data: {'submit-onchange' => true}, class: 'form-inline'}, remote: true do |f|
             .input-append
               = f.text_field :article_name_cont, placeholder: t('.article_placeholder'), class: 'search-query input-block-level resettable'
               %button.add-on.btn.reset-search{type: 'button'}

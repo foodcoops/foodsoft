@@ -13,7 +13,7 @@ class TokenVerifier < ActiveSupport::MessageVerifier
   end
 
   def verify(message)
-    r = super(message)
+    r = super
     raise InvalidMessage unless r.is_a?(Array) && r.length >= 2 && r.length <= 3
     raise InvalidScope unless r[0] == FoodsoftConfig.scope
     raise InvalidPrefix unless r[1] == @_prefix

@@ -80,8 +80,8 @@ class MultipleOrdersByArticles < OrderPdf
                 .preload(:order, group_order_articles: { group_order: :ordergroup })
   end
 
-  def each_order_article(&block)
-    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &block)
+  def each_order_article(&)
+    order_articles.find_each_with_order(batch_size: BATCH_SIZE, &)
   end
 
   def group_order_articles_for(order_article)
@@ -90,7 +90,7 @@ class MultipleOrdersByArticles < OrderPdf
     goas
   end
 
-  def each_group_order_article_for(group_order, &block)
-    group_order_articles_for(group_order).each(&block)
+  def each_group_order_article_for(group_order, &)
+    group_order_articles_for(group_order).each(&)
   end
 end

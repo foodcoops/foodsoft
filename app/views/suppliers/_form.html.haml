@@ -21,5 +21,5 @@
   = render 'shared/custom_form_fields', f: f, type: :supplier
   = f.input :shared_sync_method, collection: shared_sync_method_collection, input_html: {class: 'input-xlarge'}, include_blank: true
   .form-actions
-    = f.submit class: 'btn'
+    = f.button :submit
     = link_to t('ui.or_cancel'), suppliers_path

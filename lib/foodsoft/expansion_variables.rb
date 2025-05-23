@@ -77,8 +77,8 @@ module Foodsoft
     def self.active_suppliers
       Supplier.joins(:orders)
               .where('orders.starts > ?', ACTIVE_MONTHS.months.ago)
-              .order(:name).select(:name).distinct
-              .map(&:name).join(', ')
+              .order(:name).distinct
+              .pluck(:name).join(', ')
     end
   end
 end

@@ -1,6 +1,6 @@
-=form_with url: search_article_units_path, method: :get, id: :article_unit_search_form, html: {'data-remote': true} do |form|
+=form_with url: search_article_units_path, method: :get, id: :article_unit_search_form, html: {'data-remote': true}, class: "pull-left" do |form|
   .d-flex.align-items-center
-    = form.text_field :q, id: :article_unit_search, placeholder: t('.search'), class: 'm-0'
+    = form.text_field :q, id: :article_unit_search, placeholder: t('.search'), class: 'm-0 form-control', style: "width: 50%"
     = form.check_box :only_recommended, id: :only_recommended, class: 'm-0 ml-2', checked: true
     = form.label :only_recommended, t('.only_recommended'), class: 'm-0 ml-1', for: :only_recommended
 

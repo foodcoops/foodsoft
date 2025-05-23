@@ -40,37 +40,48 @@
     });
 
 = simple_form_for @poll do |f|
-  = f.input :name
-  .fold-line
-    = f.input :starts, as: :date_picker_time
-    = f.input :ends, as: :date_picker_time
-  = f.input :description, input_html: {rows: 2, class: 'input-xxlarge'}
-  - if @poll.poll_votes.any?
-    = f.input :voting_method, label: false do
-      = f.hint t('.already_voted')
-  - else
-    = f.input :one_vote_per_ordergroup, inline_label: true, label: false
-    - if Ordergroup.custom_fields.any?
-      = f.input :required_ordergroup_custom_fields, as: :check_boxes, label: false,
-        collection: Ordergroup.custom_fields.map{|f| [t('.required_ordergroup_custom_field', label: f[:label]), f[:name]]}.to_h
-    - if User.custom_fields.any?
-      = f.input :required_user_custom_fields, as: :check_boxes, label: false,
-        collection: User.custom_fields.map{|f| [t('.required_user_custom_field', label: f[:label]), f[:name]]}.to_h
-    = f.input :voting_method, collection: Poll.voting_methods,include_blank: false,
-      input_html: {class: 'input-xxlarge'}, value_method: ->(k){ k.first },
-      label_method: ->(k){ t("activerecord.attributes.poll.voting_methods.#{k.first}") }
-    #multi_select_count
-      = f.input :multi_select_count, input_html: { min: 0 }
-    #min_max_points
-      .fold-line
-        = f.input :min_points
-        = f.input :max_points
-    = f.input :choices do
-      #choices
-        = render partial: 'choice', collection: @poll.choices, as: :value
-        - if @poll.choices.empty?
-          = render partial: 'choice', locals: { value: '' }
-      = link_to t('.new_choice'), '#', 'data-add-choice' => true, class: 'btn'
+  .row
+    .col-md-4
+      = f.input :name
+  .row
+    .col-md-4
+      = f.input :starts, as: :date_picker_time
+      = f.input :ends, as: :date_picker_time
+  .row
+    .col-md-4
+      = f.input :description, input_html: {rows: 2, class: 'form-control'}
+  .row
+    .col-md-4
+      - if @poll.poll_votes.any?
+        = f.input :voting_method, label: false do
+          = f.hint t('.already_voted')
+      - else
+        = f.input :one_vote_per_ordergroup, inline_label: true, label: false
+        - if Ordergroup.custom_fields.any?
+          = f.input :required_ordergroup_custom_fields, as: :check_boxes, label: false,
+            collection: Ordergroup.custom_fields.map{|f| [t('.required_ordergroup_custom_field', label: f[:label]), f[:name]]}.to_h
+        - if User.custom_fields.any?
+          = f.input :required_user_custom_fields, as: :check_boxes, label: false,
+            collection: User.custom_fields.map{|f| [t('.required_user_custom_field', label: f[:label]), f[:name]]}.to_h
+        = f.input :voting_method, collection: Poll.voting_methods,include_blank: false,
+          input_html: {class: 'form-control'}, value_method: ->(k){ k.first },
+          label_method: ->(k){ t("activerecord.attributes.poll.voting_methods.#{k.first}") }
+        #multi_select_count
+          = f.input :multi_select_count, input_html: { min: 0 }
+        #min_max_points
+          .row
+            = f.input :min_points
+          .row
+            = f.input :max_points
+      = f.input :choices do
+        #choices
+          = render partial: 'choice', collection: @poll.choices, as: :value
+          - if @poll.choices.empty?
+            = render partial: 'choice', locals: { value: '' }
+      .row
+        .col-md-3
+        .col-md-4
+          = link_to t('.new_choice'), '#', 'data-add-choice' => true, class: 'btn btn-default'
   .form-actions
     = f.button :submit
     = link_to t('ui.or_cancel'), :back

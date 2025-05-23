@@ -11,7 +11,7 @@
         %td{:colspan => "3",:style => "width:14em"}
           - unless order_article.order.closed?
             = link_to t('.add_group'), new_group_order_article_path(order_article_id: order_article.id),
-              remote: true, class: 'btn btn-mini'
+              remote: true, class: 'btn btn-default btn-xs'
     %tbody
       - totals = {result: 0}
       - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }
@@ -24,7 +24,7 @@
           %td.actions{:style=>"width:1em"}
             - unless order_article.order.closed?
               = link_to t('ui.delete'), group_order_article_path(group_order_article),
-                method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+                method: :delete, remote: true, class: 'btn btn-xs btn-danger'
           %td
         - article_version = order_article.article_version
         - totals[:result] += article_version.convert_quantity(group_order_article.result, article_version.group_order_unit, article_version.billing_unit)

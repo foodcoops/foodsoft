@@ -2,8 +2,11 @@
 
 - unless FoodsoftConfig[:disable_invite]
   %p= t('.invite_new', invite_link: link_to(t('.invite_link'), new_invite_path(id: @workgroup.id))).html_safe
-= simple_form_for [:foodcoop, @workgroup] do |f|
-  = render 'shared/group_form_fields', f: f
-  .form-actions
-    = f.submit
-    = link_to t('ui.or_cancel'), foodcoop_workgroups_path
+
+.col-md-3
+  = simple_form_for [:foodcoop, @workgroup] do |f|
+    = render 'shared/group_form_fields', f: f
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.button :submit
+        = link_to t('ui.or_cancel'), foodcoop_workgroups_path
