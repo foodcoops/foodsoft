@@ -98,7 +98,7 @@ class BankAccountConnector
     @controls += [PasswordField.new(name, value, t(name))]
   end
 
-  def set_balance(amount)
+  def balance=(amount)
     @bank_account.balance = amount
   end
 
@@ -110,7 +110,7 @@ class BankAccountConnector
     @bank_account.import_continuation_point
   end
 
-  def set_continuation_point(data)
+  def continuation_point=(data)
     @bank_account.import_continuation_point = data
   end
 

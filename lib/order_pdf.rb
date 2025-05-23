@@ -112,7 +112,7 @@ class OrderPdf < RenderPdf
              .pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id', 'SUM(group_orders.transport)')
 
     result.map do |item|
-      [item.first || stock_ordergroup_name] + item[1..-1]
+      [item.first || stock_ordergroup_name] + item[1..]
     end
   end
 
@@ -127,7 +127,7 @@ class OrderPdf < RenderPdf
   def each_ordergroup_batch(batch_size)
     offset = 0
 
-    while true
+    loop do
       go_records = ordergroups(offset, batch_size)
 
       break unless go_records.any?
