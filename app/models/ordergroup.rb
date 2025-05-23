@@ -8,7 +8,7 @@ class Ordergroup < Group
 
   APPLE_MONTH_AGO = 6 # How many month back we will count tasks and orders sum
 
-  serialize :stats
+  serialize :stats, coder: YAML
 
   has_many :financial_transactions
   has_many :group_orders
