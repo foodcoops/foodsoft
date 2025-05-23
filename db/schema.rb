@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_22_103203) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_23_191049) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -52,6 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_103203) do
   create_table "article_categories", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "description"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_article_categories_on_deleted_at"
     t.index ["name"], name: "index_article_categories_on_name", unique: true
   end
 
