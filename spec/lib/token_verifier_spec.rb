@@ -38,7 +38,7 @@ describe TokenVerifier do
   end
 
   it 'returns the message' do
-    data = [5, { 'hi' => :there }, 'bye', []]
+    data = [5, { 'hi' => 'there' }, 'bye', []]
     msg = v.generate(data)
     expect(v.verify(msg)).to eq data
   end
