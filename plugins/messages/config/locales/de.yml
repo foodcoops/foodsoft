@@ -26,6 +26,21 @@ de:
       message: Nachricht
       messagegroup: Nachrichtengruppe
   admin:
+    messagegroups:
+      index:
+        title: Nachrichtengruppe
+        first_paragraph: Here you can administer Foodsoft message groups. You can %{url}, edit or remove them.
+        second_paragraph: ' '
+        new_messagegroup: Neue Nachrichtengruppe
+        new_messagegroups: neue Nachrichtengruppen
+      new:
+        title: Neue Nachrichtengruppe
+      edit:
+        title: Nachrichtengruppe bearbeiten
+      show:
+        confirm: Bist Du sicher?
+        title: Nachrichtengruppe %{name}
+        send_message: Nachricht senden
     ordergroups:
       show:
         send_message: Nachricht senden

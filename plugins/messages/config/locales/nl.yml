@@ -32,6 +32,21 @@ nl:
     users:
       show:
         send_message: Bericht sturen
+    messagegroups:
+      index:
+        title: Berichtgroepen
+        first_paragraph: Hier kun je %{url} toevoegen, bewerken en wissen.
+        second_paragraph: ' '
+        new_messagegroup: Toevoegen
+        new_messagegroups: nieuwe berichtengroepen
+      new:
+        title: Nieuwe berichtgroep
+      edit:
+        title: Berichtgroep bewerken
+      show:
+        title: Berichtgroep %{name}
+        send_message: Bericht sturen
+    confirm: Weet je het zeker dat je %{name} wil verwijderen?
   config:
     hints:
       mailing_list: Mailing-lijst adres om te gebruiken in plaats van het berichtensysteem voor emails naar alle leden.
