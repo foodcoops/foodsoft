@@ -68,7 +68,7 @@ class FoodsoftConfig
       # Gather program-default configuration
       self.default_config = initial_default_config
       # Load initial config from development or production
-      self.config = Rails.env
+      set_config Rails.env
       # Overwrite scope to have a better namescope than 'production'
       self.scope = config[:default_scope] or raise 'No default_scope is set'
       # Set defaults for backward-compatibility
@@ -89,7 +89,7 @@ class FoodsoftConfig
     # Only needed in multi coop mode.
     # @param foodcoop [String, Symbol] Foodcoop to select.
     def select_foodcoop(foodcoop)
-      self.config = foodcoop
+      set_config foodcoop
       setup_database
       setup_mailing
     end
@@ -220,7 +220,7 @@ class FoodsoftConfig
 
     private
 
-    def config=(foodcoop)
+    def set_config(foodcoop)
       raise "No config for this environment (#{foodcoop}) available!" if APP_CONFIG[foodcoop].nil?
 
       self.config = APP_CONFIG[foodcoop]
