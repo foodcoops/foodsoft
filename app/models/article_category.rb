@@ -5,21 +5,21 @@ class ArticleCategory < ApplicationRecord
   # @!attrubute description
   #   @return [String] Description (currently unused)
 
-  # @!attribute articles
-  #   @return [Array<Article>] Articles with this category.
-  has_many :articles
+  # @!attribute article_versions
+  #   @return [Array<ArticleVersion>] ArticleVersions with this category.
+  has_many :article_versions
   # @!attribute order_articles
   #   @return [Array<OrderArticle>] Order articles with this category.
-  has_many :order_articles, through: :articles
+  has_many :order_articles, through: :article_versions
   # @!attribute orders
   #   @return [Array<Order>] Orders with articles in this category.
   has_many :orders, through: :order_articles
 
+  scope :undeleted, -> { where(deleted_at: nil) }
+
   normalize_attributes :name, :description
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
-
-  before_destroy :check_for_associated_articles
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name]
@@ -50,11 +50,22 @@ class ArticleCategory < ApplicationRecord
     c
   end
 
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    transaction do
+      check_for_associated_articles
+      update_column :deleted_at, Time.now
+    end
+  end
+
   protected
 
-  # Deny deleting the category when there are associated articles.
+  # Deny deleting the category when there are associated undeleted article_versions.
   def check_for_associated_articles
-    return unless articles.undeleted.exists?
+    return unless article_versions.latest.undeleted.exists?
 
     raise I18n.t('activerecord.errors.has_many_left',
                  collection: Article.model_name.human)
