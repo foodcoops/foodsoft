@@ -15,11 +15,11 @@ class ArticleCategory < ApplicationRecord
   #   @return [Array<Order>] Orders with articles in this category.
   has_many :orders, through: :order_articles
 
+  scope :undeleted, -> { where(deleted_at: nil) }
+
   normalize_attributes :name, :description
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 2 }
-
-  before_destroy :check_for_associated_articles
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name]
@@ -48,6 +48,17 @@ class ArticleCategory < ApplicationRecord
     # return closest match if there are multiple
     c = c.sort_by { |s| s.name.length }.first if c.respond_to? :sort_by
     c
+  end
+
+  def deleted?
+    deleted_at.present?
+  end
+
+  def mark_as_deleted
+    transaction do
+      check_for_associated_articles
+      update_column :deleted_at, Time.now
+    end
   end
 
   protected
