@@ -374,7 +374,7 @@ td.symbol, th.symbol {
 .unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
-  .icon-warning-sign {
+  .glyphicon-warning-sign {
     margin-top: 8px;
     margin-left: 10px;
     color: $articleCustomUnitWarning;
@@ -429,8 +429,8 @@ table.table {
   td, th {
     vertical-align: middle;
   }
-  select, textarea, input, .uneditable-input,
-  .input-append, .input-prepend {
+  select, textarea, input, .uneditable-input
+  {
     margin-bottom: 0;
     margin-top: 0;
   }
@@ -469,16 +469,12 @@ label {
 
 
 // it's a bit distracting
-.icon-asterisk {
+.glyphicon-asterisk {
   font-size: 80%;
   vertical-align: middle;
   padding-bottom: 0.4ex;
 }
 
-// allow buttons as input add-on (with proper height)
-.input-append button.add-on {
-  height: inherit;
-}
 
 // inline form elements
 .inline {

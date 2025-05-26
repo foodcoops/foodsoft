@@ -13,6 +13,6 @@
       = f.association :financial_transaction_type, :as => :radio_buttons
     = f.input :amount
     = f.input :note, :as => :text
-    .form-actions
+    %div
       = f.submit class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), finance_group_transactions_path(@ordergroup)

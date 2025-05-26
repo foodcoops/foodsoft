@@ -81,6 +81,6 @@
       - Ordergroup.custom_fields.each do |f|
         - if f[:financial_transaction_source]
           = link_to t('.add_all_ordergroups_custom_field', label: f[:label]), '#', 'data-custom-field' => f[:name], 'data-add-all-ordergroups' => true, class: 'btn'
-    .form-actions
+    %div
       = submit_tag t('.save'), class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), finance_ordergroups_path

@@ -91,7 +91,7 @@ module OrdersHelper
       uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
     end
 
-    uq_text = content_tag(:span, uq_text, class: 'hidden-phone') if options[:soft_uq]
+    uq_text = content_tag(:span, uq_text, class: 'hidden-xs') if options[:soft_uq]
     if options[:plain]
       uq_text
     elsif options[:icon].nil? || options[:icon]
@@ -108,7 +108,6 @@ module OrdersHelper
     options = { tag: 'i', class: '' }.merge(options)
     if c.nil?
       c = '&nbsp;'.html_safe
-      options[:class] += ' icon-only'
     end
     content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
@@ -118,7 +117,7 @@ module OrdersHelper
 
     title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article_version.price}"
     title += " / #{number_to_currency order_article.article_version.gross_price}" if gross
-    content_tag(:i, nil, class: 'icon-asterisk', title: j(title)).html_safe
+    content_tag(:i, nil, class: 'glyphicon-asterisk', title: j(title)).html_safe
   end
 
   def receive_input_field(form)
@@ -141,7 +140,7 @@ module OrdersHelper
                   content_tag(:span, class: 'input-prepend input-append intable',
                                      title: t('orders.edit_amount.field_locked_title', default: '')) do
                     button_tag(nil, type: :button, class: 'btn unlocker') {
-                      content_tag(:i, nil, class: 'icon icon-unlock')
+                      content_tag(:i, nil, class: 'glyphicon glyphicon-unlock')
                     } + input_html
                   end
                 else

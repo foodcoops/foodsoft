@@ -1,6 +1,6 @@
 .col-md-4
   = simple_form_for [:admin, @messagegroup] do |f|
     = render 'shared/group_form_fields', :f => f
-    .form-actions
+    %div
       = f.button :submit
       = link_to t('ui.or_cancel'), :back

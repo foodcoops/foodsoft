@@ -19,7 +19,7 @@ SimpleForm.setup do |config|
         prepend.use :input
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+      input.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     end
   end
 
@@ -32,18 +32,18 @@ SimpleForm.setup do |config|
         append.use :input
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+      input.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     end
   end
 
   # Do not use the label in tables
-  config.wrappers :intable, tag: 'div', class: 'form-group control-group-intable', error_class: 'error' do |b|
+  config.wrappers :intable, tag: 'div', class: 'form-group', error_class: 'error' do |b|
     b.use :html5
     b.use :placeholder
-    b.wrapper tag: 'div', class: 'controls controls-intable' do |ba|
-      ba.use :input
+    b.wrapper tag: 'div', class: 'col-sm-3' do |ba|
+      ba.use :input, class: 'form-control'
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     end
   end
 

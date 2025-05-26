@@ -12,6 +12,6 @@
       - if FoodsoftConfig[:use_apple_points]
         = f.input :ignore_apple_restriction, :label => false, :inline_label => true, wrapper: :horizontal_boolean
     = render 'shared/group_form_fields', f: f, captured: captured
-    .form-actions
+    %div
       = f.button :submit
       = link_to t('ui.or_cancel'), :back

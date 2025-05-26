@@ -15,7 +15,7 @@
     .col-md-12
       %h2= t '.title'
       - if @order.errors.has_key?(:articles)
-        .alert.alert-error
+        .alert.alert-danger
           = @order.errors.messages[:articles].join(" ")
       %table.table.table-hover#articleList
         %tr
@@ -65,7 +65,7 @@
       - if (@template_orders && !@template_orders.empty?)
         = render :partial => 'template_orders_script'
 
-      .form-actions
+      %div
         = f.button :submit
         = link_to t('ui.or_cancel'), orders_path
         - unless @order.erroneous_article_ids.empty?

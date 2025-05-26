@@ -35,7 +35,7 @@
   .col-md-3
     .well
       %h4= t '.groupabos'
-      %ul.unstyled
+      %ul.list-unstyled
         - for membership in Membership.where(user: @user)
           %li= link_to(membership.group.name, [:admin, membership.group])
 

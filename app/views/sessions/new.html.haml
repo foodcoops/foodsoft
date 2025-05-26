@@ -9,11 +9,11 @@
 .lead= FoodsoftConfig[:name]
 
 %noscript
-  .alert.alert-error
+  .alert.alert-danger
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")
 
 .row
-  .col-sm-4
+  .col-sm-12
     = form_tag sessions_path do
       .form-group
         %label(for='nick')

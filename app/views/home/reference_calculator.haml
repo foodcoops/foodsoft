@@ -64,7 +64,7 @@
             %td
               .input-prepend
                 %span.add-on= t 'number.currency.format.unit'
-                = text_field_tag t.name_short, nil, class: 'input-small',
+                = text_field_tag t.name_short, nil,
               'data-has-name-short' => true, 'data-bank-account' => t.bank_account.try(:id),
               step: 0.01, type: :number
   %p#placeholder

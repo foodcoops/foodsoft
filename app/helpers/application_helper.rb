@@ -112,7 +112,7 @@ module ApplicationHelper
   # Generates a link to the top of the website
   def link_to_top
     link_to '#' do
-      content_tag :i, nil, class: 'icon-arrow-up icon-large'
+      content_tag :i, nil, class: 'glyphicon glyphicon-arrow-up'
     end
   end
 

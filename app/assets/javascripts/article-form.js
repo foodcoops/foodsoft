@@ -9,7 +9,7 @@ class ArticleForm {
       this.articleForm$ = articleForm$;
       this.unitConversionPopoverTemplate$ = $('#unit_conversion_popover_content_template');
       this.unit$ = $(`#${this.unitFieldsIdPrefix}_unit`, this.articleForm$);
-      this.customUnitWarning$ = $('.icon-warning-sign', this.articleForm$);
+      this.customUnitWarning$ = $('.glyphicon.glyphicon-warning-sign', this.articleForm$);
       this.supplierUnitSelect$ = $(`#${this.unitFieldsIdPrefix}_supplier_order_unit`, this.articleForm$);
       this.unitRatiosTable$ = $('#fc_base_price', this.articleForm$);
       this.minimumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_minimum_order_quantity`, this.articleForm$);

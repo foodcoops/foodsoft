@@ -6,13 +6,13 @@
           .col-sm-3{style: 'text-align: right'}
             %label.control-label{for: 'created_at'}
               = Invoice.human_attribute_name(:created_at)
-          .controls.control-text#article_fc_price
+          .control-text#article_fc_price
             = format_date @invoice.created_at
         .form-group
           .col-sm-3{style: 'text-align: right'}
             %label.control-label{for: 'created_by'}
               = Invoice.human_attribute_name(:created_by)
-          .controls.control-text#article_fc_price
+          .control-text#article_fc_price
             = show_user @invoice.created_by
     .row{style: 'padding-top: 20px'}
       = f.association :supplier, collection: Supplier.order(:name), hint: false
@@ -33,7 +33,7 @@
           %label.control-label
             = t('ui.delete_attachment')
           - f.object.attachments.reject(&:new_record?).each do |attachment|
-            .controls.control-text{id: "attachment_#{attachment.id}"}
+            .control-text{id: "attachment_#{attachment.id}"}
               = f.hidden_field :attachments, value: attachment.signed_id, multiple: true
               = link_to url_for(attachment), target: "_blank" do
                 = image_tag attachment.preview(resize_to_limit: [100, 100]) if attachment.previewable?
@@ -42,7 +42,7 @@
               %label= attachment.filename
               %hr
       = f.input :note
-      .form-actions
+      %div
         = f.button :submit
         = link_to t('ui.or_cancel'), :back
 

@@ -82,6 +82,6 @@
         .col-md-3
         .col-md-4
           = link_to t('.new_choice'), '#', 'data-add-choice' => true, class: 'btn btn-default'
-  .form-actions
+  %div
     = f.button :submit
     = link_to t('ui.or_cancel'), :back
