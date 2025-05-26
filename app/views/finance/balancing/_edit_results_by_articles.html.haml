@@ -26,7 +26,6 @@
   %thead
     %tr
       %th
-        .input-append
         = text_field_tag :article, params[:article], placeholder: (heading_helper Article, :name), class: 'form-control delayed-search resettable search-query'
       %th= heading_helper Article, :order_number
       %th= t('.amount')

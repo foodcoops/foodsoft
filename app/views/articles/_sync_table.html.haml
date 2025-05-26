@@ -51,7 +51,7 @@
               .form-group.d-flex.align-items-center
                 %label.control-label.col-sm-3{for: 'unit_ratios'}
                   = "Unit ratios"
-                %table#fc_base_price{:class => "controls"}
+                %table#fc_base_price
                   %tbody
                     - ratios = changed_article.article_unit_ratios
                     = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
@@ -97,5 +97,5 @@
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'form-control'
       - unless changed_article.errors.empty?
-        %tr.alert
+        %tr.alert.alert-warning
           %td(colspan=11)= changed_article.errors.full_messages.join(', ')

@@ -43,7 +43,7 @@
               .form-group.d-flex.w-full
                 %label.col-sm-3.control-label{for: 'unit_ratios'}
                   = "Unit ratios"
-                %table#fc_base_price{:class => "controls col-sm-9 "}
+                %table#fc_base_price{:class => "col-sm-9 "}
                   %tbody
                     - ratios = article.article_unit_ratios
                     = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
@@ -64,7 +64,7 @@
               .input-group.ml-1
                 %span.input-group-addon= t 'number.currency.format.unit'
                 = form.text_field 'price', class: 'form-control', style: 'width: 45px'
-              .input.d-flex.gap-1.control-group.ml-1.align-items-center
+              .input.d-flex.gap-1.ml-1.align-items-center
                 %label=t('articles.form.per')
                 = form.input :price_unit, as: :select, collection: [], input_html: {'data-initial-value': article.price_unit, class: 'form-control'}, label: false, wrapper: false, include_blank: false
           %td= form.text_field 'order_number', class: 'form-control'
@@ -76,7 +76,7 @@
             %span.input-group-addon %
           %td= form.text_field 'deposit', class: 'form-control'
         - unless article.errors.empty?
-          %tr.alert
+          %tr.alert.alert-warning
             %td(colspan="10")= article.errors.full_messages.join(", ")
 - content_for :javascript do
   - @articles.each_with_index do |article, index|

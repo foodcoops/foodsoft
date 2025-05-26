@@ -19,7 +19,7 @@
   .form-group.d-flex.w-full
     %label.control-label.col-sm-3
       = t('.unit_ratios')
-    %table#fc_base_price{:class => "controls col-sm-9 "}
+    %table#fc_base_price{:class => "col-sm-9 "}
       %tbody
         - ratios = article.article_unit_ratios
         = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}

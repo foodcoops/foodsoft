@@ -4,14 +4,13 @@
   = link_to t('.new_page'), new_page_path, class: 'btn btn-primary'
 
 .navbar.well.well-small
-  .navbar-inner
-    %ul.nav.d-flex.align-items-center
-      %li= link_to t('.title_list'), all_pages_path(:view => 'title_list')
-      %li= link_to t('.site_map'), all_pages_path(:view => 'site_map')
-      %li= link_to image_tag('icons/feed-icon-14x14.png', :alt => 'RSS Feed'), all_pages_rss_url
-      = form_tag all_pages_path, method: :get, class: 'd-flex form-inline pull-right' do
-        = text_field_tag :name, params[:name], class: 'form-control search-query',
-          placeholder: t('.search.placeholder')
-        = submit_tag t('.search.action'), class: 'btn btn-default'
+  %ul.nav.d-flex.align-items-center
+    %li= link_to t('.title_list'), all_pages_path(:view => 'title_list')
+    %li= link_to t('.site_map'), all_pages_path(:view => 'site_map')
+    %li= link_to image_tag('icons/feed-icon-14x14.png', :alt => 'RSS Feed'), all_pages_rss_url
+    = form_tag all_pages_path, method: :get, class: 'd-flex form-inline pull-right' do
+      = text_field_tag :name, params[:name], class: 'form-control search-query',
+        placeholder: t('.search.placeholder')
+      = submit_tag t('.search.action'), class: 'btn btn-default'
 
 = render @partial

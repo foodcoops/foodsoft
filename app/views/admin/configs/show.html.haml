@@ -9,6 +9,6 @@
     - for tab in @tabs
       .tab-pane{class: ('active' if @current_tab==tab), id: "tab-#{tab}"}= render "tab_#{tab}", form: f
 
-  .form-actions.col-md-8.pull-right
+  .col-md-8.pull-right
     = f.submit t('.submit'), class: 'btn btn-primary '
 

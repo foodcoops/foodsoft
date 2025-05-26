@@ -113,6 +113,6 @@
         = f.check_box "activate_unit_migration", { style: "margin-top: 10px; margin-bottom: 10px" }
         = t '.options.activate_unit_migration'
 
-  .form-actions.mt-1
+  %div.mt-1
     = submit_tag t('.submit'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), supplier_articles_path(@supplier)

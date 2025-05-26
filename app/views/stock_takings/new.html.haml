@@ -26,6 +26,6 @@
 
   #stock_changes
     = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
-  .form-actions
+  %div
     = f.button :submit
     = link_to t('ui.or_cancel'), stock_takings_path

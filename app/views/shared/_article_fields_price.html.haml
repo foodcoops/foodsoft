@@ -16,7 +16,7 @@
 .form-group
   .col-sm-3.control-label{for: 'article_fc_price', style: 'font-weight: 700'}
     = Article.human_attribute_name(:fc_price)
-  .col-sm-9.controls.control-text#article_fc_price
+  .col-sm-9#article_fc_price
     %span.price_value
     %span.price_per_text=t('articles.form.per')
     %span.price_unit

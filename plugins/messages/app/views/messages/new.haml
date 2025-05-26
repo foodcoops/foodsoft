@@ -77,40 +77,47 @@
 - title t('.title')
 
 = simple_form_for @message do |f|
-  = f.hidden_field :reply_to
+  .col-md-7
+    = f.hidden_field :reply_to
 
-  - if @message.reply_to
-    %p= t('.reply_to', link: link_to(t('.message'), message_path(@message.reply_to))).html_safe
+    - if @message.reply_to
+      %p= t('.reply_to', link: link_to(t('.message'), message_path(@message.reply_to))).html_safe
 
-  - unless FoodsoftConfig[:mailing_list].blank?
-    %b= t('.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])).html_safe
-    %br/
-    %small{:style => "color:grey"}
-      = t '.list.subscribe_msg'
+    - unless FoodsoftConfig[:mailing_list].blank?
+      %b= t('.list.desc', list: mail_to(FoodsoftConfig[:mailing_list])).html_safe
       %br/
-      - if FoodsoftConfig[:mailing_list_subscribe].blank?
-        = t('.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))).html_safe
-      - else
-        = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
+      %small{:style => "color:grey"}
+        = t '.list.subscribe_msg'
+        %br/
+        - if FoodsoftConfig[:mailing_list_subscribe].blank?
+          = t('.list.subscribe', link: link_to(t('.list.wiki'), wiki_page_path('MailingListe'))).html_safe
+        - else
+          = t('.list.mail', email: mail_to(FoodsoftConfig[:mailing_list_subscribe])).html_safe
 
-  - send_method_collection = [:workgroup, :ordergroup, :messagegroup, :order, :recipients]
-  - send_method_collection.unshift :all if FoodsoftConfig[:mailing_list].blank?
-  = f.input :send_method, :as => :radio_buttons, :collection => send_method_collection, :label => false, :label_method => ->(obj){ t("activerecord.attributes.message.send_method.#{obj}") }
+    - send_method_collection = [:workgroup, :ordergroup, :messagegroup, :order, :recipients]
+    - send_method_collection.unshift :all if FoodsoftConfig[:mailing_list].blank?
+    .row
+      .col-md-3
+      .col-md-9
+        = f.input :send_method, :as => :radio_buttons, :collection => send_method_collection, :label => false, :label_method => ->(obj){ t("activerecord.attributes.message.send_method.#{obj}") }
 
-  #workgroup
-    = f.input :workgroup_id, :as => :select, include_blank: false, :collection => Workgroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
-  #ordergroup
-    = f.input :ordergroup_id, :as => :select, include_blank: false, :collection => Ordergroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
-  #messagegroup
-    = f.input :messagegroup_id, :as => :select, include_blank: false, :collection => Messagegroup.undeleted.order(:name)
-  #order
-    = f.input :order_id, :as => :select, include_blank: false, :collection => Order.finished_not_closed.order('pickup DESC').includes(:supplier).limit(25),
-        :label_method => ->(obj){ t('.order_item', supplier_name: obj.name, pickup: format_date(obj.pickup)) }, :input_html => {class: 'input-xxlarge'}
-  #recipients
-    = f.input :recipient_tokens, :input_html => { 'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
-  = f.input :private, inline_label: t('.hint_private')
-  = f.input :subject, input_html: {class: 'input-xxlarge'}
-  = f.rich_text_area :body, input_html: {class: 'input-xxlarge', rows: 13}
-  .form-actions
-    = f.submit class: 'btn btn-primary'
-    = link_to t('ui.or_cancel'), :back
+    #workgroup
+      = f.input :workgroup_id, :as => :select, include_blank: false, :collection => Workgroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
+    #ordergroup
+      = f.input :ordergroup_id, :as => :select, include_blank: false, :collection => Ordergroup.undeleted.order(:name).includes(:memberships).reject { |g| g.memberships.empty? }
+    #messagegroup
+      = f.input :messagegroup_id, :as => :select, include_blank: false, :collection => Messagegroup.undeleted.order(:name)
+    #order
+      = f.input :order_id, :as => :select, include_blank: false, :collection => Order.finished_not_closed.order('pickup DESC').includes(:supplier).limit(25),
+          :label_method => ->(obj){ t('.order_item', supplier_name: obj.name, pickup: format_date(obj.pickup)) }
+    #recipients
+      = f.input :recipient_tokens, :input_html => {'data-pre' => User.where(id: @message.recipients_ids).map(&:token_attributes).to_json }
+    = f.input :private, inline_label: t('.hint_private')
+    = f.input :subject
+    .row
+      .col-md-3 
+      .col-md-9
+        = f.rich_text_area :body, input_html: {rows: 13}
+    %div
+      = f.submit class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), :back

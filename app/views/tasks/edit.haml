@@ -8,7 +8,7 @@
 .col-md-7
   = simple_form_for @task do |form|
     = render 'form', form: form, periodic: @periodic
-    .form-actions
+    %div
       - if @periodic
         = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-primary'
       - else

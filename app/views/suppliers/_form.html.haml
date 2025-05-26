@@ -23,6 +23,7 @@
   = f.input :remote_order_method, collection: Supplier.remote_order_methods, include_blank: false, label_method: ->(m) { t("suppliers.remote_order_methods.#{m.first}") }
   = f.input :remote_order_url
   = render 'shared/custom_form_fields', f: f, type: :supplier
-  .form-actions
+  = f.input :shared_sync_method, collection: shared_sync_method_collection, include_blank: true
+  %div
     = f.button :submit
     = link_to t('ui.or_cancel'), suppliers_path
