@@ -187,4 +187,63 @@ describe Order do
       expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
+
+  describe 'sending to supplier' do
+    let(:user) { create(:user) }
+    let(:order) { create(:order) }
+    let(:current_time) { Time.current }
+
+    before do
+      allow(Time).to receive(:now).and_return(current_time)
+      ActionMailer::Base.deliveries.clear
+    end
+
+    context 'with default order method' do
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
+
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with email order method' do
+      let(:supplier) { create(:supplier, article_count: 1, remote_order_method: 'email') }
+      let(:order) { create(:order, supplier: supplier) }
+
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
+
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with FTP order method' do
+      let(:supplier) do
+        create(:supplier, article_count: 1, remote_order_url: 'ftp://user:pass@example.com/path',
+                          remote_order_method: 'ftp', customer_number: '12345')
+      end
+      let(:order) { create(:order, supplier: supplier) }
+      let(:ftp_mock) { instance_double(Net::FTP) }
+
+      before do
+        allow(Net::FTP).to receive(:open).and_yield(ftp_mock)
+        allow(ftp_mock).to receive(:login)
+        allow(ftp_mock).to receive(:putbinaryfile)
+      end
+
+      it 'uploads order via FTP in B85 format and does not send email' do
+        order.send_to_supplier!(user)
+
+        expect(Net::FTP).to have_received(:open).with('example.com')
+        expect(ftp_mock).to have_received(:login).with('user', 'pass')
+        expect(ftp_mock).to have_received(:putbinaryfile) do |_, remote_filename|
+          expect(remote_filename).to match(/BE\d{6}\.\d{3}$/)
+        end
+        expect(ActionMailer::Base.deliveries.count).to eq 0
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+      end
+    end
+  end
 end
