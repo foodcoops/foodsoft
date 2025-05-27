@@ -1583,6 +1583,7 @@ de:
       stock: Lager
       warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
       warning_ordered_stock: 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
+      error_not_ftp_uploadable: "Die Bestellmethode der Lieferantin ist „FTP“, aber die markierten Artikel erfüllen nicht die Kriterien für das Bestellformat (vorhandene Bestellnummer bis zu 13 Zeichen, vorhandene Einheitenumrechnung für die Gebindegröße, Gebindegröße und Bestellmenge kleiner als 10.000)."
     new:
       title: Neue Bestellung anlegen
     receive:
