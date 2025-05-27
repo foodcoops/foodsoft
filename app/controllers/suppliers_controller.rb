@@ -41,6 +41,10 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
     if @supplier.update(supplier_params)
       flash[:notice] = I18n.t('suppliers.update.notice')
+      if @supplier.remote_order_method == 'ftp'
+        @supplier.orders.finished_not_closed.each { |o| o.update_attribute(:remote_ordered_at, Time.now) if o.remote_ordered_at.nil? }
+        flash[:notice] += ", #{I18n.t('suppliers.update.remote_ordered_at_notice')}"
+      end
       redirect_to @supplier
     else
       render action: 'edit'
@@ -80,6 +84,7 @@ class SuppliersController < ApplicationController
       .require(:supplier)
       .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
               :iban, :custom_fields, :delivery_days, :order_howto, :note, :supplier_category_id,
-              :min_order_quantity, :shared_sync_method, :supplier_remote_source, :remote_auto_sync)
+              :min_order_quantity, :shared_sync_method, :supplier_remote_source, :remote_auto_sync, :remote_order_method,
+              :remote_order_url)
   end
 end

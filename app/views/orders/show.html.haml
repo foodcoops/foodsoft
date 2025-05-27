@@ -79,8 +79,8 @@
     - elsif not @order.closed?
       - unless @order.stockit?
         = link_to t('.send_to_supplier'), send_result_to_supplier_order_path(@order), method: :post,
-          class: "btn#{' btn-primary' unless @order.last_sent_mail}",
-          data: {confirm: @order.last_sent_mail && t('.confirm_send_to_supplier', when: format_time(@order.last_sent_mail)) }
+          class: "btn#{' btn-primary' unless @order.remote_ordered_at}",
+          data: {confirm: @order.remote_ordered_at && t('.confirm_send_to_supplier', when: format_time(@order.remote_ordered_at)) }
         = receive_button @order
       - if current_user.role_finance?
         = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: @order.id), class: 'btn btn-primary'

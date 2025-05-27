@@ -18,9 +18,11 @@
   = f.input :note, as: :text, input_html: {rows: 5}
   = f.input :min_order_quantity
   = f.input :supplier_remote_source
-  = render 'shared/custom_form_fields', f: f, type: :supplier
-  = f.input :shared_sync_method, collection: shared_sync_method_collection, input_html: {class: 'input-xlarge'}, include_blank: true
+  = f.input :shared_sync_method, collection: shared_sync_method_collection, include_blank: true
   = f.input :remote_auto_sync
+  = f.input :remote_order_method, collection: Supplier.remote_order_methods, include_blank: false, label_method: ->(m) { t("suppliers.remote_order_methods.#{m.first}") }
+  = f.input :remote_order_url
+  = render 'shared/custom_form_fields', f: f, type: :supplier
   .form-actions
     = f.submit class: 'btn'
     = link_to t('ui.or_cancel'), suppliers_path

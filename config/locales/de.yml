@@ -221,6 +221,8 @@ de:
         phone: Telefon
         phone2: Telefon 2
         remote_auto_sync: Synchronisation automatisch ausführen (täglich)
+        remote_order_method: Bestellmethode
+        remote_order_url: Bestell-URL
         supplier_remote_source: Synchronisierungsquelle
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
@@ -281,6 +283,8 @@ de:
           attributes:
             shared_sync_method:
               included: ist keine gültige Auswahl für diesen Lieferanten
+            remote_order_method:
+              no_open_orders: darf nur ohne laufende Bestellungen geändert werden
         task:
           attributes:
             done:
@@ -1733,6 +1737,8 @@ de:
           price: "<ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
+        remote_order_method: Auf welchem Weg die Bestellung automatisch an die Lieferantin gesendet werden kann.
+        remote_order_url: Eine URL wie „ftp://user:password@example.org“.
       task:
         duration: Wie lange dauert die Aufgabe, 1-3 Stunden
         required_users: Wieviel Benutzer/innen werden insgesamt benötigt?
@@ -1893,10 +1899,14 @@ de:
       confirm_remove_share: Willst Du wirklich aufhören die Artikel dieser Lieferantin zu teilen? (Wenn Du sie später wieder freigeben willst, musst du den Link an alle Abonnentinnen schicken, die deiner Meinung nach Zugriff haben sollten.)
     update:
       notice: Lieferant wurde aktualisiert
+      remote_ordered_at_notice: "beendete Bestellungen wurden (falls vorhanden) als „versendet“ markiert"
     import_search_results:
       action_import: importieren
       already_imported: schon importiert
       not_found: Keine Artikel gefunden
+    remote_order_methods:
+      email: E-Mail
+      ftp: FTP
   supplier_shares:
     share_link:
       not_shared: Die Artikel der Lieferantin werden aktuell mit niemandem geteilt.
