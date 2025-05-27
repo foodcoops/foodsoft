@@ -310,7 +310,7 @@ class Order < ApplicationRecord
     Mailer.deliver_now_with_default_locale do
       Mailer.order_result_supplier(user, self)
     end
-    update!(last_sent_mail: Time.now)
+    update!(remote_ordered_at: Time.now)
   end
 
   def do_end_action!
