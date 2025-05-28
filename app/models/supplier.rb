@@ -24,7 +24,7 @@ class Supplier < ApplicationRecord
   validate :uniqueness_of_name
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
-  validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
+  validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https ftp]), allow_blank: true }
 
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
@@ -56,13 +56,14 @@ class Supplier < ApplicationRecord
 
   def read_from_remote(search_params = {})
     url = URI(supplier_remote_source)
-    url.query = URI.encode_www_form(search_params) unless search_params.nil?
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = url.scheme == 'https'
-    request = Net::HTTP::Get.new(url)
-
-    response = http.request(request)
-    JSON.parse(response.body, symbolize_names: true)
+    case url.scheme
+    when 'http', 'https'
+      read_from_http(url, search_params)
+    when 'ftp'
+      read_from_ftp(url)
+    else
+      raise "Unsupported protocol: #{url.scheme}"
+    end
   end
 
   def sync_from_remote(options = {})
@@ -167,5 +168,36 @@ class Supplier < ApplicationRecord
     new_article.latest_article_version = new_article_version
 
     new_article
+  end
+
+  private
+
+  def read_from_http(url, search_params = {})
+    url.query = URI.encode_www_form(search_params) unless search_params.nil?
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = url.scheme == 'https'
+    request = Net::HTTP::Get.new(url)
+    response = http.request(request)
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def read_from_ftp(url)
+    Net::FTP.open(url.host, url.port) do |ftp|
+      username, password = url.userinfo&.split(':')
+      ftp.login(username, password)
+      path = url.path[1..] # remove leading slash
+      dir_path = File.dirname(path)
+      ftp.chdir(dir_path) unless dir_path == '.'
+      file_pattern = File.basename(path)
+      files = ftp.nlst.select { |file| File.fnmatch(file_pattern, file) }
+      { articles: files.collect_concat do |file|
+        Tempfile.create do |temp_file|
+          ftp.getbinaryfile(file, temp_file.path)
+          file_data = JSON.parse(File.read(temp_file.path), symbolize_names: true)
+          # extract only article data
+          file_data[:articles]
+        end
+      end }
+    end
   end
 end
