@@ -8,6 +8,6 @@
 
   -# make these buttons to give some indicator that navigation away might lose changes
   %li.pull-right{class: ('active' if @current_tab=='list')}
-    = link_to t('config.tabs.list'), list_admin_config_path, class: ('btn btn-default' unless @current_tab=='list')
+    = link_to t('config.tabs.list'), list_admin_config_path
   %li.pull-right
-    = link_to t('config.tabs.applications'), oauth_applications_path, class: 'btn btn-default'
+    = link_to t('config.tabs.applications'), oauth_applications_path
