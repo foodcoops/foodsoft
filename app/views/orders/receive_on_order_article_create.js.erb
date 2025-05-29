@@ -9,6 +9,12 @@
     '<%= j render(partial: 'edit_amount', locals: {order_article: @order_article}) %>'
   ).addClass('success');
 
+  $('.units_received', order_article_entry).unitConversionField({
+      units: unitsData,
+      popoverTemplate$: $('#unit_conversion_popover_content_template'),
+      useTargetUnitForStep: false
+  });
+
   $('#order_articles tbody').append(order_article_entry);
   updateSort('#order_articles');
 
