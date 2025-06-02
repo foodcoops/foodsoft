@@ -80,6 +80,6 @@ class SuppliersController < ApplicationController
       .require(:supplier)
       .permit(:name, :address, :phone, :phone2, :fax, :email, :url, :contact_person, :customer_number,
               :iban, :custom_fields, :delivery_days, :order_howto, :note, :supplier_category_id,
-              :min_order_quantity, :shared_sync_method, :supplier_remote_source)
+              :min_order_quantity, :shared_sync_method, :supplier_remote_source, :remote_auto_sync)
   end
 end
