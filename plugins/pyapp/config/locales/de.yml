@@ -3,6 +3,8 @@ de:
     planned_tasks:
       title: Dienste
       all: Alle Dienste
+    admin:
+      tasks: Dienste
   config:
     hints:
       use_pyapp: moderne PyApp Adaptierung verwenden
