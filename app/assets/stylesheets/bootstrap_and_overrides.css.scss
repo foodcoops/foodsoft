@@ -319,17 +319,31 @@ tr.order-article {
   }
 }
 
+
 .units_received_cell {
-  button {
-    margin-top: 0px;
-    height: 28px;
-    font-size: 10px;
-    line-height: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 90px;
+
+}
+
+.units_received_cell {
+  
+
+  .btn-group .btn-ordering {
+    margin-top: 0;
+    width: 100px;
   }
 
-  input.units_received {
-    min-width: 45px;
-    height: 18px;
+  input .units_received {
+    height: 24px;
+    -moz-appearance: textfield;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 }
 
