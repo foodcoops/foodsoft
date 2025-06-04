@@ -62,9 +62,9 @@
           %tr
             %td= "#{t.name} (#{t.name_short}):"
             %td
-              .input-prepend
-                %span.add-on= t 'number.currency.format.unit'
-                = text_field_tag t.name_short, nil,
+              .input-group
+                %div.input-group-addon= t 'number.currency.format.unit'
+                = text_field_tag t.name_short, nil, class: 'form-control',
               'data-has-name-short' => true, 'data-bank-account' => t.bank_account.try(:id),
               step: 0.01, type: :number
   %p#placeholder
