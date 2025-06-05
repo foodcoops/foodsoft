@@ -36,6 +36,15 @@ describe Supplier do
       expect(missing_articles.empty?).to be true
       expect(new_articles.length).to be 4
     end
+
+    it 'imports articles in Bioromeo format' do
+      changed_articles, missing_articles, new_articles = supplier.sync_from_file(
+        File.open(Rails.root.join('spec/fixtures/bioromeo_file_01.csv')), 'bioromeo'
+      )
+      expect(changed_articles.empty?).to be true
+      expect(missing_articles.empty?).to be true
+      expect(new_articles.length).to be 1
+    end
   end
 
   it 'return correct tolerance' do

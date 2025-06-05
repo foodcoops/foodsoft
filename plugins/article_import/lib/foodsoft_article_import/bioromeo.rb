@@ -51,14 +51,11 @@ module FoodsoftArticleImport
         # (sub)categories are in first two content cells - assume if there's a price it's a product
         if row[:order_number].to_s.strip.empty? && row[:unit_price].to_s.strip.empty?
           category = row[:name]
-          yield nil, nil, linenum
           next
         end
         # skip products without a number
-        if row[:order_number].to_s.strip.empty?
-          yield nil, nil, linenum
-          next
-        end
+        next if row[:order_number].to_s.strip.empty?
+
         # extract name and unit
         errors = []
         notes = []
@@ -71,10 +68,8 @@ module FoodsoftArticleImport
         prod_category = nil
         RES_PARSE_UNIT.each do |re|
           m = name.match(re)
-          unless m
-            yield nil, nil, linenum
-            next
-          end
+          next unless m
+
           unit = normalize_unit(m[3])
           name = name.sub(re, '').sub(/\(\s*\)\s*$/, '').sub(/\s+/, ' ').sub(/\.\s*$/, '').strip
           break
@@ -129,14 +124,15 @@ module FoodsoftArticleImport
         errors << check_price(unit, unit_quantity, unit_price, pack_price)
         # create new article
         name.gsub!(/\s+/, ' ')
+        piece_unit_code = 'XPP'
         article = { order_number: number,
                     name: name.strip,
                     note: notes.count.positive? && notes.map(&:strip).join('; '),
                     manufacturer: manufacturer,
                     origin: 'Noordoostpolder, NL',
                     unit: unit,
+                    article_unit_ratios: [{ sort: 1, quantity: unit_quantity, unit: piece_unit_code }],
                     price: pack_price.to_f / unit_quantity,
-                    unit_quantity: unit_quantity,
                     tax: 6,
                     deposit: 0,
                     article_category: prod_category || category }
