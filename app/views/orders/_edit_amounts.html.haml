@@ -1,7 +1,6 @@
 = render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
-- new_articles = (@order.supplier.articles.undeleted rescue @order.articles)
 - current_article_ids = @order_articles.map { |oa| oa.article_version.article_id }
-- new_article_data = articles_for_select2(new_articles, current_article_ids) {|a| "#{a.name} (#{a.unit_quantity}⨯#{a.unit})"}
+- unused_article_versions = @order.supplier_articles.where.not(id: current_article_ids).map(&:latest_article_version)
 - content_for :javascript do
   :javascript
     $('.units_received').each((_, field) => $(field).unitConversionField({
@@ -30,8 +29,8 @@
     %tr
       %th{colspan: 6}
         %select#add_article{:style => 'width: 500px;'}
-          - new_article_data.each do |option|
-            %option{id: "add_article_#{option[:id]}", value: option[:id]}= option[:text]
+          - unused_article_versions.each do |unused_article_version|
+            %option{id: "add_article_#{unused_article_version.id}", value: unused_article_version.id}= article_label_with_unit(unused_article_version)
       %th{colspan: 4}
         %button.btn#set_all_to_zero{type: :button}
           = t '.set_all_to_zero'
