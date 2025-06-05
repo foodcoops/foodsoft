@@ -291,33 +291,21 @@ class ArticlesController < ApplicationController
                                                                                                 end || [] })
     @new_articles = build_articles_from_params_array(params[:new_articles]&.values || [])
 
-    has_error = false
-    Article.transaction do
-      # re-enable unit migration
-      @supplier.update_attribute(:unit_migration_completed, nil) if @enable_unit_migration
-      # delete articles
-      begin
-        @outlisted_articles.each(&:mark_as_deleted)
-      rescue StandardError
-        # raises an exception when used in current order
-        has_error = true
-      end
-      # Update articles
-      @updated_articles.each do |a|
-        current_params = params[:articles].values.detect { |p| p[:id] == a.latest_article_version.id.to_s }
-        current_params.delete(:id)
-
-        a.latest_article_version.article_unit_ratios.clear
-        a.latest_article_version.assign_attributes(current_params)
-        a.save or (has_error = true)
-      end
-      # Add new articles
-      @new_articles.each { |a| a.save or has_error = true }
-
-      raise ActiveRecord::Rollback if has_error
+    # Prepare updated articles with their parameters
+    updated_article_params = []
+    @updated_articles.each do |a|
+      current_params = params[:articles].values.detect { |p| p[:id] == a.latest_article_version.id.to_s }
+      current_params.delete(:id)
+      updated_article_params << [a, current_params]
     end
 
-    if has_error
+    # Use the SupplierSyncService to persist changes
+    service = SupplierSyncService.new(@supplier)
+    success = service.persist(@new_articles, @outlisted_articles, updated_article_params, enable_unit_migration: @enable_unit_migration)
+
+    if success
+      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
+    else
       load_article_units((@new_articles + @updated_articles).map(&:current_article_units).flatten.uniq)
       @updated_article_pairs = @updated_articles.map do |article|
         orig_article = Article.find(article.id)
@@ -325,8 +313,6 @@ class ArticlesController < ApplicationController
       end
       flash.now.alert = I18n.t('articles.controller.error_invalid')
       render params[:from_action] == 'sync' ? :sync : :parse_upload
-    else
-      redirect_to supplier_articles_path(@supplier), notice: I18n.t('articles.controller.update_sync.notice')
     end
   end
 
