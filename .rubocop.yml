@@ -12,3 +12,7 @@ AllCops:
 Gemspec/OrderedDependencies:
   Exclude:
     - 'plugins/*/*.gemspec'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/tasks/foodsoft.rake'
