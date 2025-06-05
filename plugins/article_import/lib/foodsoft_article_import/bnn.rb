@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-# Module for translation and parsing of BNN-files (www.n-bnn.de)
+# Module for translation and parsing of BNN-files
+# https://n-bnn.de/leistungen-services/markt-und-produktdaten/schnittstelle
+# (German specs are included in doc/formats/bnn)
 #
 module FoodsoftArticleImport
   module Bnn
