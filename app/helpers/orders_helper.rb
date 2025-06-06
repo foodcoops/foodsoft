@@ -106,9 +106,7 @@ module OrdersHelper
   # @return [String] Icon used for displaying the unit quantity
   def pkg_helper_icon(c = nil, options = {})
     options = { tag: 'i', class: '' }.merge(options)
-    if c.nil?
-      c = '&nbsp;'.html_safe
-    end
+    c = '&nbsp;'.html_safe if c.nil?
     content_tag(options[:tag], c, class: "package #{options[:class]}").html_safe
   end
 
