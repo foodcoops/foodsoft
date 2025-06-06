@@ -44,13 +44,6 @@
             .input-group
               = f.input_field :tax, class: 'form-control', wrapper: :inline_form
               %span.input-group-addon %
-          -# = f.input :tax, 
-          -#   label_html: { class: 'col-sm-3' },
-          -#   input_html: { class: 'col-sm-9' },
-          -#   :wrapper => :append do
-          -#   .input-group
-          -#     = f.input_field :tax
-          -#     %span.input-group-addon %
           = f.input :deposit
         - else
           = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
