@@ -21,7 +21,7 @@
         = render partial: 'shared/article_fields_price', locals: {f: f, article: @article}
     
         = f.input :note
-        = f.association :article_category
+        = f.association :article_category, collection: ArticleCategory.order(:name)
         / TODO labels
         = f.input :origin
         = f.input :manufacturer
