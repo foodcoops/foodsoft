@@ -4,10 +4,10 @@
   }
 
   input.goa-quantity, input.goa-tolerance {
-    height: 14px;
-    border-radius: 0;
+    height: 24px;
     -moz-appearance: textfield;
-
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
     }

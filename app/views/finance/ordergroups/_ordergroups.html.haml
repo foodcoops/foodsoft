@@ -20,8 +20,8 @@
           %td.numeric
             = format_currency amount
         %td
-          = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-mini'
-          = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-mini'
+          = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn btn-default btn-xs'
+          = link_to t('.account_statement'), finance_ordergroup_transactions_path(ordergroup), class: 'btn btn-default btn-xs'
   %thead
     %tr
       %th= t 'Total'

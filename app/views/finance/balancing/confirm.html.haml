@@ -17,6 +17,6 @@
       %label
         = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true)
         = t('.create_foodcoop_transaction', sum: number_to_currency(@order.sum(:groups)))
-  .form-actions
+  %div
     = submit_tag t('.clear'), class: 'btn btn-primary'
     = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)

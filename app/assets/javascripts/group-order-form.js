@@ -92,12 +92,12 @@ class GroupOrderForm {
       value += remainder - step;
     }
     const min = field$.attr('min');
-    if (min !== undefined) {
+    if (min !== undefined && min !== "") {
       value = Math.max(parseFloat(min), value);
     }
 
     const max = field$.attr('max');
-    if (max !== undefined) {
+    if (max !== undefined && max !== "") {
       value = Math.min(parseFloat(max), value);
     }
 

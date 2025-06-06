@@ -6,7 +6,7 @@ module FoodsoftCurrentOrders
 
       cond = proc { current_user.role_orders? }
       [
-        SimpleNavigation::Item.new(primary, :stage_divider, nil, nil, class: 'divider', if: cond),
+        SimpleNavigation::Item.new(primary, :stage_divider, nil, '#', html: { divider: true }, if: cond),
         SimpleNavigation::Item.new(primary, :current_orders_receive, I18n.t('current_orders.navigation.receive'),
                                    context.receive_current_orders_orders_path, if: cond),
         SimpleNavigation::Item.new(primary, :current_orders_articles, I18n.t('current_orders.navigation.articles'),

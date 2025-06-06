@@ -1,17 +1,17 @@
-.row-fluid
+.row
 
-  .span4
+  .col-md-4
     .well
-      %ul.nav.nav-list#article_list
+      %ul.nav#article_list
         %li.keep
-          = search_form_for @q, url: current_orders_articles_path, method: 'get', html: {data: {'submit-onchange' => true}, class: 'form-search'}, remote: true do |f|
+          = search_form_for @q, url: current_orders_articles_path, method: 'get', html: {data: {'submit-onchange' => true}, class: 'form-inline'}, remote: true do |f|
             .input-append
-              = f.text_field :article_name_cont, placeholder: t('.article_placeholder'), class: 'search-query input-block-level resettable'
+              = f.text_field :article_name_cont, placeholder: t('.article_placeholder'), class: 'search-query form-control resettable'
               %button.add-on.btn.reset-search{type: 'button'}
                 %i.icon.icon-remove
         = render 'articles', orders: @current_orders
 
-  .span8
+  .col-md-8
     = render 'actions'
     = render 'article', order_article: @order_article
     = render 'shared/articles_by/common'

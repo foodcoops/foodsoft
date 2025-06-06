@@ -3,11 +3,12 @@
 
 - content_for :sidebar do
   .well.well-small
-    %ul.nav.nav-list
-      %li.nav-header= t '.pages'
+    %ul.nav.nav-pills.nav-stacked
+      %li= t '.pages'
       %li= link_to t('.my_tasks'), user_tasks_path
       %li= link_to t('.all_tasks'), tasks_path
       %li= link_to t('.archive'), archive_tasks_path
-      %li.nav-header= t '.group_tasks'
+      %li= t '.group_tasks'
       - for group in Workgroup.order(:name)
         %li= link_to group.name, workgroup_tasks_path(workgroup_id: group.id)
+

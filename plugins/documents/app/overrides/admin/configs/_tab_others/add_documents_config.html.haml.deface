@@ -1,3 +1,5 @@
 / insert_after ':root:last-child'
-= config_use_heading form, :use_documents do
-  = config_input form, :documents_allowed_extension, as: :string, input_html: {class: 'input-xlarge'}
+.row
+  .col-md-4
+    = config_use_heading form, :use_documents do
+      = config_input form, :documents_allowed_extension, as: :string

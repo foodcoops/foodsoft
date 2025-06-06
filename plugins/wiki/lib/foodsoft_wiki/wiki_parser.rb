@@ -27,7 +27,7 @@ module FoodsoftWiki
     def to_html(render_options = {})
       # workaround for wikicloth 0.8.0 https://github.com/nricciar/wikicloth/pull/59
       render_options[:locale] ||= I18n.locale
-      super(render_options)
+      super
     end
 
     private

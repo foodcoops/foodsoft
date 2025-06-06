@@ -27,4 +27,4 @@
     %td.units_delta
     %td
       - if current_user.role_orders? || current_user.role_finance?
-        = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-small'
+        = link_to t('ui.edit'), edit_order_order_article_path(order_article.order, order_article, without_units: true), remote: true, class: 'btn btn-sm'

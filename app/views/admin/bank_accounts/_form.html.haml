@@ -1,13 +1,15 @@
 = simple_form_for [:admin, @bank_account], :validate => true, :remote => true do |f|
-  .modal-header
-    = close_button :modal
-    %h3= @bank_account.new_record? ? t('.title_new') : t('.title_edit')
-  .modal-body
-    = f.input :name
-    = f.input :iban
-    = f.input :description, as: :text
-    = f.input :balance
-    = f.association :bank_gateway
-  .modal-footer
-    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
-    = f.submit class: 'btn btn-primary'
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = close_button :modal
+        %h3= @bank_account.new_record? ? t('.title_new') : t('.title_edit')
+      .modal-body
+        = f.input :name
+        = f.input :iban
+        = f.input :description, as: :text
+        = f.input :balance
+        = f.association :bank_gateway
+      .modal-footer
+        = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
+        = f.submit class: 'btn btn-primary'

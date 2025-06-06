@@ -4,6 +4,6 @@
   = hidden_field_tag :from_action, 'parse_upload'
   = hidden_field_tag :enable_unit_migration, @enable_unit_migration ? '1' : '0'
   = render 'sync'
-  .form-actions
+  %div
     = submit_tag t('.submit'), class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), upload_supplier_articles_path(@supplier)

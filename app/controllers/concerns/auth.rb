@@ -32,7 +32,7 @@ module Concerns::Auth
     session[:locale] = user.locale
   end
 
-  def login_and_redirect_to_return_to(user, *args)
+  def login_and_redirect_to_return_to(user, *)
     login user
     if session[:return_to].present?
       redirect_to_url = session[:return_to]
@@ -40,7 +40,7 @@ module Concerns::Auth
     else
       redirect_to_url = root_url
     end
-    redirect_to redirect_to_url, *args
+    redirect_to(redirect_to_url, *)
   end
 
   def logout

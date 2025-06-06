@@ -1,2 +1,4 @@
 / insert_before ':root:first-child'
-= config_input form, :use_wiki, as: :boolean
+.row
+    .col-md-4
+        = config_input form, :use_wiki, as: :boolean

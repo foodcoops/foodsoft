@@ -13,7 +13,7 @@
 	left: 0;
 	padding: 4px;
 	margin-top: 1px;
-	.border-radius(4px);
+	@include border-radius(4px);
 	&:before {
 		content: '';
 		display: inline-block;
@@ -30,7 +30,7 @@
 		display: inline-block;
 		border-left:   6px solid transparent;
 		border-right:  6px solid transparent;
-		border-bottom: 6px solid @white;
+		border-bottom: 6px solid $white;
 		position: absolute;
 		top: -6px;
 		left: 7px;
@@ -55,35 +55,35 @@
 		text-align: center;
 		width: 20px;
 		height: 20px;
-		.border-radius(4px);
+		@include border-radius(4px);
 	}
 	td {
 		&.day:hover {
-			background: @grayLighter;
+			background: $grayLighter;
 			cursor: pointer;
 		}
 		&.old,
 		&.new {
-			color: @grayLight;
+			color: $grayLight;
 		}
 		&.disabled,
 		&.disabled:hover {
 			background: none;
-			color: @grayLight;
+			color: $grayLight;
 			cursor: default;
 		}
 		&.today,
 		&.today:hover,
 		&.today.disabled,
 		&.today.disabled:hover {
-			@todayBackground: lighten(@orange, 30%);
-			.buttonBackground(@todayBackground, spin(@todayBackground, 20));
+			$todayBackground: lighten($orange, 30%);
+			@include buttonBackground($todayBackground, adjust-hue($todayBackground, 20));
 		}
 		&.active,
 		&.active:hover,
 		&.active.disabled,
 		&.active.disabled:hover {
-			.buttonBackground(@btnPrimaryBackground, spin(@btnPrimaryBackground, 20));
+			@include buttonBackground($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));
 			color: #fff;
 			text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 		}
@@ -95,26 +95,26 @@
 			float: left;
 			margin: 1%;
 			cursor: pointer;
-			.border-radius(4px);
+			@include border-radius(4px);
 			&:hover {
-				background: @grayLighter;
+				background: $grayLighter;
 			}
 			&.disabled,
 			&.disabled:hover {
 				background:none;
-				color: @grayLight;
+				color: $grayLight;
 				cursor: default;
 			}
 			&.active,
 			&.active:hover,
 			&.active.disabled,
 			&.active.disabled:hover {
-				.buttonBackground(@btnPrimaryBackground, spin(@btnPrimaryBackground, 20));
+				@include buttonBackground($btnPrimaryBackground, adjust-hue($btnPrimaryBackground, 20));
 				color: #fff;
 				text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 			}
 			&.old {
-				color: @grayLight;
+				color: $grayLight;
 			}
 		}
 	}
@@ -127,21 +127,11 @@
 	tfoot tr:first-child th {
 		cursor: pointer;
 		&:hover{
-			background: @grayLighter;
+			background: $grayLighter;
 		}
 	}
 	/*.dow {
 		border-top: 1px solid #ddd !important;
 	}*/
 }
-.input-append,
-.input-prepend {
-	&.date {
-		.add-on i {
-			display: block;
-			cursor: pointer;
-			width: 16px;
-			height: 16px;
-		}
-	}
-}
+

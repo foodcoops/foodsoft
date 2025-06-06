@@ -66,7 +66,7 @@ class FoodsoftConfig
       Rails.logger.info "Loading app configuration from #{APP_CONFIG_FILE}"
       APP_CONFIG.clear.merge! YAML.load(ERB.new(File.read(File.expand_path(filename, Rails.root))).result)
       # Gather program-default configuration
-      self.default_config = get_default_config
+      self.default_config = initial_default_config
       # Load initial config from development or production
       set_config Rails.env
       # Overwrite scope to have a better namescope than 'production'
@@ -251,7 +251,7 @@ class FoodsoftConfig
     # @return [Hash] Program-default foodcoop configuration.
     # @see #default_config
     # @see #set_missing
-    def get_default_config
+    def initial_default_config
       cfg = {
         use_nick: true,
         use_apple_points: true,

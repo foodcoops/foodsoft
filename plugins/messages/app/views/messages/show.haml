@@ -31,11 +31,11 @@
         - else
           = t '.visibility_public'
         - if @message.can_toggle_private?(current_user)
-          = link_to t('.change_visibility'), toggle_private_message_path(@message), method: :post, class: 'btn btn-mini'
+          = link_to t('.change_visibility'), toggle_private_message_path(@message), method: :post, class: 'btn btn-default btn-xs'
   %hr/
   .trix-content= @message.body
   %hr/
   %p
-    = link_to t('.reply'), new_message_path(:message => {:reply_to => @message.id}), class: 'btn'
+    = link_to t('.reply'), new_message_path(:message => {:reply_to => @message.id}), class: 'btn btn-default'
     |
     = link_to t('.all_messages'), messages_path

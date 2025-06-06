@@ -48,5 +48,5 @@
         %td.numeric= number_to_currency total_gross - @delivery.invoice.net_amount
 
 %p
-  = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,@delivery), class: 'btn'
+  = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,@delivery), class: 'btn btn-default'
   = link_to t('deliveries.suppliers_overview'), supplier_deliveries_path(@supplier)
