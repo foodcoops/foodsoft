@@ -56,17 +56,17 @@ module Concerns::Auth
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
       hasRole = case role
-      when 'admin'             then current_user.role_admin?
-      when 'finance'           then current_user.role_finance?
-      when 'article_meta'      then current_user.role_article_meta?
-      when 'pickups'           then current_user.role_pickups?
-      when 'suppliers'         then current_user.role_suppliers?
-      when 'orders'            then current_user.role_orders?
-      when 'finance_or_orders' then (current_user.role_finance? || current_user.role_orders?)
-      when 'pickups_or_orders' then (current_user.role_pickups? || current_user.role_orders?)
-      when 'any'               then true  # no role required
-      else false                          # any unknown role will always fail
-      end
+                when 'admin'             then current_user.role_admin?
+                when 'finance'           then current_user.role_finance?
+                when 'article_meta'      then current_user.role_article_meta?
+                when 'pickups'           then current_user.role_pickups?
+                when 'suppliers'         then current_user.role_suppliers?
+                when 'orders'            then current_user.role_orders?
+                when 'finance_or_orders' then (current_user.role_finance? || current_user.role_orders?)
+                when 'pickups_or_orders' then (current_user.role_pickups? || current_user.role_orders?)
+                when 'any'               then true  # no role required
+                else false                          # any unknown role will always fail
+                end
       if hasRole
         current_user
       else

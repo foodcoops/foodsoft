@@ -64,6 +64,33 @@ namespace :foodsoft do
     end
   end
 
+  namespace :ordergroup do
+    desc "Sends an email on partially full cases"
+    task nearly_full_email: :environment do
+      orders1 = Order.where(ends: ((Time.now + 18.hours)...(Time.now + 18.hours + 5.minutes)))
+      orders2 = Order.where(ends: ((Time.now + 2.hours)...(Time.now + 2.hours + 5.minutes)))
+      orders = orders1.all + orders2.all
+      orders = [Order.find(874)]
+      puts "checking #{orders.count} orders for nearly full articles"
+      orders.each do |order|
+        excludes = ['ZZZ', 'Leaving', 'Z - Group']
+        if order.nearly_full_order_articles.count > 0
+          Ordergroup.undeleted.find_each do |ordergroup|
+            next if excludes.any? { |ex| ordergroup.name.start_with?(ex) }
+            ordergroup.users.each do |user|
+              puts "mailing #{user.email} about #{order.supplier.name} #{order.note}"
+              Mailer.nearly_full_articles_email(order, user.email)
+                    .deliver_now
+
+            end
+          end
+        else
+          puts "no nearly full articles"
+        end
+      end
+    end
+  end
+
   desc "Notify workgroup of upcoming weekly task"
   task :notify_users_of_weekly_task => :environment do
     tasks = Task.where(done: false, due_date: 7.day.from_now.to_date)

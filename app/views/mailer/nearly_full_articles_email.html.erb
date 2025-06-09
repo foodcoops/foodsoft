@@ -1,0 +1,32 @@
+
+<h1>Nearly Full Cases</h1>
+<p>Here is a list of cases that are nearly full.
+Please consider adding another to your order (or adding extra tolerance)
+if you are able to take more without it going to waste.
+</p>
+<p>
+Note that anything with 'case splittable' may already be full.  The rules for splittable cases are <i>usually</i> as follows:
+  24 ct to 12 ct / 25# to 10# /  30 ct to 10 ct  (some exceptions apply)
+</p>
+<p>Check the most up to date report here:
+  <%= link_to 'Current Case Report', nearly_full_url(@order) %>
+<ul>
+  <% @order.nearly_full_order_articles.each do |order_article| %>
+    <li>
+      <%= order_article.article.name %>
+      <strong><%= order_article.percent_of_full_case %>%</strong>
+      <br/>
+      <strong>How many to fill:
+        <%= order_article.quantity_left_to_fill_case %>
+      </strong>
+      <%= order_article.article.unit %>
+      <br/>
+      How many in a case: <%= order_article.article.unit_quantity %>,
+      Quantity: <%= order_article.quantity %>,
+      Tolerance: <%= order_article.tolerance %>
+      <%= order_article.article.note.include?('splittable') ? '(case splittable)' :'' %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Orders', orders_path %>

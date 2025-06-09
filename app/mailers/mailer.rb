@@ -200,6 +200,12 @@ class Mailer < ActionMailer::Base
          subject: 'You have orders that need to be settled'
   end
 
+  def nearly_full_articles_email(order, email)
+    @order = order
+    @items = @order.nearly_full_order_articles
+    mail(to: email, subject: "#{order.name} Nearly Full Cases ")
+  end
+
   def mail(args)
     args[:message_id] ||= "<#{Mail.random_tag}@#{default_url_options[:host]}>"
     args[:subject] = "[#{FoodsoftConfig[:name]}] #{args[:subject]}"

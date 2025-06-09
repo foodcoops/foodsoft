@@ -25,5 +25,10 @@ end
 
 # charge dues at the start of every month
 every 1.month, at: 'start of the month' do
-  rake "ordergroup:charge"
+  rake "multicoops:run TASK=foodsoft:ordergroup:charge"
+end
+
+# check for nearly full emails
+every 6.minutes do
+  rake "multicoops:run TASK=foodsoft:ordergroup:nearly_full_email"
 end
