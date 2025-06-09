@@ -40,6 +40,7 @@ class GroupOrder < ApplicationRecord
         extra_available = [0, (order_article.units * unit_quantity) - order_article.quantity].max
         data[:order_articles][order_article.id] = {
             :price => order_article.article.fc_price,
+            :deposit => order_article.article.deposit || null,
             :unit => unit_quantity,
             :quantity => (goa ? goa.quantity : 0),
             :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),
