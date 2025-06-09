@@ -70,7 +70,7 @@ namespace :foodsoft do
       orders1 = Order.where(ends: ((Time.now + 18.hours)...(Time.now + 18.hours + 5.minutes)))
       orders2 = Order.where(ends: ((Time.now + 2.hours)...(Time.now + 2.hours + 5.minutes)))
       orders = orders1.all + orders2.all
-      orders = [Order.find(874)]
+      # orders = [Order.find(874)]
       puts "checking #{orders.count} orders for nearly full articles"
       orders.each do |order|
         excludes = ['ZZZ', 'Leaving', 'Z - Group']
