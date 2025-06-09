@@ -1,5 +1,5 @@
 <h1>Nearly Full Cases</h1>
-
+<% @order.name %> - <% @order.note %> ending at <% @order.ends %>
 <ul>
   <% @order.nearly_full_order_articles.each do |order_article| %>
     <li>
