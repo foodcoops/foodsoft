@@ -71,7 +71,7 @@ class RenderPdf < Prawn::Document
     @options = options
     @first_page = true
 
-    super(options)
+    super
 
     # Use ttf for better utf-8 compability
     font_families.update(
@@ -120,12 +120,12 @@ class RenderPdf < Prawn::Document
 
   # @todo avoid underscore instead of unicode whitespace in pdf :/
   def number_to_currency(number, options = {})
-    super(number, options).gsub("\u202f", ' ') if number
+    super.gsub("\u202f", ' ') if number
   end
 
-  def font_size(points = nil, &block)
+  def font_size(points = nil, &)
     points *= @options[:font_size] / 12 if points
-    super(points, &block)
+    super
   end
 
   # add pagebreak or vertical whitespace, depending on configuration

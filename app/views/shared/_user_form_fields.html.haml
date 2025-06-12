@@ -26,24 +26,26 @@
 
   .settings
     .settings-group
-      = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
-
-        %div{class: 'control-group h_wrapper'}
-          %h5{class: 'controls'}
+    = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
+      .row
+        .col-sm-3.control-label
+          %h5
             = t 'simple_form.labels.settings.settings_group.privacy'
-        = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public'] }
-        = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }
+      .row
+        = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public']}, wrapper: :horizontal_boolean
+        = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }, wrapper: :horizontal_boolean
         - if FoodsoftConfig[:use_nick]
-          = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }
+          = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }, wrapper: :horizontal_boolean
 
     .settings-group
-      %div{class: 'control-group'}
-        %h5{class: 'controls'}
-          = t 'simple_form.labels.settings.settings_group.messages'
-
-      = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
-        = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }
-        = notify.input 'order_received',    as: :boolean, input_html: { checked: f.object.settings.notify['order_received'] }
-        = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }
-        = notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }
+      .row
+        .col-sm-3.control-label
+          %h5
+            = t 'simple_form.labels.settings.settings_group.messages'
+      .row
+        = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
+          = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }, wrapper: :horizontal_boolean
+          = notify.input 'order_received',    as: :boolean, input_html: { checked: f.object.settings.notify['order_received'] }, wrapper: :horizontal_boolean
+          = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }, wrapper: :horizontal_boolean
+          = notify.input 'upcoming_tasks',    as: :boolean, input_html: { checked: f.object.settings.notify['upcoming_tasks'] }, wrapper: :horizontal_boolean
 

@@ -20,7 +20,7 @@ class MoveAttachmentToActiveStorage < ActiveRecord::Migration[7.0]
 
   def down
     change_table :invoices, bulk: true do |t|
-      t.binary :attachment_data, limit: 16.megabyte
+      t.binary :attachment_data, limit: 16.megabytes
       t.string :attachment_mime
     end
 

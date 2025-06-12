@@ -6,18 +6,17 @@
 
   - for control in @controls
     - name = control.name
-    .control-group
+    .form-group
       - if name
         - if control.type == :hidden
           = hidden_field_tag "controls[#{control.name}]", control.value
         - else
           %label(for=name class='control-label')
             = control.label + ':'
-          .controls
-            - if control.type == :password
-              = password_field_tag "controls[#{control.name}]", control.value
-            -else
-              = text_field_tag "controls[#{control.name}]", control.value
+          - if control.type == :password
+            = password_field_tag "controls[#{control.name}]", control.value
+          -else
+            = text_field_tag "controls[#{control.name}]", control.value
       - else
         = control.text
 
@@ -28,6 +27,5 @@
         form.submit();
       }, form.data('auto-submit'));
   - else
-    .control-group
-      .controls
-        = submit_tag t('.submit'), class: 'btn btn-primary'
+    .form-group
+      = submit_tag t('.submit'), class: 'btn btn-primary'

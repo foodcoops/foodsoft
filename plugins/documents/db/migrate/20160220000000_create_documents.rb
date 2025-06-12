@@ -3,7 +3,7 @@ class CreateDocuments < ActiveRecord::Migration[4.2]
     create_table :documents do |t|
       t.string :name
       t.string :mime
-      t.binary :data, limit: 16.megabyte
+      t.binary :data, limit: 16.megabytes
       t.integer :created_by_user_id
       t.timestamps
     end

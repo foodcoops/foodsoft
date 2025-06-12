@@ -21,6 +21,6 @@
         %td= link_to t('.stock', count: supplier.stock_articles.undeleted.count), stock_articles_path
         %td= link_to t('.deliveries', count: supplier.deliveries.count), supplier_deliveries_path(supplier)
         %td
-          = link_to t('ui.edit'), edit_supplier_path(supplier), class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_supplier_path(supplier), class: 'btn btn-default btn-xs'
           = link_to t('ui.delete'), supplier_path(supplier), method: :delete,
-            :data => {confirm: t('.confirm_del', name: supplier.name)}, class: 'btn btn-mini btn-danger'
+            :data => {confirm: t('.confirm_del', name: supplier.name)}, class: 'btn btn-xs btn-danger'

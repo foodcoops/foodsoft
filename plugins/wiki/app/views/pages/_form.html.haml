@@ -2,21 +2,21 @@
   %section#wikiContent
     = render 'body'
 
-.row-fluid
-  .span8
+.row
+  .col-md-6
     = simple_form_for @page do |f|
       = f.hidden_field :lock_version
-      = f.input :title, input_html: {class: 'input-xxlarge'}
-      = f.input :body, input_html: {class: 'input-xxlarge', rows: 20}
+      = f.input :title, input_html: {class: 'form-control'}
+      = f.input :body, input_html: {class: 'form-control', rows: 20}
       = f.input :parent_id, as: :select, collection: parent_pages_to_select(@page)
-      .form-actions
-        = button_tag :name => 'preview', class: 'btn' do
-          %i.icon-search= t '.preview'
-        = button_tag class: 'btn' do
-          %i.icon-save= t 'ui.save'
-        = link_to t('ui.or_cancel'), @page
-
-  .span4
+     %div
+        = button_tag :name => 'preview', class: 'btn btn-default' do
+          = t '.preview'
+        = button_tag class: 'btn btn-default ml-1' do
+          = t 'ui.save'
+        = link_to t('ui.or_cancel'), @page, class: 'ml-1'
+  .col-md-2
+  .col-md-4
     %h3(style='margin-top: 0')= t '.help.title'
     %table.table
       %tbody

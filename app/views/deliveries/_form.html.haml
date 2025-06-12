@@ -133,6 +133,6 @@
   %h2= t '.title_finish_delivery'
   = f.input :date, as: :date_picker
   = f.input :note, input_html: {size: '35x4'}
-  .form-actions
+  %div
     = f.submit class: 'btn btn-primary'
     = link_to t('ui.or_cancel'), supplier_deliveries_path(@supplier)
