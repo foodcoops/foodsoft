@@ -29,6 +29,6 @@ every 1.month, at: 'start of the month' do
 end
 
 # check for nearly full emails
-every 6.minutes do
+every 5.minutes do
   rake "multicoops:run TASK=foodsoft:ordergroup:nearly_full_email"
 end

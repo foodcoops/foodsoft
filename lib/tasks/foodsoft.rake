@@ -67,9 +67,17 @@ namespace :foodsoft do
   namespace :ordergroup do
     desc "Sends an email on partially full cases"
     task nearly_full_email: :environment do
-      orders1 = Order.where(ends: ((Time.now + 18.hours)...(Time.now + 18.hours + 5.minutes)))
-      orders2 = Order.where(ends: ((Time.now + 2.hours)...(Time.now + 2.hours + 5.minutes)))
-      orders = orders1.all + orders2.all
+
+      orders1 = Order.where(ends: ((Time.now)...(Time.now + 18.hours)))
+                      .select{|o| !FoodsoftCache.get("nearly_full-18-hour-#{o.id}")}
+      orders2 = Order.where(ends: ((Time.now)...(Time.now + 2.hours )))
+                   .select{|o| !FoodsoftCache.get("nearly_full-2-hour-#{o.id}")}
+
+      # mark them so we don't resend the message
+      orders1.each{ |o| FoodsoftCache.set("nearly_full-18-hour-#{o.id}", true)}
+      orders2.each{ |o| FoodsoftCache.set("nearly_full-2-hour-#{o.id}", true)}
+
+      orders = orders1 + orders2
       # orders = [Order.find(874)]
       puts "checking #{orders.count} orders for nearly full articles"
       orders.each do |order|
@@ -81,7 +89,6 @@ namespace :foodsoft do
               puts "mailing #{user.email} about #{order.supplier.name} #{order.note}"
               Mailer.nearly_full_articles_email(order, user.email)
                     .deliver_now
-
             end
           end
         else

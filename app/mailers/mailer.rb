@@ -202,8 +202,9 @@ class Mailer < ActionMailer::Base
 
   def nearly_full_articles_email(order, email)
     @order = order
+    @order_name = order.name
     @items = @order.nearly_full_order_articles
-    mail(to: email, subject: "#{order.name} Nearly Full Cases ")
+    mail(to: email, subject: "#{order.name} Nearly Full Cases")
   end
 
   def mail(args)

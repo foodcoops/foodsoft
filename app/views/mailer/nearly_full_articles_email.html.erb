@@ -1,5 +1,9 @@
 
 <h1>Nearly Full Cases</h1>
+<p>
+  <%= @order.name %> - <%= @order.note %>
+  (closes at <%= l @order.ends.in_time_zone("Pacific Time (US & Canada)"), locale: 'en', format: :long  %>)
+</p>
 <p>Here is a list of cases that are nearly full.
 Please consider adding another to your order (or adding extra tolerance)
 if you are able to take more without it going to waste.
@@ -14,12 +18,12 @@ Note that anything with 'case splittable' may already be full.  The rules for sp
   <% @order.nearly_full_order_articles.each do |order_article| %>
     <li>
       <%= order_article.article.name %>
-      <strong><%= order_article.percent_of_full_case %>%</strong>
+      <strong><%= order_article.percent_of_full_case %>%</strong> full
       <br/>
       <strong>How many to fill:
-        <%= order_article.quantity_left_to_fill_case %>
+        <%= order_article.quantity_left_to_fill_case %> x
       </strong>
-      <%= order_article.article.unit %>
+      <%= order_article.article.unit %> (<%= number_to_currency(order_article.article.price) %>)
       <br/>
       How many in a case: <%= order_article.article.unit_quantity %>,
       Quantity: <%= order_article.quantity %>,
