@@ -47,13 +47,6 @@ PATH
       rails
 
 PATH
-  remote: plugins/mollie
-  specs:
-    foodsoft_mollie (1.0.1)
-      mollie-api-ruby (~> 4.17.0)
-      rails
-
-PATH
   remote: plugins/polls
   specs:
     foodsoft_polls (0.0.1)
@@ -331,9 +324,6 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.21.2)
-    mollie-api-ruby (4.17.0)
-      bigdecimal (~> 3.1, >= 3.1.8)
-      ostruct (~> 0.6.0)
     mono_logger (1.1.2)
     msgpack (1.7.2)
     multi_json (1.15.0)
@@ -360,7 +350,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
-    ostruct (0.6.2)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -669,7 +658,6 @@ DEPENDENCIES
   foodsoft_documents!
   foodsoft_links!
   foodsoft_messages!
-  foodsoft_mollie!
   foodsoft_polls!
   foodsoft_wiki!
   gaffe
