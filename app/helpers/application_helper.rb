@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ModuleLength
 #
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
@@ -29,7 +30,7 @@ module ApplicationHelper
   def format_state(state)
     return nil if state.nil?
 
-    class_name = state["paid"] ? 'state_paid' : 'state_fail'
+    class_name = state['paid'] ? 'state_paid' : 'state_fail'
     content_tag :span, I18n.t(state), class: class_name
   end
 
@@ -279,3 +280,5 @@ module ApplicationHelper
     number_with_precision(value, precision: max_precision, strip_insignificant_zeros: true, separator: '.', delimiter: '')
   end
 end
+
+# rubocop: enable Metrics/ModuleLength

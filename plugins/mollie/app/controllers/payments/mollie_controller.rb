@@ -1,9 +1,9 @@
 # Mollie payment page
 #
-#! NOTE Currently ONLY iDEAL is supported, All other methods supported by Mollie are ignored. Even when the account has them enabled
+# ! NOTE Currently ONLY iDEAL is supported, All other methods supported by Mollie are ignored. Even when the account has them enabled
 #
-# TODO add support for SEPA bank transfer
-# TODO add support for Credit Cards 
+# TODO: add support for SEPA bank transfer
+# TODO: add support for Credit Cards
 
 class Payments::MollieController < ApplicationController
   before_action -> { require_plugin_enabled FoodsoftMollie }
@@ -11,29 +11,23 @@ class Payments::MollieController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:check]
   before_action :validate_ordergroup_presence, only: %i[new create result]
   before_action :available_payment_methods, only: %i[new create]
- 
+
   #
   # Called when a new mollie payment is started and page is opened
   #
   # @return [hash] list of available payment methods with amount and fee (currently limited to iDEAL only)
-  # 
+  #
   def new
     params.permit(:amount, :min)
     # if amount or minimum is given use that, otherwise use a default based on the ordergroups funds or amount defined
-    @amount = [params[:min], params[:amount]].compact.max || [FoodsoftMollie.default_amount, @ordergroup.get_available_funds * -1].max # @todo extract
-    if params[:amount].to_f > 0 
-      if params[:min].to_f < params[:amount].to_f
-        params[:min] = params[:amount]
-      end
-    else
-      params[:min] = FoodsoftMollie.default_amount
-    end
-    logger.debug ">>> Method: #{@available_payment_methods["ideal"].id} Params: #{FoodsoftMollie.default_amount} => #{params[:min]} - #{params[:amount]}}"
+    @amount = [params[:min], params[:amount]].compact.max || [FoodsoftMollie.default_amount, @ordergroup.get_available_funds * -1].max # @TODO: extract
+    params[:min] = params[:amount].to_f > 0 && params[:min].to_f < params[:amount].to_f ? params[:amount] : FoodsoftMollie.default_amount
+    logger.debug ">>> Method: #{@available_payment_methods['ideal'].id} Params: #{FoodsoftMollie.default_amount} => #{params[:min]} - #{params[:amount]}}"
 
-    # TODO support looping and collecting available_payment_methods. For now only iDEAL is supported
-    @fee = payment_fee(@available_payment_methods["ideal"], @amount)
-    payment = {description: @available_payment_methods["ideal"].description, amount: @amount, fee: @fee}
-    @payment_options = {ideal: payment}
+    # TODO: support looping and collecting available_payment_methods. For now only iDEAL is supported
+    @fee = payment_fee(@available_payment_methods['ideal'], @amount)
+    payment = { description: @available_payment_methods['ideal'].description, amount: @amount, fee: @fee }
+    @payment_options = { ideal: payment }
     logger.debug "Collected: #{@payment_options}"
   end
 
@@ -45,16 +39,16 @@ class Payments::MollieController < ApplicationController
     session[:mollie_params] = params.permit(:amount, :payment_method, :label, :title, :fixed, :min, :text)
     # Check if given amount has not been lowered below minimal allowed amount
     redirect_on_error(t('.invalid_amount', currency: t('number.currency.format.unit'), amount: params[:amount], minimum: params[:min])) and return if params[:min].to_f > params[:amount].to_f
-    
-    logger.debug ">>>> #{params[:payment_method]} with #{params[:amount]}"    
+
+    logger.debug ">>>> #{params[:payment_method]} with #{params[:amount]}"
 
     @method_chosen = @available_payment_methods[params[:payment_method]]
     redirect_on_error(t('.invalid_method', method: params[:payment_method])) and return if @method_chosen.nil?
-    
+
     # Fee calculated over the amount to pay
     fee = payment_fee(@method_chosen, params[:amount])
     # Create simplified hash for payment info
-    @payment_info = {id: params[:payment_method], description: @method_chosen.description, amount: params[:amount], fee: fee}
+    @payment_info = { id: params[:payment_method], description: @method_chosen.description, amount: params[:amount], fee: fee }
 
     # Create transaction record
     transaction = create_transaction(@payment_info)
@@ -103,7 +97,7 @@ class Payments::MollieController < ApplicationController
   end
 
   private
-  
+
   #
   # <Description>
   #
@@ -122,7 +116,7 @@ class Payments::MollieController < ApplicationController
   # @return [FinancialTransaction] Trancaction
   #
   def create_transaction(payment_info)
-    logger.debug "#{payment_info.inspect()}"
+    logger.debug payment_info.inspect.to_s
     financial_transaction_type = FinancialTransactionType.find_by_id(FoodsoftConfig[:mollie][:financial_transaction_type]) || FinancialTransactionType.first
     note = t('.controller.transaction_note', method: payment_info[:description])
     FinancialTransaction.create!(
@@ -130,7 +124,7 @@ class Payments::MollieController < ApplicationController
       ordergroup: @ordergroup,
       user: @current_user,
       payment_plugin: 'mollie',
-      payment_amount: payment_info[:amount], # TODO unclear whether this attribute is used? As the paid amount seems to be copied to `amount`
+      payment_amount: payment_info[:amount], # TODO: unclear whether this attribute is used? As the paid amount seems to be copied to `amount`
       payment_fee: payment_info[:fee],
       payment_currency: FoodsoftMollie.currency,
       payment_state: 'open',
@@ -143,15 +137,13 @@ class Payments::MollieController < ApplicationController
   #
   # Query Mollie status and update financial transaction status
   #
-  # @param [FinancialTransaction] transaction 
+  # @param [FinancialTransaction] transaction
   #
-  # TODO Check how data is stored. It seems confusing and error prone that the balance is recorded seperatly instead of taken from the existing data. See ordergroep.rb|update_balance
+  # TODO: Check how data is stored. It seems confusing and error prone that the balance is recorded seperatly instead of taken from the existing data. See ordergroep.rb|update_balance
   def update_transaction(transaction)
     payment = Mollie::Payment.get(transaction.payment_id, api_key: FoodsoftMollie.api_key)
     logger.debug ">>>>>>> \n\nMollie update_transaction: #{transaction.inspect}\n\n with payment:\n #{payment.inspect} \n => #{payment.status}"
-    if payment.status == "paid"
-      transaction.update! amount: payment.amount.value.to_f - transaction.payment_fee if FoodsoftMollie.charge_fees?
-    end
+    transaction.update! amount: payment.amount.value.to_f - transaction.payment_fee if FoodsoftMollie.charge_fees && payment.status == 'paid'
     transaction.update! payment_state: payment.status
   end
 
@@ -175,7 +167,7 @@ class Payments::MollieController < ApplicationController
       method: transaction.payment_method,
       description: "#{FoodsoftConfig[:name]}: Continue to add credit to #{@ordergroup.name}",
       redirectUrl: result_payments_mollie_url(id: transaction.id),
-      webhookUrl: FoodsoftMollie.callback_url.blank? ? check_payments_mollie_url : FoodsoftMollie.callback_url,
+      webhookUrl: FoodsoftMollie.callback_url.presence? ? check_payments_mollie_url : FoodsoftMollie.callback_url,
       metadata: {
         scope: FoodsoftConfig.scope,
         transaction_id: transaction.id,
@@ -202,13 +194,12 @@ class Payments::MollieController < ApplicationController
   def available_payment_methods
     logger.debug "From cache: #{Rails.cache.read(FoodsoftMollie.api_key)}"
     # For development: `rails dev:cache`
-    @available_payment_methods = Rails.cache.fetch(FoodsoftMollie.api_key, expires_in: 1.days) do 
-       get_payment_methods
+    @available_payment_methods = Rails.cache.fetch(FoodsoftMollie.api_key, expires_in: 1.day) do
+      retrieve_payment_methods
     end
     logger.debug "MOLLIE methods enabled: #{@available_payment_methods.count}"
   end
-  
-  
+
   #
   # Calculate fee, when applicable
   #
@@ -218,15 +209,13 @@ class Payments::MollieController < ApplicationController
   # @return [float] The fee due
   #
   def payment_fee(method, amount)
+    return unless FoodsoftMollie.charge_fees?
+
     # Calculate when fees are charged (otherwise the recipient/coop pays the fee)
-    if FoodsoftMollie.charge_fees?
-      fee = method.pricing[0].fixed.value.to_f + (amount.to_f * (method.pricing[0].variable.to_f/100))
-      ## Add tax (split for clarity)
-      fee_with_tax = fee + (fee * FoodsoftMollie.tax_for_mollie.to_f/100).round(2)
-      logger.debug "Fee calculated for method #{method.id}: #{fee_with_tax} for amount: #{amount} with tax #{FoodsoftMollie.tax_for_mollie}%"
-      return fee_with_tax
-    end
-    return 0.00
+    fee = method.pricing[0].fixed.value.to_f + (amount.to_f * (method.pricing[0].variable.to_f / 100))
+    ## Add tax (split for clarity)
+    fee_with_tax = fee + (fee * FoodsoftMollie.tax_for_mollie.to_f / 100).round(2)
+    logger.debug "Fee calculated for method #{method.id}: #{fee_with_tax} for amount: #{amount} with tax #{FoodsoftMollie.tax_for_mollie}%"
   end
 
   #
@@ -234,12 +223,12 @@ class Payments::MollieController < ApplicationController
   #
   # @return [hash] available_payment_methods for the account
   #
-  def get_payment_methods
+  def retrieve_payment_methods
     @payment_methods_all = fetch_mollie_methods
     # Check for every method whether the account has it enabled
     @available_payment_methods = {}
     @payment_methods_all.each do |method|
-        # TODO note that currently this only allows iDEAL, others are effectively disabled
+      # TODO: note that currently this only allows iDEAL, others are effectively disabled
       if eligible_mollie_method(method.id)
         # Method is supported, so add to the list
         logger.debug "ADD TO LIST: #{method.inspect}"
@@ -247,9 +236,7 @@ class Payments::MollieController < ApplicationController
       end
       logger.debug "MOLLIE Available #{@available_payment_methods.size}"
     end
-    return @available_payment_methods
   end
-
 
   #
   # Retrieve all payment methods on Mollie
@@ -262,7 +249,6 @@ class Payments::MollieController < ApplicationController
     Mollie::Method.all_available(include: 'pricing', api_key: FoodsoftMollie.api_key)
   end
 
-  
   #
   # Check for eligible payment methods
   # Since Mollie changed its API, this is now needed to filter for methods which are supported by the account
@@ -273,10 +259,10 @@ class Payments::MollieController < ApplicationController
   # @return [boolean] true|false supported or not supported
   #
   def eligible_mollie_method(method_id)
-    #logger.debug "MOLLIE CHECKING #{method_id}"
-    #! ------------------------------------------------------------------------------------------------------------
-    #! For the time being we only support iDEAL payments. Others need more work to properly support, notably cards.
-    #! ------------------------------------------------------------------------------------------------------------
+    # logger.debug "MOLLIE CHECKING #{method_id}"
+    # ! ------------------------------------------------------------------------------------------------------------
+    # ! For the time being we only support iDEAL payments. Others need more work to properly support, notably cards.
+    # ! ------------------------------------------------------------------------------------------------------------
     unless ['ideal'].include?(method_id)
       logger.info "MOLLIE method [#{method_id}] currently not supported"
       return false
@@ -285,15 +271,13 @@ class Payments::MollieController < ApplicationController
     begin
       Mollie::Method.get(method_id, api_key: FoodsoftMollie.api_key)
     rescue Mollie::RequestError
-      # Either 
+      # Either
       # - 404 Not Found (not present on account)
       # - 403 Not enabled on account
-      # TODO Other errors may be present but effectively this payment method is not available
+      # TODO: Other errors may be present but effectively this payment method is not available
       logger.debug "MOLLIE method [#{method_id}] not active"
-      return false
     end
     # Method is supported and active on account
-    #logger.debug "MOLLIE method [#{method_id}] available"
-    return true
+    # logger.debug "MOLLIE method [#{method_id}] available"
   end
 end

@@ -30,8 +30,8 @@ module FoodsoftMollie
 
   # Only for testing
   def self.callback_url
-    if Rails.root.join('tmp', 'callback_url.txt').exist?
-      File.read(Rails.root.join('tmp', 'callback_url.txt'))
-    end
+    return unless Rails.root.join('tmp/callback_url.txt').exist?
+
+    Rails.root.join('tmp/callback_url.txt').read
   end
 end
