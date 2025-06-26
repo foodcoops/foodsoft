@@ -1907,7 +1907,6 @@ de:
       not_found: Keine Artikel gefunden
     remote_order_methods:
       email: E-Mail
-      ftp: FTP
   supplier_shares:
     share_link:
       not_shared: Die Artikel der Lieferantin werden aktuell mit niemandem geteilt.

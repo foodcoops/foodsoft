@@ -3,6 +3,7 @@ require 'net/http'
 class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
+  include ExtendableEnum
 
   has_many :articles, lambda {
                         merge(Article.not_in_stock.with_latest_versions_and_categories.order('article_categories.name, article_versions.name'))
@@ -18,19 +19,19 @@ class Supplier < ApplicationRecord
   validates :name, presence: true, length: { in: 4..30 }
   validates :phone, presence: true, length: { in: 8..25 }
   validates :address, presence: true, length: { in: 8..50 }
-  validates :customer_number, length: { in: 1..6 }, numericality: { only_integer: true }, if: -> { remote_order_method == 'ftp' }
+  validates :customer_number, length: { in: 1..6 }, numericality: { only_integer: true }, if: -> { remote_order_method == 'ftp_b85' }
   validates :iban, format: { with: /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, allow_blank: true }
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
   validates :remote_order_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp]), allow_blank: true }
-  validates :remote_order_url, presence: true, if: -> { remote_order_method == 'ftp' }
-  validate :no_open_orders, if: -> { remote_order_method == 'ftp' && remote_order_method_changed? }
+  validates :remote_order_url, presence: true, if: -> { remote_order_method == 'ftp_b85' }
+  validate :no_open_orders, if: -> { remote_order_method == 'ftp_b85' && remote_order_method_changed? }
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https ftp]), allow_blank: true }
 
-  enum remote_order_method: { email: 'email', ftp: 'ftp' }
+  extendable_enum :remote_order_method, { email: 'email' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }

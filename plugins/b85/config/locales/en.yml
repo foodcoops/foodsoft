@@ -1,0 +1,4 @@
+en:
+  suppliers:
+    remote_order_methods:
+      ftp_b85: FTP (BNN/B85)

@@ -15,6 +15,12 @@ GIT
       activerecord (>= 3.0.9)
 
 PATH
+  remote: plugins/b85
+  specs:
+    foodsoft_b85 (1.0.0)
+      rails
+
+PATH
   remote: plugins/discourse
   specs:
     foodsoft_discourse (0.0.1)
@@ -650,6 +656,7 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
+  foodsoft_b85!
   foodsoft_discourse!
   foodsoft_documents!
   foodsoft_links!

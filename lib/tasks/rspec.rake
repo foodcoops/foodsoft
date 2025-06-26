@@ -1,7 +1,9 @@
 begin
   require 'rspec/core/rake_task'
   task(:spec).clear
-  RSpec::Core::RakeTask.new(:spec)
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.pattern = 'spec/**/*_spec.rb,plugins/**/*_spec.rb'
+  end
   task default: :spec
 
   # Use `rspec` to run a single test. When a test fails in rake but not

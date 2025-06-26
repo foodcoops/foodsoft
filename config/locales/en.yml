@@ -1912,7 +1912,6 @@ en:
       not_found: No articles found
     remote_order_methods:
       email: E-mail
-      ftp: FTP
   supplier_shares:
     share_link:
       not_shared: Supplier's articles are currently not shared with anyone.
