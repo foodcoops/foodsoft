@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe OrderB85 do
   let(:user) { create(:user, groups: [create(:ordergroup)]) }

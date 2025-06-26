@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   validates :starts, presence: true
   validate :starts_before_ends, :include_articles
   validate :keep_ordered_articles
-  validate :ftp_uploadable, if: -> { supplier&.remote_order_method == 'ftp' }
+  validate :ftp_uploadable, if: -> { supplier&.remote_order_method == 'ftp_b85' }
 
   before_validation :distribute_transport
   # Callbacks
@@ -308,7 +308,7 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    if supplier.remote_order_method == 'ftp'
+    if supplier.remote_order_method == 'ftp_b85'
       upload_via_ftp
     else
       Mailer.deliver_now_with_default_locale do
