@@ -22,3 +22,8 @@ end
 every 1.minute do
   rake 'multicoops:run TASK=foodsoft:finish_ended_orders'
 end
+
+# Daily supplier synchronization
+every :day, at: '3:00 am' do
+  rake 'multicoops:run TASK=foodsoft:remote_sync_suppliers'
+end

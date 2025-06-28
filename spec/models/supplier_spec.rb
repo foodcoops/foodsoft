@@ -20,6 +20,85 @@ describe Supplier do
     end
   end
 
+  describe '#read_from_remote' do
+    context 'with HTTP/S protocol' do
+      let(:sample_data) { { articles: [{ name: 'Test Article', price: 1.99 }] } }
+      let(:http_double) { instance_double(Net::HTTP) }
+      let(:response_double) { instance_double(Net::HTTPResponse) }
+
+      before do
+        allow(supplier).to receive(:supplier_remote_source).and_return('https://example.org/data.json')
+        allow(Net::HTTP).to receive(:new).and_return(http_double)
+        allow(http_double).to receive(:use_ssl=)
+        allow(http_double).to receive(:request).and_return(response_double)
+        allow(response_double).to receive(:body).and_return(sample_data.to_json)
+      end
+
+      it 'fetches data from HTTP/S source' do
+        result = supplier.read_from_remote
+        expect(result).to eq(sample_data)
+      end
+
+      it 'handles search parameters' do
+        result = supplier.read_from_remote(query: 'test')
+        expect(http_double).to have_received(:request) do |request|
+          expect(request.path).to include('query=test')
+        end
+        expect(result).to eq(sample_data)
+      end
+    end
+
+    context 'with FTP protocol' do
+      let(:sample_data) do
+        { 'data1.json' => { articles: [{ name: 'Article 1', price: 1.99 }] },
+          'data2.json' => { articles: [{ name: 'Article 2', price: 2.99 }] } }
+      end
+      let(:ftp_double) { instance_double(Net::FTP) }
+
+      before do
+        allow(Net::FTP).to receive(:new).and_return(ftp_double)
+        allow(ftp_double).to receive(:connect)
+        allow(ftp_double).to receive(:login)
+        allow(ftp_double).to receive(:passive=)
+        allow(ftp_double).to receive(:chdir)
+        allow(ftp_double).to receive(:close)
+        allow(ftp_double).to receive(:nlst).and_return(%w[data1.json data2.json other.txt])
+        allow(ftp_double).to receive(:getbinaryfile) do |remote_file_name, local_file|
+          File.write(local_file, sample_data[remote_file_name].to_json) if sample_data.key?(remote_file_name)
+        end
+      end
+
+      it 'fetches data from FTP source' do
+        allow(supplier).to receive(:supplier_remote_source).and_return('ftp://example.com/path/data1.json')
+
+        result = supplier.read_from_remote
+        expect(result).to eq(sample_data['data1.json'])
+      end
+
+      it 'handles authentication in URL' do
+        allow(supplier).to receive(:supplier_remote_source).and_return('ftp://user:pass@example.com/path/data.json')
+
+        supplier.read_from_remote
+        expect(ftp_double).to have_received(:login).with('user', 'pass')
+      end
+
+      it 'handles glob patterns in path' do
+        allow(supplier).to receive(:supplier_remote_source).and_return('ftp://example.com/path/*.json')
+
+        result = supplier.read_from_remote
+        expect(result[:articles]).to contain_exactly({ name: 'Article 1', price: 1.99 }, { name: 'Article 2', price: 2.99 })
+      end
+
+      it 'returns empty articles array when no files match the pattern' do
+        allow(supplier).to receive(:supplier_remote_source).and_return('ftp://example.com/path/*.json')
+        allow(ftp_double).to receive(:nlst).and_return(['other.txt'])
+
+        result = supplier.read_from_remote
+        expect(result).to eq({ articles: [] })
+      end
+    end
+  end
+
   it 'return correct tolerance' do
     supplier = create(:supplier)
     supplier.articles = create_list(:article, 1, unit_quantity: 1)

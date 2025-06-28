@@ -93,6 +93,19 @@ namespace :foodsoft do
       rake_say "Please configure your app_config.yml accordingly:\nattachment_retention_days: <number of days>"
     end
   end
+
+  desc 'Synchronize suppliers with remote_auto_sync flag'
+  task remote_sync_suppliers: :environment do
+    suppliers = Supplier.undeleted.where(remote_auto_sync: true)
+    rake_say "Starting sync for #{suppliers.count} suppliers"
+
+    suppliers.each do |supplier|
+      rake_say "Syncing supplier: #{supplier.name}"
+      result = SupplierSyncService.new(supplier).sync
+      status = result ? 'successful' : 'failed'
+      rake_say "Sync for #{supplier.name} #{status}"
+    end
+  end
 end
 
 # Helper
