@@ -5,7 +5,7 @@ module DeliveriesHelper
               title: I18n.t('helpers.deliveries.show_invoice')
     else
       link_to I18n.t('helpers.deliveries.new_invoice'), new_finance_invoice_path(supplier_id: delivery.supplier.id, delivery_id: delivery.id),
-              class: 'btn btn-mini'
+              class: 'btn btn-default btn-xs'
     end
   end
 
@@ -25,12 +25,12 @@ module DeliveriesHelper
   def stock_change_remove_link(stock_change_form)
     if stock_change_form.object.new_record?
       return link_to t('deliveries.stock_change_fields.remove_article'), '#',
-                     class: 'remove_new_stock_change btn btn-small'
+                     class: 'remove_new_stock_change btn btn-default btn-sm'
     end
 
     output = stock_change_form.hidden_field :_destroy
     output += link_to t('deliveries.stock_change_fields.remove_article'), '#',
-                      class: 'destroy_stock_change btn btn-small'
+                      class: 'destroy_stock_change btn btn-default btn-sm'
     output.html_safe
   end
 end

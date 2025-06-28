@@ -27,5 +27,5 @@
               = link_to order.name, order_path(order)
             %td= truncate order.note
             %td{style:'white-space:nowrap'}
-              = render 'shared/order_download_button', order: order, klass: 'btn-small'
-              = receive_button order, class: 'btn-small'
+              = render 'shared/order_download_button', order: order, klass: 'btn-xs'
+              = receive_button order, class: 'btn-xs'

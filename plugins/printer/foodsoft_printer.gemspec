@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface', '~> 1.0'
   s.add_dependency 'tubesock'
   s.metadata['rubygems_mfa_required'] = 'true'
+  s.required_ruby_version = '>= 3.3'
 end

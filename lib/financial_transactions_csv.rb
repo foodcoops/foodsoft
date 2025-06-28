@@ -17,7 +17,7 @@ class FinancialTransactionsCsv < RenderCsv
   end
 
   def data
-    @object.includes(:user, :ordergroup, :financial_transaction_type).each do |t|
+    @object.includes(:user, :ordergroup, :financial_transaction_type).find_each do |t|
       yield [
         t.created_on,
         t.ordergroup_id,

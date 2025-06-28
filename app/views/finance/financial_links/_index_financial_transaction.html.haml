@@ -1,24 +1,26 @@
-.modal-header
-  = close_button :modal
-  %h3= t('.title')
-.modal-body
-  %table.table.table-striped
-    %thead
-      %tr
-        %th= heading_helper FinancialTransaction, :created_on
-        %th= heading_helper FinancialTransaction, :ordergroup
-        %th= heading_helper FinancialTransaction, :note
-        - if FinancialTransactionType.has_multiple_types
-          %th= heading_helper FinancialTransaction, :financial_transaction_type
-        %th= heading_helper FinancialTransaction, :amount
-    %tbody
-      - for t in @financial_transactions
-        %tr
-          %td= link_to format_time(t.created_on), add_financial_transaction_finance_link_path(@financial_link, financial_transaction: t.id), method: :put
-          %td= t.ordergroup_name
-          %td= render 'finance/financial_transactions/order_note', financial_transaction:t, with_grouporder_link: false
-          - if FinancialTransactionType.has_multiple_types
-            %td= h t.financial_transaction_type.name
-          %td= number_to_currency t.amount
-.modal-footer
-  = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+.modal-dialog
+  .modal-content
+    .modal-header
+      = close_button :modal
+      %h3= t('.title')
+    .modal-body
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= heading_helper FinancialTransaction, :created_on
+            %th= heading_helper FinancialTransaction, :ordergroup
+            %th= heading_helper FinancialTransaction, :note
+            - if FinancialTransactionType.has_multiple_types
+              %th= heading_helper FinancialTransaction, :financial_transaction_type
+            %th= heading_helper FinancialTransaction, :amount
+        %tbody
+          - for t in @financial_transactions
+            %tr
+              %td= link_to format_time(t.created_on), add_financial_transaction_finance_link_path(@financial_link, financial_transaction: t.id), method: :put
+              %td= t.ordergroup_name
+              %td= render 'finance/financial_transactions/order_note', financial_transaction:t, with_grouporder_link: false
+              - if FinancialTransactionType.has_multiple_types
+                %td= h t.financial_transaction_type.name
+              %td= number_to_currency t.amount
+    .modal-footer
+      = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}

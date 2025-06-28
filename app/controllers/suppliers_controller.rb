@@ -1,7 +1,7 @@
 require 'ostruct'
 
 class SuppliersController < ApplicationController
-  before_action :authenticate_suppliers, except: %i[index list]
+  before_action :authenticate_suppliers, except: %i[index]
   helper :deliveries
 
   def index

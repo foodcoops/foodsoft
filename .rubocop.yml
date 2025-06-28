@@ -1,13 +1,21 @@
 inherit_from: .rubocop_todo.yml
 
+inherit_mode:
+  merge:
+    - Exclude
+
 require:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-rspec_rails
   - rubocop-capybara
   - rubocop-factory_bot
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
 
 Gemspec/OrderedDependencies:
   Exclude:

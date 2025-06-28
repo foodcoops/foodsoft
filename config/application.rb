@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Foodsoft
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.2
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -17,7 +17,7 @@ module Foodsoft
     # the framework and any gems in your application.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.eager_load_paths << Rails.root.join('lib')
+    config.autoload_lib(ignore: %w[tasks])
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -28,7 +28,7 @@ module Foodsoft
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Internationalization.
-    config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml')]
+    config.i18n.load_path += Rails.root.glob('config/locales/*.yml')
     config.i18n.available_locales = Pathname.glob(Rails.root.join('config/locales/{??,???}{-*,}.yml')).map do |p|
       p.basename('.yml').to_s
     end

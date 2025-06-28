@@ -71,10 +71,10 @@
         // no value
         html = '';
       } else if (isNaN(units)) {
-        html = '<i class="icon-remove" style="color: red"></i>';
+        html = '<i class="glyphicon glyphicon-remove" style="color: red"></i>';
       } else if (delta == 0) {
         // equal value
-        html = '<i class="icon-ok" style="color: green"></i>';
+        html = '<i class="glyphicon glyphicon-ok" style="color: green"></i>';
       } else {
         if (delta < 0) {
           html = '<span style="color: red">- '+(-delta)+'</span>';
@@ -133,7 +133,7 @@
     unlockReceiveInputField(unlockButton$) {
       $('.units_received', unlockButton$.closest('tr')).prop('disabled', false).focus();
       unlockButton$.closest('.input-prepend').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
-      unlockButton$.replaceWith('<i class="icon icon-warning-sign"></i>');
+      unlockButton$.replaceWith('<i class="glyphicon glyphicon-warning-sign"></i>');
     }
   }
 

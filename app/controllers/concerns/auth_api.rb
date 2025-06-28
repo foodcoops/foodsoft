@@ -20,7 +20,7 @@ module Concerns::AuthApi
   end
 
   def doorkeeper_authorize!(*scopes)
-    super(*scopes)
+    super
     # In addition to Doorkeeper's authorization and scope check, we also verify
     # that the user has permissions for the scope (through its workgroups).
     # Unless no scopes were supplied, which means we only want to make sure there
