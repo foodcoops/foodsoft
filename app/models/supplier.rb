@@ -19,14 +19,14 @@ class Supplier < ApplicationRecord
   validates :name, presence: true, length: { in: 4..30 }
   validates :phone, presence: true, length: { in: 8..25 }
   validates :address, presence: true, length: { in: 8..50 }
-  validates :customer_number, length: { in: 1..6 }, numericality: { only_integer: true }, if: -> { remote_order_method == 'ftp_b85' }
+  validates :customer_number, length: { in: 1..6 }, numericality: { only_integer: true }, if: -> { remote_order_method == :ftp_b85 }
   validates :iban, format: { with: /\A[A-Z]{2}[0-9]{2}[0-9A-Z]{,30}\z/, allow_blank: true }
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
   validates :remote_order_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp]), allow_blank: true }
-  validates :remote_order_url, presence: true, if: -> { remote_order_method == 'ftp_b85' }
-  validate :no_open_orders, if: -> { remote_order_method == 'ftp_b85' && remote_order_method_changed? }
+  validates :remote_order_url, presence: true, if: -> { remote_order_method == :ftp_b85 }
+  validate :no_open_orders, if: -> { remote_order_method == :ftp_b85 && remote_order_method_changed? }
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https ftp]), allow_blank: true }
@@ -36,6 +36,24 @@ class Supplier < ApplicationRecord
 
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :having_articles, -> { where(id: Article.undeleted.select(:supplier_id).distinct) }
+
+  @remote_order_formatters = {}
+
+  class << self
+    attr_accessor :remote_order_formatters
+  end
+
+  def remote_order_formatter
+    self.class.remote_order_formatters[remote_order_method]
+  end
+
+  # Register a remote order method with its formatter (to be used by plugins)
+  # @param method [Symbol] The key for the remote order method
+  # @param formatter_class [Class] The class that will format the order for remote ordering
+  def self.register_remote_order_method(method, formatter_class)
+    add_remote_order_method_value(method)
+    @remote_order_formatters[method] = formatter_class
+  end
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name]

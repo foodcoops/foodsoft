@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   validates :starts, presence: true
   validate :starts_before_ends, :include_articles
   validate :keep_ordered_articles
-  validate :ftp_uploadable, if: -> { supplier&.remote_order_method == 'ftp_b85' }
+  validate :ftp_uploadable, if: -> { supplier&.remote_order_method == :ftp_b85 }
 
   before_validation :distribute_transport
   # Callbacks
@@ -308,12 +308,12 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    if supplier.remote_order_method == 'ftp_b85'
-      upload_via_ftp
-    else
+    if supplier.remote_order_method == :email
       Mailer.deliver_now_with_default_locale do
         Mailer.order_result_supplier(user, self)
       end
+    else
+      upload_via_ftp
     end
     update_attribute(:remote_ordered_at, Time.now)
   end
@@ -321,9 +321,13 @@ class Order < ApplicationRecord
   def upload_via_ftp
     require 'net/ftp'
     require 'tempfile'
+
+    formatter_class = supplier.remote_order_formatter
+    raise "No formatter registered for remote order method: #{supplier.read_attribute_before_type_cast(:remote_order_method)}" unless formatter_class
+
     local_temp_file = Tempfile.new
     begin
-      local_temp_file.write(OrderB85.new(self).to_b85)
+      local_temp_file.write(formatter_class.new(self).to_remote_format)
       local_temp_file.rewind
       # BE + 6-digit customer number + last 3 digits of order ID
       remote_filename = "BE#{format('%06d', supplier.customer_number.to_i)}.#{format('%03d', id % 1000)}"

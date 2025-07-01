@@ -39,7 +39,7 @@ class OrderB85
     @order = order
   end
 
-  def to_b85
+  def to_remote_format
     b85 = header + end_of_dataset
     b85 += data.join(end_of_dataset)
     b85 += end_of_dataset
