@@ -218,5 +218,22 @@ describe Order do
         expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
       end
     end
+
+    context 'with unregistered remote order method' do
+      let(:supplier) do
+        create(:supplier, article_count: 1, remote_order_url: 'ftp://user:pass@example.com/path',
+                          customer_number: '12345')
+      end
+      let(:order) { create(:order, supplier: supplier) }
+
+      before do
+        supplier.update_column(:remote_order_method, :unknown_method)
+        supplier.reload
+      end
+
+      it 'raises an error when no formatter is registered' do
+        expect { order.upload_via_ftp }.to raise_error(RuntimeError, /No formatter registered for remote order method: unknown_method/)
+      end
+    end
   end
 end

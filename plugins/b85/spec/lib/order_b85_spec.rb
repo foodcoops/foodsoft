@@ -20,7 +20,7 @@ describe OrderB85 do
   end
 
   it 'creates a proper B85 format output from an order' do
-    result = described_class.new(order).to_b85
+    result = described_class.new(order).to_remote_format
 
     # Verify the header
     expect(result).to start_with('D#123456000000 ')
