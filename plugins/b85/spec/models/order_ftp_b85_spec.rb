@@ -5,7 +5,7 @@ describe Order do
     let(:user) { create(:user) }
     let(:supplier) do
       create(:supplier, article_count: 1, remote_order_url: 'ftp://user:pass@example.com/path',
-                        customer_number: '12345', remote_order_method: 'ftp_b85')
+                        customer_number: '12345', remote_order_method: :ftp_b85)
     end
     let(:order) { create(:order, supplier: supplier) }
     let(:ftp_mock) { instance_double(Net::FTP) }
@@ -18,7 +18,7 @@ describe Order do
       allow(ftp_mock).to receive(:putbinaryfile)
 
       ActionMailer::Base.deliveries.clear
-      Supplier.add_remote_order_method_value(:ftp_b85, 'ftp_b85')
+      Supplier.register_remote_order_method(:ftp_b85, OrderB85)
     end
 
     it 'uploads order via FTP in B85 format and does not send email' do

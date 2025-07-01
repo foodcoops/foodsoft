@@ -41,7 +41,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
     if @supplier.update(supplier_params)
       flash[:notice] = I18n.t('suppliers.update.notice')
-      if @supplier.remote_order_method == 'ftp_b85'
+      if @supplier.remote_order_method == :ftp_b85
         @supplier.orders.finished_not_closed.each { |o| o.update_attribute(:remote_ordered_at, Time.now) if o.remote_ordered_at.nil? }
         flash[:notice] += ", #{I18n.t('suppliers.update.remote_ordered_at_notice')}"
       end
