@@ -285,8 +285,6 @@ en:
           attributes:
             shared_sync_method:
               included: is not a valid option for this supplier
-            remote_order_method:
-              no_open_orders: may only be changed without open orders
         task:
           attributes:
             done:

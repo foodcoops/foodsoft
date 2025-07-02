@@ -283,8 +283,6 @@ de:
           attributes:
             shared_sync_method:
               included: ist keine gültige Auswahl für diesen Lieferanten
-            remote_order_method:
-              no_open_orders: darf nur ohne laufende Bestellungen geändert werden
         task:
           attributes:
             done:
