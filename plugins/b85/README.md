@@ -7,6 +7,8 @@ This plugin adds support for the B85 order method (Biofakt B85 Mailbox Order For
 - Adds the 'ftp_b85' remote order method to suppliers
 - Provides the OrderB85 class for generating B85 format data
 - Handles FTP upload of orders in B85 format
+- Extends the Supplier model with validations for B85 suppliers
+- Extends the Order model with validations for B85 orders
 
 ## Usage
 
