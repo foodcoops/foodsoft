@@ -318,8 +318,7 @@ class Order < ApplicationRecord
   end
 
   def upload_via_ftp
-    require 'net/ftp'
-    require 'tempfile'
+    raise I18.t('orders.model.error_invalid') unless valid?
 
     formatter_class = supplier.remote_order_formatter
     raise "No formatter registered for remote order method: #{supplier.read_attribute_before_type_cast(:remote_order_method)}" unless formatter_class
