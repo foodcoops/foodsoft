@@ -2,3 +2,6 @@ en:
   suppliers:
     remote_order_methods:
       ftp_b85: FTP (BNN/B85)
+  orders:
+    model:
+      error_not_ftp_uploadable: "The supplier's order method is “FTP”, but the selected items do not meet the criteria for the order format (existing order number up to 13 characters, existing unit conversion for the container size, container size and order quantity less than 10,000)."

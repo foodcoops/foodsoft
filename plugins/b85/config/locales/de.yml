@@ -2,3 +2,6 @@ de:
   suppliers:
     remote_order_methods:
       ftp_b85: FTP (BNN/B85)
+  orders:
+    model:
+      error_not_ftp_uploadable: "Die Bestellmethode der Lieferantin ist „FTP“, aber die markierten Artikel erfüllen nicht die Kriterien für das Bestellformat (vorhandene Bestellnummer bis zu 13 Zeichen, vorhandene Einheitenumrechnung für die Gebindegröße, Gebindegröße und Bestellmenge kleiner als 10.000)."

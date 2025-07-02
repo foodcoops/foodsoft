@@ -1588,7 +1588,6 @@ en:
       stock: Stock
       warning_ordered: 'Warning: articles marked red have already been ordered within this open order. If you uncheck them here, all existing orders of these articles will be deleted. To proceed, confirm below.'
       warning_ordered_stock: 'Warning: Articles marked red have already been ordered/purchased within this open stock order. If you uncheck them here, all existing orders/purchases of these articles will be deleted and it will not be accounted for them. Confirm below to proceed.'
-      error_not_ftp_uploadable: "The supplier's order method is “FTP”, but the selected items do not meet the criteria for the order format (existing order number up to 13 characters, existing unit conversion for the container size, container size and order quantity less than 10,000)."
     new:
       title: Create new order
     receive:
@@ -1905,7 +1904,6 @@ en:
       confirm_remove_share: Do you really want to stop sharing this supplier's articles? (If you later decide to start sharing them again, you'll have to resend the new link to all subscribers who you think should have access.)
     update:
       notice: Supplier was updated
-      remote_ordered_at_notice: "completed orders (if any) have been marked as “sent”"
     import_search_results:
       action_import: import
       already_imported: imported
