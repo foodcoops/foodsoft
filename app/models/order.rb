@@ -405,7 +405,7 @@ class Order < ApplicationRecord
   def ftp_uploadable
     selected_articles = Article.find(article_ids)
     invalid_articles = selected_articles.reject do |article|
-      order_article = order_articles.where(article_version: { article_id: article.id }).first
+      order_article = order_articles.joins(:article_version).where(article_versions: { article_id: article.id }).first
       article_version = order_article&.article_version || article.latest_article_version
       # - all ordered articles must have an order number <= 13 digits
       # - the article must have at least one unit ratio (packaging quantity)
