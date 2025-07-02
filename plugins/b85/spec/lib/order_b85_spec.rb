@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OrderB85 do
+describe FoodsoftB85::OrderB85 do
   let(:user) { create(:user, groups: [create(:ordergroup)]) }
   let(:supplier) { create(:supplier, customer_number: '123456', article_count: 2) }
   let(:order) { create(:order, supplier: supplier, created_by: user, starts: Date.yesterday, ends: 1.hour.ago) }

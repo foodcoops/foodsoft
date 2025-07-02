@@ -18,7 +18,7 @@ describe Order do
       allow(ftp_mock).to receive(:putbinaryfile)
 
       ActionMailer::Base.deliveries.clear
-      Supplier.register_remote_order_method(:ftp_b85, OrderB85)
+      Supplier.register_remote_order_method(:ftp_b85, FoodsoftB85::OrderB85)
     end
 
     it 'uploads order via FTP in B85 format and does not send email' do

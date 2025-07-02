@@ -400,7 +400,6 @@ class Order < ApplicationRecord
     end
   end
 
-
   private
 
   def distribute_transport
