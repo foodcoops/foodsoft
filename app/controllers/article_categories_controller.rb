@@ -12,7 +12,8 @@ class ArticleCategoriesController < ApplicationController
   end
 
   def destroy
-    destroy!
+    resource.mark_as_deleted
+    redirect_to article_categories_path, notice: I18n.t('flash.actions.destroy.notice', resource_name: resource.class.model_name.human)
   rescue StandardError => e
     redirect_to article_categories_path, alert: I18n.t('article_categories.destroy.error', message: e.message)
   end
@@ -20,6 +21,6 @@ class ArticleCategoriesController < ApplicationController
   protected
 
   def collection
-    @article_categories = ArticleCategory.order('name')
+    @article_categories = ArticleCategory.undeleted.order('name')
   end
 end

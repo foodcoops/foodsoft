@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 
   before_action :load_article, only: %i[edit update]
   before_action :load_article_units, only: %i[edit update new create]
-  before_action :load_article_categories, only: %i[edit_all copy migrate_units update_all]
+  before_action :load_article_categories, only: %i[edit new edit_all copy migrate_units update_all]
   before_action :new_empty_article_ratio,
                 only: %i[edit edit_all migrate_units update new create parse_upload sync update_synchronized]
 
@@ -400,7 +400,10 @@ class ArticlesController < ApplicationController
   end
 
   def load_article_categories
-    @article_categories = ArticleCategory.all
+    @article_categories = ArticleCategory.undeleted.order(:name)
+
+    current_category_id = @article&.latest_article_version&.article_category_id
+    @article_categories = @article_categories.or(ArticleCategory.where(id: current_category_id)) unless current_category_id.nil?
   end
 
   def new_empty_article_ratio

@@ -59,6 +59,8 @@ class ArticleVersion < ApplicationRecord
     joins(latest_outer_join_sql("#{table_name}.article_id")).where(later_article_versions: { id: nil })
   }
 
+  scope :undeleted, -> { includes(:article).where(articles: { deleted_at: nil }) }
+
   def self.latest_outer_join_sql(article_field_name)
     %(
       LEFT OUTER JOIN #{table_name} later_article_versions
