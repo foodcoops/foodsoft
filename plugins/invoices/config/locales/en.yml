@@ -1,0 +1,7 @@
+de:
+  helpers:
+    invoices:
+      sepa_frst: "First direct debit"
+      sepa_rcur: "Follow-up direct debit"
+      sepa_ooff: "One-off direct debit"
+      sepa_fnal: "Last direct debit"

@@ -1,0 +1,7 @@
+de:
+  helpers:
+    invoices:
+      sepa_frst: Erst-Lastschrift
+      sepa_rcur: Folge-Lastschrift
+      sepa_ooff: Einmalige Lastschrift
+      sepa_fnal: Letztmalige Lastschrift
