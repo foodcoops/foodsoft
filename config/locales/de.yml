@@ -220,7 +220,7 @@ de:
         order_howto: Kurzanleitung Bestellen
         phone: Telefon
         phone2: Telefon 2
-        remote_auto_sync: Synchronisation automatisch ausführen
+        remote_auto_sync: Synchronisation automatisch ausführen (täglich)
         supplier_remote_source: Synchronisierungsquelle
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
