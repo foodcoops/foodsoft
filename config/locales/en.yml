@@ -222,7 +222,7 @@ en:
         order_howto: How to order
         phone: Phone
         phone2: Phone 2
-        remote_auto_sync: Perform synchronization automatically
+        remote_auto_sync: Perform synchronization automatically (daily)
         supplier_remote_source: Supplier remote source
         shared_sync_method: How to synchronize
         url: Homepage

@@ -191,6 +191,7 @@ nl:
         order_howto: Hoe te bestellen
         phone: Telefoon
         phone2: Telefoon 2
+        remote_auto_sync: Synchronisatie automatisch uitvoeren (dagelijks)
         shared_sync_method: Hoe synchroniseren
         url: Homepage
       supplier_category:
