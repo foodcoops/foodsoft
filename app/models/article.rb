@@ -251,6 +251,10 @@ class Article < ApplicationRecord
       fc_uq = unit_quantity
       supplier_uq = new_article.unit_quantity
       if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+        if (fc_unit*fc_uq) != (supplier_unit * supplier_uq)
+          puts "case size appears different, do not convert #{fc_unit}*#{fc_uq}(#{fc_unit*fc_uq}) != (#{supplier_unit*supplier_uq}) #{supplier_unit} * #{supplier_uq}"
+          return false
+        end
         # conversion_factor = ((supplier_unit*supplier_uq) / (fc_unit*fc_uq)).to_base.to_r
         conversion_factor = (supplier_unit / fc_unit).scalar
         new_price = new_article.price / conversion_factor
@@ -287,11 +291,23 @@ class Article < ApplicationRecord
     # puts "fc_unit=#{fc_unit} (uq=#{unit_quantity}) supplier_unit=#{supplier_unit} (uq=#{new_article.unit_quantity})  fc_unit =~ supplier_unit=#{fc_unit =~ supplier_unit} of #{name}"
     # fc_unit =~ supplier_unit is checking the type of unit - eg 1LB =~ 5LB is true
     if fc_unit && supplier_unit && fc_unit =~ supplier_unit
+      if fc_unit*unit_quantity != supplier_unit * new_article.unit_quantity
+         puts "case size appears different, do not convert #{fc_unit}*#{unit_quantity} != #{supplier_unit} * #{new_article.unit_quantity}"
+        return false
+      end
       #if fc_unit && supplier_unit && (fc_unit != supplier_unit || new_article.unit_quantity != unit_quantity)
       conversion_factor = (supplier_unit / fc_unit).to_base.to_r
       new_price = new_article.price / conversion_factor
       new_unit_quantity = new_article.unit_quantity * conversion_factor
       # puts "fc_unit =~ supplier_unit is true. conversion (#{conversion_factor}) converting #{[new_price.to_f, new_unit_quantity.to_f]}"
+
+      # sanity check
+      converted_supplier_price = new_price * new_unit_quantity
+      if converted_supplier_price - new_article.supplier_price > (0.01 * new_unit_quantity)
+        puts "converted supplier price too different #{converted_supplier_price.to_f} vs #{new_article.supplier_price.to_f} (new_uq=#{new_unit_quantity.to_f}, sup_eq=#{new_article.unit_quantity})"
+        return false
+      end
+
       return [new_price, new_unit_quantity]
     else
       # puts "fc_unit (#{fc_unit}) =~ supplier_unit (#{supplier_unit}) is not true (units changed?), no conversion possible"
