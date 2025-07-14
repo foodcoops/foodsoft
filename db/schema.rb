@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_28_114335) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -397,7 +397,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_28_114335) do
     t.datetime "boxfill", precision: nil
     t.integer "invoice_id"
     t.date "pickup"
-    t.datetime "last_sent_mail", precision: nil
+    t.datetime "remote_ordered_at", precision: nil
     t.integer "end_action", default: 0, null: false
     t.decimal "transport", precision: 8, scale: 2
     t.index ["state"], name: "index_orders_on_state"
@@ -547,6 +547,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_28_114335) do
     t.string "external_uuid"
     t.datetime "unit_migration_completed", precision: nil
     t.boolean "remote_auto_sync", default: false, null: false
+    t.string "remote_order_method", default: "email", null: false
+    t.string "remote_order_url"
     t.index ["external_uuid"], name: "index_suppliers_on_external_uuid", unique: true
     t.index ["name"], name: "index_suppliers_on_name", unique: true
   end

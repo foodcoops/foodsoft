@@ -3,6 +3,7 @@ require 'net/http'
 class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
+  include ExtendableEnum
 
   has_many :articles, lambda {
                         merge(Article.not_in_stock.with_latest_versions_and_categories.order('article_categories.name, article_versions.name'))
@@ -22,14 +23,34 @@ class Supplier < ApplicationRecord
   validates :iban, uniqueness: { case_sensitive: false, allow_blank: true }
   validates :order_howto, :note, length: { maximum: 250 }
   validate :uniqueness_of_name
+  validates :remote_order_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[ftp]), allow_blank: true }
   validates :shared_sync_method, presence: true, unless: -> { supplier_remote_source.blank? }
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https ftp]), allow_blank: true }
 
+  extendable_enum :remote_order_method, { email: 'email' }
   enum shared_sync_method: { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }
   scope :having_articles, -> { where(id: Article.undeleted.select(:supplier_id).distinct) }
+
+  @remote_order_formatters = {}
+
+  class << self
+    attr_accessor :remote_order_formatters
+  end
+
+  def remote_order_formatter
+    self.class.remote_order_formatters[remote_order_method]
+  end
+
+  # Register a remote order method with its formatter (to be used by plugins)
+  # @param method [Symbol] The key for the remote order method
+  # @param formatter_class [Class] The class that will format the order for remote ordering
+  def self.register_remote_order_method(method, formatter_class)
+    add_remote_order_method_value(method)
+    @remote_order_formatters[method] = formatter_class
+  end
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name]

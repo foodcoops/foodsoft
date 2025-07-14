@@ -74,6 +74,7 @@ gem 'foodsoft_polls', path: 'plugins/polls'
 gem 'foodsoft_wiki', path: 'plugins/wiki'
 
 # plugins not enabled by default
+# gem 'foodsoft_b85', path: 'plugins/b85'
 # gem 'foodsoft_current_orders', path: 'plugins/current_orders'
 # gem 'foodsoft_printer', path: 'plugins/printer'
 # gem 'foodsoft_uservoice', path: 'plugins/uservoice'
@@ -128,4 +129,6 @@ group :test do
   gem 'simplecov-lcov', require: false
   # api
   gem 'rswag-specs'
+  # plugins with tests deactivated by default
+  gem 'foodsoft_b85', path: 'plugins/b85'
 end

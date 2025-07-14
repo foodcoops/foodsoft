@@ -307,10 +307,37 @@ class Order < ApplicationRecord
   end
 
   def send_to_supplier!(user)
-    Mailer.deliver_now_with_default_locale do
-      Mailer.order_result_supplier(user, self)
+    if supplier.remote_order_method == :email
+      Mailer.deliver_now_with_default_locale do
+        Mailer.order_result_supplier(user, self)
+      end
+    else
+      upload_via_ftp
     end
-    update!(last_sent_mail: Time.now)
+    update_attribute(:remote_ordered_at, Time.now)
+  end
+
+  def upload_via_ftp
+    raise I18.t('orders.model.error_invalid') unless valid?
+
+    formatter_class = supplier.remote_order_formatter
+    raise "No formatter registered for remote order method: #{supplier.read_attribute_before_type_cast(:remote_order_method)}" unless formatter_class
+
+    local_temp_file = Tempfile.new
+    begin
+      formatter = formatter_class.new(self)
+      local_temp_file.write(formatter.to_remote_format)
+      local_temp_file.rewind
+      remote_filename = formatter.remote_file_name
+      uri = URI(supplier.remote_order_url)
+      Net::FTP.open(uri.host) do |ftp|
+        ftp.login(uri.user, uri.password)
+        ftp.putbinaryfile(local_temp_file.path, remote_filename)
+      end
+    ensure
+      local_temp_file.close
+      local_temp_file.unlink
+    end
   end
 
   def do_end_action!

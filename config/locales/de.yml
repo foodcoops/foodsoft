@@ -221,6 +221,8 @@ de:
         phone: Telefon
         phone2: Telefon 2
         remote_auto_sync: Synchronisation automatisch ausführen (täglich)
+        remote_order_method: Bestellmethode
+        remote_order_url: Bestell-URL
         supplier_remote_source: Synchronisierungsquelle
         shared_sync_method: Syncronisierungsmethode
         url: Webseite
@@ -1579,6 +1581,7 @@ de:
       stock: Lager
       warning_ordered: 'Warnung: Die rot markierten Artikel wurden in der laufenden Bestellung bereits bestellt. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen dieses Artikels gelöscht.'
       warning_ordered_stock: 'Warnung: Die rot markierten Artikel wurden in der laufenden Lagerbestellung bereits bestellt bzw. gekauft. Wenn Du sie hier abwählst, werden alle bestehenden Bestellungen bzw. Käufe dieses Artikels gelöscht und nicht abgerechnet!'
+      error_invalid: "Die Bestellung enthält Fehler."
     new:
       title: Neue Bestellung anlegen
     receive:
@@ -1733,6 +1736,8 @@ de:
           price: "<ul><li>Preisänderung gesperrt.</li><li>Bei Bedarf %{stock_article_copy_link}.</li></ul>"
       supplier:
         min_order_quantity: Die Mindestbestellmenge wird während der Bestellung angezeigt und soll motivieren
+        remote_order_method: Auf welchem Weg die Bestellung automatisch an die Lieferantin gesendet werden kann.
+        remote_order_url: Eine URL wie „ftp://user:password@example.org“.
       task:
         duration: Wie lange dauert die Aufgabe, 1-3 Stunden
         required_users: Wieviel Benutzer/innen werden insgesamt benötigt?
@@ -1897,6 +1902,8 @@ de:
       action_import: importieren
       already_imported: schon importiert
       not_found: Keine Artikel gefunden
+    remote_order_methods:
+      email: E-Mail
   supplier_shares:
     share_link:
       not_shared: Die Artikel der Lieferantin werden aktuell mit niemandem geteilt.

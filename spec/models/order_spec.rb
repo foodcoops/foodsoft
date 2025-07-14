@@ -187,4 +187,53 @@ describe Order do
       expect(go.ordergroup.financial_transactions.last.amount).to eq(-go.total)
     end
   end
+
+  describe 'sending to supplier' do
+    let(:user) { create(:user) }
+    let(:order) { create(:order) }
+    let(:current_time) { Time.current }
+
+    before do
+      allow(Time).to receive(:now).and_return(current_time)
+      ActionMailer::Base.deliveries.clear
+    end
+
+    context 'with default order method' do
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
+
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with email order method' do
+      let(:supplier) { create(:supplier, article_count: 1, remote_order_method: 'email') }
+      let(:order) { create(:order, supplier: supplier) }
+
+      it 'sends email and updates timestamp' do
+        order.send_to_supplier!(user)
+
+        expect(ActionMailer::Base.deliveries.count).to eq 1
+        expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+      end
+    end
+
+    context 'with unregistered remote order method' do
+      let(:supplier) do
+        create(:supplier, article_count: 1, remote_order_url: 'ftp://user:pass@example.com/path',
+                          customer_number: '12345')
+      end
+      let(:order) { create(:order, supplier: supplier) }
+
+      before do
+        supplier.update_column(:remote_order_method, :unknown_method)
+        supplier.reload
+      end
+
+      it 'raises an error when no formatter is registered' do
+        expect { order.upload_via_ftp }.to raise_error(RuntimeError, /No formatter registered for remote order method: unknown_method/)
+      end
+    end
+  end
 end

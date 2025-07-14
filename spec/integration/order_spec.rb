@@ -57,4 +57,55 @@ feature Order, :js do
     order.reload
     oa.reload
   end
+
+  context 'with registered order method' do
+    let(:user) { create(:user, groups: [create(:workgroup, role_orders: true)]) }
+    let(:supplier) { create(:supplier, article_count: 1, remote_order_url: 'ftp://user:pass@example.com/path') }
+    let(:order) { create(:order, supplier: supplier) }
+    let(:custom_method_name) { :custom_order_method }
+    let(:custom_formatter) do
+      Class.new do
+        def initialize(order)
+          @order = order
+        end
+
+        def to_remote_format
+          'ORDER_DATA'
+        end
+
+        def remote_file_name
+          'order.txt'
+        end
+      end
+    end
+    let(:ftp_mock) { instance_double(Net::FTP) }
+    let(:current_time) { Time.current }
+
+    before do
+      allow(Time).to receive(:now).and_return(current_time)
+      allow(Net::FTP).to receive(:open).and_yield(ftp_mock)
+      allow(ftp_mock).to receive(:login)
+      allow(ftp_mock).to receive(:putbinaryfile)
+
+      Supplier.register_remote_order_method(custom_method_name, custom_formatter)
+      supplier.update(remote_order_method: custom_method_name)
+    end
+
+    after do
+      Supplier.instance_variable_get(:@remote_order_formatters).delete(custom_method_name)
+    end
+
+    it 'can use registered order method' do
+      expect(supplier.remote_order_formatter).to eq(custom_formatter)
+    end
+
+    it 'successfully sends order to supplier via FTP' do
+      order.send_to_supplier!(user)
+
+      expect(Net::FTP).to have_received(:open).with('example.com')
+      expect(ftp_mock).to have_received(:login).with('user', 'pass')
+      expect(ftp_mock).to have_received(:putbinaryfile).with(anything, 'order.txt')
+      expect(order.remote_ordered_at.to_i).to eq(current_time.to_i)
+    end
+  end
 end
