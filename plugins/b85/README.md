@@ -24,3 +24,7 @@ Then, you can select "FTP (BNN/B85)" as the remote order method for suppliers.
 
 The B85 format is used by German organic wholesalers for remote ordering via FTP.
 See https://n-bnn.de/leistungen-services/markt-und-produktdaten/schnittstelle for more information.
+
+## Contact
+
+This plugin was originally written by Robert (rw@roko.li). It is part of a project led by uni:code IT Solutions (https://unicode-it.de).

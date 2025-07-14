@@ -7,8 +7,8 @@ require 'foodsoft_b85/version'
 Gem::Specification.new do |s|
   s.name        = 'foodsoft_b85'
   s.version     = FoodsoftB85::VERSION
-  s.authors     = ['Foodsoft Team']
-  s.email       = ['foodsoft@foodcoops.net']
+  s.authors     = ['Robert']
+  s.email       = ['rw@roko.li']
   s.homepage    = 'https://github.com/foodcoops/foodsoft'
   s.summary     = 'B85 order method plugin for foodsoft.'
   s.description = 'Adds B85 order method (Biofakt B85 Mailbox Order Format) to foodsoft.'
