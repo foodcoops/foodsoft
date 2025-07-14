@@ -325,10 +325,10 @@ class Order < ApplicationRecord
 
     local_temp_file = Tempfile.new
     begin
-      local_temp_file.write(formatter_class.new(self).to_remote_format)
+      formatter = formatter_class.new(self)
+      local_temp_file.write(formatter.to_remote_format)
       local_temp_file.rewind
-      # BE + 6-digit customer number + last 3 digits of order ID
-      remote_filename = "BE#{format('%06d', supplier.customer_number.to_i)}.#{format('%03d', id % 1000)}"
+      remote_filename = formatter.remote_file_name
       uri = URI(supplier.remote_order_url)
       Net::FTP.open(uri.host) do |ftp|
         ftp.login(uri.user, uri.password)

@@ -40,6 +40,11 @@ module FoodsoftB85
       @order = order
     end
 
+    def remote_file_name
+      # BE + 6-digit customer number + last 3 digits of order ID
+      "BE#{format('%06d', @order.supplier.customer_number.to_i)}.#{format('%03d', @order.id % 1000)}"
+    end
+
     def to_remote_format
       b85 = header + end_of_dataset
       b85 += data.join(end_of_dataset)
