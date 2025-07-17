@@ -33,6 +33,49 @@ de:
       payment_method: Credit
       tax_number_not_set: Tax number not set in configs or no ordergroup present
 
+  documents:
+    group_order_invoice_pdf:
+      ordergroup:
+        contact_phone: 'Phone: %{contact_phone}'
+        contact_address: 'Adress :  %{contact_address}'
+        customer_number: 'Customer number: %{customer_number}'
+        name: 'Ordergroup: %{ordergroup}'
+      filename: Invoice%{number}
+      invoicee: Invoicee
+      invoicer: Invoicer
+      invoice_date: 'Invoice date: %{invoice_date}'
+      invoice_number: 'Invoice number: %{invoice_number}'
+      markup_included: incl Foodcoop Marge on gross price %{marge}%
+      payment_method: 'Payment_method: %{payment_method}'
+      small_business_regulation: As a small entrepreneur in the sense of §19 para. 1 of the Umsatzsteuergesetz (UStG), no value added tax is charged.
+      sum_to_pay: Total sum
+      sum_to_pay_net: Total sum (net)
+      sum_to_pay_gross: Total sum (gross)
+      table_headline: 'The following items will be charged for the order:'
+      tax_excluded: excl. MwSt.
+      tax_included: incl. VAT %{tax}%
+      tax_number: 'Tax number: %{number}'
+      title: Invoice for order at %{supplier}
+      vat_exempt_rows:
+        - Name
+        - Quantity
+        - Unit price
+        - Total price
+      no_price_markup_rows:
+        - Name
+        - Quantity
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross)
+      price_markup_rows:
+        - Name
+        - Quantity
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross) incl. foodcoop margin
+
   helpers:
     invoices:
       sepa_frst: "First direct debit"

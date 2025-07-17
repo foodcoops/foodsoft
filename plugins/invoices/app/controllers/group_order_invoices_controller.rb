@@ -1,5 +1,5 @@
 class GroupOrderInvoicesController < OrderInvoicesControllerBase
-  # include Concerns::SendGroupOrderInvoicePdf
+  include SendGroupOrderInvoicePdf
 
   def show
     @group_order_invoice = GroupOrderInvoice.find(params[:id])
