@@ -35,6 +35,50 @@ de:
         payment_method: Guthaben
         tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt oder keine Bestellgruppe vorhanden
 
+  documents:
+    group_order_invoice_pdf:
+      filename: Rechnung%{number}
+      invoicer: Rechnungsteller*in
+      invoicee: Rechnungsempfänger*in
+      invoice_date: 'Rechnungsdatum: %{invoice_date}'
+      invoice_number: 'Rechnungsnummer: %{invoice_number}'
+      markup_included: zzgl. Foodcoop Marge auf brutto Preis %{marge}%
+      ordergroup:
+        contact_phone: 'Telefonnummer: %{contact_phone}'
+        contact_address: 'Adresse :  %{contact_address}'
+        customer_number: 'Kundennummer: %{customer_number}'
+        name: Bestellgruppe %{ordergroup}
+      payment_method: 'Zahlungsart: %{payment_method}'
+      pickup_date: 'Lieferdatum: %{invoice_date}'
+      sum_to_pay: Zu zahlen gesamt
+      sum_to_pay_net: Zu zahlen gesamt (netto)
+      sum_to_pay_gross: Gesamt
+      small_business_regulation: Als Kleinunternehmer*in im Sinne von §19 Abs. 1 Umsatzsteuergesetz (UStG) wird keine Umsatzsteuer berechnet.
+      table_headline: 'Für die Bestellung fallen folgende Posten an:'
+      tax_excluded: exkl. MwSt.
+      tax_included: zzgl. Gesamtsumme MwSt. %{tax}%
+      tax_number: 'Steuernummer: %{number}'
+      title: Rechnung für die Bestellung bei %{supplier}
+      vat_exempt_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis
+        - Artikel Gesamtpreis
+      no_price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto)
+      price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
+
   helpers:
     invoices:
       sepa_frst: Erst-Lastschrift
