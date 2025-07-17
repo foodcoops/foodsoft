@@ -80,6 +80,7 @@ gem 'foodsoft_wiki', path: 'plugins/wiki'
 # gem 'foodsoft_printer', path: 'plugins/printer'
 # gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 # gem 'foodsoft_mollie', path: 'plugins/mollie'
+# gem 'foodsoft_invoices', path: 'plugins/invoices'
 
 group :development do
   gem 'listen'
