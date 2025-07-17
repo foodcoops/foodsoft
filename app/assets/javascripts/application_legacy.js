@@ -27,7 +27,6 @@
 //= require touchclick
 //= require delta_input
 //= require recurring_select
-//= require foodsoft_invoices
 
 $.fn.select2.defaults.set('theme', 'bootstrap');
 
