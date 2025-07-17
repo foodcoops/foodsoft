@@ -1,0 +1,3 @@
+/ insert_before 'thead tr th:last-child'
+- if FoodsoftInvoices.enabled?
+  %th= heading_helper GroupOrderInvoice, :name
