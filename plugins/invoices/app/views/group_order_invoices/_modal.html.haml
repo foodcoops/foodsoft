@@ -1,0 +1,2 @@
+.div{id: "order_#{order.id}_modal", class: 'order-modal', data: { order_id: order.id, supplier: order.supplier&.name } }
+  = render :partial => 'group_order_invoices/links', locals: { order: order }

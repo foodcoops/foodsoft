@@ -12,7 +12,8 @@
         %th
     %tbody
       - @orders.each do |order|
-        %tr{:class => cycle("even","odd", :name => "order")}
+        - row_class = cycle("even","odd", :name => "order")
+        %tr{:class => row_class, 'data-order_id' => order.id}
           %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
           %td=h format_time(order.ends) unless order.ends.nil?
           %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : t('.ended')

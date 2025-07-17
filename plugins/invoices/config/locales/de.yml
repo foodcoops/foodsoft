@@ -1,4 +1,40 @@
 de:
+  activerecord:
+    attributes:
+      group_order_invoice:
+        name: Bestellgruppenrechnung
+        sequence_type:
+          FRST: "Erst-Lastschrift"
+          RCUR: "Folge-Lastschrift"
+          OOFF: "Einmalige Lastschrift"
+          FNAL: "Letztmalige Lastschrift"
+        links:
+          actions_for_all: Aktion für alle ausführen
+          delete: Rechnung löschen
+          create_cumulative_invoice: Kumulative Rechnung erstellen
+          confirm_send_all: Möchtest Du wirklich diese Bestellgruppenrechnungen an %{ordergroups} versenden?
+          combine: Rechnungen zusammenfassen
+          download: Rechnung herunterladen
+          download_all_zip: Alle Rechnungen herunterladen (zip)
+          generate: Rechnung erzeugen
+          generate_with_date: setzen & erzeugen
+          invoice_date: Datum der Bestellgruppenrechnung
+          invoice_number: Rechnungsnummer
+          ordergroup: Bestellgruppe
+          paid: Bezahlt
+          not_paid: Nicht Bezahlt
+          send_all_by_email: Alle Rechnungen versenden
+          send_all_success: Rechnungen erfolgreich versendet
+          sepa_downloaded: SEPA exportiert
+          sepa_not_downloaded: SEPA nicht exportiert
+          sepa_not_ready:
+            SEPA Export nicht verfügbar. Wichtige Einstellungen für SEPA Export in Administration -> Einstellungen-> Finanzen fehlen
+          sepa_select: Für SEPA Export markieren
+          sepa_sequence_type: SEPA Typ
+        open_details_modal: Details ein/ausklappen
+        payment_method: Guthaben
+        tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt oder keine Bestellgruppe vorhanden
+
   helpers:
     invoices:
       sepa_frst: Erst-Lastschrift
