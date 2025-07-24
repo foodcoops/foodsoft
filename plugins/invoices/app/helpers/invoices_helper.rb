@@ -1,11 +1,4 @@
 module InvoicesHelper
-  SEPA_SEQUENCE_TYPES = {
-    FRST: I18n.t('helpers.invoices.sepa_frst'),
-    RCUR: I18n.t('helpers.invoices.sepa_rcur'),
-    OOFF: I18n.t('helpers.invoices.sepa_ooff'),
-    FNAL: I18n.t('helpers.invoices.sepa_fnal')
-  }.freeze
-
   def generate_invoice_number(instance, count)
     trailing_number = count.to_s.rjust(4, '0')
     if GroupOrderInvoice.find_by(invoice_number: instance.invoice_date.strftime("%Y%m%d") + trailing_number)
