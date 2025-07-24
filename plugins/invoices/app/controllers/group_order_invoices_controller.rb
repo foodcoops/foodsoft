@@ -1,4 +1,5 @@
 class GroupOrderInvoicesController < OrderInvoicesControllerBase
+  include InvoicesHelper
   include SendGroupOrderInvoicePdf
 
   def show
