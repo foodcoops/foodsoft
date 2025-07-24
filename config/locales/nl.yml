@@ -1895,3 +1895,4 @@ nl:
   time:
     formats:
       foodsoft_datetime: "%d-%m-%Y %H:%M"
+      file: "%Y-%d-%B"
