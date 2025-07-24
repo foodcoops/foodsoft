@@ -12,7 +12,7 @@
   %thead
     %tr
       %th=I18n.t('activerecord.attributes.group_order_invoice.links.ordergroup')
-      -# %th=I18n.t('activerecord.attributes.group_order_invoice.links.paid')
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.paid')
       -# %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_downloaded')
       -# %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_sequence_type')
       -# %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_select')
@@ -24,9 +24,9 @@
         - if go.group_order_invoice
           %tr.order-row{id: "group_order_#{go.id}"}
             %td= link_to go.ordergroup&.name, edit_admin_ordergroup_path(go.ordergroup)
-            -# %td
-            -#   .div{id: "paid_#{go.group_order_invoice.id}"}
-            -#     = render :partial => "group_order_invoices/toggle_paid", locals: { group_order_invoice: go.group_order_invoice }
+            %td
+              .div{id: "paid_#{go.group_order_invoice.id}"}
+                = render :partial => "group_order_invoices/toggle_paid", locals: { group_order_invoice: go.group_order_invoice }
             -# %td
             -#   .div{id: "sepa_downloaded_#{go.group_order_invoice.id}"}
             -#     = render :partial => "group_order_invoices/toggle_sepa_downloaded", locals: { group_order_invoice: go.group_order_invoice }
@@ -45,7 +45,7 @@
             %td
               = go.ordergroup&.name
               = button_to I18n.t('activerecord.attributes.group_order_invoice.links.generate'), group_order_invoices_path(:method => :post, group_order: go) ,class: 'btn btn-small', params: {id: order.id}, remote: true
-            -# %td
+            %td
             -# %td
             -# %td
             -# %td
