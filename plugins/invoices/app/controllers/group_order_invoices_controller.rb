@@ -5,6 +5,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
   def show
     @group_order_invoice = GroupOrderInvoice.find(params[:id])
     raise RecordInvalid unless FoodsoftConfig[:contact][:tax_number]
+
     respond_to do |format|
       format.html do
         send_group_order_invoice_pdf @group_order_invoice if FoodsoftConfig[:contact][:tax_number]
@@ -14,7 +15,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
       end
     end
   rescue ActiveRecord::RecordInvalid => e
-    redirect_back fallback_location: root_path, notice: 'Something went wrong', alert: I18n.t('errors.general_msg', msg: "#{e} " + I18n.t('errors.check_tax_number'))
+    redirect_back fallback_location: root_path, notice: I18n.t('errors.general'), alert: I18n.t('errors.general_msg', msg: "#{e} " + I18n.t('errors.check_tax_number'))
   end
 
   def create
@@ -26,7 +27,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
         format.js
       end
     rescue StandardError => e
-      redirect_back fallback_location: root_path, notice: 'Something went wrong', :alert => I18n.t('errors.general_msg', :msg => e)
+      redirect_back fallback_location: root_path, notice: I18n.t('errors.general'), alert: I18n.t('errors.general_msg', msg: e)
     end
   end
 
@@ -44,7 +45,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
     invoice_date = params[:group_order_invoice][:invoice_date]
     order_id = params[:group_order_invoice][:order_id]
     @order = Order.find(order_id)
-    gos = GroupOrder.where("order_id = ?", order_id)
+    gos = GroupOrder.where(order_id: order_id)
     gos.each do |go|
       goi = GroupOrderInvoice.find_or_create_by!(group_order_id: go.id)
       goi.invoice_date = invoice_date
@@ -77,7 +78,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
     Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
       invoices.each do |invoice|
         pdf = create_invoice_pdf(invoice)
-        file_path = File.join("tmp", pdf.filename)
+        file_path = File.join('tmp', pdf.filename)
         File.open(file_path, 'w:ASCII-8BIT') do |file|
           file.write(pdf.to_pdf)
         end
@@ -102,7 +103,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
     GroupOrderInvoice
   end
 
-  def set_related_group_order(invoice)
+  def related_group_order(invoice)
     invoice.group_order
   end
 end

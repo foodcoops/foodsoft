@@ -1,11 +1,11 @@
 class GroupOrderInvoicePdf < RenderPdf
   def filename
-    ordergroup_name = @options[:ordergroup].name || "OrderGroup"
-    "#{ordergroup_name}_" + I18n.t('documents.group_order_invoice_pdf.filename', :number => @options[:invoice_number]) + '.pdf'
+    ordergroup_name = @options[:ordergroup].name || 'OrderGroup'
+    "#{ordergroup_name}_" + I18n.t('documents.group_order_invoice_pdf.filename', number: @options[:invoice_number]) + '.pdf'
   end
 
   def title
-    I18n.t('documents.group_order_invoice_pdf.title', :supplier => @options[:supplier])
+    I18n.t('documents.group_order_invoice_pdf.title', supplier: @options[:supplier])
   end
 
   def body
@@ -14,11 +14,11 @@ class GroupOrderInvoicePdf < RenderPdf
     # Header with invoicer and invoicee
     bounding_box [0, bounds.height], width: bounds.width do
       # Invoicer
-      bounding_box [0, bounds.height], width: bounds.width / 2 - 10 do
+      bounding_box [0, bounds.height], width: (bounds.width / 2) - 10 do
         text I18n.t('documents.group_order_invoice_pdf.invoicer'), style: :bold
         text contact[:name]
         text contact[:street]
-        text contact[:zip_code] + " " + contact[:city]
+        text contact[:zip_code] + ' ' + contact[:city]
         text contact[:country]
         text contact[:email]
         text contact[:phone]
@@ -27,17 +27,13 @@ class GroupOrderInvoicePdf < RenderPdf
       end
 
       # Invoicee
-      bounding_box [bounds.width / 2, bounds.height], width: bounds.width / 2 - 10 do
+      bounding_box [bounds.width / 2, bounds.height], width: (bounds.width / 2) - 10 do
         text I18n.t('documents.group_order_invoice_pdf.invoicee'), style: :bold
         text I18n.t('documents.group_order_invoice_pdf.ordergroup.name', ordergroup: @options[:ordergroup].name)
 
-        if @options[:ordergroup].contact_address.present?
-          text I18n.t('documents.group_order_invoice_pdf.ordergroup.contact_address', contact_address: @options[:ordergroup].contact_address)
-        end
+        text I18n.t('documents.group_order_invoice_pdf.ordergroup.contact_address', contact_address: @options[:ordergroup].contact_address) if @options[:ordergroup].contact_address.present?
 
-        if @options[:ordergroup].contact_phone.present?
-          text I18n.t('documents.group_order_invoice_pdf.ordergroup.contact_phone', contact_phone: @options[:ordergroup].contact_phone)
-        end
+        text I18n.t('documents.group_order_invoice_pdf.ordergroup.contact_phone', contact_phone: @options[:ordergroup].contact_phone) if @options[:ordergroup].contact_phone.present?
 
         text I18n.t('documents.group_order_invoice_pdf.ordergroup.customer_number', customer_number: @options[:ordergroup].id)
       end
@@ -60,20 +56,16 @@ class GroupOrderInvoicePdf < RenderPdf
     # Table with order articles
     if FoodsoftConfig[:group_order_invoices][:vat_exempt]
       create_vat_exempt_table
+    elsif FoodsoftConfig[:price_markup] > 0
+      create_price_markup_table
     else
-      if FoodsoftConfig[:price_markup] > 0
-        create_price_markup_table
-      else
-        create_no_price_markup_table
-      end
+      create_no_price_markup_table
     end
 
     move_down 15
 
     # Small business regulation text if applicable
-    if FoodsoftConfig[:group_order_invoices][:vat_exempt]
-      text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
-    end
+    text I18n.t('documents.group_order_invoice_pdf.small_business_regulation') if FoodsoftConfig[:group_order_invoices][:vat_exempt]
 
     move_down 10
   end
@@ -101,7 +93,7 @@ class GroupOrderInvoicePdf < RenderPdf
       ]
     end
 
-    data << ["", "", I18n.t('documents.group_order_invoice_pdf.sum_to_pay'), number_to_currency(sum)]
+    data << ['', '', I18n.t('documents.group_order_invoice_pdf.sum_to_pay'), number_to_currency(sum)]
 
     table(data, width: bounds.width) do
       cells.borders = []
@@ -151,8 +143,8 @@ class GroupOrderInvoicePdf < RenderPdf
       ]
     end
 
-    data << ["", "", "", I18n.t('documents.group_order_invoice_pdf.sum_to_pay_net'), "", number_to_currency(sum_net)]
-    data << ["", "", "", I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), "", number_to_currency(sum_gross)]
+    data << ['', '', '', I18n.t('documents.group_order_invoice_pdf.sum_to_pay_net'), '', number_to_currency(sum_net)]
+    data << ['', '', '', I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), '', number_to_currency(sum_gross)]
 
     table(data, width: bounds.width) do
       cells.borders = []
@@ -202,8 +194,8 @@ class GroupOrderInvoicePdf < RenderPdf
       ]
     end
 
-    data << ["", "", "", I18n.t('documents.group_order_invoice_pdf.sum_to_pay_net'), "", number_to_currency(sum_net)]
-    data << ["", "", "", I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), "", number_to_currency(sum_gross)]
+    data << ['', '', '', I18n.t('documents.group_order_invoice_pdf.sum_to_pay_net'), '', number_to_currency(sum_net)]
+    data << ['', '', '', I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), '', number_to_currency(sum_gross)]
 
     table(data, width: bounds.width) do
       cells.borders = []

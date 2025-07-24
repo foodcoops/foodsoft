@@ -21,7 +21,7 @@ class OrderInvoicesControllerBase < ApplicationController
     raise NotImplementedError
   end
 
-  def set_related_group_order(invoice)
+  def related_group_order(invoice)
     raise NotImplementedError
   end
 end
