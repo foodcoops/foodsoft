@@ -1,0 +1,79 @@
+nl:
+  activerecord:
+    attributes:
+      group_order_invoice:
+        name: Huishoudensfactuur
+        sequence_type:
+          FRST: "Eerste automatische incasso"
+          RCUR: "Terugkerende automatische incasso"
+          OOFF: "Eenmalige automatische incasso"
+          FNAL: "Laatste automatische incasso"
+        links:
+          actions_for_all: Acties voor alle bestellingen
+          delete: Factuur verwijderen
+          create_cumulative_invoice: Cumulatieve factuur maken
+          confirm_send_all: Weet je zeker dat je deze huishoudensfacturen wilt versturen naar %{ordergroups}?
+          combine: Facturen combineren
+          download: Factuur downloaden
+          download_all_zip: Alle facturen downloaden (zip)
+          generate: Factuur genereren
+          generate_with_date: Instellen & genereren
+          invoice_date: Datum van huishoudensfactuur
+          invoice_number: Factuurnummer
+          ordergroup: Huishouden
+          paid: Betaald
+          not_paid: Niet betaald
+          send_all_by_email: Alle facturen versturen
+          send_all_success: Facturen zijn naar alle huishoudens verstuurd
+          sepa_downloaded: SEPA geëxporteerd
+          sepa_not_downloaded: SEPA niet geëxporteerd
+          sepa_not_ready: Configuraties voor SEPA ontbreken in Beheer->Instellingen->Financiën
+          sepa_select: Markeren voor SEPA-export
+          sepa_sequence_type: SEPA-type
+        open_details_modal: Details tonen/verbergen
+        payment_method: Tegoed
+        tax_number_not_set: BTW-nummer niet ingesteld in configuratie of geen huishouden aanwezig
+
+  documents:
+    group_order_invoice_pdf:
+      filename: Factuur%{number}
+      invoicer: Factureerder
+      invoicee: Geadresseerde
+      invoice_date: 'Factuurdatum: %{invoice_date}'
+      invoice_number: 'Factuurnummer: %{invoice_number}'
+      markup_included: incl. Foodcoop marge op brutoprijs %{marge}%
+      ordergroup:
+        contact_phone: 'Telefoonnummer: %{contact_phone}'
+        contact_address: 'Adres: %{contact_address}'
+        customer_number: 'Klantnummer: %{customer_number}'
+        name: Huishouden %{ordergroup}
+      payment_method: 'Betaalmethode: %{payment_method}'
+      pickup_date: 'Leverdatum: %{invoice_date}'
+      sum_to_pay: Totaal te betalen
+      sum_to_pay_net: Totaal te betalen (netto)
+      sum_to_pay_gross: Totaal
+      small_business_regulation: Als kleine ondernemer in de zin van §19 lid 1 van de Umsatzsteuergesetz (UStG) wordt geen BTW in rekening gebracht.
+      table_headline: 'Voor de bestelling worden de volgende items in rekening gebracht:'
+      tax_excluded: excl. BTW
+      tax_included: incl. BTW %{tax}%
+      tax_number: 'BTW-nummer: %{number}'
+      title: Factuur voor bestelling bij %{supplier}
+      vat_exempt_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs
+        - Totaalprijs artikel
+      no_price_markup_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs (netto)
+        - Totaalprijs artikel (netto)
+        - BTW
+        - Totaalprijs artikel (bruto)
+      price_markup_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs (netto)
+        - Totaalprijs artikel (netto)
+        - BTW
+        - Totaalprijs artikel (bruto) incl. Foodcoop marge %{marge}%
