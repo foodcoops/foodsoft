@@ -2015,3 +2015,4 @@ en:
   time:
     formats:
       foodsoft_datetime: "%Y-%m-%d %H:%M"
+      file: "%Y-%d-%B"

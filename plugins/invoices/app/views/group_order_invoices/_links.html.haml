@@ -37,12 +37,10 @@
             %td
             %td
             %td
-    -# - if order.group_orders.map(&:group_order_invoice).compact.present?
-    -#   %tr.order-row
-    -#     %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
-    -#     %td
-    -#       .div{id: "toggle_all_paid_#{order.id}"}
-    -#         = render :partial => 'group_order_invoices/toggle_all_paid', locals: { order: order }
-    -#     %td
-    -#     %td
-    -#       = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_group_order_invoices_path(order_id: order.id), class: 'btn btn-block'
+    - if order.group_orders.map(&:group_order_invoice).compact.present?
+      %tr.order-row
+        %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
+        %td= render :partial => 'group_order_invoices/toggle_all_paid', locals: { order: order }
+        %td
+        %td
+          = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_group_order_invoices_path(order_id: order.id), class: 'btn btn-block'
