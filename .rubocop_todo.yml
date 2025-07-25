@@ -74,6 +74,7 @@ Gemspec/RequiredRubyVersion:
     - 'plugins/documents/foodsoft_documents.gemspec'
     - 'plugins/links/foodsoft_links.gemspec'
     - 'plugins/messages/foodsoft_messages.gemspec'
+    - 'plugins/mollie/foodsoft_mollie.gemspec'
     - 'plugins/polls/foodsoft_polls.gemspec'
     - 'plugins/printer/foodsoft_printer.gemspec'
     - 'plugins/uservoice/foodsoft_uservoice.gemspec'
