@@ -35,7 +35,7 @@
                 - ratios = stock_article.article_unit_ratios
                 = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
               %tfoot
-                %td{:colspan => 9, :style => 'padding-left: 22Px; padding-bottom: 16Px; padding-top: 16Px'}
+                %td{:colspan => 9, :style => 'padding-left: 22px; padding-bottom: 16px; padding-top: 16px'}
                   = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: "add ratio"
         = f.input :note
         - if stock_article.new_record?

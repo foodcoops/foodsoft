@@ -24,7 +24,7 @@
         - ratios = article.article_unit_ratios
         = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
       %tfoot
-        %td{:colspan => 9, :style => 'padding-left: 22Px; padding-bottom: 16Px; padding-top: 16Px'}
+        %td{:colspan => 9, :style => 'padding-left: 22px; padding-bottom: 16px; padding-top: 16px'}
           = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: "add ratio"
 %div
   = f.input :minimum_order_quantity do
