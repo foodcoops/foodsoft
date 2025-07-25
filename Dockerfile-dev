@@ -1,4 +1,4 @@
-FROM ruby:3.3.7
+FROM ruby:3.4.5
 
 # Install dependencies
 RUN deps='libmagic-dev chromium nodejs' && \
