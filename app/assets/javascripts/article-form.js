@@ -428,7 +428,7 @@ class ArticleForm {
 
     unitSelect$.trigger('change');
 
-    unitSelect$.parents('.form-group').find('.immutable_unit_label').remove();
+    unitSelect$.parents('.price-unit-wrapper').find('.immutable_unit_label').remove();
     if (units.length === 1) {
       unitSelect$.hide();
       unitSelect$.after($(`<div class="immutable_unit_label control-label pull-left">${units[0].label}</div>`))
