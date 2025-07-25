@@ -212,6 +212,9 @@ class Payments::MollieController < ApplicationController
   #
   # @return [float] The fee due
   #
+
+  # Disable as the implicit "return last assignment" mantra breaks the actual function logic
+  # rubocop:disable Style/RedundantReturn
   def payment_fee(method, amount)
     return unless FoodsoftMollie.charge_fees?
 
@@ -223,12 +226,16 @@ class Payments::MollieController < ApplicationController
     # Make sure we explicitly return the fee_with_tax as the logger returns the number of characters - duh
     return fee_with_tax
   end
+  # rubocop:enable Style/RedundantReturn
 
   #
   # Collect ENABLED payment methods for a Mollie account
   #
   # @return [hash] available_payment_methods for the account
   #
+
+  # Disable as the implicit "return last assignment" mantra breaks the actual function logic
+  # rubocop:disable Style/RedundantReturn
   def retrieve_payment_methods
     @payment_methods_all = fetch_mollie_methods
     # Check for every method whether the account has it enabled
@@ -242,9 +249,10 @@ class Payments::MollieController < ApplicationController
       end
       logger.debug "MOLLIE Available #{@available_payment_methods.size}"
     end
-    # Make sure this is the object we return
+    # Make sure this is the object we return (and not rely on the Python implicit return)
     return @available_payment_methods
   end
+  # rubocop:enable Style/RedundantReturn
 
   #
   # Retrieve all payment methods on Mollie
