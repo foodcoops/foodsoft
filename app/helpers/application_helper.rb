@@ -27,26 +27,6 @@ module ApplicationHelper
     content_tag :span, number_to_currency(amount), class: class_name
   end
 
-  # rubocop: disable Style/ConditionalAssignment
-  def format_state(state)
-    return nil if state.nil?
-
-    if state['paid']
-      class_name = 'state_paid'
-    elsif state['open']
-      class_name = 'state_open'
-    elsif state['canceled']
-      class_name = 'state_canceled'
-    elsif state['authorized']
-      class_name = 'state_authorized'
-    else
-      class_name = 'state_fail'
-    end
-
-    content_tag :span, I18n.t(state), class: class_name
-  end
-  # rubocop: enable Style/ConditionalAssignment
-
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
     iban && iban.scan(/..?.?.?/).map { |item| content_tag(:span, item, style: 'margin-right: 0.5em;') }.join.html_safe
