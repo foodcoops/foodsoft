@@ -9,7 +9,7 @@
       = f.input :title, input_html: {class: 'form-control'}
       = f.input :body, input_html: {class: 'form-control', rows: 20}
       = f.input :parent_id, as: :select, collection: parent_pages_to_select(@page)
-     %div
+      %div
         = button_tag :name => 'preview', class: 'btn btn-default' do
           = t '.preview'
         = button_tag class: 'btn btn-default ml-1' do
