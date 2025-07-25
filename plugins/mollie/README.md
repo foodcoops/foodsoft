@@ -43,11 +43,12 @@ multicoop deployments.
 
 ## Testing
 
-For testing it is helpful to allow Mollie to execute the callback, assuming you have an endpoint which can be reached (e.g. external address)
+For testing it is helpful to allow Mollie to execute the callback, assuming you have an endpoint which can be reached, e.g. external address. See also [SSL](#ssl) as that is required by the Mollie callback.
+
 For this to work: add a file `callback_url.txt` in the `tmp` folder with a single line:
 
 ```txt
-http://your_external_address.here
+https://<your_external.address>
 ```
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -56,4 +57,20 @@ http://your_external_address.here
 
 ## SSL
 
-bundle exec rails server --binding=0.0.0.0 -b 'ssl://0.0.0.0:3001?key=config/local-certs/privkey.pem&cert=config/local-certs/fullchain.pem'
+For properly testing Mollie with callbacks, `SSL/TLS` is required. 
+See for instance [Let's Encrypt](https://letsencrypt.org/docs/client-options/) to generate and configure SSL.
+
+We assume the default Webserver (Puma) here.
+
+> See your specific webserver, like Apache or Nginx, for details. 
+ 
+Start `RAILS` with SSL. 
+
+```bash
+bundle exec rails server --binding=0.0.0.0 -b 'ssl://0.0.0.0:3001?key=<some local place>/local-certs/privkey.pem&cert=some local place>/local-certs/fullchain.pem'
+```
+
+> !! Be aware that you should NEVER commit your certificates to the repository!!  
+
+Check the status to see if the webserver did start with SSL.
+Connect using `https://<your_external.address>/`
