@@ -6,21 +6,6 @@ body {
   padding-top: 10px;
 }
 
-// Set the correct sprite paths
-// TODO: Is this still needed?
-$iconSpritePath: image-url('twitter/bootstrap/glyphicons-halflings.png');
-$iconWhiteSpritePath: image-url('twitter/bootstrap/glyphicons-halflings-white.png');
-
-// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// TODO: Is this still needed?
-$fontAwesomeEotPath: asset-url('fontawesome-webfont.eot');
-$fontAwesomeEotPath_iefix: asset-url('fontawesome-webfont.eot?#iefix');
-$fontAwesomeWoffPath: asset-url('fontawesome-webfont.woff');
-$fontAwesomeTtfPath: asset-url('fontawesome-webfont.ttf');
-$fontAwesomeSvgPath: asset-url('fontawesome-webfont.svg#fontawesomeregular');
-
-// Glyphicons
-//@import "twitter/bootstrap/sprites.scss";
 
 // Your custom LESS stylesheets goes here
 //
@@ -722,18 +707,4 @@ td.mr-1 > *:last-child {
 
 .form-group .select2-container {
   width: 200px;
-}
-
-.modal-dialog {
-  margin: 30px auto;
-}
-
-  .modal-body {
-    max-height: calc(100vh - 200px); /* Adjust based on header/footer height */
-    overflow-y: auto;
-  }
-
-.modal-open .modal {
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
