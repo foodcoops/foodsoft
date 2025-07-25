@@ -5,7 +5,7 @@
 
   = render 'tabs', url: nil
 
-  .tab-content.row{style: 'padding-top: 20px; padding-left: 20px'}
+  .tab-content.row.pt-5.pl-5
     - for tab in @tabs
       .tab-pane{class: ('active' if @current_tab==tab), id: "tab-#{tab}"}= render "tab_#{tab}", form: f
 
