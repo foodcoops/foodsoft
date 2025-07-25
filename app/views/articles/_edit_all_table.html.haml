@@ -49,7 +49,7 @@
                     = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
                   %tfoot
                     %tr
-                      %td{:colspan => 9, :style => 'padding-left: 15Px; padding-bottom: 16Px; padding-top: 16Px'}
+                      %td{:colspan => 9, :style => 'padding-left: 15px; padding-bottom: 16px; padding-top: 16px'}
                         = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: t(".add_ratio")
               = form.input :minimum_order_quantity, label: "Mininum order quantity" do
                 = form.input_field :minimum_order_quantity, class: 'form form-control', title: "total minimum order quantity for this article"

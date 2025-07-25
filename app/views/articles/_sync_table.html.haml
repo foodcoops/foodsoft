@@ -88,7 +88,7 @@
                 = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
           %td{:style => highlight_new(attrs, :tax)}
             .input-group
-              = form.text_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0Px'
+              = form.text_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0px'
               %span.input-group-addon %
           %td{:style => highlight_new(attrs, :deposit)}
             .input-group
