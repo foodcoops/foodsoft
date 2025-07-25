@@ -17,10 +17,21 @@ module FoodsoftMollie
   end
 
   def self.default_amount
-    FoodsoftConfig[:mollie][:default_amount] || 10
+    FoodsoftConfig[:mollie][:default_amount] || 10.00
   end
 
   def self.api_key
     FoodsoftConfig[:mollie][:api_key]
+  end
+
+  def self.tax_for_mollie
+    FoodsoftConfig[:mollie][:tax]
+  end
+
+  # Only for testing
+  def self.callback_url
+    return unless Rails.root.join('tmp/callback_url.txt').exist?
+
+    Rails.root.join('tmp/callback_url.txt').read
   end
 end
