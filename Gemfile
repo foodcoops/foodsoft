@@ -84,7 +84,7 @@ gem 'foodsoft_wiki', path: 'plugins/wiki'
 group :development do
   gem 'listen'
   gem 'mailcatcher'
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.7'
   gem 'web-console'
 
   # Better error output
