@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/ModuleLength
 #
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
@@ -269,5 +268,3 @@ module ApplicationHelper
     stylesheet_link_tag foodcoop_css_path, media: 'all'
   end
 end
-
-# rubocop: enable Metrics/ModuleLength
