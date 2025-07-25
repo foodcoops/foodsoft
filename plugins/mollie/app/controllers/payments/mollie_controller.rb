@@ -6,6 +6,8 @@
 # TODO: add support for Credit Cards
 
 class Payments::MollieController < ApplicationController
+  include MollieHelper
+
   before_action -> { require_plugin_enabled FoodsoftMollie }
   skip_before_action :authenticate, only: [:check]
   skip_before_action :verify_authenticity_token, only: [:check]
