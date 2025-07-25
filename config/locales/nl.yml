@@ -35,7 +35,7 @@ nl:
         unit_quantity: Colligrootte
       bank_account:
         balance: Tegoed
-        bank_gateway: Bank gateway
+        bank_gateway: Bank
         description: Omschrijving
         iban: IBAN
         name: Naam
@@ -69,7 +69,11 @@ nl:
         financial_transaction_type: Financiële-transactietype
         note: Notitie
         ordergroup: Huishouden
-        user: Ingevoerd door
+        user: Gebruiker
+        payment_state: Status
+        payment_amount: Totaal bedrag
+        payment_fee: Kosten
+
       financial_transaction_class:
         ignore_for_account_balance: Negeren voor rekeningsaldo
         name: Naam
@@ -150,7 +154,7 @@ nl:
       order_comment:
         text: Commentaar voor deze bestelling toevoegen…
       ordergroup:
-        account_balance: Tegoed
+        account_balance: Tegoed totaal
         available_funds: Beschikbaar tegoed
         break: "(Laatste) pauze"
         break_until: tot
@@ -930,7 +934,7 @@ nl:
         destroy:
           notice: De transactie is verwijderd.
       index:
-        balance: 'Tegoed: %{balance}'
+        balance: 'Tegoedd: %{balance}'
         last_updated_at: "(laatst bijgewerkt %{when} geleden)"
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
@@ -1138,7 +1142,7 @@ nl:
     index:
       due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: Laatst gewijzigd %{when} geleden
+        last_update: Laatst bijgewerkt %{when} geleden
         title: Mijn huishouden
         transactions:
           title: Laatste transacties

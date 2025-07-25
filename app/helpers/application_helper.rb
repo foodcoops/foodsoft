@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ModuleLength
 #
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
@@ -22,9 +23,29 @@ module ApplicationHelper
   def format_currency(amount)
     return nil if amount.nil?
 
-    class_name = amount < 0 ? 'negative_amout' : 'positive_amount'
+    class_name = amount < 0 ? 'negative_amount' : 'positive_amount'
     content_tag :span, number_to_currency(amount), class: class_name
   end
+
+  # rubocop: disable Style/ConditionalAssignment
+  def format_state(state)
+    return nil if state.nil?
+
+    if state['paid']
+      class_name = 'state_paid'
+    elsif state['open']
+      class_name = 'state_open'
+    elsif state['canceled']
+      class_name = 'state_canceled'
+    elsif state['authorized']
+      class_name = 'state_authorized'
+    else
+      class_name = 'state_fail'
+    end
+
+    content_tag :span, I18n.t(state), class: class_name
+  end
+  # rubocop: enable Style/ConditionalAssignment
 
   # Splits an IBAN into groups of 4 digits displayed with margins in between
   def format_iban(iban)
@@ -268,3 +289,5 @@ module ApplicationHelper
     stylesheet_link_tag foodcoop_css_path, media: 'all'
   end
 end
+
+# rubocop: enable Metrics/ModuleLength

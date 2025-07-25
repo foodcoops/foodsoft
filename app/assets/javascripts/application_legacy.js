@@ -122,6 +122,10 @@ $(function() {
     // Handle ajax errors
     //     render json: {error: "can't except this!"}, status: :unprocessable_entity
     $(document).ajaxError(function(ev, xhr, settings, exception) {
+        if (xhr.statusText === 'abort') {
+          return;
+        }
+        console.log(exception.message)
         try {
             msg = xhr.responseJSON.error;
         } catch(err) {
