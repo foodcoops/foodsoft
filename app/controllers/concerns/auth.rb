@@ -54,6 +54,7 @@ module Concerns::Auth
     if current_user
       # We have an authenticated user, now check role...
       # Roles gets the user through his memberships.
+
       hasRole = case role
                 when 'admin'               then current_user.role_admin?
                 when 'finance'             then current_user.role_finance?

@@ -70,6 +70,7 @@ en:
         note: Note
         ordergroup: Ordergroup
         user: Entered by
+        payment_state: Payment state
       financial_transaction_class:
         ignore_for_account_balance: Ignore for account balance
         name: Name

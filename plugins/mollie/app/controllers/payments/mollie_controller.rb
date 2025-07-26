@@ -78,6 +78,8 @@ class Payments::MollieController < ApplicationController
   def payment_methods
     @payment_methods = fetch_mollie_methods
     @payment_methods_fees = @payment_methods.to_h do |method|
+      next [method.id, []] if method.pricing.blank?
+
       [method.id, method.pricing.map do |pricing|
         {
           description: pricing.description,
