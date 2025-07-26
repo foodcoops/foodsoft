@@ -46,6 +46,7 @@ en:
         charge_fees: Charge ordergroups the transaction fees applied by mollie. This is currently only available for EUR.
         currency: Choose the currency mollie should use (ISO code)
         default_amount: The default amount to credit the ordergroup with.
+        tax: Tax percentage to be applied to the Mollie transaction fee
     keys:
       use_mollie: Use Mollie
       mollie:
@@ -54,3 +55,4 @@ en:
         charge_fees: Charge transaction fees
         currency: Currency
         default_amount: Default amount
+        tax: Tax % applied to fee
