@@ -136,4 +136,5 @@ group :test do
   gem 'rswag-specs'
   # plugins with tests deactivated by default
   gem 'foodsoft_b85', path: 'plugins/b85'
+  gem 'foodsoft_invoices', path: 'plugins/invoices'
 end
