@@ -36,6 +36,15 @@ PATH
       ruby-filemagic
 
 PATH
+  remote: plugins/invoices
+  specs:
+    foodsoft_invoices (0.0.1)
+      deface (~> 1.0)
+      prawn
+      prawn-table
+      rails
+
+PATH
   remote: plugins/links
   specs:
     foodsoft_links (0.0.1)
@@ -659,6 +668,7 @@ DEPENDENCIES
   foodsoft_b85!
   foodsoft_discourse!
   foodsoft_documents!
+  foodsoft_invoices!
   foodsoft_links!
   foodsoft_messages!
   foodsoft_polls!
