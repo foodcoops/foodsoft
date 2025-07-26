@@ -934,7 +934,7 @@ nl:
         destroy:
           notice: De transactie is verwijderd.
       index:
-        balance: 'Tegoedd: %{balance}'
+        balance: 'Tegoed: %{balance}'
         last_updated_at: "(laatst bijgewerkt %{when} geleden)"
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
