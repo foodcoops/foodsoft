@@ -1,0 +1,324 @@
+
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "language",
+  "patternProperties": {
+    "(en|de|nl|es|fr|tr)": {
+      "type": "object",
+      "properties": {
+        "activerecord": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "home": {
+                  "type": "object",
+                  "properties": {
+                    "credit_your_account": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "credit_your_account"
+                  ]
+                }
+              },
+              "required": [
+                "home"
+              ]
+            }
+          },
+          "required": [
+            "attributes"
+          ]
+        },
+        "home": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "object",
+              "properties": {
+                "credit_your_account": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "credit_your_account"
+              ]
+            },
+            "ordergroup": {
+              "type": "object",
+              "properties": {
+                "credit_your_account": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "credit_your_account"
+              ]
+            }
+          },
+          "required": [
+            "index",
+            "ordergroup"
+          ]
+        },
+        "payments": {
+          "type": "object",
+          "properties": {
+            "mollie": {
+              "type": "object",
+              "properties": {
+                "new": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "no_ordergroup": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "no_ordergroup"
+                  ]
+                },
+                "create": {
+                  "type": "object",
+                  "properties": {
+                    "invalid_amount": {
+                      "type": "string"
+                    },
+                    "invalid_method": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "invalid_amount",
+                    "invalid_method"
+                  ]
+                },
+                "form": {
+                  "type": "object",
+                  "properties": {
+                    "payment_fee": {
+                      "type": "string"
+                    },
+                    "payment_method": {
+                      "type": "string"
+                    },
+                    "amount_pay": {
+                      "type": "string"
+                    },
+                    "submit": {
+                      "type": "string"
+                    },
+                    "financial_transaction_type": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "payment_fee",
+                    "payment_method",
+                    "amount_pay",
+                    "submit",
+                    "financial_transaction_type"
+                  ]
+                },
+                "controller": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "notice": {
+                          "type": "string"
+                        },
+                        "canceled": {
+                          "type": "string"
+                        },
+                        "failed": {
+                          "type": "string"
+                        },
+                        "wait": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "notice",
+                        "canceled",
+                        "failed",
+                        "wait"
+                      ]
+                    },
+                    "transaction_note": {
+                      "type": "string"
+                    },
+                    "decription": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "result",
+                    "transaction_note",
+                    "decription"
+                  ]
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "paid": {
+                      "type": "string"
+                    },
+                    "canceled": {
+                      "type": "string"
+                    },
+                    "open": {
+                      "type": "string"
+                    },
+                    "failed": {
+                      "type": "string"
+                    },
+                    "authorized": {
+                      "type": "string"
+                    },
+                    "expired": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "paid",
+                    "canceled",
+                    "open",
+                    "failed",
+                    "authorized",
+                    "expired"
+                  ]
+                }
+              },
+              "required": [
+                "new",
+                "create",
+                "form",
+                "controller",
+                "result"
+              ]
+            }
+          },
+          "required": [
+            "mollie"
+          ]
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "hints": {
+              "type": "object",
+              "properties": {
+                "use_mollie": {
+                  "type": "string"
+                },
+                "mollie": {
+                  "type": "object",
+                  "properties": {
+                    "api_key": {
+                      "type": "string"
+                    },
+                    "financial_transaction_type": {
+                      "type": "string"
+                    },
+                    "charge_fees": {
+                      "type": "string"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "default_amount": {
+                      "type": "string"
+                    },
+                    "tax": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "api_key",
+                    "financial_transaction_type",
+                    "charge_fees",
+                    "currency",
+                    "default_amount",
+                    "tax"
+                  ]
+                }
+              },
+              "required": [
+                "use_mollie",
+                "mollie"
+              ]
+            },
+            "keys": {
+              "type": "object",
+              "properties": {
+                "use_mollie": {
+                  "type": "string"
+                },
+                "mollie": {
+                  "type": "object",
+                  "properties": {
+                    "api_key": {
+                      "type": "string"
+                    },
+                    "financial_transaction_type": {
+                      "type": "string"
+                    },
+                    "charge_fees": {
+                      "type": "string"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "default_amount": {
+                      "type": "string"
+                    },
+                    "tax": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "api_key",
+                    "financial_transaction_type",
+                    "charge_fees",
+                    "currency",
+                    "default_amount",
+                    "tax"
+                  ]
+                }
+              },
+              "required": [
+                "use_mollie",
+                "mollie"
+              ]
+            }
+          },
+          "required": [
+            "hints",
+            "keys"
+          ]
+        }
+      },
+      "required": [
+        "activerecord",
+        "home",
+        "payments",
+        "config"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "maxProperties": 1,
+  "minProperties": 1
+}
+

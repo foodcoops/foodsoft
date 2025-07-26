@@ -1,13 +1,15 @@
+# yaml-language-server: $schema=language_schema.json
+
 en:
   activerecord:
     attributes:
       home:
         credit_your_account: Credit your Account
-    home:
-      index:
-          credit_your_account: Credit your Account
-      ordergroup:
-          credit_your_account: Credit your Account
+  home:
+    index:
+        credit_your_account: Credit your Account
+    ordergroup:
+        credit_your_account: Credit your Account
   payments:
     mollie:
       new:
@@ -15,18 +17,28 @@ en:
         no_ordergroup: You need to be member of an ordergroup
       create:
         invalid_amount: Invalid amount
+        invalid_method: No valid payment methods found
       form:
+        payment_fee: Transaction fee
+        payment_method: Payment method
         amount_pay: Amount to pay
-        method: Pay using
         submit: Pay online
         financial_transaction_type: Financial Transaction Type
-        fee: Select the appropriate transaction costs
       controller:
         result:
           notice: Your account was credited %{amount}.
+          canceled: Payment aborted.
           failed: Payment failed.
           wait: Your account will be credited when the payment is received.
         transaction_note: '%{method} payment'
+        decription: '%{coop}: add credit to household %{ordergroup}'
+      result:
+        paid: paid
+        canceled: aborted by user
+        open: waiting for payment
+        failed: failed
+        authorized: authorized
+        expired: expired
   config:
     hints:
       use_mollie: Let members credit their own Foodsoft ordergroup account with online payments using Mollie.
@@ -36,6 +48,7 @@ en:
         charge_fees: Charge ordergroups the transaction fees applied by mollie. This is currently only available for EUR.
         currency: Choose the currency mollie should use (ISO code)
         default_amount: The default amount to credit the ordergroup with.
+        tax: Tax percentage to be applied to the Mollie transaction fee
     keys:
       use_mollie: Use Mollie
       mollie:
@@ -44,3 +57,4 @@ en:
         charge_fees: Charge transaction fees
         currency: Currency
         default_amount: Default amount
+        tax: Tax % applied to fee
