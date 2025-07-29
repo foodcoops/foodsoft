@@ -51,6 +51,11 @@ jobs:
         env:
           DATABASE_URL: mysql2://user:password@127.0.0.1/test
           RAILS_ENV: test
+      - name: Apply plugin migrations
+        run: bundle exec rake foodsoft_invoices_engine:install:migrations db:migrate
+        env:
+          DATABASE_URL: mysql2://user:password@127.0.0.1/test
+          RAILS_ENV: test
       - name: Run tests
         run: bundle exec rake rspec-rerun:spec
         env:
