@@ -1,11 +1,11 @@
 class GroupOrderInvoicePdf < RenderPdf
   def filename
-    ordergroup_name = @options[:ordergroup].name || "OrderGroup"
-    "#{ordergroup_name}_" + I18n.t('documents.group_order_invoice_pdf.filename', :number => @options[:invoice_number]) + '.pdf'
+    ordergroup_name = @options[:ordergroup].name || 'OrderGroup'
+    "#{ordergroup_name}_" + I18n.t('documents.group_order_invoice_pdf.filename', number: @options[:invoice_number]) + '.pdf'
   end
 
   def title
-    I18n.t('documents.group_order_invoice_pdf.title', :supplier => @options[:supplier])
+    I18n.t('documents.group_order_invoice_pdf.title', supplier: @options[:supplier])
   end
 
   def body
@@ -28,7 +28,7 @@ class GroupOrderInvoicePdf < RenderPdf
       end
       text "#{Supplier.human_attribute_name :email}: #{contact[:email]}", size: fontsize(9), align: :left if contact[:email].present?
       move_down 5
-      text I18n.t('documents.group_order_invoice_pdf.tax_number', :number => @options[:tax_number]), size: fontsize(9), align: :left
+      text I18n.t('documents.group_order_invoice_pdf.tax_number', number: @options[:tax_number]), size: fontsize(9), align: :left
     end
 
     # Receiving Ordergroup
@@ -45,7 +45,7 @@ class GroupOrderInvoicePdf < RenderPdf
         text I18n.t('documents.group_order_invoice_pdf.ordergroup.contact_phone', contact_phone: ordergroup.contact_phone.to_s), size: fontsize(9)
         move_down 5
       end
-      if ordergroup.customer_number.present?
+      if ordergroup.respond_to?(:customer_number) && ordergroup.customer_number.present?
         text I18n.t('documents.group_order_invoice_pdf.ordergroup.customer_number', customer_number: ordergroup.customer_number.to_s), size: fontsize(9)
         move_down 5
       end
@@ -77,37 +77,73 @@ class GroupOrderInvoicePdf < RenderPdf
   end
 
   def body_for_vat_exempt
-    total_gross = 0
     data = [I18n.t('documents.group_order_invoice_pdf.vat_exempt_rows')]
     move_down 10
-    # no sinle group_order_id, capice? get all the articles.
 
-    group_order_articles = GroupOrderArticle.where(group_order_id: @options[:group_order_ids])
+    # Get all the articles
+    group_order_articles = fetch_group_order_articles
     separate_deposits = FoodsoftConfig[:group_order_invoices]&.[](:separate_deposits)
-    supplier = ""
+
+    # Build data table
+    data, total_gross = build_vat_exempt_data_table(data, group_order_articles, separate_deposits)
+
+    # Render data table
+    render_data_table(data)
+
+    # Render sum table
+    move_down 5
+    render_vat_exempt_sum_table(total_gross)
+
+    # Render footer text
+    move_down 25
+    text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
+    move_down 10
+  end
+
+  # Fetches all group order articles for the invoice
+  def fetch_group_order_articles
+    GroupOrderArticle.where(group_order_id: @options[:group_order_ids])
+  end
+
+  # Builds the data table for VAT exempt invoices
+  def build_vat_exempt_data_table(data, group_order_articles, separate_deposits)
+    total_gross = 0
+    supplier = ''
+
     group_order_articles.each do |goa|
-      # if no unit is received, nothing is to be charged
+      # Skip if no units received
       next if goa.result.to_i == 0
+
+      # Add supplier header if it changed
       if goa.group_order.order.supplier.name != supplier
         supplier = goa.group_order.order.supplier.name
-        data << [supplier,"","",""]
+        data << [supplier, '', '', '']
       end
+
+      # Add article row
       goa_total_price = separate_deposits ? goa.total_price_without_deposit : goa.total_price
       data << [goa.order_article.article.name,
                goa.result.to_i,
                number_to_currency(goa.order_article.price.fc_price_without_deposit),
                number_to_currency(goa_total_price)]
       total_gross += goa_total_price
+
+      # Add deposit row if needed
       next unless separate_deposits && goa.order_article.price.deposit > 0.0
 
       goa_total_deposit = goa.result * goa.order_article.price.fc_deposit_price
-      data << ["zzgl. Pfand",
+      data << ['zzgl. Pfand',
                goa.result.to_i,
                number_to_currency(goa.order_article.article.fc_deposit_price),
                number_to_currency(goa_total_deposit)]
       total_gross += goa_total_deposit
     end
 
+    [data, total_gross]
+  end
+
+  # Renders the data table with proper formatting
+  def render_data_table(data)
     table data, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
       table.header = true
       table.position = :center
@@ -119,11 +155,13 @@ class GroupOrderInvoicePdf < RenderPdf
       table.columns(1).align = :right
       table.columns(1..6).align = :right
     end
+  end
 
-    move_down 5
+  # Renders the sum table for VAT exempt invoices
+  def render_vat_exempt_sum_table(total_gross)
     sum = []
     sum << [nil, nil, I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), number_to_currency(total_gross)]
-    # table for sum
+
     table sum, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
       table.header = true
       table.position = :center
@@ -143,95 +181,158 @@ class GroupOrderInvoicePdf < RenderPdf
       table.columns(1).align = :right
       table.columns(1..6).align = :right
     end
-
-    move_down 25
-    text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
-    move_down 10
   end
 
   def body_with_vat
     separate_deposits = FoodsoftConfig[:group_order_invoices]&.[](:separate_deposits)
-    total_gross = 0
-    total_net = 0
-    # Articles
-
-    tax_hash_net = Hash.new(0) # for summing up article net prices grouped into vat percentage
-    tax_hash_gross = Hash.new(0) # same here with gross prices
-    tax_hash_fc = Hash.new(0) # same here with fc prices
-
-    if separate_deposits
-      total_deposit = 0
-      total_deposit_gross = 0
-
-      tax_hash_deposit_gross = Hash.new(0) # for summing up deposit gross prices grouped into vat percentage
-      tax_hash_deposit_net = Hash.new(0) # same here with gross prices
-      tax_hash_deposit_fc = Hash.new(0) # same here with fc prices
-    end
-
     marge = FoodsoftConfig[:price_markup]
 
-    # data table looks different when price_markup > 0
-    data = if marge == 0
-             [I18n.t('documents.group_order_invoice_pdf.no_price_markup_rows')]
-           else
-             [I18n.t('documents.group_order_invoice_pdf.price_markup_rows', marge: marge)]
-           end
-    
-    group_order_articles = GroupOrderArticle.where(group_order_id: @options[:group_order_ids]).includes(group_order: { order: :supplier })
+    # Initialize tax hashes and totals
+    tax_hashes = initialize_tax_hashes(separate_deposits)
 
+    # Build data table
+    data = build_vat_data_header(marge)
+    data, totals = build_vat_data_table(data, tax_hashes, separate_deposits)
+
+    # Render data table
+    render_vat_data_table(data)
+
+    # Build and render sum table
+    move_down 10
+    sum = build_vat_sum_table(tax_hashes, totals, marge)
+    render_vat_sum_table(sum, marge)
+
+    # Render footer text if needed
+    if FoodsoftConfig[:group_order_invoices][:vat_exempt]
+      move_down 15
+      text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
+    end
+    move_down 10
+  end
+
+  # Initialize tax hashes and totals for VAT calculations
+  def initialize_tax_hashes(separate_deposits)
+    result = {
+      net: Hash.new(0),      # for summing up article net prices grouped into vat percentage
+      gross: Hash.new(0),    # same here with gross prices
+      fc: Hash.new(0),       # same here with fc prices
+      totals: {
+        gross: 0,
+        net: 0
+      }
+    }
+
+    if separate_deposits
+      result[:deposit] = {
+        gross: Hash.new(0),  # for summing up deposit gross prices grouped into vat percentage
+        net: Hash.new(0),    # same here with gross prices
+        fc: Hash.new(0),     # same here with fc prices
+        totals: {
+          deposit: 0,
+          deposit_gross: 0
+        }
+      }
+    end
+
+    result
+  end
+
+  # Build the header row for the VAT data table
+  def build_vat_data_header(marge)
+    if marge == 0
+      [I18n.t('documents.group_order_invoice_pdf.no_price_markup_rows')]
+    else
+      [I18n.t('documents.group_order_invoice_pdf.price_markup_rows', marge: marge)]
+    end
+  end
+
+  # Build the data table for VAT included invoices
+  def build_vat_data_table(data, tax_hashes, separate_deposits)
+    group_order_articles = fetch_group_order_articles.includes(group_order: { order: :supplier })
+
+    # Group articles by supplier
     group_order_articles.group_by { |goa| goa.group_order.order.supplier.name }.each do |supplier_name, articles|
-      if articles.map(&:result).sum > 0
-        data << [supplier_name, "", "", "", "", ""]
-      end
+      data << [supplier_name, '', '', '', '', ''] if articles.map(&:result).sum > 0
 
+      # Process each article
       articles.each do |goa|
         next if goa.result.to_i == 0
 
-        order_article = goa.order_article
-        tax = order_article.price.tax
-        goa_total_net = goa.result * order_article.price.price
+        # Add article row
+        data = add_article_row_with_vat(data, goa, tax_hashes, separate_deposits)
 
-        goa_total_fc = separate_deposits ? goa.total_price_without_deposit : goa.total_price
-        goa_total_gross = separate_deposits ? goa.result * order_article.price.gross_price_without_deposit : goa.result * order_article.price.gross_price
-
-        data << [order_article.article_version.name,
-                 goa.result.to_i,
-                 number_to_currency(order_article.price.price),
-                 number_to_currency(goa_total_net),
-                 tax.to_s + '%',
-                 number_to_currency(goa_total_fc)]
-
-        if separate_deposits && order_article.price.deposit > 0.0
-          goa_net_deposit = goa.result * order_article.price.net_deposit_price
-          goa_deposit = goa.result * order_article.price.deposit
-          goa_total_deposit = goa.result * order_article.price.fc_deposit_price
-
-          data << ["zzgl. Pfand",
-                   goa.result.to_i,
-                   number_to_currency(order_article.price.net_deposit_price),
-                   number_to_currency(goa_net_deposit),
-                   tax.to_s + '%',
-                   number_to_currency(goa_total_deposit)]
-
-          total_deposit += goa_deposit
-          total_deposit_gross += goa_total_deposit
-
-          tax_hash_deposit_net[tax.to_i] += goa_net_deposit
-          tax_hash_deposit_gross[tax.to_i] += goa_deposit
-          tax_hash_deposit_fc[tax.to_i] += goa_total_deposit
-        end
-
-        tax_hash_net[tax.to_i] += goa_total_net
-        tax_hash_gross[tax.to_i] += goa_total_gross
-        tax_hash_fc[tax.to_i] += goa_total_fc
-
-        total_net += goa_total_net
-        total_gross += goa_total_fc
+        # Add deposit row if needed
+        data = add_deposit_row_with_vat(data, goa, tax_hashes) if separate_deposits && goa.order_article.price.deposit > 0.0
       end
     end
 
-    # Two separate tables for sum and individual data
-    # article information + data
+    # Extract totals from tax_hashes
+    totals = {
+      gross: tax_hashes[:totals][:gross],
+      deposit_gross: tax_hashes[:deposit] ? tax_hashes[:deposit][:totals][:deposit_gross] : 0
+    }
+
+    [data, totals]
+  end
+
+  # Add an article row to the data table with VAT
+  def add_article_row_with_vat(data, goa, tax_hashes, separate_deposits)
+    order_article = goa.order_article
+    tax = order_article.price.tax
+    goa_total_net = goa.result * order_article.price.price
+
+    goa_total_fc = separate_deposits ? goa.total_price_without_deposit : goa.total_price
+    goa_total_gross = separate_deposits ? goa.result * order_article.price.gross_price_without_deposit : goa.result * order_article.price.gross_price
+
+    data << [order_article.article_version.name,
+             goa.result.to_i,
+             number_to_currency(order_article.price.price),
+             number_to_currency(goa_total_net),
+             tax.to_s + '%',
+             number_to_currency(goa_total_fc)]
+
+    # Update tax hashes
+    tax_hashes[:net][tax.to_i] += goa_total_net
+    tax_hashes[:gross][tax.to_i] += goa_total_gross
+    tax_hashes[:fc][tax.to_i] += goa_total_fc
+
+    # Update totals
+    tax_hashes[:totals][:net] += goa_total_net
+    tax_hashes[:totals][:gross] += goa_total_fc
+
+    data
+  end
+
+  # Add a deposit row to the data table with VAT
+  def add_deposit_row_with_vat(data, goa, tax_hashes)
+    order_article = goa.order_article
+    tax = order_article.price.tax
+
+    goa_net_deposit = goa.result * order_article.price.net_deposit_price
+    goa_deposit = goa.result * order_article.price.deposit
+    goa_total_deposit = goa.result * order_article.price.fc_deposit_price
+
+    data << ['zzgl. Pfand',
+             goa.result.to_i,
+             number_to_currency(order_article.price.net_deposit_price),
+             number_to_currency(goa_net_deposit),
+             tax.to_s + '%',
+             number_to_currency(goa_total_deposit)]
+
+    # Update deposit tax hashes
+    tax_hashes[:deposit][:net][tax.to_i] += goa_net_deposit
+    tax_hashes[:deposit][:gross][tax.to_i] += goa_deposit
+    tax_hashes[:deposit][:fc][tax.to_i] += goa_total_deposit
+
+    # Update deposit totals
+    tax_hashes[:deposit][:totals][:deposit] += goa_deposit
+    tax_hashes[:deposit][:totals][:deposit_gross] += goa_total_deposit
+
+    data
+  end
+
+  # Render the data table for VAT included invoices
+  def render_vat_data_table(data)
     table data, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
       table.header = true
       table.position = :center
@@ -247,44 +348,45 @@ class GroupOrderInvoicePdf < RenderPdf
       table.columns(1).align = :right
       table.columns(1..6).align = :right
     end
+  end
 
-    if marge > 0
-      sum = [[nil, nil, "Netto", "MwSt", "FC-Marge", "Brutto"]]
-    else
-      sum = [[nil, nil, nil, "Netto", "MwSt", "Brutto"]]
+  # Build the sum table for VAT included invoices
+  def build_vat_sum_table(tax_hashes, totals, marge)
+    sum = if marge > 0
+            [[nil, nil, 'Netto', 'MwSt', 'FC-Marge', 'Brutto']]
+          else
+            [[nil, nil, nil, 'Netto', 'MwSt', 'Brutto']]
+          end
+
+    # Add rows for each tax rate
+    tax_hashes[:gross].each_key do |key|
+      # Add product row
+      sum = add_tax_sum_row(sum, key, tax_hashes, 'Produkte', marge)
+
+      # Add deposit row if needed
+      sum = add_tax_sum_row(sum, key, tax_hashes[:deposit], 'Pfand', marge) if tax_hashes[:deposit] && tax_hashes[:deposit][:gross][key] > 0
     end
 
-    tax_hash_gross.keys.each do |key|
-      tmp_sum = [nil, "Produkte mit #{key}%", number_to_currency(tax_hash_net[key])]
-      if marge <= 0
-        tmp_sum.unshift(nil)
-      end
-      tmp_sum << number_to_currency(tax_hash_gross[key] - tax_hash_net[key])
-      if marge > 0
-        tmp_sum << number_to_currency(tax_hash_fc[key] - tax_hash_gross[key])
-      end
-      tmp_sum << number_to_currency(tax_hash_fc[key])
-      sum << tmp_sum
+    # Add total row
+    total_amount = totals[:gross] + totals[:deposit_gross]
+    sum << [nil, nil, nil, nil, I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), number_to_currency(total_amount)]
 
+    sum
+  end
 
-      if separate_deposits
-        tmp_sum = [nil, "Pfand mit #{key}%", number_to_currency(tax_hash_deposit_net[key])]
-        if marge <= 0
-          tmp_sum.unshift(nil)
-        end
-        tmp_sum << number_to_currency(tax_hash_deposit_gross[key] - tax_hash_deposit_net[key])
-        if marge > 0
-          tmp_sum << number_to_currency(tax_hash_deposit_fc[key] - tax_hash_deposit_gross[key])
-        end
-        tmp_sum << number_to_currency(tax_hash_deposit_fc[key])
-        sum << tmp_sum
-      end
-    end
+  # Add a tax sum row to the sum table
+  def add_tax_sum_row(sum, tax_key, tax_hash, label, marge)
+    tmp_sum = [nil, "#{label} mit #{tax_key}%", number_to_currency(tax_hash[:net][tax_key])]
+    tmp_sum.unshift(nil) if marge <= 0
+    tmp_sum << number_to_currency(tax_hash[:gross][tax_key] - tax_hash[:net][tax_key])
+    tmp_sum << number_to_currency(tax_hash[:fc][tax_key] - tax_hash[:gross][tax_key]) if marge > 0
+    tmp_sum << number_to_currency(tax_hash[:fc][tax_key])
+    sum << tmp_sum
+    sum
+  end
 
-    total_deposit_gross ||= 0
-    sum << [nil, nil, nil, nil, I18n.t('documents.group_order_invoice_pdf.sum_to_pay_gross'), number_to_currency(total_gross + total_deposit_gross)]
-
-    move_down 10
+  # Render the sum table for VAT included invoices
+  def render_vat_sum_table(sum, marge)
     table sum, cell_style: { size: fontsize(8), overflow: :shrink_to_fit } do |table|
       table.header = true
       table.position = :center
@@ -308,11 +410,5 @@ class GroupOrderInvoicePdf < RenderPdf
       table.columns(1).align = :right
       table.columns(1..6).align = :right
     end
-
-    if FoodsoftConfig[:group_order_invoices][:vat_exempt]
-      move_down 15
-      text I18n.t('documents.group_order_invoice_pdf.small_business_regulation')
-    end
-    move_down 10
   end
 end
