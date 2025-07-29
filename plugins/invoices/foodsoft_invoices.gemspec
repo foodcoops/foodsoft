@@ -7,8 +7,8 @@ require 'foodsoft_invoices/version'
 Gem::Specification.new do |s|
   s.name        = 'foodsoft_invoices'
   s.version     = FoodsoftInvoices::VERSION
-  s.authors     = ['Foodsoft Team']
-  s.email       = ['foodsoft@foodcoops.net']
+  s.authors     = %w[Viehlieb Robert]
+  s.email       = ['rw@roko.li']
   s.homepage    = 'https://github.com/foodcoops/foodsoft'
   s.summary     = 'Invoice plugin for foodsoft.'
   s.description = 'Adds comprehensive invoice functionality to foodsoft.'

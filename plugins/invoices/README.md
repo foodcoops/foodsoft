@@ -30,18 +30,42 @@ The plugin will provide the following features:
    use_invoices: true
    ```
 
-## Configuration
-
-The plugin provides several configuration options that can be set in your foodsoft configuration:
-
-- `use_invoices` - Enable or disable the plugin (default: false)
-
-Additional configuration options will be added as the plugin is developed.
-
 ## Development
 
 This plugin is currently under development. The initial version provides the basic infrastructure for the invoice functionality, with additional features to be added in subsequent releases.
 
-## Maintainers
+## Migrations
 
-This plugin is maintained by the Foodsoft core team.
+To install the required database migrations, run the following rake task:
+
+```
+rake foodsoft_invoices_engine:install:migrations
+```
+
+Then run the migrations with:
+
+```
+rake db:migrate
+```
+
+## Configuration
+
+The plugin provides several configuration options that can be set in your `app_config.yml`:
+
+- `use_invoices` - Enable or disable the plugin (default: false)
+- `contact.tax_number` - The tax number to be displayed on invoices
+- `group_order_invoices.vat_exempt` - Set to `true` if your organization is VAT exempt (default: false)
+
+Example configuration:
+
+```yaml
+use_invoices: true
+contact:
+  tax_number: "123456789"
+group_order_invoices:
+  vat_exempt: true
+```
+
+## Contact
+
+Most of the code was originally written by @viehlieb. The code was ported to this plugin by Robert (rw@roko.li). It is part of the Foodsoft project. Original sources may be available in [Local-IT Gitlab](https://git.local-it.org/Foodsoft/foodsoft/src/branch/automatic_group_order_invoice).
