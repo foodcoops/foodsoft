@@ -1,4 +1,2 @@
-- if group_order_invoice.paid
-  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.paid'), toggle_paid_group_order_invoice_path(group_order_invoice), method: :patch, remote: true, class: 'btn btn-success btn-block'
-- else
-  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.not_paid'), toggle_paid_group_order_invoice_path(group_order_invoice), method: :patch, remote: true, class: 'btn btn-danger btn-block'
+= link_to toggle_paid_group_order_invoice_path(group_order_invoice), remote: true, method: :patch, data: { turbolinks: false }  do
+  = check_box_tag 'paid', '1', group_order_invoice.paid , class: 'form-check-input', id: "paid_#{group_order_invoice.id}"
