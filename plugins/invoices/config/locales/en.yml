@@ -2,7 +2,7 @@ en:
   activerecord:
     attributes:
       group_order_invoice:
-        name: group-order-invoice
+        name: Group Order Invoice
         sequence_type:
           FRST: "First Direct Debit"
           RCUR: "Recurring Direct Debit"

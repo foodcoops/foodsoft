@@ -1,4 +1,2 @@
-- if order.group_orders.map(&:group_order_invoice).compact.any?(&:paid)
-  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.not_paid'), toggle_all_paid_group_order_invoices_path(order_id: order.id, paid: true), method: :patch, remote: true, class: 'btn btn-danger btn-block'
-- else
-  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.paid'), toggle_all_paid_group_order_invoices_path(order_id: order.id, paid: false), method: :patch, remote: true, class: 'btn btn-success btn-block'
+= link_to toggle_all_paid_group_order_invoices_path(order_id: order.id, paid: order.group_orders.map(&:group_order_invoice).compact.map(&:paid)&.all? ), remote: true, method: :patch, data: { confirm: I18n.t('ui.confirm_mark_all', name: order.group_orders.map(&:group_order_invoice).compact.map(&:paid)&.all? ? I18n.t('activerecord.attributes.group_order_invoice.links.not_paid'): I18n.t('activerecord.attributes.group_order_invoice.links.paid') ) } do
+  = check_box_tag :paid, '1', order.group_orders.map(&:group_order_invoice).compact.map(&:paid)&.all? , class: 'form-check-input', id: "paid_all_#{order.id}"
