@@ -22,3 +22,19 @@ $(document).on('ready turbolinks:load', function () {
         return false; // Prevent the default behavior of the link
     });
 });
+
+$(document).on('click', '.merge-orders-btn', function () {
+    const url = $(this).data('url');
+    const selectedOrderIds = $('input[name="order_ids_for_multi_order[]"]:checked').map(function () {
+        return $(this).val();
+    }).get();
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: { order_ids_for_multi_order: selectedOrderIds },
+        success: function (response) {
+            window.location.reload();
+        },
+    });
+});

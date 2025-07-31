@@ -33,6 +33,8 @@ nl:
         open_details_modal: Details tonen/verbergen
         payment_method: Tegoed
         tax_number_not_set: BTW-nummer niet ingesteld in configuratie of geen huishouden aanwezig
+      ordergroup_invoice:
+        merge: Samenvoegen
 
   documents:
     group_order_invoice_pdf:
@@ -77,3 +79,7 @@ nl:
         - Totaalprijs artikel (netto)
         - BTW
         - Totaalprijs artikel (bruto) incl. Foodcoop marge %{marge}%
+
+  multi_orders:
+    destroy:
+      invoices_left: Verwijder eerst de facturen
