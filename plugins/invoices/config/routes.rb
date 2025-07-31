@@ -13,9 +13,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :multi_orders, only: %i[create show] do
+    resources :multi_orders, only: %i[create show destroy] do
       member do
         get :generate_ordergroup_invoices
+        get :collective_direct_debit
       end
     end
   end
