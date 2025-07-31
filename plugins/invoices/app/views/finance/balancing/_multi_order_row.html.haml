@@ -17,9 +17,9 @@
     -# - else
     -#   = t('orders.index.not_closed')
   %td
-    -# = link_to multi_order, method: :delete, data: { confirm: I18n.t('ui.confirm_delete', name: "Multi Bestellung #{multi_order.name}" ) } do
-    -#   Multi Bestellung auflösen
-    -#   %i.icon-remove
+    = link_to multi_order, method: :delete, data: { confirm: I18n.t('ui.confirm_delete', name: "Multi Bestellung #{multi_order.name}" ) } do
+      Multi Bestellung auflösen
+      %i.icon-remove
         
 -# %tr{:class => 'expanded-row hidden', :id => "expanded-multi-row-#{multi_order.id}"}
 -#   %td{:colspan => '7'}
