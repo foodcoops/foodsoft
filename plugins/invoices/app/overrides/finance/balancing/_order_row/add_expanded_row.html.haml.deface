@@ -1,4 +1,4 @@
-/ insert_after 'tbody tr'
+/ insert_after 'tr'
 - if FoodsoftInvoices.enabled?
   - row_id = "expanded-row-#{order.id}"
   %tr{:class => 'expanded-row hidden', :id => row_id}
