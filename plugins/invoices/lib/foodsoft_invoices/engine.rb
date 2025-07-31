@@ -4,7 +4,9 @@ module FoodsoftInvoices
       if FoodsoftInvoices.enabled?
         Foodsoft::AssetRegistry.register_stylesheet('foodsoft_invoices')
         Foodsoft::AssetRegistry.register_javascript('foodsoft_invoices')
+        Finance::BalancingController.include BalancingControllerExtensions
         GroupOrder.include GroupOrderExtensions
+        Order.include OrderExtensions
       end
     end
 

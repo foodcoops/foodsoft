@@ -12,5 +12,11 @@ Rails.application.routes.draw do
         get :download_all
       end
     end
+
+    resources :multi_orders, only: %i[create show] do
+      member do
+        get :generate_ordergroup_invoices
+      end
+    end
   end
 end

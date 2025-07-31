@@ -34,6 +34,8 @@ de:
         open_details_modal: Details ein/ausklappen
         payment_method: Guthaben
         tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt oder keine Bestellgruppe vorhanden
+      ordergroup_invoice:
+        merge: Zusammenführen
 
   documents:
     group_order_invoice_pdf:
@@ -78,3 +80,7 @@ de:
         - Artikel Gesamtpreis (netto)
         - MwSt.
         - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
+
+  multi_orders:
+    destroy:
+      invoices_left: Lösche erst die Rechnungen
