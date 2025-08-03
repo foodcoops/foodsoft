@@ -73,6 +73,7 @@ class ArticlesController < ApplicationController
     if valid
       render layout: false
     else
+      load_article_categories
       load_article_units(@article.current_article_units)
       render action: 'new', layout: false
     end
@@ -274,7 +275,15 @@ class ArticlesController < ApplicationController
   # sync all articles with the external database
   # renders a form with articles, which should be updated
   def sync
-    @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_remote
+    search_params = {}
+
+    if @supplier.shared_sync_method == 'import'
+      order_numbers = Article.with_latest_versions_and_categories.undeleted.where(supplier_id: @supplier, type: nil).where.not(article_versions: { order_number: nil }).map(&:latest_article_version).map(&:order_number)
+      redirect_to(supplier_articles_path(@supplier), notice: I18n.t('articles.controller.parse_upload.notice', count: 0)) if order_numbers.empty?
+      search_params['order_numbers[]'] = order_numbers
+    end
+
+    @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_remote(search_params: search_params)
     redirect_to(supplier_articles_path(@supplier), notice: I18n.t('articles.controller.parse_upload.notice', count: import_data[:articles].length)) if @updated_article_pairs.empty? && @outlisted_articles.empty? && @new_articles.empty?
     @ignored_article_count = 0
     load_article_units((@new_articles + @updated_article_pairs.map(&:first)).map(&:current_article_units).flatten.uniq)
