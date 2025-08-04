@@ -1,5 +1,3 @@
-
-
 -# - show_generate_with_date = true
 -# - multi_order.multi_group_orders.each do |mgo|
 -#   - if mgo.ordergroup_invoice.present?
@@ -26,8 +24,8 @@
           %td
             = link_to mgo.ordergroup&.name, edit_admin_ordergroup_path(mgo.ordergroup)
           %td
-            .div{id: "paid_multi_#{mgo.ordergroup_invoice.id}"}
-              = render :partial => "ordergroup_invoices/toggle_paid", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
+            -# .div{id: "paid_multi_#{mgo.ordergroup_invoice.id}"}
+            -#   = render :partial => "ordergroup_invoices/toggle_paid", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
           %td
             %b= mgo.ordergroup_invoice.invoice_number
             - if mgo.ordergroup_invoice.email_sent_at.present?
@@ -41,7 +39,7 @@
         %tr
           %td
             = mgo.group_orders.first.ordergroup&.name
-            -# = button_to I18n.t('activerecord.attributes.group_order_invoice.links.generate'), ordergroup_invoices_path(:method => :post, multi_group_order_id: mgo) ,class: 'btn btn-small', remote: true
+            = button_to I18n.t('activerecord.attributes.group_order_invoice.links.generate'), ordergroup_invoices_path(:method => :post, multi_group_order_id: mgo) ,class: 'btn btn-small', remote: true
           %td
           %td
           %td
@@ -49,8 +47,8 @@
       %tr.order-row
         %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
         %td
-          .div{id: "toggle_all_paid_multi_#{multi_order.id}"}
-            = render :partial => 'ordergroup_invoices/toggle_all_paid', locals: { multi_order: multi_order }
+          -# .div{id: "toggle_all_paid_multi_#{multi_order.id}"}
+          -#   = render :partial => 'ordergroup_invoices/toggle_all_paid', locals: { multi_order: multi_order }
         %td
         %td
           - if multi_order.multi_group_orders.count == multi_order.multi_group_orders.map(&:ordergroup_invoice).compact&.count

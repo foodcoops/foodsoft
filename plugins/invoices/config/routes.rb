@@ -13,6 +13,21 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :ordergroup_invoices do
+      member do
+        get :download_collective
+        patch :select_sepa_sequence_type
+        patch :toggle_paid
+        patch :toggle_sepa_downloaded
+      end
+      collection do
+        get :download_within_date
+        patch :select_all_sepa_sequence_type
+        patch :toggle_all_sepa_downloaded
+        patch :toggle_all_paid
+      end
+    end
+
     resources :multi_orders, only: %i[create show destroy] do
       member do
         get :generate_ordergroup_invoices
