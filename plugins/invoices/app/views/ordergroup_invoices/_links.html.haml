@@ -1,14 +1,14 @@
--# - show_generate_with_date = true
--# - multi_order.multi_group_orders.each do |mgo|
--#   - if mgo.ordergroup_invoice.present?
--#     - show_generate_with_date = false
--# - if show_generate_with_date
--#   = form_for :ordergroup_invoice, url: finance_ordergroup_invoice_path(foodcoop: FoodsoftConfig[:default_scope], protocol: :https), remote: true do |f|
--#     = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
--#     = f.date_field :invoice_date, {value: Date.today, max: Date.today, required: true}
--#     = f.hidden_field :multi_order_id, value: multi_order.id
--#
--#     = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn'
+- show_generate_with_date = true
+- multi_order.multi_group_orders.each do |mgo|
+  - if mgo.ordergroup_invoice.present?
+    - show_generate_with_date = false
+- if show_generate_with_date
+  = form_for :ordergroup_invoice, url: finance_ordergroup_invoice_path(foodcoop: FoodsoftConfig[:default_scope], protocol: :https), remote: true do |f|
+    = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
+    = f.date_field :invoice_date, {value: Date.today, max: Date.today, required: true}
+    = f.hidden_field :multi_order_id, value: multi_order.id
+
+    = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn'
 
 %table.table.group-order-invoices-table
   %thead
