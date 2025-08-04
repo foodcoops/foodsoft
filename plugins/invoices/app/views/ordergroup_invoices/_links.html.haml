@@ -24,8 +24,8 @@
           %td
             = link_to mgo.ordergroup&.name, edit_admin_ordergroup_path(mgo.ordergroup)
           %td
-            -# .div{id: "paid_multi_#{mgo.ordergroup_invoice.id}"}
-            -#   = render :partial => "ordergroup_invoices/toggle_paid", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
+            .div{id: "paid_multi_#{mgo.ordergroup_invoice.id}"}
+              = render :partial => "ordergroup_invoices/toggle_paid", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
           %td
             %b= mgo.ordergroup_invoice.invoice_number
             - if mgo.ordergroup_invoice.email_sent_at.present?

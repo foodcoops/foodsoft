@@ -1,0 +1,1 @@
+$("#paid_multi_<%= @invoice.id %>").html("<%= escape_javascript(render partial: 'toggle_paid', locals: {ordergroup_invoice: @invoice}) %>");
