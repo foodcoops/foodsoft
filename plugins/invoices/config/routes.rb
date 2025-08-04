@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   scope '/:foodcoop' do
     post 'finance/group_order_invoice', to: 'group_order_invoices#create_multiple'
+    post 'finance/ordergroup_invoice', to: 'ordergroup_invoices#create_multiple'
+    get 'multi_orders/:multi_order_id/ordergroup_invoices/download_all', to: 'ordergroup_invoices#download_all', as: 'download_all_ordergroup_invoices'
 
     resources :group_order_invoices do
       member do
