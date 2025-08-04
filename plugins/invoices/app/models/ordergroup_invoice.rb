@@ -42,10 +42,10 @@ class OrdergroupInvoice < ApplicationRecord
       goa = group_orders.map(&:group_order_articles).flatten.detect { |tmp_goa| tmp_goa.order_article_id == order_article.id }
       # Build hash with relevant data
       invoice_data[:order_articles][order_article.id] = {
-        price: order_article.article.fc_price,
+        price: order_article.article_version.fc_price,
         quantity: (goa ? goa.quantity : 0),
         total_price: (goa ? goa.total_price : 0),
-        tax: order_article.article.tax
+        tax: order_article.article_version.tax
       }
     end
     invoice_data
