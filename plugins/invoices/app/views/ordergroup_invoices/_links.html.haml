@@ -34,7 +34,7 @@
               = mgo.ordergroup_invoice.email_sent_at.strftime("%d.%m.%Y %H:%M")
           %td
             = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), mgo.ordergroup_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: "Bestellgruppenrechnung für #{mgo.ordergroup.name}" ) }
-            -# = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), ordergroup_invoice_path(mgo.ordergroup_invoice, :format => 'pdf'), class: 'btn btn-block'
+            = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), ordergroup_invoice_path(mgo.ordergroup_invoice, :format => 'pdf'), class: 'btn btn-block'
       - else
         %tr
           %td
@@ -47,11 +47,9 @@
       %tr.order-row
         %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
         %td
-          -# .div{id: "toggle_all_paid_multi_#{multi_order.id}"}
-          -#   = render :partial => 'ordergroup_invoices/toggle_all_paid', locals: { multi_order: multi_order }
+          .div{id: "toggle_all_paid_multi_#{multi_order.id}"}
+            = render :partial => 'ordergroup_invoices/toggle_all_paid', locals: { multi_order: multi_order }
         %td
         %td
           - if multi_order.multi_group_orders.count == multi_order.multi_group_orders.map(&:ordergroup_invoice).compact&.count
             = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_ordergroup_invoices_path(multi_order), class: 'btn btn-block'
-            -# sends all ordergroup invoices to the ordergoups mail address via notifyjob
-            = link_to I18n.t('activerecord.attributes.group_order_invoice.links.send_all_by_email'), send_all_ordergroup_invoices_path(multi_order), class: 'btn btn-block', method: :post, data: { confirm: I18n.t('activerecord.attributes.group_order_invoice.links.confirm_send_all', ordergroups: "#{multi_order.multi_group_orders.map(&:ordergroup).map(&:name).join(', ')}" ) }
