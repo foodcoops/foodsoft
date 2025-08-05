@@ -53,3 +53,5 @@
         %td
           - if multi_order.multi_group_orders.count == multi_order.multi_group_orders.map(&:ordergroup_invoice).compact&.count
             = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_ordergroup_invoices_path(multi_order), class: 'btn btn-block'
+            -# sends all ordergroup invoices to the ordergoups mail address via notifyjob
+            = link_to I18n.t('activerecord.attributes.group_order_invoice.links.send_all_by_email'), send_all_ordergroup_invoices_path(multi_order), class: 'btn btn-block', method: :post, data: { confirm: I18n.t('activerecord.attributes.group_order_invoice.links.confirm_send_all', ordergroups: "#{multi_order.multi_group_orders.map(&:ordergroup).map(&:name).join(', ')}" ) }

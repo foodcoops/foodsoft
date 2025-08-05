@@ -18,7 +18,7 @@ class OrdergroupInvoice < ApplicationRecord
   end
 
   def send_invoice
-    NotifyOrdergroupInvoiceJob.perform_now(self)
+    NotifyOrdergroupInvoiceJob.perform_later(self)
   end
 
   def load_data_for_invoice
