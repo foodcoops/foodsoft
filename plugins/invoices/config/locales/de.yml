@@ -36,6 +36,8 @@ de:
         tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt oder keine Bestellgruppe vorhanden
       ordergroup_invoice:
         merge: Zusammenführen
+        name: Bestellgruppenrechnung
+        email_sent: versendet am
 
   documents:
     group_order_invoice_pdf:
@@ -80,6 +82,30 @@ de:
         - Artikel Gesamtpreis (netto)
         - MwSt.
         - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
+
+  mailer:
+    group_order_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+    ordergroup_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+
+  invoice_mailer:
+    group_order_invoice:
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
+    ordergroup_invoice:
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
 
   multi_orders:
     destroy:
