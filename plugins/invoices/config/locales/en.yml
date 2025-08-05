@@ -35,6 +35,8 @@ en:
         tax_number_not_set: Tax number not set in configs or no ordergroup present
       ordergroup_invoice:
         merge: Merge
+        name: Ordergroup Invoice
+        email_sent: Email sent at
 
   documents:
     group_order_invoice_pdf:
@@ -78,6 +80,30 @@ en:
         - Total price (net)
         - VAT
         - Total price (gross) incl. foodcoop margin
+
+  mailer:
+    group_order_invoice:
+      subject: Group order invoice for %{group} at %{supplier}
+    ordergroup_invoice:
+      subject: Group order invoice for %{group} at %{supplier}
+
+  invoice_mailer:
+    group_order_invoice:
+      text: |
+        Dear order group %{group},
+        
+        The collective order at %{supplier} has just been settled and invoices have been created for the respective order groups.
+        Attached you will find your invoice.
+        
+        Best regards from %{foodcoop}
+    ordergroup_invoice:
+      text: |
+        Dear order group %{group},
+        
+        The collective order at %{supplier} has just been settled and invoices have been created for the respective order groups.
+        Attached you will find your invoice.
+        
+        Best regards from %{foodcoop}
 
   multi_orders:
     destroy:

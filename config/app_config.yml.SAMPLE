@@ -110,6 +110,7 @@ default: &defaults
   # in balancing view.
   use_invoices: false
   group_order_invoices:
+    use_automatic_invoices: false
     vat_exempt: false
 
   # Most plugins can be enabled/disabled here as well. Messages and wiki are enabled
