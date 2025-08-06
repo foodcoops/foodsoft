@@ -3,7 +3,7 @@ module InvoiceCommon
   extend ActiveSupport::Concern
 
   included do
-    include InvoicesHelper
+    include InvoiceHelper
 
     validates_presence_of :invoice_number
     validates_uniqueness_of :invoice_number

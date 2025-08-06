@@ -1,5 +1,5 @@
 class GroupOrderInvoicesController < OrderInvoicesControllerBase
-  include InvoicesHelper
+  include InvoiceHelper
   include SendGroupOrderInvoicePdf
 
   def show
@@ -61,6 +61,7 @@ class GroupOrderInvoicesController < OrderInvoicesControllerBase
     @order = Order.find(params[:order_id])
     @group_order_invoices = @order.group_orders.map(&:group_order_invoice).compact
     return unless params[:sepa_sequence_type]
+
     @sepa_sequence_type = params[:sepa_sequence_type]
     @group_order_invoices.each do |goi|
       goi.sepa_sequence_type = params[:sepa_sequence_type]

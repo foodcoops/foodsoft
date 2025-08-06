@@ -5,8 +5,8 @@ class OrderInvoicesControllerBase < ApplicationController
     @invoice = invoice_class.find(params[:id])
     return unless params[:sepa_sequence_type]
 
-    @group_order = set_related_group_order(@invoice)
-    @multi_group_order = set_related_group_order(@invoice)
+    @group_order = related_group_order(@invoice)
+    @multi_group_order = related_group_order(@invoice)
 
     @invoice.sepa_sequence_type = params[:sepa_sequence_type]
     save_and_respond(@invoice)

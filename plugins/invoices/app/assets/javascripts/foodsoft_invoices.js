@@ -38,3 +38,37 @@ $(document).on('click', '.merge-orders-btn', function () {
         },
     });
 });
+
+$(document).off('change', '[class^="ajax-update-all-link-"] select').on('change', '[class^="ajax-update-all-link-"] select', function () {
+    var selectedValue = $(this).val();
+    var url = $(this).closest('a').attr('href');
+    $.ajax({
+        url: url,
+        method: 'PATCH',
+        data: { sepa_sequence_type: selectedValue },
+        success: function (response) {
+            // Handle success response
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
+
+$(document).off('change', '.ajax-update-sepa-select').on('change', '.ajax-update-sepa-select', function () {
+    var selectedValue = $(this).val();
+    var url = $(this).data('url');
+    console.log(url);
+    console.log(selectedValue);
+    $.ajax({
+        url: url,
+        method: 'PATCH',
+        data: { sepa_sequence_type: selectedValue },
+        success: function (response) {
+            console.log("succeeded");
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+});
