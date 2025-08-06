@@ -1,9 +1,26 @@
 class OrderInvoicesControllerBase < ApplicationController
   before_action :authenticate_finance
 
+  def select_sepa_sequence_type
+    @invoice = invoice_class.find(params[:id])
+    return unless params[:sepa_sequence_type]
+
+    @group_order = set_related_group_order(@invoice)
+    @multi_group_order = set_related_group_order(@invoice)
+
+    @invoice.sepa_sequence_type = params[:sepa_sequence_type]
+    save_and_respond(@invoice)
+  end
+
   def toggle_paid
     @invoice = invoice_class.find(params[:id])
     @invoice.paid = !@invoice.paid
+    save_and_respond(@invoice)
+  end
+
+  def toggle_sepa_downloaded
+    @invoice = invoice_class.find(params[:id])
+    @invoice.sepa_downloaded = !@invoice.sepa_downloaded
     save_and_respond(@invoice)
   end
 
