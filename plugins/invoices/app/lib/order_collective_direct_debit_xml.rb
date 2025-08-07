@@ -20,12 +20,10 @@ class OrderCollectiveDirectDebitXml
 
       # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
       # String, max. 35 chars
-      creditor_identifier: FoodsoftConfig[:group_order_invoices][:creditor_identifier],
+      creditor_identifier: FoodsoftConfig[:group_order_invoices][:creditor_identifier]
     )
     group_orders.each do |group_order|
-      if group_order.class == MultiGroupOrder
-        remittance_information = "#{group_order.ordergroup_invoice.invoice_number} #{group_order.multi_order.name}"
-      end
+      remittance_information = "#{group_order.ordergroup_invoice.invoice_number} #{group_order.multi_order.name}" if group_order.instance_of?(MultiGroupOrder)
       next if group_order.price == 0
 
       sdd.add_transaction(
@@ -33,7 +31,7 @@ class OrderCollectiveDirectDebitXml
         # String, max. 70 char
         name: group_order.ordergroup.name,
 
-        #Ende zu Ende Referenz
+        # Ende zu Ende Referenz
         reference: 'NOTPROVIDED',
 
         # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
@@ -54,7 +52,7 @@ class OrderCollectiveDirectDebitXml
 
         # OPTIONAL: Instruction Identification, will not be submitted to the debtor
         # String, max. 35 char
-        #instruction: '12345',
+        # instruction: '12345',
 
         # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
         # String, max. 140 char
@@ -66,7 +64,7 @@ class OrderCollectiveDirectDebitXml
 
         # Mandate Date of signature, in German "Datum, zu dem das Mandat unterschrieben wurde"
         # Date
-        mandate_date_of_signature:  group_order.ordergroup.sepa_account_holder.mandate_date_of_signature,
+        mandate_date_of_signature: group_order.ordergroup.sepa_account_holder.mandate_date_of_signature,
 
         # Local instrument, in German "Lastschriftart"
         # One of these strings:
@@ -91,7 +89,7 @@ class OrderCollectiveDirectDebitXml
         # True or False
         batch_booking: batch_booking
       )
-    # Last: create XML string
+      # Last: create XML string
     end
     @xml_string = sdd.to_xml # Use schema pain.008.001.02
   end
