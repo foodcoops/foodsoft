@@ -13,7 +13,7 @@ class DeltaInput < SimpleForm::Inputs::StringInput
       result = []
       result << buttons
       result << @builder.text_field(attribute_name, options)
-      result.join.html_safe
+      safe_join(result)
     end
   end
   # template.button_tag('−', type: :submit, data: {decrement: options[:id]}, tabindex: -1, class: 'btn') +
@@ -29,8 +29,8 @@ class DeltaInput < SimpleForm::Inputs::StringInput
 
   def buttons
     template.content_tag :div, class: 'input-group-addon' do
-        delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-minus'), -1, options) +
-          delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), 1, options)
-      end    
+      delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-minus'), -1, options) +
+        delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), 1, options)
+    end
   end
 end
