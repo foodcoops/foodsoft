@@ -16,7 +16,7 @@ class SepaAccountHolder < ApplicationRecord
   private
 
   def strip_whitespace_from_bic_and_iban
-    self.iban = iban&.gsub(/\s+/, "")
-    self.bic = bic&.gsub(/\s+/, "")
+    self.iban = iban&.gsub(/\s+/, '')
+    self.bic = bic&.gsub(/\s+/, '')
   end
 end
