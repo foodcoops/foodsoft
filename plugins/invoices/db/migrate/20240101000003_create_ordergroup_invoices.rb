@@ -7,7 +7,7 @@ class CreateOrdergroupInvoices < ActiveRecord::Migration[7.0]
       t.boolean :paid, default: false, null: false
       t.boolean :sepa_downloaded, default: false, null: false
       t.string :sepa_sequence_type, default: 'RCUR'
-      t.references :multi_group_order, foreign_key: true, type: :integer
+      t.references :multi_group_order, foreign_key: true
       t.datetime :email_sent_at
       t.timestamps
     end
