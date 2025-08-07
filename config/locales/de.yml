@@ -697,6 +697,7 @@ de:
         phone: Telefon
         street: Straße
         zip_code: Postleitzahl
+        tax_number: Steuernummer
       currency_space: Leerzeichen hinzufügen
       currency_unit: Währung
       custom_css: Angepasstes CSS

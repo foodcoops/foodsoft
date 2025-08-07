@@ -699,6 +699,7 @@ en:
         phone: Phone
         street: Street
         zip_code: Postcode
+        tax_number: Tax number
       currency_space: add space
       currency_unit: Currency
       custom_css: Custom CSS
