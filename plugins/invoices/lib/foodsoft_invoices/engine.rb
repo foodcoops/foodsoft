@@ -2,9 +2,14 @@ module FoodsoftInvoices
   class Engine < ::Rails::Engine
     config.to_prepare do
       if FoodsoftInvoices.enabled?
+        # Register assets
         Foodsoft::AssetRegistry.register_stylesheet('foodsoft_invoices')
         Foodsoft::AssetRegistry.register_javascript('foodsoft_invoices')
+        # Register controller extensions
         Finance::BalancingController.include BalancingControllerExtensions
+        OrdersController.include OrdersControllerExtensions
+        # Register model extensions
+        Group.include GroupExtensions
         GroupOrder.include GroupOrderExtensions
         Order.include OrderExtensions
 

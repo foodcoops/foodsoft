@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'deface', '~> 1.0'
   s.add_dependency 'prawn'
   s.add_dependency 'prawn-table'
+  s.add_dependency 'sepa_king'
 
   s.metadata['rubygems_mfa_required'] = 'true'
 end

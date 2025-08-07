@@ -28,7 +28,7 @@ nl:
           sepa_downloaded: SEPA geëxporteerd
           sepa_not_downloaded: SEPA niet geëxporteerd
           sepa_not_ready: Configuraties voor SEPA ontbreken in Beheer->Instellingen->Financiën
-          sepa_select: Markeren voor SEPA-export
+          sepa_select: SEPA-export
           sepa_sequence_type: SEPA-type
         open_details_modal: Details tonen/verbergen
         payment_method: Tegoed

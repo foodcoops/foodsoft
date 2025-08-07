@@ -29,7 +29,7 @@ de:
           sepa_not_downloaded: SEPA nicht exportiert
           sepa_not_ready:
             SEPA Export nicht verfügbar. Wichtige Einstellungen für SEPA Export in Administration -> Einstellungen-> Finanzen fehlen
-          sepa_select: Für SEPA Export markieren
+          sepa_select: SEPA Export
           sepa_sequence_type: SEPA Typ
         open_details_modal: Details ein/ausklappen
         payment_method: Guthaben
@@ -38,6 +38,13 @@ de:
         merge: Zusammenführen
         name: Bestellgruppenrechnung
         email_sent: versendet am
+      sepa_account_holder:
+        bic: BIC
+        holder: SEPA Kontoinhaber*in
+        iban: IBAN
+        mandate_id: Mandatsreferenz-ID
+        mandate_date_of_signature: Datum der Mandatsunterzeichnung
+        hint: "Achtung: Die IBAN und BIC werden automatisch eingefüllt, sobald SEPA Kontoinhaber*in ausgewählt wird. Vorige Eintragungen werden überschrieben."
 
   documents:
     group_order_invoice_pdf:
@@ -110,3 +117,7 @@ de:
   multi_orders:
     destroy:
       invoices_left: Lösche erst die Rechnungen
+
+  orders:
+    collective_direct_debit:
+      alert: Wichtige Daten für eine SEPA Lastschrift bei %{ordergroup_names} fehlen.
