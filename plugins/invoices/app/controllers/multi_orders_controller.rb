@@ -1,4 +1,5 @@
 class MultiOrdersController < ApplicationController
+  include InvoiceHelper
   before_action :set_multi_order, only: [:generate_ordergroup_invoices]
 
   def create
