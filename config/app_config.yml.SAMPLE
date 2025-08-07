@@ -110,6 +110,9 @@ default: &defaults
   # in balancing view.
   use_invoices: false
   group_order_invoices:
+    iban: DE12345
+    bic: GENODE123
+    creditor_identifier: DE98ZZZ09999999999
     use_automatic_invoices: false
     vat_exempt: false
 

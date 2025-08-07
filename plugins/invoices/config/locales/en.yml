@@ -28,7 +28,7 @@ en:
           sepa_downloaded: SEPA exported
           sepa_not_downloaded: SEPA not exported
           sepa_not_ready: Configurations for SEPA are missing in Admin->Settings->Finances
-          sepa_select: mark for SEPA export
+          sepa_select: SEPA export
           sepa_sequence_type: SEPA type
         open_details_modal: Toggle details
         payment_method: Credit
