@@ -9,10 +9,11 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     options[:autocomplete] ||= 'off'
     # TODO: get generated id, don't know how yet - `add_default_name_and_id_for_value` might be an option
 
-    template.content_tag :div, class: 'delta-input input-prepend input-append' do
-      delta_button(content_tag(:i, nil, class: 'icon icon-minus'), -1, options) +
-        delta_button(content_tag(:i, nil, class: 'icon icon-plus'), 1, options) +
-        @builder.text_field(attribute_name, options)
+    template.content_tag :div, class: 'input-group' do
+      result = []
+      result << buttons
+      result << @builder.text_field(attribute_name, options)
+      result.join.html_safe
     end
   end
   # template.button_tag('−', type: :submit, data: {decrement: options[:id]}, tabindex: -1, class: 'btn') +
@@ -23,6 +24,13 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     data = { (direction > 0 ? 'increment' : 'decrement') => options[:id] }
     delta = direction * options[:data][:delta]
     template.button_tag(title, type: :button, name: 'delta', value: delta, data: data, tabindex: -1,
-                               class: 'btn modify')
+                               class: 'btn btn-xs modify')
+  end
+
+  def buttons
+    template.content_tag :div, class: 'input-group-addon' do
+        delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-minus'), -1, options) +
+          delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), 1, options)
+      end    
   end
 end

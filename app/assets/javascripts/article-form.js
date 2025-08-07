@@ -504,7 +504,7 @@ class ArticleForm {
     const inputs$ = mergeJQueryObjects([this.unitsToOrder$, this.unitsReceived$]);
     inputs$.parent().find('.unit_label').remove();
     if (billingUnitLabel.trim() !== '') {
-      inputs$.after($(`<span class="unit_label ml-1">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
+      inputs$.after($(`<span class="unit_label ml-1" style:"align-self:center">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
     }
     if (this.previousBillingUnit !== undefined) {
       this.convertOrderedAndReceivedUnits(this.previousBillingUnit, billingUnitKey);

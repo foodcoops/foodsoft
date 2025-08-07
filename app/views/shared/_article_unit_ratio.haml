@@ -6,12 +6,12 @@
     %td{:class => 'd-flex align-items-center gap-1 w-full', :style => 'padding-top:4px'}
       -# TODO: Check, if there was any justified reason for this article_unit_ratio_counter logic:
       -#= hidden_field f.object.class.to_s.underscore + "[article_unit_ratios_attributes][#{article_unit_ratio_counter + 1}]", :sort, value: article_unit_ratio_counter + 1
-      %div{:style => 'display:flex; align-items: center'}
+      %div{:style => 'margin-left:2px;display:flex; align-items: center'}
         = sub_form.input :sort, as: :hidden
 
         = sub_form.input :quantity, {input_html: {class: 'form-control'}, label: false, wrapper_class: 'col-sm-3', wrapper: :inline_form}
         %div= '&times;'.html_safe
-        = sub_form.input :unit, as: :select, include_blank: true, collection: @article_units, label: false, input_html: {class: 'form-control'}, wrapper: :inline_form, wrapper_class: 'col-sm-5'
+        = sub_form.input :unit, as: :select, include_blank: true, collection: @article_units, label: false, input_html: {class: 'form-control', style:"width:120px"}, wrapper: :inline_form, wrapper_class: 'col-sm-5'
         %div.ml-1= t('.per')
         %div.unit_multiplier.ml-2
       %div.actions{style: 'width:1em, justify-self: end'}
