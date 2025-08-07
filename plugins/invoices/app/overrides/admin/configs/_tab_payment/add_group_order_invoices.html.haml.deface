@@ -1,0 +1,13 @@
+/ insert_before 'h4'
+%h4= t '.group_order_invoices'
+= form.fields_for :group_order_invoices do |field|
+  = config_input field, :ignore_minimum_balance, as: :boolean
+  = config_input field, :use_automatic_invoices, as: :boolean
+  = config_input field, :separate_deposits, as: :boolean
+  = config_input field, :vat_exempt, as: :boolean
+  = config_input field, :payment_method, collection: FinancialTransactionType.all.map { |t| [t.name, t.id] }, as: :select, include_blank: true
+  %p
+    %i Für SEPA-Lastschrift-Export:
+    = config_input field, :iban
+    = config_input field, :bic
+    = config_input field, :creditor_identifier

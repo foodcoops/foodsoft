@@ -38,6 +38,21 @@ en:
         name: Ordergroup Invoice
         email_sent: Email sent at
 
+  admin:
+    configs:
+      tab_payment:
+        group_order_invoices: Group order invoices
+
+  config:
+    hints:
+      group_order_invoices:
+    keys:
+      group_order_invoices:
+        use_automatic_invoices: Send automatically via mail after oder settlement
+        payment_method: Payment method
+        separate_deposits: Separate deposits on invoice
+        vat_exempt: This foodcoop is VAT exempt
+
   documents:
     group_order_invoice_pdf:
       ordergroup:
