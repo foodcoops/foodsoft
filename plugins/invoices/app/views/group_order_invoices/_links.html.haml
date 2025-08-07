@@ -34,7 +34,7 @@
               .div{id: "select_sepa_sequence_type_#{go.group_order_invoice.id}"}
                 =render :partial => 'group_order_invoices/select_sepa_sequence_type', locals:{ group_order_invoice: go.group_order_invoice, group_order: go }
             %td
-              -# = check_box_tag "group_order_ids_for_order_#{order.id}", go.id, false, class: "group-order-checkbox", id: "group_order_#{go.id}_included_in_sepa", data: { order_id: go.id }
+              = check_box_tag "group_order_ids_for_order_#{order.id}", go.id, false, class: "group-order-checkbox", id: "group_order_#{go.id}_included_in_sepa", data: { order_id: go.id }
             %td
               %b= go.group_order_invoice.invoice_number
             %td

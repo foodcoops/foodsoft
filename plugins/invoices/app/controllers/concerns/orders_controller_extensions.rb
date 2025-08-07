@@ -22,7 +22,7 @@ module OrdersControllerExtensions
       when 'all'
         GroupOrder.where(order_id: params[:id])
       when 'selected'
-        GroupOrder.where(id: params[:group_order_ids])
+        GroupOrder.where(id: params[:multi_group_order_ids])
       else
         handle_invalid_mode
         nil
