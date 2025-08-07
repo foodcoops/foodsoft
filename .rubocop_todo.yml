@@ -69,6 +69,7 @@ Gemspec/DevelopmentDependencies:
 # Include: **/*.gemspec
 Gemspec/RequiredRubyVersion:
   Exclude:
+    - 'plugins/b85/foodsoft_b85.gemspec'
     - 'plugins/current_orders/foodsoft_current_orders.gemspec'
     - 'plugins/discourse/foodsoft_discourse.gemspec'
     - 'plugins/documents/foodsoft_documents.gemspec'
