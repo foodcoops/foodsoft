@@ -2,10 +2,10 @@
   .row
     .col-md-4
       = f.hidden_field :supplier_id
-      = f.input :starts, as: :date_picker_time
+      = f.input :starts, as: :date_picker_time, wrapper: :custom_form, label_html: {class:"col-md-3"}, wrapper_html: { class:"d-flex"}
       - if @order.is_boxfill_useful?
-        = f.input :boxfill, as: :date_picker_time
-      = f.input :ends, as: :date_picker_time
+        = f.input :boxfill, as: :date_picker_time, wrapper: :custom_form, label_html: {class:"col-md-3"}, wrapper_html: { class:"d-flex"}
+      = f.input :ends, as: :date_picker_time, wrapper: :custom_form, label_html: {class:"col-md-3"}, wrapper_html: { class:"d-flex"}
       = f.input :pickup, as: :date_picker
       = f.input :end_action, collection: Order.end_actions, include_blank: false, 
         input_html: { style: 'width: 100%' }, value_method: ->(k){ k.first },
