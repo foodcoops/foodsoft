@@ -12,6 +12,16 @@ module InvoiceCommon
     after_initialize :init, unless: :persisted?
   end
 
+  def mark_sepa_downloaded
+    self.sepa_downloaded = true
+    save
+  end
+
+  def unmark_sepa_downloaded
+    self.sepa_downloaded = false
+    save
+  end
+
   def name
     I18n.t("activerecord.attributes.#{self.class.name.underscore}.name") + "_#{invoice_number}"
   end

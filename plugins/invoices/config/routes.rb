@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     get 'multi_orders/:multi_order_id/ordergroup_invoices/download_all', to: 'ordergroup_invoices#download_all', as: 'download_all_ordergroup_invoices'
     post 'multi_orders/:multi_order_id/ordergroup_invoices/send_all', to: 'ordergroup_invoices#send_all', as: 'send_all_ordergroup_invoices'
 
+    resources :orders do
+      member do
+        get :collective_direct_debit
+      end
+    end
+
     resources :group_order_invoices do
       member do
         patch :select_sepa_sequence_type
