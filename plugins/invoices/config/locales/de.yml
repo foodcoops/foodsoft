@@ -46,6 +46,32 @@ de:
         mandate_date_of_signature: Datum der Mandatsunterzeichnung
         hint: "Achtung: Die IBAN und BIC werden automatisch eingefüllt, sobald SEPA Kontoinhaber*in ausgewählt wird. Vorige Eintragungen werden überschrieben."
 
+  admin:
+    configs:
+      tab_payment:
+        group_order_invoices: Bestellgruppenrechnungen
+
+  config:
+    hints:
+      group_order_invoices:
+        ignore_minimum_balance: Mitglieder können auch bestellen, wenn ihr Kontostand unter dem Minimum liegt. (Wichtig, wenn SEPA Lastschrift als Zahlart verwendet wird)
+        use_automatic_go_invoices: Es werden auf die Bestellgruppen zugeschnittene Rechnungen für die jeweilige Bestellung beim Klicken auf "abrechnen" an alle Bestellgruppenmitglieder per Mail versendet.
+        payment_method: Zahlungsart wird auf der Bestellgruppenrechnung deklariert
+        vat_exempt: Eine Auflistung der Rechnungsartikel erfolgt ohne explizite Ausweisung der MwSt. und die Rechnung erhält den notwendigen Zusatz bzgl. der Kleinunternehmerregelung §19 (FoodCoop Marge ebenfalls nicht in Rechnung enthalten)
+        iban: IBAN ohne Leerzeichen angeben
+        bic: BIC ohne Leerzeichen angeben
+        creditor_identifier: Gläubiger-ID ohne Leerzeichen angeben
+    keys:
+      group_order_invoices:
+        ignore_minimum_balance: Mindestkontostand ignorieren
+        use_automatic_invoices: Automatisch bei Abrechnung per Mail versenden
+        separate_deposits: Pfand getrennt abrechnen
+        payment_method: Zahlungsart
+        vat_exempt: Diese Foodcoop ist MwSt. befreit
+        iban: IBAN
+        bic: BIC
+        creditor_identifier: Gläubiger-ID
+
   documents:
     group_order_invoice_pdf:
       filename: Rechnung%{number}
