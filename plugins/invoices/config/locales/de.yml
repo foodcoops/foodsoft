@@ -11,6 +11,8 @@ de:
         links:
           actions_for_all: Aktion für alle ausführen
           delete: Rechnung löschen
+          direct_debit_for_all: Sammellastschrift für alle (.xml)
+          direct_debit_for_selected: Sammellastschrift für ausgewählte (.xml)
           create_cumulative_invoice: Kumulative Rechnung erstellen
           confirm_send_all: Möchtest Du wirklich diese Bestellgruppenrechnungen an %{ordergroups} versenden?
           combine: Rechnungen zusammenfassen
@@ -19,6 +21,7 @@ de:
           generate: Rechnung erzeugen
           generate_with_date: setzen & erzeugen
           invoice_date: Datum der Bestellgruppenrechnung
+          invoice_for_group: "Bestellgruppenrechnung für %{name}"
           invoice_number: Rechnungsnummer
           ordergroup: Bestellgruppe
           paid: Bezahlt
@@ -74,6 +77,8 @@ de:
 
   documents:
     group_order_invoice_pdf:
+      deposit: Pfand
+      deposit_excluded: zzgl. Pfand
       filename: Rechnung%{number}
       invoicer: Rechnungsteller*in
       invoicee: Rechnungsempfänger*in
@@ -87,6 +92,7 @@ de:
         name: Bestellgruppe %{ordergroup}
       payment_method: 'Zahlungsart: %{payment_method}'
       pickup_date: 'Lieferdatum: %{invoice_date}'
+      products: Produkte
       sum_to_pay: Zu zahlen gesamt
       sum_to_pay_net: Zu zahlen gesamt (netto)
       sum_to_pay_gross: Gesamt
@@ -94,6 +100,7 @@ de:
       table_headline: 'Für die Bestellung fallen folgende Posten an:'
       tax_excluded: exkl. MwSt.
       tax_included: zzgl. Gesamtsumme MwSt. %{tax}%
+      tax_line: "%{label} mit %{tax_key}%"
       tax_number: 'Steuernummer: %{number}'
       title: Rechnung für die Bestellung bei %{supplier}
       vat_exempt_rows:
@@ -115,6 +122,12 @@ de:
         - Artikel Gesamtpreis (netto)
         - MwSt.
         - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
+      vat_sum_table:
+        gross: Brutto
+        margin: FC-Marge
+        net: Netto
+        tax: MwSt
+
 
   mailer:
     group_order_invoice:

@@ -1,6 +1,6 @@
 - if foodsoft_sepa_ready?
-  = link_to 'Sammellastschrift für alle (.xml)', collective_direct_debit_multi_order_path(id: multi_order.id, mode: 'all'), class: 'btn btn-block', data: { turbolinks: false, multi_order_id: multi_order.id, supplier: FoodsoftConfig[:name] }, id: "collective-direct-debit-link-all-#{multi_order.id}"
-  = link_to 'Sammellastschrift für ausgewählt (.xml)', collective_direct_debit_multi_order_path(id: multi_order.id, mode: 'selected'), class: 'btn btn-block', data: { turbolinks: false, multi_order_id: multi_order.id, supplier: FoodsoftConfig[:name] }, id: "collective-direct-debit-link-selected-#{multi_order.id}"
+  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.direct_debit_for_all'), collective_direct_debit_multi_order_path(id: multi_order.id, mode: 'all'), class: 'btn btn-block', data: { turbolinks: false, multi_order_id: multi_order.id, supplier: FoodsoftConfig[:name] }, id: "collective-direct-debit-link-all-#{multi_order.id}"
+  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.direct_debit_for_selected'), collective_direct_debit_multi_order_path(id: multi_order.id, mode: 'selected'), class: 'btn btn-block', data: { turbolinks: false, multi_order_id: multi_order.id, supplier: FoodsoftConfig[:name] }, id: "collective-direct-debit-link-selected-#{multi_order.id}"
 - else
   %i
     = t('activerecord.attributes.group_order_invoice.links.sepa_not_ready')
