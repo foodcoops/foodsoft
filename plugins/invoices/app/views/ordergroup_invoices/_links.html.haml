@@ -42,9 +42,9 @@
             - if mgo.ordergroup_invoice.email_sent_at.present?
               %br/
               = I18n.t('activerecord.attributes.ordergroup_invoice.email_sent')
-              = mgo.ordergroup_invoice.email_sent_at.strftime("%d.%m.%Y %H:%M")
+              = I18n.l(mgo.ordergroup_invoice.email_sent_at, format: :short)
           %td
-            = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), mgo.ordergroup_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: "Bestellgruppenrechnung für #{mgo.ordergroup.name}" ) }
+            = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), mgo.ordergroup_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: I18n.t('activerecord.attributes.group_order_invoice.links.invoice_for_group', name: mgo.ordergroup.name)) }
             = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), ordergroup_invoice_path(mgo.ordergroup_invoice, :format => 'pdf'), class: 'btn btn-block'
       - else
         %tr

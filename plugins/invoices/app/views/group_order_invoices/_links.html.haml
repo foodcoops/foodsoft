@@ -39,7 +39,7 @@
               %b= go.group_order_invoice.invoice_number
             %td
               = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), group_order_invoice_path(go.group_order_invoice, :format => 'pdf'), class: 'btn btn-block'
-              = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), go.group_order_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: "Bestellgruppenrechnung für #{go.ordergroup.name}" ) }
+              = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), go.group_order_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: I18n.t('activerecord.attributes.group_order_invoice.links.invoice_for_group', name: go.ordergroup.name)) }
         - else
           %tr
             %td
