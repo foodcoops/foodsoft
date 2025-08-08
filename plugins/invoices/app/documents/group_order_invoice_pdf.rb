@@ -132,7 +132,7 @@ class GroupOrderInvoicePdf < RenderPdf
       next unless separate_deposits && goa.order_article.price.deposit > 0.0
 
       goa_total_deposit = goa.result * goa.order_article.price.fc_deposit_price
-      data << ['zzgl. Pfand',
+      data << [I18n.t('documents.group_order_invoice_pdf.deposit_excluded'),
                goa.result.to_i,
                number_to_currency(goa.order_article.article.fc_deposit_price),
                number_to_currency(goa_total_deposit)]
@@ -312,7 +312,7 @@ class GroupOrderInvoicePdf < RenderPdf
     goa_deposit = goa.result * order_article.price.deposit
     goa_total_deposit = goa.result * order_article.price.fc_deposit_price
 
-    data << ['zzgl. Pfand',
+    data << [I18n.t('documents.group_order_invoice_pdf.deposit_excluded'),
              goa.result.to_i,
              number_to_currency(order_article.price.net_deposit_price),
              number_to_currency(goa_net_deposit),
@@ -353,18 +353,28 @@ class GroupOrderInvoicePdf < RenderPdf
   # Build the sum table for VAT included invoices
   def build_vat_sum_table(tax_hashes, totals, marge)
     sum = if marge > 0
-            [[nil, nil, 'Netto', 'MwSt', 'FC-Marge', 'Brutto']]
+            [[nil,
+              nil,
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.net'),
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.tax'),
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.margin'),
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.gross')]]
           else
-            [[nil, nil, nil, 'Netto', 'MwSt', 'Brutto']]
+            [[nil,
+              nil,
+              nil,
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.net'),
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.tax'),
+              I18n.t('documents.group_order_invoice_pdf.vat_sum_table.gross')]]
           end
 
     # Add rows for each tax rate
     tax_hashes[:gross].each_key do |key|
       # Add product row
-      sum = add_tax_sum_row(sum, key, tax_hashes, 'Produkte', marge)
+      sum = add_tax_sum_row(sum, key, tax_hashes, I18n.t('documents.group_order_invoice_pdf.products'), marge)
 
       # Add deposit row if needed
-      sum = add_tax_sum_row(sum, key, tax_hashes[:deposit], 'Pfand', marge) if tax_hashes[:deposit] && tax_hashes[:deposit][:gross][key] > 0
+      sum = add_tax_sum_row(sum, key, tax_hashes[:deposit], I18n.t('documents.group_order_invoice_pdf.deposit'), marge) if tax_hashes[:deposit] && tax_hashes[:deposit][:gross][key] > 0
     end
 
     # Add total row
@@ -376,7 +386,7 @@ class GroupOrderInvoicePdf < RenderPdf
 
   # Add a tax sum row to the sum table
   def add_tax_sum_row(sum, tax_key, tax_hash, label, marge)
-    tmp_sum = [nil, "#{label} mit #{tax_key}%", number_to_currency(tax_hash[:net][tax_key])]
+    tmp_sum = [nil, I18n.t('documents.group_order_invoice_pdf.tax_line', label: label, tax_key: tax_key), number_to_currency(tax_hash[:net][tax_key])]
     tmp_sum.unshift(nil) if marge <= 0
     tmp_sum << number_to_currency(tax_hash[:gross][tax_key] - tax_hash[:net][tax_key])
     tmp_sum << number_to_currency(tax_hash[:fc][tax_key] - tax_hash[:gross][tax_key]) if marge > 0
