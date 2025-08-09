@@ -14,6 +14,9 @@ default: &defaults
   # true by default to keep compat with older installations, but test with false here
   use_nick: false
 
+  # invoice plugin is disabled by default, but we want tests to pass, so enable it here
+  use_invoices: true
+
   price_markup: 5
 
   # do we really need the following ones?
