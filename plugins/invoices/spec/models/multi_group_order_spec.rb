@@ -4,6 +4,10 @@ describe MultiGroupOrder do
   let(:admin) { create(:user, groups: [create(:workgroup, role_finance: true), create(:ordergroup, name: 'AdminOrders')]) }
   let(:user) { create(:user, groups: [create(:ordergroup)]) }
 
+  before do
+    FoodsoftInvoices.enable_extensions!
+  end
+
   context 'when orders are not closed' do
     it 'is not generated without valid multi_order' do
       order1 = create(:order)
