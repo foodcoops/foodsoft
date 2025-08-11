@@ -6,6 +6,10 @@ describe MultiOrder do
   let(:order) { create(:order) }
   let(:another_order) { create(:order) }
 
+  before do
+    FoodsoftInvoices.enable_extensions!
+  end
+
   context 'when orders are open' do
     let!(:order_group_order) { create(:group_order, ordergroup: user.ordergroup, order: order) }
     let!(:another_order_group_order) { create(:group_order, ordergroup: user.ordergroup, order: another_order) }
