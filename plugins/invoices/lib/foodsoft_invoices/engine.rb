@@ -4,6 +4,10 @@ module FoodsoftInvoices
       enable_extensions! if FoodsoftInvoices.enabled?
     end
 
+    initializer 'foodsoft_invoices.test_assets_precompile' do |app|
+      app.config.assets.precompile += %w[foodsoft_invoices.js foodsoft_invoices.css] if Rails.env.test?
+    end
+
     def default_foodsoft_config(cfg)
       cfg[:use_invoices] = false
     end
