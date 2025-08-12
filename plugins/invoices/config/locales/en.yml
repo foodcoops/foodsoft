@@ -153,6 +153,13 @@ en:
   multi_orders:
     destroy:
       invoices_left: Delete the invoices first
+    create:
+      no_multi_multi: You cannot convert multi-orders into a multi-multi order.
+      invalid_orders: The order is already part of a multi-order or is not yet closed.
+      merge_not_possible_invoices_present: Merge not possible. There are already invoices for some of the order groups.
+      success: "Multi order for %{suppliers} created"
+    collective_direct_debit:
+      filename_suffix: CollectiveDirectDebit
 
   orders:
     collective_direct_debit:

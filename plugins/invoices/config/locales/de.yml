@@ -156,6 +156,13 @@ de:
   multi_orders:
     destroy:
       invoices_left: Lösche erst die Rechnungen
+    create:
+      no_multi_multi: Du kannst keine Multi-Bestellungen in eine Multi-Multi-Bestellung umwandeln.
+      invalid_orders: Die Bestellung ist bereits Teil einer Multi-Bestellung oder ist noch nicht abgeschlossen.
+      merge_not_possible_invoices_present: Zusammenführen nicht möglich. Es gibt bereits Rechnungen für einige der Bestellgruppen.
+      success: "Multi Bestellung für %{suppliers} erstellt"
+    collective_direct_debit:
+      filename_suffix: Sammellastschrift
 
   orders:
     collective_direct_debit:
