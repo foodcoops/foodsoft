@@ -10,8 +10,7 @@ class MultiOrdersController < ApplicationController
     invoiced_orders = orders.select { |order| order.group_orders.map(&:group_order_invoice).compact.present? }
 
     if multi_order_params[:multi_order_ids_for_multi_multi_order].present?
-      # TODO: do the i18n and add a test
-      msg = 'Du kannst keine Multi-Bestellungen in eine Multi-Multi-Bestellung umwandeln.'
+      msg = I18n.t('multi_orders.create.no_multi_multi')
       flash[:alert] = msg
       respond_to do |format|
         format.js
@@ -20,8 +19,7 @@ class MultiOrdersController < ApplicationController
       return
     end
     if multi_orders.any? || unclosed_orders.any?
-      # TODO: do the i18n and add a test
-      msg = 'Die Bestellung ist bereits Teil einer Multi-Bestellung oder ist noch nicht abgeschlossen.'
+      msg = I18n.t('multi_orders.create.invalid_orders')
       flash[:alert] = msg
       respond_to do |format|
         format.js
@@ -30,7 +28,7 @@ class MultiOrdersController < ApplicationController
       return
     end
     if invoiced_orders.any?
-      msg = 'Zusammenführen nicht möglich. Es gibt bereits Rechnungen für einige der Bestellgruppen.'
+      msg = I18n.t('multi_orders.create.merge_not_possible_invoices_present')
       flash[:alert] = msg
       respond_to do |format|
         format.js
@@ -44,7 +42,7 @@ class MultiOrdersController < ApplicationController
       @multi_order.ends = orders.map(&:ends).max
       @multi_order.save!
       suppliers = orders.map(&:supplier).map(&:name).join(', ')
-      msg = "Multi Bestellung für #{suppliers} erstellt"
+      msg = I18n.t('multi_orders.create.success', suppliers: suppliers)
       respond_to do |format|
         flash[:notice] = msg
         format.js
@@ -134,11 +132,8 @@ class MultiOrdersController < ApplicationController
     respond_to do |format|
       format.html do
         collective_debit = OrderCollectiveDirectDebitXml.new(multi_group_orders)
-        send_data collective_debit.xml_string, filename: @order.name + '_Sammellastschrift' + '.xml', type: 'text/xml'
+        send_data collective_debit.xml_string, filename: @order.name + '_' + I18n.t('multi_orders.collective_direct_debit.filename_suffix') + '.xml', type: 'text/xml'
         multi_group_orders.map(&:ordergroup_invoice).each(&:mark_sepa_downloaded)
-      rescue SEPA::Error => e
-        multi_group_orders.map(&:ordergroup_invoice).each(&:unmark_sepa_downloaded)
-        redirect_to finance_order_index_path, alert: e.message
       rescue StandardError => e
         multi_group_orders.map(&:ordergroup_invoice).each(&:unmark_sepa_downloaded)
         redirect_to finance_order_index_path, alert: I18n.t('orders.collective_direct_debit.alert', ordergroup_names: sepa_not_possible_ordergroup_names.join(', '), error: e.message)
@@ -146,10 +141,7 @@ class MultiOrdersController < ApplicationController
       format.xml do
         multi_group_orders.map(&:ordergroup_invoice).each(&:mark_sepa_downloaded)
         collective_debit = OrderCollectiveDirectDebitXml.new(multi_group_orders)
-        send_data collective_debit.xml_string, filename: @multi_order.name + '_Sammellastschrift' + '.xml', type: 'text/xml'
-      rescue SEPA::Error => e
-        multi_group_orders.map(&:ordergroup_invoice).each(&:unmark_sepa_downloaded)
-        render json: { error: e.message }
+        send_data collective_debit.xml_string, filename: @multi_order.name + '_' + I18n.t('multi_orders.collective_direct_debit.filename_suffix') + '.xml', type: 'text/xml'
       rescue StandardError => e
         multi_group_orders.map(&:ordergroup_invoice).each(&:unmark_sepa_downloaded)
         render json: { error: I18n.t('orders.collective_direct_debit.alert', ordergroup_names: sepa_not_possible_ordergroup_names.join(', '), error: e.message) }

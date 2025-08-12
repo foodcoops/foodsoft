@@ -153,6 +153,13 @@ nl:
   multi_orders:
     destroy:
       invoices_left: Verwijder eerst de facturen
+    create:
+      no_multi_multi: Je kunt geen multi-bestellingen omzetten naar een multi-multi-bestelling.
+      invalid_orders: De bestelling is al onderdeel van een multi-bestelling of is nog niet afgesloten.
+      merge_not_possible_invoices_present: Samenvoegen niet mogelijk. Er bestaan al facturen voor sommige huishoudens.
+      success: "Multi-bestelling voor %{suppliers} aangemaakt"
+    collective_direct_debit:
+      filename_suffix: Verzamelincasso
       
   orders:
     collective_direct_debit:
