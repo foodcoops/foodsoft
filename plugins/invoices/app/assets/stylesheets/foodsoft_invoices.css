@@ -1,0 +1,69 @@
+.checkbox-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    background-color: white;
+}
+
+.checkbox-icon.checked::before {
+    content: "\2713"; /* Unicode checkmark symbol */
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px; /* Align the checkmark vertically */
+    color: #00ff00; /* Change the color to represent a checked state */
+}
+
+
+.expanded-row{
+    td {
+        padding-top: 0 !important;
+    }
+}
+.hidden{
+    display: none;
+}
+.border td{
+    background-color: rgb(231, 231, 194) !important;
+}
+
+.bordered {
+    .order-modal{
+        background-color: lightgoldenrodyellow !important;
+        padding-bottom: 2em ;
+    }
+    .multi-order-modal{
+        background-color: lightgoldenrodyellow !important;
+        padding-bottom: 2em ;
+    }
+}
+
+.table.group-order-invoices-table tr{
+    background-color: rgb(255, 255, 233);
+}
+.table.group-order-invoices-table thead tr{
+    background-color: lightgoldenrodyellow;
+}
+
+.table.group-order-invoices-table tr:nth-child(odd) > td,
+.table.group-order-invoices-table tr:nth-child(even) > td{
+    background-color: rgb(255, 255, 233);
+    padding-right: 0;
+    .group-order-checkbox {
+        margin-left: 20px;
+    }
+    .form-check-input{
+        margin-left: 20px;
+    }
+}
