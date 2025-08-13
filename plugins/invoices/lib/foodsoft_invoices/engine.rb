@@ -1,7 +1,7 @@
 module FoodsoftInvoices
   class Engine < ::Rails::Engine
     config.to_prepare do
-      enable_extensions! if FoodsoftInvoices.enabled?
+      FoodsoftInvoices.enable_extensions! if FoodsoftInvoices.enabled?
     end
 
     initializer 'foodsoft_invoices.test_assets_precompile' do |app|
