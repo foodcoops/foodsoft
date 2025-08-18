@@ -915,6 +915,8 @@ en:
         name: Supplier
         no_closed_orders: At the moment there are no closed orders.
         state: State
+        show_all: (show all)
+        for: for
       summary:
         changed: Data was changed!
         duration: From %{starts} till %{ends}
