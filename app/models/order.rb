@@ -224,13 +224,16 @@ class Order < ApplicationRecord
       end
     elsif %i[groups groups_without_markup].include?(type)
       for go in group_orders.includes(group_order_articles: { order_article: :article_version })
-        for goa in go.group_order_articles
-          case type
-          when :groups
-            total += goa.result * goa.order_article.article_version.fc_group_order_price
-          when :groups_without_markup
-            total += goa.result * goa.order_article.article_version.gross_group_order_price
+        case type
+        when :groups
+          total += go.total
+        when :groups_without_markup
+          go_price_without_markup = 0
+          for goa in go.group_order_articles
+            go_price_without_markup += goa.result * goa.order_article.article_version.gross_group_order_price
           end
+          total += go_price_without_markup.round(2) || 0
+          total += go.transport if go.transport
         end
       end
     end
@@ -273,7 +276,7 @@ class Order < ApplicationRecord
     update_price_of_group_orders!
 
     transaction do                                        # Start updating account balances
-      charge_group_orders!(user, transaction_type, financial_link)
+      total_group_charges = charge_group_orders!(user, transaction_type, financial_link)
 
       if stockit?                                         # Decreases the quantity of stock_articles
         for oa in order_articles.includes(article_version: :article)
@@ -285,7 +288,7 @@ class Order < ApplicationRecord
       if create_foodcoop_transaction
         ft = FinancialTransaction.new({ financial_transaction_type: transaction_type,
                                         user: user,
-                                        amount: sum(:groups),
+                                        amount: total_group_charges * -1,
                                         note: transaction_note,
                                         financial_link: financial_link })
         ft.save!
@@ -432,12 +435,15 @@ class Order < ApplicationRecord
 
   def charge_group_orders!(user, transaction_type = nil, financial_link = nil)
     note = transaction_note
+    total = 0
     group_orders.includes(:ordergroup).each do |group_order|
-      if group_order.ordergroup
-        price = group_order.total * -1 # decrease! account balance
-        group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, financial_link, group_order)
-      end
+      next unless group_order.ordergroup
+
+      price = group_order.total * -1 # decrease! account balance
+      transaction = group_order.ordergroup.add_financial_transaction!(price, note, user, transaction_type, financial_link, group_order)
+      total += transaction.amount
     end
+    total
   end
 
   def transaction_note
