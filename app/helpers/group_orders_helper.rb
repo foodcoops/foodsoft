@@ -11,17 +11,26 @@ module GroupOrdersHelper
   # If the option :show is true, the link is for showing the group_order.
   def link_to_ordering(order, options = {}, &block)
     group_order = order.group_order(current_user.ordergroup)
+
+    # Check if we need to generate a full URL (when host is specified)
+    use_url = options.has_key?(:host) || options.has_key?(:protocol)
+
     path = if options[:show] && group_order
-            group_order_path(group_order)
+            use_url ? group_order_url(group_order, options.slice(:host, :port, :protocol, :subdomain)) : group_order_path(group_order)
           elsif group_order
-            edit_group_order_path(group_order, :order_id => order.id)
+            url_params = options.slice(:host, :port, :protocol, :subdomain).merge(:order_id => order.id)
+            use_url ? edit_group_order_url(group_order, url_params) : edit_group_order_path(group_order, :order_id => order.id)
           else
-            new_group_order_path(:order_id => order.id)
+            url_params = options.slice(:host, :port, :protocol, :subdomain).merge(:order_id => order.id)
+            use_url ? new_group_order_url(url_params) : new_group_order_path(:order_id => order.id)
           end
-    options.delete(:show)
+
+    # Remove URL-specific options from the link options
+    options.except!(:show, :host, :port, :protocol, :subdomain)
     name = block_given? ? capture(&block) : order.name
     path ? link_to(name, path, options) : name
   end
+
 
   def link_to_ordering_url(order, options = {}, &block)
     group_order = order.group_order(current_user.ordergroup)
