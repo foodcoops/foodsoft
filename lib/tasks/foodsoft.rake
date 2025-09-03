@@ -87,7 +87,7 @@ namespace :foodsoft do
             next if excludes.any? { |ex| ordergroup.name.start_with?(ex) }
             ordergroup.users.each do |user|
               puts "mailing #{user.email} about #{order.supplier.name} #{order.note}"
-              Mailer.nearly_full_articles_email(order, user.email)
+              Mailer.nearly_full_articles_email(order, user)
                     .deliver_now
             end
           end

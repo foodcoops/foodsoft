@@ -12,7 +12,7 @@
   Note that anything with 'case splittable' may already be full.  The rules for splittable cases are <i>usually</i> as follows:
   24 ct to 12 ct / 25# to 10# /  30 ct to 10 ct  (some exceptions apply)
 </p>
-<p><%= link_to_ordering_url(@order, class: 'btn btn-primary btn-large') do %>Edit Your Order<% end %></p>
+<p><%= link_to_ordering(@order, class: 'btn btn-primary btn-large', host: 'food.bowenlift.com', port: false, user: @user) do %>Edit Your Order<% end %></p>
 <p>Check the most up to date report here:
   <%= link_to 'Current Case Report', nearly_full_url(@order) %>
 <ul>
@@ -59,4 +59,4 @@
     </li>
   <% end %>
 </ul>
-<p><%= link_to_ordering_url(@order, class: 'btn btn-primary btn-large') do %>Edit Your Order<% end %></p>
+<p><%= link_to_ordering(@order, class: 'btn btn-primary btn-large', host: 'food.bowenlift.com', port: false, user: @user) do %>Edit Your Order<% end %></p>

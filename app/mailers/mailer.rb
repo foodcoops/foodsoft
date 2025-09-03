@@ -5,6 +5,7 @@ class Mailer < ActionMailer::Base
   #     (1) Use draper, decorate user
   #     (2) Create a helper with this method, include here and in ApplicationHelper
   helper :application
+  helper :group_orders
   include ApplicationHelper
 
   class MailCancelled < StandardError; end
@@ -200,11 +201,12 @@ class Mailer < ActionMailer::Base
          subject: 'You have orders that need to be settled'
   end
 
-  def nearly_full_articles_email(order, email)
+  def nearly_full_articles_email(order, user)
     @order = order
+    @user = user
     @order_name = order.name
     @items = @order.nearly_full_order_articles
-    mail(to: email, subject: "#{order.name} Nearly Full Cases")
+    mail(to: user.email, subject: "#{order.name} Nearly Full Cases")
   end
 
   def mail(args)

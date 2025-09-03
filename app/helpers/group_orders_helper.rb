@@ -10,7 +10,11 @@ module GroupOrdersHelper
   # Returns a link to the page where a group_order can be edited.
   # If the option :show is true, the link is for showing the group_order.
   def link_to_ordering(order, options = {}, &block)
-    group_order = order.group_order(current_user.ordergroup)
+    # Allow passing user explicitly for mailer contexts
+    user = options.delete(:user) || (respond_to?(:current_user) ? current_user : nil)
+    return order.name unless user && user.ordergroup
+
+    group_order = order.group_order(user.ordergroup)
 
     # Check if we need to generate a full URL (when host is specified)
     use_url = options.has_key?(:host) || options.has_key?(:protocol)
