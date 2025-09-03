@@ -435,6 +435,12 @@ class Order < ApplicationRecord
         .sort_by { |oa| -oa.percent_of_full_case }
   end
 
+  def full_order_articles
+    self.order_articles
+        .select { |oa| oa.extra_amount > 0 }
+        .sort_by { |oa| -oa.percent_of_full_case }
+  end
+
   protected
 
   def starts_before_ends

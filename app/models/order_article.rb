@@ -94,6 +94,19 @@ class OrderArticle < ApplicationRecord
 
   end
 
+  def extra_amount
+    unit_size = price.unit_quantity
+    units_to_order = calculate_units_to_order(quantity, tolerance)
+    if units_to_order > 0
+      quantity_ordered = units_to_order * unit_size
+      quantity_extra = quantity_ordered - quantity
+      if quantity_extra > 0
+        return quantity_extra
+      end
+    end
+    0
+  end
+
   def percent_of_full_case
     unit_size = price.unit_quantity
     ((1 - (quantity_left_to_fill_case.to_f / unit_size)) * 100).round if quantity_left_to_fill_case
@@ -307,8 +320,8 @@ class OrderArticle < ApplicationRecord
     delta_mis = missing_units - missing_units_was
     delta_box = units_to_order - units_to_order_was
     unless (delta_q == 0 && delta_t >= 0) ||
-      (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
-      (delta_q > 0 && delta_q == -delta_t)
+           (delta_mis < 0 && delta_box >= 0 && delta_t >= 0) ||
+           (delta_q > 0 && delta_q == -delta_t)
       raise ActiveRecord::RecordNotSaved.new("Change not acceptable in boxfill phase for '#{article.name}', sorry.", self)
     end
   end

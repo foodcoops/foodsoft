@@ -5,13 +5,14 @@
   (closes at <%= l @order.ends.in_time_zone("Pacific Time (US & Canada)"), locale: 'en', format: :long  %>)
 </p>
 <p>Here is a list of cases that are nearly full.
-Please consider adding another to your order (or adding extra tolerance)
-if you are able to take more without it going to waste.
+  Please consider adding another to your order (or adding extra tolerance)
+  if you are able to take more without it going to waste.
 </p>
 <p>
-Note that anything with 'case splittable' may already be full.  The rules for splittable cases are <i>usually</i> as follows:
+  Note that anything with 'case splittable' may already be full.  The rules for splittable cases are <i>usually</i> as follows:
   24 ct to 12 ct / 25# to 10# /  30 ct to 10 ct  (some exceptions apply)
 </p>
+<p><%= link_to_ordering_url(@order, class: 'btn btn-primary btn-large') do %>Edit Your Order<% end %></p>
 <p>Check the most up to date report here:
   <%= link_to 'Current Case Report', nearly_full_url(@order) %>
 <ul>
@@ -28,9 +29,34 @@ Note that anything with 'case splittable' may already be full.  The rules for sp
       How many in a case: <%= order_article.article.unit_quantity %>,
       Quantity: <%= order_article.quantity %>,
       Tolerance: <%= order_article.tolerance %>
+
+      <%#=  order_article.as_json %>
       <%= order_article.article.note.include?('splittable') ? '(case splittable)' :'' %>
     </li>
   <% end %>
 </ul>
 
-<%= link_to 'Back to Orders', orders_path %>
+<h1>Filled Cases With Extras</h1>
+<p>These cases have been filled by people taking more than they want.  Please take some if you need it.</p>
+<ul>
+  <% @order.full_order_articles.each do |order_article| %>
+    <li>
+      <%= order_article.article.name %>
+      <strong><%= order_article.percent_of_full_case %>%</strong> full
+      <br/>
+      <strong>How many are extra:
+        <%= order_article.extra_amount %> x
+      </strong>
+      <%= order_article.article.unit %> (<%= number_to_currency(order_article.article.price) %>)
+      <br/>
+      How many in a case: <%= order_article.article.unit_quantity %>,
+      Quantity: <%= order_article.quantity %>,
+      Tolerance: <%= order_article.tolerance %>
+
+
+      <%#=  order_article.as_json %>
+      <%= order_article.article.note.include?('splittable') ? '(case splittable)' :'' %>
+    </li>
+  <% end %>
+</ul>
+<p><%= link_to_ordering_url(@order, class: 'btn btn-primary btn-large') do %>Edit Your Order<% end %></p>

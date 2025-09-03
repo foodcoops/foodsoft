@@ -23,6 +23,20 @@ module GroupOrdersHelper
     path ? link_to(name, path, options) : name
   end
 
+  def link_to_ordering_url(order, options = {}, &block)
+    group_order = order.group_order(current_user.ordergroup)
+    path = if options[:show] && group_order
+             group_order_path(group_order)
+           elsif group_order
+             edit_group_order_url(group_order, :order_id => order.id)
+           else
+             new_group_order_url(:order_id => order.id)
+           end
+    options.delete(:show)
+    name = block_given? ? capture(&block) : order.name
+    path ? link_to(name, path, options) : name
+  end
+
   # Return css class names for order result table
 
   def order_article_class_name(quantity, tolerance, result)
