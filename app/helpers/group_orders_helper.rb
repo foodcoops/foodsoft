@@ -26,7 +26,7 @@ module GroupOrdersHelper
   def link_to_ordering_url(order, options = {}, &block)
     group_order = order.group_order(current_user.ordergroup)
     path = if options[:show] && group_order
-             group_order_path(group_order)
+             group_order_url(group_order)
            elsif group_order
              edit_group_order_url(group_order, :order_id => order.id)
            else

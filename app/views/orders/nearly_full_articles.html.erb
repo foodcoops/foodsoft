@@ -14,7 +14,7 @@
 </p>
 <p><%= link_to_ordering(@order, class: 'btn btn-primary btn-large') do %>Edit Your Order<% end %></p>
 <p>Check the most up to date report here:
-  <%= link_to 'Current Case Report', nearly_full_url(@order) %>
+  <%= link_to 'Current Case Report', nearly_full_path(@order) %>
 <ul>
   <% @order.nearly_full_order_articles.each do |order_article| %>
     <li>
