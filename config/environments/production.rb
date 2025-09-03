@@ -86,7 +86,9 @@ Foodsoft::Application.configure do
   # config.autoflush_log = false
 
   # Configure hostname for action mailer (can be overridden in foodcoop config)
-  config.action_mailer.default_url_options = { host: `hostname -f`, protocol: 'https' }
+  # Prefer HOSTNAME env var when present; fallback to system FQDN
+  host_from_env = ENV['HOSTNAME'].presence || `hostname -f`.strip
+  config.action_mailer.default_url_options = { host: host_from_env, protocol: 'https' }
 
   if ENV['POSTMARK_API_KEY'].present?
        config.action_mailer.delivery_method = :postmark
