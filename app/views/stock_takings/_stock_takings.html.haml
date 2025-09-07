@@ -9,7 +9,7 @@
       %th= t '.note'
       %th
       %th
-%tbody
+  %tbody
     - for stock_taking in @stock_takings
       %tr
         %td= link_to format_date(stock_taking.date), stock_taking
