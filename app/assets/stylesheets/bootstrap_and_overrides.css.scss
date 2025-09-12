@@ -604,6 +604,11 @@ details {
   }
 }
 
+.conversion-popover-opener {
+  padding: 0px;
+  width: 30px;
+}
+
 input:hover + .conversion-popover-opener, input:focus + .conversion-popover-opener, .conversion-popover-opener:hover, .conversion-popover-opener:focus {
   opacity: 0.8;
 }
