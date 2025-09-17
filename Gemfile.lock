@@ -703,8 +703,10 @@ PLATFORMS
   arm-linux-musl
   arm64-darwin
   armv7l-linux
+  ruby
   universal-darwin
   x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -733,6 +735,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   font-awesome-rails
+  foodsoft_b85!
   foodsoft_discourse!
   foodsoft_documents!
   foodsoft_links!

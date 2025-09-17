@@ -39,10 +39,10 @@
             / check if the article is selected or has an error
             - included = @order.article_ids.include?(article.id.to_s)
             - row_class = ''
-            - if included
-              - row_class = 'selected'
-            - elsif @order.erroneous_article_ids.include?(article.id)
+            - if @order.erroneous_article_ids.include?(article.id)
               - row_class = 'error'
+            - elsif included
+              - row_class = 'selected'
             %tr{class: row_class, id: article.id}
               %td= check_box_tag "order[article_ids][]", article.id, included, :id => "checkbox_#{article.id}"
               %td.click-me{'data-check-this' => "#checkbox_#{article.id}"}= article.name

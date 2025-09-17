@@ -28,6 +28,7 @@ class Supplier < ApplicationRecord
   validates :shared_sync_method, absence: true, if: -> { supplier_remote_source.blank? }
   validates :supplier_remote_source, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https ftp]), allow_blank: true }
 
+  extendable_enum :remote_order_method, { email: 'email' }
   enum :shared_sync_method, { all_available: 'all_available', all_unavailable: 'all_unavailable', import: 'import' }
 
   scope :undeleted, -> { where(deleted_at: nil) }

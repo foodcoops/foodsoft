@@ -721,3 +721,17 @@ td.mr-1 > *:last-child {
 .form-group .select2-container {
   width: 200px;
 }
+
+.modal-dialog {
+  margin: 30px auto;
+}
+
+  .modal-body {
+    max-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+    overflow-y: auto;
+  }
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
