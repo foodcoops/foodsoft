@@ -5,7 +5,7 @@ class CreateMailDeliveryStatus < ActiveRecord::Migration[4.2]
       t.string :email, null: false
       t.string :message, null: false
       t.string :attachment_mime
-      t.binary :attachment_data, limit: 16.megabyte
+      t.binary :attachment_data, limit: 16.megabytes
 
       t.index :email
     end

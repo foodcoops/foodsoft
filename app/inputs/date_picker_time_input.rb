@@ -12,10 +12,12 @@ class DatePickerTimeInput < SimpleForm::Inputs::StringInput
     # In the future, use html5 date&time inputs. This needs modernizr or equiv. to avoid
     # double widgets, and perhaps conditional css to adjust input width (chrome).
     value = @builder.object.send attribute_name
-    date_options = { as: :string, class: 'input-small datepicker' }
-    time_options = { as: :string, class: 'input-mini' }
-    @builder.input_field("#{attribute_name}_date_value", options.merge(date_options)) + ' ' +
-      @builder.input_field("#{attribute_name}_time_value", options.merge(time_options))
+    date_options = { as: :string, class: 'form-control datepicker', style: 'margin-right:10px' }
+    time_options = { as: :string, class: 'form-control' }
+    template.content_tag(:div, class: 'col-md-9 d-flex') do
+      @builder.input_field("#{attribute_name}_date_value", options.merge(date_options)) + ' ' +
+        @builder.input_field("#{attribute_name}_time_value", options.merge(time_options))
+    end
     # time_select requires a date_select
     # @builder.time_select("#{attribute_name}_time", {ignore_date: true}, input_html_options.merge(time_options))
   end

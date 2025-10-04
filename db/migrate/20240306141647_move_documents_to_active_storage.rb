@@ -20,7 +20,7 @@ class MoveDocumentsToActiveStorage < ActiveRecord::Migration[7.0]
 
   def down
     change_table :documents, bulk: true do |t|
-      t.binary :data, limit: 16.megabyte
+      t.binary :data, limit: 16.megabytes
       t.string :mime
       t.remove :folder
     end

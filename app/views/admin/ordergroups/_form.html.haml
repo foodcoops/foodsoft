@@ -1,17 +1,17 @@
 - unless @ordergroup.new_record? || FoodsoftConfig[:disable_invite]
   %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @ordergroup.id), remote: true)).html_safe
-= simple_form_for [:admin, @ordergroup] do |f|
-  - captured = capture do
-    = f.input :contact_person
-    = f.input :contact_phone
-    = f.input :contact_address
-    = render 'shared/custom_form_fields', f: f, type: :ordergroup
-    .fold-line
+.col-md-4
+  = simple_form_for [:admin, @ordergroup] do |f|
+    - captured = capture do
+      = f.input :contact_person
+      = f.input :contact_phone
+      = f.input :contact_address
+      = render 'shared/custom_form_fields', f: f, type: :ordergroup
       = f.input :break_start, as: :date_picker, label: Ordergroup.human_attribute_name('break')
       = f.input :break_end, as: :date_picker, label: Ordergroup.human_attribute_name('break_until')
-    - if FoodsoftConfig[:use_apple_points]
-      = f.input :ignore_apple_restriction, :label => false, :inline_label => true
-  = render 'shared/group_form_fields', f: f, captured: captured
-  .form-actions
-    = f.button :submit
-    = link_to t('ui.or_cancel'), :back
+      - if FoodsoftConfig[:use_apple_points]
+        = f.input :ignore_apple_restriction, :label => false, :inline_label => true, wrapper: :horizontal_boolean
+    = render 'shared/group_form_fields', f: f, captured: captured
+    %div
+      = f.button :submit
+      = link_to t('ui.or_cancel'), :back

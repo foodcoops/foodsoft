@@ -1,5 +1,6 @@
-= simple_form_for order_comment, remote: true, html: {class: 'form-vertical'} do |f|
-  = f.hidden_field :order_id
-  = f.hidden_field :user_id
-  = f.input :text, input_html: {class: 'input-xlarge', rows: '5'}
-  = f.submit class: 'btn'
+.col-md-3
+  = simple_form_for order_comment, remote: true, wrapper: :vertical_form do |f|
+    = f.hidden_field :order_id
+    = f.hidden_field :user_id
+    = f.input :text, input_html: {class: 'col-md-3', rows: '5', cols: '3'}
+    = f.button :submit

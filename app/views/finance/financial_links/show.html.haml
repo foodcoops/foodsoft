@@ -30,7 +30,7 @@
         %td= sanitize item[:description]
         %td.numeric{style: 'width:5em'}= format_currency item[:amount]
         %td= link_to t('.remove_from_link'), item[:remove_path], :data => {:confirm => t('.remove_from_link_confirm')}, :method => :delete,
-          class: 'btn btn-danger btn-mini'
+          class: 'btn btn-danger btn-xs'
 
 %p
   = @financial_link.note

@@ -1,7 +1,7 @@
 .pull-right
   .btn-group
-    = link_to url_for(query: params[:query], format: :csv), class: 'btn' do
-      = glyph :download
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-default' do
+      = fa_icon :download
       CSV
   - if @bank_transactions.total_pages > 1
     .btn-group= items_per_page wrap: false
@@ -26,4 +26,4 @@
             = link_to t('ui.show'), finance_link_path(t.financial_link)
           - else
             = link_to t('.add_financial_link'), finance_links_path(bank_transaction: t.id),
-                      method: :post, class: 'btn btn-success btn-mini'
+                      method: :post, class: 'btn btn-success btn-xs'

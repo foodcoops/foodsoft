@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails'
   s.add_dependency 'mollie-api-ruby'
   s.metadata['rubygems_mfa_required'] = 'true'
-  s.required_ruby_version = '>= 2.7'
+  s.required_ruby_version = '>= 3.3'
 end

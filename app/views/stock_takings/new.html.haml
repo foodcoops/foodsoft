@@ -21,11 +21,11 @@
 
 = simple_form_for(@stock_taking) do |f|
   = f.input :date, as: :date_picker
-  = f.input :note, :input_html => {:size => "28x7", :value => "#{show_user @current_user, unique: true}: ..."}
+  = f.input :note, :input_html => {:size => "28x7", :value => "#{show_user @current_user, unique: true}: ...", class: "form-control"}
   %h2= t '.stock_articles'
 
   #stock_changes
     = render :partial => 'stock_change', :collection => @stock_taking.stock_changes
-  .form-actions
-    = f.submit class: 'btn'
+  %div
+    = f.button :submit
     = link_to t('ui.or_cancel'), stock_takings_path

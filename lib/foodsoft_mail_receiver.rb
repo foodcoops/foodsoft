@@ -2,10 +2,10 @@ require 'mail'
 require 'midi-smtp-server'
 
 class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
-  @@registered_classes = Set.new
+  @registered_classes = Set.new
 
   def self.register(klass)
-    @@registered_classes.add klass
+    @registered_classes.add klass
   end
 
   def self.received(recipient, data)
@@ -16,6 +16,25 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
     super
     @handlers = []
   end
+
+  def self.find_handler(recipient)
+    m = /(?<foodcoop>[^@.]+)\.(?<address>[^@]+)(?:@(?<hostname>[^@]+))?/.match recipient
+    raise 'recipient is missing or has an invalid format' if m.nil?
+    raise "Foodcoop '#{m[:foodcoop]}' could not be found" unless FoodsoftConfig.allowed_foodcoop? m[:foodcoop]
+
+    FoodsoftConfig.select_multifoodcoop m[:foodcoop]
+
+    @registered_classes.each do |klass|
+      if match = klass.regexp.match(m[:address])
+        handler = klass.new match
+        return ->(data) { handler.received(data) }
+      end
+    end
+
+    raise 'invalid format for recipient'
+  end
+
+  private_class_method :find_handler
 
   private
 
@@ -37,22 +56,5 @@ class FoodsoftMailReceiver < MidiSmtpServer::Smtpd
     raise e
   ensure
     @handlers.clear
-  end
-
-  def self.find_handler(recipient)
-    m = /(?<foodcoop>[^@.]+)\.(?<address>[^@]+)(@(?<hostname>[^@]+))?/.match recipient
-    raise 'recipient is missing or has an invalid format' if m.nil?
-    raise "Foodcoop '#{m[:foodcoop]}' could not be found" unless FoodsoftConfig.allowed_foodcoop? m[:foodcoop]
-
-    FoodsoftConfig.select_multifoodcoop m[:foodcoop]
-
-    @@registered_classes.each do |klass|
-      if match = klass.regexp.match(m[:address])
-        handler = klass.new match
-        return ->(data) { handler.received(data) }
-      end
-    end
-
-    raise 'invalid format for recipient'
   end
 end

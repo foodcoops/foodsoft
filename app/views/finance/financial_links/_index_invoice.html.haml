@@ -1,20 +1,22 @@
-.modal-header
-  = close_button :modal
-  %h3= t('.title')
-.modal-body
-  %table.table.table-striped
-    %thead
-      %tr
-        %th= heading_helper Invoice, :number
-        %th= heading_helper Invoice, :supplier
-        %th= heading_helper Invoice, :date
-        %th= heading_helper Invoice, :amount
-    %tbody
-      - for invoice in @invoices
-        %tr
-          %td= link_to h(invoice.number), add_invoice_finance_link_path(@financial_link, invoice: invoice.id), method: :put
-          %td= invoice.supplier.name
-          %td= format_date invoice.date
-          %td= number_to_currency invoice.amount
-.modal-footer
-  = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+.modal-dialog
+  .modal-content
+    .modal-header
+      = close_button :modal
+      %h3= t('.title')
+    .modal-body
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= heading_helper Invoice, :number
+            %th= heading_helper Invoice, :supplier
+            %th= heading_helper Invoice, :date
+            %th= heading_helper Invoice, :amount
+        %tbody
+          - for invoice in @invoices
+            %tr
+              %td= link_to h(invoice.number), add_invoice_finance_link_path(@financial_link, invoice: invoice.id), method: :put
+              %td= invoice.supplier.name
+              %td= format_date invoice.date
+              %td= number_to_currency invoice.amount
+    .modal-footer
+      = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}

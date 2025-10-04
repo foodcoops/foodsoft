@@ -26,8 +26,7 @@
   %thead
     %tr
       %th
-        .input-append
-        = text_field_tag :article, params[:article], placeholder: (heading_helper Article, :name), class: 'delayed-search resettable search-query'
+        = text_field_tag :article, params[:article], placeholder: (heading_helper Article, :name), class: 'form-control delayed-search resettable search-query'
       %th= heading_helper Article, :order_number
       %th= t('.amount')
       %th= heading_helper Article, :unit
@@ -39,8 +38,8 @@
         - unless @order.closed?
           .btn-group
             = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
-              class: 'btn btn-small'
-            = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-small dropdown-toggle' do
+              class: 'btn btn-default btn-sm'
+            = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default btn-sm dropdown-toggle' do
               %span.caret
             %ul.dropdown-menu
               %li= link_to t('.add_article'), new_order_order_article_path(@order), remote: true
@@ -60,4 +59,4 @@
         %td{ colspan: 5 }= heading_helper Order, :transport
         %td{ colspan: 3, data: {value: @order.transport} }= number_to_currency(@order.transport)
         %td= link_to t('ui.edit'), edit_transport_finance_order_path(@order), remote: true,
-          class: 'btn btn-mini' unless order_article.order.closed?
+          class: 'btn btn-default btn-xs' unless order_article.order.closed?

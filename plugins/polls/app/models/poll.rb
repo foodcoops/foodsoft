@@ -14,9 +14,9 @@ class Poll < ActiveRecord::Base
   has_many :poll_votes, dependent: :destroy
 
   validates_presence_of :name, :choices
-  serialize :choices, Array
-  serialize :required_ordergroup_custom_fields, Array
-  serialize :required_user_custom_fields, Array
+  serialize :choices, type: Array, coder: YAML
+  serialize :required_ordergroup_custom_fields, type: Array, coder: YAML
+  serialize :required_user_custom_fields, type: Array, coder: YAML
   enum voting_method: { event: 0, single_select: 1, multi_select: 2, points: 3, resistance_points: 4 }
 
   include DateTimeAttributeValidate

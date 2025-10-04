@@ -1,32 +1,33 @@
-= config_input form, :price_markup do
-  .input-append
-    = config_input_field form, :price_markup, as: :decimal, class: 'input-mini'
-    %span.add-on %
-= config_input form, :tax_default do
-  .input-append
-    = config_input_field form, :tax_default, as: :decimal, class: 'input-mini'
-    %span.add-on %
-= config_input form, :minimum_balance do
-  .input-prepend
-    %span.add-on= t 'number.currency.format.unit'
-    = config_input_field form, :minimum_balance, as: :decimal, class: 'input-small'
-= config_input form, :charge_members_manually, as: :boolean
-= config_input form, :use_iban, as: :boolean
-= config_input form, :use_financial_links, as: :boolean
-= config_input form, :use_self_service, as: :boolean
-
-%h4= t '.schedule_title'
-= form.simple_fields_for :order_schedule do |fields|
-  #boxfill-schedule.collapse{class: ('in' if FoodsoftConfig[:use_boxfill])}
-    = fields.simple_fields_for 'boxfill' do |fields|
-      .fold-line
-        = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}
-        = config_input fields, 'time', input_html: {class: 'input-mini'}
-  = fields.simple_fields_for 'ends' do |fields|
-    .fold-line
-      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'input-xlarge'}, allow_blank: true
-      = config_input fields, 'time', input_html: {class: 'input-mini'}
-  -# can't use collapse and tooltip on same element :/
-  = config_input form, :use_boxfill, as: :boolean do
-    = config_tooltip form, :use_boxfill do
-      = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}
+.col-md-4
+  = config_input form, :price_markup do
+    .input-group
+      = config_input_field form, :price_markup, as: :decimal, class: 'form-control'
+      .input-group-addon %
+  = config_input form, :tax_default do
+    .input-group
+      = config_input_field form, :tax_default, as: :decimal, class: 'form-control'
+      .input-group-addon %
+  = config_input form, :minimum_balance do
+    .input-group
+      .input-group-addon= t 'number.currency.format.unit'
+      = config_input_field form, :minimum_balance, as: :decimal, class: 'form-control'
+  = config_input form, :charge_members_manually, as: :boolean
+  = config_input form, :use_iban, as: :boolean
+  = config_input form, :use_financial_links, as: :boolean
+  = config_input form, :use_self_service, as: :boolean
+  %h4= t '.schedule_title'
+  = form.simple_fields_for :order_schedule do |fields|
+    #boxfill-schedule.collapse{class: ('in' if FoodsoftConfig[:use_boxfill])}
+      = fields.simple_fields_for 'boxfill' do |fields|
+        = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-control'}
+        = config_input fields, 'time', input_html: {class: 'form-control'}
+    = fields.simple_fields_for 'ends' do |fields|
+      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-control'}, allow_blank: true
+      = config_input fields, 'time', input_html: {class: 'form-control'}
+    -# can't use collapse and tooltip on same element :/
+    .row
+      .col-sm-3
+      .col-sm-9
+        = config_tooltip form, :use_boxfill do
+          = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}, wrapper: :horizontal_boolean
+        = fields.label :use_boxfill

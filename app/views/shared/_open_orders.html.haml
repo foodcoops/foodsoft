@@ -1,7 +1,7 @@
 %section
   %h2= t '.title'
   - if ordergroup.not_enough_apples?
-    .alert
+    .alert.alert-warning
       = t '.not_enough_apples'
   - orders = Order.open.started
   - unless orders.empty?

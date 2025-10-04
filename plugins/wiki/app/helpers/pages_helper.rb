@@ -9,7 +9,7 @@ module PagesHelper
     FoodsoftWiki::WikiParser.new(data: body + "\n", params: { referer: title }).to_html(noedit: true).html_safe
   rescue StandardError => e
     # try the following with line breaks: === one === == two == = three =
-    content_tag :span, class: 'alert alert-error' do
+    content_tag :span, class: 'alert alert-danger' do
       I18n.t '.wikicloth_exception', msg: e
     end.html_safe
   end
@@ -38,7 +38,7 @@ module PagesHelper
   end
 
   def generate_toc(body)
-    toc = String.new
+    toc = ''
     body.gsub(/^(={1,6})\s*(.*?)\s*(\1)/) do
       number = ::Regexp.last_match(1).length - 1
       name = ::Regexp.last_match(2)

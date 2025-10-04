@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
   attr_accessor :ignore_warnings, :transport_distribution
 
+  attribute :transport_distribution, :integer
+
   # Associations
   has_many :order_articles, dependent: :destroy
   has_many :article_versions, through: :order_articles
@@ -15,8 +17,8 @@ class Order < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', foreign_key: 'updated_by_user_id'
   belongs_to :created_by, class_name: 'User', foreign_key: 'created_by_user_id'
 
-  enum end_action: { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
-  enum transport_distribution: { skip: 0, ordergroup: 1, price: 2, articles: 3 }
+  enum :end_action, { no_end_action: 0, auto_close: 1, auto_close_and_send: 2, auto_close_and_send_min_quantity: 3 }
+  enum :transport_distribution, { skip: 0, ordergroup: 1, price: 2, articles: 3 }
 
   # Validations
   validates :starts, presence: true
@@ -28,7 +30,7 @@ class Order < ApplicationRecord
   after_save :save_order_articles, :update_price_of_group_orders!
 
   # Finders
-  scope :started, -> { where('starts <= ?', Time.now) }
+  scope :started, -> { where(starts: ..Time.now) }
   scope :closed, -> { where(state: 'closed').order(ends: :desc) }
   scope :stockit, -> { where(supplier_id: nil).order(ends: :desc) }
   scope :recent, -> { order(starts: :desc).limit(10) }
@@ -104,7 +106,7 @@ class Order < ApplicationRecord
   end
 
   def finished?
-    state == 'finished' || state == 'received'
+    %w[finished received].include?(state)
   end
 
   def received?
@@ -353,8 +355,7 @@ class Order < ApplicationRecord
   end
 
   def self.finish_ended!
-    orders = Order.where.not(end_action: Order.end_actions[:no_end_action]).where(state: 'open').where('ends <= ?',
-                                                                                                       DateTime.now)
+    orders = Order.where.not(end_action: Order.end_actions[:no_end_action]).where(state: 'open').where(ends: ..DateTime.now)
     orders.each do |order|
       order.do_end_action!
     rescue StandardError => e

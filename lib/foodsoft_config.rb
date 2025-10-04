@@ -66,9 +66,9 @@ class FoodsoftConfig
       Rails.logger.info "Loading app configuration from #{APP_CONFIG_FILE}"
       APP_CONFIG.clear.merge! YAML.load(ERB.new(File.read(File.expand_path(filename, Rails.root))).result)
       # Gather program-default configuration
-      self.default_config = get_default_config
+      self.default_config = initial_default_config
       # Load initial config from development or production
-      set_config Rails.env
+      setup_config Rails.env
       # Overwrite scope to have a better namescope than 'production'
       self.scope = config[:default_scope] or raise 'No default_scope is set'
       # Set defaults for backward-compatibility
@@ -89,7 +89,7 @@ class FoodsoftConfig
     # Only needed in multi coop mode.
     # @param foodcoop [String, Symbol] Foodcoop to select.
     def select_foodcoop(foodcoop)
-      set_config foodcoop
+      setup_config foodcoop
       setup_database
       setup_mailing
     end
@@ -130,9 +130,8 @@ class FoodsoftConfig
     # If value is equal to what's defined in the configuration file, remove key from the database.
     # @param key [String, Symbol] Key
     # @param value [Object] Value
-    # @return [Boolean] Whether storing succeeded (fails when key is not allowed to be set in database).
     def []=(key, value)
-      return false unless allowed_key?(key)
+      return unless allowed_key?(key)
 
       value = normalize_value value
       # then update database
@@ -141,6 +140,7 @@ class FoodsoftConfig
         begin
           RailsSettings::CachedSettings.destroy "foodcoop.#{scope}.#{key}"
         rescue RailsSettings::Settings::SettingNotFound
+          # Setting not found, do nothing
         end
       else
         # or store
@@ -220,7 +220,7 @@ class FoodsoftConfig
 
     private
 
-    def set_config(foodcoop)
+    def setup_config(foodcoop)
       raise "No config for this environment (#{foodcoop}) available!" if APP_CONFIG[foodcoop].nil?
 
       self.config = APP_CONFIG[foodcoop]
@@ -251,7 +251,7 @@ class FoodsoftConfig
     # @return [Hash] Program-default foodcoop configuration.
     # @see #default_config
     # @see #set_missing
-    def get_default_config
+    def initial_default_config
       cfg = {
         use_nick: true,
         use_apple_points: true,

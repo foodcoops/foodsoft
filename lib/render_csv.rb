@@ -14,7 +14,7 @@ class RenderCsv
 
   def to_csv
     options = @options.select { |k| %w[col_sep row_sep].include? k.to_s }
-    ret = CSV.generate options do |csv|
+    ret = CSV.generate(**options) do |csv|
       if h = header
         csv << h
       end

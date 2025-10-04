@@ -69,11 +69,13 @@ Gemspec/DevelopmentDependencies:
 # Include: **/*.gemspec
 Gemspec/RequiredRubyVersion:
   Exclude:
+    - 'plugins/b85/foodsoft_b85.gemspec'
     - 'plugins/current_orders/foodsoft_current_orders.gemspec'
     - 'plugins/discourse/foodsoft_discourse.gemspec'
     - 'plugins/documents/foodsoft_documents.gemspec'
     - 'plugins/links/foodsoft_links.gemspec'
     - 'plugins/messages/foodsoft_messages.gemspec'
+    - 'plugins/mollie/foodsoft_mollie.gemspec'
     - 'plugins/polls/foodsoft_polls.gemspec'
     - 'plugins/printer/foodsoft_printer.gemspec'
     - 'plugins/uservoice/foodsoft_uservoice.gemspec'
@@ -255,6 +257,7 @@ Metrics/AbcSize:
 # AllowedMethods: refine
 Metrics/BlockLength:
   Max: 80
+  AllowedMethods: ['setup']
 
 # Offense count: 5
 # Configuration parameters: CountBlocks.
@@ -370,7 +373,7 @@ RSpec/BeforeAfterAll:
 # Offense count: 10
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnabledMethods.
-RSpec/Capybara/FeatureMethods:
+RSpec/Dialect:
   Exclude:
     - 'spec/integration/article_units_spec.rb'
     - 'spec/integration/articles_spec.rb'
@@ -433,7 +436,7 @@ RSpec/ExampleLength:
 # Offense count: 3
 # Configuration parameters: Include, CustomTransform, IgnoreMethods, SpecSuffixOnly.
 # Include: **/*_spec*rb*, **/spec/**/*
-RSpec/FilePath:
+Rails/FilePath:
   Exclude:
     - 'spec/integration/article_units_spec.rb'
     - 'spec/integration/articles_spec.rb'
@@ -502,7 +505,7 @@ RSpec/PredicateMatcher:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: not_to, be_invalid
-RSpec/Rails/NegationBeValid:
+RSpecRails/NegationBeValid:
   Exclude:
     - 'spec/models/article_spec.rb'
     - 'spec/models/order_spec.rb'

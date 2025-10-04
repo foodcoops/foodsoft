@@ -112,22 +112,22 @@ class OrderPdf < RenderPdf
              .pluck('groups.name', 'SUM(group_orders.price)', 'ordergroup_id', 'SUM(group_orders.transport)')
 
     result.map do |item|
-      [item.first || stock_ordergroup_name] + item[1..-1]
+      [item.first || stock_ordergroup_name] + item[1..]
     end
   end
 
-  def each_order_article(&block)
-    order_articles.each(&block)
+  def each_order_article(&)
+    order_articles.each(&)
   end
 
-  def each_ordergroup(&block)
-    ordergroups.each(&block)
+  def each_ordergroup(&)
+    ordergroups.each(&)
   end
 
   def each_ordergroup_batch(batch_size)
     offset = 0
 
-    while true
+    loop do
       go_records = ordergroups(offset, batch_size)
 
       break unless go_records.any?
@@ -152,16 +152,16 @@ class OrderPdf < RenderPdf
     end
   end
 
-  def each_group_order_article_for_order_article(order_article, &block)
-    order_article.group_order_articles.each(&block)
+  def each_group_order_article_for_order_article(order_article, &)
+    order_article.group_order_articles.each(&)
   end
 
-  def each_group_order_article_for_ordergroup(ordergroup, &block)
+  def each_group_order_article_for_ordergroup(ordergroup, &)
     group_order_articles(ordergroup)
       .includes(order_article: { article_version: { article: :supplier } })
       .order('suppliers.name, article_versions.name')
       .preload(order_article: %i[article_version order])
-      .each(&block)
+      .each(&)
   end
 
   def stock_ordergroup_name

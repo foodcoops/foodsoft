@@ -9,23 +9,22 @@
 .lead= FoodsoftConfig[:name]
 
 %noscript
-  .alert.alert-error
+  .alert.alert-danger
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")
 
-= form_tag sessions_path, class: 'form-horizontal' do
-  .control-group
-    %label(for='nick' class='control-label')
-      = User.human_attribute_name (FoodsoftConfig[:use_nick] ? :user : :email)
-    .controls
-      = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off'
-
-  .control-group
-    %label(for='password' class='control-label')
-      = User.human_attribute_name :password
-    .controls
-      = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off'
-
-  .control-group
-    .controls
-      = submit_tag t('.login'), class: 'btn'
-      = link_to t('.forgot_password'), forgot_password_path
+.row
+  .col-sm-12
+    = form_tag sessions_path do
+      .form-group
+        %label(for='nick')
+          = User.human_attribute_name (FoodsoftConfig[:use_nick] ? :user : :email)
+        = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
+    
+      .form-group
+        %label(for='password' class='control-label')
+          = User.human_attribute_name :password
+        = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
+    
+      .form-group
+        = submit_tag t('.login'), class: 'btn btn-default'
+        = link_to t('.forgot_password'), forgot_password_path

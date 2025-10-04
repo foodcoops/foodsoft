@@ -1,12 +1,9 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.0.8'
+gem 'rails', '~> 7.2.2'
 
-gem 'less-rails'
-gem 'sassc-rails'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'sassc-rails', '>= 2.1.0'
 
 gem 'bootsnap', require: false
 gem 'bootstrap-datepicker-rails'
@@ -21,10 +18,12 @@ gem 'select2-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts_as_tree'
 gem 'attribute_normalizer'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
-gem 'haml', '~> 5.0'
+gem 'font-awesome-rails'
+gem 'haml', '~> 5.2', '>= 5.2.2'
 gem 'haml-rails'
 gem 'ice_cube'
 gem 'inherited_resources'
@@ -41,13 +40,13 @@ gem 'ransack'
 gem 'resque'
 gem 'ruby-units'
 gem 'simple_form'
-gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
-gem 'simple-navigation-bootstrap'
+gem 'simple-navigation'
+gem 'simple_navigation_bootstrap'
 gem 'sprockets', '< 4'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
-gem 'uri', '= 0.10.0.2' # TODO: remove this when updated to ruby 3.x
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
+gem 'concurrent-ruby', '1.3.4'
+gem 'csv'
 gem 'exception_notification'
 gem 'gaffe'
 gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
@@ -55,6 +54,8 @@ gem 'image_processing', '~> 1.12'
 gem 'importmap-rails', '~> 1.1'
 gem 'midi-smtp-server'
 gem 'mime-types'
+gem 'mutex_m'
+gem 'psych', '3.3.2'
 gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
 gem 'roo'
 gem 'roo-xls'
@@ -64,8 +65,8 @@ gem 'ruby-filemagic'
 gem 'spreadsheet'
 gem 'terser', '~> 1.1'
 
-# we use the git version of acts_as_versioned, and need to include it in this Gemfile
-gem 'acts_as_versioned', git: 'https://github.com/technoweenie/acts_as_versioned.git'
+# we use a fork with Ruby 3 support of acts_as_versioned, and need to include it in this Gemfile
+gem 'acts_as_versioned', git: 'https://github.com/assembla/acts_as_versioned.git'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
 gem 'foodsoft_documents', path: 'plugins/documents'
 gem 'foodsoft_links', path: 'plugins/links'
@@ -83,7 +84,7 @@ gem 'foodsoft_wiki', path: 'plugins/wiki'
 group :development do
   gem 'listen'
   gem 'mailcatcher'
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.7'
   gem 'web-console'
 
   # Better error output
@@ -103,8 +104,11 @@ end
 group :development, :test do
   gem 'rails-erd', '~> 1.7'
   gem 'rubocop', require: false
+  gem 'rubocop-capybara', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec_rails', require: false
   gem 'ruby-prof', require: false
 
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue

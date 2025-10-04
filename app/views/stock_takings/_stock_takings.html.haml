@@ -14,6 +14,6 @@
         %td= link_to format_date(stock_taking.date), stock_taking
         %td= truncate stock_taking.note
         %td
-          = link_to t('ui.edit'), edit_stock_taking_path(stock_taking), class: 'btn btn-mini'
+          = link_to t('ui.edit'), edit_stock_taking_path(stock_taking), class: 'btn btn-default btn-xs'
           = link_to t('ui.delete'), stock_taking, :data => {:confirm => t('.confirm_delete')}, :method => :delete,
-            class: 'btn btn-mini btn-danger'
+            class: 'btn btn-xs btn-danger'

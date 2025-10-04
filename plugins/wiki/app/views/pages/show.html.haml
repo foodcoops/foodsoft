@@ -5,7 +5,7 @@
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
       %i.icon-edit= t '.edit'
   .well.well-small
-    %ul.nav.nav-list
+    %ul.nav
       %li
       %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
       - unless @page.children.empty?
@@ -14,7 +14,7 @@
   #versions.well.well-small{:style => "display:none"}
     = form_tag diff_page_path(@page), :method => :get do
       %h3= t '.title_versions'
-      %ul.unstyled
+      %ul.list-unstyled
         - @page.versions.reverse.each_with_index do |version, index|
           %li
             = radio_button_tag :old, version.lock_version, index == 1
@@ -26,7 +26,7 @@
   - unless @page.children.empty?
     #subpages.well.well-small{:style => "display:none"}
       %h3= t '.subpages'
-      %ul.unstyled
+      %ul.list-unstyled
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
 

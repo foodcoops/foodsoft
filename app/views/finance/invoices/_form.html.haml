@@ -1,45 +1,49 @@
-= simple_form_for([:finance, @invoice]) do |f|
-  - if @invoice.created_at
-    .fold-line
-      .control-group
-        %label.control-label{for: 'created_at'}
-          = Invoice.human_attribute_name(:created_at)
-        .controls.control-text#article_fc_price
-          = format_date @invoice.created_at
-      .control-group
-        %label.control-label{for: 'created_by'}
-          = Invoice.human_attribute_name(:created_by)
-        .controls.control-text#article_fc_price
-          = show_user @invoice.created_by
-  = f.association :supplier, collection: Supplier.order(:name), hint: false
-  - if Delivery.any?
-    = f.association :deliveries, collection: @deliveries_collection, input_html: {size: 10}, multiple: true, label_method: method(:format_delivery_item)
-  = f.association :orders, collection: @orders_collection, multiple: true, label_method: method(:format_order_item)
-  = f.input :number
-  = f.input :date, as: :date_picker
-  - if current_user.role_finance?
-    = f.input :paid_on, as: :date_picker
-  = f.input :amount, as: :string
-  = f.input :deposit, as: :string
-  = f.input :deposit_credit, as: :string
-  = render 'shared/custom_form_fields', f: f, type: :invoice
-  = f.input :attachments, as: :file, hint: t('.attachment_hint'), input_html: {multiple: true}, direct_upload: true
-  - if f.object.attachments.attached?
-    .control-group
-      %label.control-label
-        = t('ui.delete_attachment')
-      - f.object.attachments.reject(&:new_record?).each do |attachment|
-        .controls.control-text{id: "attachment_#{attachment.id}"}
-          = f.hidden_field :attachments, value: attachment.signed_id, multiple: true
-          = link_to url_for(attachment), target: "_blank" do
-            = image_tag attachment.preview(resize_to_limit: [100, 100]) if attachment.previewable?
-            = image_tag attachment.variant(resize_to_limit: [100, 100]) if attachment.variable?
-          = link_to 'Delete', delete_attachment_finance_invoice_path(f.object, attachment_id: attachment.id), method: :delete, remote: true, class: 'btn'
-          %label= attachment.filename
-          %hr
-  = f.input :note
-  .form-actions
-    = f.submit class: 'btn'
-    = link_to t('ui.or_cancel'), :back
+.col-md-4 
+  = simple_form_for([:finance, @invoice]) do |f|
+    - if @invoice.created_at
+      .row
+        .form-group
+          .col-sm-3{style: 'text-align: right'}
+            %label.control-label{for: 'created_at'}
+              = Invoice.human_attribute_name(:created_at)
+          .control-text#article_fc_price
+            = format_date @invoice.created_at
+        .form-group
+          .col-sm-3{style: 'text-align: right'}
+            %label.control-label{for: 'created_by'}
+              = Invoice.human_attribute_name(:created_by)
+          .control-text#article_fc_price
+            = show_user @invoice.created_by
+    .row{style: 'padding-top: 20px'}
+      = f.association :supplier, collection: Supplier.order(:name), hint: false
+      - if Delivery.any?
+        = f.association :deliveries, collection: @deliveries_collection, input_html: {size: 10}, multiple: true, label_method: method(:format_delivery_item)
+      = f.association :orders, collection: @orders_collection, multiple: true, label_method: method(:format_order_item)
+      = f.input :number
+      = f.input :date, as: :date_picker
+      - if current_user.role_finance?
+        = f.input :paid_on, as: :date_picker
+      = f.input :amount, as: :string
+      = f.input :deposit, as: :string
+      = f.input :deposit_credit, as: :string
+      = render 'shared/custom_form_fields', f: f, type: :invoice
+      = f.input :attachments, as: :file, hint: t('.attachment_hint'), input_html: {multiple: true}, direct_upload: true
+      - if f.object.attachments.attached?
+        .form-group
+          %label.control-label
+            = t('ui.delete_attachment')
+          - f.object.attachments.reject(&:new_record?).each do |attachment|
+            .control-text{id: "attachment_#{attachment.id}"}
+              = f.hidden_field :attachments, value: attachment.signed_id, multiple: true
+              = link_to url_for(attachment), target: "_blank" do
+                = image_tag attachment.preview(resize_to_limit: [100, 100]) if attachment.previewable?
+                = image_tag attachment.variant(resize_to_limit: [100, 100]) if attachment.variable?
+              = link_to 'Delete', delete_attachment_finance_invoice_path(f.object, attachment_id: attachment.id), method: :delete, remote: true, class: 'btn'
+              %label= attachment.filename
+              %hr
+      = f.input :note
+      %div
+        = f.button :submit
+        = link_to t('ui.or_cancel'), :back
 
-= render :partial => 'form_js', :locals => {:invoice_id => invoice_id}
+  = render :partial => 'form_js', :locals => {:invoice_id => invoice_id}

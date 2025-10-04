@@ -2,7 +2,7 @@
 
 - content_for :actionbar do
   .btn-group
-    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
+    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
       = t '.change_supplier'
       %span.caret
     %ul.dropdown-menu
@@ -11,9 +11,9 @@
 
 .well.well-small
   .btn-toolbar
-    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'form-search pull-right',
+    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'pull-right',
       'data-submit-onchange' => true do
-      = text_field_tag :query, params[:query], class: 'input-medium search-query',
+      = text_field_tag :query, params[:query], class: 'form-control',
         placeholder: t('.search_placeholder')
 
     - unless @supplier.supplier_remote_source.blank?
@@ -26,18 +26,18 @@
       = link_to t('.migrate_units') + '...', prepare_units_migration_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?
     .btn-group
       = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' if @supplier.supplier_remote_source.nil?}"
-      = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn'
-      = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn'
-      = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn'
+      = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn btn-default'
+      = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn btn-default'
+      = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn btn-default'
       - if current_user.role_orders?
-        = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn'
+        = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn btn-default'
 
 - unless @supplier.supplier_remote_source.blank?
   #import.well.well-small(style="display:none;")
-    = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true, class: 'form-search',
+    = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true,
       'data-submit-onchange' => true do
       %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em;'}= t('.import.title') + ' '
-      = text_field_tag "name", "", class: 'input-medium search-query',
+      = text_field_tag "name", "", class: 'form-control',
         placeholder: t('.import.placeholder')
       %label.checkbox
         = check_box_tag "origin", "REG", false
@@ -47,7 +47,7 @@
         = collection_select :article_category, :id, ArticleCategory.all, :id, :name,
           {include_blank: true}, {'data-ignore-onchange' => true}
       #search_results.clearfix
-    = link_to t('ui.close'), "#import", 'data-toggle-this' => '#import', class: 'btn'
+    = link_to t('ui.close'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-default'
 
 = form_tag update_selected_supplier_articles_path(@supplier), id: "articlesInListForm",
   'data-submit-onchange' => true do

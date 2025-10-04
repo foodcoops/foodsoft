@@ -9,7 +9,7 @@ class ArticleForm {
       this.articleForm$ = articleForm$;
       this.unitConversionPopoverTemplate$ = $('#unit_conversion_popover_content_template');
       this.unit$ = $(`#${this.unitFieldsIdPrefix}_unit`, this.articleForm$);
-      this.customUnitWarning$ = $('.icon-warning-sign', this.articleForm$);
+      this.customUnitWarning$ = $('.glyphicon.glyphicon-warning-sign', this.articleForm$);
       this.supplierUnitSelect$ = $(`#${this.unitFieldsIdPrefix}_supplier_order_unit`, this.articleForm$);
       this.unitRatiosTable$ = $('#fc_base_price', this.articleForm$);
       this.minimumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_minimum_order_quantity`, this.articleForm$);
@@ -237,8 +237,8 @@ class ArticleForm {
       : undefined;
     const unitVal = $(`#${this.unitFieldsIdPrefix}_unit`).val();
     this.minimumOrderQuantity$
-      .parents('.input-append')
-      .find('.add-on')
+      .parents('.input-group')
+      .find('.input-group-addon')
       .text(chosenOptionLabel !== undefined ? chosenOptionLabel : unitVal);
 
     const converter = this.getUnitsConverter();
@@ -401,7 +401,7 @@ class ArticleForm {
     }
 
     this.updateUnitsInSelect(availableUnits, this.billingUnit$);
-    this.billingUnit$.parents('.fold-line').css('display', availableUnits.length > 1 ? 'block' : 'none');
+    this.billingUnit$.parents('.form-group').css('display', availableUnits.length > 1 ? 'block' : 'none');
     this.updateUnitsInSelect(availableUnits, this.groupOrderUnit$);
     this.updateUnitsInSelect(availableUnits, this.priceUnit$);
   }
@@ -428,10 +428,10 @@ class ArticleForm {
 
     unitSelect$.trigger('change');
 
-    unitSelect$.parents('.control-group').find('.immutable_unit_label').remove();
+    unitSelect$.parents('.price-unit-wrapper').find('.immutable_unit_label').remove();
     if (units.length === 1) {
       unitSelect$.hide();
-      unitSelect$.parents('.control-group').append($(`<div class="immutable_unit_label control-label">${units[0].label}</div>`))
+      unitSelect$.after($(`<div class="immutable_unit_label control-label pull-left">${units[0].label}</div>`))
     } else {
       unitSelect$.show();
     }
@@ -443,7 +443,7 @@ class ArticleForm {
 
     const supplierOrderUnitSet = !!this.unit$.val() || !!this.supplierUnitSelect$.val();
     const unitRatiosVisible = supplierOrderUnitSet || this.unitRatiosTable$.find('tbody tr').length > 0;
-    this.unitRatiosTable$.parents('.fold-line').toggle(unitRatiosVisible);
+    this.unitRatiosTable$.parents('.form-group').toggle(unitRatiosVisible);
 
     if (!unitRatiosVisible) {
       $('tbody tr', this.unitRatiosTable$).remove();
@@ -504,7 +504,7 @@ class ArticleForm {
     const inputs$ = mergeJQueryObjects([this.unitsToOrder$, this.unitsReceived$]);
     inputs$.parent().find('.unit_label').remove();
     if (billingUnitLabel.trim() !== '') {
-      inputs$.after($(`<span class="unit_label ml-1">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
+      inputs$.after($(`<span class="unit_label ml-1" style:"align-self:center">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
     }
     if (this.previousBillingUnit !== undefined) {
       this.convertOrderedAndReceivedUnits(this.previousBillingUnit, billingUnitKey);

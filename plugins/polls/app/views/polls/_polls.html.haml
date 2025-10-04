@@ -16,8 +16,8 @@
         %td= format_date poll.ends
         %td
           - if poll.user_can_vote?(current_user)
-            = link_to t('.vote'), vote_poll_path(poll), class: 'btn btn-mini btn-success'
+            = link_to t('.vote'), vote_poll_path(poll), class: 'btn btn-xs btn-success'
           - if poll.user_can_edit?(current_user)
-            = link_to t('ui.edit'), edit_poll_path(poll), class: 'btn btn-mini'
+            = link_to t('ui.edit'), edit_poll_path(poll), class: 'btn btn-default btn-xs'
             = link_to t('ui.delete'), poll, :data => {:confirm => t('ui.confirm_delete', name: poll.name)},
-              :method => :delete, class: 'btn btn-mini btn-danger'
+              :method => :delete, class: 'btn btn-xs btn-danger'

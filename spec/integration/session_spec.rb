@@ -11,12 +11,12 @@ feature 'the session' do
 
     it 'logs me in' do
       login user
-      expect(page).to have_no_css('.alert-error')
+      expect(page).to have_no_css('.alert-danger')
     end
 
     it 'does not log me in with wrong password' do
       login user.nick, 'XX' + user.password
-      expect(page).to have_css('.alert-error')
+      expect(page).to have_css('.alert-danger')
     end
 
     it 'can log me in using an email address' do
@@ -24,7 +24,7 @@ feature 'the session' do
       fill_in 'nick', with: user.email
       fill_in 'password', with: user.password
       find('input[type=submit]').click
-      expect(page).to have_no_css('.alert-error')
+      expect(page).to have_no_css('.alert-danger')
     end
   end
 end

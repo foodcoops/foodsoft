@@ -5,7 +5,7 @@ module GroupOrderArticlesHelper
     if goa.group_order.order.finished? && current_user.role_finance?
       order_article = goa.order_article
       article_version = order_article.article_version
-      simple_form_for goa, remote: true, html: { 'data-submit-onchange' => 'changed', class: 'delta-input' } do |f|
+      simple_form_for goa, remote: true, html: { 'data-submit-onchange' => 'changed', class: 'form-inline' } do |f|
         quantity_data = ratio_quantity_data(order_article, order_article.article_version.billing_unit)
         converted_value = if convert_to_billing_unit
                             article_version.convert_quantity(goa.result,
@@ -18,7 +18,7 @@ module GroupOrderArticlesHelper
           input_data = input_data.merge('multiply-before-submit': article_version.convert_quantity(1,
                                                                                                    article_version.billing_unit, article_version.group_order_unit))
         end
-        f.input_field(:result, as: :delta, class: 'input-nano', data: input_data, id: "r_#{goa.id}",
+        f.input_field(:result, as: :delta, class: 'form-control', style: 'width:100px', data: input_data, id: "r_#{goa.id}",
                                value: format_number(converted_value, 3))
       end
     else

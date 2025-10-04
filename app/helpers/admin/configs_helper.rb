@@ -78,7 +78,7 @@ module Admin::ConfigsHelper
   # @param form [ActionView::Helpers::FormBuilder] Form object.
   # @param key [Symbol, String] Configuration key of a boolean (e.g. +use_messages+).
   # @option options [String] :label Label to show
-  def config_use_heading(form, key, options = {}, &block)
+  def config_use_heading(form, key, options = {}, &)
     head = content_tag :label do
       lbl = options[:label] || config_input_label(form, key)
       field = config_input_field(form, key, as: :boolean, boolean_style: :inline,
@@ -88,7 +88,7 @@ module Admin::ConfigsHelper
         content_tag :span, (lbl + field).html_safe, config_input_tooltip_options(form, key, {})
       end
     end
-    fields = content_tag(:fieldset, id: "#{key}-fields", class: "collapse#{' in' if @cfg[key]}", &block)
+    fields = content_tag(:fieldset, id: "#{key}-fields", class: "collapse#{' in' if @cfg[key]}", &)
     head + fields
   end
 
@@ -120,8 +120,8 @@ module Admin::ConfigsHelper
   # @return [String] Tooltip element (span)
   # @param form [ActionView::Helpers::FormBuilder] Form object.
   # @param key [Symbol, String] Configuration key of a boolean (e.g. +use_messages+).
-  def config_tooltip(form, key, options = {}, &block)
-    content_tag :span, config_input_tooltip_options(form, key, options), &block
+  def config_tooltip(form, key, options = {}, &)
+    content_tag(:span, config_input_tooltip_options(form, key, options), &)
   end
 
   private

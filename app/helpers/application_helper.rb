@@ -47,7 +47,7 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({ per_page: per_page })
-      link_class = 'btn'
+      link_class = 'btn btn-default'
       link_class << ' disabled' if per_page == current
       link_to(per_page, params, remote: true, class: link_class)
     end
@@ -55,7 +55,7 @@ module ApplicationHelper
     if options[:wrap] == false
       links.join.html_safe
     else
-      content_tag :div, class: 'btn-group pull-right' do
+      content_tag :div, class: 'btn-group btn-group-sm pull-right' do
         links.join.html_safe
       end
     end
@@ -112,7 +112,7 @@ module ApplicationHelper
   # Generates a link to the top of the website
   def link_to_top
     link_to '#' do
-      content_tag :i, nil, class: 'icon-arrow-up icon-large'
+      content_tag :i, nil, class: 'glyphicon glyphicon-arrow-up'
     end
   end
 
@@ -188,7 +188,7 @@ module ApplicationHelper
     flash_messages = []
     flash.each do |type, message|
       type = :success if type == 'notice'
-      type = :error   if type == 'alert'
+      type = :danger if type == 'alert'
       text = content_tag(:div,
                          content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
                              message, class: "alert fade in alert-#{type}")
@@ -230,10 +230,10 @@ module ApplicationHelper
   end
 
   # allow truncate to add title when tooltip option is given
-  def truncate(text, options = {}, &block)
+  def truncate(text, options = {}, &)
     return text if !text || text.length <= (options[:length] || 30)
 
-    text_truncated = super(text, options, &block)
+    text_truncated = super
     if options[:tooltip]
       content_tag :span, text_truncated, title: text
     else

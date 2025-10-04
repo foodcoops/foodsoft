@@ -9,11 +9,11 @@ class BankAccountConnectorExternal < BankAccountConnector
   end
 
   def connector_import
-    set_balance @connector.balance iban
+    self.balance = @connector.balance iban
     cp = @connector.transactions iban, continuation_point do |t|
       update_or_create_transaction t[:id], map_transaction(t)
     end
-    set_continuation_point cp if cp
+    self.continuation_point = cp if cp
   end
 
   def connector_logout

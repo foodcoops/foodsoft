@@ -1,5 +1,3 @@
-@import "twitter/bootstrap/bootstrap";
-@import "twitter/bootstrap/responsive";
 @import "group_order";
 @import "article";
 @import "delta_input";
@@ -8,20 +6,6 @@ body {
   padding-top: 10px;
 }
 
-// Set the correct sprite paths
-@iconSpritePath: image-url('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: image-url('twitter/bootstrap/glyphicons-halflings-white.png');
-
-// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-@fontAwesomeEotPath: asset-url('fontawesome-webfont.eot');
-@fontAwesomeEotPath_iefix: asset-url('fontawesome-webfont.eot?#iefix');
-@fontAwesomeWoffPath: asset-url('fontawesome-webfont.woff');
-@fontAwesomeTtfPath: asset-url('fontawesome-webfont.ttf');
-@fontAwesomeSvgPath: asset-url('fontawesome-webfont.svg#fontawesomeregular');
-@import 'fontawesome/font-awesome';
-
-// Glyphicons
-//@import "twitter/bootstrap/sprites.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -32,30 +16,30 @@ body {
 // See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
 //
 // Example:
-// @linkColor: #ff0000;
+// $link-color: #ff0000;
 
 
 // main ui colours
-@mainRedColor: #ED0606;
+$mainRedColor: #ED0606;
 
 // article status
-@articleUsedColor: green;
-@articlePartusedColor: #d50;
-@articleUnusedColor: red;
-@articleUnavailColor: #999;
-@articleUpdatedColor: #468847;
-@articleCustomUnitWarning: #ff8c00;
+$articleUsedColor: green;
+$articlePartusedColor: #d50;
+$articleUnusedColor: red;
+$articleUnavailColor: #999;
+$articleUpdatedColor: #468847;
+$articleCustomUnitWarning: #ff8c00;
 
 // article units:
-@unitUntranslatedColor: #999;
+$unitUntranslatedColor: #999;
 
 // dim colors by this amount when the information is less important
-@nonessentialDim: 35%;
+$nonessentialDim: 35%;
 
 
 // Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal {
-    dd { .clearfix(); }
+    dd { @include clearfix(); }
 }
 
 // Do not use additional margin for input in table
@@ -82,12 +66,12 @@ body {
   font-size: 35px;
   font-weight: bold;
   display: block;
-  color: @mainRedColor;
+  color: $mainRedColor;
 
   span {
     padding: 2px 4px;
     color: #ffffff;
-    background-color: @mainRedColor;
+    background-color: $mainRedColor;
   }
 }
 
@@ -106,7 +90,7 @@ footer {
   border-top: 1px solid #e4e4e4;
 
   a {
-    color: mix(#888, @linkColor, 70%);
+    color: mix(#888, $link-color, 70%);
   }
 }
 
@@ -133,7 +117,7 @@ table {
     text-align: right;
   }
   td.odd {
-    background-color: @tableBackgroundAccent;
+    background-color: $table-bg-accent;
   }
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
@@ -144,7 +128,7 @@ table {
   }
 
   tr.selected td {
-    background-color: @successBackground;
+    background-color: $state-success-bg;
   }
 }
 
@@ -197,21 +181,21 @@ table {
     display: none;
   }
   .mw-headline a {
-    color: @textColor;
+    color: $text-color;
     text-decoration: none;
   }
 }
 
 // ordering
 .used {
-  color: @articleUsedColor;
+  color: $articleUsedColor;
 }
 .unused {
-  color: @articleUnusedColor;
+  color: $articleUnusedColor;
   margin-right: 0.5em;
 }
 .partused {
-  color: @articlePartusedColor;
+  color: $articlePartusedColor;
 }
 .btn-ordering, .btn-group .btn-ordering {
   font-size: 10px;
@@ -222,7 +206,7 @@ table {
 
 #order-footer, .article-info {
   text-align: left;
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   bottom: 0;
   background-color: #E4EED6;
@@ -230,7 +214,7 @@ table {
 
   #total-sum {
     width: 22em;
-    margin: .5em 2em 0 0;
+    margin: 1em 2em 1em 2em;
     float: right;
     #order-button {
       margin: .5em 0;
@@ -239,6 +223,18 @@ table {
         background-color: red; }
     }
   }
+}
+
+// search bars
+.reset-search {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.search-query .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 200px;
 }
 
 /* Hide the orders article info for small screens
@@ -308,17 +304,31 @@ tr.order-article {
   }
 }
 
+
 .units_received_cell {
-  button {
-    margin-top: 0px;
-    height: 28px;
-    font-size: 10px;
-    line-height: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 90px;
+
+}
+
+.units_received_cell {
+  
+
+  .btn-group .btn-ordering {
+    margin-top: 0;
+    width: 100px;
   }
 
-  input.units_received {
-    min-width: 45px;
-    height: 18px;
+  input .units_received {
+    height: 24px;
+    -moz-appearance: textfield;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 }
 
@@ -326,11 +336,11 @@ tr.order-article {
 // ********* Articles
 
 tr.just-updated {
-  color: @articleUpdatedColor;
+  color: $articleUpdatedColor;
 }
 
 tr.unavailable {
-  color: @articleUnavailColor;
+  color: $articleUnavailColor;
 }
 
 // articles edit all
@@ -356,17 +366,17 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: tint(@textColor, @nonessentialDim); }
-.used        .symbol { color: tint(@articleUsedColor, @nonessentialDim); }
-.unused      .symbol { color: tint(@articleUnusedColor, @nonessentialDim); }
-.partused    .symbol { color: tint(@articlePartusedColor, @nonessentialDim); }
-.unavailable .symbol { color: @articleUnavailColor; }
+.symbol              { color: tint($text-color, $nonessentialDim); }
+.used        .symbol { color: tint($articleUsedColor, $nonessentialDim); }
+.unused      .symbol { color: tint($articleUnusedColor, $nonessentialDim); }
+.partused    .symbol { color: tint($articlePartusedColor, $nonessentialDim); }
+.unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
-  .icon-warning-sign {
+  .glyphicon-warning-sign {
     margin-top: 8px;
     margin-left: 10px;
-    color: @articleCustomUnitWarning;
+    color: $articleCustomUnitWarning;
   }
 
   input[type=number]::-webkit-outer-spin-button,
@@ -393,7 +403,7 @@ td.symbol, th.symbol {
 
 // ********* Article units
 tr.untranslated {
-  color: @unitUntranslatedColor;
+  color: $unitUntranslatedColor;
 }
 
 
@@ -418,8 +428,8 @@ table.table {
   td, th {
     vertical-align: middle;
   }
-  select, textarea, input, .uneditable-input,
-  .input-append, .input-prepend {
+  select, textarea, input, .uneditable-input
+  {
     margin-bottom: 0;
     margin-top: 0;
   }
@@ -430,6 +440,7 @@ table.table {
     margin-bottom: 10px;
     .control-label {
       margin: 5px 0 0 0;
+
     }
   }
   .control-group {
@@ -457,16 +468,12 @@ label {
 
 
 // it's a bit distracting
-.icon-asterisk {
+.glyphicon-asterisk {
   font-size: 80%;
   vertical-align: middle;
   padding-bottom: 0.4ex;
 }
 
-// allow buttons as input add-on (with proper height)
-.input-append button.add-on {
-  height: inherit;
-}
 
 // inline form elements
 .inline {
@@ -474,21 +481,21 @@ label {
 }
 
 // show package icon after amount of wholesale units
-.package-image (@align) {
+@mixin package-image($align){
   background-image: image-url('package-bg.png');
   background-repeat: no-repeat;
-  background-position: @align center;
+  background-position: $align center;
 }
 input.package {
-  .package-image(90%);
+  @include package-image(90%);
   background-size: 15px 15px;
   // disabled and readonly definitions though
   &[disabled], &[readonly] {
-    background-color: @inputDisabledBackground;
+    background-color: $input-bg-disabled;
   }
 }
 i.package {
-  .package-image(left);
+  @include package-image(left);
   min-width: 18px;
   min-height: 18px;
   vertical-align: baseline;
@@ -501,11 +508,11 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: tint(@textColor, @nonessentialDim); }
-.used        .package { color: tint(@articleUsedColor, @nonessentialDim); }
-.unused      .package { color: tint(@articleUnusedColor, @nonessentialDim); }
-.partused    .package { color: tint(@articlePartusedColor, @nonessentialDim); }
-.unavailable .package { color: @articleUnavailColor; }
+.package              { color: tint($text-color, $nonessentialDim); }
+.used        .package { color: tint($articleUsedColor, $nonessentialDim); }
+.unused      .package { color: tint($articleUnusedColor, $nonessentialDim); }
+.partused    .package { color: tint($articlePartusedColor, $nonessentialDim); }
+.unavailable .package { color: $articleUnavailColor; }
 
 // very small inputs - need !important for responsive selectors
 .input-nano {
@@ -527,44 +534,6 @@ i.package.icon-only {
   margin: 0 auto;
 }
 
-// multiple-column layout in forms (landscape tablet and wider only)
-@media (min-width: 768px) {
-  .form-horizontal .fold-line {
-    .control-group {
-      float: left;
-    }
-    .control-group + .control-group {
-      .control-label {
-        width: auto;
-        margin: 0 10px;
-      }
-      .controls {
-        float: left;
-        margin-left: 0;
-      }
-      // fix margin somehow off
-      // XXX there must be a better way
-      margin-bottom: 0;
-      .help-block {
-        margin-top: 0;
-        margin-bottom: 20px;
-      }
-    }
-    .control-group:last-child {
-      float: none;
-      .controls {
-        float: none;
-      }
-    }
-    // allow to add a hint for the whole line
-    > .help-block {
-      clear: both;
-      margin-left: 180px;
-      position: relative;
-      top: -2.5ex;
-    }
-  }
-}
 // allow to have indicator text instead of input with same markup
 .control-text {
   margin-top: 5px;
@@ -635,6 +604,11 @@ details {
   }
 }
 
+.conversion-popover-opener {
+  padding: 0px;
+  width: 30px;
+}
+
 input:hover + .conversion-popover-opener, input:focus + .conversion-popover-opener, .conversion-popover-opener:hover, .conversion-popover-opener:focus {
   opacity: 0.8;
 }
@@ -646,6 +620,10 @@ input.with-conversion-popover-opener {
 // bootstrap version 2 doesn't support some styles -> let's add makeshift ones manually for now:
 .d-flex {
   display: flex;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .d-none {
@@ -677,6 +655,10 @@ td.ml-1 > *:first-child {
   margin-right: 3px !important;
 }
 
+.mr-2 {
+  margin-right: 6px !important;
+}
+
 td.mr-1 > *:last-child {
   margin-right: 3px;
 }
@@ -687,6 +669,14 @@ td.mr-1 > *:last-child {
 
 .mb-1 {
   margin-bottom: 3px !important;
+}
+
+.pt-5 {
+  padding-top: 15px;
+}
+
+.pl-5 {
+  padding-left: 15px;
 }
 
 .text-decoration-none:hover {
@@ -700,6 +690,10 @@ td.mr-1 > *:last-child {
 
 .gap-1 {
   gap: .25rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 *[role="button"] {
@@ -723,3 +717,21 @@ td.mr-1 > *:last-child {
   display: block;
 }
 
+
+.form-group .select2-container {
+  width: 200px;
+}
+
+.modal-dialog {
+  margin: 30px auto;
+}
+
+  .modal-body {
+    max-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+    overflow-y: auto;
+  }
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

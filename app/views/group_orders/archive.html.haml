@@ -2,12 +2,12 @@
 %p
 = t('.desc', link: link_to(t('.open_orders'), group_orders_path)).html_safe
 
-.row-fluid
-  .span6
+.row
+  .col-md-6
     %h2= t '.title_open'
     = render partial: 'orders', locals: {orders: @finished_not_closed_orders_including_group_order, pagination: false}
 
-  .span6
+  .col-md-6
     %h2= t '.title_closed'
     #closed_orders
       = render partial: 'orders', locals: {orders: @closed_orders_including_group_order, pagination: true}
