@@ -68,6 +68,7 @@ PATH
       deface (~> 1.0)
       diffy
       rails
+      rexml
       twitter-text (~> 1.14)
       wikicloth
 
