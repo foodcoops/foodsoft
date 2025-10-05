@@ -39,7 +39,7 @@
               = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 = fa_icon :cog
-            %div.extra-unit-fields.price-unit-wrapper.form-horizontal
+            %div.extra-unit-fields.unit-wrapper.form-horizontal
               .form-group.d-flex.w-full
                 %label.col-sm-3.control-label{for: 'unit_ratios'}
                   = "Unit ratios"
@@ -58,14 +58,14 @@
               .row
                 .col-sm-6
                   = form.input :group_order_granularity, wrapper: :custom_form, label: "Allow orders per", label_html: {class: 'col-sm-12'}, input_html: {class: 'form-control col-sm-3', style:"width:150px", title: "steps in which ordergroups can order this article"}, wrapper_html: {class: 'd-flex'}
-                .col-sm-6.price-unit-wrapper
+                .col-sm-6.unit-wrapper
                   = form.input :group_order_unit, as: :select, wrapper: :custom_form, collection: [], label_html: {style: 'width:50px;text-align: center;' }, input_html: {'data-initial-value': article.group_order_unit, class: 'form-control', style:"width:262px"}, label: '&times;'.html_safe, include_blank: false, wrapper_html: {class: 'd-flex', style:"313px"}
           %td
             .d-flex.gap-1.align-items-center
               .input-group.ml-1
                 %span.input-group-addon= t 'number.currency.format.unit'
                 = form.text_field 'price', class: 'form-control', style: 'width: 45px'
-              .input.d-flex.gap-1.ml-1.align-items-center.price-unit-wrapper
+              .input.d-flex.gap-1.ml-1.align-items-center.unit-wrapper
                 %label=t('articles.form.per')
                 = form.input :price_unit, as: :select, collection: [], input_html: {'data-initial-value': article.price_unit, class: 'form-control'}, label: false, wrapper: false, include_blank: false
           %td= form.text_field 'order_number', class: 'form-control'
