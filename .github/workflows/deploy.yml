@@ -1,0 +1,168 @@
+name: Build and deploy to server
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    types: [ opened, synchronize, reopened, closed ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    outputs:
+      reference: ${{ steps.vars.outputs.ref }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set reference
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "ref=pr-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+          else
+            echo "ref=ci" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image to GHCR
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/foodsoft:${{ steps.vars.outputs.ref }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: test-deployment
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - name: Checkout (for docker-compose file)
+        uses: actions/checkout@v4
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy to Swarm manager (no upload)
+        env:
+          REFERENCE: ${{ needs.build-and-push.outputs.reference }}
+          IMAGE: ghcr.io/${{ github.repository_owner }}/foodsoft:${{ needs.build-and-push.outputs.reference }}
+          DOMAIN: ${{ needs.build-and-push.outputs.reference }}.${{ secrets.DEPLOY_HOST }}
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: foodsoft
+          MYSQL_USER: foodsoft
+          MYSQL_PASSWORD: secret
+          REDIS_URL: redis://redis:6379/0
+          SSH_USER: ${{ secrets.DEPLOY_USER }}
+          SSH_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+          STACK_NAME="foodsoft_${REFERENCE}"
+          export DOCKER_HOST="ssh://${SSH_USER}@${SSH_HOST}"
+          docker stack deploy -c docker-compose.ci.yml --with-registry-auth --prune ${STACK_NAME}
+
+          echo "Waiting for stack to be ready..."
+          for i in $(seq 1 20); do
+            if [ "$(docker service ls --filter "name=${STACK_NAME}_foodsoft" -q | wc -l)" -eq 1 ] && \
+               [ "$(docker ps --filter "name=${STACK_NAME}_foodsoft" -q | wc -l)" -ge 1 ]; then
+              echo "Service is up."
+              break
+            fi
+            sleep 3
+          done
+
+          CONTAINER_ID=$(docker ps --filter "name=${STACK_NAME}_foodsoft" -q | head -n 1)
+          if [ -z "$CONTAINER_ID" ]; then
+            echo "Could not find a running container for ${STACK_NAME}_foodsoft"
+            exit 1
+          fi
+
+          docker exec "$CONTAINER_ID" cp config/app_config.yml.SAMPLE config/app_config.yml
+          docker exec "$CONTAINER_ID" bundle exec rails db:setup || true
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const domain = "${{ needs.build-and-push.outputs.reference }}.${{ secrets.DEPLOY_HOST }}";
+            const body = `🚀 Your preview environment is ready at: https://${domain}`;
+            const marker = "🚀 Your preview environment is ready at:";
+
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const existingComment = comments.find(comment => comment.user.login === 'github-actions[bot]' && comment.body.includes(marker));
+
+            if (!existingComment) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            } else {
+              console.log("Preview environment comment already exists.");
+            }
+
+  cleanup:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    environment: test-deployment
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Remove Docker Stack
+        env:
+          REFERENCE: "pr-${{ github.event.pull_request.number }}"
+          SSH_USER: ${{ secrets.DEPLOY_USER }}
+          SSH_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+          STACK_NAME="foodsoft_${REFERENCE}"
+          export DOCKER_HOST="ssh://${SSH_USER}@${SSH_HOST}"
+          echo "Removing stack ${STACK_NAME}"
+          docker stack rm ${STACK_NAME}
