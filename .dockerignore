@@ -41,3 +41,10 @@ Capfile
 config/deploy
 config/deploy.rb
 Gemfile.capistrano*
+
+Dockerfile
+.github/
+docker-compose*.yml
+README.md
+doc/
+.vscode/
