@@ -5,7 +5,7 @@
         %span.input-group-addon= t 'number.currency.format.unit'
         = f.input_field :price, class: 'form-control'
   .col-sm-6
-    = f.input :price_unit, as: :select, wrapper: :custom_form, collection: [], label_html: { style: "width:50px;text-align: center; "}, input_html: {'data-initial-value': article.price_unit, class: 'form-control', style: 'margin-right:12px'}, label: t('articles.form.per'), include_blank: false,  wrapper_html: { class: 'd-flex'}
+    = f.input :price_unit, as: :select, wrapper: :custom_form, collection: [], label_html: { style: "width:50px;text-align: center; "}, input_html: {'data-initial-value': article.price_unit, class: 'form-control', style: 'margin-right:12px'}, label: t('articles.form.per'), include_blank: false,  wrapper_html: { class: 'd-flex unit-wrapper'}
 %div
   = f.input :tax do
     .input-group
