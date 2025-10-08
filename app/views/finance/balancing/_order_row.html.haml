@@ -8,7 +8,7 @@
     - unless order.closed?
       - if current_user.role_orders?
         - unless order.stockit?
-          = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-small'
+          = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-default btn-sm'
         - else
-          = link_to t('orders.index.action_receive'), '#', class: 'btn btn-small disabled'
-      = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-small btn-primary'
+          = link_to t('orders.index.action_receive'), '#', class: 'btn btn-sm disabled'
+      = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-sm btn-primary'
