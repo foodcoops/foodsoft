@@ -22,7 +22,7 @@ Wenn diese Funktion von deiner Foodcoop verwendet wird, findest du eine Liste de
 
 sowie dort unter *Alle Aufgaben anzeigen* oder im Menü [Foodcoop \> Aufgaben](/de/documentation/usage/navigation):
 
-![aufgaben1.png](/uploads-de/usage_tasks-cooperate_aufgaben1.png)
+![aufgaben-offen.png](/uploads-de/usage_tasks-cooperate_aufgaben-offen.png)
 
 ## Aufgabe übernehmen
 

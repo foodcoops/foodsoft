@@ -19,7 +19,7 @@ Du musst dich einmalig im [Forum](forum.foodcoops.at) registrieren. Dann kannst 
 
 Anmeldeoption *foodcoops.at*:
 
-![wiki-login2.png](/uploads-de/wiki-login2.png)
+![wiki-login3.png](/uploads-de/wiki-login3.png)
 
 Falls du im Forum gerade nicht angemeldet bist, wirst du zur Anmeldeseite des Forums weitergeleitet.
 

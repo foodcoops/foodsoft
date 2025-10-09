@@ -1,5 +1,5 @@
 ---
-title: How to do: Toleranzen
+title: How to do Toleranzen
 description: Verwaltung der Toleranzen bei Mindestbestellmengen
 published: true
 date: 2021-10-03T11:11:02.468Z
@@ -19,7 +19,7 @@ Geht die Anzahl im Moment nicht auf, ist die Zeile rötlich eingefärbt und unte
 
 Hier hat noch niemand bestellt. Nun bestellt die erste Bestellgruppe 1 Stück:
 
-![](/uploads-de/tutorials_toleranz_9yahykx.jpg)
+![](/uploads-de/tutorials_toleranz_uvrmx7c.jpg)
 
 Nun springt die Zahl bei "Fehlend" auf 9, da noch 9 Stück bestellt werden müssten, damit es aufgeht. Deshalb ist das bestellte 1 Stück in der zweiten Zahl angegeben ("0 + 1") - momentan würde man es nicht erhalten.
 

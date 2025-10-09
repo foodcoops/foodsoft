@@ -17,7 +17,7 @@ Diese schriftliche Dokumentation besteht aus mehreren Teilen. Zusätzlich gibt e
 >Oder, noch besser:
 {.is-warning}
 
-> Diese Dokumentation ist in einem  [Wiki.js](https://js.wiki/) angelegt. Die Inhalte können sehr einfach über den Webbrowser bearbeitet werden. Du kannst dir gerne einen Zugang holen, um mitzuarbeiten und mitzuhelfen, die Dokumentation zu vervollständigen. Bitte beachte dazu den [Leitfaden](/de/documentation/development/howtowrite).
+> Diese Dokumentation ist teil des Source Codes. Die Inhalte können sehr einfach über den Webbrowser bearbeitet werden: [Github](https://github.com/foodcoops/foodsoft/edit/main/doc/user/). Bitte beachte dazu den [Leitfaden](/de/documentation/development/howtowrite).
 {.is-info}
 
 > Dieses Handbuch richtet sich an alle Menschen, die Interesse an der Foodsoft haben. Aus Gründen der Lesbarkeit wird bei **geschlechtsspezifischen Begriffen** jedoch nur die weibliche Form verwendet - außer dort, wo Begriffe in der Foodsoft anders hinterlegt sind (z.B. "Benutzer/innen", "Lieferanten"- hier werden im Sinne der Klarheit die Begriffe der Foodsoft verwendet).

@@ -1,6 +1,6 @@
 ---
 title: Einstellungen
-description:  Erklärung zu globalen/administrativen Einstellungen der Foodsoft (Menü: "Administration")
+description:  Erklärung zu globalen/administrativen Einstellungen der Foodsoft
 published: true
 date: 2021-10-07T18:34:41.218Z
 tags: 

@@ -1,6 +1,6 @@
 ---
 title: Finanzen
-description: Überblicksseite zu Finanzfunktionen sowie Verwendung (Menü: "Finanzen")
+description: Überblicksseite zu Finanzfunktionen sowie Verwendung
 published: true
 date: 2021-11-30T15:23:18.794Z
 tags: 

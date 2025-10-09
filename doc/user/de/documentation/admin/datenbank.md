@@ -2,7 +2,7 @@
 title: Datenbank - phpMyAdmin
 description: Welche verstecken Features der Zugriff auf die Foodsoft-Datenbank bietet
 published: true
-date: 2025-08-13T12:11:20.579Z
+date: 2025-10-07T23:09:47.024Z
 tags: 
 editor: markdown
 dateCreated: 2023-04-09T02:10:13.914Z
@@ -34,29 +34,29 @@ Anschließend kannst du im Browser phpMyAdmin öffnen (die Adresse variiert je n
 
 In der linken Seitenleiste siehst du, für welche Foodsoft-Instanzen du Zugriffsrechte hast.
 
-![grafik.png](/uploads-de/grafik.png)
+![grafik.png](/uploads-de//grafik.png)
 
 Für jede Foodsoft-Instanz ist eine Reihe an Tabellen gespeichert:
 
-![db_tabellen.png](/uploads-de/db_tabellen.png)
+![db_tabellen.png](/uploads-de//db_tabellen.png)
 
 In jeder Tabelle wird eine Reihe an Datensätzen gespeichert, beispielsweise sämtliche Artikel von allen Lieferantinnen.
 
-![db_datensaetze.png](/uploads-de/db_datensaetze.png)
+![db_datensaetze.png](/uploads-de//db_datensaetze.png)
 
 ## Datensätze bearbeiten
 
 Um einen Wert in einem Datensatz zu bearbeiten, einfach auf den Wert doppelklicken:
 
-![db_inline.png](/uploads-de/db_inline.png)
+![db_inline.png](/uploads-de//db_inline.png)
 
 Bei mehrzeiligen Werten kann es jedoch mühsam sein, sie "inline" zu bearbeiten. Dafür links auf "Bearbeiten" klicken. Im folgenden Menü können die Werte in einem größeren Feld bearbeitet werden.
 
-![db_bearbeiten.png](/uploads-de/db_bearbeiten.png)
+![db_bearbeiten.png](/uploads-de//db_bearbeiten.png)
 
 Danach musst die Änderungen am Datensatz noch speichern, indem du unten auf OK klickst:
 
-![db_speichern.png](/uploads-de/db_speichern.png)
+![db_speichern.png](/uploads-de//db_speichern.png)
 
 Oder du klickst im Browser einfach auf Zurück oder in der oberen Leiste auf Anzeigen, um die Bearbeitung abzubrechen.
 
@@ -83,7 +83,7 @@ anlegen, in die dann über die Benutzeroberfläche Daten eingetragen werden kön
 
 Benutzerdefinierte Felder werden zusammen mit den Standard-Felder angezeigt:
 
-![cf_bestellgruppe.drawio.png](/uploads-de/cf_bestellgruppe.drawio.png)
+![cf_bestellgruppe.drawio.png](/uploads-de//cf_bestellgruppe.drawio.png)
 
 > Benutzerdefinierte Felder für Lieferantinnen werden zwar angezeigt, Eingaben werden jedoch nicht gespeichert: [Issue 952](https://github.com/foodcoops/foodsoft/issues/952)
 {.is-danger}
@@ -94,19 +94,19 @@ Benutzerdefinierte Felder werden zusammen mit den Standard-Felder angezeigt:
 
 Die Konfiguration der benutzerdefinierten Felder wird in einem einzigen Datensatz in der Tabelle settings gespeichert.
 
-![db_settings.png](/uploads-de/db_settings.png)
+![db_settings.png](/uploads-de//db_settings.png)
 
 ### Datensatz für benutzerdefinierte Felder finden
 
 Stelle die Anzahl der Datensätze auf das Maximum und gib bei "Zeilen filtern" `.custom` ein, dann sollte ein Datensatz mit var = `foodcoop.<name>.custom_fields` erscheinen. Wenn nichts erscheint, probiere auf Seite 2, 3 ... zu blättern, bis er erscheint. Sollte er nicht existieren, musst du einen neuen Datensatz erstellen.
 
-![db_customfields.png](/uploads-de/db_customfields.png)
+![db_customfields.png](/uploads-de//db_customfields.png)
 
 ### Bearbeiten
 
 Klicke auf **Bearbeiten** und verändere den Wert unter Value. Beispiel:
 
-![db_cf_bearbeiten-.png](/uploads-de/db_cf_bearbeiten-.png)
+![db_cf_bearbeiten-.png](/uploads-de//db_cf_bearbeiten-.png)
 
 ### Syntax
 #### Felder für unterschiedliche Objekte
@@ -160,7 +160,7 @@ user:
 
 Das sieht dann so aus:
 
-![cf_beispiel.png](/uploads-de/cf_beispiel.png)
+![cf_beispiel.png](/uploads-de//cf_beispiel.png)
 
 > Eine Liste an möglichen Optionen findest du [hier](https://github.com/heartcombo/simple_form#available-input-types-and-defaults-for-each-column-type), jedoch funktionieren nicht all diese Datentypen ohne weiteres (z.B. werden die Eingaben nicht gespeichert).
 Die oben aufgelisten Datentypen sind erfolgreich getestet worden.
@@ -179,7 +179,7 @@ ordergroup:
     
 Die letzte Zeile bewirkt, dass im Menü `Neue Überweisungen eingeben` folgender Button erscheint:
 
-![mb_hinzufuegen.png](/uploads-de/mb_hinzufuegen.png)
+![mb_hinzufuegen.png](/uploads-de//mb_hinzufuegen.png)
 
 > Dadurch werden die Bestellgruppen hinzugefügt und jeweils der Wert, der als Mitgliedsbeitrag gespeichert ist, direkt als Betrag eingefügt.
 {.is-success}
@@ -209,7 +209,7 @@ Für FoodCoops mit digitaler Buchführung (d.h. alle Rechnungen werden digital p
 Mit einem Datenbankzugang (phpMyAdmin) lässt sich dies per SQL-Abfrage ermitteln.
 
 Wähle dazu in der Liste der Datenbanken deine Foodsoft aus uns anschließend auf den Reiter SQL:
-![sql_reiter.png](/uploads-de/sql_reiter.png)
+![sql_reiter.png](/uploads-de//sql_reiter.png)
 
 Kopiere folgende SQL-Abfrage und füge sie ein:
 
@@ -263,3 +263,29 @@ AND quantity=0
 AND deleted_at IS NULL;
 ```
 Die Artikel werden nicht gelöscht, es wird nur im Feld  *deleted_at* ein Datum eingetragen, wodurch die Artikel in der Foodsoft nicht mehr aufscheinen. Wenn statt dem Datum wieder NULL eingetragen wird, ist der Artikel wieder sichtbar. Wenn über die Foodsoft ein Artikel gelöscht wird, passiert das Gleiche und der Artikel ist immer noch in der Datenbank.
+
+## Status von Bestellungen ändern
+
+Bedeutung des *state* Felds in der Tabelle *orders*:
+- `open`: es kann bestellt werden
+- `finished`: es kann nicht mehr bestellt werden, aber die Bestellung ist noch nicht abgerechnet
+- `received` 	detto, aber	Bestellung wurde in Empfang genommen
+- `closed`: die Bestellung ist abgerechnet
+
+> Wenn der Status einer Bestellung in der Datenbank geändert wird, werden die Aktionen, die in der Foodsoft beim Ändern stattfinden, nicht durchgeführt oder wieder rückgängig gemacht, also zum Beispiel: eine Bestellung, die bereits beendet und an die Lieferantin verschickt wurde, enthält nach dem erneuten Öffnen und wieder Beenden auch die Bestellungen, die schon bei der Lieferantin bestellt wurden; wenn der Status in der Datenbank von `open` auf `finished` gesetzt wird, wird die Bestellung nicht automatisch versendet; wenn eine Bestellung bereits abgerechnet wurde, werden die entsprechenden Kontotransaktionen beim Ändern von `closed` auf `finished` nicht automatisch rückgängig gemacht (das muss manuell erledigt werden, wenn gewünscht); wenn der Status einer Bestellung von `finished` auf `closed` gesetzt wird, werden - anders wie beim Abrechnen in der Foodsoft - die entsprechenden Kontotransaktionen nicht durchgeführt.
+{.is-warning}
+
+Beispiel:  Status der Bestellungen bis ID 999 von *beendet* auf *abgerechnet* setzen (ohne dass entsprechende Transaktionen durchgefühert werden):
+```
+UPDATE `orders` 
+SET state = 'closed' 
+WHERE id <= 999; 
+```
+
+
+Beispiel:  Status der Bestellungen mit bestimmten IDs von *abgerechnet* auf *beendet* zurücksetzen (ohne dass entsprechende Transaktionen rückgängig gemacht werden):
+```
+UPDATE `orders` 
+SET state = 'finished' 
+WHERE id IN (1775, 1781, 1801, 1811, 1805, 1816, 1821, 1828, 1825, 1832); 
+```
