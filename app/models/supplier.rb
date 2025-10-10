@@ -89,7 +89,11 @@ class Supplier < ApplicationRecord
 
   def sync_from_remote(options = {})
     data = read_from_remote(options[:search_params])
-    parse_import_data(data, options) + [data]
+    updated_article_pairs, outlisted_articles, new_articles = parse_import_data(data, options)
+
+    available = shared_sync_method == 'all_available'
+    new_articles.each { |new_article| new_article.availability = available }
+    [updated_article_pairs, outlisted_articles, new_articles, data]
   end
 
   def deleted?

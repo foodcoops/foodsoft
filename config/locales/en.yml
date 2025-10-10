@@ -523,6 +523,8 @@ en:
       parse_upload:
         no_file: Please select a file to upload.
         notice: "%{count} articles were succesfully analysed."
+      sync:
+        exceeds_shared_supplier_article_sync_limit: The remote supplier has too many articles to be synchronized with the current configuration ('%{sync_method}'), please configure to use '%{import_sync_method}' instead.
       update_all:
         notice: All articles and prices were updated.
       update_sel:

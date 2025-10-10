@@ -42,8 +42,6 @@ class ArticleVersion < ApplicationRecord
   validates :deposit, :tax, numericality: true
   validates :minimum_order_quantity, numericality: { allow_nil: true }
 
-  # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type], if: Proc.new {|a| a.supplier.shared_sync_method.blank? or a.supplier.shared_sync_method == 'import' }
-  # validates_uniqueness_of :name, :scope => [:supplier_id, :deleted_at, :type, :unit, :unit_quantity]
   validate :uniqueness_of_name
   validate :only_one_unit_type
   validate :minimum_order_quantity_as_integer, unless: :supplier_order_unit_is_si_convertible
