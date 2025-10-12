@@ -110,6 +110,29 @@ feature ArticlesController do
       expect(page).to have_css('.just-updated.article', count: 10)
     end
 
+    it 'imports articles as unavailable according to shared_sync_method' do
+      supplier.update(shared_sync_method: 'all_unavailable')
+
+      visit supplier_articles_path(supplier_id: supplier.id)
+      click_on I18n.t('articles.index.ext_db.sync')
+      expect(page).to have_css('.sync-table tbody tr', count: 10)
+
+      10.times do |index|
+        select ArticleCategory.first.name, from: "new_articles_#{index}_article_category_id"
+      end
+
+      click_on I18n.t('articles.sync.submit')
+      expect(page).to have_css('.article.unavailable', count: 10)
+    end
+
+    it 'doesn\'t import articles on synchronize if shared_sync_method is set to (manual) import' do
+      supplier.update(shared_sync_method: 'import')
+
+      visit supplier_articles_path(supplier_id: supplier.id)
+      click_on I18n.t('articles.index.ext_db.sync')
+      expect(page).to have_css('.alert-success', text: I18n.t('articles.controller.parse_upload.notice', count: 0))
+    end
+
     it 'synchronizes articles updated in external supplier' do
       clone_supplier_articles(remote_supplier, supplier)
 

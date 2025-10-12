@@ -8,6 +8,7 @@ class Api::V1::ArticlesController < Api::V1::BaseController
     @articles = @articles.where('article_versions.updated_at > ?', index_params[:updated_after].to_datetime) if index_params.include?(:updated_after)
     @articles = @articles.where('article_versions.name LIKE ?', "%#{index_params[:name]}%") if index_params.include?(:name)
     @articles = @articles.where(article_versions: { origin: index_params[:origin] }) if index_params.include?(:origin)
+    @articles = @articles.where(article_versions: { order_number: index_params[:order_numbers] }) if index_params.include?(:order_numbers)
     @articles = @articles.page(index_params[:page]).per(index_params.fetch(:per_page)) if index_params.include?(:page)
 
     data = @articles.map { |article| get_article_version_data(article) }
@@ -18,7 +19,7 @@ class Api::V1::ArticlesController < Api::V1::BaseController
   protected
 
   def index_params
-    params.permit(:shared_supplier_uuid, :updated_after, :name, :origin, :page, :per_page)
+    params.permit(:shared_supplier_uuid, :updated_after, :name, :origin, :page, :per_page, order_numbers: [])
   end
 
   def get_article_version_data(article)

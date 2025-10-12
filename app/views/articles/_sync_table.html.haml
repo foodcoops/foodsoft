@@ -2,6 +2,7 @@
 %table.table.sync-table
   %thead
     %tr
+      %th= heading_helper Article, :availability, short: true
       %th= heading_helper Article, :name
       %th= heading_helper Article, :note
       %th= heading_helper Article, :manufacturer
@@ -17,6 +18,7 @@
       - unless changed_article.new_record?
         - article = Article.find(changed_article.id)
         %tr{:style => 'color:grey'}
+          %td= check_box_tag nil, '1', article.availability, disabled: true
           %td= article.name
           %td= article.note
           %td= article.manufacturer
@@ -33,6 +35,7 @@
             :javascript
               articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: form, article_unit_ratio_counter: -1}))}"));
               new ArticleForm(articleUnitRatioTemplate$, $('#article_row_#{field}_#{index}'), units, #{price_markup}, $('#article_row_#{field}_#{index}').closest('form'), '#{field}_#{index}', '#{field}[#{index}]');
+          %td{:style => highlight_new(attrs, :availability)}= form.input 'availability', label: false
           %td{:style => highlight_new(attrs, :name)}
             = form.text_field 'name', :size => 0
             = form.input :id, as: :hidden unless changed_article.new_record?
