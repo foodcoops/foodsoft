@@ -26,7 +26,7 @@ class OrderArticlesController < ApplicationController
   end
 
   def update
-    version_params = params.require(:article_version).permit(:id, :unit, :supplier_order_unit, :minimum_order_quantity,
+    version_params = params.require(:article_version).permit(:id, :unit, :supplier_order_unit, :minimum_order_quantity, :maximum_order_quantity,
                                                              :billing_unit, :group_order_granularity, :group_order_unit, :price, :price_unit, :tax, :deposit, article_unit_ratios_attributes: %i[id sort quantity unit _destroy])
     @order_article.update_handling_versioning!(params[:order_article], version_params)
   rescue StandardError

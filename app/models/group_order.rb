@@ -54,14 +54,19 @@ class GroupOrder < ApplicationRecord
           used_tolerance: (goa ? goa.result(:tolerance) : 0),
           total_price: (goa ? goa.total_price : 0),
           missing_units: order_article.missing_units,
-          ratio_group_order_unit_supplier_unit: order_article.article_version.convert_quantity(1,
-                                                                                               order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit),
-          quantity_available: (order.stockit? ? order_article.article_version.article.quantity_available : 0),
+          ratio_group_order_unit_supplier_unit: order_article.article_version.convert_quantity(1, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit),
           minimum_order_quantity: if order_article.article_version.minimum_order_quantity
                                     order_article.article_version.convert_quantity(
                                       order_article.article_version.minimum_order_quantity, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit
                                     )
-                                  end
+                                  end,
+          quantity_available: (if order.stockit?
+                                 order_article.article_version.article.quantity_available
+                               elsif order_article.article_version.maximum_order_quantity
+                                 order_article.article_version.convert_quantity(
+                                   [order_article.article_version.maximum_order_quantity - (order_article.quantity || 0) + (goa ? goa.quantity : 0), 0].max, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit
+                                 )
+                               end)
         }
       end
     end

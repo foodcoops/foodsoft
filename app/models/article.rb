@@ -158,6 +158,7 @@ class Article < ApplicationRecord
         unit: [latest_article_version.unit, new_unit],
         supplier_order_unit: [latest_article_version.supplier_order_unit, new_article.supplier_order_unit],
         minimum_order_quantity: [latest_article_version.minimum_order_quantity, new_article.minimum_order_quantity],
+        maximum_order_quantity: [latest_article_version.maximum_order_quantity, new_article.maximum_order_quantity],
         billing_unit: [latest_article_version.billing_unit || latest_article_version.supplier_order_unit,
                        new_article.billing_unit || new_article.supplier_order_unit],
         group_order_granularity: [latest_article_version.group_order_granularity, new_article.group_order_granularity],

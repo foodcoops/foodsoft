@@ -11,6 +11,7 @@ class GroupOrderArticle < ApplicationRecord
   validates :order_article_id, uniqueness: { scope: :group_order_id } # just once an article per group order
   validate :check_order_not_closed # don't allow changes to closed (aka settled) orders
   validates :quantity, :tolerance, numericality: { greater_than_or_equal_to: 0 }
+  validate :check_maximum_order_quantity
 
   scope :ordered, -> { includes(group_order: :ordergroup).order('groups.name') }
 
@@ -220,5 +221,31 @@ class GroupOrderArticle < ApplicationRecord
     return unless order_article.order.closed?
 
     errors.add(:order_article, I18n.t('model.group_order_article.order_closed'))
+  end
+
+  def check_maximum_order_quantity
+    return unless order_article&.article_version&.maximum_order_quantity
+    return unless quantity.present? || tolerance.present?
+
+    max_quantity = order_article.article_version.maximum_order_quantity
+
+    max_quantity_in_group_unit = order_article.article_version.convert_quantity(
+      max_quantity,
+      order_article.article_version.supplier_order_unit,
+      order_article.article_version.group_order_unit
+    )
+
+    total_ordered_by_all = order_article.group_order_articles.sum(:quantity)
+
+    total_ordered_by_all -= quantity_was || 0.0 if persisted?
+
+    available_quantity = [max_quantity_in_group_unit - total_ordered_by_all, 0.0].max
+
+    requested_quantity = quantity || 0.0
+    return unless requested_quantity > available_quantity
+
+    errors.add(:quantity, I18n.t('model.group_order_article.quantity_exceeds_maximum',
+                                 requested: requested_quantity,
+                                 available: available_quantity.round(3)))
   end
 end
