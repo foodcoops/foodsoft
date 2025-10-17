@@ -1,0 +1,14 @@
+- row_class = cycle("even","odd", :name => "order")
+%tr{:class => row_class, 'data-order_id' => order.id}
+  %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
+  %td=h format_time(order.ends) unless order.ends.nil?
+  %td= order.closed? ? t('finance.balancing.orders.cleared', amount: number_to_currency(order.foodcoop_result)) : t('finance.balancing.orders.ended')
+  %td= show_user(order.updated_by)
+  %td
+    - unless order.closed?
+      - if current_user.role_orders?
+        - unless order.stockit?
+          = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-default btn-sm'
+        - else
+          = link_to t('orders.index.action_receive'), '#', class: 'btn btn-sm disabled'
+      = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-sm btn-primary'
