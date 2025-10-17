@@ -101,8 +101,8 @@ module OrdersControllerExtensions
       group_orders.map(&:group_order_invoice).each(&:unmark_sepa_downloaded)
     end
 
-    def redirect_to_finance_with_alert(key, options = {})
-      redirect_to finance_order_index_path, alert: I18n.t(key, options)
+    def redirect_to_finance_with_alert(key, **options)
+      redirect_to finance_order_index_path, alert: I18n.t(key, **options)
     end
 
     def handle_export_error(error, group_orders)

@@ -62,8 +62,6 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  # Add registered assets after all plugins have been initialized
-  Rails.application.config.after_initialize do
-    Rails.application.config.assets.precompile += Foodsoft::AssetRegistry.precompile_assets
-  end
+  # Add factories from plugins
+  config.factory_bot.definition_file_paths += Dir['plugins/**/spec/factories']
 end
