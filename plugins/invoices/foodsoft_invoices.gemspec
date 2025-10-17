@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/foodcoops/foodsoft'
   s.summary     = 'Invoice plugin for foodsoft.'
   s.description = 'Adds comprehensive invoice functionality to foodsoft.'
-  s.required_ruby_version = '>= 2.7'
+  s.required_ruby_version = '>= 3.4'
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['Rakefile', 'README.md']
 

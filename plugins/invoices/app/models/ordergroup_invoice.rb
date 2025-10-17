@@ -8,7 +8,8 @@ class OrdergroupInvoice < ApplicationRecord
   def init
     self.invoice_date = Time.now unless invoice_date
     self.invoice_number = generate_invoice_number(self, 1) unless invoice_number
-    self.payment_method = multi_group_order.group_orders.first&.financial_transaction&.financial_transaction_type&.name || FoodsoftConfig[:ordergroup_invoices]&.[](:payment_method) || I18n.t('activerecord.attributes.ordergroup_invoice.payment_method') unless payment_method
+    transaction_type = multi_group_order&.financial_transaction&.financial_transaction_type
+    self.payment_method = transaction_type&.name || FoodsoftConfig[:ordergroup_invoices]&.[](:payment_method) || I18n.t('activerecord.attributes.ordergroup_invoice.payment_method') unless payment_method
   end
 
   def ordergroup
