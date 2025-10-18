@@ -185,22 +185,14 @@
       const unitLabel = this.unitSelectOptions.find(option => option.value === unit).label;
       this.conversionResult$.text('= ' + this.getConversionResult() + ' x ' + unitLabel);
       this.conversionResult$.parent().find('.numeric-step-error').remove();
-
-      const errorSpan$ = $('<div class="numeric-step-error"></div>');
-      
-      // Use ValidationUtils for proper custom error messages
-      const isValid = ValidationUtils.validateNumericInput(this.quantityInput$, {
-        errorSpan$: errorSpan$
-      });
-      
-      if (isValid) {
-        this.applyButton$.removeAttr('disabled');
-      } else {
+      if (this.quantityInput$.is(':invalid')) {
         this.applyButton$.attr('disabled', 'disabled');
-        if (errorSpan$.text()) {
-          errorSpan$.show();
-          this.conversionResult$.after(errorSpan$);
-        }
+
+        const errorSpan$ = $(`<div class="numeric-step-error">${I18n.t('errors.step_error', {min: 0, granularity: this.quantityInput$.attr('step')})}</div>`);
+        errorSpan$.show();
+        this.conversionResult$.after(errorSpan$);
+      } else {
+        this.applyButton$.removeAttr('disabled');
       }
     }
 
