@@ -1,0 +1,4 @@
+/ insert_before 'tr td:first-child'
+- if FoodsoftInvoices.enabled?
+  %td
+    = check_box_tag "order_ids_for_multi_order[]", order.id, false, class: "order-checkbox", id: "order_#{order.id}_combine", data: { order_id: order.id }
