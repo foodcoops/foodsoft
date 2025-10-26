@@ -1,0 +1,2 @@
+class Api::V2::OrderArticlesController < Api::V1::OrderArticlesController
+end

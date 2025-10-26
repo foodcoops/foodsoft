@@ -35,6 +35,7 @@ doc/app/
 doc/api/
 .yarddoc/
 rspec.failures
+swagger/
 
 # Capistrano etc.
 Capfile

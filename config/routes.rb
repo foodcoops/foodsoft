@@ -293,10 +293,30 @@ Rails.application.routes.draw do
         resources :order_articles, only: %i[index show]
         resources :group_order_articles
         resources :article_categories, only: %i[index show]
+      end
+
+      namespace :v2 do
+        resource :config, only: [:show]
+        resource :navigation, only: [:show]
+
+        namespace :user do
+          root to: 'users#show'
+          get :financial_overview, to: 'ordergroup#financial_overview'
+          resources :financial_transactions, only: %i[index show create]
+          resources :group_order_articles
+        end
 
         resources :shared_suppliers, param: :uuid, only: [] do
           resources :articles, only: [:index]
         end
+
+        resources :financial_transaction_classes, only: %i[index show]
+        resources :financial_transaction_types, only: %i[index show]
+        resources :financial_transactions, only: %i[index show]
+        resources :orders, only: %i[index show]
+        resources :order_articles, only: %i[index show]
+        resources :group_order_articles
+        resources :article_categories, only: %i[index show]
       end
     end
 

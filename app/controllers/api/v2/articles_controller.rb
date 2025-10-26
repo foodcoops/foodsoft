@@ -1,4 +1,4 @@
-class Api::V1::ArticlesController < Api::V1::BaseController
+class Api::V2::ArticlesController < Api::BaseController
   skip_before_action :authenticate
 
   def index

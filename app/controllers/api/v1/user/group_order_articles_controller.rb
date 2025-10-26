@@ -1,4 +1,4 @@
-class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
+class Api::V1::User::GroupOrderArticlesController < Api::BaseController
   include Concerns::CollectionScope
 
   before_action -> { doorkeeper_authorize! 'group_orders:user' }
