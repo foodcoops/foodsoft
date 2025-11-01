@@ -321,7 +321,7 @@ Naming/MemoizedInstanceVariableName:
 # AllowedNames: as, at, by, cc, db, id, if, in, io, ip, of, on, os, pp, to
 Naming/MethodParameterName:
   Exclude:
-    - 'app/controllers/api/v1/base_controller.rb'
+    - 'app/controllers/api/base_controller.rb'
     - 'app/controllers/api/v1/user/group_order_articles_controller.rb'
     - 'app/helpers/application_helper.rb'
     - 'app/helpers/orders_helper.rb'
@@ -416,6 +416,7 @@ RSpec/DescribedClass:
 RSpec/EmptyExampleGroup:
   Exclude:
     - 'spec/requests/api/**/*_spec.rb'
+    - 'spec/support/shared_contexts/api/**/*_context.rb'
 
 # Offense count: 83
 # Configuration parameters: CountAsOne.

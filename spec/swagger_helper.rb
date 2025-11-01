@@ -131,20 +131,20 @@ RSpec.configure do |config|
                 description: 'id of order this order article belongs to'
               },
               price: {
-                type: :number,
+                type: :float,
                 format: :number,
                 description: 'foodcoop price'
               },
               quantity: {
-                type: :number,
+                type: :float,
                 description: 'number of units ordered by members'
               },
               tolerance: {
-                type: :number,
+                type: :float,
                 description: 'number of extra units that members are willing to buy to fill a box'
               },
               units_to_order: {
-                type: :number,
+                type: :float,
                 description: 'number of units to order from the supplier'
               },
               article: {
@@ -174,7 +174,7 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   amount: {
-                    type: :number,
+                    type: :float,
                     format: :number,
                     nullable: true,
                     description: 'amount credited. Negative for a debit transaction, null for an incomplete transaction.'
@@ -215,7 +215,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               amount: {
-                type: :number,
+                type: :float,
                 format: :number,
                 description: 'amount credited (negative for a debit transaction)'
               },
@@ -288,12 +288,12 @@ RSpec.configure do |config|
             properties: {
               quantity:
               {
-                type: :number,
+                type: :float,
                 description: 'number of units ordered by the users ordergroup'
               },
               tolerance:
               {
-                type: :number,
+                type: :float,
                 description: 'number of extra units the users ordergroup is willing to buy for filling a box'
               }
             }
@@ -323,12 +323,12 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   result: {
-                    type: :number,
+                    type: :float,
                     description: 'number of units the users ordergroup will receive or has received'
                   },
                   total_price:
                   {
-                    type: :number,
+                    type: :float,
                     format: :number,
                     description: 'total price of this group order article'
                   },
@@ -566,11 +566,42 @@ RSpec.configure do |config|
               },
               unit: {
                 type: :string,
+                nullable: true,
                 description: 'amount of each unit, e.g. "100 g" or "kg"'
               },
-              unit_quantity: {
-                type: :integer,
-                description: 'units can only be ordered from the supplier in multiples of unit_quantity'
+              supplier_order_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article is delivered in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              price_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article\'s price is displayed in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              billing_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article\'s price is billed in (if null, the deprecated plain text `unit` is used instead)'
+              },
+              group_order_unit: {
+                type: :string,
+                nullable: true,
+                description: 'the UN/ECE unit the article can be ordered in by distinct order groups (if null, the deprecated plain text `unit` is used instead)'
+              },
+              group_order_granularity: {
+                type: :float,
+                description: 'the granularity in which order groups may order this article (measured in `group_order_unit`)'
+              },
+              minimum_order_quantity: {
+                type: :float,
+                description: 'minimum quantity that needs to be achieved for the article to be ordered at all (measured in `group_order_unit`)'
+              },
+              article_unit_ratios: {
+                type: :array,
+                items: {
+                  '$ref': '#/components/schemas/ArticleUnitRatio'
+                }
               },
               note: {
                 type: :string,
@@ -596,8 +627,30 @@ RSpec.configure do |config|
                 description: 'number of units available (only present on stock articles)'
               }
             },
-            required: %w[id name supplier_id supplier_name unit unit_quantity note manufacturer origin
+            required: %w[id name supplier_id supplier_name unit note manufacturer origin supplier_order_unit price_unit
+                         billing_unit group_order_unit group_order_granularity minimum_order_quantity article_unit_ratios
                          article_category_id]
+          },
+          ArticleUnitRatio: {
+            type: :object,
+            properties: {
+              id: {
+                type: :integer
+              },
+              unit: {
+                type: :string,
+                description: 'the UN/ECE unit of this ratio'
+              },
+              quantity: {
+                type: :float,
+                description: 'the quantity of this ratio relative to `supplier_order_unit` (or `unit` if `supplier_order_unit` is null)'
+              },
+              sort: {
+                type: :integer,
+                description: 'sort index'
+              }
+            },
+            required: %w[id unit quantity sort]
           },
           OrderArticle: {
             type: :object,
@@ -610,20 +663,20 @@ RSpec.configure do |config|
                 description: 'id of order this order article belongs to'
               },
               price: {
-                type: :number,
+                type: :float,
                 format: :number,
                 description: 'foodcoop price'
               },
               quantity: {
-                type: :number,
+                type: :float,
                 description: 'number of units ordered by members'
               },
               tolerance: {
-                type: :number,
+                type: :float,
                 description: 'number of extra units that members are willing to buy to fill a box'
               },
               units_to_order: {
-                type: :number,
+                type: :float,
                 description: 'number of units to order from the supplier'
               },
               article: {
@@ -653,7 +706,7 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   amount: {
-                    type: :number,
+                    type: :float,
                     format: :number,
                     nullable: true,
                     description: 'amount credited. Negative for a debit transaction, null for an incomplete transaction.'
@@ -694,7 +747,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               amount: {
-                type: :number,
+                type: :float,
                 format: :number,
                 description: 'amount credited (negative for a debit transaction)'
               },
@@ -767,12 +820,12 @@ RSpec.configure do |config|
             properties: {
               quantity:
               {
-                type: :number,
+                type: :float,
                 description: 'number of units ordered by the users ordergroup'
               },
               tolerance:
               {
-                type: :number,
+                type: :float,
                 description: 'number of extra units the users ordergroup is willing to buy for filling a box'
               }
             }
@@ -802,12 +855,12 @@ RSpec.configure do |config|
                     type: :integer
                   },
                   result: {
-                    type: :number,
+                    type: :float,
                     description: 'number of units the users ordergroup will receive or has received'
                   },
                   total_price:
                   {
-                    type: :number,
+                    type: :float,
                     format: :number,
                     description: 'total price of this group order article'
                   },
@@ -938,9 +991,9 @@ RSpec.configure do |config|
             description: 'article for external client with the data of its latest version',
             type: :object,
             properties: {
-              price: { type: :number },
-              tax: { type: :number },
-              deposit: { type: :number },
+              price: { type: :float },
+              tax: { type: :float },
+              deposit: { type: :float },
               created_at: {
                 type: :string,
                 format: 'date-time'
@@ -1001,11 +1054,11 @@ RSpec.configure do |config|
                 description: 'the UN/ECE unit the article can be ordered in by distinct order groups (if null, the deprecated plain text `unit` is used instead)'
               },
               group_order_granularity: {
-                type: :number,
+                type: :float,
                 description: 'the granularity in which order groups may order this article (measured in `group_order_unit`)'
               },
               minimum_order_quantity: {
-                type: :number,
+                type: :float,
                 description: 'minimum quantity that needs to be achieved for the article to be ordered at all (measured in `group_order_unit`)'
               },
               article_unit_ratios: {
@@ -1024,7 +1077,7 @@ RSpec.configure do |config|
                 description: 'the UN/ECE unit of this ratio'
               },
               quantity: {
-                type: :number,
+                type: :float,
                 description: 'the quantity of this ratio relative to `supplier_order_unit` (or `unit` if `supplier_order_unit` is null)'
               },
               sort: {
@@ -1062,6 +1115,27 @@ RSpec.configure do |config|
               number: {
                 type: :integer,
                 description: 'total number of items in the collection'
+              }
+            }
+          }
+        },
+        securitySchemes: {
+          oauth2: {
+            type: :oauth2,
+            flows: {
+              implicit: {
+                authorizationUrl: 'http://localhost:3000/f/oauth/authorize',
+                scopes: {
+                  'config:user': 'reading Foodsoft configuration for regular users',
+                  'config:read': 'reading Foodsoft configuration values',
+                  'config:write': 'reading and updating Foodsoft configuration values',
+                  'finance:user': 'accessing your own financial transactions',
+                  'finance:read': 'reading all financial transactions',
+                  'finance:write': 'reading and creating financial transactions',
+                  'user:read': 'reading your own user profile',
+                  'user:write': 'reading and updating your own user profile',
+                  offline_access: 'retain access after user has logged out'
+                }
               }
             }
           }
