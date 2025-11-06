@@ -42,6 +42,8 @@ Deploying
 Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
 [hosting platform](https://foodcoops.net/foodsoft-hosting/).
 
+You can find a ci/cd deployment of the current master on: [master.ci.foodcops.net](master.ci.foodcops.net) (admin : secret)
+
 License
 -------
 
