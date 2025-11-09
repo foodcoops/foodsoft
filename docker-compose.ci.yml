@@ -2,38 +2,25 @@ version: '3.8'
 
 services:
   mariadb:
-    image: mariadb:10.5
-    restart: unless-stopped
+    image: mariadb:12
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-foodsoft}
       MYSQL_USER: ${MYSQL_USER:-foodsoft}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
-    volumes:
-      - mariadb:/var/lib/mysql
     networks:
       - internal
 
-  redis:
-    image: redis:6.2-alpine
-    restart: unless-stopped
-    volumes:
-      - redis:/data
-    networks:
-      - internal
   foodsoft:
     image: ${IMAGE}
-    restart: unless-stopped
     depends_on:
       - mariadb
-      - redis
     environment:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       MYSQL_USER: ${MYSQL_USER:-foodsoft}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-foodsoft}
       DATABASE_URL: mysql2://${MYSQL_USER}:${MYSQL_PASSWORD}@mariadb/${MYSQL_DATABASE}?encoding=utf8mb4
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       RAILS_FORCE_SSL: ${RAILS_FORCE_SSL:-false}
       DOMAIN: ${DOMAIN}
     deploy:
@@ -43,8 +30,13 @@ services:
         - "traefik.http.routers.foodsoft-${REFERENCE}.rule=Host(`${DOMAIN}`)"
         - "traefik.http.routers.foodsoft-${REFERENCE}.entrypoints=web-secure"
         - "traefik.http.routers.foodsoft-${REFERENCE}.tls.certresolver=production"
-
         - "traefik.http.services.foodsoft-${REFERENCE}.loadbalancer.server.port=3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      timeout: 10s
+      retries: 3
+      interval: 30s
+      start_period: 60s
     networks:
       - proxy
       - internal
@@ -53,7 +45,3 @@ networks:
   internal:
   proxy:
     external: true
-  
-volumes:
-  mariadb:
-  redis:
