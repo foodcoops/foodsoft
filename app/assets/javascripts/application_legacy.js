@@ -18,6 +18,7 @@
 //= require_self
 //= require big
 //= require units-converter
+//= require validation-utils
 //= require migrate-units-form
 //= require article-form
 //= require unit-conversion-field

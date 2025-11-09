@@ -116,6 +116,7 @@
             - quantity_data['used_quantity'] = @ordering_data[:order_articles][order_article.id][:used_quantity]
             - quantity_data['price'] = @ordering_data[:order_articles][order_article.id][:price]
             - quantity_data['minimum_order_quantity'] = @ordering_data[:order_articles][order_article.id][:minimum_order_quantity] unless @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].nil?
+            - quantity_data['maximum_order_quantity'] = @ordering_data[:order_articles][order_article.id][:maximum_order_quantity] unless @ordering_data[:order_articles][order_article.id][:maximum_order_quantity].nil?
             - quantity_data['e2e-order-article-id'] = order_article.id
             %td.used-unused
               %span.used= number_with_precision(@ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
@@ -127,8 +128,8 @@
                   %i.glyphicon.glyphicon-minus
                 %a.btn.btn-ordering.increase
                   %i.glyphicon.glyphicon-plus
-                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
-              %span.numeric-step-error
+                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available]), step: order_article.article_version.group_order_granularity}
+              %span.numeric-step-error{style: 'display: none;'}
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
 
             %td.used-unused-tolerance{style: ('display:none' if @order.stockit?)}
