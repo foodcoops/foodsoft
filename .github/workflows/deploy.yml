@@ -60,7 +60,7 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     environment: test-deployment
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository)
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout (for docker-compose file)
         uses: actions/checkout@v4
