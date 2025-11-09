@@ -91,26 +91,18 @@ jobs:
           set -euo pipefail
           STACK_NAME="foodsoft_${REFERENCE}"
           export DOCKER_HOST="ssh://${SSH_USER}@${SSH_HOST}"
-          docker stack deploy -c docker-compose.ci.yml --with-registry-auth --prune ${STACK_NAME}
 
-          echo "Waiting for stack to be ready..."
-          for i in $(seq 1 20); do
-            if [ "$(docker service ls --filter "name=${STACK_NAME}_foodsoft" -q | wc -l)" -eq 1 ] && \
-               [ "$(docker ps --filter "name=${STACK_NAME}_foodsoft" -q | wc -l)" -ge 1 ]; then
-              echo "Service is up."
-              break
-            fi
-            sleep 3
-          done
+          docker stack deploy -c docker-compose.ci.yml --detach=false --resolve-image=always --with-registry-auth --prune ${STACK_NAME}
 
           CONTAINER_ID=$(docker ps --filter "name=${STACK_NAME}_foodsoft" -q | head -n 1)
           if [ -z "$CONTAINER_ID" ]; then
-            echo "Could not find a running container for ${STACK_NAME}_foodsoft"
-            exit 1
+          echo "Could not find a running container for ${STACK_NAME}_foodsoft"
+          exit 1
           fi
 
           docker exec "$CONTAINER_ID" cp config/app_config.yml.SAMPLE config/app_config.yml
-          docker exec "$CONTAINER_ID" bundle exec rails db:setup || true
+          docker exec "$CONTAINER_ID" bundle exec rails db:reset --trace DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+          docker restart $CONTAINER_ID
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
