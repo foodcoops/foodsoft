@@ -1,5 +1,7 @@
-class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
+class Api::V1::User::GroupOrderArticlesController < Api::BaseController
   include Concerns::CollectionScope
+
+  ORDER_ARTICLE_SERIALIZER = V1OrderArticleSerializer
 
   before_action -> { doorkeeper_authorize! 'group_orders:user' }
 
@@ -88,8 +90,8 @@ class Api::V1::User::GroupOrderArticlesController < Api::V1::BaseController
   def render_goa_with_oa(goa, oa = goa.order_article)
     data = {}
     data[:group_order_article] = GroupOrderArticleSerializer.new(goa) if goa
-    data[:order_article] = OrderArticleSerializer.new(oa) if oa
+    data[:order_article] = self.class::ORDER_ARTICLE_SERIALIZER.new(oa) if oa
 
-    render json: data, root: nil
+    render json: data, root: nil, include: ['group_order_article', 'order_article.article', 'order_article.article.article_unit_ratios']
   end
 end

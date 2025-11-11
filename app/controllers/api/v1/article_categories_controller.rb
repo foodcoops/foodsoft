@@ -1,4 +1,4 @@
-class Api::V1::ArticleCategoriesController < Api::V1::BaseController
+class Api::V1::ArticleCategoriesController < Api::BaseController
   include Concerns::CollectionScope
 
   def index

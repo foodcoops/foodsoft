@@ -8,6 +8,7 @@ Rswag::Ui.configure do |c|
   # correspond to the relative paths for those endpoints.
 
   c.swagger_endpoint '/api-docs/v1/swagger.yaml', 'API V1 Docs'
+  c.swagger_endpoint '/api-docs/v2/swagger.yaml', 'API V2 Docs'
 
   # Add Basic Auth in case your API is private
   # c.basic_auth_enabled = true

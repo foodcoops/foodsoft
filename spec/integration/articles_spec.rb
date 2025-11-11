@@ -89,7 +89,7 @@ feature ArticlesController do
 
     before do
       supplier.update(
-        supplier_remote_source: api_v1_shared_supplier_articles_url(remote_supplier.external_uuid,
+        supplier_remote_source: api_v2_shared_supplier_articles_url(remote_supplier.external_uuid,
                                                                     foodcoop: FoodsoftConfig[:default_scope],
                                                                     host: Capybara.current_session.server.host,
                                                                     port: Capybara.current_session.server.port),
