@@ -1,0 +1,166 @@
+nl:
+  activerecord:
+    attributes:
+      group_order_invoice:
+        name: Huishoudensfactuur
+        sequence_type:
+          FRST: "Eerste automatische incasso"
+          RCUR: "Terugkerende automatische incasso"
+          OOFF: "Eenmalige automatische incasso"
+          FNAL: "Laatste automatische incasso"
+        links:
+          actions_for_all: Acties voor alle bestellingen
+          delete: Factuur verwijderen
+          direct_debit_for_all: Verzamel-incasso voor alle (.xml)
+          direct_debit_for_selected: Verzamel-incasso voor geselecteerde (.xml)
+          create_cumulative_invoice: Cumulatieve factuur maken
+          confirm_send_all: Weet je zeker dat je deze huishoudensfacturen wilt versturen naar %{ordergroups}?
+          combine: Facturen combineren
+          download: Factuur downloaden
+          download_all_zip: Alle facturen downloaden (zip)
+          generate: Factuur genereren
+          generate_with_date: Instellen & genereren
+          invoice_date: Datum van huishoudensfactuur
+          invoice_number: Factuurnummer
+          ordergroup: Huishouden
+          paid: Betaald
+          not_paid: Niet betaald
+          send_all_by_email: Alle facturen versturen
+          send_all_success: Facturen zijn naar alle huishoudens verstuurd
+          sepa_downloaded: SEPA geëxporteerd
+          sepa_not_downloaded: SEPA niet geëxporteerd
+          sepa_not_ready: Configuraties voor SEPA ontbreken in Beheer->Instellingen->Financiën
+          sepa_select: SEPA-export
+          sepa_sequence_type: SEPA-type
+        open_details_modal: Details tonen/verbergen
+        payment_method: Tegoed
+        tax_number_not_set: BTW-nummer niet ingesteld in configuratie of geen huishouden aanwezig
+      ordergroup_invoice:
+        merge: Samenvoegen
+        name: Huishoudensfactuur
+        email_sent: E-mail verzonden op
+      sepa_account_holder:
+        bic: BIC
+        holder: SEPA-rekeninghouder
+        iban: IBAN
+        mandate_id: Mandaatreferentie-ID
+        mandate_date_of_signature: Datum van ondertekening mandaat
+        hint: "Let op: De IBAN en BIC worden automatisch ingevuld zodra de SEPA-rekeninghouder is geselecteerd. Eerdere invoer wordt overschreven."
+
+  admin:
+    configs:
+      tab_payment:
+        group_order_invoices: Huishoudensfacturen
+
+  config:
+    hints:
+      group_order_invoices:
+        ignore_minimum_balance: Leden kunnen ook bestellen als hun rekeningsaldo onder het minimum ligt. (Belangrijk bij gebruik van SEPA-incasso als betaalmethode)
+        use_automatic_go_invoices: Aangepaste facturen voor de betreffende bestelling worden per e-mail verzonden naar alle huishoudensleden bij het klikken op "afrekenen".
+        payment_method: Betaalmethode wordt vermeld op de huishoudensfactuur
+        vat_exempt: Een lijst van factuuritems wordt gemaakt zonder expliciete vermelding van BTW en de factuur krijgt de nodige toevoeging met betrekking tot de kleine ondernemersregeling §19 (Foodcoop-marge ook niet inbegrepen in factuur)
+        iban: Voer IBAN in zonder spaties
+        bic: Voer BIC in zonder spaties
+        creditor_identifier: Voer incassant-ID in zonder spaties
+    keys:
+      group_order_invoices:
+        ignore_minimum_balance: Minimaal saldo negeren
+        use_automatic_invoices: Automatisch per e-mail verzenden na afrekening bestelling
+        payment_method: Betaalmethode
+        separate_deposits: Statiegeld apart factureren
+        vat_exempt: Deze foodcoop is BTW-vrijgesteld
+        iban: IBAN
+        bic: BIC
+        creditor_identifier: Incassant-ID
+
+  documents:
+    group_order_invoice_pdf:
+      deposit: Statiegeld
+      deposit_excluded: plus statiegeld
+      filename: Factuur%{number}
+      invoicer: Factureerder
+      invoicee: Geadresseerde
+      invoice_date: 'Factuurdatum: %{invoice_date}'
+      invoice_number: 'Factuurnummer: %{invoice_number}'
+      markup_included: incl. Foodcoop marge op brutoprijs %{marge}%
+      ordergroup:
+        contact_phone: 'Telefoonnummer: %{contact_phone}'
+        contact_address: 'Adres: %{contact_address}'
+        customer_number: 'Klantnummer: %{customer_number}'
+        name: Huishouden %{ordergroup}
+      payment_method: 'Betaalmethode: %{payment_method}'
+      pickup_date: 'Leverdatum: %{invoice_date}'
+      products: Producten
+      sum_to_pay: Totaal te betalen
+      sum_to_pay_net: Totaal te betalen (netto)
+      sum_to_pay_gross: Totaal
+      small_business_regulation: Als kleine ondernemer in de zin van §19 lid 1 van de Umsatzsteuergesetz (UStG) wordt geen BTW in rekening gebracht.
+      table_headline: 'Voor de bestelling worden de volgende items in rekening gebracht:'
+      tax_excluded: excl. BTW
+      tax_included: incl. BTW %{tax}%
+      tax_line: "%{label} met %{tax_key}%"
+      tax_number: 'BTW-nummer: %{number}'
+      title: Factuur voor bestelling bij %{supplier}
+      vat_sum_table:
+        gross: Bruto
+        margin: FC-marge
+        net: Netto
+        tax: BTW
+      vat_exempt_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs
+        - Totaalprijs artikel
+      no_price_markup_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs (netto)
+        - Totaalprijs artikel (netto)
+        - BTW
+        - Totaalprijs artikel (bruto)
+      price_markup_rows:
+        - Naam
+        - Aantal
+        - Eenheidsprijs (netto)
+        - Totaalprijs artikel (netto)
+        - BTW
+        - Totaalprijs artikel (bruto) incl. Foodcoop marge %{marge}%
+
+  mailer:
+    group_order_invoice:
+      subject: Huishoudensfactuur voor %{group} bij %{supplier}
+    ordergroup_invoice:
+      subject: Huishoudensfactuur voor %{group} bij %{supplier}
+
+  invoice_mailer:
+    group_order_invoice:
+      text: |
+        Beste bestelgroep %{group},
+        
+        De gezamenlijke bestelling bij %{supplier} is zojuist afgerekend en er zijn facturen aangemaakt voor de betreffende bestelgroepen.
+        In de bijlage vind je jullie factuur.
+        
+        Vriendelijke groeten van %{foodcoop}
+    ordergroup_invoice:
+      text: |
+        Beste bestelgroep %{group},
+        
+        De gezamenlijke bestelling bij %{supplier} is zojuist afgerekend en er zijn facturen aangemaakt voor de betreffende bestelgroepen.
+        In de bijlage vind je jullie factuur.
+        
+        Vriendelijke groeten van %{foodcoop}
+
+  multi_orders:
+    destroy:
+      invoices_left: Verwijder eerst de facturen
+    create:
+      no_multi_multi: Je kunt geen multi-bestellingen omzetten naar een multi-multi-bestelling.
+      invalid_orders: De bestelling is al onderdeel van een multi-bestelling of is nog niet afgesloten.
+      merge_not_possible_invoices_present: Samenvoegen niet mogelijk. Er bestaan al facturen voor sommige huishoudens.
+      success: "Multi-bestelling voor %{suppliers} aangemaakt"
+    collective_direct_debit:
+      filename_suffix: Verzamelincasso
+      
+  orders:
+    collective_direct_debit:
+      alert: Belangrijke gegevens voor een SEPA-incasso ontbreken voor %{ordergroup_names}.
