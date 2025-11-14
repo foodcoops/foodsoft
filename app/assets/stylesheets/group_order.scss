@@ -6,6 +6,7 @@
   input.goa-quantity, input.goa-tolerance {
     height: 24px;
     -moz-appearance: textfield;
+    appearance: textfield;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     &::-webkit-inner-spin-button {
