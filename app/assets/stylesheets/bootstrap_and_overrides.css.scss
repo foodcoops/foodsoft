@@ -206,7 +206,7 @@ table {
 
 #order-footer, .article-info {
   text-align: left;
-  z-index: 3;
+  z-index: 1;
   position: fixed;
   bottom: 0;
   background-color: #E4EED6;
@@ -294,7 +294,7 @@ tr.order-article {
 
   .group-order-input:not(.stock-order) {
     .goa-quantity, .goa-tolerance {
-      width: 45px;
+      width: 70px;
       text-align: right;
     }
   }
