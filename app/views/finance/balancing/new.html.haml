@@ -64,7 +64,7 @@
         = link_to t('.confirm_order'), close_direct_finance_order_path(@order), class: 'btn btn-primary', method: :patch
       - else
         = link_to t('.confirm_order'), confirm_finance_order_path(@order), class: 'btn btn-primary'
-        = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
+        = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
           %span.caret
         %ul.dropdown-menu
           %li= link_to t('.confirm_order'), confirm_finance_order_path(@order)
