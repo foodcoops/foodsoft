@@ -18,7 +18,7 @@ module GroupOrderArticlesHelper
           input_data = input_data.merge('multiply-before-submit': article_version.convert_quantity(1,
                                                                                                    article_version.billing_unit, article_version.group_order_unit))
         end
-        f.input_field(:result, as: :delta, class: 'form-control', style: 'width:100px', data: input_data, id: "r_#{goa.id}",
+        f.input_field(:result, as: :delta, class: 'form-control', data: input_data, id: "r_#{goa.id}",
                                value: format_number(converted_value, 3))
       end
     else

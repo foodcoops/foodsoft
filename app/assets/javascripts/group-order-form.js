@@ -30,8 +30,8 @@ class GroupOrderForm {
       popoverTemplate$: $('#unit_conversion_popover_content_template'),
     }));
     row$.find('.btn-ordering').mousedown((e) => e.preventDefault());
-    row$.find('.btn-ordering.decrease').click((event) => this.increaseOrDecrease($(event.target).parents('.btn-group').find('input.numeric'), false));
-    row$.find('.btn-ordering.increase').click((event) => this.increaseOrDecrease($(event.target).parents('.btn-group').find('input.numeric'), true));
+    row$.find('.btn-ordering.decrease').click((event) => this.increaseOrDecrease($(event.target).parents('.input-group').find('input.numeric'), false));
+    row$.find('.btn-ordering.increase').click((event) => this.increaseOrDecrease($(event.target).parents('.input-group').find('input.numeric'), true));
 
     quantityAndTolerance$.change(() => {
       this.updateMissingUnits(row$, quantity$);
