@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mariadb:
-    image: mariadb:12
+    image: mariadb:10.5
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-foodsoft}
@@ -11,16 +11,20 @@ services:
     networks:
       - internal
 
+  redis:
+    image: redis:6.2-alpine
+    networks:
+      - internal
+
   foodsoft:
     image: ${IMAGE}
-    depends_on:
-      - mariadb
     environment:
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-verysecret}
       MYSQL_USER: ${MYSQL_USER:-foodsoft}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-foodsoft}
-      DATABASE_URL: mysql2://${MYSQL_USER}:${MYSQL_PASSWORD}@mariadb/${MYSQL_DATABASE}?encoding=utf8mb4
+      DATABASE_URL: mysql2://${MYSQL_USER:-foodsoft}:${MYSQL_PASSWORD:-secret}@mariadb/${MYSQL_DATABASE:-foodsoft}?encoding=utf8mb4
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       RAILS_FORCE_SSL: ${RAILS_FORCE_SSL:-false}
       DOMAIN: ${DOMAIN}
     deploy:
