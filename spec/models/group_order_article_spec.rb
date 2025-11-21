@@ -86,4 +86,98 @@ describe GroupOrderArticle do
       expect(res).to eq(quantity: 4, tolerance: 2, total: 6)
     end
   end
+
+  describe 'maximum_order_quantity validation' do
+    let(:user) { create(:user, :ordergroup) }
+    let(:supplier) { create(:supplier) }
+    let(:article) { create(:article, supplier: supplier) }
+    let(:order) { create(:order, supplier: supplier, article_ids: [article.id]) }
+    let(:group_order) { create(:group_order, order: order, ordergroup: user.ordergroup) }
+    let(:order_article) { order.order_articles.first }
+
+    context 'when article has no maximum_order_quantity' do
+      it 'allows any quantity' do
+        goa = build(:group_order_article,
+                    group_order: group_order,
+                    order_article: order_article,
+                    quantity: 100.0)
+
+        expect(goa).to be_valid
+      end
+    end
+
+    context 'when article has maximum_order_quantity' do
+      before do
+        order_article.article_version.update!(maximum_order_quantity: 10.0)
+      end
+
+      it 'allows quantity within the limit' do
+        goa = build(:group_order_article,
+                    group_order: group_order,
+                    order_article: order_article,
+                    quantity: 5.0)
+
+        expect(goa).to be_valid
+      end
+
+      it 'rejects quantity exceeding the limit' do
+        goa = build(:group_order_article,
+                    group_order: group_order,
+                    order_article: order_article,
+                    quantity: 15.0)
+
+        expect(goa).not_to be_valid
+        expect(goa.errors[:quantity]).to include(match(/cannot exceed.*10/))
+      end
+
+      it 'considers existing orders from other groups' do
+        other_group_order = create(:group_order, order: order)
+        create(:group_order_article,
+               group_order: other_group_order,
+               order_article: order_article,
+               quantity: 8.0)
+
+        order_article.reload
+
+        goa = build(:group_order_article,
+                    group_order: group_order,
+                    order_article: order_article,
+                    quantity: 3.0)
+
+        expect(goa).not_to be_valid
+        expect(goa.errors[:quantity]).to include(match(/cannot exceed.*2/))
+      end
+
+      it 'allows updating existing orders within limits' do
+        goa = create(:group_order_article,
+                     group_order: group_order,
+                     order_article: order_article,
+                     quantity: 5.0)
+
+        goa.quantity = 8.0
+        expect(goa).to be_valid
+
+        goa.quantity = 12.0
+        expect(goa).not_to be_valid
+      end
+
+      it 'handles unit conversion correctly' do
+        order_article.article_version.update!(
+          supplier_order_unit: 'KGM',
+          group_order_unit: 'GRM',
+          maximum_order_quantity: 2.0 # 2 kg = 2000 grams
+        )
+
+        goa = build(:group_order_article,
+                    group_order: group_order,
+                    order_article: order_article,
+                    quantity: 1500.0)
+
+        expect(goa).to be_valid
+
+        goa.quantity = 3000.0
+        expect(goa).not_to be_valid
+      end
+    end
+  end
 end
