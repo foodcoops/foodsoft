@@ -23,7 +23,7 @@
       // if there's less then two options, don't even bother showing the popover:
       this.disabled = this.unitSelectOptions.length < 2;
 
-      this.opener$ = $('<button class="input-group-addon conversion-popover-opener btn btn-xs"><i class="glyphicon glyphicon-retweet"></i></button>');
+      this.opener$ = $('<span class="input-group-btn"><button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button></div>');
       this.opener$.attr('title', this.popoverTemplate.dataset.title);
       this.field$.after(this.opener$);
       if (this.field$.css('display') === 'none') {
