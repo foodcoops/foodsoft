@@ -58,9 +58,9 @@ en:
         order_number: Order number
         article_category: Category
 
-        supplier_order_unit: Delivery unit
-        group_order_granularity: can be ordered per
-        billing_unit: Billing unit
+        supplier_order_unit: Orderable from supplier per
+        group_order_granularity: Orderable for members in
+        billing_unit: Will be billed per
         price_unit: Price unit
         minimum_order_quantity: Minimum order quantity
       bank_account:
@@ -1678,11 +1678,11 @@ en:
     article_fields_units:
       custom_unit: Custom
       unit: Unit
-      unit_ratios: Unit ratios
-      add_ratio: Add ratio
+      unit_ratios: Content
+      add_ratio: Add content
       warn_about_needless_custom_unit: Refrain from using custom plain text units when there are apt units in the dropdown. (Choosing units from the dropdown allows for interoperability with other systems and enables automatically converting them into other units.)
     article_unit_ratio:
-      remove: Remove ratio
+      remove: Remove content
       per: per
     articles_by:
       price: Total price
