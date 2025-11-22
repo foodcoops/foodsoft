@@ -56,9 +56,9 @@ de:
         order_number: Bestellnummer
         article_category: Kategorie
 
-        supplier_order_unit: Liefereinheit
-        group_order_granularity: bestellbar per
-        billing_unit: Abrechnungseinheit
+        supplier_order_unit: Bestellbar von Lieferantin in
+        group_order_granularity: Für Mitglieder bestellbar in
+        billing_unit: Wird abgerechnet nach
         price_unit: Preiseinheit
         minimum_order_quantity: Mindestbestellmenge
       bank_account:
@@ -1671,11 +1671,11 @@ de:
     article_fields_units:
       custom_unit: Benutzerdefiniert
       unit: Einheit
-      unit_ratios: Einheiten-Umrechnung
-      add_ratio: Umrechnung hinzufügen
+      unit_ratios: Inhalt
+      add_ratio: Inhalt hinzufügen
       warn_about_needless_custom_unit: Wenn möglich keine benutzerdefinierten Einheiten eintippen, sondern stattdessen das Einheiten-Dropdown verwenden (Das gewährleistet Interoperabilität mit anderen Systemen und erlaubt die automatische Umrechnung in andere Einheiten.)
     article_unit_ratio:
-      remove: Umrechnung entfernen
+      remove: Inhalt entfernen
       per: pro
     articles_by:
       price: Gesamtpreis
