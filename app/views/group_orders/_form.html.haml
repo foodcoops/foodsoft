@@ -127,7 +127,7 @@
                   %i.glyphicon.glyphicon-minus
                 %a.btn.btn-ordering.increase
                   %i.glyphicon.glyphicon-plus
-                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
+                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric decimal', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
               %span.numeric-step-error
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
 
@@ -143,7 +143,7 @@
                     %i.glyphicon.glyphicon-minus
                   %a.btn.btn-ordering.increase
                     %i.glyphicon.glyphicon-plus
-                  %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
+                  %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric decimal', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display", data: {price: @ordering_data[:order_articles][order_article.id][:total_price]}}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
