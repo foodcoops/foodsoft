@@ -11,12 +11,45 @@ class GroupOrderForm {
     this.groupBalance = config.groupBalance;
     this.minimumBalance = config.minimumBalance;
 
+    ValidationUtils.setupCustomValidation(this.form$);
+
     this.initializeIncreaseDecreaseButtons();
     this.submitButton$.removeAttr('disabled');
+    this.initializeFormValidation();
   }
 
   initializeIncreaseDecreaseButtons() {
     this.articleRows$.each((_, element) => this.initializeOrderArticleRow($(element)));
+  }
+
+  initializeFormValidation() {
+    this.form$.on('submit', (e) => {
+      // Update all validation messages first
+      this.articleRows$.each((_, row) => {
+        const row$ = $(row);
+        this.updateValidationMessages(row$);
+      });
+
+      // Check if form is valid - browser will prevent submission if invalid
+      if (!this.form$[0].checkValidity()) {
+        e.preventDefault();
+
+        // Show error messages for all invalid inputs
+        this.form$.find(':invalid').each((_, invalidInput) => {
+          const input$ = $(invalidInput);
+          if (input$.hasClass('goa-quantity')) {
+            // Trigger validation to show error message
+            ValidationUtils.validateNumericInput(input$);
+          }
+        });
+
+        // Focus on first invalid input
+        const firstInvalid = this.form$.find(':invalid').first();
+        if (firstInvalid.length > 0) {
+          firstInvalid.focus();
+        }
+      }
+    });
   }
 
   initializeOrderArticleRow(row$) {
@@ -36,8 +69,18 @@ class GroupOrderForm {
     quantityAndTolerance$.change(() => {
       this.updateMissingUnits(row$, quantity$);
       this.updateBalance();
+      this.updateValidationMessages(row$);
     });
     quantityAndTolerance$.keyup(() => quantity$.trigger('change'));
+
+    // Handle validation events for quantity field only
+    quantity$.on('invalid', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.updateValidationMessages(row$);
+    });
+
+    this.updateValidationMessages(row$);
   }
 
   updateBalance() {
@@ -59,8 +102,8 @@ class GroupOrderForm {
     // determine bgcolor and submit button state according to balance
     var bgcolor = '';
     if (balance < this.minimumBalance) {
-        bgcolor = '#FF0000';
-        this.submitButton$.attr('disabled', 'disabled')
+      bgcolor = '#FF0000';
+      this.submitButton$.attr('disabled', 'disabled')
     } else {
       this.submitButton$.removeAttr('disabled')
     }
@@ -225,6 +268,31 @@ class GroupOrderForm {
   packCompletedFromTolerance(packSize, quantity, tolerance) {
     var remainder = Big(quantity).mod(packSize).toNumber();
     return (remainder > 0 && (Big(remainder).add(tolerance).toNumber() >= packSize));
+  }
+
+  updateValidationMessages(row$) {
+    const quantity$ = row$.find('.goa-quantity');
+
+    if (quantity$.length === 0) return;
+
+    const inputElement = quantity$[0];
+
+    // Clear any existing validation state
+    inputElement.setCustomValidity('');
+
+    // Use ValidationUtils for validation with error spans
+    ValidationUtils.validateNumericInput(quantity$);
+
+    // Special case: item not available (max = 0)
+    const rawValue = quantity$.val().trim();
+    const inputValue = parseFloat(rawValue);
+    const maxValue = parseFloat(quantity$.attr('max'));
+
+    if (maxValue === 0 && inputValue > 0) {
+      const message = I18n.t('errors.item_not_available');
+      inputElement.setCustomValidity(message);
+      ValidationUtils.showValidationMessage(quantity$, message);
+    }
   }
 }
 

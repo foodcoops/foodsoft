@@ -281,6 +281,7 @@ en:
               taken_with_unit: name and unit are already taken
             minimum_order_quantity:
               only_integer: Must be an integer if supplier order unit is a piece unit
+              greater_than_maximum: must be less than or equal to maximum order quantity
         supplier:
           attributes:
             shared_sync_method:
@@ -837,6 +838,8 @@ en:
       text: This page does not appear to exist, sorry!
       title: Page not found
     step_error: Enter a number >=%{min}, which is a multiple of %{granularity}.
+    maximum_quantity_error: There are a maximum of %{max} units available.
+    item_not_available: This item is no longer available for ordering.
   feedback:
     create:
       notice: Your feedback was sent successfully. Thanks a lot!
@@ -1479,6 +1482,7 @@ en:
       no_ordergroup: no ordergroup
     group_order_article:
       order_closed: Order is closed and cannot be modified
+      quantity_exceeds_maximum: 'Quantity %{requested} cannot exceed available %{available}'
   navigation:
     admin:
       config: Configuration

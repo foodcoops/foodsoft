@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_09_100306) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
     t.string "group_order_unit"
     t.decimal "group_order_granularity", precision: 8, scale: 3, default: "1.0", null: false
     t.float "minimum_order_quantity"
+    t.float "maximum_order_quantity"
     t.index ["article_category_id"], name: "index_article_versions_on_article_category_id"
     t.index ["article_id", "created_at"], name: "index_article_versions_on_article_id_and_created_at", unique: true
   end

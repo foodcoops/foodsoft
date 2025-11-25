@@ -268,4 +268,64 @@ describe OrderArticle do
       end
     end
   end
+
+  describe 'calculate_units_to_order with si unit_quantity' do
+    let(:article) { create(:article, unit_quantity: 3) }
+    let(:order) { create(:order, article_ids: [article.id]) }
+    let(:oa) { order.order_articles.first }
+
+    it 'simple case' do
+      expect(oa.calculate_units_to_order(6)).to eq 2
+    end
+
+    it 'with tolerance' do
+      expect(oa.calculate_units_to_order(5, 0)).to eq 1
+      expect(oa.calculate_units_to_order(5, 1)).to eq 2
+    end
+
+    it 'minimum order quantity' do
+      oa.article_version.update_attribute :minimum_order_quantity, 6
+      expect(oa.calculate_units_to_order(3)).to eq 0
+      expect(oa.calculate_units_to_order(6)).to eq 2
+    end
+
+    it 'maximum order quantity' do
+      oa.article_version.update_attribute :maximum_order_quantity, 6
+      expect(oa.calculate_units_to_order(9)).to eq 2
+    end
+  end
+
+  describe 'calculate_units_to_order with article_version' do
+    let(:article_version) { create(:article_version, article_unit_ratios: [create(:article_unit_ratio, quantity: 3)]) }
+    let(:article) { article_version.article }
+    let(:order) { create(:order, article_ids: [article.id]) }
+    let(:oa) { order.order_articles.first }
+
+    it 'simple case' do
+      expect(oa.calculate_units_to_order(3)).to eq 1
+    end
+
+    it 'with tolerance' do
+      expect(oa.calculate_units_to_order(5, 0)).to eq 1
+      expect(oa.calculate_units_to_order(5, 1)).to eq 2
+    end
+
+    it 'minimum order quantity' do
+      oa.article_version.update_attribute :minimum_order_quantity, 6
+      expect(oa.calculate_units_to_order(3)).to eq 0
+      expect(oa.calculate_units_to_order(6)).to eq 2
+    end
+
+    it 'maximum order quantity' do
+      oa.article_version.update_attribute :maximum_order_quantity, 6
+      expect(oa.calculate_units_to_order(9)).to eq 2
+    end
+
+    it 'maximum and minimum' do
+      oa.article_version.update_attribute :maximum_order_quantity, 9
+      oa.article_version.update_attribute :minimum_order_quantity, 6
+      expect(oa.calculate_units_to_order(12)).to eq 3
+      expect(oa.calculate_units_to_order(3)).to eq 0
+    end
+  end
 end

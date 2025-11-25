@@ -279,6 +279,7 @@ de:
               taken_with_unit: Name und Einheit sind bereits vergeben
             minimum_order_quantity:
               only_integer: Muss eine Ganzzahl sein, wenn die Liefereinheit eine Stückeinheit ist.
+              greater_than_maximum: muss kleiner oder gleich der maximalen Bestellmenge sein
         supplier:
           attributes:
             shared_sync_method:
@@ -833,6 +834,8 @@ de:
       text: Diese Seite existiert anscheinend nicht. Entschuldigung!
       title: Seite nicht gefunden
     step_error: Gib eine Zahl >=%{min} ein, die ein Vielfaches von %{granularity} ist.
+    maximum_quantity_error: Es sind maximal %{max} Einheiten verfügbar.
+    item_not_available: Dieser Artikel ist nicht mehr zum Bestellen verfügbar.
   feedback:
     create:
       notice: Das Feedback wurde erfolgreich verschickt. Vielen Dank!
@@ -1472,6 +1475,7 @@ de:
       no_ordergroup: keine Bestellgruppe
     group_order_article:
       order_closed: Bestellung ist geschlossen und kann nicht geändert werden
+      quantity_exceeds_maximum: 'Menge %{requested} kann verfügbare Menge %{available} nicht überschreiten'
   navigation:
     admin:
       config: Einstellungen
