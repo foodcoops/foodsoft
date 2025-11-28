@@ -426,9 +426,14 @@ tr.untranslated {
 
 // center table rows vertically (including form elements)
 table.table {
-  td, th {
-    vertical-align: middle;
+  thead, tbody, tfoot > {
+    tr > {
+      td, th {
+        vertical-align: middle;
+      }
+    }
   }
+
   select, textarea, input, .uneditable-input
   {
     margin-bottom: 0;
