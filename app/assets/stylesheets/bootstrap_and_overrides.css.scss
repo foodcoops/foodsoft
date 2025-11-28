@@ -603,12 +603,23 @@ details {
   cursor: pointer;
 }
 
-.form-horizontal .no-indent-left .control-group {
-  margin-bottom: 0;
-  .controls {
-    margin-left: 0;
+.form-horizontal {
+  .no-indent-left .control-group {
+    margin-bottom: 0;
+    .controls {
+      margin-left: 0;
+    }
+  }
+
+  .control-label {
+    hyphens: auto;
+
+    &.text-left {
+      text-align: left;
+    }
   }
 }
+
 
 // bootstrap version 2 doesn't support some styles -> let's add makeshift ones manually for now:
 .d-flex {
@@ -664,6 +675,10 @@ td.mr-1 > *:last-child {
   margin-bottom: 3px !important;
 }
 
+.pt-0 {
+  padding-top: 0 !important;
+}
+
 .pt-5 {
   padding-top: 15px;
 }
@@ -674,6 +689,14 @@ td.mr-1 > *:last-child {
 
 .text-decoration-none:hover {
   text-decoration: none;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.d-inline-block {
+  display: inline-block;
 }
 
 // Wider popovers
@@ -687,6 +710,10 @@ td.mr-1 > *:last-child {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 *[role="button"] {

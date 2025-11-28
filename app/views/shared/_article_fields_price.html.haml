@@ -1,11 +1,15 @@
-.row
-  .col-sm-6
-    = f.input :price, wrapper: :custom_form, label_html: { class: 'col-sm-12', style: "width:280px"}, input_html: { class: 'form-control col-sm-3' }, wrapper_html: { class: 'd-flex' } do
-      .input-group
-        %span.input-group-addon= t 'number.currency.format.unit'
-        = f.input_field :price, class: 'form-control'
-  .col-sm-6
-    = f.input :price_unit, as: :select, wrapper: :custom_form, collection: [], label_html: { style: "width:50px;text-align: center; "}, input_html: {'data-initial-value': article.price_unit, class: 'form-control', style: 'margin-right:12px'}, label: t('articles.form.per'), include_blank: false,  wrapper_html: { class: 'd-flex unit-wrapper'}
+.overflow-hidden.form-group
+  %label.control-label.col-sm-3{for: 'article_version_price'}
+    = ArticleVersion.human_attribute_name(:price)
+  .col-sm-9.d-flex
+    .input-group.unit-wrapper
+      %span.input-group-addon= t 'number.currency.format.unit'
+      = f.input_field :price, class: 'form-control mr-2', step: 0.001, style: 'width: 150px;'
+      -# width:50px;text-align: center;
+      .ml-1.d-flex.align-items-center
+        %span.mr-2.control-label
+          = t('articles.form.per')
+        = f.select :price_unit, [], {include_blank: false}, {class: 'form-control', style: 'margin-right:12px', 'data-initial-value': article.price_unit}
 %div
   = f.input :tax do
     .input-group

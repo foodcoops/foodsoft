@@ -29,7 +29,8 @@ class ArticleForm {
       this.multiForm$ = multiForm$;
       const selectContainer$ = this.articleForm$.parents('#modalContainer');
       this.select2Config = {
-        dropdownParent: selectContainer$.length === 0 ? undefined : selectContainer$
+        dropdownParent: selectContainer$.length === 0 ? undefined : selectContainer$,
+        dropdownAutoWidth : true
       };
 
       this.loadAvailableUnits();
@@ -431,7 +432,7 @@ class ArticleForm {
     unitSelect$.parents('.unit-wrapper').find('.immutable_unit_label').remove();
     if (units.length === 1) {
       unitSelect$.hide();
-      unitSelect$.after($(`<div class="immutable_unit_label control-label pull-left">${units[0].label}</div>`))
+      unitSelect$.after($(`<div class="immutable_unit_label control-label d-inline-block">${units[0].label}</div>`))
     } else {
       unitSelect$.show();
     }
