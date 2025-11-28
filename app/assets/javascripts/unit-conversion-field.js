@@ -23,16 +23,18 @@
       // if there's less then two options, don't even bother showing the popover:
       this.disabled = this.unitSelectOptions.length < 2;
 
-      this.opener$ = $('<span class="input-group-btn"><button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button></div>');
-      this.opener$.attr('title', this.popoverTemplate.dataset.title);
+      this.opener$ = $('<span class="input-group-btn"></div>');
+      this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button>');
+      this.opener$.append(this.openerButton$);
+      this.openerButton$.attr('title', this.popoverTemplate.dataset.title);
       this.field$.after(this.opener$);
       if (this.field$.css('display') === 'none') {
         this.opener$.hide();
       }
 
       if (this.disabled) {
-        this.opener$.attr('disabled', 'disabled');
-        this.opener$.attr('title', this.popoverTemplate.dataset.disabledTitle);
+        this.openerButton$.attr('disabled', 'disabled');
+        this.openerButton$.attr('title', this.popoverTemplate.dataset.disabledTitle);
         return;
       }
 
@@ -64,7 +66,7 @@
     initializeOpenListener() {
       this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'left', trigger: 'manual'});
 
-      this.opener$.click((e) => {
+      this.openerButton$.click((e) => {
         e.preventDefault();
         e.stopPropagation();
         this.openPopover()
