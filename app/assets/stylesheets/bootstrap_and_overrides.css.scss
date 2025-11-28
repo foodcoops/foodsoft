@@ -124,7 +124,7 @@ table {
     text-align: right;
   }
   td.odd {
-    background-color: $table-bg-accent;
+    background-color: $table-accent-bg;
   }
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
@@ -135,7 +135,7 @@ table {
   }
 
   tr.selected td {
-    background-color: $state-success-bg;
+    background-color: $success-bg-subtle;
   }
 }
 
@@ -188,7 +188,7 @@ table {
     display: none;
   }
   .mw-headline a {
-    color: $text-color;
+    color: $body-color;
     text-decoration: none;
   }
 }
@@ -393,7 +393,7 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: tint($text-color, $nonessentialDim); }
+.symbol              { color: tint($body-color, $nonessentialDim); }
 .used        .symbol { color: tint($articleUsedColor, $nonessentialDim); }
 .unused      .symbol { color: tint($articleUnusedColor, $nonessentialDim); }
 .partused    .symbol { color: tint($articlePartusedColor, $nonessentialDim); }
@@ -523,7 +523,7 @@ input.package {
   background-size: 15px 15px;
   // disabled and readonly definitions though
   &[disabled], &[readonly] {
-    background-color: $input-bg-disabled;
+    background-color: $input-disabled-bg;
   }
 }
 i.package {
@@ -540,7 +540,7 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: tint($text-color, $nonessentialDim); }
+.package              { color: tint($body-color, $nonessentialDim); }
 .used        .package { color: tint($articleUsedColor, $nonessentialDim); }
 .unused      .package { color: tint($articleUnusedColor, $nonessentialDim); }
 .partused    .package { color: tint($articlePartusedColor, $nonessentialDim); }
