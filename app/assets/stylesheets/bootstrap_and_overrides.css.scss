@@ -287,8 +287,11 @@ tr.order-article {
 
   .group-order-input:not(.stock-order) {
     .goa-quantity, .goa-tolerance {
-      width: 75px;
+      width: 65px;
       text-align: right;
+      font-size: 14px;
+      padding: 4px 6px;
+      appearance: textfield;
     }
   }
 

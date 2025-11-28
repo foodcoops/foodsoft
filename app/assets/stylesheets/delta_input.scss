@@ -12,8 +12,10 @@ form.delta-input, .delta-input form {
   }
 
   input[data-delta] {
-    text-align: center;
+    text-align: right;
     min-width: 65px;
+    font-size: 14px;
+    padding: 4px 6px;
 
     appearance: textfield;
     -moz-appearance: textfield;
