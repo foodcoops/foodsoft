@@ -101,7 +101,7 @@
             - if @order.stockit?
               %td= truncate order_article.article_version.article.supplier.name, length: 15
             %td= h order_article.article_version.origin
-            %td= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
+            %td.text-nowrap= number_to_currency(@ordering_data[:order_articles][order_article.id][:price])
             %td.group-order-unit= format_group_order_unit_with_ratios(order_article.article_version)
             %td
               - if @order.stockit?
@@ -149,7 +149,7 @@
                         %i.glyphicon.glyphicon-plus
                     %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
 
-            %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
+            %td.text-nowrap{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display", data: {price: @ordering_data[:order_articles][order_article.id][:total_price]}}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
               .article-info
                 .article-name= order_article.article_version.name
