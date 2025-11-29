@@ -23,7 +23,7 @@
       // if there's less then two options, don't even bother showing the popover:
       this.disabled = this.unitSelectOptions.length < 2;
 
-      this.opener$ = $('<span class="input-group-btn"></div>');
+      this.opener$ = $('<span class="input-group-btn overflow-hidden w-fit-content"></div>');
       this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button>');
       this.opener$.append(this.openerButton$);
       this.openerButton$.attr('title', this.popoverTemplate.dataset.title);
@@ -64,7 +64,7 @@
     }
 
     initializeOpenListener() {
-      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'left', trigger: 'manual'});
+      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'bottom', trigger: 'manual'});
 
       this.openerButton$.click((e) => {
         e.preventDefault();
@@ -72,7 +72,7 @@
         this.openPopover()
       });
 
-      this.field$.on('shown.bs.popover', () => this.initializeConversionPopover(this.field$.next('.popover')));
+      this.field$.on('inserted.bs.popover', () => this.initializeConversionPopover(this.field$.next('.popover')));
     }
 
     openPopover() {
@@ -93,10 +93,8 @@
     }
 
     initializeConversionPopover(popover$) {
-      let showAgainHack = false;
       if (!popover$.hasClass('wide')) {
         popover$.addClass('wide');
-        showAgainHack = true;
       }
 
       const popoverContent$ = popover$.find('.popover-content');
@@ -104,11 +102,6 @@
 
       const contents$ = $(document.importNode(this.popoverTemplate, true));
       popoverContent$.append(contents$);
-
-      if (showAgainHack) {
-        this.openPopover();
-        return;
-      }
 
       this.quantityInput$ = contents$.find('input.quantity');
       this.quantityInput$.val(String(this.field$.val()).replace(',', '.'));

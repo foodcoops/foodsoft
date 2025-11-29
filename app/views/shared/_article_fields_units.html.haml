@@ -13,17 +13,16 @@
     -# title: free text unit
     = f.input_field :unit, class: 'form-control ml-1', placeholder: t('.unit')
     %i.glyphicon.glyphicon-warning-sign{title: t('.warn_about_needless_custom_unit')}
-%div
-  .form-group.d-flex.w-full
-    %label.control-label.col-sm-3
-      = t('.unit_ratios')
-    %table#fc_base_price{:class => "col-sm-9 "}
-      %tbody
-        - ratios = article.article_unit_ratios
-        = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
-      %tfoot
-        %td{:colspan => 9, :style => 'padding-left: 22px; padding-bottom: 16px; padding-top: 16px'}
-          = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: "add ratio"
+.form-group.d-flex.form-group
+  %label.control-label.col-sm-3
+    = t('.unit_ratios')
+  %table#fc_base_price{:class => "col-sm-9 mr-2"}
+    %tbody
+      - ratios = article.article_unit_ratios
+      = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
+    %tfoot
+      %td{:colspan => 9, :style => 'padding-left: 22px; padding-bottom: 16px; padding-top: 16px'}
+        = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: "add ratio"
 %div
   = f.input :minimum_order_quantity do
     .input-group
