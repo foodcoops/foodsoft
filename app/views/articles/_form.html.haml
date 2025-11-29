@@ -10,7 +10,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
+        %h3.modal-title= @article.new_record? ? t('.title_new') : t('.title_edit')
       .modal-body.article-form
         = f.hidden_field :id
         = f.input :availability, wrapper: :inverse_horizontal_boolean

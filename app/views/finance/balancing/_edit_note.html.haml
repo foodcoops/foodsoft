@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= t('.title')
+        %h3.modal-title= t('.title')
       .modal-body
         = f.input :note, input_html: {class: 'form-control', rows: 10, cols: 80}
       .modal-footer

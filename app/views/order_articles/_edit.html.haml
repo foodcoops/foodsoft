@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= t '.title'
+        %h3.modal-title= t '.title'
       .modal-body.article-form
         - if params[:without_units]
           = hidden_field_tag :without_units, true

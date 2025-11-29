@@ -250,7 +250,7 @@ module ApplicationHelper
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
   def close_button(dismiss)
-    content_tag :button, type: 'button', class: 'close', data: { dismiss: dismiss } do
+    content_tag :button, type: 'button', class: 'close mt-1', data: { dismiss: dismiss } do
       I18n.t('ui.marks.close').html_safe
     end
   end
