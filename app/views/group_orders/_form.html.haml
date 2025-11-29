@@ -71,7 +71,7 @@
   = f.hidden_field :order_id
   = f.hidden_field :updated_by_user_id
   = f.hidden_field :ordergroup_id
-  %table.table.table-hover
+  %table.table.table-hover{style: "margin-bottom:30px;"}
     %thead
       %tr
         %th= heading_helper Article, :name
@@ -200,7 +200,7 @@
             %strong
               %span#new_balance= number_to_currency(old_balance - @group_order.price)
       %span#order-button
-        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary', disabled: 'disabled' )
+        = submit_tag( t('.action_save'), id: 'submit_button', class: 'btn btn-primary mt-1', disabled: 'disabled' )
         = link_to t('.account_statement'), my_ordergroup_path, class: 'btn btn-default hidden', id: 'account-statement-button'
         #{link_to t('ui.or_cancel'), group_orders_path}
   %input#total_balance{name: "total_balance", type: "hidden", value: @ordergroup.account_balance - @group_order.price}/
