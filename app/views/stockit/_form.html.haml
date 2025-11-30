@@ -8,7 +8,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= title
+        %h3.modal-title= title
       .modal-body.article-form
         = f.hidden_field :id
         = f.simple_fields_for :article do |a|

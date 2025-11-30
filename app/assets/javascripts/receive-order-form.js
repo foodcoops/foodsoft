@@ -77,9 +77,9 @@
         html = '<i class="glyphicon glyphicon-ok" style="color: green"></i>';
       } else {
         if (delta < 0) {
-          html = '<span style="color: red">- '+(-delta)+'</span>';
+          html = '<span style="color: red" class="mr-1">- '+(-delta)+'</span>';
         } else /*if (units> expected)*/ {
-          html = '<span style="color: green">+ '+(delta)+'</span>';
+          html = '<span style="color: green" class="mr-1">+ '+(delta)+'</span>';
         }
         // show package icon only if the receive field has one
         if ($(input).hasClass('package')) {

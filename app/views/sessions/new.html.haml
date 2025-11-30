@@ -19,12 +19,12 @@
         %label(for='nick')
           = User.human_attribute_name (FoodsoftConfig[:use_nick] ? :user : :email)
         = text_field_tag 'nick', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
-    
+
       .form-group
         %label(for='password' class='control-label')
           = User.human_attribute_name :password
         = password_field_tag 'password', nil, autocapitalize: 'off', autocorrect: 'off', class: 'form-control'
-    
+
       .form-group
-        = submit_tag t('.login'), class: 'btn btn-default'
+        = submit_tag t('.login'), class: 'btn btn-default mr-2'
         = link_to t('.forgot_password'), forgot_password_path
