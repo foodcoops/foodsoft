@@ -135,10 +135,10 @@ module OrdersHelper
                                                   disabled: order_article.result_manually_changed?,
                                                   autocomplete: 'off'
     span_html = if order_article.result_manually_changed?
-                  content_tag(:span, class: 'input-prepend input-append intable',
+                  content_tag(:span, class: 'input-prepend input-append intable d-flex',
                                      title: t('orders.edit_amount.field_locked_title', default: '')) do
                     button_tag(nil, type: :button, class: 'btn unlocker') {
-                      content_tag(:i, nil, class: 'glyphicon glyphicon-unlock')
+                      content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
                     } + input_html
                   end
                 else

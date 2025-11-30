@@ -305,25 +305,19 @@ tr.order-article {
     font-size: 10px !important;
 }
 
-
 .units_received_cell {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 90px;
-
-}
-
-.units_received_cell {
-
+  width: auto;
 
   .btn-group .btn-ordering {
     margin-top: 0;
     width: 100px;
   }
 
-  input .units_received {
-    height: 24px;
+  input.units_received {
+    width: 75px;
     -moz-appearance: textfield;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
