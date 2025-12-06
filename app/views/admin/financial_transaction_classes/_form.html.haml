@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= @financial_transaction_class.new_record? ? t('.title_new') : t('.title_edit')
+        %h3.modal-title= @financial_transaction_class.new_record? ? t('.title_new') : t('.title_edit')
       .modal-body
         = f.input :name
         .col-sm-3

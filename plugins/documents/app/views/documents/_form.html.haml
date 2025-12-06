@@ -4,7 +4,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= @document.folder? ? t('.new_folder') : t('.new')
+        %h3.modal-title= @document.folder? ? t('.new_folder') : t('.new')
       .modal-body
         = f.input :name, as: :string, required: @document.folder?
         - if @document.file?
