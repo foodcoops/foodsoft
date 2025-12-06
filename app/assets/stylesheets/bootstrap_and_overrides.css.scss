@@ -292,6 +292,10 @@ tr.order-article {
       font-size: 14px;
       padding: 4px 6px;
       appearance: textfield;
+
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
     }
   }
 
