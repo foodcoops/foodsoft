@@ -134,18 +134,20 @@ module OrdersHelper
                                                   data: data,
                                                   disabled: order_article.result_manually_changed?,
                                                   autocomplete: 'off'
-    span_html = if order_article.result_manually_changed?
-                  content_tag(:span, class: 'input-prepend input-append intable d-flex',
-                                     title: t('orders.edit_amount.field_locked_title', default: '')) do
-                    button_tag(nil, type: :button, class: 'btn unlocker') {
-                      content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
-                    } + input_html
-                  end
-                else
-                  content_tag(:span, class: 'btn-group numeric-step d-flex') { input_html }
-                end
+    wrapper_html = if order_article.result_manually_changed?
+                     content_tag(:div, class: 'input-group') do
+                       content_tag(:span, class: 'input-group-btn',
+                                          title: t('orders.edit_amount.field_locked_title', default: '')) do
+                         button_tag(nil, type: :button, class: 'btn btn-default unlocker') {
+                           content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
+                         }
+                       end + input_html
+                     end
+                   else
+                     content_tag(:div, class: 'input-group') { input_html }
+                   end
 
-    span_html.html_safe
+    wrapper_html.html_safe
   end
 
   def ratio_quantity_data(order_article, default_unit = nil)
