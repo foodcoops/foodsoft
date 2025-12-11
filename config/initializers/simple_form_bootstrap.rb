@@ -147,6 +147,17 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :inverse_horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+
+    b.use :label, class: 'col-sm-3 pt-0'
+
+    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
+      ba.use :input
+    end
+  end
+
   config.wrappers :horizontal_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly

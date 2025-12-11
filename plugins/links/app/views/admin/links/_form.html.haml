@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= @link.new_record? ? t('.title_new') : t('.title_edit')
+        %h3.modal-title= @link.new_record? ? t('.title_new') : t('.title_edit')
       .modal-body
         = f.input :name
         = f.input :url

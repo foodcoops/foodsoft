@@ -36,10 +36,10 @@
   #import.well.well-small(style="display:none;")
     = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true,
       'data-submit-onchange' => true do
-      %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em;'}= t('.import.title') + ' '
-      = text_field_tag "name", "", class: 'form-control',
+      %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em'}= t('.import.title') + ' '
+      = text_field_tag "name", "", class: 'form-control mt-1',
         placeholder: t('.import.placeholder')
-      %label.checkbox
+      %label.checkbox{style: 'margin-left: 20px'}
         = check_box_tag "origin", "REG", false
         = t '.import.restrict_region'
       .pull-right{style: 'line-height: 40px'}

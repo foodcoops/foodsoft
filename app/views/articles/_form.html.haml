@@ -10,15 +10,15 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= @article.new_record? ? t('.title_new') : t('.title_edit')
+        %h3.modal-title= @article.new_record? ? t('.title_new') : t('.title_edit')
       .modal-body.article-form
         = f.hidden_field :id
-        = f.input :availability, label_html: { style: 'padding-left: 0px' }
+        = f.input :availability, wrapper: :inverse_horizontal_boolean
         = f.input :name
         = render partial: 'shared/article_fields_units', locals: {f: f, article: @article}
-    
+
         = render partial: 'shared/article_fields_price', locals: {f: f, article: @article}
-    
+
         = f.input :note
         = f.association :article_category, collection: @article_categories
         / TODO labels

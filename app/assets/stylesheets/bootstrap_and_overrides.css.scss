@@ -287,8 +287,15 @@ tr.order-article {
 
   .group-order-input:not(.stock-order) {
     .goa-quantity, .goa-tolerance {
-      width: 75px;
+      width: 65px;
       text-align: right;
+      font-size: 14px;
+      padding: 4px 6px;
+      appearance: textfield;
+
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
     }
   }
 
@@ -302,25 +309,19 @@ tr.order-article {
     font-size: 10px !important;
 }
 
-
 .units_received_cell {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 90px;
-
-}
-
-.units_received_cell {
-  
+  width: auto;
 
   .btn-group .btn-ordering {
     margin-top: 0;
     width: 100px;
   }
 
-  input .units_received {
-    height: 24px;
+  input.units_received {
+    width: 75px;
     -moz-appearance: textfield;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
@@ -423,9 +424,14 @@ tr.untranslated {
 
 // center table rows vertically (including form elements)
 table.table {
-  td, th {
-    vertical-align: middle;
+  thead, tbody, tfoot > {
+    tr > {
+      td, th {
+        vertical-align: middle;
+      }
+    }
   }
+
   select, textarea, input, .uneditable-input
   {
     margin-bottom: 0;
@@ -595,12 +601,23 @@ details {
   cursor: pointer;
 }
 
-.form-horizontal .no-indent-left .control-group {
-  margin-bottom: 0;
-  .controls {
-    margin-left: 0;
+.form-horizontal {
+  .no-indent-left .control-group {
+    margin-bottom: 0;
+    .controls {
+      margin-left: 0;
+    }
+  }
+
+  .control-label {
+    hyphens: auto;
+
+    &.text-left {
+      text-align: left;
+    }
   }
 }
+
 
 // bootstrap version 2 doesn't support some styles -> let's add makeshift ones manually for now:
 .d-flex {
@@ -656,6 +673,10 @@ td.mr-1 > *:last-child {
   margin-bottom: 3px !important;
 }
 
+.pt-0 {
+  padding-top: 0 !important;
+}
+
 .pt-5 {
   padding-top: 15px;
 }
@@ -666,6 +687,14 @@ td.mr-1 > *:last-child {
 
 .text-decoration-none:hover {
   text-decoration: none;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.d-inline-block {
+  display: inline-block;
 }
 
 // Wider popovers
@@ -679,6 +708,14 @@ td.mr-1 > *:last-child {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.w-fit-content {
+  width: fit-content;
 }
 
 *[role="button"] {

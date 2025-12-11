@@ -3,15 +3,15 @@
     .modal-content
       .modal-header
         = close_button :modal
-        %h3= t '.title'
+        %h3.modal-title= t '.title'
       .modal-body.article-form
         - if params[:without_units]
           = hidden_field_tag :without_units, true
         - else
-          .row
-            = form.input :units_to_order, hint: '', wrapper: :custom_form, label_html: {class:'col-sm-3', style:"width:160px"}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;", step: 0.001}, wrapper_html: {class:"d-flex items-center"}
+          .row.w-full
+            = form.input :units_to_order, hint: '', wrapper: :custom_form, label_html: {class:'col-sm-3', style:"width:160px"}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;margin-left:15px;", step: 0.001}, wrapper_html: {class:"d-flex align-items-center"}
             -#= form.input :units_billed, label: 'invoice', input_html: {class: 'input-nano'}
-          = form.input :units_received, wrapper: :custom_form, label_html: {class:'col-sm-3'}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;", step: 0.001}, wrapper_html: {class:"d-flex items-center"},
+          = form.input :units_received, wrapper: :custom_form, label_html: {class:'col-sm-3'}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;margin-left:15px;", step: 0.001}, wrapper_html: {class:"d-flex align-items-center"},
                        label: t('activerecord.attributes.order_article.units_received_short')
           %p.help-block= t 'simple_form.hints.order_article.units_to_order'
 
