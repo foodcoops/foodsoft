@@ -31,7 +31,7 @@ class Ordergroup < Group
   end
 
   def self.include_transaction_class_sum
-    columns = ['groups.*']
+    columns = column_names.map { |col| "groups.#{col}" }
     FinancialTransactionClass.all.find_each do |c|
       columns << "sum(CASE financial_transaction_types.financial_transaction_class_id WHEN #{c.id} THEN financial_transactions.amount ELSE 0 END) AS sum_of_class_#{c.id}"
     end
