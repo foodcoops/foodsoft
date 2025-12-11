@@ -1,4 +1,4 @@
-class Api::V1::User::OrdergroupController < Api::V1::BaseController
+class Api::V1::User::OrdergroupController < Api::BaseController
   before_action -> { doorkeeper_authorize! 'finance:user' }, only: [:financial_overview]
 
   def financial_overview
