@@ -2,13 +2,13 @@
 # metadata file that makes public software easily discoverable.
 # More info at https://github.com/italia/publiccode.yml
 
-publiccodeYmlVersion: '0.2'
+publiccodeYmlVersion: '0.5'
 name: Foodsoft
 url: 'https://github.com/foodcoops/foodsoft.git'
 landingURL: 'https://foodcoops.net'
-releaseDate: '2025-03-20'
-softwareVersion: v4.9.1
-developmentStatus: stable
+releaseDate: '2026-01-06'
+softwareVersion: v5.0.0-dev
+developmentStatus: development
 platforms:
   - web
 softwareType: standalone/web
