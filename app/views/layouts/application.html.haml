@@ -26,7 +26,7 @@
           - if FoodsoftConfig[:help_url]
             %li.nav-item= link_to t('.help'), FoodsoftConfig[:help_url], class: 'nav-link', target: '_blank'
 
-  #main.container-fluid
+  #main.container-fluid.mt-3
     .row
       - if content_for?(:sidebar)
         .col-md-3
@@ -34,7 +34,7 @@
         .col-md-9
           = bootstrap_flash_patched
           - if content_for?(:actionbar)
-            .btn-toolbar.pull-right= yield(:actionbar)
+            .btn-toolbar.pull-right(role="toolbar")= yield(:actionbar)
           - if show_title?
             .page-header
               %h1= yield(:title)
@@ -43,7 +43,7 @@
         .col-md-12
           = bootstrap_flash_patched
           - if content_for?(:actionbar)
-            .btn-toolbar.pull-right= yield(:actionbar)
+            .btn-toolbar.pull-right(role="toolbar")= yield(:actionbar)
           - if show_title?
             .page-header
               %h1= yield(:title)
