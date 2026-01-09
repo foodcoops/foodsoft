@@ -179,19 +179,18 @@ module ApplicationHelper
 
   # Returns flash messages html.
   #
-  # Use this instead of twitter-bootstrap's +bootstrap_flash+ method for safety, until
-  # CVE-2014-4920 is fixed.
-  #
   # @return [String] Flash message html.
-  # @see http://blog.nvisium.com/2014/03/reflected-xss-vulnerability-in-twitter.html
   def bootstrap_flash_patched
     flash_messages = []
     flash.each do |type, message|
-      type = :success if type == 'notice'
-      type = :danger if type == 'alert'
+      type = :success if type == "notice"
+      type = :danger if type == "alert"
       text = content_tag(:div,
-                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
-                             message, class: "alert fade in alert-#{type}")
+        safe_join([
+          message,
+          content_tag(:button, "", class: "btn-close", "data-bs-dismiss": "alert", "aria-label": "close")
+        ]),
+        class: "alert alert-dismissible fade show alert-#{type}", role: "alert")
       flash_messages << text if message
     end
     flash_messages.join("\n").html_safe
