@@ -3,7 +3,8 @@
 - content_for :sidebar do
   %p
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
-      %i.icon-edit= t '.edit'
+      = fa_icon :edit
+      =t('.edit')
   .well.well-small
     %ul.nav
       %li
@@ -30,15 +31,14 @@
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
 
-%ul.breadcrumb
-  %li
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
-    %span.divider /
-  - for page in @page.ancestors.reverse
-    %li
-      = link_to_wikipage(page)
-      %span.divider /
-  %li.active= @page.title
+%nav(aria-label="breadcrumb")
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+    - for page in @page.ancestors.reverse
+      %li.breadcrumb-item
+        = link_to_wikipage(page)
+    %li.breadcrumb-item.active(aria-current="page")= @page.title
 
 
 #wikiContent
@@ -46,10 +46,14 @@
     %h1= @page.title
   = render :partial => 'body'
 
-%hr.clear/
-%p
-  = link_to edit_page_path(@page), class: 'btn btn-primary' do
-    %i.icon-edit= t '.edit'
-  = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
-    :data => {:confirm => t('.delete_confirm')}
-  != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))
+%hr
+
+.d-flex.justify-content-between.align-items-baseline
+  %div
+    = link_to edit_page_path(@page), class: 'btn btn-primary me-2' do
+      = fa_icon :edit
+      = t '.edit'
+    = link_to t('.delete'), @page, class: 'btn btn-danger me-2', :method => :delete,
+      :data => {:confirm => t('.delete_confirm')}
+  %div
+    %small!= t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))
