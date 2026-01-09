@@ -1,48 +1,44 @@
 %div
   %h3= t '.title'
-  .panel.panel-default
-    .panel-heading
-      %h3.panel-title= t '.foodcoop'
-    %ul.list-group
-      - unless FoodsoftConfig[:disable_members_overview]
-        = link_to t('.members'), foodcoop_users_path, class: 'list-group-item'
-      = link_to t('.tasks'), user_tasks_path, class: 'list-group-item'
+  %div.d-flex.flex-column.gap-3
+    .card
+      %h5.card-header= t '.foodcoop'
+      %ul.list-group.list-group-flush
+        - unless FoodsoftConfig[:disable_members_overview]
+          = link_to t('.members'), foodcoop_users_path, class: 'list-group-item'
+        = link_to t('.tasks'), user_tasks_path, class: 'list-group-item'
 
-  - has_ordergroup = !@current_user.ordergroup.nil?
-  - has_orders_role = @current_user.role_orders?
-  - if has_ordergroup || has_orders_role
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title= t '.orders.title'
-      %ul.list-group
-        - if has_ordergroup
-          = link_to t('.orders.overview'), group_orders_path, class: 'list-group-item'
-        - if has_orders_role
-          = link_to t('.orders.end'), {controller: 'orders'}, class: 'list-group-item'
-  // Articles
-  - if @current_user.role_article_meta? || @current_user.role_suppliers?
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title= t '.products.title'
-      %ul.list-group
-        = link_to t('.products.edit'), suppliers_path, class: 'list-group-item'
-        = link_to t('.products.edit_stock'), {controller: 'stockit'}, class: 'list-group-item'
-        = link_to t('.products.edit_suppliers'), suppliers_path, class: 'list-group-item'
+    - has_ordergroup = !@current_user.ordergroup.nil?
+    - has_orders_role = @current_user.role_orders?
+    - if has_ordergroup || has_orders_role
+      .card
+        %h5.card-header= t '.orders.title'
+        %ul.list-group.list-group-flush
+          - if has_ordergroup
+            = link_to t('.orders.overview'), group_orders_path, class: 'list-group-item'
+          - if has_orders_role
+            = link_to t('.orders.end'), {controller: 'orders'}, class: 'list-group-item'
+    // Articles
+    - if @current_user.role_article_meta? || @current_user.role_suppliers?
+      .card
+        %h5.card-header= t '.products.title'
+        %ul.list-group.list-group-flush
+          = link_to t('.products.edit'), suppliers_path, class: 'list-group-item'
+          = link_to t('.products.edit_stock'), {controller: 'stockit'}, class: 'list-group-item'
+          = link_to t('.products.edit_suppliers'), suppliers_path, class: 'list-group-item'
 
-  // Finance
-  - if @current_user.role_finance?
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title= t '.finances.title'
-      %ul.list-group
-        = link_to t('.finances.accounts'), finance_new_transaction_collection_path, class: 'list-group-item'
-        = link_to t('.finances.settle'), finance_root_path, class: 'list-group-item'
+    // Finance
+    - if @current_user.role_finance?
+      .card
+        %h5.card-header= t '.finances.title'
+        %ul.list-group.list-group-flush
+          = link_to t('.finances.accounts'), finance_new_transaction_collection_path, class: 'list-group-item'
+          = link_to t('.finances.settle'), finance_root_path, class: 'list-group-item'
 
-  // Administration
-  - if @current_user.role_admin?
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title= t '.admin'
-      %ul.list-group
-        = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'list-group-item'
-        = link_to t('.new_user'), new_admin_user_path, class: 'list-group-item'
+    // Administration
+    - if @current_user.role_admin?
+      .card
+        %h5.card-header= t '.admin'
+        %ul.list-group.list-group-flush
+          = link_to t('.new_ordergroup'), new_admin_ordergroup_path, class: 'list-group-item'
+          = link_to t('.new_user'), new_admin_user_path, class: 'list-group-item'
