@@ -3,16 +3,19 @@
 %section
   = t('.body', profile_link: link_to(t('.profile_link'), my_profile_path)).html_safe
 
-  .well
+  .p-3.bg-body-secondary
     = form_tag foodcoop_users_path, :method => :get, :remote => true,
-      'data-submit-onchange' => true, class: 'form-inline' do
+      'data-submit-onchange' => true, class: 'row' do
 
-      = text_field_tag :user_name, params[:user_name], class: 'form-control search-query',
-        placeholder: t('.ph_name')
-      = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'form-control search-query',
-        placeholder: t('.ph_ordergroup')
-      %button.btn.btn-secondary
-        = fa_icon :search
+      .col-auto
+        = text_field_tag :user_name, params[:user_name], class: 'form-control search-query',
+          placeholder: t('.ph_name')
+      .col-auto
+        = text_field_tag :ordergroup_name, params[:ordergroup_name], class: 'form-control search-query',
+          placeholder: t('.ph_ordergroup')
+      .col-auto
+        %button.btn.btn-secondary
+          = fa_icon :search
 
-  #users
+  #users.mt-3
     = render :partial => "users"
