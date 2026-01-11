@@ -1,3 +1,8 @@
+# 1 - https://jsonformatter.org/yaml-to-json to generate JSON
+# 2 - https://www.liquid-technologies.com/online-json-to-schema-converter to generate a schema
+
+# yaml-language-server: $schema=language_schema.json
+
 nl:
   activerecord:
     attributes:
@@ -12,6 +17,7 @@ nl:
         fc_share: Foodcoop-marge
         fc_share_short: FC-marge
         gross_price: Brutoprijs
+        id: Foodsoft ID
         manufacturer: Producent
         name: Naam
         note: Notitie
@@ -28,14 +34,14 @@ nl:
       article_category:
         description: Namen importeren
         name: Naam
-      article_price:
+      article_version:
         deposit: Statiegeld
         price: Nettoprijs
         tax: BTW
         unit_quantity: Colligrootte
       bank_account:
         balance: Tegoed
-        bank_gateway: Bank
+        bank_gateway: Bank gateway
         description: Omschrijving
         iban: IBAN
         name: Naam
@@ -69,11 +75,7 @@ nl:
         financial_transaction_type: Financiële-transactietype
         note: Notitie
         ordergroup: Huishouden
-        user: Gebruiker
-        payment_state: Status
-        payment_amount: Totaal bedrag
-        payment_fee: Kosten
-
+        user: Ingevoerd door
       financial_transaction_class:
         ignore_for_account_balance: Negeren voor rekeningsaldo
         name: Naam
@@ -154,7 +156,7 @@ nl:
       order_comment:
         text: Commentaar voor deze bestelling toevoegen…
       ordergroup:
-        account_balance: Tegoed totaal
+        account_balance: Tegoed
         available_funds: Beschikbaar tegoed
         break: "(Laatste) pauze"
         break_until: tot
@@ -195,6 +197,7 @@ nl:
         order_howto: Hoe te bestellen
         phone: Telefoon
         phone2: Telefoon 2
+        remote_auto_sync: Synchronisatie automatisch uitvoeren (dagelijks)
         shared_sync_method: Hoe synchroniseren
         url: Homepage
       supplier_category:
@@ -243,7 +246,7 @@ nl:
     errors:
       has_many_left: is nog met een %{collection} verbonden!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: naam bestaat al
@@ -485,14 +488,10 @@ nl:
         notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: "%{msg} … in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
         no_file: Een bestand om te uploaden kiezen.
         notice: "%{count} artikelen zijn geanalyseerd"
-      sync:
-        notice: Catalogus is bijgewerkt
-        shared_alert: "%{supplier} is niet aan een externe database gekoppeld"
       update_all:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
@@ -513,10 +512,6 @@ nl:
     form:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
-    import_search_results:
-      action_import: importeren
-      already_imported: geïmporteerd
-      not_found: Geen artikelen gevonden
     index:
       change_supplier: Leverancier wisselen
       download: Artikelen downloaden
@@ -762,9 +757,8 @@ nl:
       rows:
         - Nummer
         - Aantal
-        - Naam
-        - Colli
         - Eenheid
+        - Naam
         - Prijs/eenh.
         - Subtotaal
       total: Totaal
@@ -783,6 +777,15 @@ nl:
     not_found:
       text: Deze pagina bestaat niet, sorry!
       title: Pagina niet gevonden
+    step_error: Voer een number in >=%{min}, dat een veelvoud is van %{granularity}.      
+  feedback:
+    create:
+      notice: Je reactie is verstuurd. Dank je wel!
+    new:
+      first_paragraph: Probleem gevonden? Suggesties? Commentaar? We horen graag je reactie.
+      second_paragraph: Het Foodsoft Team is alleen verantwoordelijk voor het onderhoud van de applicatie. Voor vragen m.b.t. de organisatie van jouw Foodcoop, neem contant op met de verantwoordelijke van jouw coöperatie.
+      send: Verzend
+      title: Reageer
   finance:
     balancing:
       close:
@@ -796,6 +799,8 @@ nl:
       confirm:
         clear: Afrekenen
         first_paragraph: 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        create_financial_link: Maak een algemene financiële link aan voor de nieuwe transactie.
+        create_foodcoop_transaction: Maak een foodcoop grootboek transactie aan met het totaal (%{sum}).
         or_cancel: of terug naar balans
         title: Bestelling afrekenen
       edit_note:
@@ -1142,7 +1147,7 @@ nl:
     index:
       due_date_format: "%A %d %B"
       my_ordergroup:
-        last_update: Laatst bijgewerkt %{when} geleden
+        last_update: Laatst gewijzigd %{when} geleden
         title: Mijn huishouden
         transactions:
           title: Laatste transacties
@@ -1457,8 +1462,8 @@ nl:
   orders:
     articles:
       article_count: 'Bestelde artikelen:'
-      prices: Netto/bruto prijs
-      prices_sum: 'Totaal (netto/bruto prijs):'
+      prices: Excl./incl. prijs
+      prices_sum: 'Totaal (Excl./incl. prijs):'
       units_full: Volle eenheden
       units_ordered: Bestelde eenheden
     create:
@@ -1673,6 +1678,8 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
+        article:
+          supplier_id: Leverancier
     'no': 'Nee'
     options:
       settings:
@@ -1792,8 +1799,15 @@ nl:
       last_orders: Recente bestellingen
       new_delivery: Levering aanmaken
       show_deliveries: Alle leveringen tonen
+      share: Delen
+      remove_share: Stop delen
+      confirm_remove_share: Stoppen met delen van de artikelen van deze leverancier? (Indien deze lijst opnieuw gedeeld moet worden, moet de link opnieuw gedeeld worden met iedereen die het nodig heeft)
     update:
       notice: Leverancier is bijgewerkt
+    import_search_results:
+      action_import: importeren
+      already_imported: geïmporteerd
+      not_found: Geen artikelen gevonden
   tasks:
     accept:
       notice: Je hebt de taak geaccepteerd
