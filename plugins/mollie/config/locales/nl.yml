@@ -32,13 +32,16 @@ nl:
           wait: Je tegoed wordt aangepast zodra de betaling is ontvangen en verwerkt.
         transaction_note: '%{method} betaling'
         decription: '%{coop}: tegoed aanvullen voor huishouden %{ordergroup}'
-      result:
-        paid: betaald
-        canceled: geannuleerd
-        open: wachten op betaling
-        failed: mislukt
-        authorized: goedgekeurd
-        expired: verlopen
+  finance:
+    financial_transactions:
+      payments:
+        result:
+          paid: betaald
+          canceled: geannuleerd
+          open: wachten op betaling
+          failed: mislukt
+          authorized: goedgekeurd
+          expired: verlopen
   config:
     hints:
       use_mollie: Laat gebruikers zelf geld op de rekening van hun Foodsoft huishouden zetten met online betalingen via Mollie.
