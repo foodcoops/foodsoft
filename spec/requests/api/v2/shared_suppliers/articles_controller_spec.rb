@@ -23,8 +23,9 @@ def success_schema
   }
 end
 
-describe 'shared supplier articles' do
+describe Api::V2::ArticlesController, swagger_doc: 'v2/swagger.yaml' do
   include ApiHelper
+
   let(:api_scopes) { ['shared_suppliers:articles'] }
 
   path '/shared_suppliers/{uuid}/articles' do

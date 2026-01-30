@@ -193,7 +193,7 @@ class FoodsoftConfig
       keys.index_with { |k| self[k] }
     end
 
-    # for using active_model_serializer in the api/v1/configs controller
+    # for using active_model_serializer in the api/*/configs controller
     alias read_attribute_for_serialization []
 
     # @!attribute default_config
