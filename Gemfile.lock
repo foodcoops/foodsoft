@@ -582,7 +582,6 @@ GEM
     ruby-ole (1.2.13.1)
     ruby-prof (1.7.1)
     ruby-progressbar (1.13.0)
-    ruby-units (4.1.0)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
@@ -795,7 +794,6 @@ DEPENDENCIES
   rubocop-rspec_rails
   ruby-filemagic
   ruby-prof
-  ruby-units
   sassc-rails (>= 2.1.0)
   select2-rails
   simple-navigation

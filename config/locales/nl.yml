@@ -560,7 +560,6 @@ nl:
         status: Status (x=overslaan)
       file_label: Kies een compatibel bestand uit
       options:
-        convert_units: Bestaande eenheden behouden, groothandelseenheid en prijs herberekenen (net als synchroniseren).
         outlist_absent: Artikelen die niet in het bestand voorkomen, verwijderen.
       sample:
         juices: Sappen

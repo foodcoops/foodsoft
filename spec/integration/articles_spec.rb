@@ -219,18 +219,5 @@ feature ArticlesController do
         expect(article.reload.deleted?).to be true
       end
     end
-
-    describe 'can convert units when updating' do
-      let!(:article) { create(:article, supplier: supplier, order_number: 1, unit: '250 g', group_order_unit: nil, price_unit: nil) }
-
-      it do
-        check('articles_convert_units')
-        find('input[type="submit"]').click
-        expect(find_by_id('articles_0_name').value).to eq 'Tomatoes'
-        find('input[type="submit"]').click
-        article.reload
-        expect([article.unit, article.unit_quantity, article.price]).to eq ['250 g', 40, 0.6]
-      end
-    end
   end
 end
