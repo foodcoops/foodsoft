@@ -80,6 +80,7 @@ gem 'foodsoft_wiki', path: 'plugins/wiki'
 # gem 'foodsoft_printer', path: 'plugins/printer'
 # gem 'foodsoft_uservoice', path: 'plugins/uservoice'
 # gem 'foodsoft_mollie', path: 'plugins/mollie'
+# gem 'foodsoft_invoices', path: 'plugins/invoices'
 
 group :development do
   gem 'listen'
@@ -135,4 +136,5 @@ group :test do
   gem 'rswag-specs'
   # plugins with tests deactivated by default
   gem 'foodsoft_b85', path: 'plugins/b85'
+  gem 'foodsoft_invoices', path: 'plugins/invoices'
 end
