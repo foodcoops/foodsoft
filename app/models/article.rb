@@ -130,39 +130,23 @@ class Article < ApplicationRecord
     end
   end
 
-  # Return article attributes that were changed (incl. unit conversion)
+  # Return article attributes that were changed
   # @param new_article [Article] New article to update self
-  # @option options [Boolean] :convert_units Omit or set to +true+ to keep current unit and recompute unit quantity and price.
   # @return [Hash<Symbol, Object>] Attributes with new values
-  def unequal_attributes(new_article, options = {})
-    # try to convert different units when desired
-    if options[:convert_units] == false
-      new_price = nil
-      new_unit_quantity = nil
-    else
-      new_price, new_unit_quantity = convert_units(new_article)
-    end
-    if new_price && new_unit_quantity
-      new_unit = unit
-    else
-      new_price = new_article.price
-      new_unit_quantity = new_article.unit_quantity
-      new_unit = new_article.unit
-    end
-
+  def unequal_attributes(new_article)
     ret = ArticleVersion.compare_attributes(
       {
         name: [latest_article_version.name, new_article.name],
         manufacturer: [latest_article_version.manufacturer, new_article.manufacturer.to_s],
         origin: [latest_article_version.origin, new_article.origin],
-        unit: [latest_article_version.unit, new_unit],
+        unit: [latest_article_version.unit, new_article.unit],
         supplier_order_unit: [latest_article_version.supplier_order_unit, new_article.supplier_order_unit],
         minimum_order_quantity: [latest_article_version.minimum_order_quantity, new_article.minimum_order_quantity],
         billing_unit: [latest_article_version.billing_unit || latest_article_version.supplier_order_unit,
                        new_article.billing_unit || new_article.supplier_order_unit],
         group_order_granularity: [latest_article_version.group_order_granularity, new_article.group_order_granularity],
         group_order_unit: [latest_article_version.group_order_unit, new_article.group_order_unit],
-        price: [latest_article_version.price.to_f.round(2), new_price.to_f.round(2)],
+        price: [latest_article_version.price.to_f.round(2), new_article.price.to_f.round(2)],
         tax: [latest_article_version.tax, new_article.tax],
         deposit: [latest_article_version.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
         note: [latest_article_version.note.to_s, new_article.note.to_s]
@@ -180,54 +164,7 @@ class Article < ApplicationRecord
       ret[:article_unit_ratios_attributes] = ratio_attribs
     end
 
-    if options[:convert_units] && latest_article_version.article_unit_ratios.length < 2 && new_article.article_unit_ratios.length < 2 && !new_unit_quantity.nil?
-      ret[:article_unit_ratios_attributes] = [new_article.article_unit_ratios.build(unit: 'XPP', quantity: new_unit_quantity, sort: 1).attributes]
-      # TODO: Either remove this aspect of the :convert_units feature or extend it to also work for the new units system (see https://github.com/foodcoopsat/foodsoft_hackathon/issues/90)
-    end
-
     ret
-  end
-
-  # convert units in foodcoop-size
-  # uses unit factors in app_config.yml to calc the price/unit_quantity
-  # returns new price and unit_quantity in array, when calc is possible => [price, unit_quantity]
-  # returns false if units aren't foodsoft-compatible
-  # returns nil if units are eqal
-  def convert_units(new_article = shared_article)
-    return unless unit != new_article.unit
-
-    return false if new_article.unit.include?(',')
-
-    # legacy, used by foodcoops in Germany
-    if new_article.unit == 'KI' && unit == 'ST' # 'KI' means a box, with a different amount of items in it
-      # try to match the size out of its name, e.g. "banana 10-12 St" => 10
-      new_unit_quantity = /[0-9\-\s]+(St)/.match(new_article.name).to_s.to_i
-      if new_unit_quantity && new_unit_quantity > 0
-        new_price = (new_article.price / new_unit_quantity.to_f).round(2)
-        [new_price, new_unit_quantity]
-      else
-        false
-      end
-    else # use ruby-units to convert
-      fc_unit = begin
-        ::Unit.new(unit)
-      rescue StandardError
-        nil
-      end
-      supplier_unit = begin
-        ::Unit.new(new_article.unit)
-      rescue StandardError
-        nil
-      end
-      if fc_unit != 0 && supplier_unit != 0 && fc_unit && supplier_unit && fc_unit =~ supplier_unit
-        conversion_factor = (supplier_unit / fc_unit).to_base.to_r
-        new_price = new_article.price / conversion_factor
-        new_unit_quantity = new_article.unit_quantity * conversion_factor
-        [new_price, new_unit_quantity]
-      else
-        false
-      end
-    end
   end
 
   def deleted?

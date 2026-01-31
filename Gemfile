@@ -38,7 +38,6 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
 gem 'ransack'
 gem 'resque'
-gem 'ruby-units'
 gem 'simple_form'
 gem 'simple-navigation'
 gem 'simple_navigation_bootstrap'

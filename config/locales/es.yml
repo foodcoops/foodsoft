@@ -559,7 +559,6 @@ es:
         status: Estado (x=saltar)
       file_label: Por favor elige un archivo compatible
       options:
-        convert_units: Mantener unidades actuales, recomputar la cantidad y precio de unidades (como sincronizar).
         outlist_absent: Borrar artículos que no están en el archivo subido.
       sample:
         juices: Jugos

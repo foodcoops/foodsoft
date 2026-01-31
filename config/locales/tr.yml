@@ -559,7 +559,6 @@ tr:
         status: Durum (x=atla)
       file_label: Lütfen uyumlu bir dosya seçin
       options:
-        convert_units: Mevcut birimleri koruyun, birim miktarını ve fiyatı yeniden hesaplayın (senkronize gibi).
         outlist_absent: Yüklenen dosyada olmayan ürünleri sil.
       sample:
         juices: Meyve suları

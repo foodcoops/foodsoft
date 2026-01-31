@@ -65,7 +65,6 @@ class Supplier < ApplicationRecord
   # @param file [File] Spreadsheet file to parse
   # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
   # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
-  # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
   def sync_from_file(file, options = {})
     data = FoodsoftFile.parse(file, options)
     data.each do |new_attrs|
@@ -161,7 +160,7 @@ class Supplier < ApplicationRecord
         if article.nil?
           new_articles << new_article
         else
-          unequal_attributes = article.unequal_attributes(new_article, options.slice(:convert_units))
+          unequal_attributes = article.unequal_attributes(new_article)
           unless unequal_attributes.empty?
             article.latest_article_version.article_unit_ratios.target.clear unless unequal_attributes[:article_unit_ratios_attributes].nil?
             article.latest_article_version.attributes = unequal_attributes
