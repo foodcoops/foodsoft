@@ -167,45 +167,13 @@
                     "transaction_note",
                     "decription"
                   ]
-                },
-                "result": {
-                  "type": "object",
-                  "properties": {
-                    "paid": {
-                      "type": "string"
-                    },
-                    "canceled": {
-                      "type": "string"
-                    },
-                    "open": {
-                      "type": "string"
-                    },
-                    "failed": {
-                      "type": "string"
-                    },
-                    "authorized": {
-                      "type": "string"
-                    },
-                    "expired": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "paid",
-                    "canceled",
-                    "open",
-                    "failed",
-                    "authorized",
-                    "expired"
-                  ]
                 }
               },
               "required": [
                 "new",
                 "create",
                 "form",
-                "controller",
-                "result"
+                "controller"
               ]
             }
           },
