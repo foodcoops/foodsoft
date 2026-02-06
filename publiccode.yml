@@ -7,7 +7,7 @@ name: Foodsoft
 url: 'https://github.com/foodcoops/foodsoft.git'
 landingURL: 'https://foodcoops.net'
 releaseDate: '2026-01-06'
-softwareVersion: v5.0.0-dev
+softwareVersion: v5.0.0
 developmentStatus: development
 platforms:
   - web
