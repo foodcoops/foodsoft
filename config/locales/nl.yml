@@ -1,3 +1,8 @@
+# 1 - https://jsonformatter.org/yaml-to-json to generate JSON
+# 2 - https://www.liquid-technologies.com/online-json-to-schema-converter to generate a schema
+
+# yaml-language-server: $schema=language_schema.json
+
 nl:
   activerecord:
     attributes:
@@ -12,6 +17,7 @@ nl:
         fc_share: Foodcoop-marge
         fc_share_short: FC-marge
         gross_price: Brutoprijs
+        id: Foodsoft ID
         manufacturer: Producent
         name: Naam
         note: Notitie
@@ -28,7 +34,7 @@ nl:
       article_category:
         description: Namen importeren
         name: Naam
-      article_price:
+      article_version:
         deposit: Statiegeld
         price: Nettoprijs
         tax: BTW
@@ -63,11 +69,14 @@ nl:
         mime: MIME-type
         name: Naam
       financial_transaction:
-        amount: Bedrag
+        amount: Transactie bedrag
         created_on: Datum
         financial_transaction_class: Financiële-transactieklasse
         financial_transaction_type: Financiële-transactietype
-        note: Notitie
+        note: Toelichting
+        payment_fee: Kosten
+        payment_amount: Bedrag
+        payment_state: Status
         ordergroup: Huishouden
         user: Ingevoerd door
       financial_transaction_class:
@@ -191,6 +200,7 @@ nl:
         order_howto: Hoe te bestellen
         phone: Telefoon
         phone2: Telefoon 2
+        remote_auto_sync: Synchronisatie automatisch uitvoeren (dagelijks)
         shared_sync_method: Hoe synchroniseren
         url: Homepage
       supplier_category:
@@ -239,7 +249,7 @@ nl:
     errors:
       has_many_left: is nog met een %{collection} verbonden!
       models:
-        article:
+        article_version:
           attributes:
             name:
               taken: naam bestaat al
@@ -481,14 +491,10 @@ nl:
         notice: "Er zijn %{count} nieuwe artikelen opgeslagen."
       error_invalid: Er zijn artikelen die een fout hebben
       error_nosel: Geen artikelen geselecteerd
-      error_parse: "%{msg} … in regel %{line}"
       error_update: 'Er trad een fout op bij het bijwerken van artikel ''%{article}'': %{msg}'
       parse_upload:
         no_file: Een bestand om te uploaden kiezen.
         notice: "%{count} artikelen zijn geanalyseerd"
-      sync:
-        notice: Catalogus is bijgewerkt
-        shared_alert: "%{supplier} is niet aan een externe database gekoppeld"
       update_all:
         notice: Alle artikelen en prijzen zijn bijgewerkt.
       update_sel:
@@ -509,10 +515,6 @@ nl:
     form:
       title_edit: Artikel bewerken
       title_new: Nieuw artikel toevoegen
-    import_search_results:
-      action_import: importeren
-      already_imported: geïmporteerd
-      not_found: Geen artikelen gevonden
     index:
       change_supplier: Leverancier wisselen
       download: Artikelen downloaden
@@ -632,7 +634,9 @@ nl:
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.
       use_iban: Om leverancier en gebruiker een extra veld te geven voor het internationale bankrekeningnummer (IBAN).
+      use_financial_links: Als actief, optie om financiële link te maken wordt getoond, waarbij financiële transacties, facturen en banktransacties worden gegroepeerd. Ook de optie om foodcoop transacties aan te makenm wordt getoond. Dit betreft transacties die niet aan een ordergroep zijn verbonden maar dienen als grootboek regels.
       use_nick: Toon bijnamen in plaats van volledige naam. Controleer dat iedereen een bijnaam heeft wanneer je dit aanzet.
+      profile_data_public_by_default: Wanneer een nieuwe gebruiker wordt aangemaakt, worden de privacy opties "Telefoonnummer / E-mail / Naam is zichtbaar voor andere leden", standaard geactiveerd. Als de "Bijnaam" optie niet actief is, wordt de "Naam" altijd getoond.
       use_self_service: Wanneer dit aan staat, kan iedereen zelf financiële transacties toevoegen.
       webstats_tracking_code: Tracking code voor bezoeker statistieken (zoals Piwik of Google analytics). Leeg laten als geen tracking gewenst is.
     keys:
@@ -758,9 +762,8 @@ nl:
       rows:
         - Nummer
         - Aantal
-        - Naam
-        - Colli
         - Eenheid
+        - Naam
         - Prijs/eenh.
         - Subtotaal
       total: Totaal
@@ -779,6 +782,15 @@ nl:
     not_found:
       text: Deze pagina bestaat niet, sorry!
       title: Pagina niet gevonden
+    step_error: Voer een number in >=%{min}, dat een veelvoud is van %{granularity}.      
+  feedback:
+    create:
+      notice: Je reactie is verstuurd. Dank je wel!
+    new:
+      first_paragraph: Probleem gevonden? Suggesties? Commentaar? We horen graag je reactie.
+      second_paragraph: Het Foodsoft Team is alleen verantwoordelijk voor het onderhoud van de applicatie. Voor vragen m.b.t. de organisatie van jouw Foodcoop, neem contant op met de verantwoordelijke van jouw coöperatie.
+      send: Verzend
+      title: Reageer
   finance:
     balancing:
       close:
@@ -792,6 +804,8 @@ nl:
       confirm:
         clear: Afrekenen
         first_paragraph: 'Wanneer de bestelling afgerekend wordt, worden alle tegoeden van huishoudens bijgewerkt.<br />De tegoeden worden als volgt belast:'
+        create_financial_link: Maak een algemene financiële link aan voor de nieuwe transactie.
+        create_foodcoop_transaction: Maak een foodcoop grootboek transactie aan met het totaal (%{sum}).
         or_cancel: of terug naar balans
         title: Bestelling afrekenen
       edit_note:
@@ -919,6 +933,8 @@ nl:
         new_financial_transaction: Nieuwe financiële transactie
         title: Financiële link %{number}
         type: Type
+        remove_from_link: Verwijder link
+        remove_from_link_confirm: De transactie zelf wordt niet verwijderd, alleen de link. Wil je doorgaan?
     financial_transactions:
       controller:
         create:
@@ -934,6 +950,7 @@ nl:
         last_updated_at: "(laatst bijgewerkt %{when} geleden)"
         new_transaction: Nieuwe transactie toevoegen
         title: Rekeningoverzicht voor %{name}
+        title_foodcoop: Foodcoop rekeningoverzicht
       index_collection:
         show_groups: Tegoeden
         title: Financiële transacties
@@ -995,6 +1012,14 @@ nl:
       ordergroups:
         account_statement: Rekeningafschrift
         new_transaction: Nieuwe transactie
+    payments:
+      result:
+        paid: betaald
+        canceled: afgebroken door gebruiker
+        open: wachten op betaling
+        failed: mislukt
+        authorized: goedgekeurd
+        expired: verlopen
     update:
       notice: Factuur is bijgewerkt
   foodcoop:
@@ -1052,7 +1077,7 @@ nl:
       search_article: Artikelen zoeken...
       sum_amount: Huidig totaalbedrag
       title: Bestellen
-      total_sum_amount: Totalbedrag
+      total_sum_amount: Totaalbedrag
       total_tolerance: Totale tolerantie
       units: Eenheden
       units_full: Volle eenheden
@@ -1453,8 +1478,8 @@ nl:
   orders:
     articles:
       article_count: 'Bestelde artikelen:'
-      prices: Netto/bruto prijs
-      prices_sum: 'Totaal (netto/bruto prijs):'
+      prices: Excl./incl. prijs
+      prices_sum: 'Totaal (Excl./incl. prijs):'
       units_full: Volle eenheden
       units_ordered: Bestelde eenheden
     create:
@@ -1669,6 +1694,8 @@ nl:
         settings_group:
           messages: Berichten
           privacy: Privacy
+        article:
+          supplier_id: Leverancier
     'no': 'Nee'
     options:
       settings:
@@ -1788,8 +1815,15 @@ nl:
       last_orders: Recente bestellingen
       new_delivery: Levering aanmaken
       show_deliveries: Alle leveringen tonen
+      share: Delen
+      remove_share: Stop delen
+      confirm_remove_share: Stoppen met delen van de artikelen van deze leverancier? (Indien deze lijst opnieuw gedeeld moet worden, moet de link opnieuw gedeeld worden met iedereen die het nodig heeft)
     update:
       notice: Leverancier is bijgewerkt
+    import_search_results:
+      action_import: importeren
+      already_imported: geïmporteerd
+      not_found: Geen artikelen gevonden
   tasks:
     accept:
       notice: Je hebt de taak geaccepteerd

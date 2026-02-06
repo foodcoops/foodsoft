@@ -23,8 +23,6 @@
         %th= heading_helper FinancialTransaction, :financial_transaction_type
       %th= sort_link_helper heading_helper(FinancialTransaction, :note), "note"
       - if with_payment
-        %th= heading_helper FinancialTransaction, :payment_plugin
-        %th= heading_helper FinancialTransaction, :payment_method
         %th= heading_helper FinancialTransaction, :payment_amount
         %th= heading_helper FinancialTransaction, :payment_fee
         %th= heading_helper FinancialTransaction, :payment_state
@@ -34,33 +32,37 @@
       - if with_hidden
         %th
   %tbody
-    - @financial_transactions.each do |t|
-      %tr{class: "#{'deleted_row' if t.hidden?}"}
+    - @financial_transactions.each do |ta|
+      %tr{class: "#{'deleted_row' if ta.hidden?}"}
         %td
-          - if t.financial_link && current_user.role_finance?
-            = link_to format_time(t.created_on), finance_link_path(t.financial_link)
+          - if ta.financial_link && current_user.role_finance?
+            = link_to format_time(ta.created_on), finance_link_path(ta.financial_link)
           - else
-            = format_time(t.created_on)
+            = format_time(ta.created_on)
         - if with_ordergroup
-          %td= h link_to t.ordergroup_name, finance_group_transactions_path(t.ordergroup)
-        %td= h show_user(t.user)
+          %td= h link_to ta.ordergroup_name, finance_group_transactions_path(ta.ordergroup)
+        %td= h show_user(ta.user)
         - if FinancialTransactionType.has_multiple_types
-          %td= h t.financial_transaction_type.name
-        %td= render "finance/financial_transactions/order_note", financial_transaction:t, with_grouporder_link: with_grouporder_links
+          %td= h ta.financial_transaction_type.name
+        %td= render "finance/financial_transactions/order_note", financial_transaction:ta, with_grouporder_link: with_grouporder_links
         - if with_payment
-          %td= t.payment_plugin
-          %td= t.payment_method
-          %td= format_currency t.payment_amount
-          %td= format_currency t.payment_fee
-          %td= t.payment_state
+          %td= format_currency ta.payment_amount
+          %td= format_currency ta.payment_fee
+        - else
+          %td= ' '
+          %td= ' '   
+        - if not ta.payment_state.nil?
+          %td= format_state "finance.payments.result.#{ta.payment_state}"
+        - else
+          %td= ' ' 
         - FinancialTransactionClass.sorted.each do |c|
           %td.numeric{style: 'width:5em'}
-            - if t.financial_transaction_type.financial_transaction_class == c
-              = format_currency t.amount
+            - if ta.financial_transaction_type.financial_transaction_class == c
+              = format_currency ta.amount
         - if with_hidden
           %td.actions{style: 'width:1em'}
-            - unless t.hidden? || t.amount.nil?
-              = link_to finance_transaction_path(t), method: :delete,
-                data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
+            - unless ta.hidden? || ta.amount.nil?
+              = link_to finance_transaction_path(ta), method: :delete,
+                data: {confirm: t('.confirm_revert', name: ta.note)}, title: t('.revert_title'),
                 class: 'btn btn-danger btn-mini' do
                 = glyph :remove

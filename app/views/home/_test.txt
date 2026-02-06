@@ -52,12 +52,11 @@
       %b= current_user.ordergroup.name
       = ' | '
       - if FoodsoftConfig[:charge_members_manually]
-        = heading_helper(Ordergroup, :account_balance) + ': '
+        = heading_helper(Ordergroup, :account_balance) + ':'
         = number_to_currency(current_user.ordergroup.account_balance)
       - else
-        = heading_helper(Ordergroup, :available_funds) + ': '
+        = heading_helper(Ordergroup, :available_funds) + ':'
         = number_to_currency(current_user.ordergroup.get_available_funds)
-      = ' | '
       %small= t '.my_ordergroup.last_update', when: distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated)
       %h3
         = t '.my_ordergroup.transactions.title'
@@ -80,8 +79,6 @@
           - FinancialTransactionClass.sorted.each do |fc|
             %th
               = fc.display
-          - if with_payment
-            %th= heading_helper FinancialTransaction, :payment_fee
         - for ft in financial_transactions
           %tr
             %td= format_time(ft.created_on)
@@ -89,17 +86,12 @@
             - if FinancialTransactionType.has_multiple_types
               %td= h(ft.financial_transaction_type.name)
             %td= h(render "finance/financial_transactions/order_note", financial_transaction:ft, with_grouporder_link: true)
-            - if with_payment and not ft.payment_state.nil?
-              %td= h(format_state "finance.payments.result.#{ft.payment_state}")
-            - else 
-              %td= ' '
+            - if with_payment
+              %td= h(ft.payment_state)
             - FinancialTransactionClass.sorted.each do |fc|
               %td.numeric{style: 'width:5em'}
                 - if ft.financial_transaction_type.financial_transaction_class == fc
                   = format_currency(ft.amount)
-              %td.numeric{style: 'width:5em'}
-                - if with_payment and (not ft.payment_state.nil? and ft.payment_state["paid"])
-                  = format_currency(ft.payment_fee)                  
 
 -# placeholder deface to add content using erb[silent]:contains()
 - '<dashboard_bottom_mark>'
