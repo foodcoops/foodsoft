@@ -416,6 +416,15 @@
                             "note": {
                                 "type": "string"
                             },
+                            "payment_fee": {
+                                "type": "string"
+                            },
+                            "payment_amount": {
+                                "type": "string"
+                            },
+                            "payment_state": {
+                                "type": "string"
+                            },
                             "ordergroup": {
                                 "type": "string"
                             },
@@ -5360,56 +5369,97 @@
                     "ordergroups": {
                         "type": "object",
                         "properties": {
-                        "index": {
-                            "type": "object",
-                            "properties": {
-                            "new_financial_link": {
-                                "type": "string"
+                            "index": {
+                                "type": "object",
+                                "properties": {
+                                    "new_financial_link": {
+                                        "type": "string"
+                                    },
+                                    "new_transaction": {
+                                        "type": "string"
+                                    },
+                                    "show_all": {
+                                        "type": "string"
+                                    },
+                                    "show_foodcoop": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                "new_financial_link",
+                                "new_transaction",
+                                "show_all",
+                                "show_foodcoop",
+                                "title"
+                                ],
+                                "additionalProperties": false
                             },
-                            "new_transaction": {
-                                "type": "string"
-                            },
-                            "show_all": {
-                                "type": "string"
-                            },
-                            "show_foodcoop": {
-                                "type": "string"
-                            },
-                            "title": {
-                                "type": "string"
+                            "ordergroups": {
+                                "type": "object",
+                                "properties": {
+                                    "account_statement": {
+                                        "type": "string"
+                                    },
+                                    "new_transaction": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                "account_statement",
+                                "new_transaction"
+                                ],
+                                "additionalProperties": false
                             }
-                            },
-                            "required": [
-                            "new_financial_link",
-                            "new_transaction",
-                            "show_all",
-                            "show_foodcoop",
-                            "title"
-                            ],
-							"additionalProperties": false
-                        },
-                        "ordergroups": {
-                            "type": "object",
-                            "properties": {
-                            "account_statement": {
-                                "type": "string"
-                            },
-                            "new_transaction": {
-                                "type": "string"
-                            }
-                            },
-                            "required": [
-                            "account_statement",
-                            "new_transaction"
-                            ],
-							"additionalProperties": false
-                        }
                         },
                         "required": [
                         "index",
                         "ordergroups"
                         ],
-							"additionalProperties": false
+						"additionalProperties": false
+                    },
+                    "payments": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "type": "object",
+                                    "properties": {
+                                        "paid": {
+                                            "type": "string"
+                                        },
+                                        "canceled": {
+                                            "type": "string"
+                                        },
+                                        "open": {
+                                            "type": "string"
+                                        },
+                                        "failed": {
+                                            "type": "string"
+                                        },
+                                        "authorized": {
+                                            "type": "string"
+                                        },
+                                        "expired": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                    "paid",
+                                    "canceled",
+                                    "open",
+                                    "failed",
+                                    "authorized",
+                                    "expired"
+                                    ],
+							        "additionalProperties": false
+                                }
+                        },
+                        "required": [
+                        "result"
+                        ],
+						"additionalProperties": false
                     },
                     "update": {
                         "type": "object",
@@ -5421,7 +5471,7 @@
                         "required": [
                         "notice"
                         ],
-							"additionalProperties": false
+						"additionalProperties": false
                     }
                     },
                     "required": [
@@ -5436,7 +5486,7 @@
                     "ordergroups",
                     "update"
                     ],
-							"additionalProperties": false
+					"additionalProperties": false
                 },
                 "foodcoop": {
                     "type": "object",

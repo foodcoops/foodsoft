@@ -1066,6 +1066,14 @@ en:
       ordergroups:
         account_statement: Account statement
         new_transaction: New transaction
+    payments:
+      result:
+        paid: paid
+        canceled: aborted by user
+        open: waiting for payment
+        failed: failed
+        authorized: authorized
+        expired: expired
     update:
       notice: Invoice was updated
   foodcoop:

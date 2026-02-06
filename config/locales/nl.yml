@@ -69,11 +69,14 @@ nl:
         mime: MIME-type
         name: Naam
       financial_transaction:
-        amount: Bedrag
+        amount: Transactie bedrag
         created_on: Datum
         financial_transaction_class: Financiële-transactieklasse
         financial_transaction_type: Financiële-transactietype
-        note: Notitie
+        note: Toelichting
+        payment_fee: Kosten
+        payment_amount: Bedrag
+        payment_state: Status
         ordergroup: Huishouden
         user: Ingevoerd door
       financial_transaction_class:
@@ -1009,6 +1012,14 @@ nl:
       ordergroups:
         account_statement: Rekeningafschrift
         new_transaction: Nieuwe transactie
+    payments:
+      result:
+        paid: betaald
+        canceled: afgebroken door gebruiker
+        open: wachten op betaling
+        failed: mislukt
+        authorized: goedgekeurd
+        expired: verlopen
     update:
       notice: Factuur is bijgewerkt
   foodcoop:

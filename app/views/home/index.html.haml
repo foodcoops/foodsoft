@@ -90,7 +90,7 @@
               %td= h(ft.financial_transaction_type.name)
             %td= h(render "finance/financial_transactions/order_note", financial_transaction:ft, with_grouporder_link: true)
             - if with_payment and not ft.payment_state.nil?
-              %td= h(format_state "payments.mollie.result.#{ft.payment_state}")
+              %td= h(format_state "finance.payments.result.#{ft.payment_state}")
             - else 
               %td= ' '
             - FinancialTransactionClass.sorted.each do |fc|

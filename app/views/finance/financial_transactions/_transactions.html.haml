@@ -52,7 +52,7 @@
           %td= ' '
           %td= ' '   
         - if not ta.payment_state.nil?
-          %td= format_state "payments.mollie.result.#{ta.payment_state}"
+          %td= format_state "finance.payments.result.#{ta.payment_state}"
         - else
           %td= ' ' 
         - FinancialTransactionClass.sorted.each do |c|
