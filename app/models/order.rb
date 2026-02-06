@@ -326,7 +326,7 @@ class Order < ApplicationRecord
     elsif auto_close_and_send_min_quantity?
       finish!(created_by)
       # fix for issue 1166 to catch input including non numeric characters
-      send_to_supplier!(created_by) if sum >= supplier.min_order_quantity.delete("^0-9.,").to_i
+      send_to_supplier!(created_by) if sum >= supplier.min_order_quantity.delete('^0-9.,').to_i
     end
   end
 
