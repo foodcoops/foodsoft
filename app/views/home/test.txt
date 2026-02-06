@@ -1,0 +1,97 @@
+- title t('.title'), false
+
+- content_for(:sidebar) do
+  = render :partial => 'start_nav'
+
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_top_mark>'
+
+- unless @unaccepted_tasks.empty? && @next_tasks.empty?
+  %section.row-fluid
+    - unless @next_tasks.empty?
+      .span3.well
+        %h4= t '.your_tasks'
+        %dl
+          - @next_tasks.each do |task|
+            %dt= l task.due_date, format: t('.due_date_format')
+            %dd= link_to task.name, task_path(task)
+    - unless @unaccepted_tasks.empty?
+      .span3.well
+        %h4= t '.tasks_move.title'
+        = t '.tasks_move.desc'
+        = link_to t('.tasks_move.action'), user_tasks_path
+
+- if @unassigned_tasks.size > 0
+  %section
+    %h2
+      = t '.tasks_open.title'
+      %small
+        = link_to tasks_path do
+          = t '.tasks_open.view_all'
+          %i.icon.icon-chevron-right
+    = render 'shared/task_list', tasks: @unassigned_tasks
+
+- if current_user.ordergroup
+  = render :partial => 'shared/open_orders', :locals => {:ordergroup => current_user.ordergroup}
+
+// Stats
+- if current_user.ordergroup and FoodsoftConfig[:use_apple_points]
+  %section
+    %h2= t '.ordergroup.title'
+    = render :partial => "apple_bar", :locals => {:apple_bar => AppleBar.new(current_user.ordergroup)}
+
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_middle_mark>'
+
+- if current_user.ordergroup
+
+  // Ordergroup overview
+  %section
+    %h2= t '.my_ordergroup.title'
+    %p
+      %b= current_user.ordergroup.name
+      = ' | '
+      - if FoodsoftConfig[:charge_members_manually]
+        = heading_helper(Ordergroup, :account_balance) + ':'
+        = number_to_currency(current_user.ordergroup.account_balance)
+      - else
+        = heading_helper(Ordergroup, :available_funds) + ':'
+        = number_to_currency(current_user.ordergroup.get_available_funds)
+      %small= t '.my_ordergroup.last_update', when: distance_of_time_in_words(Time.now, current_user.ordergroup.account_updated)
+      %h3
+        = t '.my_ordergroup.transactions.title'
+        %small
+          = link_to my_ordergroup_path do
+            = t '.my_ordergroup.transactions.view'
+            %i.icon.icon-chevron-right
+          - '<dashboard_ordergroup_mark>'
+      %table.table.table-striped
+        - financial_transactions = current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)
+        - with_payment = financial_transactions.with_payment_plugin.any?
+        %tr
+          %th= heading_helper FinancialTransaction, :created_on
+          %th= heading_helper FinancialTransaction, :user
+          - if FinancialTransactionType.has_multiple_types
+            %th= heading_helper FinancialTransaction, :financial_transaction_type
+          %th= heading_helper FinancialTransaction, :note
+          - if with_payment
+            %th= heading_helper FinancialTransaction, :payment_state
+          - FinancialTransactionClass.sorted.each do |fc|
+            %th
+              = fc.display
+        - for ft in financial_transactions
+          %tr
+            %td= format_time(ft.created_on)
+            %td= h(show_user(ft.user))
+            - if FinancialTransactionType.has_multiple_types
+              %td= h(ft.financial_transaction_type.name)
+            %td= h(render "finance/financial_transactions/order_note", financial_transaction:ft, with_grouporder_link: true)
+            - if with_payment
+              %td= h(ft.payment_state)
+            - FinancialTransactionClass.sorted.each do |fc|
+              %td.numeric{style: 'width:5em'}
+                - if ft.financial_transaction_type.financial_transaction_class == fc
+                  = format_currency(ft.amount)
+
+-# placeholder deface to add content using erb[silent]:contains()
+- '<dashboard_bottom_mark>'
