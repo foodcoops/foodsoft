@@ -1,6 +1,5 @@
-
-# [Foodsoft 4.9.1](https://github.com/foodcoops/foodsoft/compare/v4.9...v4.9.1)
-(2025-03-20)
+# [Foodsoft 5.0.0](https://github.com/foodcoops/foodsoft/compare/master...v4.x)
+(2026-01-07)
 
 ### Bug Fixes
 
