@@ -5,5 +5,6 @@
   = config_input fields, :api_key, as: :string, input_html: {class: 'input-xlarge'}
   = config_input fields, :financial_transaction_type, :as => :select, :collection => FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }
   = config_input fields, :charge_fees, as: :boolean
+  = config_input fields, :tax, as: :float
   = config_input fields, :currency, as: :string, input_html: {class: 'input-xlarge'}
   = config_input fields, :default_amount, as: :float

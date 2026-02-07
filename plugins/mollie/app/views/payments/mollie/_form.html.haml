@@ -1,27 +1,3 @@
-- content_for :javascript do
-  - if FoodsoftMollie.charge_fees?
-    :javascript
-      function paymentFee(amount, fixed, variable) {
-        return fixed + (amount * (variable/100));
-      }
-
-      function handleInputAmount(){
-        const payment_method = $('#payment_method').val();
-        const amount = parseFloat($('#amount').val());
-        $('#payment_fee').empty();
-        $('#fee_list').data(payment_method).forEach (fee => {
-          const calculatedFee =  paymentFee(amount, fee.fixed.value, fee.variable).toFixed(2);
-          const currency = fee.fixed.currency;
-          $('#payment_fee')
-          .append($("<option></option>")
-            .attr("value", calculatedFee)
-              .text(`${currency} ${calculatedFee} (${fee.description})`));
-          });
-      }
-      $('#amount').on('keyup', handleInputAmount);
-      $('#payment_method').on('change', handleInputAmount);
-      $(document).ready(handleInputAmount);
-
 = form_tag payments_mollie_path, method: :post do
   - if params[:text]
     .well= params[:text]
@@ -29,24 +5,27 @@
     .control-label
       = label_tag 'amount', ((params[:label] or t('.amount_pay')))
     .controls
+      - # TODO For iDEAL the fee is fixed. Recalculate fee for other methods as soon as that is supported
       .input-prepend
         %span.add-on= t 'number.currency.format.unit'
         = text_field_tag 'amount', @amount, readonly: (params[:fixed]=='true'), class: 'input-mini'
       - if params[:min]
         .help-inline{style: 'margin-bottom: 10px'}
-          = "(min #{number_to_currency params[:min], precision: 0})"
+          = "(min #{number_to_currency params[:min], precision: 2})"
         = hidden_field_tag 'min', params[:min]
   .control-group
     .control-label
       = label_tag 'payment_method', t('.payment_method')
     .controls
-      = select_tag 'payment_method', options_for_select(@payment_methods.map { |p| [p.description, p.id] }, params[:payment_method]), class: 'input-large'
+      - # TODO leave map for testing with other methods so they are shown.
+      = select_tag 'payment_method', options_for_select(@payment_options.map { |id, m| [m[:description], id.to_s] }, params[:payment_method]), class: 'input-large'
   - if FoodsoftMollie.charge_fees?
-    .control-group
-      .control-label
-        = label_tag 'payment_fee', t('.fee')
-      .controls
-        #fee_list{data: @payment_methods_fees }= select_tag 'payment_fee'
+    .control-label
+      = label_tag 'payment_fee', t('.payment_fee')
+      .input-prepend
+        %span.add-on= t 'number.currency.format.unit'
+      .help-inline{style: 'margin-bottom: 10px'}
+        = "#{number_to_currency @payment_options.dig(:ideal, :fee), precision: 2, unit: ''}"
   .control-group
     .controls
       = submit_tag t('.submit')

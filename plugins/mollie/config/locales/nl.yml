@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=language_schema.json
+
 nl:
   activerecord:
     attributes:
@@ -14,17 +16,32 @@ nl:
         title: Stort geld op je account
         no_ordergroup: U dient lid te zijn van een huishouden
       create:
-        invalid_amount: Ongeldig bedrag
+        invalid_amount: Bedrag %{currency}%{amount} is lager dan vereist minimum %{currency}%{minimum}
+        invalid_method: Geen geldige betaalwijze gevonden voor %{method}
       form:
+        payment_fee: Transactiekosten
+        payment_method: Betaalwijze
         amount_pay: Te betalen bedrag
-        method: Hoe te betalen
         submit: Betaal online
         financial_transaction_type: Financiële-transactietype
-        fee: Selecteer de juiste transactiekosten
       controller:
         result:
           notice: Er is %{amount} bijgeschreven op uw account.
+          canceled: Betaling afgebroken.
           failed: Betaling mislukt.
+          wait: Je tegoed wordt aangepast zodra de betaling is ontvangen en verwerkt.
+        transaction_note: '%{method} betaling'
+        decription: '%{coop}: tegoed aanvullen voor huishouden %{ordergroup}'
+  finance:
+    financial_transactions:
+      payments:
+        result:
+          paid: betaald
+          canceled: geannuleerd
+          open: wachten op betaling
+          failed: mislukt
+          authorized: goedgekeurd
+          expired: verlopen
   config:
     hints:
       use_mollie: Laat gebruikers zelf geld op de rekening van hun Foodsoft huishouden zetten met online betalingen via Mollie.
@@ -34,6 +51,7 @@ nl:
         charge_fees: Breng huishouden de door Mollie gehanteerde transactiekosten in rekening. Dit is momenteel alleen beschikbaar voor EUR.
         currency: Kies de valuta die Mollie moet gebruiken (ISO code)
         default_amount: Het standaardbedrag waarmee de ordergroep wordt gecrediteerd.
+        tax: Het belastingtarief voor de transactiekosten
     keys:
       use_mollie: Accepteer online betalingen via Mollie
       mollie:
@@ -42,3 +60,4 @@ nl:
         charge_fees: Transactiekosten in rekening brengen
         currency: Valuta
         default_amount: Standaard bedrag
+        tax: Belasting % voor kosten

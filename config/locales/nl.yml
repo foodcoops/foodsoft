@@ -69,7 +69,7 @@ nl:
         mime: MIME-type
         name: Naam
       financial_transaction:
-        amount: Transactie bedrag
+        amount: Transactie
         created_on: Datum
         financial_transaction_class: Financiële-transactieklasse
         financial_transaction_type: Financiële-transactietype
