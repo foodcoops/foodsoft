@@ -255,7 +255,6 @@ class ArticlesController < ApplicationController
     options = { filename: uploaded_file.original_filename, foodsoft_url: root_url }
     options[:delete_unavailable] = (params[:articles]['delete_unavailable'] == '1')
     options[:outlist_absent] = (params[:articles]['outlist_absent'] == '1')
-    options[:convert_units] = (params[:articles]['convert_units'] == '1')
     @enable_unit_migration = (params[:articles]['activate_unit_migration'] == '1')
     @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_file(uploaded_file.tempfile,
                                                                                                        options)

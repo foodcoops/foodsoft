@@ -619,7 +619,6 @@ en:
         status: Status (x=skip)
       file_label: Please choose a compatible file
       options:
-        convert_units: Keep current units, recompute unit quantity and price (like synchronize).
         outlist_absent: Delete articles not in uploaded file.
         activate_unit_migration: "Re-enable unit migration."
         delete_unavailable: "Delete unavailable articles."
