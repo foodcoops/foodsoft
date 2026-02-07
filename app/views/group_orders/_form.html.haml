@@ -155,13 +155,19 @@
                 .article-name= order_article.article_version.name
                 .pull-right
                   = t('.units_full') + ':'
-                  %span{id: "units_#{order_article.id}"}= order_article.article_version.convert_quantity(order_article.units_to_order, order_article.article_version.supplier_order_unit, order_article.article_version.group_order_unit)
+                  %span{id: "units_#{order_article.id}"}
+                    %span.quantity= order_article.units_to_order
+                    %span.unit= ' × ' + format_unit(:supplier_order_unit, order_article.article_version)
                   %br/
                   = t('.units_total') + ':'
-                  %span{id: "q_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
+                  %span{id: "q_total_#{order_article.id}"}
+                    %span.quantity= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
+                    %span.unit=' × ' + format_unit_with_ratios(:group_order_unit, order_article.article_version)
                   %br/
                   = t('.total_tolerance') + ':'
-                  %span{id: "t_total_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
+                  %span{id: "t_total_#{order_article.id}"}
+                    %span.quantity= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
+                    %span.unit=' × ' + format_unit_with_ratios(:group_order_unit, order_article.article_version)
                   %br/
                 .pull-left
                   #{heading_helper Article, :manufacturer}: #{order_article.article_version.manufacturer}
@@ -170,7 +176,7 @@
                   - if @order.stockit?
                     #{order_article.article_version.article.quantity_available}
                   - elsif order_article.article_version.uses_tolerance?
-                    #{format_supplier_order_unit_with_ratios(order_article.article_version)}
+                    #{format_unit_with_ratios(:supplier_order_unit, order_article.article_version)}
                   - else
                     #{format_group_order_unit_with_ratios(order_article.article_version)}
 

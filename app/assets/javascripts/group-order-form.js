@@ -113,9 +113,9 @@ class GroupOrderForm {
     const tolerance$ = row$.find('.goa-tolerance');
     const usedTolerance$ = row$.find('.used-unused-tolerance .used');
     const unusedTolerance$ = row$.find('.used-unused-tolerance .unused');
-    const totalPacks$ = row$.find('.article-info *[id^="units_"]');
-    const totalQuantity$ = row$.find('.article-info *[id^="q_total_"]');
-    const totalTolerance$ = row$.find('.article-info *[id^="t_total_"]');
+    const totalPacks$ = row$.find('.article-info *[id^="units_"] .quantity');
+    const totalQuantity$ = row$.find('.article-info *[id^="q_total_"] .quantity');
+    const totalTolerance$ = row$.find('.article-info *[id^="t_total_"] .quantity');
     const totalPrice$ = row$.find('*[id^="price_"][id$="_display"]');
 
     const missing$ = row$.find('.missing-units');
@@ -171,7 +171,7 @@ class GroupOrderForm {
 
     totalPacks$.text(packSizeDeterminedBySupplierOrderUnit ? round(totalPacks) : round(totalQuantity));
 
-    totalPacks$.css('color', this.packCompletedFromTolerance(packSize, totalQuantity, totalTolerance) ? 'grey' : 'auto');
+    totalPacks$.css('color', this.packCompletedFromTolerance(packSize, totalQuantity, totalTolerance) ? 'grey' : '');
 
     totalQuantity$.text(round(totalQuantity));
     totalTolerance$.text(round(totalTolerance));
