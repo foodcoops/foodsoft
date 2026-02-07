@@ -1,4 +1,4 @@
-class Api::V1::NavigationsController < Api::V1::BaseController
+class Api::V1::NavigationsController < Api::BaseController
   def show
     # we don't use active_model_serializers here, because source is a Hash
     render json: { navigation: transform(navigation) }
