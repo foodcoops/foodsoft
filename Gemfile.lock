@@ -36,6 +36,16 @@ PATH
       ruby-filemagic
 
 PATH
+  remote: plugins/invoices
+  specs:
+    foodsoft_invoices (0.1.0)
+      deface (~> 1.0)
+      prawn
+      prawn-table
+      rails
+      sepa_king
+
+PATH
   remote: plugins/links
   specs:
     foodsoft_links (0.0.1)
@@ -277,6 +287,7 @@ GEM
       i18n (>= 0.6.6, < 2)
     i18n-spec (0.6.0)
       iso
+    iban-tools (1.2.1)
     ice_cube (0.17.0)
     image_processing (1.13.0)
       mini_magick (>= 4.9.5, < 5)
@@ -599,6 +610,10 @@ GEM
       tilt
     securerandom (0.4.1)
     select2-rails (4.0.13)
+    sepa_king (0.14.0)
+      activemodel (>= 4.2)
+      iban-tools
+      nokogiri
     simple-navigation (4.4.0)
       activesupport (>= 2.3.2)
     simple_form (5.3.1)
@@ -738,6 +753,7 @@ DEPENDENCIES
   foodsoft_b85!
   foodsoft_discourse!
   foodsoft_documents!
+  foodsoft_invoices!
   foodsoft_links!
   foodsoft_messages!
   foodsoft_polls!
