@@ -1,8 +1,18 @@
 - title t('.title')
 
 = render 'messages/actionbar', active: 'message_threads'
+-# General threads (group = nil)
+= render 'groupmessage_threads',
+   threads: @threads_by_group[nil][:threads],
+   total_count: @threads_by_group[nil][:total_count],
+   name: t('.general'),
+   id: 0
 
-= render 'groupmessage_threads', group: nil, name: t('.general'), id: 0
-
-- for group in @groups
-  = render 'groupmessage_threads', group: group, name: group.name, id: group.id
+-# Threads for each group
+- for group_id, data in @threads_by_group
+  - next if group_id.nil?   # skip general/ungrouped threads
+  = render 'groupmessage_threads',
+      threads: data[:threads],
+      total_count: data[:total_count],
+      name: data[:group]&.name,
+      id: group_id

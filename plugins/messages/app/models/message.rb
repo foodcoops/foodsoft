@@ -6,25 +6,32 @@ class Message < ApplicationRecord
   belongs_to :reply_to_message, optional: true, class_name: 'Message', foreign_key: 'reply_to'
   has_many :message_recipients, dependent: :destroy
   has_many :recipients, through: :message_recipients, source: :user
+  has_one :last_reply, -> { order(created_at: :desc) }, class_name: "Message", foreign_key: :reply_to
 
   attr_accessor :send_method, :recipient_tokens, :order_id, :mrecipients_ids
 
   scope :threads, -> { where(reply_to: nil) }
   scope :thread, ->(id) { where('id = ? OR reply_to = ?', id, id) }
-  scope :readable_for, ->(user) {
-    user_id = user&.id
+  # scope :readable_for, ->(user) {
+  #   user_id = user.try(:id)
+  #   return none unless user_id
+  #
+  #   public_messages = Message.where(private: false)
+  #   sent_messages   = Message.where(sender_id: user_id)
+  #   received_messages = Message.joins(:message_recipients)
+  #                              .where(message_recipients: { user_id: user_id })
+  #
+  #   Message.where(id: public_messages.select(:id))
+  #          .or(Message.where(id: sent_messages.select(:id)))
+  #          .or(Message.where(id: received_messages.select(:id)))
+  # }
 
-    base = where(reply_to: nil, group_id: nil)
+  scope :readable_for, lambda { |user|
+    user_id = user.try(&:id)
 
-    base.where(private: false)
-        .or(base.where(sender_id: user_id))
-        .or(
-          base.where(
-            id: MessageRecipient
-                  .where(user_id: user_id)
-                  .select(:message_id)
-          )
-        )
+    joins(:message_recipients)
+      .where('private = ? OR sender_id = ? OR message_recipients.user_id = ?', false, user_id, user_id)
+      .distinct
   }
   scope :last_readable_for, ->(user, nr) {
     user_id = user.try(&:id)
@@ -140,10 +147,6 @@ class Message < ApplicationRecord
     system_message? ? I18n.t('layouts.foodsoft') : sender.display
   rescue StandardError
     '?'
-  end
-
-  def last_reply
-    Message.where(reply_to: id).order(:created_at).last
   end
 
   def is_readable_for?(user)

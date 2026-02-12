@@ -1,5 +1,5 @@
 - if pagination
-  - if Message.readable_for(current_user).count > 20
+  - if total_count > 20
     = items_per_page
   = pagination_links_remote message_threads
 

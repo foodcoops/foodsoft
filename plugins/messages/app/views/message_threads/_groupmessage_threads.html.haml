@@ -1,5 +1,8 @@
-- message_threads = Message.readable_for(current_user).threads.where(group: group).order(created_at: :desc).limit(5)
-- unless message_threads.empty?
+-# _groupmessage_threads.html.haml
+- threads = local_assigns[:threads] || []
+- total_count = local_assigns[:total_count] || []
+
+- unless threads.empty?
   %section
     %h3
       = name
@@ -7,5 +10,7 @@
         = link_to message_thread_path(id) do
           = t '.show_message_threads'
           %i.icon.icon-chevron-right
-    = render 'message_threads', message_threads: message_threads, pagination: false
+
+    = render 'message_threads', message_threads: threads, pagination: false, total_count: total_count
+
     = link_to_top
