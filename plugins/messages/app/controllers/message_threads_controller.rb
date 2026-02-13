@@ -39,5 +39,6 @@ class MessageThreadsController < ApplicationController
   def show
     @group = Group.find_by_id(params[:id])
     @message_threads = Message.readable_for(current_user).threads.where(group: @group).page(params[:page]).per(@per_page).order(created_at: :desc)
+    @total_count = Message.readable_for(current_user).threads.where(group: @group).count
   end
 end

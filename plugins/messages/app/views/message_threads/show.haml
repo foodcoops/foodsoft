@@ -4,4 +4,4 @@
   - title @group.name
 
 #message_threads
-  = render 'message_threads', message_threads: @message_threads, pagination: true
+  = render 'message_threads', message_threads: @message_threads, pagination: true, total_count: @total_count
