@@ -230,14 +230,6 @@ table {
   width: 200px;
 }
 
-/* Hide the orders article info for small screens
-   to prevent the "save order" button to disappear */
-@media only screen and (max-width: 950px) {
-  tr.order-article:hover .article-info {
-    display: none;
-  }
-}
-
 #order-footer {
   width: 100%;
   right: 0;
@@ -270,8 +262,16 @@ tr.order-article .article-info {
   display: none;
 }
 
-tr.order-article:hover .article-info {
-  display: block;
+@media (pointer: coarse) {
+  tr.order-article:focus-within .article-info {
+    display: block;
+  }
+}
+
+@media (pointer: fine) {
+  tr.order-article:hover .article-info {
+    display: block;
+  }
 }
 
 tr.order-article {
