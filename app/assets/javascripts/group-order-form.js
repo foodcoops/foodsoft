@@ -6,6 +6,7 @@ class GroupOrderForm {
     this.newBalance$ = this.form$.find('#new_balance');
     this.totalBalance$ = this.form$.find('#total_balance');
     this.submitButton$ = this.form$.find('#submit_button');
+
     this.units = config.units;
     this.toleranceIsCostly = config.toleranceIsCostly;
     this.groupBalance = config.groupBalance;
@@ -29,7 +30,6 @@ class GroupOrderForm {
       units: this.units,
       popoverTemplate$: $('#unit_conversion_popover_content_template'),
     }));
-    row$.find('.btn-ordering').mousedown((e) => e.preventDefault());
     row$.find('.btn-ordering.decrease').click((event) => this.increaseOrDecrease($(event.target).parents('.input-group').find('input.numeric'), false));
     row$.find('.btn-ordering.increase').click((event) => this.increaseOrDecrease($(event.target).parents('.input-group').find('input.numeric'), true));
 
