@@ -12,25 +12,12 @@ class Message < ApplicationRecord
 
   scope :threads, -> { where(reply_to: nil) }
   scope :thread, ->(id) { where('id = ? OR reply_to = ?', id, id) }
-  # scope :readable_for, ->(user) {
-  #   user_id = user.try(:id)
-  #   return none unless user_id
-  #
-  #   public_messages = Message.where(private: false)
-  #   sent_messages   = Message.where(sender_id: user_id)
-  #   received_messages = Message.joins(:message_recipients)
-  #                              .where(message_recipients: { user_id: user_id })
-  #
-  #   Message.where(id: public_messages.select(:id))
-  #          .or(Message.where(id: sent_messages.select(:id)))
-  #          .or(Message.where(id: received_messages.select(:id)))
-  # }
-
   scope :readable_for, lambda { |user|
-    user_id = user.try(&:id)
-
-    joins(:message_recipients)
-      .where('private = ? OR sender_id = ? OR message_recipients.user_id = ?', false, user_id, user_id)
+    return none unless user
+    
+    left_joins(:message_recipients)
+      .where('messages.private = FALSE OR messages.sender_id = :user_id OR message_recipients.user_id = :user_id',
+             user_id: user.id)
       .distinct
   }
   scope :last_readable_for, ->(user, nr) {
