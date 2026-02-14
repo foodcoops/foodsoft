@@ -15,6 +15,7 @@
     %th
     %th= t '.amount'
     %th
+  - balance = 0
   - for stock_change in @stock_taking.stock_changes
     %tr
       %td= stock_change.stock_article.name
