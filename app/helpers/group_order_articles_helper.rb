@@ -2,7 +2,8 @@ module GroupOrderArticlesHelper
   # return an edit field for a GroupOrderArticle result
   def group_order_article_edit_result(goa, convert_to_billing_unit = true)
     result = number_with_precision goa.result, strip_insignificant_zeros: true
-    if goa.group_order.order.finished? && current_user.role_finance?
+
+    if goa.group_order.order.finished? && current_user.role_finance? && !goa.new_record?
       order_article = goa.order_article
       article_version = order_article.article_version
       simple_form_for goa, remote: true, html: { 'data-submit-onchange' => 'changed', class: 'form-inline' } do |f|

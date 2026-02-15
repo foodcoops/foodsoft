@@ -14,11 +14,11 @@ class GroupOrderArticlesController < ApplicationController
     # XXX when ordergroup_id appears before order_article_id in the parameters, you
     #     can get `NoMethodError - undefined method 'order_id' for nil:NilClass`
 
-    unless params[:group_order_article][:article_id].nil?
+    unless params[:group_order_article][:article_version_id].nil?
       go = GroupOrder.find_by_id(params[:group_order_article][:group_order_id])
-      oa = OrderArticle.where(article_id: params[:group_order_article][:article_id], order_id: go.order_id).first
+      oa = OrderArticle.where(article_version_id: params[:group_order_article][:article_version_id], order_id: go.order_id).first
       params[:group_order_article][:order_article_id] = oa.id
-      params[:group_order_article].delete(:article_id)
+      params[:group_order_article].delete(:article_version_id)
     end
 
     @group_order_article = GroupOrderArticle.new(params[:group_order_article])

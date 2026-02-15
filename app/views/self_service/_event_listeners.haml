@@ -87,11 +87,10 @@
       $(sel).removeAttr('disabled').select2({
         placeholder: '#{j t('orders.receive.add_article')}',
         formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
-        // TODO implement adding a new article, like in deliveries
       }).on('change', function(e) {
         const $input = $(e.target);
-        const selectedArticleId = parseInt($input.val(), 10);
-        if(!selectedArticleId) {
+        const selectedArticleVersionId = parseInt($input.val(), 10);
+        if(!selectedArticleVersionId) {
           return false;
         }
         const groupOrderId = parseInt($(this).attr('data-group-order_id'), 10);
@@ -99,7 +98,7 @@
         $.ajax({
           url: '#{group_order_articles_path}',
           type: 'post',
-          data: JSON.stringify({group_order_article: {article_id: selectedArticleId, group_order_id: groupOrderId}}),
+          data: JSON.stringify({group_order_article: {article_version_id: selectedArticleVersionId, group_order_id: groupOrderId}}),
           contentType: 'application/json; charset=UTF-8'
         });
 

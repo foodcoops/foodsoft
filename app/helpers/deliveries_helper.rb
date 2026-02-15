@@ -19,7 +19,7 @@ module DeliveriesHelper
   end
 
   def order_articles_for_select2(order_articles, exclude_ids = [])
-    order_articles = order_articles.joins(:article).reorder('articles.name ASC')
+    order_articles = order_articles.joins(:article_version).reorder('article_versions.name ASC')
     order_articles.select { |a| exclude_ids.index(a.id).nil? } if exclude_ids
   end
 
