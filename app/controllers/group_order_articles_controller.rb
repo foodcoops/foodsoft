@@ -1,7 +1,8 @@
 class GroupOrderArticlesController < ApplicationController
-  before_action :authenticate_finance, except: [:update]
+  before_action :authenticate_finance, except: %i[update create]
   before_action :find_group_order_article, except: %i[new create]
-  before_action :authenticate_finance_or_self_service_and_member, only: [:update]
+  before_action :find_group_order, only: [:create]
+  before_action :authenticate_finance_or_self_service_and_member, only: %i[update create]
 
   layout false # We only use this controller to server js snippets, no need for layout rendering
 
@@ -14,11 +15,10 @@ class GroupOrderArticlesController < ApplicationController
     # XXX when ordergroup_id appears before order_article_id in the parameters, you
     #     can get `NoMethodError - undefined method 'order_id' for nil:NilClass`
 
-    unless params[:group_order_article][:article_id].nil?
-      go = GroupOrder.find_by_id(params[:group_order_article][:group_order_id])
-      oa = OrderArticle.where(article_id: params[:group_order_article][:article_id], order_id: go.order_id).first
+    unless params[:group_order_article][:article_version_id].nil?
+      oa = OrderArticle.where(article_version_id: params[:group_order_article][:article_version_id], order_id: @group_order.order_id).first
       params[:group_order_article][:order_article_id] = oa.id
-      params[:group_order_article].delete(:article_id)
+      params[:group_order_article].delete(:article_version_id)
     end
 
     @group_order_article = GroupOrderArticle.new(params[:group_order_article])
@@ -78,6 +78,10 @@ class GroupOrderArticlesController < ApplicationController
     group_order_article.order_article.update_results! if group_order_article.order_article.article_version.is_a?(StockArticle)
   end
 
+  def find_group_order
+    @group_order = GroupOrder.find_by_id(params[:group_order_article][:group_order_id])
+  end
+
   def find_group_order_article
     @group_order_article = GroupOrderArticle.find(params[:id])
   end
@@ -85,7 +89,7 @@ class GroupOrderArticlesController < ApplicationController
   def authenticate_finance_or_self_service_and_member
     current_user.role_finance? || (
       FoodsoftConfig[:use_self_service] &&
-      @group_order_article.group_order.ordergroup.member?(current_user)
+      (@group_order || @group_order_article.group_order).ordergroup.member?(current_user)
     )
   end
 end

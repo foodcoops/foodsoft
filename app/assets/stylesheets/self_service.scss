@@ -37,7 +37,13 @@
     }
 
     input.numeric {
-      width: 50px;
+      width: 100px;
+
+      appearance: textfield;
+
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
     }
 
     .date, .amount {

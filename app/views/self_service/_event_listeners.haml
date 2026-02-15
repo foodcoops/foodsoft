@@ -71,27 +71,51 @@
     });
 
     $(document).on('GroupOrderArticle#create', function(e) {
-      const newRow = $('#new_goa_'+e.order_article_id);
-      if (newRow.length === 1) {
-        newRow.replaceWith(e.row_html);
+      const newRow$ = $('#new_goa_'+e.order_article_id);
+      const addedRow$ = $(e.row_html);
+      if (newRow$.length === 1) {
+        newRow$.replaceWith(addedRow$);
       } else {
-        $('#group_order_' + e.group_order_id + " tr.order_sum_row").before(e.row_html);
+        $('#group_order_' + e.group_order_id + " tr.order_sum_row").before(addedRow$);
       }
+
+      $('.availability[data-toggle="tooltip"]').tooltip({
+          html: true,
+          sanitize: false,
+          container: 'body'
+      });
+
+      $('.delta', addedRow$).each((_, field) => $(field).unitConversionField({
+        units: unitsData,
+        popoverTemplate$: $('#unit_conversion_popover_content_template'),
+        useTargetUnitForStep: false
+      }));
     });
 
     $(function() {
       init_add_article('.add_article');
+
+      $('.availability[data-toggle="tooltip"]').tooltip({
+          html: true,
+          sanitize: false,
+          container: 'body'
+      });
+
+      $('.delta').each((_, field) => $(field).unitConversionField({
+        units: unitsData,
+        popoverTemplate$: $('#unit_conversion_popover_content_template'),
+        useTargetUnitForStep: false
+      }));
     });
 
     function init_add_article(sel) {
       $(sel).removeAttr('disabled').select2({
         placeholder: '#{j t('orders.receive.add_article')}',
         formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
-        // TODO implement adding a new article, like in deliveries
       }).on('change', function(e) {
         const $input = $(e.target);
-        const selectedArticleId = parseInt($input.val(), 10);
-        if(!selectedArticleId) {
+        const selectedArticleVersionId = parseInt($input.val(), 10);
+        if(!selectedArticleVersionId) {
           return false;
         }
         const groupOrderId = parseInt($(this).attr('data-group-order_id'), 10);
@@ -99,7 +123,7 @@
         $.ajax({
           url: '#{group_order_articles_path}',
           type: 'post',
-          data: JSON.stringify({group_order_article: {article_id: selectedArticleId, group_order_id: groupOrderId}}),
+          data: JSON.stringify({group_order_article: {article_version_id: selectedArticleVersionId, group_order_id: groupOrderId}}),
           contentType: 'application/json; charset=UTF-8'
         });
 

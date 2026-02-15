@@ -6,7 +6,7 @@ $(document).trigger({
   group_order_article_id: <%= @group_order_article.id %>,
   group_order_article_price: <%= @group_order_article.total_price %>,
   group_order_article_availability_data: {
-    availability: <%= @group_order_article.order_article.availability%>,
+    availability: <%= number_with_precision(@group_order_article.order_article.availability, precision: 3, strip_insignificant_zeros: true)%>,
     title: '<%= j(render('shared/articles_by/availability_explanation', goa: @group_order_article))%>'
   },
   available_funds: '<%= @ordergroup.nil? ? '?' : j(number_to_currency(@ordergroup.get_available_funds)) %>'

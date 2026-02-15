@@ -1,4 +1,4 @@
-%div.text-left
+%div.text-left{style: "min-width: 200px"}
   %strong=t('shared.articles_by.ordered_in_total')
   = goa.order_article.units_to_order
   %br
@@ -14,7 +14,7 @@
   %br
   %strong
     - if goa.order_article.sum_of_all_fetch_deviations.negative?
-      =t('shared.articles_by.received_negative_diff')
+      =t('shared.articles_by.fetched_negative_diff')
     - else
       =t('shared.articles_by.fetched_positive_diff')
   = goa.order_article.sum_of_all_fetch_deviations.abs
@@ -25,7 +25,7 @@
     %table
       - goa.order_article.group_order_articles_with_fetch_deviations.each do |other_goa|
         %tr
-          %td
+          %td.mr-1
             %i="#{other_goa.group_order.ordergroup_name}:"
           %td.text-right
             ="#{other_goa.fetch_deviation.positive? ? '+' : ''}#{other_goa.fetch_deviation}"

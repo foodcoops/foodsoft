@@ -1104,8 +1104,8 @@ en:
       availability: Availability
       transactions: Transactions
     pickup:
+      availability: Availability
       fetched: Picked up
-      pickup: Pickup
     transactions:
       date: Date
       amount: Value

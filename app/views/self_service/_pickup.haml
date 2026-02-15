@@ -18,10 +18,10 @@
         %th= t 'shared.articles_by.price'
         %th= #heading_helper Article, :unit_quantity, short: true
     = render 'shared/articles_by/group_single', self_service: true, group_order: group_order, unassociated_articles_in_abundance: unassociated_articles_in_abundance
-  %select.add_article{:style => 'width: 500px;', :disabled => true, 'data-group-order_id' => group_order.id}
+  %select.add_article{:style => 'width: 500px;', :disabled => true, 'data-group-order_id' => group_order.id, :id => "add_article_select_#{group_order.id}"}
     - new_article_data = order_articles_for_select2(group_order.order.received_order_articles, group_order.order_articles.map(&:id) + unassociated_articles_in_abundance.map(&:id))
     - new_article_data.each do |order_article|
-      %option{id: "add_article_#{order_article.id}", value: order_article.article.id}
-        = "#{order_article.article.name} (#{number_to_currency order_article.article.price}/#{order_article.article.unit}) - #{t('.availability')}: #{order_article.availability}"
+      %option{id: "add_article_#{order_article.id}", value: order_article.article_version.id}
+        = "#{order_article.article_version.name} (#{number_to_currency order_article.article_version.price}/#{format_price_unit(order_article.article_version)}) - #{t('.availability')}: #{number_with_precision(order_article.availability, precision: 3, strip_insignificant_zeros: true)}"
 %div.pull-right
   = paginate @group_orders
