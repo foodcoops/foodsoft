@@ -25,8 +25,8 @@ class SelfServiceController < ApplicationController
   # -> Maybe merge it:
   def ensure_ordergroup_member
     @ordergroup = @current_user.ordergroup
-    if @ordergroup.nil?
-      redirect_to root_url, :alert => I18n.t('group_orders.errors.no_member')
-    end
+    return unless @ordergroup.nil?
+
+    redirect_to root_url, alert: I18n.t('group_orders.errors.no_member')
   end
 end

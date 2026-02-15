@@ -56,15 +56,15 @@ class Finance::FinancialTransactionsController < ApplicationController
     respond_to do |format|
       format.js
       redirect_to finance_group_transactions_path(@ordergroup),
-                notice: I18n.t('finance.financial_transactions.controller.create.notice')
+                  notice: I18n.t('finance.financial_transactions.controller.create.notice')
     end
-  rescue ActiveRecord::RecordInvalid => error
-    @error = error
+  rescue ActiveRecord::RecordInvalid => e
+    @error = e
     respond_to do |format|
       format.js
       format.html do
-        flash.now[:alert] = error.message
-        render :action => :new
+        flash.now[:alert] = e.message
+        render action: :new
       end
     end
   end

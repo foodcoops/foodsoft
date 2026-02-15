@@ -270,14 +270,14 @@ describe OrderArticle do
   end
 
   describe 'self_service' do
-    let(:article) { create :article, unit_quantity: 3 }
-    let(:order) { create :order, article_ids: [article.id] }
-    let(:go1) { create :group_order, order: order }
-    let(:go2) { create :group_order, order: order }
-    let(:go3) { create :group_order, order: order }
-    let(:goa1) { create :group_order_article, group_order: go1, order_article: oa, quantity: 4, result: 3 }
-    let(:goa2) { create :group_order_article, group_order: go2, order_article: oa, quantity: 4, result: 6 }
-    let(:goa3) { create :group_order_article, group_order: go3, order_article: oa, quantity: 4, result: 4 }
+    let(:article) { create(:article, unit_quantity: 3) }
+    let(:order) { create(:order, article_ids: [article.id]) }
+    let(:go1) { create(:group_order, order: order) }
+    let(:go2) { create(:group_order, order: order) }
+    let(:go3) { create(:group_order, order: order) }
+    let(:goa1) { create(:group_order_article, group_order: go1, order_article: oa, quantity: 4, result: 3) }
+    let(:goa2) { create(:group_order_article, group_order: go2, order_article: oa, quantity: 4, result: 6) }
+    let(:goa3) { create(:group_order_article, group_order: go3, order_article: oa, quantity: 4, result: 4) }
 
     it 'can retrieve articles that haven\'t been fetched as ordered' do
       [goa1, goa2, goa3].map(&:reload)
