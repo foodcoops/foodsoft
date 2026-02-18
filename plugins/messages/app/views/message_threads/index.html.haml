@@ -3,8 +3,8 @@
 = render 'messages/actionbar', active: 'message_threads'
 -# General threads (group = nil)
 = render 'groupmessage_threads',
-   threads: @threads_by_group[nil][:threads],
-   total_count: @threads_by_group[nil][:total_count],
+   threads: @threads_by_group.dig(nil, :threads) || [],
+   total_count: @threads_by_group.dig(nil, :total_count) || 0,
    name: t('.general'),
    id: 0
 
