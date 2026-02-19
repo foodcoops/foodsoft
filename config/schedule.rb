@@ -1,6 +1,12 @@
 # Use this file to define all tasks, which should be executed by cron
 # Learn more: http://github.com/javan/whenever
 
+# We use rvm-shell to ensure the Ruby environment is loaded inside the jail
+set :job_template, nil # Clear default to avoid double-wrapping
+job_type :rake, "schroot -c heritage_app -u foodsoft -- /home/foodsoft/.rvm/bin/rvm-shell -c 'cd :path && RAILS_ENV=:environment bundle exec rake :task --silent :output'"
+
+
+
 # Upcoming tasks notifier
 every :day, :at => '7:20 am' do
   rake "multicoops:run TASK=foodsoft:notify_upcoming_tasks"
