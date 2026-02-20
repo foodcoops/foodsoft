@@ -49,19 +49,19 @@
               = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
               = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
-                %i.icon-cog{:style => highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])}
+                = fa_icon :cog, style: highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])
             %div.extra-unit-fields.form-horizontal
-              .form-group.d-flex.align-items-center
-                %label.control-label.col-sm-3{for: 'unit_ratios'}
+              .form-group.d-flex.w-full
+                %label.col-sm-3.control-label{for: 'unit_ratios'}
                   = "Unit ratios"
-                %table#fc_base_price
+                %table#fc_base_price{:class => "col-sm-9 "}
                   %tbody
                     - ratios = changed_article.article_unit_ratios
                     = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: form, original_ratios: article&.article_unit_ratios}
                   %tfoot
                     %tr
-                      %td{:colspan => 6}
-                        = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-default', title: "add ratio"
+                      %td{:colspan => 9, :style => 'padding-left: 15px; padding-bottom: 16px; padding-top: 16px'}
+                        = link_to t('.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-primary', title: "add ratio"
                     - unless changed_article.new_record?
                       %tr{style: 'color: grey;'}
                         %td{:colspan => 6}
@@ -71,16 +71,25 @@
                               = "#{ratio.quantity} x #{ArticleUnitsLib.get_translated_name_for_code(ratio.unit)}"
                               = t 'articles.form.per'
                               = ArticleUnitsLib.get_translated_name_for_code(article.supplier_order_unit)
-              = form.input :minimum_order_quantity, label: "Mininum order quantity" do
+              = form.input :minimum_order_quantity, class: 'form form-control', label: "Mininum order quantity" do
                 .form
-                  = form.input_field :minimum_order_quantity, class: 'form-control', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
-                  %span.input-group-addon
+                  .input-group
+                    = form.input_field :minimum_order_quantity, class: 'form-control', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
+                    %span.input-group-addon
                   - unless changed_article.new_record?
                     %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
               = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'form-control', style: highlight_new(attrs, :billing_unit)}, include_blank: false
-              .form-group
-                = form.input :group_order_granularity, hint: changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}", hint_html: {style: 'color: grey;'}, label: "Allow orders per", input_html: {class: 'form-control', style: highlight_new(attrs, :group_order_granularity), title: "steps in which ordergroups can order this article"}
-                = form.input :group_order_unit, as: :select, collection: [], input_html: {'data-initial-value': changed_article.group_order_unit, class: 'form-control', style: highlight_new(attrs, :group_order_unit)}, label: '&times;'.html_safe, include_blank: false
+              .overflow-hidden.form-group
+                %label.control-label.col-sm-3{for: 'article_version_group_order_granularity'}
+                  = "Allow orders per"
+                .col-sm-9.d-flex
+                  .input-group.unit-wrapper
+                    = form.input_field :group_order_granularity, class: 'form-control mr-2', step: 0.001, style: highlight_new(attrs, :group_order_granularity).to_s + '; width: 150px;'
+                    .ml-1.d-flex.align-items-center
+                      %span.mr-2.control-label
+                        = '&times;'.html_safe
+                      = form.select :group_order_unit, [], {include_blank: false}, {class: 'form-control', style: highlight_new(attrs, :group_order_unit).to_s + ';margin-right:12px', 'data-initial-value': changed_article.group_order_unit}
+                  %p.help-block{style: 'color: grey;'}= changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}"
           %td{:style => highlight_new(attrs, :price)}
             .d-flex.gap-1
               .input-group
