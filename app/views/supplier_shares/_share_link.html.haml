@@ -1,7 +1,7 @@
 - if external_uuid.nil?
   = t('.not_shared')
 - else
-  - share_url = api_v1_shared_supplier_articles_url(external_uuid)
+  - share_url = api_v2_shared_supplier_articles_url(external_uuid)
   %div#copy-share-link-button.user-select-none{:role => 'button'}
     %span= share_url
     %i.icon-copy

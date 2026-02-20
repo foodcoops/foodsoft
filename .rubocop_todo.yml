@@ -321,7 +321,7 @@ Naming/MemoizedInstanceVariableName:
 # AllowedNames: as, at, by, cc, db, id, if, in, io, ip, of, on, os, pp, to
 Naming/MethodParameterName:
   Exclude:
-    - 'app/controllers/api/v1/base_controller.rb'
+    - 'app/controllers/api/base_controller.rb'
     - 'app/controllers/api/v1/user/group_order_articles_controller.rb'
     - 'app/helpers/application_helper.rb'
     - 'app/helpers/orders_helper.rb'
@@ -415,18 +415,8 @@ RSpec/DescribedClass:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 RSpec/EmptyExampleGroup:
   Exclude:
-    - 'spec/requests/api/v1/article_categories_controller_spec.rb'
-    - 'spec/requests/api/v1/shared_suppliers/articles_controller_spec.rb'
-    - 'spec/requests/api/v1/configs_controller_spec.rb'
-    - 'spec/requests/api/v1/financial_transaction_classes_controller_spec.rb'
-    - 'spec/requests/api/v1/financial_transaction_types_controller_spec.rb'
-    - 'spec/requests/api/v1/financial_transactions_controller_spec.rb'
-    - 'spec/requests/api/v1/navigations_controller_spec.rb'
-    - 'spec/requests/api/v1/order_articles_controller_spec.rb'
-    - 'spec/requests/api/v1/orders_controller_spec.rb'
-    - 'spec/requests/api/v1/user/financial_transactions_spec.rb'
-    - 'spec/requests/api/v1/user/group_order_articles_spec.rb'
-    - 'spec/requests/api/v1/user/users_spec.rb'
+    - 'spec/requests/api/**/*_spec.rb'
+    - 'spec/support/shared_contexts/api/**/*_context.rb'
 
 # Offense count: 83
 # Configuration parameters: CountAsOne.
@@ -534,6 +524,7 @@ RSpec/SpecFilePathFormat:
     - 'spec/integration/articles_spec.rb'
     - 'spec/integration/login_spec.rb'
     - 'spec/lib/bank_account_information_importer_spec.rb'
+    - 'spec/requests/api/**/*_spec.rb'
 
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.

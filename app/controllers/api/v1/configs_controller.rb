@@ -1,4 +1,4 @@
-class Api::V1::ConfigsController < Api::V1::BaseController
+class Api::V1::ConfigsController < Api::BaseController
   before_action -> { doorkeeper_authorize! 'config:user', 'config:read', 'config:write' }
 
   def show

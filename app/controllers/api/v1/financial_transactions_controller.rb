@@ -1,4 +1,4 @@
-class Api::V1::FinancialTransactionsController < Api::V1::BaseController
+class Api::V1::FinancialTransactionsController < Api::BaseController
   include Concerns::CollectionScope
 
   before_action -> { doorkeeper_authorize! 'finance:read', 'finance:write' }
