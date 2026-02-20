@@ -260,17 +260,37 @@ table {
 
 tr.order-article .article-info {
   display: none;
+
+  .close-btn {
+    display: none;
+    position: absolute;
+    right: 10px;
+    padding: 0;
+  }
 }
 
 @media (pointer: coarse) {
   tr.order-article:focus-within .article-info {
     display: block;
+
+    .close-btn {
+      display: block;
+    }
   }
 }
 
 @media (pointer: fine) {
   tr.order-article:hover .article-info {
     display: block;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .article-info {
+    box-shadow: 10px 11px 5px 0px rgba(104,153,70,0.15);
+    margin-bottom: 5px;
+    border: 1px solid rgb(104,153,70);
+    padding: 2px;
   }
 }
 
