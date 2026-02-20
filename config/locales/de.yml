@@ -1123,6 +1123,7 @@ de:
       units: Gebinde
       units_full: Volle Gebinde
       units_total: Gesamt-Einheiten
+      hide_article_info: Fortfahren
     index:
       closed_orders:
         more: mehr...
