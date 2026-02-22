@@ -6,6 +6,9 @@ class Mailer < ActionMailer::Base
   helper :application
   include ApplicationHelper
 
+  helper :articles
+  include ArticlesHelper
+
   layout 'email' # Use views/layouts/email.txt.erb
 
   default from: "#{I18n.t('layouts.foodsoft')} <#{FoodsoftConfig[:email_sender]}>",

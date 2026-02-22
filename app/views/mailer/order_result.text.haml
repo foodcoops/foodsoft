@@ -4,5 +4,5 @@
 = raw t '.text2'
 - for group_order_article in @group_order.group_order_articles.ordered.includes(:order_article)
   - article = group_order_article.order_article.article_version
-  \- #{article.name}:  #{group_order_article.result} x #{article.unit} = #{group_order_article.result * article.fc_price}
+  \- #{article.name}:  #{group_order_article.result} x #{format_group_order_unit_with_ratios(article)} = #{group_order_article.result * article.fc_price}
 = raw t '.text3', sum: @group_order.price, order_url: group_order_url(@group_order), foodcoop: FoodsoftConfig[:name]
