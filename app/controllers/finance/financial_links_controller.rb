@@ -46,6 +46,9 @@ class Finance::FinancialLinksController < Finance::BaseController
     if params[:bank_transaction]
       bank_transaction = BankTransaction.find(params[:bank_transaction])
       bank_transaction.update_attribute :financial_link, @financial_link
+    elsif params[:invoice]
+      invoice = Invoice.find(params[:invoice])
+      invoice.update_attribute :financial_link, @financial_link
     end
     redirect_to finance_link_url(@financial_link), notice: t('.notice')
   end
