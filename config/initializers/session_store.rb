@@ -19,7 +19,7 @@ module ActionDispatch
   end
 end
 
-Rails.application.config.session_store :slug_cookie_store, key: '_foodsoft_session'
+Rails.application.config.session_store :slug_cookie_store, key: '_foodsoft_session', expire_after: 1.year
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
