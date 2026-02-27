@@ -1098,6 +1098,18 @@ en:
     form:
       amount_change_for: Change amount for %{article}
       result_hint: 'Unit: %{unit}'
+  self_service:
+    index:
+      title: Self service
+      availability: Availability
+      transactions: Transactions
+    pickup:
+      availability: Availability
+      fetched: Picked up
+    transactions:
+      date: Date
+      amount: Value
+      transaction_text: Transaction text
   group_orders:
     archive:
       desc: View all %{link} here.
@@ -1510,6 +1522,7 @@ en:
       archive: My Orders
       manage: Manage orders
       ordering: Place order!
+      self_service: Self service
       pickups: Pickup days
       title: Orders
     tasks: Tasks
@@ -1687,6 +1700,13 @@ en:
     articles_by:
       price: Total price
       price_sum: Sum
+      ordered_in_total: Ordered in total
+      received_in_total: Received in total
+      received_negative_diff: Received too little
+      received_positive_diff: Received too much
+      fetched_negative_diff: Picked up less than ordered
+      fetched_positive_diff: Picked up more than ordered
+      corrections_details_header: Detailed corrections so far
     group:
       access: Access to
       activated: activated

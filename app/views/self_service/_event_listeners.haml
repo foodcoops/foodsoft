@@ -1,0 +1,133 @@
+= content_for :javascript do
+  :javascript
+    $(document).on('GroupOrderArticle#update', function(e) {
+      // update availability:
+      const el_goa = $('#goa_'+e.group_order_article_id);
+      const el_availability = $('.availability', el_goa);
+      const availability = e.group_order_article_availability_data.availability;
+      el_availability.text(availability);
+      el_availability.attr('title', e.group_order_article_availability_data.title);
+      el_availability.tooltip('fixTitle');
+
+      // update row style according to availability:
+      const tr = $(el_availability).parents('tr');
+      tr
+        .removeClass('abundance')
+        .removeClass('shortage');
+
+      if (availability > 0) {
+        tr.addClass('abundance');
+      } else if (availability < 0) {
+        tr.addClass('shortage');
+      }
+
+      // update funds:
+      const availableFunds = $('#available-funds');
+      availableFunds.removeClass('just-added');
+      void availableFunds[0].offsetWidth;
+      availableFunds.addClass('just-added')
+        .html(e.available_funds);
+    });
+
+    $(document).on('FinancialTransactions#create', function(e) {
+      if (e.error) {
+        alert(e.errorMessage);
+        return;
+      }
+
+      const transactions = $('#transactions');
+      const tr = $('<tr class="just-added"></tr>')
+      tr.append($('<td>' + e.created_on + '</td>'));
+      tr.append($('<td class="numeric">' + e.amount + '</td>'));
+      tr.append($('<td>' + e.note + '</td>'));
+      tr.append($('<td></td>'));
+      const firstRow = $('tbody > tr:nth-child(1)', transactions);
+      firstRow.after(tr);
+
+      $('#new_financial_transaction')[0].reset();
+      $('#financial_transaction_amount')
+        .focus()
+        .select();
+
+      // update funds:
+      var availableFunds = $('#available-funds');
+      availableFunds.removeClass('just-added');
+      void availableFunds[0].offsetWidth;
+      availableFunds.addClass('just-added')
+        .html(e.available_funds);
+
+      var accountBalance = $('#account_balance');
+      accountBalance.removeClass('just-added');
+      void accountBalance[0].offsetWidth;
+      accountBalance.addClass('just-added')
+        .html(e.account_balance);
+    });
+
+    $('#transactions-tab').on('shown', function (e) {
+      $('.just-added').removeClass('just-added');
+      $('#financial_transaction_amount')
+        .focus()
+        .select();
+    });
+
+    $(document).on('GroupOrderArticle#create', function(e) {
+      const newRow$ = $('#new_goa_'+e.order_article_id);
+      const addedRow$ = $(e.row_html);
+      if (newRow$.length === 1) {
+        newRow$.replaceWith(addedRow$);
+      } else {
+        $('#group_order_' + e.group_order_id + " tr.order_sum_row").before(addedRow$);
+      }
+
+      $('.availability[data-toggle="tooltip"]').tooltip({
+          html: true,
+          sanitize: false,
+          container: 'body'
+      });
+
+      $('.delta', addedRow$).each((_, field) => $(field).unitConversionField({
+        units: unitsData,
+        popoverTemplate$: $('#unit_conversion_popover_content_template'),
+        useTargetUnitForStep: false
+      }));
+    });
+
+    $(function() {
+      init_add_article('.add_article');
+
+      $('.availability[data-toggle="tooltip"]').tooltip({
+          html: true,
+          sanitize: false,
+          container: 'body'
+      });
+
+      $('.delta').each((_, field) => $(field).unitConversionField({
+        units: unitsData,
+        popoverTemplate$: $('#unit_conversion_popover_content_template'),
+        useTargetUnitForStep: false
+      }));
+    });
+
+    function init_add_article(sel) {
+      $(sel).removeAttr('disabled').select2({
+        placeholder: '#{j t('orders.receive.add_article')}',
+        formatNoMatches: function(term) { return '#{j t('.no_articles_available')}';}
+      }).on('change', function(e) {
+        const $input = $(e.target);
+        const selectedArticleVersionId = parseInt($input.val(), 10);
+        if(!selectedArticleVersionId) {
+          return false;
+        }
+        const groupOrderId = parseInt($(this).attr('data-group-order_id'), 10);
+
+        $.ajax({
+          url: '#{group_order_articles_path}',
+          type: 'post',
+          data: JSON.stringify({group_order_article: {article_version_id: selectedArticleVersionId, group_order_id: groupOrderId}}),
+          contentType: 'application/json; charset=UTF-8'
+        });
+
+        $input.val('').trigger('change');
+      });
+      $(sel).val('').trigger('change');
+    }

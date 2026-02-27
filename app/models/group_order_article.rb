@@ -214,6 +214,10 @@ class GroupOrderArticle < ApplicationRecord
     result != result_computed unless result.nil?
   end
 
+  def fetch_deviation
+    (quantity - result) * -1
+  end
+
   private
 
   def check_order_not_closed

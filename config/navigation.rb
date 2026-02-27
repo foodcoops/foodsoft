@@ -22,6 +22,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :orders, I18n.t('navigation.orders.title'), '#' do |subnav|
       subnav.item :ordering, I18n.t('navigation.orders.ordering'), group_orders_path
+      subnav.item :self_service, I18n.t('navigation.orders.self_service'), self_service_index_path, if: proc { FoodsoftConfig[:use_self_service] }
       subnav.item :ordering_archive, I18n.t('navigation.orders.archive'), archive_group_orders_path
       subnav.item :orders, I18n.t('navigation.orders.manage'), orders_path, if: proc { current_user.role_orders? }
       subnav.item :pickups, I18n.t('navigation.orders.pickups'), pickups_path, if: proc { current_user.role_pickups? }

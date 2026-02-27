@@ -1094,6 +1094,18 @@ de:
     form:
       amount_change_for: Mengenänderung für %{article}
       result_hint: 'Einheit: %{unit}'
+  self_service:
+    index:
+      title: Selbstbedienung
+      pickup: Abholung
+      transactions: Transaktionen
+    pickup:
+      availability: Verfügbarkeit
+      fetched: Abgeholt
+    transactions:
+      date: Datum
+      amount: Betrag
+      transaction_text: Buchungstext
   group_orders:
     archive:
       desc: Siehe hier alle %{link}.
@@ -1503,6 +1515,7 @@ de:
       archive: Meine Bestellungen
       manage: Bestellverwaltung
       ordering: Bestellen!
+      self_service: Selbstbedienung
       pickups: Abholtage
       title: Bestellungen
     tasks: Aufgaben
@@ -1680,6 +1693,13 @@ de:
     articles_by:
       price: Gesamtpreis
       price_sum: Summe
+      ordered_in_total: Gesamt bestellt
+      received_in_total: Gesamt geliefert
+      received_negative_diff: Zuwenig geliefert
+      received_positive_diff: Zuviel geliefert
+      fetched_negative_diff: Weniger abgeholt als bestellt
+      fetched_positive_diff: Mehr abgeholt als bestellt
+      corrections_details_header: Bisherige Korrekturen im Detail
     group:
       access: Zugriff auf
       activated: aktiviert

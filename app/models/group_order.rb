@@ -8,6 +8,7 @@ class GroupOrder < ApplicationRecord
   belongs_to :ordergroup, optional: true
   has_many :group_order_articles, dependent: :destroy
   has_many :order_articles, through: :group_order_articles
+  has_many :articles, through: :order_articles
   has_one :financial_transaction
   belongs_to :updated_by, optional: true, class_name: 'User', foreign_key: 'updated_by_user_id'
 
@@ -111,5 +112,25 @@ class GroupOrder < ApplicationRecord
     return price + transport if transport
 
     price
+  end
+
+  def unassociated_articles_in_abundance
+    goas = group_order_articles.to_a
+    order.received_order_articles.filter do |order_article|
+      next false if goas.any? { |goa| goa.order_article_id == order_article.id }
+
+      order_article.availability.positive?
+    end
+  end
+
+  def new_group_order_article(order_article)
+    goa = GroupOrderArticle.new
+    goa.group_order_id = id
+    goa.order_article_id = order_article.id
+    goa.quantity = 0
+    goa.tolerance = 0
+    goa.result = 0
+    goa.result_computed = 0
+    goa
   end
 end

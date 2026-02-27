@@ -1,0 +1,10 @@
+$(document).trigger({
+  type: 'FinancialTransactions#create',
+  amount: '<%= j(format_currency(@financial_transaction.amount))%>',
+  created_on: '<%= format_time(@financial_transaction.created_on)%>',
+  note: '<%= j(@financial_transaction.note)%>',
+  error: <%= @error.nil? ? 'false' : 'true'%>,
+  errorMessage: '<%= j(@error.nil? ? '' : @error.message)%>',
+  available_funds: '<%= j(number_to_currency(@ordergroup.get_available_funds)) %>',
+  account_balance: '<%= j(number_to_currency(@ordergroup.account_balance)) %>'
+});

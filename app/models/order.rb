@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   has_many :ordergroups, through: :group_orders
   has_many :users_ordered, through: :ordergroups, source: :users
   has_many :comments, -> { order('created_at') }, class_name: 'OrderComment'
+  has_many :received_order_articles, -> { where 'units_received > 0' }, class_name: 'OrderArticle'
+  has_many :received_articles, through: :received_order_articles, class_name: 'Article', source: :article
   has_many :stock_changes
   belongs_to :invoice, optional: true
   belongs_to :supplier, optional: true

@@ -1,0 +1,17 @@
+= render 'shared/articles_by/common'
+= render 'event_listeners'
+= render partial: 'shared/js_templates/unit_conversion_popover_template', locals: {set_units_data: true}
+
+- title t('.title')
+#self-service
+  = render 'funds'
+  %ul.nav.nav-tabs
+    %li.active
+      %a#pickup-tab{:href => '#pickup', 'data-toggle' => 'tab'}=t('.pickup')
+    %li
+      %a#transactions-tab{:href => '#transactions', 'data-toggle' => 'tab'}=t('.transactions')
+  %div.tab-content
+    %div#pickup.tab-pane.active
+      = render 'pickup'
+    %div#transactions.tab-pane
+      = render 'transactions'
