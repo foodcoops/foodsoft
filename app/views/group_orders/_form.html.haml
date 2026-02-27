@@ -152,6 +152,8 @@
             %td.text-nowrap{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display", data: {price: @ordering_data[:order_articles][order_article.id][:total_price]}}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
               .article-info
+                .close-btn.btn.btn-link
+                  = t('.hide_article_info') + ' >>'
                 .article-name= order_article.article_version.name
                 .pull-right
                   = t('.units_full') + ':'

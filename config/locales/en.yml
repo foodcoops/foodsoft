@@ -1127,6 +1127,7 @@ en:
       units: Units
       units_full: Filled units
       units_total: Total units
+      hide_article_info: Proceed
     index:
       closed_orders:
         more: more...
