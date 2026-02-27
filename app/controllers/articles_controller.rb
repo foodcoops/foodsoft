@@ -285,7 +285,9 @@ class ArticlesController < ApplicationController
       search_params[:per_page] = FoodsoftConfig[:shared_supplier_article_sync_limit]
     end
 
-    @updated_article_pairs, @outlisted_articles, @new_articles, import_data = @supplier.sync_from_remote(search_params: search_params)
+    @updated_article_pairs, @outlisted_articles, @new_articles, import_data, articles_without_order_number = @supplier.sync_from_remote(search_params: search_params)
+
+    flash[:warning] = I18n.t('articles.controller.parse_upload.articles_without_order_number', count: articles_without_order_number.length) unless articles_without_order_number.empty?
 
     if !search_params[:page].nil? && import_data[:pagination][:total_pages] != 1
       redirect_to supplier_articles_path(@supplier),

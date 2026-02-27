@@ -521,6 +521,7 @@ de:
       parse_upload:
         no_file: Bitte eine Datei zum hochladen auswählen.
         notice: "%{count} Artikel sind erfolgreich analysiert."
+        articles_without_order_number: "%{count} Artikel hatten keine Bestellnummer und wurden daher ignoriert."
       update_all:
         notice: Alle Artikel und Preise wurden aktualisiert
       update_sel:
