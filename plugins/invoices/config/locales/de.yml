@@ -1,0 +1,169 @@
+de:
+  activerecord:
+    attributes:
+      group_order_invoice:
+        name: Bestellgruppenrechnung
+        sequence_type:
+          FRST: "Erst-Lastschrift"
+          RCUR: "Folge-Lastschrift"
+          OOFF: "Einmalige Lastschrift"
+          FNAL: "Letztmalige Lastschrift"
+        links:
+          actions_for_all: Aktion für alle ausführen
+          delete: Rechnung löschen
+          direct_debit_for_all: Sammellastschrift für alle (.xml)
+          direct_debit_for_selected: Sammellastschrift für ausgewählte (.xml)
+          create_cumulative_invoice: Kumulative Rechnung erstellen
+          confirm_send_all: Möchtest Du wirklich diese Bestellgruppenrechnungen an %{ordergroups} versenden?
+          combine: Rechnungen zusammenfassen
+          download: Rechnung herunterladen
+          download_all_zip: Alle Rechnungen herunterladen (zip)
+          generate: Rechnung erzeugen
+          generate_with_date: setzen & erzeugen
+          invoice_date: Datum der Bestellgruppenrechnung
+          invoice_for_group: "Bestellgruppenrechnung für %{name}"
+          invoice_number: Rechnungsnummer
+          ordergroup: Bestellgruppe
+          paid: Bezahlt
+          not_paid: Nicht Bezahlt
+          send_all_by_email: Alle Rechnungen versenden
+          send_all_success: Rechnungen erfolgreich versendet
+          sepa_downloaded: SEPA exportiert
+          sepa_not_downloaded: SEPA nicht exportiert
+          sepa_not_ready:
+            SEPA Export nicht verfügbar. Wichtige Einstellungen für SEPA Export in Administration -> Einstellungen-> Finanzen fehlen
+          sepa_select: SEPA Export
+          sepa_sequence_type: SEPA Typ
+        open_details_modal: Details ein/ausklappen
+        payment_method: Guthaben
+        tax_number_not_set: Steuernummer in den Einstellungen nicht gesetzt oder keine Bestellgruppe vorhanden
+      ordergroup_invoice:
+        merge: Zusammenführen
+        name: Bestellgruppenrechnung
+        email_sent: versendet am
+      sepa_account_holder:
+        bic: BIC
+        holder: SEPA Kontoinhaber*in
+        iban: IBAN
+        mandate_id: Mandatsreferenz-ID
+        mandate_date_of_signature: Datum der Mandatsunterzeichnung
+        hint: "Achtung: Die IBAN und BIC werden automatisch eingefüllt, sobald SEPA Kontoinhaber*in ausgewählt wird. Vorige Eintragungen werden überschrieben."
+
+  admin:
+    configs:
+      tab_payment:
+        group_order_invoices: Bestellgruppenrechnungen
+
+  config:
+    hints:
+      group_order_invoices:
+        ignore_minimum_balance: Mitglieder können auch bestellen, wenn ihr Kontostand unter dem Minimum liegt. (Wichtig, wenn SEPA Lastschrift als Zahlart verwendet wird)
+        use_automatic_go_invoices: Es werden auf die Bestellgruppen zugeschnittene Rechnungen für die jeweilige Bestellung beim Klicken auf "abrechnen" an alle Bestellgruppenmitglieder per Mail versendet.
+        payment_method: Zahlungsart wird auf der Bestellgruppenrechnung deklariert
+        vat_exempt: Eine Auflistung der Rechnungsartikel erfolgt ohne explizite Ausweisung der MwSt. und die Rechnung erhält den notwendigen Zusatz bzgl. der Kleinunternehmerregelung §19 (FoodCoop Marge ebenfalls nicht in Rechnung enthalten)
+        iban: IBAN ohne Leerzeichen angeben
+        bic: BIC ohne Leerzeichen angeben
+        creditor_identifier: Gläubiger-ID ohne Leerzeichen angeben
+    keys:
+      group_order_invoices:
+        ignore_minimum_balance: Mindestkontostand ignorieren
+        use_automatic_invoices: Automatisch bei Abrechnung per Mail versenden
+        separate_deposits: Pfand getrennt abrechnen
+        payment_method: Zahlungsart
+        vat_exempt: Diese Foodcoop ist MwSt. befreit
+        iban: IBAN
+        bic: BIC
+        creditor_identifier: Gläubiger-ID
+
+  documents:
+    group_order_invoice_pdf:
+      deposit: Pfand
+      deposit_excluded: zzgl. Pfand
+      filename: Rechnung%{number}
+      invoicer: Rechnungsteller*in
+      invoicee: Rechnungsempfänger*in
+      invoice_date: 'Rechnungsdatum: %{invoice_date}'
+      invoice_number: 'Rechnungsnummer: %{invoice_number}'
+      markup_included: zzgl. Foodcoop Marge auf brutto Preis %{marge}%
+      ordergroup:
+        contact_phone: 'Telefonnummer: %{contact_phone}'
+        contact_address: 'Adresse :  %{contact_address}'
+        customer_number: 'Kundennummer: %{customer_number}'
+        name: Bestellgruppe %{ordergroup}
+      payment_method: 'Zahlungsart: %{payment_method}'
+      pickup_date: 'Lieferdatum: %{invoice_date}'
+      products: Produkte
+      sum_to_pay: Zu zahlen gesamt
+      sum_to_pay_net: Zu zahlen gesamt (netto)
+      sum_to_pay_gross: Gesamt
+      small_business_regulation: Als Kleinunternehmer*in im Sinne von §19 Abs. 1 Umsatzsteuergesetz (UStG) wird keine Umsatzsteuer berechnet.
+      table_headline: 'Für die Bestellung fallen folgende Posten an:'
+      tax_excluded: exkl. MwSt.
+      tax_included: zzgl. Gesamtsumme MwSt. %{tax}%
+      tax_line: "%{label} mit %{tax_key}%"
+      tax_number: 'Steuernummer: %{number}'
+      title: Rechnung für die Bestellung bei %{supplier}
+      vat_exempt_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis
+        - Artikel Gesamtpreis
+      no_price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto)
+      price_markup_rows:
+        - Name
+        - Anzahl
+        - Einzelpreis (netto)
+        - Artikel Gesamtpreis (netto)
+        - MwSt.
+        - Artikel Gesamtpreis (brutto) inkl. Foodcoopmarge %{marge}%
+      vat_sum_table:
+        gross: Brutto
+        margin: FC-Marge
+        net: Netto
+        tax: MwSt
+
+
+  mailer:
+    group_order_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+    ordergroup_invoice:
+      subject: Bestellgruppenrechnung für %{group} bei %{supplier}
+
+  invoice_mailer:
+    group_order_invoice:
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
+    ordergroup_invoice:
+      text: |
+        Liebe Bestellgruppe %{group},
+
+        Die Sammelbestellung bei %{supplier} wurde soeben abgerechnet und für die jeweiligen Bestellgruppen Rechnungen angelegt.
+        Im Anhang befindet sich daher eure Rechnung.
+
+        Viele Grüße von %{foodcoop}
+
+  multi_orders:
+    destroy:
+      invoices_left: Lösche erst die Rechnungen
+    create:
+      no_multi_multi: Du kannst keine Multi-Bestellungen in eine Multi-Multi-Bestellung umwandeln.
+      invalid_orders: Die Bestellung ist bereits Teil einer Multi-Bestellung oder ist noch nicht abgeschlossen.
+      merge_not_possible_invoices_present: Zusammenführen nicht möglich. Es gibt bereits Rechnungen für einige der Bestellgruppen.
+      success: "Multi Bestellung für %{suppliers} erstellt"
+    collective_direct_debit:
+      filename_suffix: Sammellastschrift
+
+  orders:
+    collective_direct_debit:
+      alert: Wichtige Daten für eine SEPA Lastschrift bei %{ordergroup_names} fehlen.

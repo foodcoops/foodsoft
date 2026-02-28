@@ -1,0 +1,3 @@
+/ insert_before 'erb:contains("custom_form_fields")'
+- unless @ordergroup.new_record?
+  = render 'sepa_account_holder', f: f

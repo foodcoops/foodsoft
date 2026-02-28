@@ -1486,6 +1486,7 @@ nl:
       confirm_end: Wil je de bestelling %{order} werkelijk sluiten? Dit kun je niet ongedaan maken.
       new_order: Nieuwe bestelling openen
       no_open_or_finished_orders: Er zijn momenteel geen open of gesloten bestellingen.
+      not_closed: Niet afgerekend
       orders_finished: Gesloten
       orders_open: Open
       orders_settled: Afgerekend
@@ -1860,6 +1861,7 @@ nl:
     cancel: Annuleren
     close: Sluiten
     confirm_delete: Wil je %{name} echt verwijderen?
+    confirm_mark_all: Wil je '%{name}' echt voor iedereen instellen?
     confirm_restore: Wil je %{name} echt opnieuw actief maken?
     copy: Kopiëren
     delete: Verwijder
@@ -1894,3 +1896,4 @@ nl:
   time:
     formats:
       foodsoft_datetime: "%d-%m-%Y %H:%M"
+      file: "%Y-%d-%B"

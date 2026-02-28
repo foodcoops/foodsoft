@@ -1,0 +1,4 @@
+<% @group_order_invoices.each do |group_order_invoice| %>
+  $("#sepa_downloaded_<%= group_order_invoice.id %>").html("<%= escape_javascript(render partial: 'toggle_sepa_downloaded', locals: { group_order_invoice: group_order_invoice }) %>");
+<% end %>
+  $("#toggle_all_sepa_downloaded_<%= @order.id %>").html("<%= escape_javascript(render partial: 'toggle_all_sepa_downloaded', locals: { order: @order }) %>");

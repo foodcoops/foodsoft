@@ -1,0 +1,2 @@
+= link_to select_all_sepa_sequence_type_group_order_invoices_path(order_id: order.id), remote: true, method: :patch, class: "ajax-update-all-link-#{order.id}" , data: { turbolinks: false } do
+  = select_tag 'sepa_sequence_type', options_for_select(InvoiceHelper::SEPA_SEQUENCE_TYPES.keys.map { |st| [I18n.t("activerecord.attributes.group_order_invoice.sequence_type.#{st}"), st] }, selected: @sequence_type || order.group_orders.map(&:group_order_invoice)&.compact&.first.sepa_sequence_type), class: 'form-control', id: "all_sepa_sequence_type_#{order.id}"
