@@ -35,4 +35,5 @@
       = invoices_text.join(', ')
       %br/
       %b= t('.invoices_sum') + ':'
-      = number_to_currency invoices_sum
+      - url = "https://epc-qr.eu/?#{{iban: supplier.iban, euro: invoices_sum, bname: supplier.name, info: invoices_text.join(', ')}.to_query}"
+      = link_to number_to_currency(invoices_sum), url  
