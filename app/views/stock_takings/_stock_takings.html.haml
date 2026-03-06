@@ -8,11 +8,16 @@
       %th= t '.date'
       %th= t '.note'
       %th
+      %th
   %tbody
     - for stock_taking in @stock_takings
       %tr
         %td= link_to format_date(stock_taking.date), stock_taking
         %td= truncate stock_taking.note
+        - balance = 0
+        - for stock_change in stock_taking.stock_changes
+          - balance += stock_change.quantity * stock_change.stock_article.gross_price
+        %td.numeric{style: 'width:5em'}= format_currency(balance)
         %td
           = link_to t('ui.edit'), edit_stock_taking_path(stock_taking), class: 'btn btn-default btn-xs'
           = link_to t('ui.delete'), stock_taking, :data => {:confirm => t('.confirm_delete')}, :method => :delete,
