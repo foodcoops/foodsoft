@@ -13,6 +13,7 @@
       - invoices_text << invoice.number
       = link_to finance_invoice_path(invoice) do
         = format_date invoice.date
+        = ' ' + invoice.number
       = ' ' 
       - if invoice.amount>0
         - url = "https://epc-qr.eu/?#{{iban: supplier.iban, euro: invoice.amount, bname: supplier.name, info: invoice.number}.to_query}"
