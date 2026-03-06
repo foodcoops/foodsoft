@@ -19,7 +19,6 @@
         = link_to(number_to_currency(invoice.amount), url)
       - else
         = number_to_currency(invoice.amount)
-      = ' ' + number_to_currency(invoice.amount)
       - if invoice_amount_diff != 0
         %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
           = invoice_amount_diff > 0 ? '+' : '-'
