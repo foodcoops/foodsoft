@@ -13,7 +13,12 @@
       - invoices_text << invoice.number
       = link_to finance_invoice_path(invoice) do
         = format_date invoice.date
-        = ' ' + invoice.number
+      = ' ' 
+      - if invoice.amount>0
+        - url = "https://epc-qr.eu/?#{{iban: supplier.iban, euro: invoice.amount, bname: supplier.name, info: invoice.number}.to_query}"
+        = link_to(number_to_currency(invoice.amount), url)
+      - else
+        = number_to_currency(invoice.amount)
       = ' ' + number_to_currency(invoice.amount)
       - if invoice_amount_diff != 0
         %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
