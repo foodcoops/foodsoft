@@ -118,7 +118,8 @@ class Finance::InvoicesController < ApplicationController
         creditorAccount: {
           iban: i.supplier.iban
         },
-        remittanceInformationUnstructured: i.number
+        remittanceInformationUnstructured: i.number,
+        requestedExecutionDate: (Date.current + 1).strftime('%Y-%m-%d')
       }
     end
 
