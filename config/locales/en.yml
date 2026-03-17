@@ -1387,6 +1387,13 @@ en:
 
 
         Kind regards from %{foodcoop}.
+    failure_in_unattended_bank_import:
+      subject: 'bankgateway "%{bankgateway}" import failed!'
+      text: |
+        Dear %{user},
+
+        you are the uattended user for the bankgateway "%{bankgateway}" import job which failed.
+
     not_enough_users_assigned:
       subject: '"%{task}" still needs people!'
       text: |

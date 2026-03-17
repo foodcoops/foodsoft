@@ -102,6 +102,14 @@ class Mailer < ActionMailer::Base
          subject: I18n.t('mailer.negative_balance.subject')
   end
 
+  def failure_in_unattended_bank_import(bankgateway)
+    @bankgateway = bankgateway
+    @user = bankgateway.unattended_user
+
+    mail to: @user,
+      subject: I18n.t('mailer.failure_in_unattended_bank_import.subject', bankgateway: bankgateway.name)
+  end
+
   def not_enough_users_assigned(task, user)
     @task = task
     @user = user

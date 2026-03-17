@@ -311,7 +311,7 @@ Rails.application.routes.draw do
         resources :order_articles, only: %i[index show]
         resources :group_order_articles
         resources :article_categories, only: %i[index show]
-        resources :pickup        
+        resources :pickup
         resources :mirko
       end
 

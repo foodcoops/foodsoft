@@ -1380,6 +1380,13 @@ de:
 
 
         Viele Grüße von %{foodcoop}
+    failure_in_unattended_bank_import:
+      subject: 'bankgateway "%{bankgateway}" import hat fehlgeschlagen!'
+      text: |
+        Liebe(r) %{user},
+
+        du bist als Benutzer des Headless Jobs des Bankgateways "%{bankgateway}" eingetragen und
+        dieser Job ist fehlgeschlagen.
     not_enough_users_assigned:
       subject: '"%{task}" braucht noch Leute!'
       text: |
