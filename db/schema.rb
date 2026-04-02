@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_01_093453) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
 
   create_table "article_versions", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "article_id", null: false
-    t.decimal "price", precision: 11, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "price", precision: 12, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
     t.decimal "tax", precision: 8, scale: 2, default: "0.0", null: false
     t.decimal "deposit", precision: 8, scale: 2, default: "0.0", null: false
     t.datetime "created_at"
@@ -366,11 +366,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_01_093453) do
     t.integer "order_id", default: 0, null: false
     t.decimal "quantity", precision: 8, scale: 3, default: "0.0", null: false, comment: "stored in `article_versions.group_order_unit`"
     t.decimal "tolerance", precision: 8, scale: 3, default: "0.0", null: false, comment: "stored in `article_versions.group_order_unit`"
-    t.decimal "units_to_order", precision: 11, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "units_to_order", precision: 12, scale: 6, default: "0.0", null: false, comment: "stored in `article_versions.supplier_order_unit`"
     t.integer "lock_version", default: 0, null: false
     t.integer "article_version_id", null: false
-    t.decimal "units_billed", precision: 11, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
-    t.decimal "units_received", precision: 11, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "units_billed", precision: 12, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
+    t.decimal "units_received", precision: 12, scale: 6, comment: "stored in `article_versions.supplier_order_unit`"
     t.index ["article_version_id"], name: "index_order_articles_on_article_version_id"
     t.index ["order_id", "article_version_id"], name: "index_order_articles_on_order_id_and_article_version_id", unique: true
     t.index ["order_id"], name: "index_order_articles_on_order_id"
