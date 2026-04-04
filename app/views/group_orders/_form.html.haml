@@ -159,17 +159,17 @@
                   = t('.units_full') + ':'
                   %span{id: "units_#{order_article.id}"}
                     %span.quantity= order_article.units_to_order
-                    %span.unit= ' × ' + format_unit(:supplier_order_unit, order_article.article_version)
+                    %span.unit= format_unit(:supplier_order_unit, order_article.article_version, prepend_multiplier_symbol_for_non_si_units: true)
                   %br/
                   = t('.units_total') + ':'
                   %span{id: "q_total_#{order_article.id}"}
                     %span.quantity= @ordering_data[:order_articles][order_article.id][:quantity] + @ordering_data[:order_articles][order_article.id][:others_quantity]
-                    %span.unit=' × ' + format_unit_with_ratios(:group_order_unit, order_article.article_version)
+                    %span.unit= format_unit_with_ratios(:group_order_unit, order_article.article_version, :group_order_unit, prepend_multiplier_symbol_for_non_si_units: true)
                   %br/
                   = t('.total_tolerance') + ':'
                   %span{id: "t_total_#{order_article.id}"}
                     %span.quantity= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
-                    %span.unit=' × ' + format_unit_with_ratios(:group_order_unit, order_article.article_version)
+                    %span.unit= format_unit_with_ratios(:group_order_unit, order_article.article_version, :group_order_unit, prepend_multiplier_symbol_for_non_si_units: true)
                   %br/
                 .pull-left
                   #{heading_helper Article, :manufacturer}: #{order_article.article_version.manufacturer}

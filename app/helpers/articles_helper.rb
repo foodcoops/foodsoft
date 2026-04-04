@@ -60,8 +60,8 @@ module ArticlesHelper
 
   private
 
-  def format_unit_with_ratios(unit_property, article_version, reference_unit = :group_order_unit)
-    base = format_unit(unit_property, article_version)
+  def format_unit_with_ratios(unit_property, article_version, reference_unit = :group_order_unit, prepend_multiplier_symbol_for_non_si_units: false)
+    base = format_unit(unit_property, article_version, prepend_multiplier_symbol_for_non_si_units: prepend_multiplier_symbol_for_non_si_units)
 
     factorized_unit_str = get_factorized_unit_str(article_version, unit_property, reference_unit) unless reference_unit.nil?
     return base if factorized_unit_str.nil?
@@ -69,11 +69,12 @@ module ArticlesHelper
     "#{base} (#{factorized_unit_str})"
   end
 
-  def format_unit(unit_property, article)
+  def format_unit(unit_property, article, prepend_multiplier_symbol_for_non_si_units: false)
     unit_code = article.send(unit_property)
-    return article.unit if unit_code.nil?
+    prefix = prepend_multiplier_symbol_for_non_si_units && !ArticleUnitsLib.unit_is_si_convertible(unit_code) ? ' × ' : ''
+    return prefix + article.unit if unit_code.nil?
 
-    ArticleUnitsLib.human_readable_unit(unit_code)
+    prefix + ArticleUnitsLib.human_readable_unit(unit_code)
   end
 
   def get_factorized_unit_str(article_version, unit_property, reference_unit)
