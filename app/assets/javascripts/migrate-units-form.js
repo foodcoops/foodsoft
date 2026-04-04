@@ -131,10 +131,10 @@ class MigrateUnitsForm {
 
     unitSelect$.parents('.form-group').find('.immutable_unit_label').remove();
     if (units.length === 1) {
-      unitSelect$.parents('.controls').hide();
+      unitSelect$.parents('.form-group').find('.select2').hide();
       unitSelect$.parents('.form-group').append($(`<div class="immutable_unit_label control-label">${units[0].label}</div>`))
     } else {
-      unitSelect$.parents('.controls').show();
+      unitSelect$.parents('.form-group').find('.select2').show();
     }
   }
 
