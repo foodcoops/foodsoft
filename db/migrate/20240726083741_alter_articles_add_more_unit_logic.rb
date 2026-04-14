@@ -7,7 +7,7 @@ class AlterArticlesAddMoreUnitLogic < ActiveRecord::Migration[5.2]
       t.column :group_order_unit, :string, length: 3
       t.column :group_order_granularity, :decimal, precision: 8, scale: 3, null: false, default: 1
       t.column :minimum_order_quantity, :float
-      t.change :price, :decimal, precision: 11, scale: 6, null: false, default: '0.0', comment: 'stored in `article_versions.supplier_order_unit`'
+      t.change :price, :decimal, precision: 12, scale: 6, null: false, default: '0.0', comment: 'stored in `article_versions.supplier_order_unit`'
       t.change :unit, :string, null: true, default: nil
     end
 
@@ -37,7 +37,7 @@ class AlterArticlesAddMoreUnitLogic < ActiveRecord::Migration[5.2]
         SET unit = #{quote compound_unit},
           group_order_granularity = #{quote 1},
           group_order_unit = #{quote 'XPP'},
-          price = #{quote article_version['price'].to_f * article_version['unit_quantity']},
+          price = LEAST(#{quote article_version['price'].to_f * article_version['unit_quantity']}, 999999),
           price_unit = #{quote 'XPP'},
           billing_unit = #{quote 'XPP'}
         WHERE article_versions.id = #{quote article_version['id']}
@@ -51,9 +51,9 @@ class AlterArticlesAddMoreUnitLogic < ActiveRecord::Migration[5.2]
     change_table :order_articles do |t|
       t.change :quantity, :decimal, precision: 8, scale: 3, null: false, default: '0.0', comment: 'stored in `article_versions.group_order_unit`'
       t.change :tolerance, :decimal, precision: 8, scale: 3, null: false, default: '0.0', comment: 'stored in `article_versions.group_order_unit`'
-      t.change :units_to_order, :decimal, precision: 11, scale: 6, null: false, default: '0.0', comment: 'stored in `article_versions.supplier_order_unit`'
-      t.change :units_billed, :decimal, precision: 11, scale: 6, null: true, default: nil, comment: 'stored in `article_versions.supplier_order_unit`'
-      t.change :units_received, :decimal, precision: 11, scale: 6, null: true, default: nil, comment: 'stored in `article_versions.supplier_order_unit`'
+      t.change :units_to_order, :decimal, precision: 12, scale: 6, null: false, default: '0.0', comment: 'stored in `article_versions.supplier_order_unit`'
+      t.change :units_billed, :decimal, precision: 12, scale: 6, null: true, default: nil, comment: 'stored in `article_versions.supplier_order_unit`'
+      t.change :units_received, :decimal, precision: 12, scale: 6, null: true, default: nil, comment: 'stored in `article_versions.supplier_order_unit`'
     end
 
     change_table :group_order_articles do |t|
