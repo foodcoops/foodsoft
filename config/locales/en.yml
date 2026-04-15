@@ -701,6 +701,7 @@ en:
         phone: Phone
         street: Street
         zip_code: Postcode
+        tax_number: Tax number
       currency_space: add space
       currency_unit: Currency
       custom_css: Custom CSS
@@ -1587,6 +1588,7 @@ en:
       confirm_end: Do you really want to close the order %{order}? There is no going back.
       new_order: Create new order
       no_open_or_finished_orders: There are currently no open or closed orders.
+      not_closed: Not accounted
       orders_finished: Closed
       orders_open: Open
       orders_settled: Settled
@@ -2004,6 +2006,7 @@ en:
     cancel: Cancel
     close: Close
     confirm_delete: Do you really want to delete %{name}?
+    confirm_mark_all: Do you really want to set '%{name}' for all?
     confirm_restore: Do you really want to restore %{name}?
     copy: Copy
     delete: Delete
@@ -2038,3 +2041,4 @@ en:
   time:
     formats:
       foodsoft_datetime: "%Y-%m-%d %H:%M"
+      file: "%Y-%d-%B"

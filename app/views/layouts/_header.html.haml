@@ -6,7 +6,7 @@
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %title= [t('layouts.foodsoft'), yield(:title)].join(" - ")
     = csrf_meta_tags
-    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag *Foodsoft::AssetRegistry.stylesheets, media: "all"
     //%link(href="images/favicon.ico" rel="shortcut icon")
     = yield(:head)
     = foodcoop_css_tag
@@ -20,7 +20,7 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_importmap_tags
-    = javascript_include_tag "application_legacy"
+    = javascript_include_tag *Foodsoft::AssetRegistry.javascripts
 
     :javascript
       I18n.defaultLocale = "#{I18n.default_locale}";

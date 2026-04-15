@@ -697,6 +697,7 @@ de:
         phone: Telefon
         street: Straße
         zip_code: Postleitzahl
+        tax_number: Steuernummer
       currency_space: Leerzeichen hinzufügen
       currency_unit: Währung
       custom_css: Angepasstes CSS
@@ -1580,6 +1581,7 @@ de:
       confirm_end: Willst Du wirklich die Bestellung %{order} beenden? Es gibt kein zurück.
       new_order: Neue Bestellung anlegen
       no_open_or_finished_orders: Derzeit gibt es keine laufende oder beendete Bestellungen.
+      not_closed: Nicht abgerechnet
       orders_finished: Beendet
       orders_open: Laufend
       orders_settled: Abgerechnet
@@ -1997,6 +1999,7 @@ de:
     cancel: Abbrechen
     close: Schließen
     confirm_delete: Willst du %{name} wirklich löschen?
+    confirm_mark_all: Willst du wirklich '%{name}' für alle setzen?
     confirm_restore: Willst du %{name} wirklich wiederherstellen?
     copy: Kopieren
     delete: Löschen
@@ -2031,3 +2034,4 @@ de:
   time:
     formats:
       foodsoft_datetime: "%d.%m.%Y %H:%M"
+      file: "%Y-%d-%B"
