@@ -1314,6 +1314,7 @@ en:
     footer:
       revision: revision %{revision}
     header:
+      demo_mode: Demo mode!
       help: Help
       logout: Logout
       ordergroup: My ordergroup
