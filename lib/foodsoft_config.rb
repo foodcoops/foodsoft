@@ -273,7 +273,8 @@ class FoodsoftConfig
           notification: true,
           shared_lists: true,
           protected: true,
-          database: true
+          database: true,
+          display_demo_warning: false
         }
       }
       # allow engines to easily add to this

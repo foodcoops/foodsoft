@@ -1310,6 +1310,7 @@ de:
     footer:
       revision: Revision %{revision}
     header:
+      demo_mode: Demo-Modus!
       help: Hilfe
       logout: Abmelden
       ordergroup: Meine Bestellgruppe
