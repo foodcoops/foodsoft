@@ -1,6 +1,10 @@
 = render layout: 'layouts/header' do
   .logo
     = t('layouts.logo').html_safe
+    -if FoodsoftConfig[:display_demo_warning]
+      %span.demo-mode
+        %i.glyphicon.glyphicon-warning-sign
+        = t ".demo_mode"
   %ul.nav.nav-pills.pull-right
     %li.dropdown
       %a.dropdown-toggle(data-toggle="dropdown" href="#")
