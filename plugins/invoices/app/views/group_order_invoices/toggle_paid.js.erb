@@ -1,0 +1,1 @@
+$('#paid_<%= @invoice.id %>').html('<%= j render partial: "group_order_invoices/toggle_paid", locals: { group_order_invoice: @invoice } %>');
