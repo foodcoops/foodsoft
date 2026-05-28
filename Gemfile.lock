@@ -135,6 +135,8 @@ GEM
       activemodel (= 7.2.3.1)
       activesupport (= 7.2.3.1)
       timeout (>= 0.4.0)
+    activerecord-nulldb-adapter (1.2.2)
+      activerecord (>= 6.1, < 8.2)
     activestorage (7.2.3.1)
       actionpack (= 7.2.3.1)
       activejob (= 7.2.3.1)
@@ -718,6 +720,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
+  activerecord-nulldb-adapter
   acts_as_tree
   acts_as_versioned!
   apparition

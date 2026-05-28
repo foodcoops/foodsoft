@@ -64,6 +64,9 @@ gem 'ruby-filemagic'
 gem 'spreadsheet'
 gem 'terser', '~> 1.1'
 
+# Only needed for building assets and swagger docs in docker build
+gem 'activerecord-nulldb-adapter'
+
 # we use a fork with Ruby 3 support of acts_as_versioned, and need to include it in this Gemfile
 gem 'acts_as_versioned', git: 'https://github.com/assembla/acts_as_versioned.git'
 gem 'foodsoft_discourse', path: 'plugins/discourse'
