@@ -19,7 +19,7 @@ unece_units:
   XBH:
     name: Cintura
   XBE:
-    name: Paquete
+    name: Haz
   XCX:
     name: Puede
   XBJ:
@@ -65,7 +65,7 @@ unece_units:
   XBD:
     name: Cartón
   XCR:
-    name: Caja
+    name: Cajón
   XAI:
     name: Envases con bisagras
   XPA:
@@ -73,7 +73,7 @@ unece_units:
   XBK:
     name: Cesta
   XBI:
-    name: Cubo
+    name: Cajón de almacenamiento
   XOV:
     name: Palé retornable
   XNT:
@@ -81,7 +81,7 @@ unece_units:
   XPK:
     name: Paquete
   XPC:
-    name: Paquete
+    name: Bulto
   XPX:
     name: Palé
   X5M:
@@ -125,7 +125,7 @@ unece_units:
   XP2:
     name: Crisol
   XCK:
-    name: Tonelada
+    name: Tonel
   XPT:
     name: Olla
   XGI:
@@ -268,8 +268,8 @@ unece_units:
     symbols:
     - ft²
   YDK:
-    name: Metros cuadrados
-    long_name: Metros cuadrados
+    name: Yarda cuadrada
+    long_name: Yarda cuadrada
     symbols:
     - yd²
   MIK:
@@ -542,8 +542,8 @@ unece_units:
     symbols:
     - RT
   5I:
-    name: Pies cúbicos
-    long_name: Pies cúbicos
+    name: Pie cúbico estándar
+    long_name: Pie cúbico estándar
     symbols:
     - std
   INQ:
@@ -557,8 +557,8 @@ unece_units:
     symbols:
     - ft³
   YDQ:
-    name: Metros cúbicos
-    long_name: Metros cúbicos
+    name: Yarda cúbica
+    long_name: Yarda cúbica
     symbols:
     - yd³
   GLI:
