@@ -38,8 +38,8 @@
         - unless @order.closed?
           .btn-group
             = link_to t('.add_article'), new_order_order_article_path(@order), remote: true,
-              class: 'btn btn-default btn-sm'
-            = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default btn-sm dropdown-toggle' do
+              class: 'btn btn-secondary btn-sm'
+            = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-secondary btn-sm dropdown-toggle' do
               %span.caret
             %ul.dropdown-menu
               %li= link_to t('.add_article'), new_order_order_article_path(@order), remote: true
@@ -59,4 +59,4 @@
         %td{ colspan: 5 }= heading_helper Order, :transport
         %td{ colspan: 3, data: {value: @order.transport} }= number_to_currency(@order.transport)
         %td= link_to t('ui.edit'), edit_transport_finance_order_path(@order), remote: true,
-          class: 'btn btn-default btn-xs' unless order_article.order.closed?
+          class: 'btn btn-secondary btn-xs' unless order_article.order.closed?

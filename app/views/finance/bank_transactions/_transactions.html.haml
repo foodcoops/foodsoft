@@ -1,6 +1,6 @@
 .pull-right
   .btn-group
-    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-default' do
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-secondary' do
       = fa_icon :download
       CSV
   - if @bank_transactions.total_pages > 1

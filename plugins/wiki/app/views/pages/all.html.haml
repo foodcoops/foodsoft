@@ -11,6 +11,6 @@
     = form_tag all_pages_path, method: :get, class: 'd-flex form-inline pull-right' do
       = text_field_tag :name, params[:name], class: 'form-control search-query',
         placeholder: t('.search.placeholder')
-      = submit_tag t('.search.action'), class: 'btn btn-default'
+      = submit_tag t('.search.action'), class: 'btn btn-secondary'
 
 = render @partial

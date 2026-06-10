@@ -1,6 +1,6 @@
 .pull-right
   .btn-group
-    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-default' do
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-secondary' do
       = fa_icon :download
       CSV
   - if @invoices.total_pages > 1
@@ -41,7 +41,7 @@
         %td= truncate(invoice.note)
         %td
           - if invoice.user_can_edit?(current_user)
-            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-default btn-xs'
+            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-secondary btn-xs'
         %td
           - if invoice.user_can_edit?(current_user)
             = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('ui.confirm_delete', name: invoice.number)}, :method => :delete,

@@ -26,7 +26,7 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     data = { (direction > 0 ? 'increment' : 'decrement') => options[:id] }
     delta = direction * options[:data][:delta]
     template.button_tag(title, type: :button, name: 'delta', value: delta, data: data, tabindex: -1,
-                               class: 'btn btn-default modify')
+                               class: 'btn btn-secondary modify')
   end
 
   def buttons

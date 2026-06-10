@@ -53,7 +53,7 @@ SimpleForm.setup do |config|
   # buttons and other elements.
   # config.default_wrapper = :bootstrap
   config.error_notification_class = 'alert alert-danger'
-  config.button_class = 'btn btn-default'
+  config.button_class = 'btn btn-secondary'
   config.boolean_label_class = nil
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|

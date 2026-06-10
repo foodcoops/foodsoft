@@ -24,7 +24,7 @@
       this.disabled = this.unitSelectOptions.length < 2;
 
       this.opener$ = $('<span class="input-group-btn overflow-hidden w-fit-content"></div>');
-      this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button>');
+      this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-secondary"><i class="glyphicon glyphicon-retweet"></i></button>');
       this.opener$.append(this.openerButton$);
       this.openerButton$.attr('title', this.popoverTemplate.dataset.title);
       this.field$.after(this.opener$);

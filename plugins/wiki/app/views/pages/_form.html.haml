@@ -10,9 +10,9 @@
       = f.input :body, input_html: {class: 'form-control', rows: 20}
       = f.input :parent_id, as: :select, collection: parent_pages_to_select(@page)
       %div
-        = button_tag :name => 'preview', class: 'btn btn-default' do
+        = button_tag :name => 'preview', class: 'btn btn-secondary' do
           = t '.preview'
-        = button_tag class: 'btn btn-default ml-1' do
+        = button_tag class: 'btn btn-secondary ml-1' do
           = t 'ui.save'
         = link_to t('ui.or_cancel'), @page, class: 'ml-1'
   .col-md-2

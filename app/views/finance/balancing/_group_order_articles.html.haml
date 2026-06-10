@@ -11,7 +11,7 @@
         %td{:colspan => "3",:style => "width:14em"}
           - unless order_article.order.closed?
             = link_to t('.add_group'), new_group_order_article_path(order_article_id: order_article.id),
-              remote: true, class: 'btn btn-default btn-xs'
+              remote: true, class: 'btn btn-secondary btn-xs'
     %tbody
       - totals = {result: 0}
       - for group_order_article in order_article.group_order_articles.select { |goa| goa.result > 0 }

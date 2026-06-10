@@ -2,7 +2,7 @@
 
 - content_for :actionbar do
   = link_to t('.new_user'), new_admin_user_path, class: 'btn btn-primary'
-  = link_to url_for(search: params[:q], format: :csv), class: 'btn btn-default' do
+  = link_to url_for(search: params[:q], format: :csv), class: 'btn btn-secondary' do
     = fa_icon :download
     CSV
 

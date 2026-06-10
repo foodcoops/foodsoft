@@ -13,8 +13,8 @@
         %td.numeric= link_to_invoice(delivery)
         %td= truncate delivery.note
         %td
-          = link_to t('ui.show'), [@supplier, delivery], class: 'btn btn-default btn-xs'
-          = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-default btn-xs'
+          = link_to t('ui.show'), [@supplier, delivery], class: 'btn btn-secondary btn-xs'
+          = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,delivery), class: 'btn btn-secondary btn-xs'
           = link_to t('ui.delete'), [@supplier,delivery], :data => {:confirm => t('.confirm_delete')}, :method => :delete,
           class: 'btn btn-xs btn-danger'
 

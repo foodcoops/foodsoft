@@ -47,7 +47,7 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({ per_page: per_page })
-      link_class = 'btn btn-default'
+      link_class = 'btn btn-secondary'
       link_class << ' disabled' if per_page == current
       link_to(per_page, params, remote: true, class: link_class)
     end

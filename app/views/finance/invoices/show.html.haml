@@ -81,5 +81,5 @@
     .clearfix
       %div
         - if @invoice.user_can_edit?(current_user)
-          = link_to t('ui.edit'), edit_finance_invoice_path(@invoice), class: 'btn btn-default'
+          = link_to t('ui.edit'), edit_finance_invoice_path(@invoice), class: 'btn btn-secondary'
         = link_to t('ui.or_cancel'), finance_invoices_path

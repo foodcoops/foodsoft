@@ -67,8 +67,8 @@
         %tbody
           = render :partial => 'ordergroup', :collection => [1, 2, 3]
     %p
-      = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn btn-default'
-      = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn btn-default'
+      = link_to t('.new_ordergroup'), '#', 'data-add-transaction' => true, class: 'btn btn-secondary'
+      = link_to t('.add_all_ordergroups'), '#', 'data-add-all-ordergroups' => true, class: 'btn btn-secondary'
     - if FoodsoftConfig[:use_financial_links]
       %p
         %label
