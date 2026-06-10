@@ -1,10 +1,6 @@
 @import "article";
 @import "delta_input";
 
-body {
-  padding-top: 10px;
-}
-
 
 // Your custom LESS stylesheets goes here
 //
@@ -60,12 +56,15 @@ $nonessentialDim: 35%;
 
 
 .logo {
-  margin: 10px 0 0 30px;
   float: left;
-  font-size: 35px;
+  font-size: 1.5rem;
   font-weight: bold;
   display: block;
   color: $mainRedColor;
+
+  &:hover {
+    color: $mainRedColor;
+  }
 
   span {
     padding: 2px 4px;
