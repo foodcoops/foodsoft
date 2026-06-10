@@ -22,15 +22,14 @@
       %li= link_to t('.help'), FoodsoftConfig[:help_url], target: '_blank'
   .clearfix
 
-  .navbar.navbar-default
+  .navbar.navbar-expand-lg.bg-body-tertiary
     .container-fluid
-      %button.navbar-toggle.collapsed(type="button" data-target=".navbar-collapse" data-toggle="collapse" aria-expanded="false")
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      .navbar-collapse.collapse
-        = render_navigation expand_all: true, renderer: :bootstrap3
+      %a.navbar-brand
+        Foodsoft
+      %button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.navbar-collapse.collapse
+        = render_navigation expand_all: true, renderer: :bootstrap5
 
   #main.container-fluid
     .row

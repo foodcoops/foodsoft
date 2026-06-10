@@ -2,3 +2,5 @@
 import "trix"
 import "@rails/actiontext"
 import "trix-editor-overrides"
+import "@popperjs/core"
+import "bootstrap"
