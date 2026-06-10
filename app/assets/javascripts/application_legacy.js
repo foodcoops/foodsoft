@@ -1,6 +1,7 @@
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require popper
+//= require bootstrap
 //= require select2-full
 //= require jquery.tokeninput
 //= require bootstrap-datepicker/core

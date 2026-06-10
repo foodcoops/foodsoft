@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 7.2.2'
 
-gem 'sassc-rails', '>= 2.1.0'
+gem 'dartsass-sprockets'
 
 gem 'bootsnap', require: false
 gem 'bootstrap-datepicker-rails'
@@ -18,7 +18,7 @@ gem 'select2-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts_as_tree'
 gem 'attribute_normalizer'
-gem 'bootstrap-sass', '~> 3.4.1'
+gem 'bootstrap', '~> 5.3.3'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
