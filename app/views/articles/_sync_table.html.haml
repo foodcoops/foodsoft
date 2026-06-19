@@ -95,7 +95,7 @@
               .input-group
                 %span.input-group-addon= t 'number.currency.format.unit'
                 = form.text_field 'price', class: 'form-control', style: 'width: 45px'
-              .input.d-flex.gap-1
+              .input.d-flex.gap-1.unit-wrapper
                 %label=t('articles.form.per')
                 = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
           %td{:style => highlight_new(attrs, :tax)}
