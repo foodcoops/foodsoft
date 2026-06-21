@@ -22,6 +22,6 @@
     - new_article_data = order_articles_for_select2(group_order.order.received_order_articles, group_order.order_articles.map(&:id) + unassociated_articles_in_abundance.map(&:id))
     - new_article_data.each do |order_article|
       %option{id: "add_article_#{order_article.id}", value: order_article.article_version.id}
-        = "#{order_article.article_version.name} (#{number_to_currency order_article.article_version.price}/#{format_price_unit(order_article.article_version)}) - #{t('.availability')}: #{number_with_precision(order_article.availability, precision: 3, strip_insignificant_zeros: true)}"
+        = "#{order_article.article_version.name} (#{number_to_currency order_article.article_version.price}/#{format_supplier_order_unit(order_article.article_version)}) - #{t('.availability')}: #{number_with_precision(order_article.availability, precision: 3, strip_insignificant_zeros: true)}"
 %div.pull-right
   = paginate @group_orders
