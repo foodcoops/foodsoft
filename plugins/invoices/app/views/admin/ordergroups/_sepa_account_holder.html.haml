@@ -1,0 +1,20 @@
+= f.simple_fields_for :sepa_account_holder, @ordergroup.sepa_account_holder || @ordergroup.build_sepa_account_holder do |sepa_f|
+  = sepa_f.input :user_id, collection: f.object.users.map { |user| [user.name, user.id, { 'data-iban' => user.iban, 'data-bic' => user.bic }] }, selected: sepa_f.object.user_id, as: :select, label: I18n.t('activerecord.attributes.sepa_account_holder.holder' ) , include_blank: true, input_html: { id: 'user_id_select' }, hint: I18n.t('activerecord.attributes.sepa_account_holder.hint')
+  = sepa_f.hidden_field :group_id, value: @ordergroup.id
+  = sepa_f.input :iban
+  = sepa_f.input :bic
+  = sepa_f.input :mandate_id
+  = sepa_f.input :mandate_date_of_signature, as: :date_picker
+
+- content_for :javascript do
+  :javascript
+    $(document).ready(function() {
+      $('#user_id_select').on('change', function() {
+        var selectedOption = $(this).find('option:selected');
+        var iban = selectedOption.data('iban');
+        var bic = selectedOption.data('bic');
+
+        $('#ordergroup_sepa_account_holder_attributes_iban').val(iban || ''); // Update the IBAN input field
+        $('#ordergroup_sepa_account_holder_attributes_bic').val(bic || ''); // Update the BIC input field
+      });
+    });

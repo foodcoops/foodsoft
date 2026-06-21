@@ -1893,3 +1893,4 @@ es:
   time:
     formats:
       foodsoft_datetime: "%d/%b/%Y %H:%M"
+      file: "%Y-%d-%B"
