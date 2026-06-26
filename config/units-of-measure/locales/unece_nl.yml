@@ -76,7 +76,7 @@ unece_units:
   XBH:
     name: bos
   XTS:
-    name: bundel
+    name: vastgebonden bundel
   XBE:
     name: bundel
   XCC:
@@ -296,7 +296,7 @@ unece_units:
   XQS:
     name: hard plastic box
   XPL:
-    name: emmer met deksel
+    name: sluitbare emmer
   X7B:
     name: houten kist
   X8C:
@@ -366,11 +366,11 @@ unece_units:
   XBD:
     name: karton
   XCT:
-    name: karton
+    name: kartonnen doos
   XEF:
     name: kartonnen kist met palletbodem
   XBY:
-    name: bundel karton
+    name: gebundelde planken
   XIK:
     name: kartonnen verpakking met flesgaten
   XCQ:
@@ -398,7 +398,7 @@ unece_units:
   XCF:
     name: koffer
   XSU:
-    name: koffer
+    name: transportkist
   XFL:
     name: heupfles
   XPA:
@@ -638,11 +638,11 @@ unece_units:
   XCW:
     name: rolcontainer
   XBT:
-    name: rol
+    name: stofrol
   XCL:
-    name: spoel
+    name: spoel (metaal/draad)
   XRO:
-    name: rol
+    name: papierrol
   X1A:
     name: stalen trommel
   XO2:
@@ -686,9 +686,9 @@ unece_units:
   XAE:
     name: spuitbus
   XRL:
-    name: spoel
+    name: kabelhaspel
   XBB:
-    name: spoel
+    name: garenklos
   XSO:
     name: spoel
   XBZ:
@@ -816,7 +816,7 @@ unece_units:
   PTN:
     name: portie
   STC:
-    name: staaf
+    name: stok
   DMT:
     name: decimeter
     long_name: decimeter
