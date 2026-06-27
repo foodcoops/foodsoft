@@ -7,16 +7,16 @@
     %table.table.table-striped
       %tr
         %td= heading_helper Ordergroup, :account_balance
-        %td.numeric{:style => "width:5em"}= number_to_currency(@ordergroup.account_balance)
+        %td.numeric.text-nowrap{:style => "width:5em"}= number_to_currency(@ordergroup.account_balance)
       %tr
         %td= '- ' + t('.funds.open_orders')
-        %td.numeric= number_to_currency(@ordergroup.value_of_open_orders)
+        %td.numeric.text-nowrap= number_to_currency(@ordergroup.value_of_open_orders)
       %tr
         %td= '- ' + t('.funds.finished_orders')
-        %td.numeric= number_to_currency(@ordergroup.value_of_finished_orders)
+        %td.numeric.text-nowrap= number_to_currency(@ordergroup.value_of_finished_orders)
       %tr
         %th= heading_helper Ordergroup, :available_funds
-        %th.numeric= number_to_currency(@ordergroup.get_available_funds)
+        %th.numeric.text-nowrap= number_to_currency(@ordergroup.get_available_funds)
 
 = render :partial => "shared/open_orders", :locals => {:ordergroup => @ordergroup}
 
