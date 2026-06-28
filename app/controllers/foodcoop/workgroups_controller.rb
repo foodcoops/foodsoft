@@ -12,10 +12,16 @@ class Foodcoop::WorkgroupsController < ApplicationController
 
   def update
     @workgroup = Workgroup.find(params[:id])
-    if @workgroup.update(params[:workgroup])
+    if @workgroup.update(workgroup_params)
       redirect_to foodcoop_workgroups_url, notice: I18n.t('workgroups.update.notice')
     else
       render action: 'edit'
     end
+  end
+
+  private
+
+  def workgroup_params
+    params.require(:workgroup).permit(:name, :description, :user_tokens)
   end
 end
