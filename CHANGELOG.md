@@ -1,3 +1,11 @@
+# [Foodsoft 4.9.2](https://github.com/foodcoops/foodsoft/compare/v4.9.1...v4.9.2)
+
+(2026-06-28)
+
+### Bug Fixes
+
+* Fix privilege escalation via mass assignment in workgroup update ([PR #1323](https://github.com/foodcoops/foodsoft/pull/1323))([7334695](https://github.com/foodcoops/foodsoft/commit/73346956cf223f8b63e7bc27edcdfd91953355c4))
+* Fix range errors when syncing from external database (`sharedlists`) ([#1030](https://github.com/foodcoops/foodsoft/issues/1030), PR [#1162](https://github.com/foodcoops/foodsoft/pull/1162))([c48091d](https://github.com/foodcoops/foodsoft/commit/c48091db5f98a1718bec022782df12c67af0b71f))
 
 # [Foodsoft 4.9.1](https://github.com/foodcoops/foodsoft/compare/v4.9...v4.9.1)
 (2025-03-20)
