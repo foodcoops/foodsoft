@@ -9,9 +9,9 @@
   - [x] 0A-4: Update data-dismiss="modal" → data-bs-dismiss="modal" (17 instances)
   - [x] 0A-5: Handle .modal-xl class additions (4 instances)
 - [ ] **Phase 0B — Fix Tooltips** (broken functionality)
-  - [ ] 0B-1: Replace global tooltip init in application_legacy.js
-  - [ ] 0B-2: Fix self_service tooltips
-  - [ ] 0B-3: Rename data-toggle="tooltip" → data-bs-toggle="tooltip" (6 instances)
+  - [x] 0B-1: Replace global tooltip init in application_legacy.js
+  - [x] 0B-2: Fix self_service tooltips
+  - [x] 0B-3: Rename data-toggle="tooltip" → data-bs-toggle="tooltip" (6 instances)
 - [ ] **Phase 0C — Fix Popovers** (broken functionality)
   - [ ] 0C-1: Rewrite unit-conversion-field.js
 - [ ] **Phase 1 — SimpleForm Config**

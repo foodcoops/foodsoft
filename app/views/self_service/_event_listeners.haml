@@ -7,7 +7,9 @@
       const availability = e.group_order_article_availability_data.availability;
       el_availability.text(availability);
       el_availability.attr('title', e.group_order_article_availability_data.title);
-      el_availability.tooltip('fixTitle');
+      el_availability.attr('data-bs-title', e.group_order_article_availability_data.title);
+      var tip = bootstrap.Tooltip.getInstance(el_availability[0]);
+      if (tip) tip.setContent({'.tooltip-inner': e.group_order_article_availability_data.title});
 
       // update row style according to availability:
       const tr = $(el_availability).parents('tr');
@@ -79,10 +81,12 @@
         $('#group_order_' + e.group_order_id + " tr.order_sum_row").before(addedRow$);
       }
 
-      $('.availability[data-toggle="tooltip"]').tooltip({
+      document.querySelectorAll('.availability[data-bs-toggle="tooltip"]').forEach(function(el) {
+        new bootstrap.Tooltip(el, {
           html: true,
           sanitize: false,
           container: 'body'
+        });
       });
 
       $('.delta', addedRow$).each((_, field) => $(field).unitConversionField({
@@ -95,10 +99,12 @@
     $(function() {
       init_add_article('.add_article');
 
-      $('.availability[data-toggle="tooltip"]').tooltip({
+      document.querySelectorAll('.availability[data-bs-toggle="tooltip"]').forEach(function(el) {
+        new bootstrap.Tooltip(el, {
           html: true,
           sanitize: false,
           container: 'body'
+        });
       });
 
       $('.delta').each((_, field) => $(field).unitConversionField({
