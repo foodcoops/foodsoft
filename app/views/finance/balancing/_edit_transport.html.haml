@@ -9,5 +9,5 @@
         = f.input :transport_distribution, as: :radio_buttons, collection: Order.transport_distributions,
           include_blank: false, label_method: ->(k){ t("activerecord.attributes.order.transport_distributions.#{k.first}") }
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-secondary', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = f.submit t('ui.save'), class: 'btn btn-primary'

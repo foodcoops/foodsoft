@@ -3,11 +3,11 @@
 ## Progress Checklist
 
 - [ ] **Phase 0A — Fix Modals** (broken functionality)
-  - [ ] 0A-1: Add inner modal structure to layout
-  - [ ] 0A-2: Update modal show calls (21 instances)
-  - [ ] 0A-3: Update modal hide calls (13 instances)
-  - [ ] 0A-4: Update data-dismiss="modal" → data-bs-dismiss="modal" (17 instances)
-  - [ ] 0A-5: Handle .modal-xl class additions (4 instances)
+  - [x] 0A-1: Add inner modal structure to layout
+  - [x] 0A-2: Update modal show calls (21 instances)
+  - [x] 0A-3: Update modal hide calls (13 instances)
+  - [x] 0A-4: Update data-dismiss="modal" → data-bs-dismiss="modal" (17 instances)
+  - [x] 0A-5: Handle .modal-xl class additions (4 instances)
 - [ ] **Phase 0B — Fix Tooltips** (broken functionality)
   - [ ] 0B-1: Replace global tooltip init in application_legacy.js
   - [ ] 0B-2: Fix self_service tooltips

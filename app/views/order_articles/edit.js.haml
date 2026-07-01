@@ -1,2 +1,3 @@
-$('#modalContainer').addClass('modal-xl').html('#{j(render("edit"))}');
-$('#modalContainer').modal();
+$('#modalContainer').html('#{j(render("edit"))}');
+$('#modalContainer .modal-dialog').addClass('modal-xl');
+new bootstrap.Modal('#modalContainer').show();

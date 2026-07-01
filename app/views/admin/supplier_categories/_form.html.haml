@@ -10,5 +10,5 @@
         = f.association :financial_transaction_class, :include_blank => false
         = f.association :bank_account, :include_blank => false
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-secondary', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = f.submit class: 'btn btn-primary'

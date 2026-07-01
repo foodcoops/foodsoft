@@ -11,5 +11,5 @@
         = f.input :balance
         = f.association :bank_gateway
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-secondary', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = f.submit class: 'btn btn-primary'

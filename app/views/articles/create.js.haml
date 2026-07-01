@@ -1,4 +1,4 @@
-$('#modalContainer').modal('hide');
+bootstrap.Modal.getInstance('#modalContainer').hide();
 $('#listbody').prepend('#{escape_javascript(render(@article))}');
 const importActionsCell$ = $('#import #search_results td[data-order-number="#{escape_javascript(@article.order_number)}"]');
 importActionsCell$.find('.icon-ok').show();

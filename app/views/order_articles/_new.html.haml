@@ -7,5 +7,5 @@
       .modal-body
         = form.association :article_version, collection: @order.supplier_articles.map(&:latest_article_version), label_method: lambda {|a| article_label_with_unit(a)}
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-secondary', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = form.submit class: 'btn btn-primary'

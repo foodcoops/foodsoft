@@ -12,5 +12,5 @@
           = f.association :bank_account
         %small= t '.name_short_desc'
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-secondary', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = f.submit class: 'btn btn-primary'
