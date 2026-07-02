@@ -38,14 +38,14 @@
   %tfoot
     %tr
       %td(colspan="4")= t '.sum_net'
-      %td.numeric= number_to_currency total_net
+      %td.numeric.text-nowrap= number_to_currency total_net
     %tr
       %td(colspan="4")= t '.sum_gross'
-      %td.numeric= number_to_currency total_gross
+      %td.numeric.text-nowrap= number_to_currency total_gross
     - if @delivery.invoice
       %tr
         %td(colspan="4")= t '.sum_diff'
-        %td.numeric= number_to_currency total_gross - @delivery.invoice.net_amount
+        %td.numeric.text-nowrap= number_to_currency total_gross - @delivery.invoice.net_amount
 
 %p
   = link_to t('ui.edit'), edit_supplier_delivery_path(@supplier,@delivery), class: 'btn btn-default'
