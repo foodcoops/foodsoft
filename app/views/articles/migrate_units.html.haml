@@ -28,7 +28,7 @@
           = simple_fields_for "samples[#{index}]", sample do |form|
             %td
               = yield form # allow to add hidden fields to form
-              = form.input :apply_migration, as: :boolean, label: false, input_html: { value: true, checked: 'checked' }
+              = form.input :apply_migration, as: :boolean, input_html: { value: true, checked: 'checked' }
             %td
               - sample[:articles].each do |article|
                 = hidden_field_tag "samples[#{index}][article_ids][]", article.id

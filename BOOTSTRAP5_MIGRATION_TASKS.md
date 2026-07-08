@@ -15,8 +15,8 @@
 - [ ] **Phase 0C — Fix Popovers** (broken functionality)
   - [x] 0C-1: Rewrite unit-conversion-field.js
 - [ ] **Phase 1 — SimpleForm Config**
-  - [ ] 1-1: Rewrite simple_form_bootstrap.rb for BS5
-  - [ ] 1-2: Update simple_form.rb label_class
+  - [x] 1-1: Rewrite simple_form_bootstrap.rb for BS5
+  - [x] 1-2: Update simple_form.rb label_class
 - [ ] **Phase 2 — Mechanical Replacements**
   - [ ] 2-1: btn-xs → btn-sm (73 instances)
   - [ ] 2-2: pull-right → float-end (~36 instances)
