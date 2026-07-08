@@ -36,6 +36,8 @@
   - [ ] 3-4: .input-group-btn → .input-group (7 instances)
   - [ ] 3-5: .control-group → remove or .mb-3 (12 instances SCSS+Ruby)
   - [ ] 3-6: .form-group → .mb-3 (18 instances hardcoded)
+  - [ ] 3-7: .btn-toolbar needs .gap-2 for spacing (6 instances — layout:37,46; orders/show:55,62; articles/index:13; stockit/index:33)
+  - [ ] 3-8: Dropdown toggle <a> → <button class="dropdown-toggle"> (12 instances across orders, articles, stockit, finance, plugins)
 - [ ] **Phase 4 — Icon Replacement**
   - [ ] 4-1: glyphicon → FontAwesome in views (22 instances)
   - [ ] 4-2: icon-* → fa fa-* in views (8 instances)
@@ -298,9 +300,18 @@ Key files:
 - `app/helpers/orders_helper.rb:94`
 - Also: `.hidden` → `.d-none` in `app/views/group_orders/_form.html.haml:212`
 
-### 2-8: `data-toggle` → `data-bs-toggle` (8 instances, non-tooltip non-modal)
+### 2-8: `data-toggle` → `data-bs-toggle` (18 instances, non-tooltip non-modal)
 - `app/views/self_service/index.haml:10,12` (tab)
 - `plugins/links/app/views/admin/links/_form.html.haml:11` (collapse)
+- Dropdown toggles (10 instances): `data: {toggle: 'dropdown'}` → `data-bs-toggle="dropdown"`
+  - `app/views/orders/index.html.haml:5`
+  - `app/views/articles/index.html.haml:5`
+  - `app/views/shared/_order_download_button.html.haml:2`
+  - `app/views/stockit/index.html.haml:35,49`
+  - `app/views/finance/financial_links/show.html.haml:7`
+  - `app/views/finance/balancing/new.html.haml:67,75`
+  - `app/views/finance/balancing/_edit_results_by_articles.html.haml:42`
+  - `plugins/current_orders/.../articles/_actions.html.haml:2`
 
 ### 2-9: `data-dismiss` → `data-bs-dismiss` (18 instances, non-modal)
 Alert: `app/views/stockit/_destroy_fail.js.haml:2` (`data-dismiss="alert"`)
@@ -370,6 +381,38 @@ Forms that explicitly write `.form-group` (not via SimpleForm wrapper):
 - `app/views/foodcoop/workgroups/edit.html.haml:9`
 
 Note: many of these also have `control-label` that needs updating.
+
+### 3-7: `.btn-toolbar` spacing — add `.gap-2` (6 instances)
+In BS5, `.btn-toolbar` no longer adds automatic spacing between child `.btn-group` elements. Add `.gap-2` to all `.btn-toolbar` containers.
+
+| # | File | Line |
+|---|------|------|
+| 1 | `app/views/layouts/application.html.haml` | 37 |
+| 2 | `app/views/layouts/application.html.haml` | 46 |
+| 3 | `app/views/orders/show.html.haml` | 55 |
+| 4 | `app/views/orders/show.html.haml` | 62 |
+| 5 | `app/views/articles/index.html.haml` | 13 |
+| 6 | `app/views/stockit/index.html.haml` | 33 |
+
+Also: `.pull-right` on layout toolbar → `.float-end` (overlaps with Phase 2-2).
+
+### 3-8: Dropdown toggle `<a>` → `<button>` (12 instances)
+BS5 dropdown toggles should be `<button>` elements with `type="button"` and `aria-expanded="false"`, not `<a>` links. Replace all `= link_to '#'` dropdown toggles with `%button`.
+
+Also: `data: {toggle: 'dropdown'}` → `data-bs-toggle="dropdown"` on these elements (overlaps with Phase 2-8).
+
+| # | File | Line |
+|---|------|------|
+| 1 | `app/views/orders/index.html.haml` | 5 |
+| 2 | `app/views/articles/index.html.haml` | 5 |
+| 3 | `app/views/shared/_order_download_button.html.haml` | 2 |
+| 4 | `app/views/stockit/index.html.haml` | 35 |
+| 5 | `app/views/stockit/index.html.haml` | 49 |
+| 6 | `app/views/finance/financial_links/show.html.haml` | 7 |
+| 7 | `app/views/finance/balancing/new.html.haml` | 67 |
+| 8 | `app/views/finance/balancing/new.html.haml` | 75 |
+| 9 | `app/views/finance/balancing/_edit_results_by_articles.html.haml` | 42 |
+| 10 | `plugins/current_orders/app/views/current_orders/articles/_actions.html.haml` | 2 |
 
 ---
 
