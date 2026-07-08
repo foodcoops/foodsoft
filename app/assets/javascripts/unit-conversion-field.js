@@ -64,15 +64,25 @@
     }
 
     initializeOpenListener() {
-      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'bottom', trigger: 'manual'});
-
+      this.popover = new bootstrap.Popover(this.field$[0], {
+        title: this.popoverTemplate.dataset.title,
+        placement: 'bottom',
+        trigger: 'manual',
+        html: true,
+        container:'body',
+        content: () => {
+          return document.importNode(this.popoverTemplate, true);
+        }
+      });
       this.openerButton$.click((e) => {
         e.preventDefault();
         e.stopPropagation();
         this.openPopover()
       });
 
-      this.field$.on('inserted.bs.popover', () => this.initializeConversionPopover(this.field$.next('.popover')));
+      this.field$[0].addEventListener('shown.bs.popover', () => {
+        if (this.popover.tip) this.initializeConversionPopover($(this.popover.tip));
+      });
     }
 
     openPopover() {
@@ -83,13 +93,13 @@
 
         this.closePopover();
       });
-      this.field$.popover('show');
+      this.popover.show();
     }
 
     closePopover() {
       $(document).off('mousedown.unit-conversion-field');
       this.field$.off('change.unit-conversion-field');
-      this.field$.popover('hide');
+      this.popover.hide();
     }
 
     initializeConversionPopover(popover$) {
@@ -97,20 +107,14 @@
         popover$.addClass('wide');
       }
 
-      const popoverContent$ = popover$.find('.popover-content');
-      popoverContent$.empty();
-
-      const contents$ = $(document.importNode(this.popoverTemplate, true));
-      popoverContent$.append(contents$);
-
-      this.quantityInput$ = contents$.find('input.quantity');
+      this.quantityInput$ = popover$.find('input.quantity');
       this.quantityInput$.val(String(this.field$.val()).replace(',', '.'));
       this.quantityInput$
         .focus()
         .select();
-      this.applyButton$ = contents$.find('input.apply');
-      this.conversionResult$ = contents$.find('.conversion-result');
-      this.unitSelect$ = contents$.find('select.unit');
+      this.applyButton$ = popover$.find('input.apply');
+      this.conversionResult$ = popover$.find('.conversion-result');
+      this.unitSelect$ = popover$.find('select.unit');
       this.unitSelect$.append(this.unitSelectOptions.map(option => $(`<option value${option.value === undefined ? '' : `="${option.value}"`}>${option.label}</option>`)))
       let initialUnitSelectValue = this.defaultUnit;
       if (initialUnitSelectValue === undefined) {
@@ -132,7 +136,7 @@
         this.unitSelect$.val(initialUnitSelectValue);
       });
 
-      contents$.find('input.cancel').click(() => this.closePopover());
+      popover$.find('input.cancel').click(() => this.closePopover());
       this.applyButton$.click(() => {
         this.applyConversion();
         this.closePopover();

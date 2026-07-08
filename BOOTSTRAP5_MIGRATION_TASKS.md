@@ -13,7 +13,7 @@
   - [x] 0B-2: Fix self_service tooltips
   - [x] 0B-3: Rename data-toggle="tooltip" → data-bs-toggle="tooltip" (6 instances)
 - [ ] **Phase 0C — Fix Popovers** (broken functionality)
-  - [ ] 0C-1: Rewrite unit-conversion-field.js
+  - [x] 0C-1: Rewrite unit-conversion-field.js
 - [ ] **Phase 1 — SimpleForm Config**
   - [ ] 1-1: Rewrite simple_form_bootstrap.rb for BS5
   - [ ] 1-2: Update simple_form.rb label_class
