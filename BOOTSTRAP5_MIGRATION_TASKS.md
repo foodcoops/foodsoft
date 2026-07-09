@@ -38,6 +38,7 @@
   - [ ] 3-6: .form-group → .mb-3 (18 instances hardcoded)
   - [ ] 3-7: .btn-toolbar needs .gap-2 for spacing (6 instances — layout:37,46; orders/show:55,62; articles/index:13; stockit/index:33)
   - [ ] 3-8: Dropdown toggle <a> → <button class="dropdown-toggle"> (12 instances across orders, articles, stockit, finance, plugins)
+  - [ ] 3-9: Tab component — add nav-link, role, aria attributes (admin/configs)
 - [ ] **Phase 4 — Icon Replacement**
   - [ ] 4-1: glyphicon → FontAwesome in views (22 instances)
   - [ ] 4-2: icon-* → fa fa-* in views (8 instances)
@@ -414,9 +415,52 @@ Also: `data: {toggle: 'dropdown'}` → `data-bs-toggle="dropdown"` on these elem
 | 9 | `app/views/finance/balancing/_edit_results_by_articles.html.haml` | 42 |
 | 10 | `plugins/current_orders/app/views/current_orders/articles/_actions.html.haml` | 2 |
 
+### 3-9: Tab component — `.nav-link`, `role`, `aria` attributes (admin/configs)
+BS5 tabs require additional classes and accessibility attributes:
+- `<ul class="nav">` needs `role="tablist"`
+- Each tab `<a>` needs `.nav-link`, `role="tab"`, `aria-selected="true/false"`
+- `<li>` wrappers need `.nav-item`, `role="presentation"`
+- `.tab-pane` divs need `role="tabpanel"`, `aria-labelledby`
+
+**Files:**
+| # | File | Changes |
+|---|------|---------|
+| 1 | `app/views/admin/configs/_tabs.html.haml` | Add `.nav-link`, `role="tab"`, `aria-selected`, `.nav-item`, `role="tablist"` |
+| 2 | `app/views/admin/configs/show.html.haml` | Add `role="tabpanel"` to `.tab-pane`, fix submit button layout |
+
+Required structural changes:
+
+`_tabs.html.haml`:
+```haml
+%ul.nav.nav-tabs(role="tablist")
+  %li.nav-item.heading(role="presentation")
+    %h1= t '.title'
+  - for tab in @tabs
+    - url = action_name == 'show' ? nil : admin_config_path(tab: tab)
+    %li.nav-item(role="presentation")
+      = link_to t("config.tabs.#{tab}"), "#{url}#tab-#{tab}",
+        class: "nav-link #{'active' if @current_tab==tab}",
+        data: ({'bs-toggle': 'tab'} unless url),
+        role: "tab",
+        'aria-selected' => (@current_tab==tab).to_s
+  %li.nav-item.float-end(role="presentation")
+    = link_to t('config.tabs.list'), list_admin_config_path, class: 'nav-link'
+  %li.nav-item.float-end(role="presentation")
+    = link_to t('config.tabs.applications'), oauth_applications_path, class: 'nav-link'
+```
+
+`show.html.haml`:
+```haml
+.tab-content
+  - for tab in @tabs
+    .tab-pane.fade.show.active{id: "tab-#{tab}", role: "tabpanel", class: ('active' if @current_tab==tab)}
+      = render "tab_#{tab}", form: f
+.text-end
+  = f.submit t('.submit'), class: 'btn btn-primary'
+```
+
 ---
 
-## Phase 4 — Icon Replacement (Glyphicon → Font Awesome)
 
 ### 4-1: Replace all glyphicon classes with fa_icon helper or fa classes (30 instances)
 
