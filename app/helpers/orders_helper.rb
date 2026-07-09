@@ -91,7 +91,7 @@ module OrdersHelper
       uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
     end
 
-    uq_text = content_tag(:span, uq_text, class: 'hidden-xs') if options[:soft_uq]
+    uq_text = content_tag(:span, uq_text, class: 'd-none d-sm-block') if options[:soft_uq]
     if options[:plain]
       uq_text
     elsif options[:icon].nil? || options[:icon]

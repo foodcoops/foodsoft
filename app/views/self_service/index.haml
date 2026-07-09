@@ -7,9 +7,9 @@
   = render 'funds'
   %ul.nav.nav-tabs
     %li.active
-      %a#pickup-tab{:href => '#pickup', 'data-toggle' => 'tab'}=t('.pickup')
+      %a#pickup-tab{:href => '#pickup', 'data-bs-toggle' => 'tab'}=t('.pickup')
     %li
-      %a#transactions-tab{:href => '#transactions', 'data-toggle' => 'tab'}=t('.transactions')
+      %a#transactions-tab{:href => '#transactions', 'data-bs-toggle' => 'tab'}=t('.transactions')
   %div.tab-content
     %div#pickup.tab-pane.active
       = render 'pickup'

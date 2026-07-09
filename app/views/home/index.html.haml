@@ -64,7 +64,7 @@
         %div
           = link_to my_ordergroup_path, class: 'btn btn-primary btn-sm' do
             = t '.my_ordergroup.transactions.view'
-            = fa_icon 'chevron-right', class: 'ml-2'
+            = fa_icon 'chevron-right', class: 'ms-2'
           - '<dashboard_ordergroup_mark>'
       %table.table.table-striped
         - financial_transactions = current_user.ordergroup.financial_transactions.visible.includes(:financial_transaction_type, :user).limit(5).order(created_on: :desc)

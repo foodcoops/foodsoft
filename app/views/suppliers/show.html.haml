@@ -46,8 +46,8 @@
       %dt= heading_helper(Supplier, :share_link) + ':'
       %dd
         %div#share_link= render partial: 'supplier_shares/share_link', locals: { external_uuid: @supplier.external_uuid }
-        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-xs', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
-        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-xs', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
+        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-sm', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
+        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-sm', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
 
     .clearfix
     - if @current_user.role_suppliers?
@@ -57,7 +57,7 @@
 
   - if @deliveries.any?
     .col-md-6
-      .pull-right
+      .float-end
         = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn btn-secondary'
         = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn btn-secondary'
       %h2= t '.last_deliveries'

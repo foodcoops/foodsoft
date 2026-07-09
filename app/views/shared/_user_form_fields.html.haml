@@ -17,7 +17,7 @@
   = f.fields_for [:ordergroup, f.object.ordergroup || Ordergroup.new] do |ogf|
     - address_hint = f.object.ordergroup.users.count > 1 ? t('.contact_address_hint') : nil
     = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false,
-                input_html: { title: address_hint, data: {bs_toggle: 'tooltip', bs_placement: 'right'} }
+                input_html: { title: address_hint, data: {'bs-toggle': 'tooltip', 'bs-placement': 'right'} }
 
 = render 'shared/custom_form_fields', f: f, type: :user
 = f.simple_fields_for :settings_attributes do |s|

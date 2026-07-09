@@ -47,7 +47,7 @@
           %td{:style => highlight_new(attrs, :supplier_order_unit)}
             .d-flex.gap-1.align-items-center
               = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
-              = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
+              = form.input :unit, input_html: {class: 'form-control ms-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 = fa_icon :cog, style: highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])
             %div.extra-unit-fields.form-horizontal
@@ -84,9 +84,9 @@
                   = "Allow orders per"
                 .col-sm-9.d-flex
                   .input-group.unit-wrapper
-                    = form.input_field :group_order_granularity, class: 'form-control mr-2', step: 0.001, style: highlight_new(attrs, :group_order_granularity).to_s + '; width: 150px;'
-                    .ml-1.d-flex.align-items-center
-                      %span.mr-2.control-label
+                    = form.input_field :group_order_granularity, class: 'form-control me-2', step: 0.001, style: highlight_new(attrs, :group_order_granularity).to_s + '; width: 150px;'
+                    .ms-1.d-flex.align-items-center
+                      %span.me-2.control-label
                         = '&times;'.html_safe
                       = form.select :group_order_unit, [], {include_blank: false}, {class: 'form-control', style: highlight_new(attrs, :group_order_unit).to_s + ';margin-right:12px', 'data-initial-value': changed_article.group_order_unit}
                   %p.help-block{style: 'color: grey;'}= changed_article.new_record? ? nil : "#{article.group_order_granularity} x #{ArticleUnitsLib.get_translated_name_for_code(article.group_order_unit)}"

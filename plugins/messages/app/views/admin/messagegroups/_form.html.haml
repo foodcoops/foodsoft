@@ -2,5 +2,5 @@
   = simple_form_for [:admin, @messagegroup] do |f|
     = render 'shared/group_form_fields', :f => f
     %div
-      = f.button :submit
+      = f.button :submit, class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), :back

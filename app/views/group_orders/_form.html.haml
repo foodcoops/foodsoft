@@ -25,7 +25,7 @@
 
 - title t('.title'), false
 .row
-  .well.pull-left.alert
+  .well.float-start.alert
     = close_button :alert
     %h2= @order.name
     %dl.dl-horizontal
@@ -54,7 +54,7 @@
         %dt= heading_helper Ordergroup, :available_funds
         %dd= number_to_currency(@ordering_data[:available_funds])
 
-  .well.pull-right.alert
+  .well.float-end.alert
     = close_button :alert
     = render 'switch_order', current_order: @order
 
@@ -155,7 +155,7 @@
                 .close-btn.btn.btn-link
                   = t('.hide_article_info') + ' >>'
                 .article-name= order_article.article_version.name
-                .pull-right
+                .float-end
                   = t('.units_full') + ':'
                   %span{id: "units_#{order_article.id}"}
                     %span.quantity= order_article.units_to_order
@@ -171,7 +171,7 @@
                     %span.quantity= @ordering_data[:order_articles][order_article.id][:tolerance] + @ordering_data[:order_articles][order_article.id][:others_tolerance]
                     %span.unit= format_unit_with_ratios(:group_order_unit, order_article.article_version, :group_order_unit, prepend_multiplier_symbol_for_non_si_units: true)
                   %br/
-                .pull-left
+                .float-start
                   #{heading_helper Article, :manufacturer}: #{order_article.article_version.manufacturer}
                   %br/
                   #{heading_helper Article, :units}:

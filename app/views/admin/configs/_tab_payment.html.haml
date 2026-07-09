@@ -29,5 +29,5 @@
       .col-sm-3
       .col-sm-9
         = config_tooltip form, :use_boxfill do
-          = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {toggle: 'collapse', target: '#boxfill-schedule'}, wrapper: :horizontal_boolean
+          = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {'bs-toggle': 'collapse', 'bs-target': '#boxfill-schedule'}, wrapper: :horizontal_boolean
         = fields.label :use_boxfill

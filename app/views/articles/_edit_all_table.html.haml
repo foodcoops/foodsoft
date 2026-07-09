@@ -36,7 +36,7 @@
             .d-flex.gap-1.align-items-center
               = form.hidden_field :unit, id: 'article_unit_hidden', value: ''
               = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
-              = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
+              = form.input :unit, input_html: {class: 'form-control ms-1'}, label: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 = fa_icon :cog
             %div.extra-unit-fields.unit-wrapper.form-horizontal
@@ -62,10 +62,10 @@
                   = form.input :group_order_unit, as: :select, wrapper: :custom_form, collection: [], label_html: {style: 'width:50px;text-align: center;' }, input_html: {'data-initial-value': article.group_order_unit, class: 'form-control', style:"width:262px"}, label: '&times;'.html_safe, include_blank: false, wrapper_html: {class: 'd-flex', style:"313px"}
           %td
             .d-flex.gap-1.align-items-center
-              .input-group.ml-1
+              .input-group.ms-1
                 %span.input-group-addon= t 'number.currency.format.unit'
                 = form.text_field 'price', class: 'form-control', style: 'width: 45px'
-              .input.d-flex.gap-1.ml-1.align-items-center.unit-wrapper
+              .input.d-flex.gap-1.ms-1.align-items-center.unit-wrapper
                 %label=t('articles.form.per')
                 = form.input :price_unit, as: :select, collection: [], input_html: {'data-initial-value': article.price_unit, class: 'form-control'}, label: false, wrapper: false, include_blank: false
           %td= form.text_field 'order_number', class: 'form-control'

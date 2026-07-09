@@ -5,7 +5,7 @@
     - captured = capture do
       = render 'shared/custom_form_fields', f: f, type: :workgroup
       %h4= t 'admin.access_to'
-      = f.input :role_suppliers
+      = f.input :role_suppliers, as: :boolean, wrapper: :horizontal_boolean
       = f.input :role_article_meta
       = f.input :role_orders
       = f.input :role_pickups

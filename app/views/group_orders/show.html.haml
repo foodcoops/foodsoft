@@ -7,7 +7,7 @@
 - title t('.title', order: @order.name)
 
 .row
-  .well.pull-left
+  .well.float-start
     // Order summary
     %dl.dl-horizontal
       %dt= heading_helper Order, :name
@@ -34,7 +34,7 @@
         %dd= show_user_link @order.updated_by
         %p= link_to t('.comment'), "#comments"
 
-  .well.pull-right.alert
+  .well.float-end.alert
     = close_button :alert
     = render 'switch_order', current_order: @order
 
@@ -43,7 +43,7 @@
   %h2= t '.articles.title'
   .column_content#result
     - if @group_order
-      %p.pull-right= link_to t('.articles.show_hide'), '#', 'data-toggle-this' => 'tr.ignored'
+      %p.float-end= link_to t('.articles.show_hide'), '#', 'data-toggle-this' => 'tr.ignored'
       %p= link_to(t('.articles.edit_order'), edit_group_order_path(@group_order, order_id: @order.id), class: 'btn btn-primary') if @order.open?
       %table.table.table-hover
         %thead

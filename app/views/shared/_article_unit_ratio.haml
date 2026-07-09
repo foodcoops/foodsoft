@@ -12,8 +12,8 @@
         = sub_form.input :quantity, {input_html: {class: 'form-control'}, label: false, wrapper_class: 'col-sm-3', wrapper: :inline_form}
         %div= '&times;'.html_safe
         = sub_form.input :unit, as: :select, include_blank: true, collection: @article_units, label: false, input_html: {class: 'form-control', style:"width:120px"}, wrapper: :inline_form, wrapper_class: 'col-sm-5'
-        %div.ml-1= t('.per')
-        %div.unit_multiplier.ml-2
+        %div.ms-1= t('.per')
+        %div.unit_multiplier.ms-2
       %div.actions{style: 'width:1em, justify-self: end'}
-        = link_to t('.remove'), method: :delete, 'data-remove-ratio' => true, title: t('.remove'), class: 'btn btn-danger btn-xs' do
+        = link_to t('.remove'), method: :delete, 'data-remove-ratio' => true, title: t('.remove'), class: 'btn btn-danger btn-sm' do
           = fa_icon :remove

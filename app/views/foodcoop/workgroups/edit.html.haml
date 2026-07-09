@@ -7,6 +7,6 @@
   = simple_form_for [:foodcoop, @workgroup] do |f|
     = render 'shared/group_form_fields', f: f
     .form-group
-      .col-sm-offset-2.col-sm-10
+      .offset-sm-2.col-sm-10
         = f.button :submit
         = link_to t('ui.or_cancel'), foodcoop_workgroups_path

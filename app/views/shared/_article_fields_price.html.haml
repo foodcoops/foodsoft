@@ -4,10 +4,10 @@
   .col-sm-9.d-flex
     .input-group.unit-wrapper
       %span.input-group-addon= t 'number.currency.format.unit'
-      = f.input_field :price, class: 'form-control mr-2', step: 0.001, style: 'width: 150px;'
+      = f.input_field :price, class: 'form-control me-2', step: 0.001, style: 'width: 150px;'
       -# width:50px;text-align: center;
-      .ml-1.d-flex.align-items-center
-        %span.mr-2.control-label
+      .ms-1.d-flex.align-items-center
+        %span.me-2.control-label
           = t('articles.form.per')
         = f.select :price_unit, [], {include_blank: false}, {class: 'form-control', style: 'margin-right:12px', 'data-initial-value': article.price_unit}
 %div

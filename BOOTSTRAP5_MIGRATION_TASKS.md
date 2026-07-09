@@ -18,17 +18,17 @@
   - [x] 1-1: Rewrite simple_form_bootstrap.rb for BS5
   - [x] 1-2: Update simple_form.rb label_class
 - [ ] **Phase 2 — Mechanical Replacements**
-  - [ ] 2-1: btn-xs → btn-sm (73 instances)
-  - [ ] 2-2: pull-right → float-end (~36 instances)
-  - [ ] 2-3: pull-left → float-start (~3 instances)
-  - [ ] 2-4: ml-* → ms-*, mr-* → me-* (~41 instances)
-  - [ ] 2-5: pl-* → ps-*, pr-* → pe-* (~13 instances)
-  - [ ] 2-6: text-left → text-start, text-right → text-end (4 instances)
-  - [ ] 2-7: hidden-xs → d-none d-sm-block (2 instances)
-  - [ ] 2-8: data-toggle → data-bs-toggle (8 instances, non-tooltip)
-  - [ ] 2-9: data-dismiss → data-bs-dismiss (18 instances, non-modal)
-  - [ ] 2-10: badge-important → badge bg-danger (1 instance)
-  - [ ] 2-11: Offset classes col-*-offset-* → offset-*-* (3 instances)
+- [x] 2-1: btn-xs → btn-sm (73 instances)
+- [x] 2-2: pull-right → float-end (27 instances)
+- [x] 2-3: pull-left → float-start (8 instances)
+- [x] 2-4: ml-* → ms-*, mr-* → me-* (35 instances)
+- [x] 2-5: pl-* → ps-*, pr-* → pe-* (1 instance)
+- [x] 2-6: text-left → text-start, text-right → text-end (3 instances)
+- [x] 2-7: hidden-xs → d-none d-sm-block (2 instances)
+- [x] 2-8: data-toggle → data-bs-toggle (14 instances, non-tooltip)
+- [x] 2-9: data-dismiss → data-bs-dismiss (1 instance, non-modal)
+- [x] 2-10: badge-important → badge bg-danger (1 instance)
+- [x] 2-11: Offset classes col-*-offset-* → offset-*-* (2 instances)
 - [ ] **Phase 3 — Structural Component Changes**
   - [ ] 3-1: .well/.well-small → .card/.card-body (27 instances)
   - [ ] 3-2: .panel → .card (7 instances)

@@ -31,7 +31,7 @@
         - else
           = t '.visibility_public'
         - if @message.can_toggle_private?(current_user)
-          = link_to t('.change_visibility'), toggle_private_message_path(@message), method: :post, class: 'btn btn-secondary btn-xs'
+          = link_to t('.change_visibility'), toggle_private_message_path(@message), method: :post, class: 'btn btn-secondary btn-sm'
   %hr/
   .trix-content= @message.body
   %hr/

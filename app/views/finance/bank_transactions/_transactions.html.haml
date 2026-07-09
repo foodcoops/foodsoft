@@ -1,4 +1,4 @@
-.pull-right
+.float-end
   .btn-group
     = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-secondary' do
       = fa_icon :download
@@ -26,4 +26,4 @@
             = link_to t('ui.show'), finance_link_path(t.financial_link)
           - else
             = link_to t('.add_financial_link'), finance_links_path(bank_transaction: t.id),
-                      method: :post, class: 'btn btn-success btn-xs'
+                      method: :post, class: 'btn btn-success btn-sm'

@@ -5,7 +5,7 @@ module DeliveriesHelper
               title: I18n.t('helpers.deliveries.show_invoice')
     else
       link_to I18n.t('helpers.deliveries.new_invoice'), new_finance_invoice_path(supplier_id: delivery.supplier.id, delivery_id: delivery.id),
-              class: 'btn btn-secondary btn-xs'
+              class: 'btn btn-secondary btn-sm'
     end
   end
 

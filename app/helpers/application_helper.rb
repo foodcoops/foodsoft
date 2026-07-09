@@ -55,7 +55,7 @@ module ApplicationHelper
     if options[:wrap] == false
       links.join.html_safe
     else
-      content_tag :div, class: 'btn-group btn-group-sm pull-right' do
+      content_tag :div, class: 'btn-group btn-group-sm float-end' do
         links.join.html_safe
       end
     end

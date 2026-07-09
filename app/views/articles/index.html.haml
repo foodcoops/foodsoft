@@ -2,7 +2,7 @@
 
 - content_for :actionbar do
   .btn-group
-    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
+    = link_to '#', data: {'bs-toggle': 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
       = t '.change_supplier'
       %span.caret
     %ul.dropdown-menu
@@ -11,7 +11,7 @@
 
 .well.well-small
   .btn-toolbar
-    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'pull-right',
+    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'float-end',
       'data-submit-onchange' => true do
       = text_field_tag :query, params[:query], class: 'form-control',
         placeholder: t('.search_placeholder')
@@ -42,7 +42,7 @@
       %label.checkbox{style: 'margin-left: 20px'}
         = check_box_tag "origin", "REG", false
         = t '.import.restrict_region'
-      .pull-right{style: 'line-height: 40px'}
+      .float-end{style: 'line-height: 40px'}
         = label_tag :article_category_id, t('.import.category')
         = collection_select :article_category, :id, ArticleCategory.all, :id, :name,
           {include_blank: true}, {'data-ignore-onchange' => true}

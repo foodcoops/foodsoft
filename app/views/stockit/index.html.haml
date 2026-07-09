@@ -31,8 +31,8 @@
 
 .well.well-small
   .btn-toolbar
-    .btn-group.pull-right
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
+    .btn-group.float-end
+      = link_to '#', data: {'bs-toggle': 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
         = t '.view_options'
         %span.caret
       %ul.dropdown-menu
@@ -46,7 +46,7 @@
       = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn btn-secondary'
 
     .btn-group
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
+      = link_to '#', data: {'bs-toggle': 'dropdown'}, class: 'btn btn-secondary dropdown-toggle' do
         = t '.new_delivery'
         %span.caret
       %ul.dropdown-menu

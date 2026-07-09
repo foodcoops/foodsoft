@@ -23,5 +23,5 @@
     - new_article_data.each do |order_article|
       %option{id: "add_article_#{order_article.id}", value: order_article.article_version.id}
         = "#{order_article.article_version.name} (#{number_to_currency order_article.article_version.price}/#{format_price_unit(order_article.article_version)}) - #{t('.availability')}: #{number_with_precision(order_article.availability, precision: 3, strip_insignificant_zeros: true)}"
-%div.pull-right
+%div.float-end
   = paginate @group_orders

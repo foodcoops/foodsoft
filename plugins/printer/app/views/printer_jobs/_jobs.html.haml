@@ -1,4 +1,4 @@
-.pull-right
+.float-end
   - if @finished_jobs.total_pages > 1
     .btn-group= items_per_page wrap: false
 = pagination_links_remote @finished_jobs
@@ -21,4 +21,4 @@
         %td= link_to j.document, document_printer_job_path(j)
         %td= j.last_update_state
         %td= format_time j.finished_at
-        %td= link_to t('.requeue'), requeue_printer_job_path(j), method: :post, class: 'btn btn-xs'
+        %td= link_to t('.requeue'), requeue_printer_job_path(j), method: :post, class: 'btn btn-sm'

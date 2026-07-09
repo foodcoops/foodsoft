@@ -3,7 +3,7 @@
 - with_csv = local_assigns[:with_csv]
 - with_grouporder_links = local_assigns[:with_grouporder_links]
 - with_payment = @financial_transactions.with_payment_plugin.any?
-.pull-right
+.float-end
   - if with_csv
     .btn-group
       = link_to url_for(search: params[:q], format: :csv), class: 'btn btn-secondary' do
@@ -62,5 +62,5 @@
             - unless t.hidden? || t.amount.nil?
               = link_to finance_transaction_path(t), method: :delete,
                 data: {confirm: t('.confirm_revert', name: t.note)}, title: t('.revert_title'),
-                class: 'btn btn-danger btn-xs' do
+                class: 'btn btn-danger btn-sm' do
                 = fa_icon :remove
