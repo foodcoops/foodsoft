@@ -7,9 +7,10 @@
 - title t('.title', order: @order.name)
 
 .row
-  .well.float-start
-    // Order summary
-    %dl.dl-horizontal
+  .card.bg-light.float-start
+    .card-body
+      // Order summary
+      %dl.dl-horizontal
       %dt= heading_helper Order, :name
       %dd= @order.name
       %dt= heading_helper Order, :note
@@ -34,8 +35,9 @@
         %dd= show_user_link @order.updated_by
         %p= link_to t('.comment'), "#comments"
 
-  .well.float-end.alert
-    = close_button :alert
+  .card.alert.alert-info.float-end
+    .card-body
+      = close_button :alert
     = render 'switch_order', current_order: @order
 
 // Article box

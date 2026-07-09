@@ -3,7 +3,8 @@
 
 - unless toc.blank? || params[:preview]
   - content_for :sidebar do
-    #wikitoc.well.well-small
-      %h3= t '.title_toc'
-      = toc
+    #wikitoc.card.bg-light
+      .card-body
+        %h5.card-title= t '.title_toc'
+        = toc
 = content

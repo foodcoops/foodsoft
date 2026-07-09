@@ -1,7 +1,6 @@
 .btn-group
-  = link_to '#', class: "btn btn-secondary #{klass} dropdown-toggle", data: {'bs-toggle': 'dropdown'} do
+  %button{type: "button", class: "btn btn-secondary #{klass} dropdown-toggle", 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false'}
     = t '.title'
-    %span.caret
   %ul.dropdown-menu
     %li= order_pdf(order, :groups, t('.group_pdf'))
     %li= order_pdf(order, :articles, t('.article_pdf'))

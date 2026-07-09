@@ -1,11 +1,12 @@
 - title t('.title')
 
-.well.well-small
-  %dl.dl-horizontal
-    %dt= t '.date'
-    %dd= format_date @stock_taking.date
-    %dt= t '.note'
-    %dd= simple_format @stock_taking.note
+.card.bg-light
+  .card-body
+    %dl.dl-horizontal
+      %dt= t '.date'
+      %dd= format_date @stock_taking.date
+      %dt= t '.note'
+      %dd= simple_format @stock_taking.note
 
 %table.table.table-striped
   %tr

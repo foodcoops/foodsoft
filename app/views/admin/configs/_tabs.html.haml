@@ -1,13 +1,17 @@
-%ul.nav.nav-tabs.nav-tabs-with-heading
-  %li.heading
+%ul.nav.nav-tabs(role="tablist")
+  %li.nav-item.heading(role="presentation")
     %h1= t '.title'
 
   - for tab in @tabs
     - url = action_name == 'show' ? nil : admin_config_path(tab: tab)
-    %li{class: ('active' if @current_tab==tab)}= link_to t("config.tabs.#{tab}"), "#{url}#tab-#{tab}", data: ({'bs-toggle': 'tab'} unless url)
+    %li.nav-item(role="presentation")
+      = link_to t("config.tabs.#{tab}"), "#{url}#tab-#{tab}",
+        class: "nav-link #{'active' if @current_tab==tab}",
+        data: ({'bs-toggle': 'tab'} unless url),
+        role: "tab",
+        'aria-selected' => (@current_tab==tab).to_s
 
-  -# make these buttons to give some indicator that navigation away might lose changes
-  %li.float-end{class: ('active' if @current_tab=='list')}
-    = link_to t('config.tabs.list'), list_admin_config_path
-  %li.float-end
-    = link_to t('config.tabs.applications'), oauth_applications_path
+  %li.nav-item.float-end(role="presentation")
+    = link_to t('config.tabs.list'), list_admin_config_path, class: 'nav-link'
+  %li.nav-item.float-end(role="presentation")
+    = link_to t('config.tabs.applications'), oauth_applications_path, class: 'nav-link'

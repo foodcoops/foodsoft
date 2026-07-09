@@ -5,17 +5,19 @@
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
       = fa_icon :edit
       =t('.edit')
-  .well.well-small
-    %ul.nav
-      %li
-      %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
-      - unless @page.children.empty?
-        %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
+  .card.bg-light
+    .card-body
+      %ul.nav
+        %li
+        %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
+        - unless @page.children.empty?
+          %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
 
-  #versions.well.well-small{:style => "display:none"}
-    = form_tag diff_page_path(@page), :method => :get do
-      %h3= t '.title_versions'
-      %ul.list-unstyled
+  #versions.card.bg-light{:style => "display:none"}
+    .card-body
+      = form_tag diff_page_path(@page), :method => :get do
+        %h5.card-title= t '.title_versions'
+        %ul.list-unstyled
         - @page.versions.reverse.each_with_index do |version, index|
           %li
             = radio_button_tag :old, version.lock_version, index == 1
@@ -25,8 +27,9 @@
       = submit_tag t('.diff'), class: 'btn'
 
   - unless @page.children.empty?
-    #subpages.well.well-small{:style => "display:none"}
-      %h3= t '.subpages'
+    #subpages.card.bg-light{:style => "display:none"}
+      .card-body
+        %h5.card-title= t '.subpages'
       %ul.list-unstyled
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
@@ -42,8 +45,7 @@
 
 
 #wikiContent
-  .page-header
-    %h1= @page.title
+  %h1= @page.title
   = render :partial => 'body'
 
 %hr

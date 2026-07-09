@@ -51,7 +51,7 @@
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 = fa_icon :cog, style: highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])
             %div.extra-unit-fields.form-horizontal
-              .form-group.d-flex.w-full
+              .mb-3.d-flex.w-full
                 %label.col-sm-3.control-label{for: 'unit_ratios'}
                   = "Unit ratios"
                 %table#fc_base_price{:class => "col-sm-9 "}
@@ -79,7 +79,7 @@
                   - unless changed_article.new_record?
                     %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
               = form.input :billing_unit, hint: changed_article.new_record? ? nil : ArticleUnitsLib.get_translated_name_for_code(article.billing_unit || article.supplier_order_unit), hint_html: {style: 'color: grey;'}, as: :select, collection: [], input_html: {'data-initial-value': changed_article.billing_unit, class: 'form-control', style: highlight_new(attrs, :billing_unit)}, include_blank: false
-              .overflow-hidden.form-group
+              .overflow-hidden.mb-3
                 %label.control-label.col-sm-3{for: 'article_version_group_order_granularity'}
                   = "Allow orders per"
                 .col-sm-9.d-flex

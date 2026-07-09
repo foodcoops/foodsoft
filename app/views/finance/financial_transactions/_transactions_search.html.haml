@@ -1,4 +1,4 @@
-.well.well-small.row
+.card.bg-light.row
   = search_form_for @q, url: url,
         html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'from-inline'} do |f|
     .col-md-3

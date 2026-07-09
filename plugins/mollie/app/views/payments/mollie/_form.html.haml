@@ -24,32 +24,29 @@
 
 = form_tag payments_mollie_path, method: :post do
   - if params[:text]
-    .well= params[:text]
-  .control-group
-    .control-label
-      = label_tag 'amount', ((params[:label] or t('.amount_pay')))
-    .controls
-      .input-prepend
-        %span.add-on= t 'number.currency.format.unit'
-        = text_field_tag 'amount', @amount, readonly: (params[:fixed]=='true'), class: 'input-mini'
+    .alert.alert-info= params[:text]
+  .mb-3.row
+    = label_tag 'amount', ((params[:label] or t('.amount_pay'))), class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      .input-group
+        %span.input-group-text= t 'number.currency.format.unit'
+        = text_field_tag 'amount', @amount, readonly: (params[:fixed]=='true'), class: 'form-control'
       - if params[:min]
-        .help-inline{style: 'margin-bottom: 10px'}
+        .form-text{style: 'margin-bottom: 10px'}
           = "(min #{number_to_currency params[:min], precision: 0})"
         = hidden_field_tag 'min', params[:min]
-  .control-group
-    .control-label
-      = label_tag 'payment_method', t('.payment_method')
-    .controls
-      = select_tag 'payment_method', options_for_select(@payment_methods.map { |p| [p.description, p.id] }, params[:payment_method]), class: 'input-large'
+  .mb-3.row
+    = label_tag 'payment_method', t('.payment_method'), class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = select_tag 'payment_method', options_for_select(@payment_methods.map { |p| [p.description, p.id] }, params[:payment_method]), class: 'form-select'
   - if FoodsoftMollie.charge_fees?
-    .control-group
-      .control-label
-        = label_tag 'payment_fee', t('.fee')
-      .controls
-        #fee_list{data: @payment_methods_fees }= select_tag 'payment_fee'
-  .control-group
-    .controls
-      = submit_tag t('.submit')
+    .mb-3.row
+      = label_tag 'payment_fee', t('.fee'), class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        #fee_list{data: @payment_methods_fees }= select_tag 'payment_fee', class: 'form-select'
+  .mb-3.row
+    .offset-sm-3.col-sm-9
+      = submit_tag t('.submit'), class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), cancel_payments_mollie_path
 
 -# pass through options to allow reusing on error

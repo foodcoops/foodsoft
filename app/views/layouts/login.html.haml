@@ -4,8 +4,7 @@
       .offset-md-3.col-md-6
         = bootstrap_flash_patched
         - if show_title?
-          .page-header
-            %h1= yield(:title)
+          %h1= yield(:title)
         = yield
 
         = render 'layouts/footer'

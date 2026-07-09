@@ -2,9 +2,8 @@
 
 - content_for :actionbar do
   .btn-group
-    = link_to '#', data: {'bs-toggle': 'dropdown'}, class: 'btn btn-primary dropdown-toggle' do
+    %button.btn.btn-primary.dropdown-toggle(type="button" data-bs-toggle="dropdown" aria-expanded="false")
       = t '.new_order'
-      %span.caret
     %ul.dropdown-menu
       - for supplier in @suppliers
         %li= link_to supplier.name, new_order_path(supplier_id: supplier.id), tabindex: -1

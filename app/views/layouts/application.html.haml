@@ -34,19 +34,17 @@
         .col-md-9
           = bootstrap_flash_patched
           - if content_for?(:actionbar)
-            .btn-toolbar.float-end(role="toolbar")= yield(:actionbar)
+            .btn-toolbar.float-end.gap-2(role="toolbar")= yield(:actionbar)
           - if show_title?
-            .page-header
-              %h1= yield(:title)
+            %h1= yield(:title)
           = yield
       - else
         .col-md-12
           = bootstrap_flash_patched
           - if content_for?(:actionbar)
-            .btn-toolbar.float-end(role="toolbar")= yield(:actionbar)
+            .btn-toolbar.float-end.gap-2(role="toolbar")= yield(:actionbar)
           - if show_title?
-            .page-header
-              %h1= yield(:title)
+            %h1= yield(:title)
           = yield
 
     = render 'layouts/footer'

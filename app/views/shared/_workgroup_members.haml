@@ -1,5 +1,6 @@
-.card
-  %h5.card-header= t '.title'
+.card.bg-light
+  .card-body
+    %h5.card-title= t '.title'
   #groupMembers.accordion.accordion-flush
     - Workgroup.all.each do |workgroup|
       .accordion-item

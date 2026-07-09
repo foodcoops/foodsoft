@@ -2,13 +2,13 @@
   = simple_form_for([:finance, @invoice]) do |f|
     - if @invoice.created_at
       .row
-        .form-group
+        .mb-3
           .col-sm-3{style: 'text-align: right'}
             %label.control-label{for: 'created_at'}
               = Invoice.human_attribute_name(:created_at)
           .control-text#article_fc_price
             = format_date @invoice.created_at
-        .form-group
+        .mb-3
           .col-sm-3{style: 'text-align: right'}
             %label.control-label{for: 'created_by'}
               = Invoice.human_attribute_name(:created_by)
@@ -29,7 +29,7 @@
       = render 'shared/custom_form_fields', f: f, type: :invoice
       = f.input :attachments, as: :file, hint: t('.attachment_hint'), input_html: {multiple: true}, direct_upload: true
       - if f.object.attachments.attached?
-        .form-group
+        .mb-3
           %label.control-label
             = t('ui.delete_attachment')
           - f.object.attachments.reject(&:new_record?).each do |attachment|

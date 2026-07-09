@@ -3,15 +3,17 @@
 
 - content_for :sidebar do
   %div.d-flex.flex-column.gap-3
-    .card
-      %h5.card-header= t '.pages'
+    .card.bg-light
+      .card-body
+        %h5.card-title= t '.pages'
       %ul.list-group.list-group-flush
         = link_to t('.my_tasks'), user_tasks_path, class: 'list-group-item'
         = link_to t('.all_tasks'), tasks_path, class: 'list-group-item'
         = link_to t('.archive'), archive_tasks_path, class: 'list-group-item'
 
-    .card
-      %h5.card-header= t '.group_tasks'
+    .card.bg-light
+      .card-body
+        %h5.card-title= t '.group_tasks'
       %ul.list-group.list-group-flush
         - for group in Workgroup.order(:name)
           = link_to group.name, workgroup_tasks_path(workgroup_id: group.id), class: 'list-group-item'

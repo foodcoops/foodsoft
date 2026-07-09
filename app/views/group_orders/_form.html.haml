@@ -25,10 +25,11 @@
 
 - title t('.title'), false
 .row
-  .well.float-start.alert
-    = close_button :alert
-    %h2= @order.name
-    %dl.dl-horizontal
+  .card.alert.alert-info.float-start
+    .card-body
+      = close_button :alert
+      %h2.card-title= @order.name
+      %dl.dl-horizontal
       - unless @order.note.blank?
         %dt= heading_helper Order, :note
         %dd= @order.note
@@ -54,13 +55,15 @@
         %dt= heading_helper Ordergroup, :available_funds
         %dd= number_to_currency(@ordering_data[:available_funds])
 
-  .well.float-end.alert
-    = close_button :alert
-    = render 'switch_order', current_order: @order
+  .card.alert.alert-info.float-end
+    .card-body
+      = close_button :alert
+      = render 'switch_order', current_order: @order
 
 .row
-  .well.clear
-    .form-inline
+  .card.bg-light
+    .card-body
+      .form-inline
       .input-group.d-flex
         = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable form-control', style: "width:200px"
         %button.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
@@ -124,11 +127,10 @@
             %td.quantity.group-order-input{class: ('stock-order' if @order.stockit?)}
               .row
                 .col-xs-4.input-group.input-group-sm
-                  %span.input-group-btn.numeric-step
-                    %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                      %i.glyphicon.glyphicon-minus
-                    %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                      %i.glyphicon.glyphicon-plus
+                  %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
+                    %i.glyphicon.glyphicon-minus
+                  %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
+                    %i.glyphicon.glyphicon-plus
                   %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
               %span.numeric-step-error
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
@@ -142,11 +144,10 @@
               - if (order_article.article_version.uses_tolerance?)
                 .row
                   .col-xs-4.input-group.input-group-sm
-                    %span.input-group-btn
-                      %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                        %i.glyphicon.glyphicon-minus
-                      %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                        %i.glyphicon.glyphicon-plus
+                    %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
+                      %i.glyphicon.glyphicon-minus
+                    %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
+                      %i.glyphicon.glyphicon-plus
                     %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
 
             %td.text-nowrap{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}

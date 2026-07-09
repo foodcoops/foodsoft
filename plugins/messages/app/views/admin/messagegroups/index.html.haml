@@ -6,7 +6,7 @@
 - content_for :sidebar do
   %p= t('.first_paragraph', url: link_to(t('.new_messagegroups'), new_admin_messagegroup_path)).html_safe
   %p= t '.second_paragraph'
-.well.well-small
+.card.bg-light
   = form_tag admin_messagegroups_path, :method => :get, :remote => true,
     'data-submit-onchange' => true, class: 'form-inline' do
     = text_field_tag :query, params[:query], class: 'form-control search-query',

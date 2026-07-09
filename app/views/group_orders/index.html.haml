@@ -1,9 +1,10 @@
 - title t('.title'), false
 
 - content_for :sidebar do
-  .well.well-small
-    // Ordergroups Account Balance
-    %h2= t '.funds.title'
+  .card.bg-light
+    .card-body
+      // Ordergroups Account Balance
+      %h2.card-title= t '.funds.title'
     %table.table.table-striped
       %tr
         %td= heading_helper Ordergroup, :account_balance

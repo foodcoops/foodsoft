@@ -136,12 +136,10 @@ module OrdersHelper
                                                   autocomplete: 'off'
     wrapper_html = if order_article.result_manually_changed?
                      content_tag(:div, class: 'input-group') do
-                       content_tag(:span, class: 'input-group-btn',
-                                          title: t('orders.edit_amount.field_locked_title', default: '')) do
-                         button_tag(nil, type: :button, class: 'btn btn-default unlocker') {
+                       button_tag(nil, type: :button, class: 'btn btn-default unlocker',
+                                  title: t('orders.edit_amount.field_locked_title', default: '')) {
                            content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
-                         }
-                       end + input_html
+                         } + input_html
                      end
                    else
                      content_tag(:div, class: 'input-group') { input_html }

@@ -51,16 +51,17 @@
   .alert.alert-warning
     = t '.warn_not_closed'
 
-.well.well-small
-  .btn-toolbar
-    .float-end
-      .input-group.d-flex
-        = text_field_tag :query, params[:query], class: 'form-control search-query delayed-search resettable'
-        %button.btn.reset-search{:type => :button, :title => t('.search_reset')}
-          %i.glyphicon.glyphicon-remove
+.card.bg-light
+  .card-body
+    .btn-toolbar.gap-2
+      .float-end
+        .input-group.d-flex
+          = text_field_tag :query, params[:query], class: 'form-control search-query delayed-search resettable'
+          %button.btn.reset-search{:type => :button, :title => t('.search_reset')}
+            %i.glyphicon.glyphicon-remove
 
-  .btn-toolbar
-    .btn-group.view_buttons
+    .btn-toolbar.gap-2
+      .btn-group.view_buttons
       = update_articles_link @order, t('.articles'), :default, class: 'btn btn-secondary'
       = update_articles_link @order, t('.sort_group'), :groups, class: 'btn btn-secondary'
       = update_articles_link @order, t('.sort_article'), :articles, class: 'btn btn-secondary'

@@ -1,4 +1,4 @@
-%section.well
+%section.card.bg-light
   %h3= messagegroup.name
   = render :partial => 'shared/group', :locals => { :group => messagegroup }
   = link_to_new_message(message_params: {group_id: messagegroup.id})

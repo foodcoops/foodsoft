@@ -29,16 +29,16 @@
 - [x] 2-9: data-dismiss → data-bs-dismiss (1 instance, non-modal)
 - [x] 2-10: badge-important → badge bg-danger (1 instance)
 - [x] 2-11: Offset classes col-*-offset-* → offset-*-* (2 instances)
-- [ ] **Phase 3 — Structural Component Changes**
-  - [ ] 3-1: .well/.well-small → .card/.card-body (27 instances)
-  - [ ] 3-2: .panel → .card (7 instances)
-  - [ ] 3-3: .page-header → remove or custom CSS (4 instances)
-  - [ ] 3-4: .input-group-btn → .input-group (7 instances)
-  - [ ] 3-5: .control-group → remove or .mb-3 (12 instances SCSS+Ruby)
-  - [ ] 3-6: .form-group → .mb-3 (18 instances hardcoded)
-  - [ ] 3-7: .btn-toolbar needs .gap-2 for spacing (6 instances — layout:37,46; orders/show:55,62; articles/index:13; stockit/index:33)
-  - [ ] 3-8: Dropdown toggle <a> → <button class="dropdown-toggle"> (12 instances across orders, articles, stockit, finance, plugins)
-  - [ ] 3-9: Tab component — add nav-link, role, aria attributes (admin/configs)
+- [x] **Phase 3 — Structural Component Changes**
+  - [x] 3-1: .well/.well-small → .card/.card-body (27 instances)
+  - [x] 3-2: .panel → .card (1 file)
+  - [x] 3-3: .page-header → remove (4 instances)
+  - [x] 3-4: .input-group-btn → .input-group (6 instances)
+  - [x] 3-5: Mollie .control-group form restructured; SCSS refs remain for Phase 5
+  - [x] 3-6: .form-group → .mb-3 (24 instances hardcoded)
+  - [x] 3-7: .btn-toolbar needs .gap-2 for spacing (6 instances)
+  - [x] 3-8: Dropdown toggle `<a>` → `<button>` (10 instances; navbar kept per BS5 spec)
+  - [x] 3-9: Tab component — BS5 structure (nav-link, role, aria attributes)
 - [ ] **Phase 4 — Icon Replacement**
   - [ ] 4-1: glyphicon → FontAwesome in views (22 instances)
   - [ ] 4-2: icon-* → fa fa-* in views (8 instances)
