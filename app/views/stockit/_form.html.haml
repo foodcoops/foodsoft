@@ -1,7 +1,7 @@
 = simple_form_for stock_article.latest_article_version, :url => stock_article.new_record? ? stock_articles_path(stock_article, foodcoop: FoodsoftConfig.scope) : stock_article_path(stock_article), remote: true, validate: true do |f|
   :javascript
-    const articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: f, article_unit_ratio_counter: -1}))}"));
-    const units = #{raw(@all_units.to_json)};
+    var articleUnitRatioTemplate$ = $($.parseHTML("#{escape_javascript(render(partial: 'shared/article_unit_ratio', locals: {article_unit_ratio: @empty_article_unit_ratio, f: f, article_unit_ratio_counter: -1}))}"));
+    var units = #{raw(@all_units.to_json)};
     new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
   = render partial: 'shared/js_templates/unit_conversion_popover_template'
   .modal-dialog
