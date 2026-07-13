@@ -94,10 +94,10 @@
             .d-flex.gap-1
               .input-group
                 %span.input-group-addon= t 'number.currency.format.unit'
-                = form.text_field 'price', class: 'form-control', style: 'width: 45px'
+                = form.text_field 'price', class: 'form-control article-price-input'
               .input.d-flex.gap-1.unit-wrapper
                 %label=t('articles.form.per')
-                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
+                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control article-price-unit'}
           %td{:style => highlight_new(attrs, :tax)}
             .input-group
               = form.text_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0px'
