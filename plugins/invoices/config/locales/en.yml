@@ -1,0 +1,166 @@
+en:
+  activerecord:
+    attributes:
+      group_order_invoice:
+        name: Group Order Invoice
+        sequence_type:
+          FRST: "First Direct Debit"
+          RCUR: "Recurring Direct Debit"
+          OOFF: "One-time Direct Debit"
+          FNAL: "Final Direct Debit"
+        links:
+          actions_for_all: Actions for all group orders
+          create_cumulative_invoice: create cumulative invoice
+          combine: combine invoices
+          confirm_send_all: Are you sure you want to send these ordergroup invoices to %{ordergroups}?
+          delete: delete invoice
+          direct_debit_for_all: Collective direct debit for all (.xml)
+          direct_debit_for_selected: Collective direct debit for selected (.xml)
+          download: download invoice
+          download_all_zip: download all invoices as zip
+          generate: generate invoice
+          generate_with_date: set & generate
+          invoice_date: date of group order invoice
+          invoice_number: invoice number
+          ordergroup: Ordergroup
+          paid: paid
+          not_paid: unpaid
+          send_all_by_email: send all invoices
+          send_all_success: Invoices were sent to all ordergroups
+          sepa_downloaded: SEPA exported
+          sepa_not_downloaded: SEPA not exported
+          sepa_not_ready: Configurations for SEPA are missing in Admin->Settings->Finances
+          sepa_select: SEPA export
+          sepa_sequence_type: SEPA type
+        open_details_modal: Toggle details
+        payment_method: Credit
+        tax_number_not_set: Tax number not set in configs or no ordergroup present
+      ordergroup_invoice:
+        merge: Merge
+        name: Ordergroup Invoice
+        email_sent: Email sent at
+      sepa_account_holder:
+        bic: BIC
+        holder: SEPA Account holder
+        iban: IBAN
+        mandate_id: Mandate reference ID
+        mandate_date_of_signature: Date of mandate signature
+        hint: "Attention: The IBAN and BIC will be filled in automatically once the SEPA account holder is selected. Previous entries will be overwritten."
+
+  admin:
+    configs:
+      tab_payment:
+        group_order_invoices: Group order invoices
+
+  config:
+    hints:
+      group_order_invoices:
+        ignore_minimum_balance: Members can order even if their account balance is below the minimum. (Important when using SEPA direct debit as payment method)
+        use_automatic_go_invoices: Customized invoices for the respective order will be sent by email to all ordergroup members when clicking on "settle".
+        payment_method: Payment method is declared on the ordergroup invoice
+        vat_exempt: A list of invoice items is made without explicit indication of VAT and the invoice receives the necessary addition regarding the small business regulation §19 (FoodCoop margin also not included in invoice)
+        iban: Enter IBAN without spaces
+        bic: Enter BIC without spaces
+        creditor_identifier: Enter creditor identifier without spaces
+    keys:
+      group_order_invoices:
+        ignore_minimum_balance: Ignore minimum balance
+        use_automatic_invoices: Send automatically via mail after oder settlement
+        payment_method: Payment method
+        separate_deposits: Separate deposits on invoice
+        vat_exempt: This foodcoop is VAT exempt
+        iban: IBAN
+        bic: BIC
+        creditor_identifier: Creditor identifier
+
+  documents:
+    group_order_invoice_pdf:
+      ordergroup:
+        contact_phone: 'Phone: %{contact_phone}'
+        contact_address: 'Address: %{contact_address}'
+        customer_number: 'Customer number: %{customer_number}'
+        name: 'Ordergroup: %{ordergroup}'
+      deposit: Deposit
+      deposit_excluded: plus deposit
+      filename: Invoice%{number}
+      invoicee: Invoicee
+      invoicer: Invoicer
+      invoice_date: 'Invoice date: %{invoice_date}'
+      invoice_number: 'Invoice number: %{invoice_number}'
+      markup_included: incl. Foodcoop margin on gross price %{marge}%
+      payment_method: 'Payment method: %{payment_method}'
+      pickup_date: 'Delivery date: %{invoice_date}'
+      products: Products
+      small_business_regulation: As a small entrepreneur in the sense of §19 para. 1 of the Umsatzsteuergesetz (UStG), no value added tax is charged.
+      sum_to_pay: Total sum
+      sum_to_pay_net: Total sum (net)
+      sum_to_pay_gross: Total sum (gross)
+      table_headline: 'The following items will be charged for the order:'
+      tax_excluded: excl. VAT
+      tax_included: incl. VAT %{tax}%
+      tax_line: "%{label} with %{tax_key}%"
+      tax_number: 'Tax number: %{number}'
+      title: Invoice for order at %{supplier}
+      vat_sum_table:
+        gross: Gross
+        margin: FC margin
+        net: Net
+        tax: VAT
+      vat_exempt_rows:
+        - Name
+        - Quantity
+        - Unit price
+        - Total price
+      no_price_markup_rows:
+        - Name
+        - Quantity
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross)
+      price_markup_rows:
+        - Name
+        - Quantity
+        - Unit price (net)
+        - Total price (net)
+        - VAT
+        - Total price (gross) incl. foodcoop margin
+
+  mailer:
+    group_order_invoice:
+      subject: Group order invoice for %{group} at %{supplier}
+    ordergroup_invoice:
+      subject: Group order invoice for %{group} at %{supplier}
+
+  invoice_mailer:
+    group_order_invoice:
+      text: |
+        Dear order group %{group},
+        
+        The collective order at %{supplier} has just been settled and invoices have been created for the respective order groups.
+        Attached you will find your invoice.
+        
+        Best regards from %{foodcoop}
+    ordergroup_invoice:
+      text: |
+        Dear order group %{group},
+        
+        The collective order at %{supplier} has just been settled and invoices have been created for the respective order groups.
+        Attached you will find your invoice.
+        
+        Best regards from %{foodcoop}
+
+  multi_orders:
+    destroy:
+      invoices_left: Delete the invoices first
+    create:
+      no_multi_multi: You cannot convert multi-orders into a multi-multi order.
+      invalid_orders: The order is already part of a multi-order or is not yet closed.
+      merge_not_possible_invoices_present: Merge not possible. There are already invoices for some of the order groups.
+      success: "Multi order for %{suppliers} created"
+    collective_direct_debit:
+      filename_suffix: CollectiveDirectDebit
+
+  orders:
+    collective_direct_debit:
+      alert: Important data for a SEPA direct debit is missing for %{ordergroup_names}.

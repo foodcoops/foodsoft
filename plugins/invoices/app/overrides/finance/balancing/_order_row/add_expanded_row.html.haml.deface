@@ -1,0 +1,6 @@
+/ insert_after 'tr'
+- if FoodsoftInvoices.enabled?
+  - row_id = "expanded-row-#{order.id}"
+  %tr{:class => 'expanded-row hidden', :id => row_id}
+    %td{:colspan => '7'}
+      = render partial: 'group_order_invoices/modal', locals: { order: order }
