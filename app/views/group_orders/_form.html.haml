@@ -183,7 +183,8 @@
                     #{format_group_order_unit_with_ratios(order_article.article_version)}
 
                   %br/
-                  #{heading_helper Article, :note}: #{order_article.article_version.note}
+                  %span.note
+                    #{heading_helper Article, :note}: #{order_article.article_version.note}
                   %br/
   #order-footer
     #info-box
