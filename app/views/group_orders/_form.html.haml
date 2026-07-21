@@ -123,8 +123,8 @@
               %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
             %td.quantity.group-order-input{class: ('stock-order' if @order.stockit?)}
               .row
-                .col-xs-4.input-group.input-group-sm
-                  %span.input-group-btn.numeric-step
+                .col-xs-4.input-group.input-group-sm.d-flex
+                  %span.input-group-btn.numeric-step{style: 'width: 50px !important'}
                     %button.btn.btn-default.btn-ordering.decrease{type: "button"}
                       %i.glyphicon.glyphicon-minus
                     %button.btn.btn-default.btn-ordering.increase{type: "button"}
@@ -141,8 +141,8 @@
             %td.tolerance.group-order-input{style: ('display:none' if @order.stockit?)}
               - if (order_article.article_version.uses_tolerance?)
                 .row
-                  .col-xs-4.input-group.input-group-sm
-                    %span.input-group-btn
+                  .col-xs-4.input-group.input-group-sm.d-flex
+                    %span.input-group-btn{style: 'width: 50px !important'}
                       %button.btn.btn-default.btn-ordering.decrease{type: "button"}
                         %i.glyphicon.glyphicon-minus
                       %button.btn.btn-default.btn-ordering.increase{type: "button"}
