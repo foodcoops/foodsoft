@@ -759,6 +759,10 @@ td.mr-1 > *:last-child {
   display: block;
 }
 
+.numeric-step {
+  min-width: 50px;
+}
+
 
 .form-group .select2-container {
   width: 200px;
