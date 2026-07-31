@@ -71,6 +71,7 @@ de:
         separate_deposits: Pfand getrennt abrechnen
         payment_method: Zahlungsart
         vat_exempt: Diese Foodcoop ist MwSt. befreit
+        sepa_export_settings: SEPA-Lastschrift-Export Einstellungen
         iban: IBAN
         bic: BIC
         creditor_identifier: Gläubiger-ID

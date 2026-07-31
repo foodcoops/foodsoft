@@ -7,7 +7,7 @@
   = config_input field, :vat_exempt, as: :boolean
   = config_input field, :payment_method, collection: FinancialTransactionType.all.map { |t| [t.name, t.id] }, as: :select, include_blank: true
   %p
-    %i Für SEPA-Lastschrift-Export:
+    %i= t '.group_order_invoices.sepa_export_settings'
     = config_input field, :iban
     = config_input field, :bic
     = config_input field, :creditor_identifier

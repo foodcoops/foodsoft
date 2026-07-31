@@ -69,6 +69,7 @@ en:
         payment_method: Payment method
         separate_deposits: Separate deposits on invoice
         vat_exempt: This foodcoop is VAT exempt
+        sepa_export_settings: SEPA direct debit export settings
         iban: IBAN
         bic: BIC
         creditor_identifier: Creditor identifier

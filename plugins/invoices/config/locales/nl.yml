@@ -69,6 +69,7 @@ nl:
         payment_method: Betaalmethode
         separate_deposits: Statiegeld apart factureren
         vat_exempt: Deze foodcoop is BTW-vrijgesteld
+        sepa_export_settings: Instellingen voor SEPA-incasso-export
         iban: IBAN
         bic: BIC
         creditor_identifier: Incassant-ID
