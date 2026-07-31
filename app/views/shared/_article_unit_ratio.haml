@@ -9,7 +9,7 @@
       %div{:style => 'margin-left:2px;display:flex; align-items: center'}
         = sub_form.input :sort, as: :hidden
 
-        = sub_form.input :quantity, {input_html: {class: 'form-control'}, label: false, wrapper_class: 'col-sm-3', wrapper: :inline_form}
+        = sub_form.input :quantity, { as: :decimal, input_html: {class: 'form-control', step: 0.001}, label: false, wrapper_class: 'col-sm-3', wrapper: :inline_form}
         %div= '&times;'.html_safe
         = sub_form.input :unit, as: :select, include_blank: true, collection: @article_units, label: false, input_html: {class: 'form-control', style:"width:120px"}, wrapper: :inline_form, wrapper_class: 'col-sm-5'
         %div.ml-1= t('.per')

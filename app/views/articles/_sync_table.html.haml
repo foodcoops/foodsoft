@@ -74,7 +74,7 @@
               = form.input :minimum_order_quantity, class: 'form form-control', label: "Mininum order quantity" do
                 .form
                   .input-group
-                    = form.input_field :minimum_order_quantity, class: 'form-control', style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
+                    = form.number_field :minimum_order_quantity, class: 'form-control', step: 0.001, style: highlight_new(attrs, :minimum_order_quantity), title: "total minimum order quantity for this article"
                     %span.input-group-addon
                   - unless changed_article.new_record?
                     %p.help-block{style: 'color: grey;'}=article.minimum_order_quantity.to_s
@@ -94,18 +94,18 @@
             .d-flex.gap-1
               .input-group
                 %span.input-group-addon= t 'number.currency.format.unit'
-                = form.text_field 'price', class: 'form-control', style: 'width: 45px'
+                = form.number_field 'price', class: 'form-control', style: 'width: 45px', step: 0.001
               .input.d-flex.gap-1.unit-wrapper
                 %label=t('articles.form.per')
                 = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
           %td{:style => highlight_new(attrs, :tax)}
             .input-group
-              = form.text_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0px'
+              = form.number_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0px', step: 0.001
               %span.input-group-addon %
           %td{:style => highlight_new(attrs, :deposit)}
             .input-group
               %span.input-group-addon= t 'number.currency.format.unit'
-              = form.text_field 'deposit', class: 'form-control', style: 'width: 45px'
+              = form.number_field 'deposit', class: 'form-control', style: 'width: 45px', step: 0.001
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'form-control'
       - unless changed_article.errors.empty?

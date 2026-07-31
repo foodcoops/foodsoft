@@ -160,9 +160,9 @@ class ArticleForm {
   }
 
   undoPriceConversion() {
-    const relativePrice = this.price$.val();
+    const relativePrice = parseLocalizedFloat(this.price$.val());
     const priceUnit = this.priceUnit$.val();
-    if (priceUnit === undefined) {
+    if (priceUnit === undefined || Number.isNaN(relativePrice)) {
       return;
     }
     const ratio = this.getUnitRatio(1, priceUnit, this.supplierUnitSelect$.val());
@@ -551,7 +551,10 @@ class ArticleForm {
     this.unitRatiosTable$.find('tbody tr').each((_, element) => {
       const tr$ = $(element);
       const unit = tr$.find(`select[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[unit]"]`).val();
-      const quantity = tr$.find(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]:last`).val();
+      const quantity = parseLocalizedFloat(tr$.find(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]:last`).val());
+      if (Number.isNaN(quantity)) {
+        return;
+      }
       this.ratios.push({ unit, quantity });
     });
   }
@@ -560,7 +563,11 @@ class ArticleForm {
     let previousValue;
     $(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]`).each((_, field) => {
       let currentField$ = $(field);
-      let quantity = currentField$.val();
+      let quantity = parseLocalizedFloat(currentField$.val());
+
+      if (Number.isNaN(quantity)) {
+        return;
+      }
 
       if (previousValue !== undefined) {
         const td$ = currentField$.closest('td');
