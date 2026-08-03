@@ -115,7 +115,7 @@ module OrdersHelper
 
     title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article_version.price}"
     title += " / #{number_to_currency order_article.article_version.gross_price}" if gross
-    content_tag(:i, nil, class: 'glyphicon-asterisk', title: j(title)).html_safe
+    content_tag(:i, nil, class: 'fa fa-asterisk', title: j(title)).html_safe
   end
 
   def receive_input_field(form)
@@ -138,7 +138,7 @@ module OrdersHelper
                      content_tag(:div, class: 'input-group') do
                        button_tag(nil, type: :button, class: 'btn btn-default unlocker',
                                   title: t('orders.edit_amount.field_locked_title', default: '')) {
-                           content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
+                           content_tag(:i, nil, class: 'fa fa-lock')
                          } + input_html
                      end
                    else

@@ -33,7 +33,7 @@
             %td
             %td{:colspan => "6", :style => "text-align:left"}
               = category_name
-              %i.icon-tag
+              %i.fa.fa-tag
           - for article in articles
             / check if the article is selected or has an error
             - included = @order.article_ids.include?(article.id.to_s)

@@ -67,7 +67,7 @@
       .input-group.d-flex
         = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable form-control', style: "width:200px"
         %button.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
-          %i.glyphicon.glyphicon-remove
+          %i.fa.fa-times
 
 = form_for @group_order, html: {class: 'group_order_form'} do |f|
   = f.hidden_field :lock_version
@@ -96,7 +96,7 @@
         %tr.list-heading.article-category
           %td
             = category
-            %i.icon-tag
+            %i.fa.fa-tag
           %td{colspan: "9"}
         - order_articles.each do |order_article|
           %tr{class: "#{cycle('even', 'odd', name: 'articles')} order-article #{get_missing_units_css_class(@ordering_data[:order_articles][order_article.id][:missing_units], order_article.article_version)}", valign: "top"}
@@ -128,9 +128,9 @@
               .row
                 .col-xs-4.input-group.input-group-sm
                   %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                    %i.glyphicon.glyphicon-minus
+                    %i.fa.fa-minus
                   %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                    %i.glyphicon.glyphicon-plus
+                    %i.fa.fa-plus
                   %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
               %span.numeric-step-error
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
@@ -145,9 +145,9 @@
                 .row
                   .col-xs-4.input-group.input-group-sm
                     %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                      %i.glyphicon.glyphicon-minus
+                      %i.fa.fa-minus
                     %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                      %i.glyphicon.glyphicon-plus
+                      %i.fa.fa-plus
                     %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
 
             %td.text-nowrap{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}

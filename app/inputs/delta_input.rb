@@ -30,7 +30,7 @@ class DeltaInput < SimpleForm::Inputs::StringInput
   end
 
   def buttons
-    delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-minus'), -1, options) +
-      delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), 1, options)
+    delta_button(content_tag(:i, nil, class: 'fa fa-minus'), -1, options) +
+      delta_button(content_tag(:i, nil, class: 'fa fa-plus'), 1, options)
   end
 end

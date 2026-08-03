@@ -26,6 +26,6 @@
           - elsif !task.done
             = link_to set_done_task_path(task), method: :post, class: 'btn btn-secondary btn-sm',
               title: t('.mark_done') do
-              %i.icon-ok= t '.done_q'
+              %i.fa.fa-check= t '.done_q'
           - else
-            %i.icon-ok= t '.done'
+            %i.fa.fa-check= t '.done'

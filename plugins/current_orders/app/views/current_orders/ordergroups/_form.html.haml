@@ -9,7 +9,7 @@
       = text_field_tag :query, params[:query], class: 'search-query delayed-search resettable', disabled: @ordergroup.nil?,
         'placeholder' => t('orders.show.search_placeholder.articles')
       %button.add-on.btn.reset-search{:type => :button, :title => t('orders.show.search_reset')}
-        %i.icon.icon-remove
+        %i.fa.fa-times
 
 
     - if @ordergroup and FoodsoftConfig[:price_markup_list]

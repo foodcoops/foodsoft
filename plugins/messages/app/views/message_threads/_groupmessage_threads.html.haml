@@ -6,6 +6,6 @@
       %small
         = link_to message_thread_path(id) do
           = t '.show_message_threads'
-          %i.icon.icon-chevron-right
+          %i.fa.fa-chevron-right
     = render 'message_threads', message_threads: message_threads, pagination: false
     = link_to_top

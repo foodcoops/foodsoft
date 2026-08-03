@@ -12,7 +12,7 @@
     = f.select :supplier_order_unit, @article_units, selected: supplier_order_unit_override, include_blank: t('.custom_unit'), html: {class: 'form-control d-flex', style: 'width: 150px;'}, class: 'flex-1'
     -# title: free text unit
     = f.input_field :unit, class: 'form-control ms-1', placeholder: t('.unit')
-    %i.glyphicon.glyphicon-warning-sign{title: t('.warn_about_needless_custom_unit')}
+    %i.fa.fa-warning{title: t('.warn_about_needless_custom_unit')}
 .mb-3.d-flex
   %label.control-label.col-sm-3
     = t('.unit_ratios')

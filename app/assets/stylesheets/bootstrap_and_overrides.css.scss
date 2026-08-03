@@ -399,7 +399,7 @@ td.symbol, th.symbol {
 .unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
-  .glyphicon-warning-sign {
+  .fa-warning {
     margin-top: 8px;
     margin-left: 10px;
     color: $articleCustomUnitWarning;
@@ -499,7 +499,7 @@ label {
 
 
 // it's a bit distracting
-.glyphicon-asterisk {
+.fa-asterisk {
   font-size: 80%;
   vertical-align: middle;
   padding-bottom: 0.4ex;

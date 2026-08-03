@@ -39,12 +39,12 @@
   - [x] 3-7: .btn-toolbar needs .gap-2 for spacing (6 instances)
   - [x] 3-8: Dropdown toggle `<a>` → `<button>` (10 instances; navbar kept per BS5 spec)
   - [x] 3-9: Tab component — BS5 structure (nav-link, role, aria attributes)
-- [ ] **Phase 4 — Icon Replacement**
-  - [ ] 4-1: glyphicon → FontAwesome in views (22 instances)
-  - [ ] 4-2: icon-* → fa fa-* in views (8 instances)
-  - [ ] 4-3: glyphicon → FontAwesome in Ruby helpers
-  - [ ] 4-4: glyphicon → FontAwesome in JavaScript
-  - [ ] 4-5: Remove glyphicon SCSS references
+- [x] **Phase 4 — Icon Replacement**
+  - [x] 4-1: glyphicon → FontAwesome in views (22 instances)
+  - [x] 4-2: icon-* → fa fa-* in views (8 instances)
+  - [x] 4-3: glyphicon → FontAwesome in Ruby helpers
+  - [x] 4-4: glyphicon → FontAwesome in JavaScript
+  - [x] 4-5: Remove glyphicon SCSS references
 - [ ] **Phase 5 — CSS Cleanup**
   - [ ] 5-1: Delete dead file app/assets/javascripts/bootstrap.js
   - [ ] 5-2: Remove manually-defined BS5-native utility classes from SCSS
