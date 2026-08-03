@@ -51,25 +51,205 @@
   - [x] 5-3: Remove legacy form CSS from SCSS
   - [x] 5-4: Remove legacy panel CSS from SCSS
   - [x] 5-5: Remove pull-left/pull-right fallback CSS
-- [ ] **Phase 6 — Form-by-Form Manual Review**
-  - [ ] 6-1: Group orders form
-  - [ ] 6-2: Article forms (sync_table, upload)
-  - [ ] 6-3: Sessions form
-  - [ ] 6-4: Inline forms
-  - [ ] 6-5: Finance forms
-  - [ ] 6-6: Article field partials
-  - [ ] 6-7: Orders helper
-  - [ ] 6-8: Mollie plugin form
-  - [ ] 6-9: Workgroups form
+- [ ] **Phase 6 — View-by-View Manual Review** (135 HAML files)
+
+### Layouts
+- [ ] `app/views/layouts/application.html.haml`
+- [ ] `app/views/layouts/login.html.haml`
+- [ ] `app/views/layouts/_footer.html.haml`
+
+### Home & Navigation
+- [ ] `app/views/home/index.html.haml`
+- [ ] `app/views/home/ordergroup.html.haml`
+- [ ] `app/views/home/_start_nav.html.haml`
+
+### Orders
+- [ ] `app/views/orders/_form.html.haml`
+- [ ] `app/views/orders/_articles.html.haml`
+- [ ] `app/views/orders/_edit_amount.html.haml`
+- [ ] `app/views/orders/show.html.haml`
+- [ ] `app/views/orders/index.html.haml`
+- [ ] `app/views/orders/receive.html.haml`
+
+### Group Orders
+- [ ] `app/views/group_orders/_form.html.haml`
+- [ ] `app/views/group_orders/show.html.haml`
+- [ ] `app/views/group_orders/index.html.haml`
+- [ ] `app/views/group_order_articles/_form.html.haml`
+
+### Articles
+- [ ] `app/views/articles/_form.html.haml`
+- [ ] `app/views/articles/_sync_table.html.haml`
+- [ ] `app/views/articles/_edit_all_table.html.haml`
+- [ ] `app/views/articles/_article.html.haml`
+- [ ] `app/views/articles/index.html.haml`
+- [ ] `app/views/articles/migrate_units.html.haml`
+
+### Stockit / StockTakings / Deliveries
+- [ ] `app/views/stockit/_form.html.haml`
+- [ ] `app/views/stockit/index.html.haml`
+- [ ] `app/views/stockit/_stock_article.html.haml`
+- [ ] `app/views/stock_takings/index.html.haml`
+- [ ] `app/views/stock_takings/show.html.haml`
+- [ ] `app/views/stock_takings/_stock_change.html.haml`
+- [ ] `app/views/stock_takings/_stock_takings.html.haml`
+- [ ] `app/views/deliveries/index.html.haml`
+- [ ] `app/views/deliveries/_stock_article_for_adding.html.haml`
+- [ ] `app/views/deliveries/_stock_change_fields.html.haml`
+
+### Suppliers
+- [ ] `app/views/suppliers/index.html.haml`
+- [ ] `app/views/suppliers/show.html.haml`
+- [ ] `app/views/suppliers/_import_search_results.html.haml`
+
+### Finance — Balancing
+- [ ] `app/views/finance/balancing/new.html.haml`
+- [ ] `app/views/finance/balancing/_edit_results_by_articles.html.haml`
+- [ ] `app/views/finance/balancing/_group_order_articles.html.haml`
+- [ ] `app/views/finance/balancing/_order_article.html.haml`
+- [ ] `app/views/finance/balancing/_edit_note.html.haml`
+- [ ] `app/views/finance/balancing/_edit_transport.html.haml`
+
+### Finance — Bank & Transactions
+- [ ] `app/views/finance/bank_transactions/index.html.haml`
+- [ ] `app/views/finance/bank_transactions/_transactions.html.haml`
+- [ ] `app/views/finance/bank_accounts/_import.html.haml`
+- [ ] `app/views/finance/financial_transactions/index.html.haml`
+- [ ] `app/views/finance/financial_transactions/_transactions.html.haml`
+- [ ] `app/views/finance/financial_transactions/_transactions_search.html.haml`
+- [ ] `app/views/finance/financial_transactions/new_collection.html.haml`
+
+### Finance — Links, Invoices, Ordergroups
+- [ ] `app/views/finance/financial_links/_index_bank_transaction.html.haml`
+- [ ] `app/views/finance/financial_links/_index_financial_transaction.html.haml`
+- [ ] `app/views/finance/financial_links/_index_invoice.html.haml`
+- [ ] `app/views/finance/financial_links/_new_financial_transaction.html.haml`
+- [ ] `app/views/finance/financial_links/show.html.haml`
+- [ ] `app/views/finance/invoices/_form.html.haml`
+- [ ] `app/views/finance/invoices/_invoices.html.haml`
+- [ ] `app/views/finance/ordergroups/index.html.haml`
+- [ ] `app/views/finance/ordergroups/_ordergroups.html.haml`
+
+### Finance — Index
+- [ ] `app/views/finance/index.html.haml`
+
+### Admin — Configs
+- [ ] `app/views/admin/configs/_tabs.html.haml`
+- [ ] `app/views/admin/configs/show.html.haml`
+- [ ] `app/views/admin/configs/_tab_payment.html.haml`
+
+### Admin — Users & Workgroups
+- [ ] `app/views/admin/users/_form.html.haml`
+- [ ] `app/views/admin/users/index.html.haml`
+- [ ] `app/views/admin/users/show.html.haml`
+- [ ] `app/views/admin/users/_users.html.haml`
+- [ ] `app/views/admin/workgroups/_form.html.haml`
+- [ ] `app/views/admin/workgroups/index.html.haml`
+- [ ] `app/views/admin/workgroups/_workgroups.html.haml`
+
+### Admin — Finances
+- [ ] `app/views/admin/finances/_form.html.haml`
+- [ ] `app/views/admin/finances/_bank_gateways.html.haml`
+- [ ] `app/views/admin/finances/_supplier_categories.html.haml`
+- [ ] `app/views/admin/finances/_transaction_types.html.haml`
+- [ ] `app/views/admin/financial_transaction_classes/_form.html.haml`
+- [ ] `app/views/admin/financial_transaction_types/_form.html.haml`
+
+### Admin — Misc
+- [ ] `app/views/admin/ordergroups/index.html.haml`
+- [ ] `app/views/admin/ordergroups/_ordergroups.html.haml`
+- [ ] `app/views/admin/bank_accounts/_form.html.haml`
+- [ ] `app/views/admin/bank_gateways/_form.html.haml`
+- [ ] `app/views/admin/supplier_categories/_form.html.haml`
+- [ ] `app/views/admin/mail_delivery_status/_maildeliverystatus.html.haml`
+
+### Sessions
+- [ ] `app/views/sessions/new.html.haml`
+
+### Shared Partials
+- [ ] `app/views/shared/_article_fields_units.html.haml`
+- [ ] `app/views/shared/_article_fields_price.html.haml`
+- [ ] `app/views/shared/_article_unit_ratio.html.haml`
+- [ ] `app/views/shared/_user_form_fields.html.haml`
+- [ ] `app/views/shared/_task_list.html.haml`
+- [ ] `app/views/shared/_order_download_button.html.haml`
+- [ ] `app/views/shared/_alert_success.haml`
+- [ ] `app/views/shared/_workgroup_members.html.haml`
+- [ ] `app/views/shared/articles_by/_articles.html.haml`
+- [ ] `app/views/shared/articles_by/_article_single.html.haml`
+- [ ] `app/views/shared/articles_by/_availability_explanation.html.haml`
+- [ ] `app/views/shared/articles_by/_group_single_goa.html.haml`
+- [ ] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`
+
+### Self Service
+- [ ] `app/views/self_service/_event_listeners.haml`
+- [ ] `app/views/self_service/index.haml`
+- [ ] `app/views/self_service/_pickup.haml`
+
+### Tasks, Errors, Pickups, Invites, Workgroups
+- [ ] `app/views/tasks/edit.haml`
+- [ ] `app/views/tasks/_nav.haml`
+- [ ] `app/views/errors/_error.html.haml`
+- [ ] `app/views/invites/_modal_form.html.haml`
+- [ ] `app/views/pickups/index.html.haml`
+- [ ] `app/views/foodcoop/workgroups/edit.html.haml`
+- [ ] `app/views/foodcoop/workgroups/_workgroup.html.haml`
+
+### Article Units & Categories
+- [ ] `app/views/article_units/index.html.haml`
+- [ ] `app/views/article_units/_create_link.html.haml`
+- [ ] `app/views/article_units/_destroy_link.html.haml`
+- [ ] `app/views/article_categories/index.html.haml`
+
+### Plugins — Current Orders
+- [ ] `plugins/current_orders/.../ordergroups/_form.html.haml`
+- [ ] `plugins/current_orders/.../ordergroups/_payment_bar.html.haml`
+- [ ] `plugins/current_orders/.../articles/_form.html.haml`
+- [ ] `plugins/current_orders/.../articles/_actions.html.haml`
+- [ ] `plugins/current_orders/.../group_orders/_result.html.haml`
+- [ ] `plugins/current_orders/.../group_orders/_payment_bar.html.haml`
+
+### Plugins — Messages
+- [ ] `plugins/messages/.../messages/thread.haml`
+- [ ] `plugins/messages/.../messages/show.html.haml`
+- [ ] `plugins/messages/.../messages/_messages.html.haml`
+- [ ] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/_form.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/index.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
+- [ ] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
+
+### Plugins — Wiki
+- [ ] `plugins/wiki/.../pages/show.html.haml`
+- [ ] `plugins/wiki/.../pages/all.html.haml`
+- [ ] `plugins/wiki/.../pages/_form.html.haml`
+- [ ] `plugins/wiki/.../pages/_body.html.haml`
+
+### Plugins — Documents
+- [ ] `plugins/documents/.../documents/_form.html.haml`
+- [ ] `plugins/documents/.../documents/_documents.html.haml`
+- [ ] `plugins/documents/.../documents/_move.html.haml`
+
+### Plugins — Polls, Links, Printer, Mollie
+- [ ] `plugins/polls/.../polls/_polls.html.haml`
+- [ ] `plugins/links/.../admin/links/_form.html.haml`
+- [ ] `plugins/links/.../admin/links/_links.html.haml`
+- [ ] `plugins/printer/.../printer_jobs/_jobs.html.haml`
+- [ ] `plugins/printer/.../printer_jobs/index.html.haml`
+- [ ] `plugins/mollie/.../payments/mollie/_form.html.haml`
+
+### Scaffold
+- [ ] `lib/templates/haml/scaffold/_form.html.haml`
+
 
 ---
 
 ## Current State
 
-- **Bootstrap 5.3.8** installed via gem (dartsass-sprockets pipeline)
-- **334 view files** (301 HAML, 33 ERB), +80 plugin views
+- **Bootstrap 5.3** installed via gem (dartsass-sprockets pipeline)
+- **334 view files** (301 HAML, 33 ERB), +80 plugin views — **135 HAML files** touched across Phases 0-5
 - JS delivered via dual pipeline: Importmap (BS5 JS) + Sprockets (legacy jQuery)
-- Migration is **partial** — navbar, alerts, accordion are migrated; modals/tooltips/popovers are **broken**
+- Phases 0-5: **complete** — modals, tooltips, popovers, forms, icons, CSS all migrated
 
 ---
 
@@ -523,77 +703,25 @@ Remove `.pull-right { float: right; }` and `.pull-left { float: left; }`
 
 ---
 
-## Phase 6 — Form-by-Form Manual Review
+## Phase 6 — View-by-View Manual Review
 
-### 6-1: Group orders form
-**File:** `app/views/group_orders/_form.html.haml`
-- Check `input-group-btn` replacements
-- Check glyphicon replacements
-- Check pull-right → float-end
+All 135 HAML view files touched by the BS5 migration, grouped by functional area.
+Review each file for layout correctness, BS3 remnants, and visual consistency.
 
-### 6-2: Article forms
-**File:** `app/views/articles/_sync_table.html.haml`
-- `form-horizontal` class usage → restructure with BS5 grid
-- `control-label` → `form-label`
-- `help-block` → `form-text`
-- `form-group` → `mb-3`
-
-**File:** `app/views/articles/upload.html.haml`
-- `form-horizontal` class → restructure
-
-### 6-3: Sessions form
-**File:** `app/views/sessions/new.html.haml`
-- `form-group` → `mb-3`
-- `control-label` → `form-label`
-
-### 6-4: Inline forms
-**File:** `app/views/home/ordergroup.html.haml:31`
-**File:** `app/views/admin/ordergroups/index.html.haml:14`
-**File:** `app/views/finance/ordergroups/index.html.haml:12`
-**File:** `app/views/finance/bank_transactions/index.html.haml:9`
-**File:** `app/views/group_orders/_form.html.haml:63`
-- Verify `form-inline` still works or replace with `d-flex` pattern
-
-### 6-5: Finance forms
-**File:** `app/views/finance/bank_accounts/_import.html.haml`
-**File:** `app/views/finance/invoices/_form.html.haml`
-**File:** `app/views/admin/finances/_form.html.haml`
-- `form-horizontal`, `form-group`, `control-label` replacements
-
-### 6-6: Article field partials
-**File:** `app/views/shared/_article_fields_units.html.haml`
-**File:** `app/views/shared/_article_fields_price.html.haml`
-- `form-group`, `control-label`, `ml-*`, `mr-*` replacements
-
-### 6-7: Orders helper
-**File:** `app/helpers/orders_helper.rb`
-- `glyphicon` → FontAwesome
-- `input-group-btn` → `.input-group > .btn`
-
-### 6-8: Mollie plugin
-**File:** `plugins/mollie/app/views/payments/mollie/_form.html.haml`
-- `input-prepend` → `input-group`
-- `control-group` → `mb-3`
-- `control-label` → `form-label`
-- `col-sm-offset-*` → `offset-sm-*`
-
-### 6-9: Workgroups form
-**File:** `app/views/foodcoop/workgroups/edit.html.haml:9-10`
-- `form-group` → `mb-3`
-- `col-sm-offset-2` → `offset-sm-2`
+**Review priority:** Layouts → Orders → Group Orders → Articles → Finance → Admin → Shared Partials → Plugins
 
 ---
 
 ## Execution Order
 
-1. **Phase 0A** — Fix modals (broken functionality)
-2. **Phase 0B** — Fix tooltips (broken functionality)
-3. **Phase 0C** — Fix popovers (broken functionality)
-4. **Phase 1** — SimpleForm config (changes all form output)
-5. **Phase 2** — Mechanical replacements (safe find-replace)
-6. **Phase 3** — Structural component changes
-7. **Phase 4** — Icon replacement
-8. **Phase 5** — CSS cleanup
-9. **Phase 6** — Manual form review
+1. **Phase 0A** — Fix modals (broken functionality) ✅
+2. **Phase 0B** — Fix tooltips (broken functionality) ✅
+3. **Phase 0C** — Fix popovers (broken functionality) ✅
+4. **Phase 1** — SimpleForm config (changes all form output) ✅
+5. **Phase 2** — Mechanical replacements (safe find-replace) ✅
+6. **Phase 3** — Structural component changes ✅
+7. **Phase 4** — Icon replacement ✅
+8. **Phase 5** — CSS cleanup ✅
+9. **Phase 6** — View-by-view manual review (135 files) ← current
 
 Test thoroughly after each phase. Phase 2 can be done as one mechanical pass.
