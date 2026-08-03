@@ -379,10 +379,10 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: tint($body-color, $nonessentialDim); }
-.used        .symbol { color: tint($articleUsedColor, $nonessentialDim); }
-.unused      .symbol { color: tint($articleUnusedColor, $nonessentialDim); }
-.partused    .symbol { color: tint($articlePartusedColor, $nonessentialDim); }
+.symbol              { color: mix(white, $body-color, $nonessentialDim); }
+.used        .symbol { color: mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .symbol { color: mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .symbol { color: mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
@@ -514,10 +514,10 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: tint($body-color, $nonessentialDim); }
-.used        .package { color: tint($articleUsedColor, $nonessentialDim); }
-.unused      .package { color: tint($articleUnusedColor, $nonessentialDim); }
-.partused    .package { color: tint($articlePartusedColor, $nonessentialDim); }
+.package              { color: mix(white, $body-color, $nonessentialDim); }
+.used        .package { color: mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .package { color: mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .package { color: mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .package { color: $articleUnavailColor; }
 
 // very small inputs - need !important for responsive selectors
