@@ -25,7 +25,7 @@
 
 - title t('.title'), false
 .row
-  .card.alert.alert-info.float-start
+  .card.alert.alert-light.float-start
     .card-body
       = close_button :alert
       %h2.card-title= @order.name
@@ -55,7 +55,7 @@
         %dt= heading_helper Ordergroup, :available_funds
         %dd= number_to_currency(@ordering_data[:available_funds])
 
-  .card.alert.alert-info.float-end
+  .card.alert.alert-light.float-end
     .card-body
       = close_button :alert
       = render 'switch_order', current_order: @order

@@ -24,7 +24,7 @@
 
 = form_tag payments_mollie_path, method: :post do
   - if params[:text]
-    .alert.alert-info= params[:text]
+    .alert.alert-light= params[:text]
   .mb-3.row
     = label_tag 'amount', ((params[:label] or t('.amount_pay'))), class: 'col-sm-3 col-form-label'
     .col-sm-9

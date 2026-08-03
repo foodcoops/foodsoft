@@ -35,7 +35,7 @@
         %dd= show_user_link @order.updated_by
         %p= link_to t('.comment'), "#comments"
 
-  .card.alert.alert-info.float-end
+  .card.alert.alert-light.float-end
     .card-body
       = close_button :alert
     = render 'switch_order', current_order: @order
