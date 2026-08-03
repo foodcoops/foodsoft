@@ -38,7 +38,15 @@
         return;
       }
 
-      this.initializeOpenListener();
+      this.openerButton$.click((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.openPopover();
+      });
+
+      this.field$[0].addEventListener('shown.bs.popover', () => {
+        if (this.popover && this.popover.tip) this.initializeConversionPopover($(this.popover.tip));
+      });
     }
 
     loadArticleUnitRatios() {
@@ -74,18 +82,12 @@
           return document.importNode(this.popoverTemplate, true);
         }
       });
-      this.openerButton$.click((e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.openPopover()
-      });
-
-      this.field$[0].addEventListener('shown.bs.popover', () => {
-        if (this.popover.tip) this.initializeConversionPopover($(this.popover.tip));
-      });
     }
 
     openPopover() {
+      if (!this.popover) {
+        this.initializeOpenListener();
+      }
       $(document).on('mousedown.unit-conversion-field', (e) => {
         if ($(e.target).parents('.popover').length !== 0 || e.target === this.field$[0]) {
           return;
