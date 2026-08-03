@@ -126,7 +126,7 @@
               %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
             %td.quantity.group-order-input{class: ('stock-order' if @order.stockit?)}
               .row
-                .col-xs-4.input-group.input-group-sm
+                .col-4.input-group.input-group-sm
                   %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
                     %i.fa.fa-minus
                   %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
@@ -143,7 +143,7 @@
             %td.tolerance.group-order-input{style: ('display:none' if @order.stockit?)}
               - if (order_article.article_version.uses_tolerance?)
                 .row
-                  .col-xs-4.input-group.input-group-sm
+                  .col-4.input-group.input-group-sm
                     %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
                       %i.fa.fa-minus
                     %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
