@@ -19,7 +19,7 @@
           - supplier_order_unit_override = stock_article.supplier_order_unit
           - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
           -# title: unit in which article can be ordered from supplier
-          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-full' }
+          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-100' }
         -# title: free text unit
         %div
           .col-sm-3
@@ -27,7 +27,7 @@
           .col-sm-9
             = f.input :unit, input_html: {class: 'form-control ms-1'}, label: false, wrapper: :inline_form
         %div
-          .mb-3.d-flex.w-full
+          .mb-3.d-flex.w-100
             %label.control-label.col-sm-3{for: 'unit_ratios'}
               = t('shared.article_fields_units.unit_ratios')
             %table#fc_base_price{:class => 'col-sm-9'}

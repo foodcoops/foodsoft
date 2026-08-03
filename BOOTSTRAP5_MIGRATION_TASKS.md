@@ -45,12 +45,12 @@
   - [x] 4-3: glyphicon → FontAwesome in Ruby helpers
   - [x] 4-4: glyphicon → FontAwesome in JavaScript
   - [x] 4-5: Remove glyphicon SCSS references
-- [ ] **Phase 5 — CSS Cleanup**
-  - [ ] 5-1: Delete dead file app/assets/javascripts/bootstrap.js
-  - [ ] 5-2: Remove manually-defined BS5-native utility classes from SCSS
-  - [ ] 5-3: Remove legacy form CSS from SCSS
-  - [ ] 5-4: Remove legacy panel CSS from SCSS
-  - [ ] 5-5: Remove pull-left/pull-right fallback CSS
+- [x] **Phase 5 — CSS Cleanup**
+  - [x] 5-1: Delete dead file app/assets/javascripts/bootstrap.js
+  - [x] 5-2: Remove manually-defined BS5-native utility classes from SCSS
+  - [x] 5-3: Remove legacy form CSS from SCSS
+  - [x] 5-4: Remove legacy panel CSS from SCSS
+  - [x] 5-5: Remove pull-left/pull-right fallback CSS
 - [ ] **Phase 6 — Form-by-Form Manual Review**
   - [ ] 6-1: Group orders form
   - [ ] 6-2: Article forms (sync_table, upload)

@@ -37,13 +37,6 @@ $nonessentialDim: 35%;
     dd { @include clearfix(); }
 }
 
-// Do not use additional margin for input in table
-.form-horizontal .control-group.control-group-intable,
-.form-horizontal .controls.controls-intable,
-.input-prepend.intable {
-  margin: 0;
-}
-
 // Light tooltips without empty space below tables
 .tooltip-inner {
   color: #000;
@@ -257,12 +250,6 @@ table {
     width: 100%;
     font-weight: bold;
   }
-  .pull-right {
-    width: 35%;
-  }
-  .pull-left {
-    width: 60%;
-  }
 }
 
 tr.order-article .article-info {
@@ -474,15 +461,6 @@ table.table {
 
     }
   }
-  .control-group {
-    margin-bottom: 5px;
-  }
-  .control-group.h_wrapper {
-    margin-bottom: 5px;
-  }
-  .control-group.select {
-    margin-bottom: 15px
-  }
 }
 
 // inline (boolean) position after/before heading
@@ -493,9 +471,6 @@ label {
     }
   }
 }
-// fix checkbox form height
-.controls > label.checkbox { margin-top: 5px; }
-.settings-group .controls > label.checkbox { margin-top: 0; }
 
 
 // it's a bit distracting
@@ -570,44 +545,6 @@ i.package.icon-only {
   margin-top: 5px;
 }
 
-// unlock button same size as warning sign
-.input-prepend button.unlocker {
-  padding-right: 6px;
-  padding-left: 7px;
-}
-
-// TODO: Remove the .panel defines after updating Bootstrap to >=3.0
-.panel {
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.panel-default {
-  border-color: #ddd;
-}
-
-.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px
-}
-
-.panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd
-}
-
-.panel-body {
-  padding: 15px;
-  padding-bottom: 0px;
-}
-
 span.disabled_amount {
   color: gray;
 }
@@ -628,100 +565,17 @@ details {
   cursor: pointer;
 }
 
-.form-horizontal {
-  .no-indent-left .control-group {
-    margin-bottom: 0;
-    .controls {
-      margin-left: 0;
-    }
-  }
-
-  .control-label {
-    hyphens: auto;
-
-    &.text-left {
-      text-align: left;
-    }
-  }
+.control-label {
+  hyphens: auto;
 }
 
 
-// bootstrap version 2 doesn't support some styles -> let's add makeshift ones manually for now:
-.d-flex {
-  display: flex;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.d-none {
-  display: none;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.m-0 {
-  margin:0 !important;
-}
-
-.ml-1 {
-  margin-left: 3px !important;
-}
-
-.ml-2 {
-  margin-left: 6px !important;
-}
-
-td.ml-1 > *:first-child {
-  margin-left: 3px !important;
-}
-
-
-.mr-1 {
-  margin-right: 3px !important;
-}
-
-.mr-2 {
-  margin-right: 6px !important;
-}
-
-td.mr-1 > *:last-child {
-  margin-right: 3px;
-}
-
-.mt-1 {
-  margin-top: 3px !important;
-}
-
-.mb-1 {
-  margin-bottom: 3px !important;
-}
-
-.pt-0 {
-  padding-top: 0 !important;
-}
-
-.pt-5 {
-  padding-top: 15px;
-}
-
-.pl-5 {
-  padding-left: 15px;
-}
-
-.text-decoration-none:hover {
-  text-decoration: none;
+.w-fit-content {
+  width: fit-content;
 }
 
 .flex-1 {
   flex: 1;
-}
-
-.d-inline-block {
-  display: inline-block;
 }
 
 // Wider popovers
@@ -729,28 +583,8 @@ td.mr-1 > *:last-child {
   max-width: 90vw;
 }
 
-.gap-1 {
-  gap: .25rem;
-}
-
-.gap-8 {
-  gap: 2rem;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.w-fit-content {
-  width: fit-content;
-}
-
 *[role="button"] {
   cursor: pointer;
-}
-
-.user-select-none {
-  user-select: none;
 }
 
 .numeric-step-error {

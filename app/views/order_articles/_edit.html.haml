@@ -8,7 +8,7 @@
         - if params[:without_units]
           = hidden_field_tag :without_units, true
         - else
-          .row.w-full
+          .row.w-100
             = form.input :units_to_order, hint: '', wrapper: :custom_form, label_html: {class:'col-sm-3', style:"width:160px"}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;margin-left:15px;", step: 0.001}, wrapper_html: {class:"d-flex align-items-center"}
             -#= form.input :units_billed, label: 'invoice', input_html: {class: 'input-nano'}
           = form.input :units_received, wrapper: :custom_form, label_html: {class:'col-sm-3'}, input_html: {class: 'form-control', style:"width:200px;margin-right:5px;margin-left:15px;", step: 0.001}, wrapper_html: {class:"d-flex align-items-center"},
