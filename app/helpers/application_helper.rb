@@ -249,10 +249,8 @@ module ApplicationHelper
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
   def close_button(dismiss)
-    content_tag :button, type: 'button', class: 'close mt-1', 'data-bs-dismiss' => dismiss do
-      I18n.t('ui.marks.close').html_safe
-    end
-  end
+    content_tag(:button, "", class: "btn-close", "data-bs-dismiss": "alert", "aria-label":  I18n.t('ui.marks.close'))
+  end  
 
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)
   def foodcoop_css_path(options = {})
