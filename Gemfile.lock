@@ -15,11 +15,10 @@ GIT
       sass-rails (>= 5.0)
 
 GIT
-  remote: https://github.com/henning-unicode/simple_navigation_bootstrap.git
-  revision: ec2c13ac495ce3c48b0f389352c0b1f3a706442f
-  branch: feature/bootstrap5
+  remote: https://github.com/jbox-web/simple_navigation_bootstrap.git
+  revision: 4a08bbff737c57e266ef09667e8e16e809baf049
   specs:
-    simple_navigation_bootstrap (1.3.0)
+    simple_navigation_bootstrap (1.4.0)
       simple-navigation (~> 4.0)
       zeitwerk
 

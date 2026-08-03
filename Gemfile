@@ -40,7 +40,7 @@ gem 'ransack'
 gem 'resque'
 gem 'simple_form'
 gem 'simple-navigation'
-gem 'simple_navigation_bootstrap', git: 'https://github.com/henning-unicode/simple_navigation_bootstrap.git', branch: 'feature/bootstrap5'
+gem 'simple_navigation_bootstrap', git: 'https://github.com/jbox-web/simple_navigation_bootstrap.git'
 gem 'sprockets', '< 4'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
