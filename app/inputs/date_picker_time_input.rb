@@ -16,7 +16,7 @@ class DatePickerTimeInput < SimpleForm::Inputs::StringInput
     time_options = { as: :string, class: 'form-control' }
     date_options[:class] += ' is-invalid' if @builder.object.errors[attribute_name].any?
     time_options[:class] += ' is-invalid' if @builder.object.errors[attribute_name].any?
-    template.content_tag(:div, class: 'col-md-9 d-flex') do
+    template.content_tag(:div, class: 'd-flex') do
       @builder.input_field("#{attribute_name}_date_value", options.merge(date_options)) + ' ' +
         @builder.input_field("#{attribute_name}_time_value", options.merge(time_options))
     end

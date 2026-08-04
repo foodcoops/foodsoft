@@ -6,10 +6,9 @@
     - if @order.invoice.present?
       = link_to t('.show_invoice'), finance_invoice_path(@order.invoice), class: 'btn btn-secondary'
     - elsif !@order.open?
-      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier),
-        class: 'btn'
+      = link_to t('.create_invoice'), new_finance_invoice_path(:order_id => @order, :supplier_id => @order.supplier), class: 'btn btn-secondary'
 
-.well.alert
+.alert.alert-light.alert-dismissible.fade.show{role: "alert"}
   = close_button :alert
   %p
     - description1 = raw t '.description1_order',
@@ -53,41 +52,41 @@
 
 .card.bg-light
   .card-body
-    .btn-toolbar.gap-2
-      .float-end
+    .row.g-2.align-items-start
+      .col
+        .d-flex.flex-wrap.gap-2
+          .btn-group.view_buttons
+            = update_articles_link @order, t('.articles'), :default, class: 'btn btn-secondary'
+            = update_articles_link @order, t('.sort_group'), :groups, class: 'btn btn-secondary'
+            = update_articles_link @order, t('.sort_article'), :articles, class: 'btn btn-secondary'
+          .d-inline-flex.gap-1
+            - unless @order.open?
+              = render 'shared/order_download_button', order: @order, klass: ''
+            - if @order.open?
+              = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
+                data: {confirm: t('.confirm_end', order: @order.name)}
+              - if @order.supplier
+                - if @order.stock_group_order
+                  = link_to t('.stock_order'), edit_group_order_path(@order.stock_group_order, order_id: @order.id), class: 'btn btn-secondary'
+                - else
+                  = link_to t('.stock_order'), new_group_order_path(order_id: @order.id, stock_order: true), class: 'btn btn-secondary'
+              = link_to t('ui.edit'), edit_order_path(@order), class: 'btn btn-secondary'
+            - elsif not @order.closed?
+              - unless @order.stockit?
+                = link_to t('.send_to_supplier'), send_result_to_supplier_order_path(@order), method: :post,
+                  class: "btn#{' btn-primary' unless @order.remote_ordered_at}",
+                  data: {confirm: @order.remote_ordered_at && t('.confirm_send_to_supplier', when: format_time(@order.remote_ordered_at)) }
+                = receive_button @order, class: 'btn btn-success'
+              - if current_user.role_finance?
+                = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: @order.id), class: 'btn btn-primary'
+            - unless @order.closed?
+              = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
+                class: 'btn btn-danger'
+      .col-12.col-md-auto.ms-auto:
         .input-group.d-flex
           = text_field_tag :query, params[:query], class: 'form-control search-query delayed-search resettable'
-          %button.btn.reset-search{:type => :button, :title => t('.search_reset')}
+          %button.btn.btn-secondary.reset-search{:type => :button, :title => t('.search_reset')}
             %i.fa.fa-times
-
-    .btn-toolbar.gap-2
-      .btn-group.view_buttons
-      = update_articles_link @order, t('.articles'), :default, class: 'btn btn-secondary'
-      = update_articles_link @order, t('.sort_group'), :groups, class: 'btn btn-secondary'
-      = update_articles_link @order, t('.sort_article'), :articles, class: 'btn btn-secondary'
-
-    - unless @order.open?
-      = render 'shared/order_download_button', order: @order, klass: ''
-    - if @order.open?
-      = link_to t('.action_end'), finish_order_path(@order), method: :post, class: 'btn btn-success',
-        data: {confirm: t('.confirm_end', order: @order.name)}
-      - if @order.supplier
-        - if @order.stock_group_order
-          = link_to t('.stock_order'), edit_group_order_path(@order.stock_group_order, order_id: @order.id), class: 'btn btn-secondary'
-        - else
-          = link_to t('.stock_order'), new_group_order_path(order_id: @order.id, stock_order: true), class: 'btn btn-secondary'
-      = link_to t('ui.edit'), edit_order_path(@order), class: 'btn btn-secondary'
-    - elsif not @order.closed?
-      - unless @order.stockit?
-        = link_to t('.send_to_supplier'), send_result_to_supplier_order_path(@order), method: :post,
-          class: "btn#{' btn-primary' unless @order.remote_ordered_at}",
-          data: {confirm: @order.remote_ordered_at && t('.confirm_send_to_supplier', when: format_time(@order.remote_ordered_at)) }
-        = receive_button @order
-      - if current_user.role_finance?
-        = link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: @order.id), class: 'btn btn-primary'
-    - unless @order.closed?
-      = link_to t('ui.delete'), @order, data: {confirm: t('.confirm_delete')}, method: :delete,
-        class: 'btn btn-danger'
 
 %section#articles_table
   = render @partial, order: @order

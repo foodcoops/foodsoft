@@ -186,16 +186,9 @@ table {
 }
 
 // ordering
-.used {
-  color: $articleUsedColor;
-}
-.unused {
-  color: $articleUnusedColor;
-  margin-right: 0.5em;
-}
-.partused {
-  color: $articlePartusedColor;
-}
+tr.used td        { --bs-table-color: #{$articleUsedColor}; }
+tr.unused td      { --bs-table-color: #{$articleUnusedColor}; }
+tr.partused td    { --bs-table-color: #{$articlePartusedColor}; }  
 
 #order-footer, .article-info {
   text-align: left;
@@ -324,10 +317,13 @@ tr.order-article {
 }
 
 .units_received_cell {
-  display: flex;
-  align-items: center;
+  white-space: nowrap;
   gap: 12px;
-  width: auto;
+  
+  .input-group {
+    display: inline-flex;  // instead of flex, keeps it inline with .package
+    width: fit-content;
+  }
 
   .btn-group .btn-ordering {
     margin-top: 0;
@@ -335,7 +331,8 @@ tr.order-article {
   }
 
   input.units_received {
-    width: 75px;
+    width: 50px;
+    flex-shrink: 0;
     -moz-appearance: textfield;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
@@ -343,18 +340,19 @@ tr.order-article {
       -webkit-appearance: none;
     }
   }
+
+  .package {
+    width: 75px;
+    flex-shrink: 0;
+  }
+
 }
 
 
 // ********* Articles
 
-tr.just-updated {
-  color: $articleUpdatedColor;
-}
-
-tr.unavailable {
-  color: $articleUnavailColor;
-}
+tr.just-updated td  { --bs-table-color: #{$articleUpdatedColor}; }
+tr.unavailable td   { --bs-table-color: #{$articleUnavailColor}; }
 
 // articles edit all
 .field_with_errors {
@@ -429,11 +427,6 @@ tr.untranslated {
 .dl-horizontal {
   dt { width: 200px; margin-bottom: 0.2em; }
   dd { margin-left: 210px; }
-}
-
-// get rid of extra bottom margin inside well
-.well p:last-child {
-  margin-bottom: 0;
 }
 
 // center table rows vertically (including form elements)

@@ -81,17 +81,15 @@ module OrdersHelper
     if unit_code == article.supplier_order_unit
       first_ratio = article&.article_unit_ratios&.first
       if first_ratio.nil? || first_ratio.quantity == 1
-        return "x #{article.unit}" if unit_code.nil?
-
-        return ArticleUnitsLib.human_readable_unit(unit_code)
+        uq_text = unit_code.nil? ? "x #{article.unit}" : ArticleUnitsLib.human_readable_unit(unit_code)
+      else
+        uq_text = "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
       end
-
-      uq_text = "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
     else
       uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
     end
 
-    uq_text = content_tag(:span, uq_text, class: 'd-none d-sm-block') if options[:soft_uq]
+    uq_text = content_tag(:span, uq_text, class: 'd-none d-sm-inline') if options[:soft_uq]
     if options[:plain]
       uq_text
     elsif options[:icon].nil? || options[:icon]
@@ -142,7 +140,7 @@ module OrdersHelper
                          } + input_html
                      end
                    else
-                     content_tag(:div, class: 'input-group') { input_html }
+                     content_tag(:div, class: 'input-group flex-nowrap') { input_html }
                    end
 
     wrapper_html.html_safe
@@ -208,7 +206,8 @@ module OrdersHelper
       content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
     else
       link_to t('orders.index.action_receive'), receive_order_path(order),
-              class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
+        class: "btn #{options[:class]}"
+
     end
   end
 

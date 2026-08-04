@@ -64,12 +64,12 @@
 - [x] `app/views/home/_start_nav.html.haml`
 
 ### Orders
-- [ ] `app/views/orders/_form.html.haml`
-- [ ] `app/views/orders/_articles.html.haml`
-- [ ] `app/views/orders/_edit_amount.html.haml`
-- [ ] `app/views/orders/show.html.haml`
-- [ ] `app/views/orders/index.html.haml`
-- [ ] `app/views/orders/receive.html.haml`
+- [x] `app/views/orders/_form.html.haml`
+- [x] `app/views/orders/_articles.html.haml`
+- [x] `app/views/orders/_edit_amount.html.haml`
+- [x] `app/views/orders/show.html.haml`
+- [x] `app/views/orders/index.html.haml`
+- [x] `app/views/orders/receive.html.haml`
 
 ### Group Orders
 - [ ] `app/views/group_orders/_form.html.haml`
