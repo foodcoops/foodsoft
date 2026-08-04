@@ -23,13 +23,11 @@
       // if there's less then two options, don't even bother showing the popover:
       this.disabled = this.unitSelectOptions.length < 2;
 
-      this.opener$ = $('<span class="overflow-hidden w-fit-content"></div>');
-      this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-secondary rounded-start-0 rounded-end"><i class="fa fa-retweet"></i></button>');
-      this.opener$.append(this.openerButton$);
+      this.openerButton$ = $('<button type="button" class="conversion-popover-opener input-group-text rounded-start-0 rounded-end"><i class="fa fa-retweet"></i></button>');
       this.openerButton$.attr('title', this.popoverTemplate.dataset.title);
-      this.field$.after(this.opener$);
+      this.field$.after(this.openerButton$);
       if (this.field$.css('display') === 'none') {
-        this.opener$.hide();
+        this.openerButton$.hide();
       }
 
       if (this.disabled) {
@@ -262,7 +260,7 @@
         if (conversionField === undefined || conversionField.field$ === undefined) {
           break;
         }
-        conversionField.opener$.remove();
+        conversionField.openerButton$.remove();
         convertersMap.delete($(this)[0]);
         break;
       default: {

@@ -22,52 +22,53 @@
       });
     });
 
+- title t('.title', order: @order.name)
 
-- title t('.title'), false
-.row
-  .card.alert.alert-light.float-start
-    .card-body
-      = close_button :alert
-      %h2.card-title= @order.name
-      %dl.dl-horizontal
-      - unless @order.note.blank?
-        %dt= heading_helper Order, :note
-        %dd= @order.note
-      %dt= heading_helper Order, :created_by
-      %dd= show_user_link(@order.created_by)
-      %dt= heading_helper Order, :ends
-      %dd= format_time(@order.ends)
-      %dt= heading_helper Order, :pickup
-      %dd= format_date(@order.pickup)
-      - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
-        %dt= heading_helper Supplier, :min_order_quantity, short: true
-        %dd= @order.supplier.min_order_quantity
-      %dt= t '.sum_amount'
-      %dd= number_to_currency @order.sum
-      - unless @group_order.new_record?
-        %dt= heading_helper GroupOrder, :updated_by
-        %dd
-          = show_user(@group_order.updated_by)
-          (#{format_time(@group_order.updated_on)})
-      %dt= heading_helper Ordergroup, :account_balance
-      %dd= number_to_currency(@ordering_data[:account_balance])
-      - unless FoodsoftConfig[:charge_members_manually]
-        %dt= heading_helper Ordergroup, :available_funds
-        %dd= number_to_currency(@ordering_data[:available_funds])
+%section
+  .row.g-2
+    .col 
+      .card.alert.alert-light.alert-dismissible.h-100.fade.show{role: "alert"}
+        = close_button :alert
+        .card-body
+          %h2.card-title= @order.name
+          %dl.dl-horizontal
+          - unless @order.note.blank?
+            %dt= heading_helper Order, :note
+            %dd= @order.note
+          %dt= heading_helper Order, :created_by
+          %dd= show_user_link(@order.created_by)
+          %dt= heading_helper Order, :ends
+          %dd= format_time(@order.ends)
+          %dt= heading_helper Order, :pickup
+          %dd= format_date(@order.pickup)
+          - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+            %dt= heading_helper Supplier, :min_order_quantity, short: true
+            %dd= @order.supplier.min_order_quantity
+          %dt= t '.sum_amount'
+          %dd= number_to_currency @order.sum
+          - unless @group_order.new_record?
+            %dt= heading_helper GroupOrder, :updated_by
+            %dd
+              = show_user(@group_order.updated_by)
+              (#{format_time(@group_order.updated_on)})
+          %dt= heading_helper Ordergroup, :account_balance
+          %dd= number_to_currency(@ordering_data[:account_balance])
+          - unless FoodsoftConfig[:charge_members_manually]
+            %dt= heading_helper Ordergroup, :available_funds
+            %dd= number_to_currency(@ordering_data[:available_funds])
+    .col-md-4
+      .card.alert.alert-light.alert-dismissible.h-100.fade.show{role: "alert"}
+        = close_button :alert
+        = render 'switch_order', current_order: @order
 
-  .card.alert.alert-light.float-end
-    .card-body
-      = close_button :alert
-      = render 'switch_order', current_order: @order
-
-.row
-  .card.bg-light
-    .card-body
-      .form-inline
-      .input-group.d-flex
-        = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable form-control', style: "width:200px"
-        %button.btn.reset-search{:type => :button, :title => t('.reset_article_search')}
-          %i.fa.fa-times
+.card.bg-light
+  .card-body
+    .form-inline
+    .input-group.d-flex
+      = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable form-control', style: "width:200px"
+      %button.btn.reset-search{:type => :button, :title => t('.reset_article_search'), :class => 'btn btn-secondary'}
+        %i.fa.fa-times
+  
 
 = form_for @group_order, html: {class: 'group_order_form'} do |f|
   = f.hidden_field :lock_version
@@ -125,13 +126,12 @@
               +
               %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity], precision: 3, strip_insignificant_zeros: true)
             %td.quantity.group-order-input{class: ('stock-order' if @order.stockit?)}
-              .row
-                .col-4.input-group.input-group-sm
-                  %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                    %i.fa.fa-minus
-                  %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                    %i.fa.fa-plus
-                  %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
+              .input-group.input-group-sm
+                %button.input-group-text.btn-ordering.decrease{type: "button"}
+                  %i.fa.fa-minus
+                %button.input-group-text.btn-ordering.increase{type: "button"}
+                  %i.fa.fa-plus
+                %input.goa-quantity{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", value: @ordering_data[:order_articles][order_article.id][:quantity], data: quantity_data, autocomplete: 'off', class: 'form-control numeric', style: ('display:none' if @order.stockit?), min: 0, max: (@ordering_data[:order_articles][order_article.id][:quantity_available] if @order.stockit?), step: order_article.article_version.group_order_granularity}
               %span.numeric-step-error
                 = t('errors.step_error', granularity: order_article.article_version.group_order_granularity, min: 0)
 
@@ -142,13 +142,14 @@
                 %span.unused= number_with_precision(@ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance], precision: 3, strip_insignificant_zeros: true)
             %td.tolerance.group-order-input{style: ('display:none' if @order.stockit?)}
               - if (order_article.article_version.uses_tolerance?)
-                .row
-                  .col-4.input-group.input-group-sm
-                    %button.btn.btn-secondary.btn-ordering.decrease{type: "button"}
-                      %i.fa.fa-minus
-                    %button.btn.btn-secondary.btn-ordering.increase{type: "button"}
-                      %i.fa.fa-plus
-                    %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
+                .input-group.input-group-sm 
+                  %button.input-group-text.btn-ordering.decrease{type: "button"}
+                    %i.fa.fa-minus
+                  %button.input-group-text.btn-ordering.increase{type: "button"}
+                    %i.fa.fa-plus
+                  %input.goa-tolerance{type: "number", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", data: quantity_data, value: @ordering_data[:order_articles][order_article.id][:tolerance], autocomplete: 'off', class: 'form-control numeric', min: 0, step: order_article.article_version.group_order_granularity, max: [@ordering_data[:order_articles][order_article.id][:ratio_group_order_unit_supplier_unit], @ordering_data[:order_articles][order_article.id][:minimum_order_quantity].presence || 0].max}
+
+                    
 
             %td.text-nowrap{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display", data: {price: @ordering_data[:order_articles][order_article.id][:total_price]}}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])

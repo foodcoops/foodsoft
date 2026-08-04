@@ -72,9 +72,9 @@
 - [x] `app/views/orders/receive.html.haml`
 
 ### Group Orders
-- [ ] `app/views/group_orders/_form.html.haml`
-- [ ] `app/views/group_orders/show.html.haml`
-- [ ] `app/views/group_orders/index.html.haml`
+- [x] `app/views/group_orders/_form.html.haml`
+- [x] `app/views/group_orders/show.html.haml`
+- [x] `app/views/group_orders/index.html.haml`
 - [ ] `app/views/group_order_articles/_form.html.haml`
 
 ### Articles
