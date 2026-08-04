@@ -54,14 +54,14 @@
 - [ ] **Phase 6 — View-by-View Manual Review** (135 HAML files)
 
 ### Layouts
-- [ ] `app/views/layouts/application.html.haml`
-- [ ] `app/views/layouts/login.html.haml`
-- [ ] `app/views/layouts/_footer.html.haml`
+- [x] `app/views/layouts/application.html.haml`
+- [x] `app/views/layouts/login.html.haml`
+- [x] `app/views/layouts/_footer.html.haml`
 
 ### Home & Navigation
-- [ ] `app/views/home/index.html.haml`
-- [ ] `app/views/home/ordergroup.html.haml`
-- [ ] `app/views/home/_start_nav.html.haml`
+- [x] `app/views/home/index.html.haml`
+- [x] `app/views/home/ordergroup.html.haml`
+- [x] `app/views/home/_start_nav.html.haml`
 
 ### Orders
 - [ ] `app/views/orders/_form.html.haml`
