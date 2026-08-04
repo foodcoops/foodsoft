@@ -266,10 +266,6 @@ table {
   .pull-left {
     width: 60%;
   }
-
-  .note {
-    white-space: normal;
-  }
 }
 
 tr.order-article .article-info {
@@ -711,6 +707,10 @@ td.mr-1 > *:last-child {
 
 .text-decoration-none:hover {
   text-decoration: none;
+}
+
+.text-wrap {
+  white-space: normal;
 }
 
 .flex-1 {
