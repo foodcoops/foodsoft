@@ -24,8 +24,8 @@ This plugin extends Foodsoft with a complete, production‑ready invoicing syste
    ```
 3. Install and run migrations:
    ```
-   rake foodsoft_invoices_engine:install:migrations
-   rake db:migrate
+   bin/rails foodsoft_invoices_engine:install:migrations
+   bin/rails db:migrate
    ```
 
 Note: The required assets (foodsoft_invoices.js/.css) are registered via the Foodsoft AssetRegistry and precompiled. No further steps are required.
@@ -42,7 +42,7 @@ contact:
 
 ## Configuration
 
-The plugin settings are available under Admin → Settings → Payment. The following options are available (keys in parentheses):
+The plugin settings are available under Administration → Configuration → Finances. The following options are available (keys in parentheses):
 
 - Ignore minimum balance (group_order_invoices.ignore_minimum_balance)
 - Automatically send invoices by email after balancing (group_order_invoices.use_automatic_invoices)
@@ -51,7 +51,7 @@ The plugin settings are available under Admin → Settings → Payment. The foll
 - Payment method (group_order_invoices.payment_method)
 - For SEPA export: IBAN, BIC, Creditor Identifier (group_order_invoices.iban/bic/creditor_identifier)
 
-SEPA account holder per order group: In Admin → Order groups you can store a SEPA account holder with IBAN, BIC, mandate ID and signature date for each group. These data are used for single/collective direct debits.
+SEPA account holder per order group: In Administration → Order groups you can store a SEPA account holder with IBAN, BIC, mandate ID and signature date for each group. These data are used for single/collective direct debits.
 
 Example configuration in `app_config.yml` (optional – settings can also be managed via the Admin UI):
 

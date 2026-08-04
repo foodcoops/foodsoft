@@ -110,11 +110,13 @@ en:
       vat_exempt_rows:
         - Name
         - Quantity
+        - Unit
         - Unit price
         - Total price
       no_price_markup_rows:
         - Name
         - Quantity
+        - Unit
         - Unit price (net)
         - Total price (net)
         - VAT
@@ -122,6 +124,7 @@ en:
       price_markup_rows:
         - Name
         - Quantity
+        - Unit
         - Unit price (net)
         - Total price (net)
         - VAT

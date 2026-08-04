@@ -27,6 +27,11 @@ module PriceCalculation
     add_percent(gross_price, FoodsoftConfig[:price_markup].to_i)
   end
 
+  # @return [Number] Price for the foodcoop-member without deposit.
+  def fc_price_without_deposit
+    add_percent(gross_price, FoodsoftConfig[:price_markup].to_i)
+  end
+
   # get the unit ratio quantity in reference to the supplier_order_unit
   def get_unit_ratio_quantity(unit)
     return 1 if unit == supplier_order_unit

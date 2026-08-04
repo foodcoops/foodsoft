@@ -107,11 +107,13 @@ de:
       vat_exempt_rows:
         - Name
         - Anzahl
+        - Einheit
         - Einzelpreis
         - Artikel Gesamtpreis
       no_price_markup_rows:
         - Name
         - Anzahl
+        - Einheit
         - Einzelpreis (netto)
         - Artikel Gesamtpreis (netto)
         - MwSt.
@@ -119,6 +121,7 @@ de:
       price_markup_rows:
         - Name
         - Anzahl
+        - Einheit
         - Einzelpreis (netto)
         - Artikel Gesamtpreis (netto)
         - MwSt.

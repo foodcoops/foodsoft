@@ -1,4 +1,6 @@
 class GroupOrderInvoicePdf < RenderPdf
+  include ArticlesHelper
+
   def filename
     ordergroup_name = @options[:ordergroup].name || 'OrderGroup'
     "#{ordergroup_name}_" + I18n.t('documents.group_order_invoice_pdf.filename', number: @options[:invoice_number]) + '.pdf'
@@ -117,14 +119,16 @@ class GroupOrderInvoicePdf < RenderPdf
       # Add supplier header if it changed
       if goa.group_order.order.supplier.name != supplier
         supplier = goa.group_order.order.supplier.name
-        data << [supplier, '', '', '']
+        data << [{ content: supplier, colspan: 5, font_style: :bold }]
       end
 
       # Add article row
       goa_total_price = separate_deposits ? goa.total_price_without_deposit : goa.total_price
-      data << [goa.order_article.article.name,
+      data << [goa.order_article.article_version.name,
                goa.result.to_i,
-               number_to_currency(goa.order_article.price.fc_price_without_deposit),
+               format_group_order_unit_with_ratios(goa.order_article.article_version),
+               # TODO: Findout what to use now after article versions update
+               number_to_currency(goa.order_article.article_version.fc_price_without_deposit),
                number_to_currency(goa_total_price)]
       total_gross += goa_total_price
 
@@ -134,6 +138,7 @@ class GroupOrderInvoicePdf < RenderPdf
       goa_total_deposit = goa.result * goa.order_article.price.fc_deposit_price
       data << [I18n.t('documents.group_order_invoice_pdf.deposit_excluded'),
                goa.result.to_i,
+               format_group_order_unit_with_ratios(goa.order_article.article_version),
                number_to_currency(goa.order_article.article.fc_deposit_price),
                number_to_currency(goa_total_deposit)]
       total_gross += goa_total_deposit
@@ -149,6 +154,7 @@ class GroupOrderInvoicePdf < RenderPdf
       table.position = :center
       table.cells.border_width = 1
       table.cells.border_color = '666666'
+      table.row(0).columns(0..4).style(background_color: 'cccccc', font_style: :bold)
       table.row(0).column(0..4).width = 80
       table.row(0).column(0).width = 180
       table.row(0).border_bottom_width = 2
@@ -252,7 +258,7 @@ class GroupOrderInvoicePdf < RenderPdf
 
     # Group articles by supplier
     group_order_articles.group_by { |goa| goa.group_order.order.supplier.name }.each do |supplier_name, articles|
-      data << [supplier_name, '', '', '', '', ''] if articles.map(&:result).sum > 0
+      data << [{ content: supplier_name, colspan: 7, font_style: :bold }] if articles.map(&:result).sum > 0
 
       # Process each article
       articles.each do |goa|
@@ -286,7 +292,8 @@ class GroupOrderInvoicePdf < RenderPdf
 
     data << [order_article.article_version.name,
              goa.result.to_i,
-             number_to_currency(order_article.price.price),
+             format_group_order_unit_with_ratios(order_article.article_version),
+             number_to_currency(order_article.article_version.price),
              number_to_currency(goa_total_net),
              tax.to_s + '%',
              number_to_currency(goa_total_fc)]
@@ -314,6 +321,7 @@ class GroupOrderInvoicePdf < RenderPdf
 
     data << [I18n.t('documents.group_order_invoice_pdf.deposit_excluded'),
              goa.result.to_i,
+             format_group_order_unit_with_ratios(order_article.article_version),
              number_to_currency(order_article.price.net_deposit_price),
              number_to_currency(goa_net_deposit),
              tax.to_s + '%',
@@ -339,8 +347,8 @@ class GroupOrderInvoicePdf < RenderPdf
       table.cells.border_width = 1
       table.cells.border_color = '666666'
       table.row(0).columns(0..6).style(background_color: 'cccccc', font_style: :bold)
-      table.rows(0..-1).columns(2..6).width = 80
-      table.rows(0..-1).column(0).width = 170
+      table.rows(0..-1).columns(2..6).width = 60
+      table.rows(0..-1).column(0).width = 150
       table.rows(0..-1).column(1).width = 40
       table.rows(0..-1).column(4).width = 60
       table.rows(0..-1).column(5).width = 90

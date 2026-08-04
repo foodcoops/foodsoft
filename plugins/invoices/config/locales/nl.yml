@@ -110,11 +110,13 @@ nl:
       vat_exempt_rows:
         - Naam
         - Aantal
+        - Eenheid
         - Eenheidsprijs
         - Totaalprijs artikel
       no_price_markup_rows:
         - Naam
         - Aantal
+        - Eenheid
         - Eenheidsprijs (netto)
         - Totaalprijs artikel (netto)
         - BTW
@@ -122,6 +124,7 @@ nl:
       price_markup_rows:
         - Naam
         - Aantal
+        - Eenheid
         - Eenheidsprijs (netto)
         - Totaalprijs artikel (netto)
         - BTW
