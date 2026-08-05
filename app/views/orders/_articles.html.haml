@@ -29,7 +29,9 @@
           %td= format_group_order_unit_with_ratios(order_article.article_version)
           %td= "#{number_to_currency(net_price)} / #{number_to_currency(gross_price)}"
           - if order.stockit?
-            %td= = number_with_precision(units, precision: 3, strip_insignificant_zeros: true)
+            %td
+              = number_with_precision(units, precision: 3, strip_insignificant_zeros: true)
+              = pkg_helper article
           - else
             - if order_article.tolerance > 0
               %td= "#{number_with_precision(order_article.quantity, precision: 3, strip_insignificant_zeros: true)} + #{number_with_precision(order_article.tolerance, precision: 3, strip_insignificant_zeros: true)}"
