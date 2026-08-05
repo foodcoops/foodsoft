@@ -26,3 +26,15 @@
   %div
     = f.button :submit
     = link_to t('ui.or_cancel'), suppliers_path
+
+- content_for :javascript do
+  :javascript
+    $(function() {
+      var urlFormGroup$ = $('#supplier_remote_order_url').closest('.form-group');
+      var methodSelect$ = $('#supplier_remote_order_method');
+      var toggleUrlField = function() {
+        urlFormGroup$.toggle(methodSelect$.val() !== 'email');
+      };
+      methodSelect$.on('change', toggleUrlField);
+      toggleUrlField();
+    });
