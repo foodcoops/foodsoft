@@ -27,7 +27,7 @@ gem 'haml', '~> 5.2', '>= 5.2.2'
 gem 'haml-rails'
 gem 'ice_cube'
 gem 'inherited_resources'
-gem 'kaminari'
+gem "kaminari"
 gem 'mysql2'
 gem 'net-ftp'
 gem 'net-http'

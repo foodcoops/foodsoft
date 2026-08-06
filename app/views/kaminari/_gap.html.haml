@@ -6,6 +6,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 
-%li{:class => "page gap disabled"}
-  %a{:href => "#",  :onclick => "return false;"}
+%li.page-item.disabled
+  %span.page-link
     = raw(t 'views.pagination.truncate')

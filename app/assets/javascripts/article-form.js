@@ -141,7 +141,7 @@ class ArticleForm {
 
     if (this.extraUnits$.hasClass('show')) {
       $(document).on('mousedown.extra-units', (e) => {
-        if ($(e.target).parents(this.extraUnits$.selector).length !== 0 || e.target === this.extraUnits$[0] || e.target === this.toggleExtraUnitsButton$[0]) {
+        if ($(e.target).closest('.extra-unit-fields').length > 0 || e.target === this.extraUnits$[0] || e.target === this.toggleExtraUnitsButton$[0]) {
           return;
         }
 
@@ -239,7 +239,7 @@ class ArticleForm {
     const unitVal = $(`#${this.unitFieldsIdPrefix}_unit`).val();
     this.minimumOrderQuantity$
       .parents('.input-group')
-      .find('.input-group-addon')
+      .find('.input-group-text')
       .text(chosenOptionLabel !== undefined ? chosenOptionLabel : unitVal);
 
     const converter = this.getUnitsConverter();
@@ -402,7 +402,9 @@ class ArticleForm {
     }
 
     this.updateUnitsInSelect(availableUnits, this.billingUnit$);
+    if (this.unitsToOrder$.length > 0 && this.unitsReceived$.length > 0) {
     this.billingUnit$.parents('.mb-3').css('display', availableUnits.length > 1 ? 'block' : 'none');
+    }
     this.updateUnitsInSelect(availableUnits, this.groupOrderUnit$);
     this.updateUnitsInSelect(availableUnits, this.priceUnit$);
   }
@@ -430,11 +432,22 @@ class ArticleForm {
     unitSelect$.trigger('change');
 
     unitSelect$.parents('.unit-wrapper').find('.immutable_unit_label').remove();
+    const singleLabel$ = unitSelect$.parents('.unit-wrapper').find('.unit-label-single');
+    singleLabel$.text('');
+
     if (units.length === 1) {
       unitSelect$.hide();
-      unitSelect$.after($(`<div class="immutable_unit_label control-label d-inline-block">${units[0].label}</div>`))
+      if (singleLabel$.length > 0) {
+        singleLabel$.text(units[0].label);
+        singleLabel$.parent('.input-group-text').addClass('last');
+      } else {
+        unitSelect$.after($(`<div class="immutable_unit_label control-label d-inline-block">${units[0].label}</div>`))
+      }
     } else {
       unitSelect$.show();
+      if (singleLabel$.length > 0) {
+        singleLabel$.parent('.input-group-text').removeClass('last');
+      }
     }
   }
 
@@ -492,6 +505,7 @@ class ArticleForm {
   }
 
   initializeOrderedAndReceivedUnits() {
+    if (this.unitsToOrder$.length === 0 || this.unitsReceived$.length === 0) return;
     this.billingUnit$.change(() => {
       this.updateOrderedAndReceivedUnits();
       this.initializeOrderedAndReceivedUnitsConverters();

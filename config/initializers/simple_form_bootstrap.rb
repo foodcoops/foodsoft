@@ -161,8 +161,8 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 col-form-label'
-    b.wrapper :grid_wrapper, class: 'col-sm-9' do |ba|
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
       ba.use :input, class: 'form-control', error_class: 'is-invalid'
       ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
       ba.use :hint, wrap_with: { class: 'form-text' }
@@ -226,8 +226,8 @@ SimpleForm.setup do |config|
   config.wrappers :horizontal_select, class: 'row mb-3' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 col-form-label'
-    b.wrapper :grid_wrapper, class: 'col-sm-9' do |ba|
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
       ba.use :input, class: 'form-select', error_class: 'is-invalid'
       ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
       ba.use :hint, wrap_with: { class: 'form-text' }
@@ -266,7 +266,7 @@ SimpleForm.setup do |config|
   # inline forms
   #
   # inline default_wrapper
-  config.wrappers :inline_form, class: 'col-12' do |b|
+  config.wrappers :inline_form do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -362,9 +362,9 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
 
-    b.use :label, class: 'col-sm-3 col-form-label pt-0'
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
 
-    b.wrapper :grid_wrapper, class: 'col-sm-9' do |ba|
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
       ba.use :input, class: 'form-check-input', error_class: 'is-invalid'
     end
   end

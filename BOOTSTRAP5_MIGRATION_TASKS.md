@@ -78,12 +78,12 @@
 - [ ] `app/views/group_order_articles/_form.html.haml`
 
 ### Articles
-- [ ] `app/views/articles/_form.html.haml`
-- [ ] `app/views/articles/_sync_table.html.haml`
-- [ ] `app/views/articles/_edit_all_table.html.haml`
-- [ ] `app/views/articles/_article.html.haml`
-- [ ] `app/views/articles/index.html.haml`
-- [ ] `app/views/articles/migrate_units.html.haml`
+- [x] `app/views/articles/_form.html.haml`
+- [x] `app/views/articles/_sync_table.html.haml`
+- [x] `app/views/articles/_edit_all_table.html.haml`
+- [x] `app/views/articles/_article.html.haml`
+- [x] `app/views/articles/index.html.haml`
+- [x] `app/views/articles/migrate_units.html.haml`
 
 ### Stockit / StockTakings / Deliveries
 - [ ] `app/views/stockit/_form.html.haml`
@@ -170,6 +170,10 @@
 - [ ] `app/views/shared/_article_fields_units.html.haml`
 - [ ] `app/views/shared/_article_fields_price.html.haml`
 - [ ] `app/views/shared/_article_unit_ratio.html.haml`
+  - **Note:** The unit `<select>` on line 13 is enhanced by **select2** via `article-form.js:302` (`select$.select2(this.select2Config)`). Select2 bundles a Bootstrap-version-specific theme CSS. With BS5, either:
+    - Install `select2-bootstrap-5-theme` (npm package), or
+    - Replace select2 with a BS5-native alternative (plain `<select>` with `.form-select`, or a custom dropdown)
+    - The select is also used in `_article_fields_units.html.haml:13`, `_edit_all_table.html.haml:38`, and `_sync_table.html.haml:49`
 - [ ] `app/views/shared/_user_form_fields.html.haml`
 - [ ] `app/views/shared/_task_list.html.haml`
 - [ ] `app/views/shared/_order_download_button.html.haml`

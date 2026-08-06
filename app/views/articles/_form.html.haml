@@ -6,11 +6,11 @@
     new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
 
   = render partial: 'shared/js_templates/unit_conversion_popover_template'
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= @article.new_record? ? t('.title_new') : t('.title_edit')
+        = close_button :modal
       .modal-body.article-form
         = f.hidden_field :id
         = f.input :availability, wrapper: :inverse_horizontal_boolean
@@ -27,4 +27,4 @@
         = f.input :order_number
       .modal-footer
         = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
-        = f.submit class: 'btn btn-secondary btn-primary', disabled: true
+        = f.submit class: 'btn btn-primary', disabled: true

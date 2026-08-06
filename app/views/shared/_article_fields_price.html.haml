@@ -1,28 +1,28 @@
-.overflow-hidden.mb-3
-  %label.control-label.col-sm-3{for: 'article_version_price'}
+.row.mb-3
+  %label.control-label.col-sm-4{for: 'article_version_price'}
     = ArticleVersion.human_attribute_name(:price)
-  .col-sm-9.d-flex
+  .col-sm-8.d-flex
     .input-group.unit-wrapper
-      %span.input-group-addon= t 'number.currency.format.unit'
-      = f.input_field :price, class: 'form-control me-2', step: 0.001, style: 'width: 150px;'
-      -# width:50px;text-align: center;
-      .ms-1.d-flex.align-items-center
-        %span.me-2.control-label
-          = t('articles.form.per')
-        = f.select :price_unit, [], {include_blank: false}, {class: 'form-control', style: 'margin-right:12px', 'data-initial-value': article.price_unit}
-%div
+      %span.input-group-text= t 'number.currency.format.unit'
+      = f.input_field :price, class: 'form-control', step: 0.001, style: 'width: 150px;'
+      .input-group-text.unit-suffix
+        = t('articles.form.per')
+        %span.unit-label-single.ms-1
+      = f.select :price_unit, [], {include_blank: false}, {class: 'form-control', 'data-initial-value': article.price_unit}
+%row
   = f.input :tax do
     .input-group
-      = f.input_field :tax, class: 'form-control', wrapper: :inline_form
-      %span.input-group-addon %
+      = f.input_field :tax, class: 'form-control'
+      %span.input-group-text %
   = f.input :deposit do
     .input-group
-      %span.input-group-addon= t 'number.currency.format.unit'
+      %span.input-group-text= t 'number.currency.format.unit'
       = f.input_field :deposit, class: 'form-control'
 .row.d-flex.align-items-center{ style: "padding-bottom:15px" }
-  .col-sm-3.control-label{for: 'article_fc_price', style: 'font-weight: 700'}
+  .col-sm-4.control-label{for: 'article_fc_price'}
     = Article.human_attribute_name(:fc_price)
-  .col-sm-9#article_fc_price
-    %span.price_value
-    %span.price_per_text=t('articles.form.per')
-    %span.price_unit
+  .col-sm-8.custom-form-fields-wrapper
+    %div.input-group-text.gap-1#article_fc_price
+      %span.price_value
+      %span.price_per_text=t('articles.form.per')
+      %span.price_unit

@@ -8,5 +8,5 @@
     remote:        data-remote
 
 - unless current_page.first?
-  %li{:class => "first"}
-    = link_to_unless current_page.first?, raw(t 'views.pagination.first'), url, :remote => remote
+  %li.page-item
+    = link_to_unless current_page.first?, raw(t 'views.pagination.first'), url, :remote => remote, :class => 'page-link'
