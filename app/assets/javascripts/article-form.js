@@ -57,9 +57,9 @@ class ArticleForm {
 
   initializePriceDisplay() {
     mergeJQueryObjects([this.price$, this.priceUnit$, this.tax$, this.deposit$]).on('change keyup', () => {
-      const price = parseFloat(this.price$.val());
-      const tax = parseFloat(this.tax$.val());
-      const deposit = parseFloat(this.deposit$.val());
+      const price = parseLocalizedFloat(this.price$.val());
+      const tax = parseLocalizedFloat(this.tax$.val());
+      const deposit = parseLocalizedFloat(this.deposit$.val());
       const grossPrice = (price + deposit) * (tax / 100 + 1);
       const fcPrice = grossPrice  * (this.priceMarkup / 100 + 1);
       const priceUnitLabel = this.getUnitLabel(this.priceUnit$.val());
@@ -126,7 +126,7 @@ class ArticleForm {
       return true;
     }
 
-    if (this.minimumOrderQuantity$.val().trim() !== '' || parseFloat(this.groupOrderGranularity$.val().trim()) !== 1) {
+    if (this.minimumOrderQuantity$.val().trim() !== '' || parseLocalizedFloat(this.groupOrderGranularity$.val().trim()) !== 1) {
       return true;
     }
 
@@ -160,9 +160,9 @@ class ArticleForm {
   }
 
   undoPriceConversion() {
-    const relativePrice = this.price$.val();
+    const relativePrice = parseLocalizedFloat(this.price$.val());
     const priceUnit = this.priceUnit$.val();
-    if (priceUnit === undefined) {
+    if (priceUnit === undefined || Number.isNaN(relativePrice)) {
       return;
     }
     const ratio = this.getUnitRatio(1, priceUnit, this.supplierUnitSelect$.val());
@@ -487,7 +487,7 @@ class ArticleForm {
       return;
     }
     const ratio = this.getUnitRatio(1, priceUnit, this.supplierUnitSelect$.val());
-    const relativePrice = round(supplierUnitPrice * ratio);
+    const relativePrice = round(parseLocalizedFloat(supplierUnitPrice) * ratio);
     this.price$.val(relativePrice);
   }
 
@@ -551,7 +551,10 @@ class ArticleForm {
     this.unitRatiosTable$.find('tbody tr').each((_, element) => {
       const tr$ = $(element);
       const unit = tr$.find(`select[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[unit]"]`).val();
-      const quantity = tr$.find(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]:last`).val();
+      const quantity = parseLocalizedFloat(tr$.find(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]:last`).val());
+      if (Number.isNaN(quantity)) {
+        return;
+      }
       this.ratios.push({ unit, quantity });
     });
   }
@@ -560,7 +563,11 @@ class ArticleForm {
     let previousValue;
     $(`input[name^="${this.unitFieldsNamePrefix}[article_unit_ratios_attributes]"][name$="[quantity]"]`).each((_, field) => {
       let currentField$ = $(field);
-      let quantity = currentField$.val();
+      let quantity = parseLocalizedFloat(currentField$.val());
+
+      if (Number.isNaN(quantity)) {
+        return;
+      }
 
       if (previousValue !== undefined) {
         const td$ = currentField$.closest('td');
@@ -599,6 +606,31 @@ function round(num, precision) {
   }
   const factor = Math.pow(10, precision);
   return Math.round((num + Number.EPSILON) * factor) / factor;
+}
+
+function parseLocalizedFloat(value) {
+  if (value === undefined || value === null) {
+    return NaN;
+  }
+
+  const normalized = String(value).trim().replace(/\s/g, '');
+  if (normalized === '') {
+    return NaN;
+  }
+
+  if (/[^\d.,+-]/.test(normalized)) {
+    return Number(normalized.replace(/[^\d.,+-]/g, ''));
+  }
+
+  const hasDecimalComma = normalized.includes(',');
+  const hasDecimalDot = normalized.includes('.');
+  if (hasDecimalComma && hasDecimalDot) {
+    return normalized.lastIndexOf('.') > normalized.lastIndexOf(',')
+      ? Number(normalized.replace(/,/g, ''))
+      : Number(normalized.replace(/\./g, '').replace(',', '.'));
+  }
+
+  return Number(normalized.replace(',', '.'));
 }
 
 function escapeForRegex(str) {
