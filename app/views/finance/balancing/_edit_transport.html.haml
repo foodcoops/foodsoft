@@ -1,9 +1,9 @@
 = simple_form_for @order, url: update_transport_finance_order_path(@order), method: :put do |f|
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= t('.title')
+        = close_button :modal
       .modal-body
         = f.input :transport
         = f.input :transport_distribution, as: :radio_buttons, collection: Order.transport_distributions,

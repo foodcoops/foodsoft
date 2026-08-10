@@ -1,9 +1,9 @@
 = simple_form_for [@order, @order_article], remote: true do |form|
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= t '.title'
+        = close_button :modal
       .modal-body
         = form.association :article_version, collection: @order.supplier_articles.map(&:latest_article_version), label_method: lambda {|a| article_label_with_unit(a)}
       .modal-footer

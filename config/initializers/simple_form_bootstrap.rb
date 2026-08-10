@@ -173,7 +173,7 @@ SimpleForm.setup do |config|
   config.wrappers :horizontal_boolean, class: 'row mb-3' do |b|
     b.use :html5
     b.optional :readonly
-    b.wrapper :grid_wrapper, class: 'col-sm-9 offset-sm-3' do |wr|
+    b.wrapper :grid_wrapper, class: 'col-sm-8 offset-sm-4' do |wr|
       wr.wrapper :form_check_wrapper, class: 'form-check' do |bb|
         bb.use :input, class: 'form-check-input', error_class: 'is-invalid'
         bb.use :label, class: 'form-check-label'
@@ -187,8 +187,8 @@ SimpleForm.setup do |config|
   config.wrappers :horizontal_collection, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', class: 'row mb-3' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 col-form-label pt-0'
-    b.wrapper :grid_wrapper, class: 'col-sm-9' do |ba|
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
       ba.use :input, class: 'form-check-input', error_class: 'is-invalid'
       ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
       ba.use :hint, wrap_with: { class: 'form-text' }

@@ -98,17 +98,17 @@
 - [x] `app/views/deliveries/_stock_change_fields.html.haml`
 
 ### Suppliers
-- [ ] `app/views/suppliers/index.html.haml`
-- [ ] `app/views/suppliers/show.html.haml`
+- [x] `app/views/suppliers/index.html.haml`
+- [x] `app/views/suppliers/show.html.haml`
 - [ ] `app/views/suppliers/_import_search_results.html.haml`
 
 ### Finance — Balancing
-- [ ] `app/views/finance/balancing/new.html.haml`
-- [ ] `app/views/finance/balancing/_edit_results_by_articles.html.haml`
-- [ ] `app/views/finance/balancing/_group_order_articles.html.haml`
-- [ ] `app/views/finance/balancing/_order_article.html.haml`
-- [ ] `app/views/finance/balancing/_edit_note.html.haml`
-- [ ] `app/views/finance/balancing/_edit_transport.html.haml`
+- [x] `app/views/finance/balancing/new.html.haml`
+- [x] `app/views/finance/balancing/_edit_results_by_articles.html.haml`
+- [x] `app/views/finance/balancing/_group_order_articles.html.haml`
+- [x] `app/views/finance/balancing/_order_article.html.haml`
+- [x] `app/views/finance/balancing/_edit_note.html.haml`
+- [x] `app/views/finance/balancing/_edit_transport.html.haml`
 
 ### Finance — Bank & Transactions
 - [ ] `app/views/finance/bank_transactions/index.html.haml`

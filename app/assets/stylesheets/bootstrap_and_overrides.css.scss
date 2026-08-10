@@ -32,9 +32,13 @@ $unitUntranslatedColor: #999;
 $nonessentialDim: 35%;
 
 
-// Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal {
-    dd { @include clearfix(); }
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  row-gap: 0.5rem;
+  
+  dt { grid-column: 1; }
+  dd { grid-column: 2; }
 }
 
 // Light tooltips without empty space below tables

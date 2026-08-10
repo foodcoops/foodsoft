@@ -1,9 +1,9 @@
 = simple_form_for [@order, @order_article], remote: true do |form|
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= t '.title'
+        = close_button :modal
       .modal-body.article-form
         - if params[:without_units]
           = hidden_field_tag :without_units, true

@@ -21,7 +21,7 @@
         .btn-group
           = link_to t('.migrate_units') + '...', prepare_units_migration_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?
         .btn-group
-          = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' if @supplier.supplier_remote_source.nil?}"
+          = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{@supplier.supplier_remote_source.nil? ? 'btn-primary' : 'btn-secondary'}"
           = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn btn-secondary'
           = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn btn-secondary'
           = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn btn-secondary'
