@@ -86,16 +86,16 @@
 - [x] `app/views/articles/migrate_units.html.haml`
 
 ### Stockit / StockTakings / Deliveries
-- [ ] `app/views/stockit/_form.html.haml`
-- [ ] `app/views/stockit/index.html.haml`
-- [ ] `app/views/stockit/_stock_article.html.haml`
-- [ ] `app/views/stock_takings/index.html.haml`
-- [ ] `app/views/stock_takings/show.html.haml`
-- [ ] `app/views/stock_takings/_stock_change.html.haml`
-- [ ] `app/views/stock_takings/_stock_takings.html.haml`
-- [ ] `app/views/deliveries/index.html.haml`
-- [ ] `app/views/deliveries/_stock_article_for_adding.html.haml`
-- [ ] `app/views/deliveries/_stock_change_fields.html.haml`
+- [x] `app/views/stockit/_form.html.haml`
+- [x] `app/views/stockit/index.html.haml`
+- [x] `app/views/stockit/_stock_article.html.haml`
+- [x] `app/views/stock_takings/index.html.haml`
+- [x] `app/views/stock_takings/show.html.haml`
+- [x] `app/views/stock_takings/_stock_change.html.haml`
+- [x] `app/views/stock_takings/_stock_takings.html.haml`
+- [x] `app/views/deliveries/index.html.haml`
+- [x] `app/views/deliveries/_stock_article_for_adding.html.haml`
+- [x] `app/views/deliveries/_stock_change_fields.html.haml`
 
 ### Suppliers
 - [ ] `app/views/suppliers/index.html.haml`

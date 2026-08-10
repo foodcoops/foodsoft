@@ -4,11 +4,11 @@
     var units = #{raw(@all_units.to_json)};
     new ArticleForm(articleUnitRatioTemplate$, $('.article-form').parents('form'), units, #{FoodsoftConfig[:price_markup].to_f});
   = render partial: 'shared/js_templates/unit_conversion_popover_template'
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= title
+        = close_button :modal
       .modal-body.article-form
         = f.hidden_field :id
         = f.simple_fields_for :article do |a|
@@ -22,31 +22,47 @@
           = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-100' }
         -# title: free text unit
         %div
-          .col-sm-3
+          .col-sm-4
             = ""
-          .col-sm-9
+          .col-sm-8
             = f.input :unit, input_html: {class: 'form-control ms-1'}, label: false, wrapper: :inline_form
         %div
           .mb-3.d-flex.w-100
-            %label.control-label.col-sm-3{for: 'unit_ratios'}
+            %label.control-label.col-sm-4{for: 'unit_ratios'}
               = t('shared.article_fields_units.unit_ratios')
-            %table#fc_base_price{:class => 'col-sm-9'}
+            %table#fc_base_price{:class => 'col-sm-8'}
               %tbody
                 - ratios = stock_article.article_unit_ratios
                 = render :partial => 'shared/article_unit_ratio', :as => 'article_unit_ratio', :collection => ratios, locals: {f: f}
               %tfoot
-                %td{:colspan => 9, :style => 'padding-left: 22px; padding-bottom: 16px; padding-top: 16px'}
-                  = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-secondary', title: "add ratio"
+                %td{:colspan => 8}
+                  %div.custom-form-fields-wrapper
+                    = link_to t('shared.article_fields_units.add_ratio'), '#', 'data-add-ratio' => true, class: 'btn btn-secondary', title: "add ratio"
         = f.input :note
         - if stock_article.new_record?
-          = f.input :price
-          = f.input :tax do
-            .input-group
-              = f.input_field :tax, class: 'form-control', wrapper: :inline_form
-              %span.input-group-addon %
-          = f.input :deposit
+          .row.mb-3
+            = f.label :price, class: 'control-label col-sm-4'
+            .col-sm-8.d-flex
+              .input-group
+                %span.input-group-text= t 'number.currency.format.unit'
+                = f.input_field :price, class: 'form-control', step: 0.001, style: 'width: 150px;'
+          .row.mb-3
+            = f.label :tax, class: 'control-label col-sm-4'
+            .col-sm-8
+              .input-group
+                %span.input-group-text %
+                = f.input_field :tax, class: 'form-control'
+          .row.mb-3
+            = f.label :deposit, class: 'control-label col-sm-4'
+            .col-sm-8
+              .input-group
+                %span.input-group-text= t 'number.currency.format.unit'
+                = f.input_field :deposit, class: 'form-control'
         - else
-          = f.input :price, :input_html => {:disabled => 'disabled'}, :hint => stock_article_price_hint(stock_article).html_safe
+          = f.input :price, hint: stock_article_price_hint(stock_article).html_safe do
+            .input-group
+              %span.input-group-text= t 'number.currency.format.unit'
+              = f.input_field :price, class: 'form-control', disabled: true
         = f.association :article_category
       .modal-footer
         = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
