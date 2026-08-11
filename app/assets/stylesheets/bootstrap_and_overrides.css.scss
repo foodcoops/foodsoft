@@ -660,3 +660,7 @@ a {
   padding: 0.25rem 0;
   padding-left: calc(var(--bs-gutter-x, 1.5rem) * .5);
 }
+
+select.recurring_select {
+  @extend .form-select;
+}

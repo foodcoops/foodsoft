@@ -7,7 +7,7 @@
 
   .tab-content
     - for tab in @tabs
-      .tab-pane.fade.show{id: "tab-#{tab}", role: "tabpanel", class: ('active' if @current_tab==tab)}
+      .tab-pane.fade{id: "tab-#{tab}", role: "tabpanel", class: ('show active' if @current_tab==tab)}
         = render "tab_#{tab}", form: f
 
   .text-end

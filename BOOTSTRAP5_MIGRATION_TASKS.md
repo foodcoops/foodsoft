@@ -135,9 +135,9 @@
 - [x] `app/views/finance/index.html.haml`
 
 ### Admin — Configs
-- [ ] `app/views/admin/configs/_tabs.html.haml`
-- [ ] `app/views/admin/configs/show.html.haml`
-- [ ] `app/views/admin/configs/_tab_payment.html.haml`
+- [x] `app/views/admin/configs/_tabs.html.haml`
+- [x] `app/views/admin/configs/show.html.haml`
+- [x] `app/views/admin/configs/_tab_payment.html.haml`
 
 ### Admin — Users & Workgroups
 - [ ] `app/views/admin/users/_form.html.haml`

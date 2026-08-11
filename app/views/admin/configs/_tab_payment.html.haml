@@ -1,15 +1,15 @@
-.col-md-4
+.col-md-6
   = config_input form, :price_markup do
     .input-group
       = config_input_field form, :price_markup, as: :decimal, class: 'form-control'
-      .input-group-addon %
+      .input-group-text %
   = config_input form, :tax_default do
     .input-group
       = config_input_field form, :tax_default, as: :decimal, class: 'form-control'
-      .input-group-addon %
+      .input-group-text %
   = config_input form, :minimum_balance do
     .input-group
-      .input-group-addon= t 'number.currency.format.unit'
+      .input-group-text= t 'number.currency.format.unit'
       = config_input_field form, :minimum_balance, as: :decimal, class: 'form-control'
   = config_input form, :charge_members_manually, as: :boolean
   = config_input form, :use_iban, as: :boolean
@@ -17,17 +17,17 @@
   = config_input form, :use_self_service, as: :boolean
   %h4= t '.schedule_title'
   = form.simple_fields_for :order_schedule do |fields|
-    #boxfill-schedule.collapse{class: ('in' if FoodsoftConfig[:use_boxfill])}
+    #boxfill-schedule.collapse{class: ('show' if FoodsoftConfig[:use_boxfill])}
       = fields.simple_fields_for 'boxfill' do |fields|
-        = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-control'}
+        = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-select'}
         = config_input fields, 'time', input_html: {class: 'form-control'}
     = fields.simple_fields_for 'ends' do |fields|
-      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-control'}, allow_blank: true
+      = config_input fields, 'recurr', as: :select_recurring, input_html: {class: 'form-select'}, allow_blank: true
       = config_input fields, 'time', input_html: {class: 'form-control'}
     -# can't use collapse and tooltip on same element :/
     .row
-      .col-sm-3
-      .col-sm-9
+      .col-sm-8.offset-sm-4
         = config_tooltip form, :use_boxfill do
-          = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {'bs-toggle': 'collapse', 'bs-target': '#boxfill-schedule'}, wrapper: :horizontal_boolean
-        = fields.label :use_boxfill
+          .form-check
+            = config_input_field form, :use_boxfill, as: :boolean, title: '', data: {'bs-toggle': 'collapse', 'bs-target': '#boxfill-schedule'}, class: 'form-check-input'
+            = fields.label :use_boxfill, class: 'form-check-label'
