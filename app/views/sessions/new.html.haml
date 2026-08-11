@@ -12,6 +12,11 @@
   .alert.alert-danger
     != t '.nojs', link: link_to(t('.noscript'), "http://noscript.net/")
 
+- if FoodsoftConfig[:oidc_enabled]
+  .center
+    = link_to FoodsoftConfig[:oidc_button_label], oidc_initiate_path, class: 'btn btn-primary'
+  %hr
+
 .row
   .col-sm-12
     = form_tag sessions_path do
