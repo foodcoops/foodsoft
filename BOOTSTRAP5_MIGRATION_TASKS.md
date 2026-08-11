@@ -111,13 +111,14 @@
 - [x] `app/views/finance/balancing/_edit_transport.html.haml`
 
 ### Finance — Bank & Transactions
-- [ ] `app/views/finance/bank_transactions/index.html.haml`
+- [x] `app/views/finance/bank_transactions/index.html.haml`
 - [ ] `app/views/finance/bank_transactions/_transactions.html.haml`
 - [ ] `app/views/finance/bank_accounts/_import.html.haml`
-- [ ] `app/views/finance/financial_transactions/index.html.haml`
-- [ ] `app/views/finance/financial_transactions/_transactions.html.haml`
-- [ ] `app/views/finance/financial_transactions/_transactions_search.html.haml`
-- [ ] `app/views/finance/financial_transactions/new_collection.html.haml`
+  - **Note:** Dummy Bank Gateway missing in order to test templates
+- [x] `app/views/finance/financial_transactions/index.html.haml`
+- [x] `app/views/finance/financial_transactions/_transactions.html.haml`
+- [x] `app/views/finance/financial_transactions/_transactions_search.html.haml`
+- [x] `app/views/finance/financial_transactions/new_collection.html.haml`
 
 ### Finance — Links, Invoices, Ordergroups
 - [ ] `app/views/finance/financial_links/_index_bank_transaction.html.haml`

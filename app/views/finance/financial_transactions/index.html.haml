@@ -6,7 +6,7 @@
 
 - if @ordergroup
   - content_for :sidebar do
-    .card.bg-light
+    .card.bg-light.mb-3
       .card-body
         %strong= t('.balance', balance: number_to_currency(@ordergroup.account_balance))
         %br/

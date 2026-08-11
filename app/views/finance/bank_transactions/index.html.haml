@@ -4,7 +4,7 @@
   = link_to t('.assign_unlinked_transactions'), assign_unlinked_transactions_finance_bank_account_path(@bank_account), class: 'btn btn-secondary'
   = link_to t('.import_transactions'), import_finance_bank_account_path(@bank_account), class: 'btn btn-primary'
 
-.card.bg-light
+.card.bg-light.mb-3
   .card-body
     = form_tag finance_bank_account_transactions_path, :method => :get, :remote => true,
       'data-submit-onchange' => true, class: 'form-inline' do

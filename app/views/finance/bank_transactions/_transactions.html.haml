@@ -6,7 +6,7 @@
   - if @bank_transactions.total_pages > 1
     .btn-group= items_per_page wrap: false
 = pagination_links_remote @bank_transactions
-%table.table.table-striped
+%table.table.table
   %thead
     %tr
       %th= sort_link_helper heading_helper(BankTransaction, :date), "date"

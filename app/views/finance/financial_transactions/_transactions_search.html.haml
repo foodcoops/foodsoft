@@ -1,25 +1,26 @@
-.card.bg-light.row
-  = search_form_for @q, url: url,
-        html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'from-inline'} do |f|
-    .col-md-3
-      = f.text_field :note_cont, class: 'form-control search-query', placeholder: t('ui.search_placeholder'),
-        style: 'width: 200px'
-    .col-md-3.d-flex.align-items-center
-      = label_tag 'q_created_on_gteq', FinancialTransaction.human_attribute_name(:created_on), style: 'margin-bottom: 0px; margin-right: 10px'
-      .input-group
-        = f.text_field :created_on_gteq, class: 'form-control datepicker', style: 'width: 100px'
-        .input-group-addon -
-        = f.text_field :created_on_lteq, class: 'form-control search-query datepicker', style: 'width: 100px'
+.card.bg-light.mb-3
+  .card-body.px-sm-3
+    = search_form_for @q, url: url,
+          html: {data: {'submit-onchange' => true}, method: :get, remote: true, class: 'from-inline row gy-2 align-items-center'} do |f|
+      .col-xl-3
+        = f.text_field :note_cont, class: 'form-control search-query', placeholder: t('ui.search_placeholder')
+      .col-xl-3
+        .d-flex.align-items-center.flex-nowrap.flex-grow-1
+          = label_tag 'q_created_on_gteq', FinancialTransaction.human_attribute_name(:created_on), style: 'margin-bottom: 0; width: 6em'
+          .input-group
+            = f.text_field :created_on_gteq, class: 'form-control datepicker'
+            .input-group-text -
+            = f.text_field :created_on_lteq, class: 'form-control search-query datepicker'
 
-    .col-md-3.d-flex.align-items-center
-      = label_tag 'q_amount_gteq', FinancialTransaction.human_attribute_name(:amount), style: 'margin-bottom: 0px; margin-right: 10px'
-      .input-group
-        .input-group-addon= t 'number.currency.format.unit'
-        = f.text_field :amount_gteq, class: 'form-control', style: 'width: 100px'
-        .input-group-addon -
-        = f.text_field :amount_lteq, class: 'form-control search-query', style: 'width: 100px'
-
-    .col-md-3.d-flex.align-items-center
-      %label{for: 'show_hidden', style:'padding-left: 30px' }
-        = check_box_tag 'show_hidden', 1, params[:show_hidden]
-        = t '.show_hidden'
+      .col-xl-3.d-flex.align-items-center
+        .d-flex.align-items-center.flex-nowrap.flex-grow-1
+          = label_tag 'q_amount_gteq', FinancialTransaction.human_attribute_name(:amount), style: 'margin-bottom: 0; width: 6em'
+          .input-group
+            .input-group-text= t 'number.currency.format.unit'
+            = f.text_field :amount_gteq, class: 'form-control'
+            .input-group-text -
+            = f.text_field :amount_lteq, class: 'form-control search-query'
+      .col-xl-3.d-flex.align-items-center
+        %label{for: 'show_hidden' }
+          = check_box_tag 'show_hidden', 1, params[:show_hidden]
+          = t '.show_hidden'
