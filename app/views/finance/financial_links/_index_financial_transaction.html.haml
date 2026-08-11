@@ -1,10 +1,10 @@
-.modal-dialog
+.modal-dialog.modal-lg
   .modal-content
     .modal-header
-      = close_button :modal
       %h3.modal-title= t('.title')
+      = close_button :modal
     .modal-body
-      %table.table.table-striped
+      %table.table
         %thead
           %tr
             %th= heading_helper FinancialTransaction, :created_on

@@ -121,18 +121,18 @@
 - [x] `app/views/finance/financial_transactions/new_collection.html.haml`
 
 ### Finance — Links, Invoices, Ordergroups
-- [ ] `app/views/finance/financial_links/_index_bank_transaction.html.haml`
-- [ ] `app/views/finance/financial_links/_index_financial_transaction.html.haml`
-- [ ] `app/views/finance/financial_links/_index_invoice.html.haml`
-- [ ] `app/views/finance/financial_links/_new_financial_transaction.html.haml`
-- [ ] `app/views/finance/financial_links/show.html.haml`
-- [ ] `app/views/finance/invoices/_form.html.haml`
-- [ ] `app/views/finance/invoices/_invoices.html.haml`
-- [ ] `app/views/finance/ordergroups/index.html.haml`
-- [ ] `app/views/finance/ordergroups/_ordergroups.html.haml`
+- [x] `app/views/finance/financial_links/_index_bank_transaction.html.haml`
+- [x] `app/views/finance/financial_links/_index_financial_transaction.html.haml`
+- [x] `app/views/finance/financial_links/_index_invoice.html.haml`
+- [x] `app/views/finance/financial_links/_new_financial_transaction.html.haml`
+- [x] `app/views/finance/financial_links/show.html.haml`
+- [x] `app/views/finance/invoices/_form.html.haml`
+- [x] `app/views/finance/invoices/_invoices.html.haml`
+- [x] `app/views/finance/ordergroups/index.html.haml`
+- [x] `app/views/finance/ordergroups/_ordergroups.html.haml`
 
 ### Finance — Index
-- [ ] `app/views/finance/index.html.haml`
+- [x] `app/views/finance/index.html.haml`
 
 ### Admin — Configs
 - [ ] `app/views/admin/configs/_tabs.html.haml`
