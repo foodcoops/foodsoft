@@ -33,18 +33,22 @@
           = yield(:sidebar)
         .col-md-9
           = bootstrap_flash_patched
-          - if content_for?(:actionbar)
-            .btn-toolbar.float-end.gap-2(role="toolbar")= yield(:actionbar)
-          - if show_title?
-            %h1= yield(:title)
+          - if show_title? || content_for?(:actionbar)
+            .d-flex.flex-wrap.align-items-center.gap-2.mb-2{ class: (show_title? ? 'justify-content-between' : 'justify-content-end') }
+              - if show_title?
+                %h1.mb-0= yield(:title)
+              - if content_for?(:actionbar)
+                .btn-group(role="group")= yield(:actionbar)
           = yield
       - else
         .col-md-12
           = bootstrap_flash_patched
-          - if content_for?(:actionbar)
-            .btn-toolbar.float-end.gap-2(role="toolbar")= yield(:actionbar)
-          - if show_title?
-            %h1= yield(:title)
+          - if show_title? || content_for?(:actionbar)
+            .d-flex.flex-wrap.align-items-center.gap-2.mb-2{ class: (show_title? ? 'justify-content-between' : 'justify-content-end') }
+              - if show_title?
+                %h1.mb-0= yield(:title)
+              - if content_for?(:actionbar)
+                .btn-group(role="group")= yield(:actionbar)
           = yield
 
     = render 'layouts/footer'
