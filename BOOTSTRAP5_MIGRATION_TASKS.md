@@ -165,26 +165,26 @@
 - [x] `app/views/admin/mail_delivery_status/_maildeliverystatus.html.haml`
 
 ### Sessions
-- [ ] `app/views/sessions/new.html.haml`
+- [x] `app/views/sessions/new.html.haml`
 
 ### Shared Partials
-- [ ] `app/views/shared/_article_fields_units.html.haml`
-- [ ] `app/views/shared/_article_fields_price.html.haml`
+- [x] `app/views/shared/_article_fields_units.html.haml`
+- [x] `app/views/shared/_article_fields_price.html.haml`
 - [ ] `app/views/shared/_article_unit_ratio.html.haml`
   - **Note:** The unit `<select>` on line 13 is enhanced by **select2** via `article-form.js:302` (`select$.select2(this.select2Config)`). Select2 bundles a Bootstrap-version-specific theme CSS. With BS5, either:
     - Install `select2-bootstrap-5-theme` (npm package), or
     - Replace select2 with a BS5-native alternative (plain `<select>` with `.form-select`, or a custom dropdown)
     - The select is also used in `_article_fields_units.html.haml:13`, `_edit_all_table.html.haml:38`, and `_sync_table.html.haml:49`
-- [ ] `app/views/shared/_user_form_fields.html.haml`
-- [ ] `app/views/shared/_task_list.html.haml`
+- [x] `app/views/shared/_user_form_fields.html.haml`
+- [x] `app/views/shared/_task_list.html.haml`
 - [ ] `app/views/shared/_order_download_button.html.haml`
-- [ ] `app/views/shared/_alert_success.haml`
-- [ ] `app/views/shared/_workgroup_members.html.haml`
-- [ ] `app/views/shared/articles_by/_articles.html.haml`
-- [ ] `app/views/shared/articles_by/_article_single.html.haml`
+- [x] `app/views/shared/_alert_success.haml`
+- [x] `app/views/shared/_workgroup_members.html.haml`
+- [x] `app/views/shared/articles_by/_articles.html.haml`
+- [x] `app/views/shared/articles_by/_article_single.html.haml`
 - [ ] `app/views/shared/articles_by/_availability_explanation.html.haml`
-- [ ] `app/views/shared/articles_by/_group_single_goa.html.haml`
-- [ ] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`
+- [x] `app/views/shared/articles_by/_group_single_goa.html.haml`
+- [x] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`
 
 ### Self Service
 - [ ] `app/views/self_service/_event_listeners.haml`
