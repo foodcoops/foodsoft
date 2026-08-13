@@ -1,10 +1,10 @@
-.col-md-4
+.col-md-6
   = simple_form_for([:admin, @user]) do |f|
     = render 'shared/user_form_fields', f: f, password_autocomplete: false
     .settings
       .settings-group
         .row
-          .col-sm-3
+          .col-sm-4
         .row
           = f.input :send_welcome_mail, as: :boolean, inline_label: t('.send_welcome_mail'), wrapper: :horizontal_boolean
           - unless @user.ordergroup

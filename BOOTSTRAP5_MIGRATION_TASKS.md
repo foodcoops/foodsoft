@@ -140,13 +140,13 @@
 - [x] `app/views/admin/configs/_tab_payment.html.haml`
 
 ### Admin — Users & Workgroups
-- [ ] `app/views/admin/users/_form.html.haml`
-- [ ] `app/views/admin/users/index.html.haml`
-- [ ] `app/views/admin/users/show.html.haml`
-- [ ] `app/views/admin/users/_users.html.haml`
-- [ ] `app/views/admin/workgroups/_form.html.haml`
-- [ ] `app/views/admin/workgroups/index.html.haml`
-- [ ] `app/views/admin/workgroups/_workgroups.html.haml`
+- [x] `app/views/admin/users/_form.html.haml`
+- [x] `app/views/admin/users/index.html.haml`
+- [x] `app/views/admin/users/show.html.haml`
+- [x] `app/views/admin/users/_users.html.haml`
+- [x] `app/views/admin/workgroups/_form.html.haml`
+- [x] `app/views/admin/workgroups/index.html.haml`
+- [x] `app/views/admin/workgroups/_workgroups.html.haml`
 
 ### Admin — Finances
 - [ ] `app/views/admin/finances/_form.html.haml`

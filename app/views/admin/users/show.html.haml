@@ -1,6 +1,6 @@
 - title show_user(@user)
 
-.row
+.row.mb-3
   .col-md-3
     .card.bg-light
       .card-body
@@ -42,8 +42,7 @@
           - for membership in Membership.where(user: @user)
             %li= link_to(membership.group.name, [:admin, membership.group])
 
-%hr/
-%p
+.btn-toolbar.gap-1
   = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn btn-secondary'
   = link_to t('ui.delete'), [:admin, @user], method: :delete, class: 'btn btn-danger',
       data: {confirm: t('ui.confirm_delete', name: @user.first_name)}
