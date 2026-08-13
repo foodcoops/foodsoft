@@ -149,12 +149,12 @@
 - [x] `app/views/admin/workgroups/_workgroups.html.haml`
 
 ### Admin — Finances
-- [ ] `app/views/admin/finances/_form.html.haml`
-- [ ] `app/views/admin/finances/_bank_gateways.html.haml`
-- [ ] `app/views/admin/finances/_supplier_categories.html.haml`
-- [ ] `app/views/admin/finances/_transaction_types.html.haml`
-- [ ] `app/views/admin/financial_transaction_classes/_form.html.haml`
-- [ ] `app/views/admin/financial_transaction_types/_form.html.haml`
+- [x] `app/views/admin/finances/index.html.haml`
+- [x] `app/views/admin/finances/_bank_gateways.html.haml`
+- [x] `app/views/admin/finances/_supplier_categories.html.haml`
+- [x] `app/views/admin/finances/_transaction_types.html.haml`
+- [x] `app/views/admin/financial_transaction_classes/_form.html.haml`
+- [x] `app/views/admin/financial_transaction_types/_form.html.haml`
 
 ### Admin — Misc
 - [ ] `app/views/admin/ordergroups/index.html.haml`
@@ -563,7 +563,6 @@ Forms that explicitly write `.form-group` (not via SimpleForm wrapper):
 - `app/views/stockit/_form.html.haml:30`
 - `app/views/shared/_article_fields_units.html.haml:4,16,33`
 - `app/views/shared/_article_fields_price.html.haml:1`
-- `app/views/admin/finances/_form.html.haml:3`
 - `app/views/foodcoop/workgroups/edit.html.haml:9`
 
 Note: many of these also have `control-label` that needs updating.

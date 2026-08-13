@@ -9,14 +9,18 @@
 - content_for :sidebar do
   %p= t('.first_paragraph').html_safe
 
-%h2= t('.transaction_types')
-#transaction_types_table= render 'transaction_types'
+%section
+  %h2= t('.transaction_types')
+  #transaction_types_table= render 'transaction_types'
 
-%h2= t('.bank_accounts')
-#bank_accounts_table= render 'bank_accounts'
+%section
+  %h2= t('.bank_accounts')
+  #bank_accounts_table= render 'bank_accounts'
 
-%h2= t('.bank_gateways')
-#bank_gateways_table= render 'bank_gateways'
+%section
+  %h2= t('.bank_gateways')
+  #bank_gateways_table= render 'bank_gateways'
 
-%h2= t('.supplier_categories')
-#supplier_categories_table= render 'supplier_categories'
+%section
+  %h2= t('.supplier_categories')
+  #supplier_categories_table= render 'supplier_categories'
