@@ -188,23 +188,24 @@
 
 ### Self Service
 - [ ] `app/views/self_service/_event_listeners.haml`
-- [ ] `app/views/self_service/index.haml`
-- [ ] `app/views/self_service/_pickup.haml`
+  - **Note:** On availability column the availability explanation is displayed twice if the event listener has been toggled before. 
+- [x] `app/views/self_service/index.haml`
+- [x] `app/views/self_service/_pickup.haml`
 
 ### Tasks, Errors, Pickups, Invites, Workgroups
-- [ ] `app/views/tasks/edit.haml`
-- [ ] `app/views/tasks/_nav.haml`
-- [ ] `app/views/errors/_error.html.haml`
-- [ ] `app/views/invites/_modal_form.html.haml`
-- [ ] `app/views/pickups/index.html.haml`
-- [ ] `app/views/foodcoop/workgroups/edit.html.haml`
-- [ ] `app/views/foodcoop/workgroups/_workgroup.html.haml`
+- [x] `app/views/tasks/edit.haml`
+- [x] `app/views/tasks/_nav.haml`
+- [x] `app/views/errors/_error.html.haml`
+- [x] `app/views/invites/_modal_form.html.haml`
+- [x] `app/views/pickups/index.html.haml`
+- [x] `app/views/foodcoop/workgroups/edit.html.haml`
+- [x] `app/views/foodcoop/workgroups/_workgroup.html.haml`
 
 ### Article Units & Categories
-- [ ] `app/views/article_units/index.html.haml`
-- [ ] `app/views/article_units/_create_link.html.haml`
-- [ ] `app/views/article_units/_destroy_link.html.haml`
-- [ ] `app/views/article_categories/index.html.haml`
+- [x] `app/views/article_units/index.html.haml`
+- [x] `app/views/article_units/_create_link.html.haml`
+- [x] `app/views/article_units/_destroy_link.html.haml`
+- [x] `app/views/article_categories/index.html.haml`
 
 ### Plugins — Current Orders
 - [ ] `plugins/current_orders/.../ordergroups/_form.html.haml`

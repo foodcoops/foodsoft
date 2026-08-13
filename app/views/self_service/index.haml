@@ -6,12 +6,12 @@
 #self-service
   = render 'funds'
   %ul.nav.nav-tabs
-    %li.active
-      %a#pickup-tab{:href => '#pickup', 'data-bs-toggle' => 'tab'}=t('.pickup')
-    %li
-      %a#transactions-tab{:href => '#transactions', 'data-bs-toggle' => 'tab'}=t('.transactions')
+    %li.nav-item
+      %a.nav-link.active#pickup-tab{:href => '#pickup', 'data-bs-toggle' => 'tab'}=t('.pickup')
+    %li.nav-item
+      %a.nav-link#transactions-tab{:href => '#transactions', 'data-bs-toggle' => 'tab'}=t('.transactions')
   %div.tab-content
-    %div#pickup.tab-pane.active
+    .mt-3#pickup.tab-pane.active
       = render 'pickup'
-    %div#transactions.tab-pane
+    .mt-3#transactions.tab-pane
       = render 'transactions'

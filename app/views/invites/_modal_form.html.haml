@@ -2,8 +2,8 @@
   .modal-dialog
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= t '.title'
+        = close_button :modal
       .modal-body
         = t('.body', group: @invite.group.name).html_safe
         = form.hidden_field :user_id
