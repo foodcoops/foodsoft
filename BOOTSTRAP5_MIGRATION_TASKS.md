@@ -157,12 +157,12 @@
 - [x] `app/views/admin/financial_transaction_types/_form.html.haml`
 
 ### Admin — Misc
-- [ ] `app/views/admin/ordergroups/index.html.haml`
-- [ ] `app/views/admin/ordergroups/_ordergroups.html.haml`
-- [ ] `app/views/admin/bank_accounts/_form.html.haml`
-- [ ] `app/views/admin/bank_gateways/_form.html.haml`
-- [ ] `app/views/admin/supplier_categories/_form.html.haml`
-- [ ] `app/views/admin/mail_delivery_status/_maildeliverystatus.html.haml`
+- [x] `app/views/admin/ordergroups/index.html.haml`
+- [x] `app/views/admin/ordergroups/_ordergroups.html.haml`
+- [x] `app/views/admin/bank_accounts/_form.html.haml`
+- [x] `app/views/admin/bank_gateways/_form.html.haml`
+- [x] `app/views/admin/supplier_categories/_form.html.haml`
+- [x] `app/views/admin/mail_delivery_status/_maildeliverystatus.html.haml`
 
 ### Sessions
 - [ ] `app/views/sessions/new.html.haml`
