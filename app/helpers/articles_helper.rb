@@ -129,7 +129,6 @@ module ArticlesHelper
     unit_data = ArticleUnitsLib.units.to_h[factor[:code]]
     is_si_conversible = ArticleUnitsLib.unit_is_si_convertible(factor[:code])
     unit_label = is_si_conversible ? unit_data[:symbol] : unit_data[:name]
-    return unit_label if factor[:quantity] == 1
 
     multiplier_str = '×' unless is_si_conversible
 
