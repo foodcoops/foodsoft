@@ -291,7 +291,9 @@ class ArticleForm {
       .on('click.article_form_ratio_row', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.removeRatioRow($(e.target).closest('tr'));
+        if (confirm($(e.target).closest('a').attr('title') + '?')) {
+          this.removeRatioRow($(e.target).closest('tr'));
+        }
       });
 
     const select$ = $('select[name$="[unit]"]', row$);
