@@ -216,14 +216,14 @@
 - [ ] `plugins/current_orders/.../group_orders/_payment_bar.html.haml`
 
 ### Plugins — Messages
-- [x] `plugins/messages/.../messages/thread.haml`
-- [x] `plugins/messages/.../messages/show.html.haml`
-- [x] `plugins/messages/.../messages/_messages.html.haml`
-- [x] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
-- [x] `plugins/messages/.../admin/messagegroups/_form.html.haml`
-- [x] `plugins/messages/.../admin/messagegroups/index.html.haml`
-- [x] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
-- [x] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
+- [ ] `plugins/messages/.../messages/thread.haml`
+- [ ] `plugins/messages/.../messages/show.html.haml`
+- [ ] `plugins/messages/.../messages/_messages.html.haml`
+- [ ] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/_form.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/index.html.haml`
+- [ ] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
+- [ ] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
 
 ### Plugins — Wiki
 - [x] `plugins/wiki/.../pages/show.html.haml`
@@ -231,13 +231,19 @@
 - [x] `plugins/wiki/.../pages/_form.html.haml`
 - [x] `plugins/wiki/.../pages/_body.html.haml`
 
+### Plugins — Polls
+- [x] `plugins/polls/.../polls/_polls.html.haml`
+- [x] `plugins/polls/.../polls/_form.html.haml`
+- [x] `plugins/polls/.../polls/index.html.haml`
+- [x] `plugins/polls/.../polls/show.html.haml`
+- [x] `plugins/polls/.../polls/vote.html.haml`
+
 ### Plugins — Documents
 - [ ] `plugins/documents/.../documents/_form.html.haml`
 - [ ] `plugins/documents/.../documents/_documents.html.haml`
 - [ ] `plugins/documents/.../documents/_move.html.haml`
 
 ### Plugins — Polls, Links, Printer, Mollie
-- [ ] `plugins/polls/.../polls/_polls.html.haml`
 - [ ] `plugins/links/.../admin/links/_form.html.haml`
 - [ ] `plugins/links/.../admin/links/_links.html.haml`
 - [ ] `plugins/printer/.../printer_jobs/_jobs.html.haml`
