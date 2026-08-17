@@ -3,7 +3,7 @@
     = render 'body'
 
 .row
-  .col-md-6
+  .col-md-7
     = simple_form_for @page do |f|
       = f.hidden_field :lock_version
       = f.input :title, input_html: {class: 'form-control'}
@@ -15,76 +15,85 @@
         = button_tag class: 'btn btn-secondary ms-1' do
           = t 'ui.save'
         = link_to t('ui.or_cancel'), @page, class: 'ms-1'
-  .col-md-2
+  .col-md-1
   .col-md-4
     %h3(style='margin-top: 0')= t '.help.title'
-    %table.table
-      %tbody
-        %tr
-          %td(colspan=2)
-            %b= t '.help.section_character'
-        %tr
-          %td
-            %i= t '.help.italic'
-          %td
-            %pre
-              ''#{t '.help.italic'}''<br />
-        %tr
-          %td
-            %b= t '.help.bold'
-          %td
-            %pre '''#{t '.help.bold'}'''<br />
-        %tr
-          %td= t '.help.noformat'
-          %td
-            %pre &lt;nowiki&gt;#{t '.help.text'}&lt;/nowiki&gt;
-        %tr
-          %td(colspan=2)
-            %b= t '.help.section_block'
-        %tr
-          %td= t '.help.headings'
-          %td
-            %pre
-              \== #{t '.help.heading', level: 1} == <br>
-              \=== #{t '.help.heading', level: 2} === <br>
-              \==== #{t '.help.heading', level: 3} ==== <br>
-        %tr
-          %td= t '.help.unordered_list'
-          %td
-            %pre
-              * #{t '.help.list_item_1'} <br>
-              * #{t '.help.list_item_2'}
-        %tr
-          %td= t '.help.ordered_list'
-          %td
-            %pre
-              \# #{t '.help.list_item_1'} <br>
-              \# #{t '.help.list_item_2'}
-        %tr
-          %td(colspan=2)
-            %b= t '.help.section_link'
-        %tr
-          %td= t '.help.wiki_links'
-          %td
-            %pre
-              [[#{t '.help.wiki_link_ex'}]]
-        %tr
-          %td= t '.help.external_links'
-          %td
-            %pre
-              [http://example.net #{t '.help.external_link_ex'}]
-        %tr
-          %td= t '.help.image_links'
-          %td
-            %pre
-              [[Image:http://example.net/image.jpg|#{t '.help.image_link_title'}]]
-        %tr
-          %td(colspan=2)
-            %b= t '.help.section_more'
-        %tr
-          %td(colspan=2)
-            %ul
-              %li!= link_to t('.help.link_table'), '//www.mediawiki.org/wiki/Help:Tables', target: '_blank'
-              %li!= link_to t('.help.link_variables'), page_path('Help:Foodsoft_variables'), target: '_blank'
-              %li!= link_to t('.help.link_lists'), '//www.mediawiki.org/wiki/Help:Lists', target: '_blank'
-              %li!= link_to t('.help.link_templates'), '//www.mediawiki.org/wiki/Help:Templates', target: '_blank'
+    .row
+      .col-12
+        %b= t '.help.section_character'
+    .row
+      .col-sm-4
+        %i= t '.help.italic'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            ''#{t '.help.italic'}''
+    .row
+      .col-sm-4
+        %b= t '.help.bold'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            '''#{t '.help.bold'}'''<br />
+    .row
+      .col-sm-4= t '.help.noformat'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            &lt;nowiki&gt;#{t '.help.text'}&lt;/nowiki&gt;
+    .row
+      .col-12
+        %b= t '.help.section_block'
+    .row
+      .col-sm-4= t '.help.headings'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            \== #{t '.help.heading', level: 1} == <br>
+            \=== #{t '.help.heading', level: 2} === <br>
+            \==== #{t '.help.heading', level: 3} ==== <br>
+    .row
+      .col-sm-4= t '.help.unordered_list'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            * #{t '.help.list_item_1'} <br>
+            * #{t '.help.list_item_2'}
+    .row
+      .col-sm-4= t '.help.ordered_list'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            \# #{t '.help.list_item_1'} <br>
+            \# #{t '.help.list_item_2'}
+    .row
+      .col-12
+        %b= t '.help.section_link'
+    .row
+      .col-sm-4= t '.help.wiki_links'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            [[#{t '.help.wiki_link_ex'}]]
+    .row
+      .col-sm-4= t '.help.external_links'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            [http://example.net #{t '.help.external_link_ex'}]
+    .row
+      .col-sm-4= t '.help.image_links'
+      .col-sm-7
+        %pre.bg-light.p-2{style: 'white-space: pre-wrap; overflow-wrap: break-word'}
+          %code
+            [[Image:http://example.net/image.jpg|#{t '.help.image_link_title'}]]
+    .row
+      .col-12
+        %b= t '.help.section_more'
+    .row
+      .col-12
+        %ul
+          %li!= link_to t('.help.link_table'), '//www.mediawiki.org/wiki/Help:Tables', target: '_blank'
+          %li!= link_to t('.help.link_variables'), page_path('Help:Foodsoft_variables'), target: '_blank'
+          %li!= link_to t('.help.link_lists'), '//www.mediawiki.org/wiki/Help:Lists', target: '_blank'
+          %li!= link_to t('.help.link_templates'), '//www.mediawiki.org/wiki/Help:Templates', target: '_blank'

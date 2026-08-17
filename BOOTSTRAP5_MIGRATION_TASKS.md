@@ -216,20 +216,20 @@
 - [ ] `plugins/current_orders/.../group_orders/_payment_bar.html.haml`
 
 ### Plugins — Messages
-- [ ] `plugins/messages/.../messages/thread.haml`
-- [ ] `plugins/messages/.../messages/show.html.haml`
-- [ ] `plugins/messages/.../messages/_messages.html.haml`
-- [ ] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/_form.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/index.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
-- [ ] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
+- [x] `plugins/messages/.../messages/thread.haml`
+- [x] `plugins/messages/.../messages/show.html.haml`
+- [x] `plugins/messages/.../messages/_messages.html.haml`
+- [x] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/_form.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/index.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
+- [x] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
 
 ### Plugins — Wiki
-- [ ] `plugins/wiki/.../pages/show.html.haml`
-- [ ] `plugins/wiki/.../pages/all.html.haml`
-- [ ] `plugins/wiki/.../pages/_form.html.haml`
-- [ ] `plugins/wiki/.../pages/_body.html.haml`
+- [x] `plugins/wiki/.../pages/show.html.haml`
+- [x] `plugins/wiki/.../pages/all.html.haml`
+- [x] `plugins/wiki/.../pages/_form.html.haml`
+- [x] `plugins/wiki/.../pages/_body.html.haml`
 
 ### Plugins — Documents
 - [ ] `plugins/documents/.../documents/_form.html.haml`

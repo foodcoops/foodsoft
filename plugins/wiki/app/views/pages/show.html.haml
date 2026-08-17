@@ -5,10 +5,9 @@
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
       = fa_icon :edit
       =t('.edit')
-  .card.bg-light
+  .card.bg-light.mb-3
     .card-body
-      %ul.nav
-        %li
+      %ul
         %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
         - unless @page.children.empty?
           %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
