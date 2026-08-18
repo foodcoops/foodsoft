@@ -239,11 +239,12 @@
 - [x] `plugins/polls/.../polls/vote.html.haml`
 
 ### Plugins — Documents
-- [ ] `plugins/documents/.../documents/_form.html.haml`
-- [ ] `plugins/documents/.../documents/_documents.html.haml`
-- [ ] `plugins/documents/.../documents/_move.html.haml`
+- [x] `plugins/documents/.../documents/_form.html.haml`
+- [x] `plugins/documents/.../documents/_documents.html.haml`
+- [x] `plugins/documents/.../documents/_move.html.haml`
+- [x] `plugins/documents/.../documents/index.html.haml`
 
-### Plugins — Polls, Links, Printer, Mollie
+### Plugins — Links, Printer, Mollie
 - [ ] `plugins/links/.../admin/links/_form.html.haml`
 - [ ] `plugins/links/.../admin/links/_links.html.haml`
 - [ ] `plugins/printer/.../printer_jobs/_jobs.html.haml`

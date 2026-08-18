@@ -1,8 +1,8 @@
 .modal-dialog
   .modal-content
     .modal-header
-      = close_button :modal
       %h3.modal-title= t('.title')
+      = close_button :modal
     .modal-body
       = link_to t('.root_folder'), document_path(@document, parent_id: nil), method: :patch
       - Document.walk_tree do |document, level|

@@ -2,8 +2,8 @@
 
 - content_for :actionbar do
   - options = { document_id: @document || 0 }
-  = link_to t('.new_folder'), document_new_path(options.merge(type: :folder)), remote: true, class: 'btn'
-  = link_to t('.new'), document_new_path(options), remote: true, class: 'btn btn-primary'
+  = link_to t('.new_folder'), new_document_path(options.merge(type: :folder)), remote: true, class: 'btn btn-secondary'
+  = link_to t('.new'), new_document_path(options), remote: true, class: 'btn btn-primary'
 
 - if @document
   %ul.breadcrumb
