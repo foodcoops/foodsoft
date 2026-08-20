@@ -120,19 +120,25 @@
 - [x] `app/views/finance/financial_transactions/_transactions_search.html.haml`
 - [x] `app/views/finance/financial_transactions/new_collection.html.haml`
 
-### Finance — Links, Invoices, Ordergroups
+### Finance — Links, Ordergroups
 - [x] `app/views/finance/financial_links/_index_bank_transaction.html.haml`
 - [x] `app/views/finance/financial_links/_index_financial_transaction.html.haml`
 - [x] `app/views/finance/financial_links/_index_invoice.html.haml`
 - [x] `app/views/finance/financial_links/_new_financial_transaction.html.haml`
 - [x] `app/views/finance/financial_links/show.html.haml`
-- [x] `app/views/finance/invoices/_form.html.haml`
-- [x] `app/views/finance/invoices/_invoices.html.haml`
 - [x] `app/views/finance/ordergroups/index.html.haml`
 - [x] `app/views/finance/ordergroups/_ordergroups.html.haml`
 
 ### Finance — Index
 - [x] `app/views/finance/index.html.haml`
+
+### Finance — Invoices, Balancing
+- [x] `app/views/finance/invoices/_form.html.haml`
+- [x] `app/views/finance/invoices/_invoices.html.haml`
+- [x] `app/views/finance/invoices/show.html.haml`
+- [x] `app/views/finance/balancing/confirm.html.haml`
+- [x] `app/views/finance/balancing/index.html.haml`
+
 
 ### Admin — Configs
 - [x] `app/views/admin/configs/_tabs.html.haml`
@@ -182,6 +188,7 @@
 - [x] `app/views/shared/_workgroup_members.html.haml`
 - [x] `app/views/shared/articles_by/_articles.html.haml`
 - [x] `app/views/shared/articles_by/_article_single.html.haml`
+- [x] `app/views/shared/articles_by/_article_single_goa.html.haml`
 - [ ] `app/views/shared/articles_by/_availability_explanation.html.haml`
 - [x] `app/views/shared/articles_by/_group_single_goa.html.haml`
 - [x] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`

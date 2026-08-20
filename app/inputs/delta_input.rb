@@ -9,8 +9,8 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     options[:autocomplete] ||= 'off'
     # TODO: get generated id, don't know how yet - `add_default_name_and_id_for_value` might be an option
 
-    template.content_tag :div, class: 'row' do
-      template.content_tag :div, class: 'delta-input col-xs-4 input-group input-group-sm' do
+    template.content_tag :div do
+      template.content_tag :div, class: 'delta-input input-group input-group-sm' do
         result = []
         result << buttons
         result << @builder.text_field(attribute_name, options)

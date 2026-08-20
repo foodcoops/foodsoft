@@ -664,3 +664,9 @@ a {
 select.recurring_select {
   @extend .form-select;
 }
+
+.order-article-edit-form .conversion-popover-opener {
+  border-radius: 0 !important;
+  height: 100%;
+  display: flex;
+}

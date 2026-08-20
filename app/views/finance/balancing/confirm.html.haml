@@ -1,22 +1,25 @@
-= form_tag close_finance_order_path(@order) do
-  %p!= t('.first_paragraph')
-  - if FinancialTransactionType.has_multiple_types
-    %p
-      %b= heading_helper FinancialTransaction, :financial_transaction_type
-      = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] })
-  %table.table.table-striped{:style => "width:35em"}
-    - for group_order in @order.group_orders
-      %tr{:class => cycle('even', 'odd')}
-        %td= group_order.ordergroup_name
-        %td.numeric= number_to_currency(group_order.total)
-  - if FoodsoftConfig[:use_financial_links]
-    %p
-      %label
-        = check_box_tag :create_financial_link, true, params.fetch(:create_financial_link, true)
-        = t('.create_financial_link')
-      %label
-        = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true)
-        = t('.create_foodcoop_transaction', sum: number_to_currency(@order.sum(:groups)))
-  %div
-    = submit_tag t('.clear'), class: 'btn btn-primary'
-    = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)
+.col-md-7
+  = form_tag close_finance_order_path(@order) do
+    %p!= t('.first_paragraph')
+    - if FinancialTransactionType.has_multiple_types
+      .row.mb-3
+        .col-sm-4
+          = label_tag :type, heading_helper(FinancialTransaction, :financial_transaction_type), class: 'form-label'
+        .col-sm-8
+          = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }), class: 'form-select'
+    %table.table.mb-3
+      - for group_order in @order.group_orders
+        %tr
+          %td= group_order.ordergroup_name
+          %td.numeric= number_to_currency(group_order.total)
+    - if FoodsoftConfig[:use_financial_links]
+      .mb-3
+        .form-check
+          = check_box_tag :create_financial_link, true, params.fetch(:create_financial_link, true), class: 'form-check-input'
+          = label_tag :create_financial_link, t('.create_financial_link'), class: 'form-check-label'
+        .form-check
+          = check_box_tag :create_foodcoop_transaction, true, params.fetch(:create_foodcoop_transaction, true), class: 'form-check-input'
+          = label_tag :create_foodcoop_transaction, t('.create_foodcoop_transaction', sum: number_to_currency(@order.sum(:groups))), class: 'form-check-label'
+    %div
+      = submit_tag t('.clear'), class: 'btn btn-primary'
+      = link_to t('.or_cancel'), new_finance_order_path(order_id: @order.id)

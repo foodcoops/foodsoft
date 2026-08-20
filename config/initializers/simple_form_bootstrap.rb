@@ -169,6 +169,23 @@ SimpleForm.setup do |config|
     end
   end
 
+  # horizontal flex
+  config.wrappers :horizontal_form_flex, class: 'row mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8 d-flex align-items-center' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
   # horizontal input for boolean
   config.wrappers :horizontal_boolean, class: 'row mb-3' do |b|
     b.use :html5

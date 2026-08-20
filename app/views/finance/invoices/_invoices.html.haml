@@ -40,6 +40,7 @@
             = link_to format_date(order.ends), new_finance_order_path(order_id: order)
         %td= truncate(invoice.note)
         %td
+          = link_to t('ui.show'), finance_invoice_path(invoice), class: 'btn btn-secondary btn-sm'
           - if invoice.user_can_edit?(current_user)
             = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-secondary btn-sm'
         %td

@@ -75,7 +75,7 @@
         placement: 'bottom',
         trigger: 'manual',
         html: true,
-        container:'body',
+        container: this.field$.closest('.modal')[0] || 'body',
         content: () => {
           return document.importNode(this.popoverTemplate, true);
         }

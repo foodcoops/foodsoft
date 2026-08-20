@@ -14,12 +14,11 @@
         = f.simple_fields_for :article do |a|
           = a.input :supplier_id, collection: Supplier.all, selected: stock_article.supplier_id
         = f.input :name
-        .d-flex
-          = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
-          - supplier_order_unit_override = stock_article.supplier_order_unit
-          - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
-          -# title: unit in which article can be ordered from supplier
-          = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}, wrapper_html: { class: 'd-flex w-100' }
+        = f.hidden_field :unit, id: 'article_unit_hidden', value: ''
+        - supplier_order_unit_override = stock_article.supplier_order_unit
+        - supplier_order_unit_override = 'XPP' if supplier_order_unit_override.nil? && stock_article.unit.nil?
+        -# title: unit in which article can be ordered from supplier
+        = f.input :supplier_order_unit, as: :select, collection: @article_units, selected: supplier_order_unit_override, value: stock_article.supplier_order_unit, include_blank: t('shared.article_fields_units.custom_unit'), input_html: {class: 'form-control'}
         -# title: free text unit
         %div
           .col-sm-4

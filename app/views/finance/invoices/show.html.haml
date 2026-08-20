@@ -3,20 +3,20 @@
 - total = 0
 
 .row
-  .col-md-4
-    %dl.dl-horizontal
-      %dt= heading_helper(Invoice, :created_at) + ':'
-      %dd= format_time(@invoice.created_at)
+  .col-md-7
+    %dl.row
+      %dt.col-sm-4= heading_helper(Invoice, :created_at) + ':'
+      %dd.col-sm-8= format_time(@invoice.created_at)
 
-      %dt= heading_helper(Invoice, :created_by) + ':'
-      %dd= show_user(@invoice.created_by)
+      %dt.col-sm-4= heading_helper(Invoice, :created_by) + ':'
+      %dd.col-sm-8= show_user(@invoice.created_by)
 
-      %dt= heading_helper(Invoice, :supplier) + ':'
-      %dd= @invoice.supplier.name
+      %dt.col-sm-4= heading_helper(Invoice, :supplier) + ':'
+      %dd.col-sm-8= @invoice.supplier.name
 
       - if @invoice.deliveries.any?
-        %dt= heading_helper(Invoice, :deliveries) + ':'
-        %dd><
+        %dt.col-sm-4= heading_helper(Invoice, :deliveries) + ':'
+        %dd.col-sm-8><
           - @invoice.deliveries.order(:date).each_with_index do |delivery, index|
             - sum = delivery.sum
             - total += sum
@@ -25,8 +25,8 @@
             = ' (' + number_to_currency(sum) + ')'
 
       - if @invoice.orders.any?
-        %dt= heading_helper(Invoice, :orders) + ':'
-        %dd><
+        %dt.col-sm-4= heading_helper(Invoice, :orders) + ':'
+        %dd.col-sm-8><
           - @invoice.orders.order(:ends).each_with_index do |order, index|
             - sum = order.sum
             - transport = order.transport || 0
@@ -38,45 +38,45 @@
               = ' + ' + number_to_currency(transport)
             = ')'
 
-      %dt= heading_helper(Invoice, :number) + ':'
-      %dd= @invoice.number
+      %dt.col-sm-4= heading_helper(Invoice, :number) + ':'
+      %dd.col-sm-8= @invoice.number
 
-      %dt= heading_helper(Invoice, :date) + ':'
-      %dd= format_date(@invoice.date)
+      %dt.col-sm-4= heading_helper(Invoice, :date) + ':'
+      %dd.col-sm-8= format_date(@invoice.date)
 
-      %dt= heading_helper(Invoice, :paid_on) + ':'
-      %dd= format_date(@invoice.paid_on)
+      %dt.col-sm-4= heading_helper(Invoice, :paid_on) + ':'
+      %dd.col-sm-8= format_date(@invoice.paid_on)
 
-      %dt= heading_helper(Invoice, :amount) + ':'
-      %dd= number_to_currency @invoice.amount
+      %dt.col-sm-4= heading_helper(Invoice, :amount) + ':'
+      %dd.col-sm-8= number_to_currency @invoice.amount
 
-      %dt= heading_helper(Invoice, :deposit) + ':'
-      %dd= number_to_currency @invoice.deposit
+      %dt.col-sm-4= heading_helper(Invoice, :deposit) + ':'
+      %dd.col-sm-8= number_to_currency @invoice.deposit
 
-      %dt= heading_helper(Invoice, :deposit_credit) + ':'
-      %dd= number_to_currency @invoice.deposit_credit
+      %dt.col-sm-4= heading_helper(Invoice, :deposit_credit) + ':'
+      %dd.col-sm-8= number_to_currency @invoice.deposit_credit
 
-      %dt= heading_helper(Invoice, :net_amount) + ':'
-      %dd= number_to_currency @invoice.net_amount
+      %dt.col-sm-4= heading_helper(Invoice, :net_amount) + ':'
+      %dd.col-sm-8= number_to_currency @invoice.net_amount
 
       - if @invoice.deliveries.any? || @invoice.orders.any?
-        %dt= heading_helper(Invoice, :total) + ':'
-        %dd= number_to_currency total
+        %dt.col-sm-4= heading_helper(Invoice, :total) + ':'
+        %dd.col-sm-8= number_to_currency total
 
       - if @invoice.attachments.attached?
-        %dt= heading_helper(Invoice, :attachment) + ':'
+        %dt.col-sm-4= heading_helper(Invoice, :attachment) + ':'
         - for attachment in @invoice.attachments
-          %dd
+          %dd.col-sm-8
             =link_to url_for(attachment), target: "_blank" do
               = image_tag attachment.preview(resize_to_limit: [100, 100]), style: 'margin: 0px 10px 10px 0px;' if attachment.previewable?
               = image_tag attachment.variant(resize_to_limit: [100, 100]), style: 'margin: 0px 10px 10px 0px;' if attachment.variable?
               = attachment.filename
-      %dt= heading_helper(Invoice, :note) + ':'
-      %dd= simple_format(@invoice.note)
+      %dt.col-sm-4= heading_helper(Invoice, :note) + ':'
+      %dd.col-sm-8= simple_format(@invoice.note)
 
       - if @invoice.financial_link
-        %dt= heading_helper(Invoice, :financial_link) + ':'
-        %dd= link_to t('ui.show'), finance_link_path(@invoice.financial_link)
+        %dt.col-sm-4= heading_helper(Invoice, :financial_link) + ':'
+        %dd.col-sm-8= link_to t('ui.show'), finance_link_path(@invoice.financial_link)
 
     .clearfix
       %div

@@ -6,14 +6,21 @@ form.delta-input, .delta-input form {
 }
 
 .delta-input {
-  .btn.modify {
+  display: inline-flex;  // inline, so td.center's text-align:center centers it
+  width: auto;           // override .input-group's width:100%
+  flex-wrap: nowrap;
+
+
+  .input-group-text.modify {
+    flex: 0 0 auto;
     padding: 4px 8px;
     font-size: 10px;
   }
 
   input[data-delta] {
     text-align: right;
-    min-width: 65px;
+    min-width: 3rem;  
+    max-width: 5rem; 
     font-size: 14px;
     padding: 4px 6px;
 
@@ -25,9 +32,7 @@ form.delta-input, .delta-input form {
     }
   }
 
-  .btn-ordering {
-    margin-top: 0px;
-  }
+  .btn-ordering { margin-top: 0px; }
 
   // handle error class outside of bootstrap controls
   input[data-delta].error {

@@ -1,7 +1,7 @@
 %table.table.table-condensed.table-hover.list#articles_by_articles
   %thead.list-heading
     %tr
-      %th{:style => 'width:70%'}= Ordergroup.model_name.human
+      %th= Ordergroup.model_name.human
       %th.center
         %acronym{:title => t('shared.articles.ordered_desc')}= t 'shared.articles.ordered'
       %th.center
@@ -20,5 +20,5 @@
     - for go in order.group_orders
       - if go.transport
         %tr
-          %td{colspan: 3, style: 'width:70%'}= go.ordergroup_name
+          %td{colspan: 3}= go.ordergroup_name
           %td= number_to_currency(go.transport)
