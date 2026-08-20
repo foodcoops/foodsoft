@@ -1,65 +1,77 @@
 - title t('.title')
 - with_payment = @financial_transactions.with_payment_plugin.any?
 
-.row
-  .col-md-6
-    %h2
-      = t('.unpaid_invoices')
-      %small= link_to t('.show_all'), unpaid_finance_invoices_path
-    %table.table.table-striped
-      %thead
-        %tr
-          %th= heading_helper Invoice, :date
-          %th.numeric= heading_helper Invoice, :amount
-          %th= heading_helper Invoice, :supplier
-          %th
-      %tbody
-        - for invoice in @unpaid_invoices
-          %tr
-            %td= link_to h(format_date(invoice.date)), finance_invoice_path(invoice)
-            %td.numeric= number_to_currency(invoice.amount)
-            %td= invoice.supplier.name
-            %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-secondary btn-sm'
 
-    %h2
-      = t('.last_transactions')
-      %small= link_to(t('.show_all'), finance_transactions_path)
-    %table.table.table-striped
-      %thead
-        %tr
-          %th= heading_helper FinancialTransaction, :created_on
-          %th= heading_helper FinancialTransaction, :ordergroup
-          %th= heading_helper FinancialTransaction, :note
-          - if with_payment
-            %th= heading_helper FinancialTransaction, :payment_state
-          %th.numeric= heading_helper FinancialTransaction, :amount
-      %tbody
-        - @financial_transactions.each do |ft|
-          %tr
-            %td= format_date(ft.created_on)
-            %td= ft.ordergroup_name
-            %td= ft.note
-            - if with_payment
-              %td= ft.payment_state
-            %td.numeric= format_currency(ft.amount)
+.row.mb-3
   .col-md-6
-    %h2
-      = t('.open_transactions')
-      %small= link_to t('.show_all'), finance_order_index_path
-    - unless @orders.empty?
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= heading_helper Order, :name
-            %th= t '.end'
-            %th.numeric= t('.amount_fc')
-            %th
-        %tbody
-          - @orders.each do |order|
+    .card.h-100 
+      .card-body
+        .card-title
+          .d-flex.justify-content-between.align-items-center
+            %h2
+              = t('.unpaid_invoices')
+            %small= link_to t('.show_all'), unpaid_finance_invoices_path
+          %table.table
+            %thead
+              %tr
+                %th= heading_helper Invoice, :date
+                %th.numeric= heading_helper Invoice, :amount
+                %th= heading_helper Invoice, :supplier
+                %th
+            %tbody
+              - for invoice in @unpaid_invoices
+                %tr
+                  %td= link_to h(format_date(invoice.date)), finance_invoice_path(invoice)
+                  %td.numeric= number_to_currency(invoice.amount)
+                  %td= invoice.supplier.name
+                  %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-secondary btn-sm'
+  .col-md-6
+    .card.h-100 
+      .card-body
+        .card-title.d-flex.justify-content-between.align-items-center
+          %h2
+            = t('.open_transactions')
+          %small= link_to t('.show_all'), finance_order_index_path
+        - unless @orders.empty?
+          %table.table
+            %thead
+              %tr
+                %th= heading_helper Order, :name
+                %th= t '.end'
+                %th.numeric= t('.amount_fc')
+                %th
+            %tbody
+              - @orders.each do |order|
+                %tr
+                  %td= order.name
+                  %td= format_date(order.ends)
+                  %td.numeric= number_to_currency(order.sum(:fc))
+                  %td= link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-secondary btn-sm'
+        - else
+          = t('.everything_cleared')
+.row
+  .col-md-12      
+    .card
+      .card-body
+        .card-title.d-flex.justify-content-between.align-items-center
+          %h2
+            = t('.last_transactions')
+          %small= link_to(t('.show_all'), finance_transactions_path)
+        %table.table.table-striped
+          %thead
             %tr
-              %td= order.name
-              %td= format_date(order.ends)
-              %td.numeric= number_to_currency(order.sum(:fc))
-              %td= link_to t('finance.balancing.orders.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-secondary btn-sm'
-    - else
-      = t('.everything_cleared')
+              %th= heading_helper FinancialTransaction, :created_on
+              %th= heading_helper FinancialTransaction, :ordergroup
+              %th= heading_helper FinancialTransaction, :note
+              - if with_payment
+                %th= heading_helper FinancialTransaction, :payment_state
+              %th.numeric= heading_helper FinancialTransaction, :amount
+          %tbody
+            - @financial_transactions.each do |ft|
+              %tr
+                %td= format_date(ft.created_on)
+                %td= ft.ordergroup_name
+                %td= ft.note
+                - if with_payment
+                  %td= ft.payment_state
+                %td.numeric= format_currency(ft.amount)

@@ -1,7 +1,7 @@
 - if Ordergroup.count > 20
   = items_per_page
 = pagination_links_remote @ordergroups
-%table.table.table-striped
+%table.table
   %thead
     %tr
       %th= sort_link_helper heading_helper(Ordergroup, :name), "name", :per_page => @per_page
