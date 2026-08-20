@@ -19,12 +19,13 @@
             %p
               %b= c.display + ':'
               = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
-        %p
+        %div
           %b= heading_helper(Ordergroup, :user_tokens) + ':'
           = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')
         - unless FoodsoftConfig[:disable_invite]
-          = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
-        - '<home_ordergroup_well_mark>'
+          .mb-2
+            = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
+          - '<home_ordergroup_well_mark>'
   .col-md-8
     %h2= t('.account_summary')
     .card.bg-light

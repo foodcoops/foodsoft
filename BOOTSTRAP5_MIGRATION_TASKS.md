@@ -208,6 +208,11 @@
 - [x] `app/views/foodcoop/workgroups/edit.html.haml`
 - [x] `app/views/foodcoop/workgroups/_workgroup.html.haml`
 
+### Home
+- [x] `app/views/home/ordergroup.html.haml`
+- [x] `app/views/home/profile.html.haml`
+- [x] `app/views/home/reference_calculator.html.haml`
+
 ### Article Units & Categories
 - [x] `app/views/article_units/index.html.haml`
 - [x] `app/views/article_units/_create_link.html.haml`
@@ -223,14 +228,14 @@
 - [ ] `plugins/current_orders/.../group_orders/_payment_bar.html.haml`
 
 ### Plugins — Messages
-- [ ] `plugins/messages/.../messages/thread.haml`
-- [ ] `plugins/messages/.../messages/show.html.haml`
-- [ ] `plugins/messages/.../messages/_messages.html.haml`
-- [ ] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/_form.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/index.html.haml`
-- [ ] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
-- [ ] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
+- [x] `plugins/messages/.../messages/thread.haml`
+- [x] `plugins/messages/.../messages/show.html.haml`
+- [x] `plugins/messages/.../messages/_messages.html.haml`
+- [x] `plugins/messages/.../messagegroups/_messagegroup.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/_form.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/index.html.haml`
+- [x] `plugins/messages/.../admin/messagegroups/_messagegroups.html.haml`
+- [x] `plugins/messages/.../message_threads/_groupmessage_threads.html.haml`
 
 ### Plugins — Wiki
 - [x] `plugins/wiki/.../pages/show.html.haml`
