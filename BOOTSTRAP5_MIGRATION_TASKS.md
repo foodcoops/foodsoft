@@ -251,15 +251,13 @@
 - [x] `plugins/documents/.../documents/_move.html.haml`
 - [x] `plugins/documents/.../documents/index.html.haml`
 
-### Plugins — Links, Printer, Mollie
-- [ ] `plugins/links/.../admin/links/_form.html.haml`
-- [ ] `plugins/links/.../admin/links/_links.html.haml`
-- [ ] `plugins/printer/.../printer_jobs/_jobs.html.haml`
-- [ ] `plugins/printer/.../printer_jobs/index.html.haml`
-- [ ] `plugins/mollie/.../payments/mollie/_form.html.haml`
+### Plugins — Links, Mollie
+- [x] `plugins/links/.../admin/links/_form.html.haml`
+- [x] `plugins/links/.../admin/links/_links.html.haml`
+- [x] `plugins/mollie/.../payments/mollie/_form.html.haml`
 
 ### Scaffold
-- [ ] `lib/templates/haml/scaffold/_form.html.haml`
+- [x] `lib/templates/haml/scaffold/_form.html.haml`
 
 
 ---

@@ -2,13 +2,13 @@
   .modal-dialog
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= @link.new_record? ? t('.title_new') : t('.title_edit')
+        = close_button :modal
       .modal-body
         = f.input :name
         = f.input :url
         = f.association :workgroup
-        = f.input :indirect, input_html: { 'data-bs-toggle' => 'collapse', 'data-target' => '#authorization' }
+        = f.input :indirect, input_html: { 'data-bs-toggle' => 'collapse', 'data-bs-target' => '#authorization' }
         #authorization{class: @link.indirect? ? '' : 'collapse'}
           = f.input :authorization
         %small= t '.description'
