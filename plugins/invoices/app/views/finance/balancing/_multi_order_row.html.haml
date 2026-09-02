@@ -1,0 +1,26 @@
+%tr{:class => cycle("even","odd", :name => "multi_order"), 'data-multi_order_id' => multi_order.id}
+  %td
+  %td
+    = "*Multi*"
+    -multi_order.orders.each do |order|
+      = link_to truncate(order.name),  new_finance_order_path(order_id: order.id)
+      =", " if order != multi_order.orders.last
+  %td=h format_time(multi_order.ends) unless multi_order.ends.nil?
+  %td= multi_order.closed? ? t('finance.balancing.orders.cleared', amount: number_to_currency(multi_order.foodcoop_result)) : t('finance.balancing.orders.ended')
+  %td= show_user(multi_order.updated_by)
+  %td{id: "group-multi_order-invoices-for-multi-order-#{multi_order.id}"}
+    - if multi_order.closed?
+      -if FoodsoftConfig[:contact][:tax_number] && multi_order.multi_group_orders.present?
+        = link_to I18n.t('activerecord.attributes.group_order_invoice.open_details_modal'), "#", remote: true, class: 'btn btn-small expand-trigger'
+      -else
+        = I18n.t('activerecord.attributes.group_order_invoice.tax_number_not_set')
+    - else
+      = t('orders.index.not_closed')
+  %td
+    = link_to multi_order, method: :delete, data: { confirm: I18n.t('ui.confirm_delete', name: "Multi Bestellung #{multi_order.name}" ) } do
+      Multi Bestellung auflösen
+      %i.icon-remove
+        
+%tr{:class => 'expanded-row hidden', :id => "expanded-multi-row-#{multi_order.id}"}
+  %td{:colspan => '7'}
+    = render partial: 'ordergroup_invoices/modal', locals: { multi_order: multi_order }

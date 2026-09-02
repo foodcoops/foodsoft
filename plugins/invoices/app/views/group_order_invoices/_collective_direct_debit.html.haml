@@ -1,0 +1,6 @@
+- if foodsoft_sepa_ready?
+  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.direct_debit_for_all'), collective_direct_debit_order_path(id: order.id, mode: 'all'), class: 'btn btn-block', data: { turbolinks: false, order_id: order.id, supplier: order.supplier&.name }, id: "collective-direct-debit-link-all-#{order.id}"
+  = link_to I18n.t('activerecord.attributes.group_order_invoice.links.direct_debit_for_selected'), collective_direct_debit_order_path(id: order.id, mode: 'selected'), class: 'btn btn-block', data: { turbolinks: false, order_id: order.id, supplier: order.supplier&.name}, id: "collective-direct-debit-link-selected-#{order.id}"
+- else
+  %i
+    = t('activerecord.attributes.group_order_invoice.links.sepa_not_ready')

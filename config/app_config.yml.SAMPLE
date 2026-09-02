@@ -19,6 +19,7 @@ default: &defaults
     country: Deutschland
     email: foodsoft@foodcoop.test
     phone: "030 323 23249"
+    tax_number: "12345"
 
   # Homepage
   homepage: http://www.foodcoop.test
@@ -104,6 +105,16 @@ default: &defaults
   # and the option to show a nickname instead of full name to foodcoop members.
   # Members of a user's groups and administrators can still see full names.
   use_nick: false
+
+  # When use_invoices is enabled, it is possible to generate group order invoices
+  # in balancing view.
+  use_invoices: false
+  group_order_invoices:
+    iban: DE12345
+    bic: GENODE123
+    creditor_identifier: DE98ZZZ09999999999
+    use_automatic_invoices: false
+    vat_exempt: false
 
   # Most plugins can be enabled/disabled here as well. Messages and wiki are enabled
   # by default and need to be set to false to disable. Most other plugins needs to
