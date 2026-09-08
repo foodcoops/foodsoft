@@ -4,9 +4,3 @@ import "bootstrap"
 import "trix"
 import "trix-editor-overrides"
 import "@rails/actiontext"
-import "@hotwired/turbo-rails"
-
-// prevent turbo from intercepting forms
-document.addEventListener('turbo:load', () => {
-  document.querySelectorAll('form:not([data-turbo])').forEach(f => f.dataset.turbo = 'false')
-})

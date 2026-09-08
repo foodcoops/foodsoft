@@ -719,9 +719,6 @@ GEM
     tsort (0.2.0)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
-    turbo-rails (2.0.23)
-      actionpack (>= 7.1.0)
-      railties (>= 7.1.0)
     twitter-text (1.14.7)
       unf (~> 0.1.0)
     tzinfo (2.0.6)
@@ -869,7 +866,6 @@ DEPENDENCIES
   sqlite3 (~> 2.7)
   table_print
   terser (~> 1.1)
-  turbo-rails (~> 2.0, >= 2.0.23)
   web-console
   whenever
 
