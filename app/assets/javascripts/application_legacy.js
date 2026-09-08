@@ -27,7 +27,7 @@
 //= require delta_input
 //= require recurring_select
 
-$.fn.select2.defaults.set('theme', 'bootstrap');
+$.fn.select2.defaults.set('theme', 'bootstrap-5');
 
 // Load following statements, when DOM is ready
 $(function() {
