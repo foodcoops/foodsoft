@@ -647,7 +647,7 @@ details {
     overflow-y: hidden;
 }
 
-a {
+a:not(.btn, .nav-link, .dropdown-item, .page-link) {
   text-decoration: none;
   &:hover {
     text-decoration: underline;
