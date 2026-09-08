@@ -176,11 +176,7 @@
 ### Shared Partials
 - [x] `app/views/shared/_article_fields_units.html.haml`
 - [x] `app/views/shared/_article_fields_price.html.haml`
-- [ ] `app/views/shared/_article_unit_ratio.html.haml`
-  - **Note:** The unit `<select>` on line 13 is enhanced by **select2** via `article-form.js:302` (`select$.select2(this.select2Config)`). Select2 bundles a Bootstrap-version-specific theme CSS. With BS5, either:
-    - Install `select2-bootstrap-5-theme` (npm package), or
-    - Replace select2 with a BS5-native alternative (plain `<select>` with `.form-select`, or a custom dropdown)
-    - The select is also used in `_article_fields_units.html.haml:13`, `_edit_all_table.html.haml:38`, and `_sync_table.html.haml:49`
+- [x] `app/views/shared/_article_unit_ratio.html.haml`
 - [x] `app/views/shared/_user_form_fields.html.haml`
 - [x] `app/views/shared/_task_list.html.haml`
 - [ ] `app/views/shared/_order_download_button.html.haml`
@@ -194,8 +190,7 @@
 - [x] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`
 
 ### Self Service
-- [ ] `app/views/self_service/_event_listeners.haml`
-  - **Note:** On availability column the availability explanation is displayed twice if the event listener has been toggled before. 
+- [x] `app/views/self_service/_event_listeners.haml`
 - [x] `app/views/self_service/index.haml`
 - [x] `app/views/self_service/_pickup.haml`
 
