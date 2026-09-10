@@ -23,7 +23,7 @@
             = link_to t('.show_email_problems'), admin_mail_delivery_status_index_path(email: user.email), class: 'btn btn-warning btn-sm'
         %td= format_roles(user, true)
         %td= format_time(user.last_activity)
-        %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-secondary btn-sm'
+        %td= link_to t('ui.edit'), edit_admin_user_path(user), class: 'btn btn-outline-secondary btn-sm'
         %td
           - if user.deleted?
             = link_to t('ui.restore'), restore_admin_user_path(user), :data => {:confirm => t('ui.confirm_restore', name: user.name)},

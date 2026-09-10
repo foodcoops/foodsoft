@@ -9,7 +9,7 @@
         %td
           %strong= financial_transaction_class.name
         %td
-          = link_to t('ui.edit'), edit_admin_financial_transaction_class_path(financial_transaction_class), remote: true, class: 'btn btn-secondary btn-sm'
+          = link_to t('ui.edit'), edit_admin_financial_transaction_class_path(financial_transaction_class), remote: true, class: 'btn btn-outline-secondary btn-sm'
           = link_to t('ui.delete'), [:admin, financial_transaction_class], :data => {:confirm => t('ui.confirm_delete', name: financial_transaction_class.name)},
             :method => :delete, remote: true, class: 'btn btn-sm btn-danger'
           = link_to t('.new_financial_transaction_type'), new_admin_financial_transaction_type_path(financial_transaction_class: financial_transaction_class), remote: true, class: 'btn btn-success btn-sm'
@@ -18,6 +18,6 @@
           %td{:style => "padding-left: #{25}px"}
             = financial_transaction_type.name
           %td
-            = link_to t('ui.edit'), edit_admin_financial_transaction_type_path(financial_transaction_type), remote: true, class: 'btn btn-secondary btn-sm'
+            = link_to t('ui.edit'), edit_admin_financial_transaction_type_path(financial_transaction_type), remote: true, class: 'btn btn-outline-secondary btn-sm'
             = link_to t('ui.delete'), [:admin, financial_transaction_type], :data => {:confirm => t('ui.confirm_delete', name: financial_transaction_type.name)},
               :method => :delete, remote: true, class: 'btn btn-sm btn-danger'

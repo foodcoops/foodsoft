@@ -33,7 +33,7 @@
       = link_to t('.reject_task'), reject_task_path(@task), method: :post, class: 'btn btn-secondary'
   - unless @task.done?
     = link_to t('.mark_done'), set_done_task_path(@task), method: :post, class: 'btn btn-secondary'
-  = link_to t('ui.edit'), edit_task_path(@task), class: 'btn btn-secondary'
+  = link_to t('ui.edit'), edit_task_path(@task), class: 'btn btn-outline-secondary'
   - if @task.periodic?
     = link_to edit_task_path(@task, periodic: true), class: 'btn btn-secondary' do
       %i.icon.icon-repeat

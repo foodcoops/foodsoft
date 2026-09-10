@@ -58,4 +58,4 @@
         %td{ colspan: 5 }= heading_helper Order, :transport
         %td{ colspan: 3, data: {value: @order.transport} }= number_to_currency(@order.transport)
         %td{ colspan: 2}= link_to t('ui.edit'), edit_transport_finance_order_path(@order), remote: true,
-          class: 'btn btn-secondary btn-sm' unless order_article.order.closed?
+          class: 'btn btn-outline-secondary btn-sm' unless order_article.order.closed?

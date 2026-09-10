@@ -37,8 +37,8 @@
               class: 'btn btn-sm btn-success'
 
             %td
-              = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-secondary btn-sm me-1'
-              = link_to t('ui.show'), order, class: 'btn btn-secondary btn-sm me-1'
+              = link_to t('ui.edit'), edit_order_path(order), class: 'btn btn-outline-secondary btn-sm me-1'
+              = link_to t('ui.show'), order, class: 'btn btn-outline-secondary btn-sm me-1'
               = link_to t('ui.delete'), order, data: {confirm: t('.confirm_delete')}, method: :delete,
                 class: 'btn btn-sm btn-danger'
 

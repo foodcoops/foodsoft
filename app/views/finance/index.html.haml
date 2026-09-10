@@ -24,7 +24,7 @@
                   %td= link_to h(format_date(invoice.date)), finance_invoice_path(invoice)
                   %td.numeric= number_to_currency(invoice.amount)
                   %td= invoice.supplier.name
-                  %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-secondary btn-sm'
+                  %td= link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-outline-secondary btn-sm'
   .col-md-6
     .card.h-100 
       .card-body

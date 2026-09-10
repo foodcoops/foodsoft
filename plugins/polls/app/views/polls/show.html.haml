@@ -4,7 +4,7 @@
   - if @poll.user_can_vote?(current_user)
     = link_to t('.vote'), vote_poll_path(@poll), class: 'btn btn-success'
   - if @poll.user_can_edit?(current_user)
-    = link_to t('ui.edit'), edit_poll_path(@poll), class: 'btn btn-secondary'
+    = link_to t('ui.edit'), edit_poll_path(@poll), class: 'btn btn-outline-secondary'
     = link_to t('ui.delete'), @poll, :data => {:confirm => t('.confirm')}, :method => :delete, class: 'btn btn-danger'
 
 %p= simple_format @poll.description

@@ -43,8 +43,8 @@
             %li= link_to(membership.group.name, [:admin, membership.group])
 
 .btn-toolbar.gap-1
-  = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn btn-secondary'
+  = link_to t('ui.edit'), edit_admin_user_path(@user), class: 'btn btn-outline-secondary'
   = link_to t('ui.delete'), [:admin, @user], method: :delete, class: 'btn btn-danger',
       data: {confirm: t('ui.confirm_delete', name: @user.first_name)}
-  = link_to t('.sudo'), sudo_admin_user_path(@user), method: :post, class: 'btn btn-secondary',
+  = link_to t('.sudo'), sudo_admin_user_path(@user), method: :post, class: 'btn btn-outline-secondary',
       data: {confirm: t('.confirm_sudo', user: @user.first_name)}

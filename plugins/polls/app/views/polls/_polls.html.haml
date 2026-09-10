@@ -18,6 +18,6 @@
           - if poll.user_can_vote?(current_user)
             = link_to t('.vote'), vote_poll_path(poll), class: 'btn btn-sm btn-success'
           - if poll.user_can_edit?(current_user)
-            = link_to t('ui.edit'), edit_poll_path(poll), class: 'btn btn-secondary btn-sm'
+            = link_to t('ui.edit'), edit_poll_path(poll), class: 'btn btn-outline-secondary btn-sm'
             = link_to t('ui.delete'), poll, :data => {:confirm => t('ui.confirm_delete', name: poll.name)},
               :method => :delete, class: 'btn btn-sm btn-danger'
