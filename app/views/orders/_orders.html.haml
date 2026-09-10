@@ -1,5 +1,5 @@
 = pagination_links_remote @orders, :params => {:sort => params[:sort]}
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th= sort_link_helper heading_helper(Order, :supplier), "supplier"

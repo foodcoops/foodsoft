@@ -3,7 +3,7 @@
 - content_for :actionbar do
   = link_to t('.action_new'), new_supplier_path, class: 'btn btn-primary'
 
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th= heading_helper Supplier, :name

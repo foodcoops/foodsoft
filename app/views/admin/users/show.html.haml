@@ -29,7 +29,7 @@
     .card.bg-light
       .card-body
         %h4.card-title= t '.preference'
-        %table.table
+        %table.table.table-striped
           - @user.settings.profile.each do |key, setting|
             %tr
               %td= t("simple_form.labels.settings.profile.#{key}")

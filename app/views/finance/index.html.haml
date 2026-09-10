@@ -11,7 +11,7 @@
             %h2
               = t('.unpaid_invoices')
             %small= link_to t('.show_all'), unpaid_finance_invoices_path
-          %table.table
+          %table.table.table-striped
             %thead
               %tr
                 %th= heading_helper Invoice, :date
@@ -33,7 +33,7 @@
             = t('.open_transactions')
           %small= link_to t('.show_all'), finance_order_index_path
         - unless @orders.empty?
-          %table.table
+          %table.table.table-striped
             %thead
               %tr
                 %th= heading_helper Order, :name

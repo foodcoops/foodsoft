@@ -7,7 +7,7 @@
       .card.bg-light
         .card-body
           %h3= User.human_attribute_name(:ordergroup, count: 1)
-          %table.table
+          %table.table.table-striped
             %tr
               %td
                 - if @current_user.ordergroup.users.count > 1
@@ -24,7 +24,7 @@
       .card.bg-light
         .card-body
           %h3= User.human_attribute_name(:workgroup, count: 2)
-          %table.table
+          %table.table.table-striped
             - @current_user.workgroups.each do |workgroup|
               %tr
                 %td= workgroup.name

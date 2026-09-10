@@ -6,7 +6,7 @@
   - orders = Order.open.started
   - total = orders.sum { |o| o.group_order(ordergroup)&.price.to_f }
   - unless orders.empty?
-    %table.table
+    %table.table.table-striped
       %thead
         %tr
           %th= heading_helper Order, :name

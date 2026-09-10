@@ -15,7 +15,7 @@
 - else
   = t '.no_open_or_finished_orders'
 - unless @open_orders.empty? and @finished_orders.empty?
-  %table.table
+  %table.table.table-striped
     %thead
       %tr
         %th= heading_helper Order, :name

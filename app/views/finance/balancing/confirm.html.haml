@@ -7,7 +7,7 @@
           = label_tag :type, heading_helper(FinancialTransaction, :financial_transaction_type), class: 'form-label'
         .col-sm-8
           = select_tag :type, options_for_select(FinancialTransactionType.order(:name).map { |t| [ t.name, t.id ] }), class: 'form-select'
-    %table.table.mb-3
+    %table.table.table-striped.mb-3
       - for group_order in @order.group_orders
         %tr
           %td= group_order.ordergroup_name

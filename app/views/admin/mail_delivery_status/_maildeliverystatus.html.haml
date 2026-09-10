@@ -1,7 +1,7 @@
 - if MailDeliveryStatus.count > 20
   = items_per_page
 = pagination_links_remote @maildeliverystatus
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th= heading_helper MailDeliveryStatus, :created_at

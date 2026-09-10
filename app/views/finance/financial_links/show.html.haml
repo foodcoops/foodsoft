@@ -9,7 +9,7 @@
       %li= link_to t('.new_financial_transaction'), new_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'dropdown-item'
   = link_to t('.add_invoice'), index_invoice_finance_link_path(@financial_link), remote: true, class: 'btn btn-secondary'
 
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th= t '.date'

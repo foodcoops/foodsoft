@@ -5,7 +5,7 @@
     .card-body
       // Ordergroups Account Balance
       %h2.card-title= t '.funds.title'
-      %table.table
+      %table.table.table-striped
         %tr
           %td= heading_helper Ordergroup, :account_balance
           %td.numeric{:style => "width:5em"}= number_to_currency(@ordergroup.account_balance)
