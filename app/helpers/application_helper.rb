@@ -183,14 +183,14 @@ module ApplicationHelper
   def bootstrap_flash_patched
     flash_messages = []
     flash.each do |type, message|
-      type = :success if type == "notice"
-      type = :danger if type == "alert"
+      type = :success if type == 'notice'
+      type = :danger if type == 'alert'
       text = content_tag(:div,
-        safe_join([
-          message,
-          content_tag(:button, "", class: "btn-close", "data-bs-dismiss": "alert", "aria-label": "close")
-        ]),
-        class: "alert alert-dismissible fade show alert-#{type}", role: "alert")
+                         safe_join([
+                                     message,
+                                     content_tag(:button, '', class: 'btn-close', 'data-bs-dismiss': 'alert', 'aria-label': 'close')
+                                   ]),
+                         class: "alert alert-dismissible fade show alert-#{type}", role: 'alert')
       flash_messages << text if message
     end
     flash_messages.join("\n").html_safe
@@ -249,7 +249,7 @@ module ApplicationHelper
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
   def close_button(dismiss)
-    content_tag(:button, "", class: "btn-close", type: "button", "data-bs-dismiss": dismiss.to_s, "aria-label": I18n.t('ui.marks.close'))
+    content_tag(:button, '', class: 'btn-close', type: 'button', 'data-bs-dismiss': dismiss.to_s, 'aria-label': I18n.t('ui.marks.close'))
   end
 
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)

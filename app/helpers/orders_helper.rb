@@ -80,11 +80,11 @@ module OrdersHelper
     unit_code = options[:unit] || article.supplier_order_unit
     if unit_code == article.supplier_order_unit
       first_ratio = article&.article_unit_ratios&.first
-      if first_ratio.nil? || first_ratio.quantity == 1
-        uq_text = unit_code.nil? ? "x #{article.unit}" : ArticleUnitsLib.human_readable_unit(unit_code)
-      else
-        uq_text = "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
-      end
+      uq_text = if first_ratio.nil? || first_ratio.quantity == 1
+                  unit_code.nil? ? "x #{article.unit}" : ArticleUnitsLib.human_readable_unit(unit_code)
+                else
+                  "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
+                end
     else
       uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
     end
@@ -135,9 +135,9 @@ module OrdersHelper
     wrapper_html = if order_article.result_manually_changed?
                      content_tag(:div, class: 'input-group') do
                        button_tag(nil, type: :button, class: 'btn btn-default unlocker',
-                                  title: t('orders.edit_amount.field_locked_title', default: '')) {
-                           content_tag(:i, nil, class: 'fa fa-lock')
-                         } + input_html
+                                       title: t('orders.edit_amount.field_locked_title', default: '')) {
+                         content_tag(:i, nil, class: 'fa fa-lock')
+                       } + input_html
                      end
                    else
                      content_tag(:div, class: 'input-group flex-nowrap') { input_html }
@@ -206,7 +206,7 @@ module OrdersHelper
       content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
     else
       link_to t('orders.index.action_receive'), receive_order_path(order),
-        class: "btn #{options[:class]}"
+              class: "btn #{options[:class]}"
 
     end
   end

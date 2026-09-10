@@ -19,7 +19,7 @@ SimpleForm.setup do |config|
   config.boolean_label_class = 'form-check-label'
 
   # How the label text should be generated altogether with the required text.
-  config.label_text = lambda { |label, required, explicit_label| "#{label} #{required}" }
+  config.label_text = ->(label, required, _explicit_label) { "#{label} #{required}" }
 
   # Define the way to render check boxes / radio buttons with labels.
   config.boolean_style = :inline
@@ -148,7 +148,6 @@ SimpleForm.setup do |config|
     b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
     b.use :hint, wrap_with: { class: 'form-text' }
   end
-
 
   # horizontal forms
   #
@@ -279,7 +278,6 @@ SimpleForm.setup do |config|
     end
   end
 
-
   # inline forms
   #
   # inline default_wrapper
@@ -310,7 +308,6 @@ SimpleForm.setup do |config|
     end
   end
 
-
   # bootstrap custom forms
   #
   # custom input switch for boolean
@@ -324,7 +321,6 @@ SimpleForm.setup do |config|
       bb.use :hint, wrap_with: { class: 'form-text' }
     end
   end
-
 
   # Input Group - custom component
   # see example app and config at https://github.com/heartcombo/simple_form-bootstrap
@@ -345,7 +341,6 @@ SimpleForm.setup do |config|
     end
     b.use :hint, wrap_with: { class: 'form-text' }
   end
-
 
   # Floating Labels form
   #
@@ -418,14 +413,14 @@ SimpleForm.setup do |config|
   # Custom wrappers for input types. This should be a hash containing an input
   # type as key and the wrapper that will be used for all inputs with specified type.
   config.wrapper_mappings = {
-  boolean:       :horizontal_boolean,
-  check_boxes:   :horizontal_collection,
-  radio_buttons: :horizontal_collection,
-  file:          :horizontal_file,
-  select:        :horizontal_select,
-  date:          :vertical_multi_select,
-  datetime:      :vertical_multi_select,
-  range:         :vertical_range,
-  time:          :vertical_multi_select
-}
+    boolean: :horizontal_boolean,
+    check_boxes: :horizontal_collection,
+    radio_buttons: :horizontal_collection,
+    file: :horizontal_file,
+    select: :horizontal_select,
+    date: :vertical_multi_select,
+    datetime: :vertical_multi_select,
+    range: :vertical_range,
+    time: :vertical_multi_select
+  }
 end
