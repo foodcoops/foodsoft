@@ -1,5 +1,8 @@
-@import "article";
-@import "delta_input";
+@use "sass:color";
+@use "bootstrap" as *;
+
+@use "article";
+@use "delta_input";
 
 
 // Your custom LESS stylesheets goes here
@@ -95,7 +98,7 @@ footer {
   border-top: 1px solid #e4e4e4;
 
   a {
-    color: mix(#888, $link-color, 70%);
+    color: color.mix(#888, $link-color, 70%);
   }
 }
 
@@ -393,10 +396,10 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: mix(white, $body-color, $nonessentialDim); }
-.used        .symbol { color: mix(white, $articleUsedColor, $nonessentialDim); }
-.unused      .symbol { color: mix(white, $articleUnusedColor, $nonessentialDim); }
-.partused    .symbol { color: mix(white, $articlePartusedColor, $nonessentialDim); }
+.symbol              { color: color.mix(white, $body-color, $nonessentialDim); }
+.used        .symbol { color: color.mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .symbol { color: color.mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .symbol { color: color.mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
@@ -523,10 +526,10 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: mix(white, $body-color, $nonessentialDim); }
-.used        .package { color: mix(white, $articleUsedColor, $nonessentialDim); }
-.unused      .package { color: mix(white, $articleUnusedColor, $nonessentialDim); }
-.partused    .package { color: mix(white, $articlePartusedColor, $nonessentialDim); }
+.package              { color: color.mix(white, $body-color, $nonessentialDim); }
+.used        .package { color: color.mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .package { color: color.mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .package { color: color.mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .package { color: $articleUnavailColor; }
 
 // very small inputs - need !important for responsive selectors
