@@ -19,7 +19,7 @@ unece_units:
   XBH:
     name: Bel bandı
   XBE:
-    name: Paket
+    name: Demet
   XCX:
     name: Can
   XBJ:
@@ -31,7 +31,7 @@ unece_units:
   XDH:
     name: Eurobox, CHEP-Box
   XBA:
-    name: Fıçı
+    name: Varil
   XFI:
     name: Variller
   XBO:
@@ -73,7 +73,7 @@ unece_units:
   XBK:
     name: Sepet
   XBI:
-    name: Kova
+    name: Saklama kutusu
   XOV:
     name: İade edilebilir palet
   XNT:
@@ -81,7 +81,7 @@ unece_units:
   XPK:
     name: Paket
   XPC:
-    name: Paket
+    name: Koli
   XPX:
     name: PALET
   X5M:
@@ -125,7 +125,7 @@ unece_units:
   XP2:
     name: Pota
   XCK:
-    name: Ton
+    name: Fıçı
   XPT:
     name: Tencere
   XGI:
@@ -268,8 +268,8 @@ unece_units:
     symbols:
     - ft²
   YDK:
-    name: Metrekare
-    long_name: Metrekare
+    name: Yarda kare
+    long_name: Yarda kare
     symbols:
     - yd²
   MIK:
@@ -542,8 +542,8 @@ unece_units:
     symbols:
     - RT
   5I:
-    name: Fit küp
-    long_name: Fit küp
+    name: Standart fit küp
+    long_name: Standart fit küp
     symbols:
     - std
   INQ:
@@ -557,8 +557,8 @@ unece_units:
     symbols:
     - ft³
   YDQ:
-    name: Metreküp
-    long_name: Metreküp
+    name: Yarda küp
+    long_name: Yarda küp
     symbols:
     - yd³
   GLI:

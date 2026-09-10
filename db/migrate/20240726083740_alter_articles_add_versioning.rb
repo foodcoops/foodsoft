@@ -73,6 +73,66 @@ class AlterArticlesAddVersioning < ActiveRecord::Migration[5.2]
       ))
     end
 
+    # create versions resetting price/tax/deposit/unit_quantity to what (until now) was
+    # referred to as "global price", if the latest version differs:
+    articles = select_all(%(
+      SELECT articles.*,
+        latest_article_versions.price AS latest_price,
+        latest_article_versions.tax AS latest_tax,
+        latest_article_versions.deposit AS latest_deposit,
+        latest_article_versions.unit_quantity AS latest_unit_quantity,
+        latest_article_versions.created_at AS latest_modification
+      FROM articles
+      LEFT JOIN (
+        SELECT `article_versions`.*
+        FROM `article_versions`
+        LEFT OUTER JOIN article_versions later_article_versions ON later_article_versions.article_id = article_versions.article_id
+          AND later_article_versions.created_at > article_versions.created_at
+        WHERE `later_article_versions`.`id` IS NULL
+      ) AS latest_article_versions ON latest_article_versions.article_id = articles.id
+      WHERE latest_article_versions.price != articles.price
+        OR latest_article_versions.tax != articles.tax
+        OR latest_article_versions.deposit != articles.deposit
+        OR latest_article_versions.unit_quantity != articles.unit_quantity
+    ))
+    articles.each do |article|
+      insert(%(
+        INSERT INTO article_versions (
+          article_id,
+          price,
+          tax,
+          deposit,
+          name,
+          article_category_id,
+          unit,
+          note,
+          availability,
+          manufacturer,
+          origin,
+          order_number,
+          unit_quantity,
+          created_at,
+          updated_at
+        ) VALUES (
+          #{quote article['id']},
+          #{quote article['price']},
+          #{quote article['tax']},
+          #{quote article['deposit']},
+          #{quote article['name']},
+          #{quote article['article_category_id']},
+          #{quote article['unit']},
+          #{quote article['note']},
+          #{quote article['availability']},
+          #{quote article['manufacturer']},
+          #{quote article['origin']},
+          #{quote article['order_number']},
+          #{quote article['unit_quantity']},
+          #{quote (article['latest_modification'] + 1.second).to_fs(:db)},
+          #{quote (article['latest_modification'] + 1.second).to_fs(:db)}
+        )
+      ))
+    end
+
     remove_index :articles, %i[name supplier_id]
 
     # drop article columns (now superfluous as they exist in article_versions):

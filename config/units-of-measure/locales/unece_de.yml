@@ -28,7 +28,7 @@ unece_units:
   XAL:
     name: Ball
   XBN:
-    name: Ballen
+    name: Ballen, unkomprimiert
   XBF:
     name: Ballon
   XSY:
@@ -46,7 +46,7 @@ unece_units:
   XPO:
     name: Beutel
   XSH:
-    name: Beutel
+    name: Beutelchen
   XCB:
     name: Bierkasten
   X43:
@@ -80,7 +80,7 @@ unece_units:
     aliases:
     - bd
   XTS:
-    name: Bündel
+    name: Ballen
   XBE:
     name: Bündel
     abbreviation: Bdl.
@@ -123,11 +123,11 @@ unece_units:
   XCX:
     name: Dose
   XTN:
-    name: Dose
+    name: Blechdose
   XCD:
     name: Dose mit Griff und Ausgießer
   XTB:
-    name: Eimer
+    name: großer Eimer
   XBJ:
     name: Eimer
   XTL:
@@ -158,11 +158,11 @@ unece_units:
   XBA:
     name: Fass
   XBU:
-    name: Fass
+    name: Großfass
   XDR:
-    name: Fass
+    name: Trommel
   XTO:
-    name: Fass
+    name: Tun
   XFI:
     name: Fässchen
   XFR:
@@ -232,7 +232,7 @@ unece_units:
   XRK:
     name: Gestell
   XSI:
-    name: Gestell
+    name: Palettengestell
   X5H:
     name: Gewebte Plastiktüte
   XXA:
@@ -381,13 +381,13 @@ unece_units:
   XCM:
     name: Karte
   XBD:
-    name: Karton
+    name: Servierbrett
   XCT:
     name: Karton
   XEF:
     name: Karton mit Palettenboden
   XBY:
-    name: Kartonbündel
+    name: gebündelte Bretter
   XIK:
     name: Kartonverpackung mit Flaschengrifflöchern
   XCQ:
@@ -405,7 +405,7 @@ unece_units:
   XED:
     name: Kiste mit Palettenboden
   XPB:
-    name: Kiste mit Palettenboden
+    name: Palettenkiste
   XKI:
     name: Kit
   XAI:
@@ -415,7 +415,7 @@ unece_units:
   XCF:
     name: Koffer
   XSU:
-    name: Koffer
+    name: Transporttruhe
   XFL:
     name: Kolben
   XPA:
@@ -431,7 +431,7 @@ unece_units:
   XVR:
     name: Körnige Partikel, feste Schüttgüter ("Körner")
   XJG:
-    name: Krug
+    name: Kanne
   XPH:
     name: Krug
   XBI:
@@ -653,15 +653,15 @@ unece_units:
   XRG:
     name: Ring
   XPV:
-    name: Rohre
+    name: Rohrbündel
   XTZ:
     name: Rohre
   XCW:
     name: Rollcontainer
   XBT:
-    name: Rolle
+    name: Stoffrolle
   XCL:
-    name: Rolle
+    name: Drahtrolle
   XRO:
     name: Rolle
   X1A:
@@ -707,9 +707,9 @@ unece_units:
   XAE:
     name: Sprühdose
   XRL:
-    name: Spule
+    name: Kabeltrommel
   XBB:
-    name: Spule
+    name: Spulenkapsel
   XSO:
     name: Spule
   XBZ:
@@ -737,7 +737,7 @@ unece_units:
   XLZ:
     name: Stämme
   XRD:
-    name: Stange
+    name: Stab
   XIL:
     name: Starres Tablett mit Deckel, stapelbar
   XAA:
@@ -811,9 +811,9 @@ unece_units:
   XCH:
     name: Truhe
   XFO:
-    name: Truhe
+    name: Koffertruhe
   XTR:
-    name: Truhe
+    name: Transportkoffer
   XTU:
     name: Tube
   XTV:
@@ -976,8 +976,8 @@ unece_units:
     symbols:
     - ft²
   YDK:
-    name: Quadratmeter
-    long_name: Quadratmeter
+    name: Quadratyard
+    long_name: Quadratyard
     symbols:
     - yd²
   MIK:
@@ -1255,8 +1255,8 @@ unece_units:
     symbols:
     - RT
   5I:
-    name: Kubikfuß
-    long_name: Kubikfuß
+    name: Std.-Kubikfuß
+    long_name: Standard-Kubikfuß
     symbols:
     - std
   INQ:
@@ -1270,8 +1270,8 @@ unece_units:
     symbols:
     - ft³
   YDQ:
-    name: Kubikmeter
-    long_name: Kubikmeter
+    name: Kubikyard
+    long_name: Kubikyard
     symbols:
     - yd³
   GLI:

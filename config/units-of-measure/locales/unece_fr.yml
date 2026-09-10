@@ -21,7 +21,7 @@ unece_units:
   XBE:
     name: Faisceau
   XCX:
-    name: Boîte
+    name: Conserve
   XBJ:
     name: Seau
   XUN:
@@ -59,7 +59,7 @@ unece_units:
   XJT:
     name: Sac en jute
   XGY:
-    name: Sac en jute
+    name: Sac de toile de jute
   XJY:
     name: Bidons
   XBD:
@@ -103,7 +103,7 @@ unece_units:
   XSA:
     name: Sac
   XBM:
-    name: Bol
+    name: Cuvette
   XSX:
     name: Set
   XDN:
@@ -119,13 +119,13 @@ unece_units:
   XPP:
     name: Pièces
   XPU:
-    name: Bol
+    name: Plateau
   XBG:
-    name: Sac
+    name: Pochette
   XP2:
     name: Creuset
   XCK:
-    name: Tonne
+    name: Fût
   XPT:
     name: Pot
   XGI:
@@ -268,8 +268,8 @@ unece_units:
     symbols:
     - ft²
   YDK:
-    name: Mètres carrés
-    long_name: Mètres carrés
+    name: Yard carré
+    long_name: Yard carré
     symbols:
     - yd²
   MIK:
@@ -542,8 +542,8 @@ unece_units:
     symbols:
     - RT
   5I:
-    name: Pieds cubes
-    long_name: Pieds cubes
+    name: Pied cube standard
+    long_name: Pied cube standard
     symbols:
     - std
   INQ:
@@ -557,8 +557,8 @@ unece_units:
     symbols:
     - ft³
   YDQ:
-    name: Mètres cubes
-    long_name: Mètres cubes
+    name: Yard cube
+    long_name: Yard cube
     symbols:
     - yd³
   GLI:

@@ -9,7 +9,7 @@
     %ul
       - @outlisted_articles.each_with_index do |article, index|
         %li
-          = hidden_field_tag "outlisted_articles[#{index}]", article.id
+          = hidden_field_tag "outlisted_articles[#{index}]", article.latest_article_version.id
           = article.name
           - if article.in_open_order
             .alert= t '.outlist.alert_used', article: article.name

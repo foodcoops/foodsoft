@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_01_093453) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_11_191316) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -211,8 +211,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_01_093453) do
     t.decimal "quantity", precision: 8, scale: 3, default: "0.0", null: false
     t.decimal "tolerance", precision: 8, scale: 3, default: "0.0", null: false
     t.datetime "updated_on", precision: nil, null: false
-    t.decimal "result", precision: 8, scale: 3
-    t.decimal "result_computed", precision: 8, scale: 3
+    t.decimal "result", precision: 12, scale: 6
+    t.decimal "result_computed", precision: 12, scale: 6
     t.index ["group_order_id", "order_article_id"], name: "goa_index", unique: true
     t.index ["group_order_id"], name: "index_group_order_articles_on_group_order_id"
     t.index ["order_article_id"], name: "index_group_order_articles_on_order_article_id"
