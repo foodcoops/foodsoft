@@ -187,8 +187,8 @@
       if (this.quantityInput$.is(':invalid')) {
         this.applyButton$.attr('disabled', 'disabled');
         const errorSpan$ = $(`<div class="numeric-step-error">${I18n.t('errors.step_error', {min: 0, granularity: this.quantityInput$.attr('step')})}</div>`);
-        errorSpan$.show();
         this.conversionResult$.after(errorSpan$);
+        errorSpan$.show();
       } else {
         this.applyButton$.removeAttr('disabled');
       }

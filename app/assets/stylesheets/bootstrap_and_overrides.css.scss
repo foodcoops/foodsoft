@@ -595,11 +595,11 @@ details {
   color: #b94a48;
 }
 
-.btn-group.numeric-step > input:invalid {
+.input-group.numeric-step > input:invalid {
   border: 1px solid #b94a48;
 }
 
-.btn-group.numeric-step:has(> input:invalid) + .numeric-step-error {
+.input-group.numeric-step:has(> input:invalid) + .numeric-step-error {
   display: block;
 }
 
