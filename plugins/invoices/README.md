@@ -71,10 +71,13 @@ group_order_invoices:
 
 ## Usage
 
-- Single order (order group invoices): In Finance → Balancing, expand the order. There you can
-  - generate invoices for all order groups, view/download PDFs and download all as a ZIP,
-  - send invoices via email,
-  - set SEPA sequence types and mark them as "paid"/"SEPA downloaded".
+- Single order (order group invoices):
+  - First close the order you want to create an invoice for.
+  - Go to Finances → Account orders search for the order and select "Toggle details". There you can
+    - generate invoices for all order groups ("set & generate" button), view/download PDFs and download all as a ZIP,
+    - generate invoices for a single order group ("generate invoice" button)
+    - send invoices via email,
+    - set SEPA sequence types and mark them as "paid"/"SEPA downloaded".
 - SEPA export: Using the links "Direct debit"/"Collective direct debit" you can generate XML files for all or selected order groups.
 - Collective order (MultiOrder): Merge orders on the balancing list. For the resulting MultiOrder you can create ordergroup invoices, send them in bulk and download them as a ZIP. SEPA functions and status toggles are also available here.
 
