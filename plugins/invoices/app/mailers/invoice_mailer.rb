@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class InvoiceMailer < Mailer
-  # Sends automatically generated invoicesfor group orders to ordergroup members
+  # Sends automatically generated invoices for group orders to ordergroup members
   def group_order_invoice(group_order_invoice, user)
     @user = user
     @group_order_invoice = group_order_invoice
