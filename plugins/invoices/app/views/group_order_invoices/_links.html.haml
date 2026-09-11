@@ -1,0 +1,70 @@
+- show_generate_with_date = true
+- order.group_orders.each do |go|
+  - if go.group_order_invoice.present?
+    - show_generate_with_date = false
+- if show_generate_with_date
+  = form_for :group_order_invoice, url: finance_group_order_invoice_path(foodcoop: FoodsoftConfig[:default_scope], protocol: :https), remote: true do |f|
+    = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
+    = f.date_field :invoice_date, {value: Date.today, max: Date.today, required: true}
+    = f.hidden_field :order_id, value: order.id
+    = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn'
+%table.table.group-order-invoices-table
+  %thead
+    %tr
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.ordergroup')
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.paid')
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_downloaded')
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_sequence_type')
+      %th=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_select')
+      %th= I18n.t('activerecord.attributes.group_order_invoice.links.invoice_number')
+      %th
+  %tbody
+    - order.group_orders.includes([:group_order_invoice, :ordergroup]).each do |go|
+      -if go.ordergroup.present?
+        - if go.group_order_invoice
+          %tr.order-row{id: "group_order_#{go.id}"}
+            %td= link_to go.ordergroup&.name, edit_admin_ordergroup_path(go.ordergroup)
+            %td
+              .div{id: "paid_#{go.group_order_invoice.id}"}
+                = render :partial => "group_order_invoices/toggle_paid", locals: { group_order_invoice: go.group_order_invoice }
+            %td
+              .div{id: "sepa_downloaded_#{go.group_order_invoice.id}"}
+                = render :partial => "group_order_invoices/toggle_sepa_downloaded", locals: { group_order_invoice: go.group_order_invoice }
+            %td
+              .div{id: "select_sepa_sequence_type_#{go.group_order_invoice.id}"}
+                =render :partial => 'group_order_invoices/select_sepa_sequence_type', locals:{ group_order_invoice: go.group_order_invoice, group_order: go }
+            %td
+              = check_box_tag "group_order_ids_for_order_#{order.id}", go.id, false, class: "group-order-checkbox", id: "group_order_#{go.id}_included_in_sepa", data: { order_id: go.id }
+            %td
+              %b= go.group_order_invoice.invoice_number
+            %td
+              = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), group_order_invoice_path(go.group_order_invoice, :format => 'pdf'), class: 'btn btn-block'
+              = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), go.group_order_invoice, method: :delete, class: 'btn btn-block btn-danger', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: I18n.t('activerecord.attributes.group_order_invoice.links.invoice_for_group', name: go.ordergroup.name)) }
+        - else
+          %tr
+            %td
+              = go.ordergroup&.name
+              = button_to I18n.t('activerecord.attributes.group_order_invoice.links.generate'), group_order_invoices_path(:method => :post, group_order: go) ,class: 'btn btn-small', params: {id: order.id}, remote: true
+            %td
+            %td
+            %td
+            %td
+            %td
+            %td
+
+    - if order.group_orders.map(&:group_order_invoice).compact.present?
+      %tr.order-row
+        %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
+        %td= render :partial => 'group_order_invoices/toggle_all_paid', locals: { order: order }
+        %td
+          .div{id: "toggle_all_sepa_downloaded_#{order.id}"}
+            = render :partial => 'group_order_invoices/toggle_all_sepa_downloaded', locals: { order: order }
+        %td
+          .div{id: "select_all_sepa_sequence_type_#{order.id}"}
+            = render :partial => 'group_order_invoices/select_all_sepa_sequence_type', locals: { order: order }
+        %td
+          .div{id: "select_all_sepa_#{order.id}"}
+            = render :partial => 'group_order_invoices/collective_direct_debit', locals: { order: order }
+        %td
+        %td
+          = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_group_order_invoices_path(order_id: order.id), class: 'btn btn-block'
