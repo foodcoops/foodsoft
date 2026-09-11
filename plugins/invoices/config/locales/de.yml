@@ -31,7 +31,7 @@ de:
           sepa_downloaded: SEPA exportiert
           sepa_not_downloaded: SEPA nicht exportiert
           sepa_not_ready:
-            SEPA Export nicht verfügbar. Wichtige Einstellungen für SEPA Export in Administration -> Einstellungen-> Finanzen fehlen
+            SEPA Export nicht verfügbar. Wichtige Einstellungen für SEPA Export in Administration -> Konfiguration -> Finanzen fehlen
           sepa_select: SEPA Export
           sepa_sequence_type: SEPA Typ
         open_details_modal: Details ein/ausklappen

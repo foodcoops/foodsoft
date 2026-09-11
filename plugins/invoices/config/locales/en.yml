@@ -29,7 +29,7 @@ en:
           send_all_success: Invoices were sent to all ordergroups
           sepa_downloaded: SEPA exported
           sepa_not_downloaded: SEPA not exported
-          sepa_not_ready: Configurations for SEPA are missing in Admin->Settings->Finances
+          sepa_not_ready: Configurations for SEPA are missing in Administration -> Configuration -> Finances
           sepa_select: SEPA export
           sepa_sequence_type: SEPA type
         open_details_modal: Toggle details
