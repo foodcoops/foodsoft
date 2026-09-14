@@ -5,15 +5,19 @@ require_relative 'support/coverage' # needs to be first
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rails'
-require 'capybara/apparition'
 
 Capybara.server = :puma, { Silent: true }
-Capybara.javascript_driver = :apparition
 
-# TODO: Remove temporary fix to ignore JavaScript errors
-Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, { js_errors: true })
+Capybara.register_driver :selenium_chrome_headless do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: Selenium::WebDriver::Options.chrome(
+      args: %w[headless=new no-sandbox disable-dev-shm-usage window-size=1400,1400]
+    )
+  )
 end
+Capybara.javascript_driver = :selenium_chrome_headless
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
