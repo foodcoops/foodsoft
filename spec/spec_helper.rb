@@ -12,7 +12,7 @@ Capybara.javascript_driver = :apparition
 
 # TODO: Remove temporary fix to ignore JavaScript errors
 Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, { js_errors: false })
+  Capybara::Apparition::Driver.new(app, { js_errors: true })
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
