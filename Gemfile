@@ -119,7 +119,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara' # Capybara javascript driver
+  gem 'capybara'
   gem 'connection_pool'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
@@ -129,7 +129,7 @@ group :test do
   gem 'i18n-spec'
   gem 'rspec-core'
   gem 'rspec-rerun'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver' # Capybara javascript driver
   # code coverage
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false
