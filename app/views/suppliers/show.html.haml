@@ -6,7 +6,7 @@
     = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn btn-secondary'
 
 .row
-  .col-md-6
+  .col-md-6.mb-3.mb-md-0
     - unless @supplier.shared_sync_method.nil?
       .alert.alert-light
         = t 'suppliers.shared_supplier_note'

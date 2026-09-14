@@ -118,6 +118,6 @@
       .col-md-4 
       .col-md-8
         = f.rich_text_area :body, input_html: {rows: 13}
-    %div
+    .mt-3
       = f.submit class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), :back

@@ -10,6 +10,7 @@
       .tab-pane.fade{id: "tab-#{tab}", role: "tabpanel", class: ('show active' if @current_tab==tab)}
         = render "tab_#{tab}", form: f
 
-  .text-end
-    = f.submit t('.submit'), class: 'btn btn-primary'
+  .col-md-6
+    .float-end
+      = f.submit t('.submit'), class: 'btn btn-primary'
 

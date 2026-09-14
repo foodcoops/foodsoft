@@ -1,6 +1,6 @@
 - unless @ordergroup.new_record? || FoodsoftConfig[:disable_invite]
   %p= t('.first_paragraph', url: link_to(t('.here'), new_invite_path(id: @ordergroup.id), remote: true)).html_safe
-.col-md-4
+.col-md-6
   = simple_form_for [:admin, @ordergroup] do |f|
     - captured = capture do
       = f.input :contact_person
