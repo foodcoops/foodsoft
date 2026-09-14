@@ -2,22 +2,22 @@
 
 ## Progress Checklist
 
-- [ ] **Phase 0A — Fix Modals** (broken functionality)
+- [x] **Phase 0A — Fix Modals** (broken functionality)
   - [x] 0A-1: Add inner modal structure to layout
   - [x] 0A-2: Update modal show calls (21 instances)
   - [x] 0A-3: Update modal hide calls (13 instances)
   - [x] 0A-4: Update data-dismiss="modal" → data-bs-dismiss="modal" (17 instances)
   - [x] 0A-5: Handle .modal-xl class additions (4 instances)
-- [ ] **Phase 0B — Fix Tooltips** (broken functionality)
+- [x] **Phase 0B — Fix Tooltips** (broken functionality)
   - [x] 0B-1: Replace global tooltip init in application_legacy.js
   - [x] 0B-2: Fix self_service tooltips
   - [x] 0B-3: Rename data-toggle="tooltip" → data-bs-toggle="tooltip" (6 instances)
-- [ ] **Phase 0C — Fix Popovers** (broken functionality)
+- [x] **Phase 0C — Fix Popovers** (broken functionality)
   - [x] 0C-1: Rewrite unit-conversion-field.js
-- [ ] **Phase 1 — SimpleForm Config**
+- [x] **Phase 1 — SimpleForm Config**
   - [x] 1-1: Rewrite simple_form_bootstrap.rb for BS5
   - [x] 1-2: Update simple_form.rb label_class
-- [ ] **Phase 2 — Mechanical Replacements**
+- [x] **Phase 2 — Mechanical Replacements**
 - [x] 2-1: btn-xs → btn-sm (73 instances)
 - [x] 2-2: pull-right → float-end (27 instances)
 - [x] 2-3: pull-left → float-start (8 instances)
@@ -51,7 +51,7 @@
   - [x] 5-3: Remove legacy form CSS from SCSS
   - [x] 5-4: Remove legacy panel CSS from SCSS
   - [x] 5-5: Remove pull-left/pull-right fallback CSS
-- [ ] **Phase 6 — View-by-View Manual Review** (135 HAML files)
+- [x] **Phase 6 — View-by-View Manual Review** (135 HAML files)
 
 ### Layouts
 - [x] `app/views/layouts/application.html.haml`
@@ -113,6 +113,7 @@
 ### Finance — Bank & Transactions
 - [x] `app/views/finance/bank_transactions/index.html.haml`
 - [ ] `app/views/finance/bank_transactions/_transactions.html.haml`
+  - **Note:** Missing transaction import in order to test templates
 - [ ] `app/views/finance/bank_accounts/_import.html.haml`
   - **Note:** Dummy Bank Gateway missing in order to test templates
 - [x] `app/views/finance/financial_transactions/index.html.haml`
@@ -179,13 +180,13 @@
 - [x] `app/views/shared/_article_unit_ratio.html.haml`
 - [x] `app/views/shared/_user_form_fields.html.haml`
 - [x] `app/views/shared/_task_list.html.haml`
-- [ ] `app/views/shared/_order_download_button.html.haml`
+- [x] `app/views/shared/_order_download_button.html.haml`
 - [x] `app/views/shared/_alert_success.haml`
 - [x] `app/views/shared/_workgroup_members.html.haml`
 - [x] `app/views/shared/articles_by/_articles.html.haml`
 - [x] `app/views/shared/articles_by/_article_single.html.haml`
 - [x] `app/views/shared/articles_by/_article_single_goa.html.haml`
-- [ ] `app/views/shared/articles_by/_availability_explanation.html.haml`
+- [x] `app/views/shared/articles_by/_availability_explanation.html.haml`
 - [x] `app/views/shared/articles_by/_group_single_goa.html.haml`
 - [x] `app/views/shared/js_templates/_unit_conversion_popover_template.haml`
 
