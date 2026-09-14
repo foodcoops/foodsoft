@@ -1,11 +1,12 @@
 - title t('.title')
 
-.well.well-small
-  %dl.dl-horizontal
-    %dt= t '.date'
-    %dd= format_date @stock_taking.date
-    %dt= t '.note'
-    %dd= simple_format @stock_taking.note
+.card.bg-light.mb-3
+  .card-body
+    %dl.dl-horizontal
+      %dt= t '.date'
+      %dd= format_date @stock_taking.date
+      %dt= t '.note'
+      %dd= simple_format @stock_taking.note
 
 %table.table.table-striped
   %tr
@@ -21,7 +22,7 @@
       %td= stock_change.quantity
 
 .btn-group
-  = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn btn-default'
-  = link_to t('.overview'), stock_takings_path, class: 'btn btn-default'
+  = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn btn-outline-secondary'
+  = link_to t('.overview'), stock_takings_path, class: 'btn btn-outline-secondary'
   = link_to t('ui.delete'), @stock_taking, :method => :delete, :data => {:confirm => t('.confirm_delete')},
     class: 'btn btn-danger'

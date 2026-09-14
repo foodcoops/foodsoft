@@ -129,12 +129,12 @@ class MigrateUnitsForm {
 
     unitSelect$.trigger('change');
 
-    unitSelect$.parents('.form-group').find('.immutable_unit_label').remove();
+    unitSelect$.parents('.mb-3').find('.immutable_unit_label').remove();
     if (units.length === 1) {
-      unitSelect$.parents('.form-group').find('.select2').hide();
-      unitSelect$.parents('.form-group').append($(`<div class="immutable_unit_label control-label">${units[0].label}</div>`))
+      unitSelect$.parents('.mb-3').find('.select2').hide();
+      unitSelect$.parents('.mb-3').append($(`<div class="immutable_unit_label control-label">${units[0].label}</div>`))
     } else {
-      unitSelect$.parents('.form-group').find('.select2').show();
+      unitSelect$.parents('.mb-3').find('.select2').show();
     }
   }
 

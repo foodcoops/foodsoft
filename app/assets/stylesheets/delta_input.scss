@@ -1,4 +1,5 @@
-// needs @import "twitter/bootstrap/bootstrap";
+@use "sass:color";
+@use "bootstrap" as *;
 
 form.delta-input, .delta-input form {
   margin: 0;
@@ -6,14 +7,21 @@ form.delta-input, .delta-input form {
 }
 
 .delta-input {
-  .btn.modify {
+  display: inline-flex;  // inline, so td.center's text-align:center centers it
+  width: auto;           // override .input-group's width:100%
+  flex-wrap: nowrap;
+
+
+  .input-group-text.modify {
+    flex: 0 0 auto;
     padding: 4px 8px;
     font-size: 10px;
   }
 
   input[data-delta] {
     text-align: right;
-    min-width: 65px;
+    min-width: 3rem;  
+    max-width: 5rem; 
     font-size: 14px;
     padding: 4px 6px;
 
@@ -25,17 +33,15 @@ form.delta-input, .delta-input form {
     }
   }
 
-  .btn-ordering {
-    margin-top: 0px;
-  }
+  .btn-ordering { margin-top: 0px; }
 
   // handle error class outside of bootstrap controls
   input[data-delta].error {
-    border-color: $state-danger-text;
+    border-color: $danger-text-emphasis;
     @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075)); // Redeclare so transitions work
     &:focus {
-      border-color: $state-danger-border;
-      $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($state-danger-bg, 20%);
+      border-color: $danger-border-subtle;
+      $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px color.adjust($danger-bg-subtle, $lightness: 20%);
       @include box-shadow($shadow);
     }
   }

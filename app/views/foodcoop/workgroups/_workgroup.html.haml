@@ -1,6 +1,8 @@
-%section.well
-  %h3= workgroup.name
-  = render :partial => 'shared/group', :locals => { :group => workgroup }
-  = link_to t('.show_tasks'), workgroup_tasks_path(workgroup_id: workgroup), class: 'btn btn-default'
-  - if workgroup.member?(current_user)
-    = link_to t('.edit'), edit_foodcoop_workgroup_path(workgroup), class: 'btn btn-default'
+.card.bg-light
+  .card-body
+    %h3.card-title= workgroup.name
+    = render :partial => 'shared/group', :locals => { :group => workgroup }
+    .d-flex.gap-2
+      = link_to t('.show_tasks'), workgroup_tasks_path(workgroup_id: workgroup), class: 'btn btn-secondary'
+      - if workgroup.member?(current_user)
+        = link_to t('.edit'), edit_foodcoop_workgroup_path(workgroup), class: 'btn btn-secondary'

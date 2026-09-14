@@ -2,48 +2,61 @@
 
 %p= simple_format @poll.description
 
-= form_tag(vote_poll_path(@poll)) do
-  - if @poll.event?
-    %table.table.table-striped
-      %thead
-        %tr
-          %th
-          %th= "\u2714"
-          %th= "?"
-          %th= "\u2715"
-      %tbody
-        - @poll.choices.each_with_index do |choice, idx|
-          %tr
-            %td= @poll.choices[idx]
-            %td= radio_button_tag "choices[#{idx}]", '1', @poll_vote.poll_choices.where(choice: idx, value: '1').any?
-            %td= radio_button_tag "choices[#{idx}]", '2', @poll_vote.poll_choices.where(choice: idx, value: '2').any?
-            %td= radio_button_tag "choices[#{idx}]", '0', @poll_vote.poll_choices.where(choice: idx, value: '0').any?
-  - elsif @poll.single_select?
-    - @poll.choices.each_with_index do |choice, idx|
-      = radio_button_tag 'choice', idx, @poll_vote.poll_choices.where(choice: idx, value: 1).any?, style: 'float:left'
-      = label_tag "choices[#{idx}]", choice
-  - elsif @poll.multi_select?
-    - @poll.choices.each_with_index do |choice, idx|
-      = check_box_tag "choices[#{idx}]", '1', @poll_vote.poll_choices.where(choice: idx, value: 1).any?, style: 'float:left'
-      = label_tag "choices[#{idx}]", choice
-  - elsif @poll.points? || @poll.resistance_points?
-    %table.table.table-striped
-      %thead
-        %tr
-          %th
-          - @poll.available_points.each do |point|
-            %th= point
-      %tbody
-        - @poll.choices.each_with_index do |choice, idx|
-          %tr
-            %td= @poll.choices[idx]
-            - @poll.available_points.each do |point|
-              %th= radio_button_tag "choices[#{idx}]", point, @poll_vote.poll_choices.where(choice: idx, value: point).any?
+.col-md-7
+  = form_tag(vote_poll_path(@poll)) do
+    - if @poll.event?
+      .row.mb-3
+        = label_tag nil, heading_helper(Poll, :choices) + ':', class: 'col-sm-4 col-form-label'
+        .col-sm-8
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                %th= "\u2714"
+                %th= "?"
+                %th= "\u2715"
+            %tbody
+              - @poll.choices.each_with_index do |choice, idx|
+                %tr
+                  %th{scope: 'row'}= @poll.choices[idx]
+                  %td= radio_button_tag "choices[#{idx}]", '1', @poll_vote.poll_choices.where(choice: idx, value: '1').any?
+                  %td= radio_button_tag "choices[#{idx}]", '2', @poll_vote.poll_choices.where(choice: idx, value: '2').any?
+                  %td= radio_button_tag "choices[#{idx}]", '0', @poll_vote.poll_choices.where(choice: idx, value: '0').any?
+    - elsif @poll.single_select?
+      - @poll.choices.each_with_index do |choice, idx|
+        .row.mb-3
+          .col-sm-8.offset-sm-4
+            .form-check
+              = radio_button_tag 'choice', idx, @poll_vote.poll_choices.where(choice: idx, value: 1).any?, style: 'form-check-input'
+              = label_tag "choices[#{idx}]", choice, class: 'form-check-label'
+    - elsif @poll.multi_select?
+      - @poll.choices.each_with_index do |choice, idx|
+        .row.mb-3
+          .col-sm-8.offset-sm-4
+            .form-check
+              = check_box_tag "choices[#{idx}]", '1', @poll_vote.poll_choices.where(choice: idx, value: 1).any?, class: 'form-check-input'
+              = label_tag "choices_#{idx}", choice, class: 'form-check-label'
+    - elsif @poll.points? || @poll.resistance_points?
+      .row.mb-3
+        = label_tag nil, heading_helper(Poll, :choices) + ':', class: 'col-sm-4 col-form-label'
+        .col-sm-8
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                - @poll.available_points.each do |point|
+                  %th= point
+            %tbody
+              - @poll.choices.each_with_index do |choice, idx|
+                %tr
+                  %th{scope: 'row'}= @poll.choices[idx]
+                  - @poll.available_points.each do |point|
+                    %td= radio_button_tag "choices[#{idx}]", point, @poll_vote.poll_choices.where(choice: idx, value: point).any?
 
-  %p
-    %b= heading_helper(PollVote, :note) + ':'
-  %p
-    = text_area_tag 'note', @poll_vote.note
-  %p
-    = submit_tag t('.submit'), class: 'btn btn-success'
-    = link_to t('ui.back'), @poll, class: 'btn'
+    .row.mb-3
+      = label_tag 'note', heading_helper(PollVote, :note) + ':', class: 'col-sm-4 col-form-label'
+      .col-sm-8
+        = text_area_tag 'note', @poll_vote.note, class: 'form-control'
+    %p
+      = submit_tag t('.submit'), class: 'btn btn-primary'
+      = link_to t('ui.or_cancel'), @poll

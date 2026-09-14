@@ -1,11 +1,11 @@
 - title @periodic ? t('.title_periodic') : t('.title')
 
 - if @task.periodic? && !@periodic
-  .alert.alert-info= raw t('tasks.edit.warning_periodic')
+  .alert.alert-light= raw t('tasks.edit.warning_periodic')
 
 = render 'form_sidebar'
 
-.col-md-7
+.col-md-6
   = simple_form_for @task do |form|
     = render 'form', form: form, periodic: @periodic
     %div

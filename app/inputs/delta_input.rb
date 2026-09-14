@@ -9,8 +9,8 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     options[:autocomplete] ||= 'off'
     # TODO: get generated id, don't know how yet - `add_default_name_and_id_for_value` might be an option
 
-    template.content_tag :div, class: 'row' do
-      template.content_tag :div, class: 'delta-input col-xs-4 input-group input-group-sm' do
+    template.content_tag :div do
+      template.content_tag :div, class: 'delta-input input-group input-group-sm' do
         result = []
         result << buttons
         result << @builder.text_field(attribute_name, options)
@@ -26,13 +26,11 @@ class DeltaInput < SimpleForm::Inputs::StringInput
     data = { (direction > 0 ? 'increment' : 'decrement') => options[:id] }
     delta = direction * options[:data][:delta]
     template.button_tag(title, type: :button, name: 'delta', value: delta, data: data, tabindex: -1,
-                               class: 'btn btn-default modify')
+                               class: 'input-group-text modify')
   end
 
   def buttons
-    template.content_tag :span, class: 'input-group-btn' do
-      delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-minus'), -1, options) +
-        delta_button(content_tag(:i, nil, class: 'glyphicon glyphicon-plus'), 1, options)
-    end
+    delta_button(content_tag(:i, nil, class: 'fa fa-minus'), -1, options) +
+      delta_button(content_tag(:i, nil, class: 'fa fa-plus'), 1, options)
   end
 end

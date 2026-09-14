@@ -1,10 +1,10 @@
 - if current_user.role_finance?
-  .pull-right
+  .float-end
     = t('.payment')
     - if current_user.role_finance?
       = link_to t('.new_transaction'), new_finance_ordergroup_transaction_path(ordergroup), class: 'btn'
 
-%p.pull-left
+%p.float-start
   - if current_user.role_finance?
     = link_to 'Account balance', finance_ordergroup_transactions_path(ordergroup)
   - else

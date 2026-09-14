@@ -1,4 +1,4 @@
-%div.text-left{style: "min-width: 200px"}
+%div.text-start{style: "min-width: 200px"}
   %strong=t('shared.articles_by.ordered_in_total')
   = goa.order_article.units_to_order
   %br
@@ -25,7 +25,7 @@
     %table
       - goa.order_article.group_order_articles_with_fetch_deviations.each do |other_goa|
         %tr
-          %td.mr-1
+          %td.me-1
             %i="#{other_goa.group_order.ordergroup_name}:"
-          %td.text-right
+          %td.text-end
             ="#{other_goa.fetch_deviation.positive? ? '+' : ''}#{other_goa.fetch_deviation}"

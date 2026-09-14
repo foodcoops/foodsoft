@@ -65,6 +65,8 @@ module Foodsoft
     # Load legacy scripts from vendor
     config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
+    config.sass.quiet_deps = true
+
     config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
 
     config.autoloader = :zeitwerk

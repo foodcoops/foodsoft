@@ -29,29 +29,27 @@
       });
     })
 
-.well.well-small
-  .btn-toolbar
-    .btn-group.pull-right
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
-        = t '.view_options'
-        %span.caret
-      %ul.dropdown-menu
-        %li= link_to t('.toggle_unavailable'), "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1
-
-    .btn-group
-      = link_to_if @current_user.role_orders?, t('.order_online'), new_order_path(supplier_id: nil),
-        class: 'btn', class: 'btn btn-primary'
-      = link_to t('.new_stock_article'), new_stock_article_path, remote: true, class: 'btn btn-default'
-      = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn btn-default'
-      = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn btn-default'
-
-    .btn-group
-      = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
-        = t '.new_delivery'
-        %span.caret
-      %ul.dropdown-menu
-        - Supplier.undeleted.order(:name).each do |supplier|
-          %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1
+.card.bg-light
+  .card-body
+    .row.g-2.align-items-start
+      .col.btn-toolbar.gap-2
+        .btn-group
+          = link_to_if @current_user.role_orders?, t('.order_online'), new_order_path(supplier_id: nil),
+            class: 'btn', class: 'btn btn-primary'
+          = link_to t('.new_stock_article'), new_stock_article_path, remote: true, class: 'btn btn-secondary'
+          = link_to t('.new_stock_taking'), new_stock_taking_path, class: 'btn btn-secondary'
+          = link_to t('.show_stock_takings'), stock_takings_path, class: 'btn btn-secondary'
+        .btn-group
+          %button.btn.btn-secondary.dropdown-toggle(type="button" data-bs-toggle="dropdown" aria-expanded="false")
+            = t '.new_delivery'
+          %ul.dropdown-menu
+            - Supplier.undeleted.order(:name).each do |supplier|
+              %li= link_to supplier.name, new_supplier_delivery_path(supplier), tabindex: -1, class: 'dropdown-item'
+      .col-12.col-md-auto.ms-auto:
+        %button.btn.btn-secondary.dropdown-toggle(type="button" data-bs-toggle="dropdown" aria-expanded="false")
+          = t '.view_options'
+        %ul.dropdown-menu
+          %li= link_to t('.toggle_unavailable'), "#", 'data-toggle-this' => 'tr.unavailable', tabindex: -1, class: 'dropdown-item'
 
 %table.table.table-hover#articles
   %thead

@@ -80,18 +80,16 @@ module OrdersHelper
     unit_code = options[:unit] || article.supplier_order_unit
     if unit_code == article.supplier_order_unit
       first_ratio = article&.article_unit_ratios&.first
-      if first_ratio.nil? || first_ratio.quantity == 1
-        return "x #{article.unit}" if unit_code.nil?
-
-        return ArticleUnitsLib.human_readable_unit(unit_code)
-      end
-
-      uq_text = "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
+      uq_text = if first_ratio.nil? || first_ratio.quantity == 1
+                  unit_code.nil? ? "x #{article.unit}" : ArticleUnitsLib.human_readable_unit(unit_code)
+                else
+                  "× #{number_with_precision(first_ratio.quantity, precision: 3, strip_insignificant_zeros: true)} #{ArticleUnitsLib.human_readable_unit(first_ratio.unit)}"
+                end
     else
       uq_text = ArticleUnitsLib.human_readable_unit(unit_code)
     end
 
-    uq_text = content_tag(:span, uq_text, class: 'hidden-xs') if options[:soft_uq]
+    uq_text = content_tag(:span, uq_text, class: 'd-none d-sm-inline') if options[:soft_uq]
     if options[:plain]
       uq_text
     elsif options[:icon].nil? || options[:icon]
@@ -115,7 +113,7 @@ module OrdersHelper
 
     title = "#{t('helpers.orders.old_price')}: #{number_to_currency order_article.article_version.price}"
     title += " / #{number_to_currency order_article.article_version.gross_price}" if gross
-    content_tag(:i, nil, class: 'glyphicon-asterisk', title: j(title)).html_safe
+    content_tag(:i, nil, class: 'fa fa-asterisk', title: j(title)).html_safe
   end
 
   def receive_input_field(form)
@@ -136,15 +134,13 @@ module OrdersHelper
                                                   autocomplete: 'off'
     wrapper_html = if order_article.result_manually_changed?
                      content_tag(:div, class: 'input-group') do
-                       content_tag(:span, class: 'input-group-btn',
-                                          title: t('orders.edit_amount.field_locked_title', default: '')) do
-                         button_tag(nil, type: :button, class: 'btn btn-default unlocker') {
-                           content_tag(:i, nil, class: 'glyphicon glyphicon-lock')
-                         }
-                       end + input_html
+                       button_tag(nil, type: :button, class: 'btn btn-default unlocker',
+                                       title: t('orders.edit_amount.field_locked_title', default: '')) {
+                         content_tag(:i, nil, class: 'fa fa-lock')
+                       } + input_html
                      end
                    else
-                     content_tag(:div, class: 'input-group') { input_html }
+                     content_tag(:div, class: 'input-group flex-nowrap') { input_html }
                    end
 
     wrapper_html.html_safe
@@ -210,7 +206,8 @@ module OrdersHelper
       content_tag :div, t('orders.index.action_receive'), class: "btn disabled #{options[:class]}"
     else
       link_to t('orders.index.action_receive'), receive_order_path(order),
-              class: "btn#{' btn-success' unless order.received?} #{options[:class]}"
+              class: "btn #{options[:class]}"
+
     end
   end
 

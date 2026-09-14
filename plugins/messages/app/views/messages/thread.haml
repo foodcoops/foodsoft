@@ -5,18 +5,18 @@
   - title thread_message.subject
 
 - for message in @messages
-  .panel.panel-default{:style => "width:40em"}
-    .panel-heading
+  .card.bg-light.mb-3{:style => "width:40em"}
+    .card-header
       %b= h(message.sender_name)
       = format_time(message.created_at)
       %br
-      - # show the list of recipients in a expandable detail/summary panel
+      - # show the list of recipients in a expandable detail/summary card
       %details
         %summary= t '.recipients'
         = message.recipients.map(&:display).join(', ')
-    .panel-body= simple_format(h(message.body))
+    .card-body= simple_format(h(message.body))
 
 %p
-  = link_to t('.reply'), new_message_path(:message => {:reply_to => thread_message.id}), class: 'btn'
+  = link_to t('.reply'), new_message_path(:message => {:reply_to => thread_message.id}), class: 'btn btn-primary'
   |
   = link_to t('.all_message_threads'), message_threads_path

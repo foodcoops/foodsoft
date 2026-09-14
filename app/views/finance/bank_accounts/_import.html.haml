@@ -6,7 +6,7 @@
 
   - for control in @controls
     - name = control.name
-    .form-group
+    .mb-3
       - if name
         - if control.type == :hidden
           = hidden_field_tag "controls[#{control.name}]", control.value
@@ -27,5 +27,5 @@
         form.submit();
       }, form.data('auto-submit'));
   - else
-    .form-group
+    .mb-3
       = submit_tag t('.submit'), class: 'btn btn-primary'

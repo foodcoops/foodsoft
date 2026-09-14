@@ -1,7 +1,7 @@
 - title t('.title', supplier: @supplier.name)
 %p.mb-1
   =simple_format(t('.explanation'))
-= link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn'
+= link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn btn-outline-secondary'
 %br/
 %br/
 %p.mt-1

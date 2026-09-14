@@ -20,6 +20,7 @@
         %td= format_date ordergroup.last_user_activity
         %td= format_date ordergroup.last_order.try(:starts)
         %td
-          = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-default btn-xs'
-          = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('ui.confirm_delete', name: ordergroup.name)},
-            :method => :delete, class: 'btn btn-xs btn-danger'
+          .d-flex.flex-column.flex-md-row.gap-1
+            = link_to t('ui.edit'), edit_admin_ordergroup_path(ordergroup), class: 'btn btn-outline-secondary btn-sm'
+            = link_to t('ui.delete'), [:admin, ordergroup], :data => {:confirm => t('ui.confirm_delete', name: ordergroup.name)},
+              :method => :delete, class: 'btn btn-sm btn-danger'

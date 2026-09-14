@@ -1,5 +1,3 @@
-.alert.fade.in.alert-success
-  %a.close{:href => '#', :data => {:dismiss => 'alert'}}
-    = t('ui.marks.close').html_safe
-  = t('ui.marks.success').html_safe
+.alert.alert-success.alert-dismissible.fade.show(role="alert")
   = alert_message
+  %button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Close")

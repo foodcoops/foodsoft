@@ -14,7 +14,7 @@ module MessagesHelper
     messages_params = options[:message_params] || nil
     link_text = content_tag :i, nil, class: 'fa fa-envelope'
     link_text << " #{options[:text]}" if options[:text].present?
-    link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn btn-default',
+    link_to(link_text.html_safe, new_message_path(message: messages_params), class: 'btn btn-secondary',
                                                                              title: I18n.t('helpers.submit.message.create'))
   end
 end

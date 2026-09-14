@@ -16,6 +16,7 @@
         %td= format_time(order.starts)
         %td= format_time(order.ends)
         %td= t(order.state, scope: 'orders.state')
-        %td
-          = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-default btn-sm'
-          = link_to t('ui.show'), order, class: 'btn btn-default btn-sm'
+        %td 
+          .d-flex.flex-column.flex-md-row.gap-1
+            = link_to t('ui.copy'), new_order_path(order_id: order), class: 'btn btn-outline-secondary btn-sm'
+            = link_to t('ui.show'), order, class: 'btn btn-outline-secondary btn-sm'

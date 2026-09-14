@@ -1,9 +1,8 @@
-@import "article";
-@import "delta_input";
+@use "sass:color";
+@use "bootstrap" as *;
 
-body {
-  padding-top: 10px;
-}
+@use "article";
+@use "delta_input";
 
 
 // Your custom LESS stylesheets goes here
@@ -36,16 +35,13 @@ $unitUntranslatedColor: #999;
 $nonessentialDim: 35%;
 
 
-// Fix empty dd tags in horizontal dl, see https://github.com/twitter/bootstrap/issues/4062
 .dl-horizontal {
-    dd { @include clearfix(); }
-}
-
-// Do not use additional margin for input in table
-.form-horizontal .control-group.control-group-intable,
-.form-horizontal .controls.controls-intable,
-.input-prepend.intable {
-  margin: 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  row-gap: 0.5rem;
+  
+  dt { grid-column: 1; }
+  dd { grid-column: 2; }
 }
 
 // Light tooltips without empty space below tables
@@ -60,12 +56,15 @@ $nonessentialDim: 35%;
 
 
 .logo {
-  margin: 10px 0 0 30px;
   float: left;
-  font-size: 35px;
+  font-size: 1.5rem;
   font-weight: bold;
   display: block;
   color: $mainRedColor;
+
+  &:hover {
+    color: $mainRedColor;
+  }
 
   span {
     padding: 2px 4px;
@@ -99,7 +98,7 @@ footer {
   border-top: 1px solid #e4e4e4;
 
   a {
-    color: mix(#888, $link-color, 70%);
+    color: color.mix(#888, $link-color, 70%);
   }
 }
 
@@ -114,7 +113,9 @@ table {
   }
 
   tr.list-heading {
-    background-color: #efefef;
+    td {
+      --bs-table-bg: #efefef;
+    }
     td:first-child {
       text-align: left;
     }
@@ -126,7 +127,7 @@ table {
     text-align: right;
   }
   td.odd {
-    background-color: $table-bg-accent;
+    background-color: $table-accent-bg;
   }
   th.left, td.left     { text-align: left; }
   th.right, td.right   { text-align: right; }
@@ -137,7 +138,7 @@ table {
   }
 
   tr.selected td {
-    background-color: $state-success-bg;
+    background-color: $success-bg-subtle;
   }
 }
 
@@ -190,22 +191,19 @@ table {
     display: none;
   }
   .mw-headline a {
-    color: $text-color;
+    color: $body-color;
     text-decoration: none;
   }
 }
 
 // ordering
-.used {
-  color: $articleUsedColor;
-}
-.unused {
-  color: $articleUnusedColor;
-  margin-right: 0.5em;
-}
-.partused {
-  color: $articlePartusedColor;
-}
+tr.used td        { --bs-table-color: #{$articleUsedColor}; }
+tr.unused td      { --bs-table-color: #{$articleUnusedColor}; }
+tr.partused td    { --bs-table-color: #{$articlePartusedColor}; }  
+
+.used        { color: $articleUsedColor; }      // green for fulfilled quantity
+.unused      { color: $articleUnusedColor; }    // red for remaining quantity
+.partused    { color: $articlePartusedColor; }  // orange for partial
 
 #order-footer, .article-info {
   text-align: left;
@@ -260,12 +258,6 @@ table {
     width: 100%;
     font-weight: bold;
   }
-  .pull-right {
-    width: 35%;
-  }
-  .pull-left {
-    width: 60%;
-  }
 }
 
 tr.order-article .article-info {
@@ -317,7 +309,7 @@ tr.order-article {
 
   .group-order-input:not(.stock-order) {
     .goa-quantity, .goa-tolerance {
-      width: 65px;
+      width: 50px;
       text-align: right;
       font-size: 14px;
       padding: 4px 6px;
@@ -332,6 +324,10 @@ tr.order-article {
   .group-order-input.stock-order {
     width: 50px;
   }
+
+  td.group-order-input {
+    min-width: 150px;
+  }
 }
 
 .quantity .btn-ordering, .tolerance .btn-ordering {
@@ -340,10 +336,13 @@ tr.order-article {
 }
 
 .units_received_cell {
-  display: flex;
-  align-items: center;
+  white-space: nowrap;
   gap: 12px;
-  width: auto;
+  
+  .input-group {
+    display: inline-flex;  // instead of flex, keeps it inline with .package
+    width: fit-content;
+  }
 
   .btn-group .btn-ordering {
     margin-top: 0;
@@ -351,7 +350,8 @@ tr.order-article {
   }
 
   input.units_received {
-    width: 75px;
+    width: 50px;
+    flex-shrink: 0;
     -moz-appearance: textfield;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
@@ -359,18 +359,19 @@ tr.order-article {
       -webkit-appearance: none;
     }
   }
+
+  .package {
+    width: 75px;
+    flex-shrink: 0;
+  }
+
 }
 
 
 // ********* Articles
 
-tr.just-updated {
-  color: $articleUpdatedColor;
-}
-
-tr.unavailable {
-  color: $articleUnavailColor;
-}
+tr.just-updated td  { --bs-table-color: #{$articleUpdatedColor}; }
+tr.unavailable td   { --bs-table-color: #{$articleUnavailColor}; }
 
 // articles edit all
 .field_with_errors {
@@ -395,14 +396,14 @@ td.symbol, th.symbol {
   padding-right: 0;
   text-align: center;
 }
-.symbol              { color: tint($text-color, $nonessentialDim); }
-.used        .symbol { color: tint($articleUsedColor, $nonessentialDim); }
-.unused      .symbol { color: tint($articleUnusedColor, $nonessentialDim); }
-.partused    .symbol { color: tint($articlePartusedColor, $nonessentialDim); }
+.symbol              { color: color.mix(white, $body-color, $nonessentialDim); }
+.used        .symbol { color: color.mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .symbol { color: color.mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .symbol { color: color.mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .symbol { color: $articleUnavailColor; }
 
 .article-form {
-  .glyphicon-warning-sign {
+  .fa-warning {
     margin-top: 8px;
     margin-left: 10px;
     color: $articleCustomUnitWarning;
@@ -447,11 +448,6 @@ tr.untranslated {
   dd { margin-left: 210px; }
 }
 
-// get rid of extra bottom margin inside well
-.well p:last-child {
-  margin-bottom: 0;
-}
-
 // center table rows vertically (including form elements)
 table.table {
   thead, tbody, tfoot > {
@@ -477,15 +473,6 @@ table.table {
 
     }
   }
-  .control-group {
-    margin-bottom: 5px;
-  }
-  .control-group.h_wrapper {
-    margin-bottom: 5px;
-  }
-  .control-group.select {
-    margin-bottom: 15px
-  }
 }
 
 // inline (boolean) position after/before heading
@@ -496,13 +483,10 @@ label {
     }
   }
 }
-// fix checkbox form height
-.controls > label.checkbox { margin-top: 5px; }
-.settings-group .controls > label.checkbox { margin-top: 0; }
 
 
 // it's a bit distracting
-.glyphicon-asterisk {
+.fa-asterisk {
   font-size: 80%;
   vertical-align: middle;
   padding-bottom: 0.4ex;
@@ -525,7 +509,7 @@ input.package {
   background-size: 15px 15px;
   // disabled and readonly definitions though
   &[disabled], &[readonly] {
-    background-color: $input-bg-disabled;
+    background-color: $input-disabled-bg;
   }
 }
 i.package {
@@ -542,10 +526,10 @@ i.package.icon-only {
   background-position: right;
   display: inline-block;
 }
-.package              { color: tint($text-color, $nonessentialDim); }
-.used        .package { color: tint($articleUsedColor, $nonessentialDim); }
-.unused      .package { color: tint($articleUnusedColor, $nonessentialDim); }
-.partused    .package { color: tint($articlePartusedColor, $nonessentialDim); }
+.package              { color: color.mix(white, $body-color, $nonessentialDim); }
+.used        .package { color: color.mix(white, $articleUsedColor, $nonessentialDim); }
+.unused      .package { color: color.mix(white, $articleUnusedColor, $nonessentialDim); }
+.partused    .package { color: color.mix(white, $articlePartusedColor, $nonessentialDim); }
 .unavailable .package { color: $articleUnavailColor; }
 
 // very small inputs - need !important for responsive selectors
@@ -561,44 +545,6 @@ i.package.icon-only {
 // allow to have indicator text instead of input with same markup
 .control-text {
   margin-top: 5px;
-}
-
-// unlock button same size as warning sign
-.input-prepend button.unlocker {
-  padding-right: 6px;
-  padding-left: 7px;
-}
-
-// TODO: Remove the .panel defines after updating Bootstrap to >=3.0
-.panel {
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.panel-default {
-  border-color: #ddd;
-}
-
-.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px
-}
-
-.panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd
-}
-
-.panel-body {
-  padding: 15px;
-  padding-bottom: 0px;
 }
 
 span.disabled_amount {
@@ -621,92 +567,13 @@ details {
   cursor: pointer;
 }
 
-.form-horizontal {
-  .no-indent-left .control-group {
-    margin-bottom: 0;
-    .controls {
-      margin-left: 0;
-    }
-  }
-
-  .control-label {
-    hyphens: auto;
-
-    &.text-left {
-      text-align: left;
-    }
-  }
+.control-label {
+  hyphens: auto;
 }
 
 
-// bootstrap version 2 doesn't support some styles -> let's add makeshift ones manually for now:
-.d-flex {
-  display: flex;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.d-none {
-  display: none;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.m-0 {
-  margin:0 !important;
-}
-
-.ml-1 {
-  margin-left: 3px !important;
-}
-
-.ml-2 {
-  margin-left: 6px !important;
-}
-
-td.ml-1 > *:first-child {
-  margin-left: 3px !important;
-}
-
-
-.mr-1 {
-  margin-right: 3px !important;
-}
-
-.mr-2 {
-  margin-right: 6px !important;
-}
-
-td.mr-1 > *:last-child {
-  margin-right: 3px;
-}
-
-.mt-1 {
-  margin-top: 3px !important;
-}
-
-.mb-1 {
-  margin-bottom: 3px !important;
-}
-
-.pt-0 {
-  padding-top: 0 !important;
-}
-
-.pt-5 {
-  padding-top: 15px;
-}
-
-.pl-5 {
-  padding-left: 15px;
-}
-
-.text-decoration-none:hover {
-  text-decoration: none;
+.w-fit-content {
+  width: fit-content;
 }
 
 .text-wrap {
@@ -717,37 +584,13 @@ td.mr-1 > *:last-child {
   flex: 1;
 }
 
-.d-inline-block {
-  display: inline-block;
-}
-
 // Wider popovers
 .popover.wide {
   max-width: 90vw;
 }
 
-.gap-1 {
-  gap: .25rem;
-}
-
-.gap-8 {
-  gap: 2rem;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.w-fit-content {
-  width: fit-content;
-}
-
 *[role="button"] {
   cursor: pointer;
-}
-
-.user-select-none {
-  user-select: none;
 }
 
 .numeric-step-error {
@@ -755,21 +598,17 @@ td.mr-1 > *:last-child {
   color: #b94a48;
 }
 
-.btn-group.numeric-step > input:invalid {
+.input-group.numeric-step > input:invalid {
   border: 1px solid #b94a48;
 }
 
-.btn-group.numeric-step:has(> input:invalid) + .numeric-step-error {
+.input-group.numeric-step:has(> input:invalid) + .numeric-step-error {
   display: block;
 }
 
-.numeric-step {
-  min-width: 50px;
-}
-
-
-.form-group .select2-container {
-  width: 200px;
+.input-group-text.last {
+  border-top-right-radius: var(--bs-border-radius, 0.375rem) !important;
+  border-bottom-right-radius: var(--bs-border-radius, 0.375rem) !important;
 }
 
 .modal-dialog {
@@ -786,3 +625,26 @@ td.mr-1 > *:last-child {
     overflow-y: hidden;
 }
 
+a:not(.btn, .nav-link, .dropdown-item, .page-link) {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.mb-none { margin-bottom: 0 !important; }
+
+.custom-form-fields-wrapper {
+  padding: 0.25rem 0;
+  padding-left: calc(var(--bs-gutter-x, 1.5rem) * .5);
+}
+
+select.recurring_select {
+  @extend .form-select;
+}
+
+.order-article-edit-form .conversion-popover-opener {
+  border-radius: 0 !important;
+  height: 100%;
+  display: flex;
+}

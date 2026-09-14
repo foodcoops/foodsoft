@@ -2,6 +2,6 @@
 
 - content_for :actionbar do
   - if FoodsoftConfig[:charge_members_manually]
-    = link_to t('.close_all_direct_with_invoice'), close_all_direct_with_invoice_finance_order_index_path, method: :post, class: 'btn'
+    = link_to t('.close_all_direct_with_invoice'), close_all_direct_with_invoice_finance_order_index_path, method: :post, class: 'btn btn-primary'
 
 #ordersTable= render 'orders'

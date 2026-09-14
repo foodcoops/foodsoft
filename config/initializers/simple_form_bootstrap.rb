@@ -1,228 +1,426 @@
+# frozen_string_literal: true
+
+# These defaults are defined and maintained by the community at
+# https://github.com/heartcombo/simple_form-bootstrap
+# Please submit feedback, changes and tests only there.
+
+# Uncomment this and change the path if necessary to include your own
+# components.
+# See https://github.com/heartcombo/simple_form#custom-components
+# to know more about custom components.
+# Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.wrappers :bootstrap, tag: 'div', class: 'form-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
+  # Default class for buttons
+  config.button_class = 'btn btn-secondary'
 
-    b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-  end
+  # Define the default class of the input wrapper of the boolean input.
+  config.boolean_label_class = 'form-check-label'
 
-  config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |input|
-      input.wrapper tag: 'div', class: 'input-prepend' do |prepend|
-        prepend.use :input
-      end
-      input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    end
-  end
+  # How the label text should be generated altogether with the required text.
+  config.label_text = ->(label, required, _explicit_label) { "#{label} #{required}" }
 
-  config.wrappers :append, tag: 'div', class: 'form-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.use :label
-    b.wrapper tag: 'div', class: 'controls' do |input|
-      input.wrapper tag: 'div', class: 'input-append' do |append|
-        append.use :input
-      end
-      input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
-      input.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    end
-  end
+  # Define the way to render check boxes / radio buttons with labels.
+  config.boolean_style = :inline
 
-  # Do not use the label in tables
-  config.wrappers :intable, tag: 'div', class: 'form-group', error_class: 'error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.wrapper tag: 'div', class: 'col-sm-3' do |ba|
-      ba.use :input, class: 'form-control'
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    end
-  end
+  # You can wrap each item in a collection of radio/check boxes with a tag
+  config.item_wrapper_tag = :div
 
-  # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
-  # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
-  # to learn about the different styles for forms and inputs,
-  # buttons and other elements.
-  # config.default_wrapper = :bootstrap
+  # Defines if the default input wrapper class should be included in radio
+  # collection wrappers.
+  config.include_default_input_wrapper_class = false
+
+  # Tell browsers whether to use the native HTML5 validations (novalidate form option).
+  # These validations are enabled in SimpleForm's internal config but disabled by default
+  # in this configuration, which is recommended due to some quirks from different browsers.
+  # To stop SimpleForm from generating the novalidate option, enabling the HTML5 validations,
+  # change this configuration to true.
+  config.browser_validations = true
+
+  # CSS class to add for error notification helper.
   config.error_notification_class = 'alert alert-danger'
-  config.button_class = 'btn btn-default'
-  config.boolean_label_class = nil
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # Method used to tidy up errors. Specify any Rails Array method.
+  # :first lists the first message for each field.
+  # :to_sentence to list all errors for each field.
+  config.error_method = :to_sentence
+
+  # add validation classes to `input_field`
+  config.input_field_error_class = 'is-invalid'
+
+  # vertical forms
+  #
+  # vertical default_wrapper
+  config.wrappers :vertical_form, class: 'mb-3' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
+    b.optional :minlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'control-label'
-
-    b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :label, class: 'form-label'
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
   end
 
-  config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.optional :maxlength
-    b.optional :readonly
-    b.use :label, class: 'control-label'
-
-    b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-  end
-
-  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # vertical input for boolean
+  config.wrappers :vertical_boolean, tag: 'fieldset', class: 'mb-3' do |b|
     b.use :html5
     b.optional :readonly
-
-    b.wrapper tag: 'div', class: 'checkbox' do |ba|
-      ba.use :label_input
+    b.wrapper :form_check_wrapper, class: 'form-check' do |bb|
+      bb.use :input, class: 'form-check-input', error_class: 'is-invalid'
+      bb.use :label, class: 'form-check-label'
+      bb.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      bb.use :hint, wrap_with: { class: 'form-text' }
     end
-
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # vertical input for radio buttons and check boxes
+  config.wrappers :vertical_collection, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', tag: 'fieldset', class: 'mb-3' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, class: 'control-label'
-    b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|
+      ba.use :label_text
+    end
+    b.use :input, class: 'form-check-input', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # vertical input for inline radio buttons and check boxes
+  config.wrappers :vertical_collection_inline, item_wrapper_class: 'form-check form-check-inline', item_label_class: 'form-check-label', tag: 'fieldset', class: 'mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|
+      ba.use :label_text
+    end
+    b.use :input, class: 'form-check-input', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # vertical file input
+  config.wrappers :vertical_file, class: 'mb-3' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
+    b.optional :minlength
+    b.optional :readonly
+    b.use :label, class: 'form-label'
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # vertical select input
+  config.wrappers :vertical_select, class: 'mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'form-label'
+    b.use :input, class: 'form-select', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # vertical multi select
+  config.wrappers :vertical_multi_select, class: 'mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'form-label'
+    b.wrapper class: 'd-flex flex-row justify-content-between align-items-center' do |ba|
+      ba.use :input, class: 'form-select mx-1', error_class: 'is-invalid'
+    end
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # vertical range input
+  config.wrappers :vertical_range, class: 'mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :readonly
+    b.optional :step
+    b.use :label, class: 'form-label'
+    b.use :input, class: 'form-range', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # horizontal forms
+  #
+  # horizontal default_wrapper
+  config.wrappers :horizontal_form, class: 'row mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 control-label'
-
-    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input, class: 'form-control'
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
     end
   end
 
-  config.wrappers :horizontal_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # horizontal flex
+  config.wrappers :horizontal_form_flex, class: 'row mb-3' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 control-label'
-
-    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8 d-flex align-items-center' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
     end
   end
 
-  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # horizontal input for boolean
+  config.wrappers :horizontal_boolean, class: 'row mb-3' do |b|
     b.use :html5
     b.optional :readonly
-
-    b.wrapper tag: 'div', class: 'col-sm-offset-3 col-sm-9' do |wr|
-      wr.wrapper tag: 'div', class: 'checkbox' do |ba|
-        ba.use :label_input
+    b.wrapper :grid_wrapper, class: 'col-sm-8 offset-sm-4' do |wr|
+      wr.wrapper :form_check_wrapper, class: 'form-check' do |bb|
+        bb.use :input, class: 'form-check-input', error_class: 'is-invalid'
+        bb.use :label, class: 'form-check-label'
+        bb.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+        bb.use :hint, wrap_with: { class: 'form-text' }
       end
-
-      wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      wr.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
   end
 
-  config.wrappers :inverse_horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # horizontal input for radio buttons and check boxes
+  config.wrappers :horizontal_collection, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', class: 'row mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-check-input', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # horizontal input for inline radio buttons and check boxes
+  config.wrappers :horizontal_collection_inline, item_wrapper_class: 'form-check form-check-inline', item_label_class: 'form-check-label', class: 'row mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-check-input', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # horizontal file input
+  config.wrappers :horizontal_file, class: 'row mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # horizontal select input
+  config.wrappers :horizontal_select, class: 'row mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-select', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # horizontal multi select
+  config.wrappers :horizontal_multi_select, class: 'row mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label, class: 'col-sm-4 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.wrapper class: 'd-flex flex-row justify-content-between align-items-center' do |bb|
+        bb.use :input, class: 'form-select mx-1', error_class: 'is-invalid'
+      end
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # horizontal range input
+  config.wrappers :horizontal_range, class: 'row mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :readonly
+    b.optional :step
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-range', error_class: 'is-invalid'
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+      ba.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # inline forms
+  #
+  # inline default_wrapper
+  config.wrappers :inline_form do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: 'visually-hidden'
+
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.optional :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # inline input for boolean
+  config.wrappers :inline_boolean, class: 'col-12' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :form_check_wrapper, class: 'form-check' do |bb|
+      bb.use :input, class: 'form-check-input', error_class: 'is-invalid'
+      bb.use :label, class: 'form-check-label'
+      bb.use :error, wrap_with: { class: 'invalid-feedback d-block' }
+      bb.optional :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # bootstrap custom forms
+  #
+  # custom input switch for boolean
+  config.wrappers :custom_boolean_switch, class: 'mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :form_check_wrapper, tag: 'div', class: 'form-check form-switch' do |bb|
+      bb.use :input, class: 'form-check-input', error_class: 'is-invalid'
+      bb.use :label, class: 'form-check-label'
+      bb.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
+      bb.use :hint, wrap_with: { class: 'form-text' }
+    end
+  end
+
+  # Input Group - custom component
+  # see example app and config at https://github.com/heartcombo/simple_form-bootstrap
+  config.wrappers :input_group, class: 'mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label, class: 'form-label'
+    b.wrapper :input_group_tag, class: 'input-group' do |ba|
+      ba.optional :prepend
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.optional :append
+      ba.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    end
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # Floating Labels form
+  #
+  # floating labels default_wrapper
+  config.wrappers :floating_labels_form, class: 'form-floating mb-3' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :label
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # custom multi select
+  config.wrappers :floating_labels_select, class: 'form-floating mb-3' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :input, class: 'form-select', error_class: 'is-invalid'
+    b.use :label
+    b.use :full_error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { class: 'form-text' }
+  end
+
+  # custom wrapper
+  config.wrappers :inverse_horizontal_boolean, class: 'row mb-3' do |b|
     b.use :html5
     b.optional :readonly
 
-    b.use :label, class: 'col-sm-3 pt-0'
+    b.use :label, class: 'col-sm-4 col-form-label pt-0'
 
-    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input
+    b.wrapper :grid_wrapper, class: 'col-sm-8' do |ba|
+      ba.use :input, class: 'form-check-input', error_class: 'is-invalid'
     end
   end
 
-  config.wrappers :horizontal_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.optional :readonly
-
-    b.use :label, class: 'col-sm-3 control-label'
-
-    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-    end
-  end
-
-  config.wrappers :horizontal_select, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
-    b.use :html5
-    b.optional :readonly
-
-    b.use :label, class: 'col-sm-3 control-label'
-
-    b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input, class: 'form-control'
-      ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
-    end
-  end
-
-  config.wrappers :inline_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # custom wrapper
+  config.wrappers :custom_form, class: 'mb-3' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'sr-only'
+    b.use :label, class: 'form-label'
 
-    b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :error, wrap_with: { class: 'invalid-feedback d-block' }
+    b.use :hint,  wrap_with: { class: 'form-text' }
   end
 
-  config.wrappers :custom_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # custom wrapper: do not use the label in tables
+  config.wrappers :intable, class: 'mb-3' do |b|
     b.use :html5
     b.use :placeholder
-    b.optional :maxlength
-    b.optional :pattern
-    b.optional :min_max
-    b.optional :readonly
-    b.use :label, class: 'control-label'
-
-    b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.wrapper :grid_wrapper, class: 'col-sm-4' do |ba|
+      ba.use :input, class: 'form-control', error_class: 'is-invalid'
+      ba.use :hint,  wrap_with: { class: 'form-text' }
+      ba.use :error, wrap_with: { class: 'invalid-feedback d-block' }
+    end
   end
 
-  # Wrappers for forms and inputs using the Bootstrap toolkit.
-  # Check the Bootstrap docs (http://getbootstrap.com)
-  # to learn about the different styles for forms and inputs,
-  # buttons and other elements.
+  # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :horizontal_form
-  config.default_form_class = 'form-horizontal'
+
+  # Custom wrappers for input types. This should be a hash containing an input
+  # type as key and the wrapper that will be used for all inputs with specified type.
   config.wrapper_mappings = {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
     boolean: :horizontal_boolean,
-    select: :horizontal_select
+    check_boxes: :horizontal_collection,
+    radio_buttons: :horizontal_collection,
+    file: :horizontal_file,
+    select: :horizontal_select,
+    date: :vertical_multi_select,
+    datetime: :vertical_multi_select,
+    range: :vertical_range,
+    time: :vertical_multi_select
   }
 end

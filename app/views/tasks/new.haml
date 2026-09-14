@@ -7,5 +7,5 @@
     = render 'form', form: form, periodic: nil
     %div
       = form.submit class: 'btn btn-primary'
-      = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn'
+      = form.submit t('.submit_periodic'), name: 'periodic', class: 'btn btn-secondary'
       = link_to t('ui.or_cancel'), :back

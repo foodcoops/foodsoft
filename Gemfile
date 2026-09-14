@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 7.2.2'
 
-gem 'sassc-rails', '>= 2.1.0'
+gem 'dartsass-sprockets'
 
 gem 'bootsnap', require: false
 gem 'bootstrap-datepicker-rails'
@@ -18,7 +18,7 @@ gem 'select2-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts_as_tree'
 gem 'attribute_normalizer'
-gem 'bootstrap-sass', '~> 3.4.1'
+gem 'bootstrap', '~> 5.3.3'
 gem 'daemons'
 gem 'doorkeeper'
 gem 'doorkeeper-i18n'
@@ -40,7 +40,7 @@ gem 'ransack'
 gem 'resque'
 gem 'simple_form'
 gem 'simple-navigation'
-gem 'simple_navigation_bootstrap'
+gem 'simple_navigation_bootstrap', git: 'https://github.com/jbox-web/simple_navigation_bootstrap.git'
 gem 'sprockets', '< 4'
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
@@ -119,7 +119,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'apparition' # Capybara javascript driver
   gem 'capybara'
   gem 'connection_pool'
   gem 'database_cleaner'
@@ -130,6 +129,7 @@ group :test do
   gem 'i18n-spec'
   gem 'rspec-core'
   gem 'rspec-rerun'
+  gem 'selenium-webdriver' # Capybara javascript driver
   # code coverage
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false
