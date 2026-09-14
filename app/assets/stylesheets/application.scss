@@ -6,10 +6,10 @@
 @use "select2-bootstrap-5-theme.min";
 @use "token-input-bootstrappy";
 @use "bootstrap-datepicker3";
-@use "list.unlist";
-@use "list.missing";
+@use "list.unlist" as list-unlist;
+@use "list.missing" as list-missing;
 @use "recurring_select";
-@use "actiontext";
 @use "trix";
+@use "actiontext";
 @use "self_service";
 @use "migrate-units";
