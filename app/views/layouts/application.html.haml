@@ -1,6 +1,6 @@
 = render layout: 'layouts/header' do
   .navbar.navbar-expand-lg.bg-body-tertiary
-    .container-xxl
+    .container-fluid
       .navbar-brand.logo
         = t('layouts.logo').html_safe
         -if FoodsoftConfig[:display_demo_warning]
@@ -26,7 +26,7 @@
           - if FoodsoftConfig[:help_url]
             %li.nav-item= link_to t('.help'), FoodsoftConfig[:help_url], class: 'nav-link', target: '_blank'
 
-  #main.container-xxl.mt-3.d-flex.flex-column.flex-grow-1
+  #main.container-fluid.mt-3.d-flex.flex-column.flex-grow-1
     .row.flex-grow-1
       - if content_for?(:sidebar)
         .col-md-3
