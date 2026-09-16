@@ -1,2 +1,3 @@
 $('#modalContainer').html('#{j(render("form"))}');
-$('#modalContainer').modal();
+$('#modalContainer .modal-dialog').addClass('modal-xl');
+new bootstrap.Modal('#modalContainer').show();

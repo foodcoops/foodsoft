@@ -9,7 +9,7 @@ class ArticleForm {
       this.articleForm$ = articleForm$;
       this.unitConversionPopoverTemplate$ = $('#unit_conversion_popover_content_template');
       this.unit$ = $(`#${this.unitFieldsIdPrefix}_unit`, this.articleForm$);
-      this.customUnitWarning$ = $('.glyphicon.glyphicon-warning-sign', this.articleForm$);
+      this.customUnitWarning$ = $('.fa.fa-warning', this.articleForm$);
       this.supplierUnitSelect$ = $(`#${this.unitFieldsIdPrefix}_supplier_order_unit`, this.articleForm$);
       this.unitRatiosTable$ = $('#fc_base_price', this.articleForm$);
       this.minimumOrderQuantity$ = $(`#${this.unitFieldsIdPrefix}_minimum_order_quantity`, this.articleForm$);
@@ -141,7 +141,7 @@ class ArticleForm {
 
     if (this.extraUnits$.hasClass('show')) {
       $(document).on('mousedown.extra-units', (e) => {
-        if ($(e.target).parents(this.extraUnits$.selector).length !== 0 || e.target === this.extraUnits$[0] || e.target === this.toggleExtraUnitsButton$[0]) {
+        if ($(e.target).closest('.extra-unit-fields').length > 0 || e.target === this.extraUnits$[0] || e.target === this.toggleExtraUnitsButton$[0]) {
           return;
         }
 
@@ -239,7 +239,7 @@ class ArticleForm {
     const unitVal = $(`#${this.unitFieldsIdPrefix}_unit`).val();
     this.minimumOrderQuantity$
       .parents('.input-group')
-      .find('.input-group-addon')
+      .find('.input-group-text')
       .text(chosenOptionLabel !== undefined ? chosenOptionLabel : unitVal);
 
     const converter = this.getUnitsConverter();
@@ -402,7 +402,9 @@ class ArticleForm {
     }
 
     this.updateUnitsInSelect(availableUnits, this.billingUnit$);
-    this.billingUnit$.parents('.form-group').css('display', availableUnits.length > 1 ? 'block' : 'none');
+    if (this.unitsToOrder$.length > 0 && this.unitsReceived$.length > 0) {
+    this.billingUnit$.parents('.mb-3').css('display', availableUnits.length > 1 ? 'block' : 'none');
+    }
     this.updateUnitsInSelect(availableUnits, this.groupOrderUnit$);
     this.updateUnitsInSelect(availableUnits, this.priceUnit$);
   }
@@ -430,11 +432,22 @@ class ArticleForm {
     unitSelect$.trigger('change');
 
     unitSelect$.parents('.unit-wrapper').find('.immutable_unit_label').remove();
+    const singleLabel$ = unitSelect$.parents('.unit-wrapper').find('.unit-label-single');
+    singleLabel$.text('');
+
     if (units.length === 1) {
       unitSelect$.hide();
-      unitSelect$.after($(`<div class="immutable_unit_label control-label d-inline-block">${units[0].label}</div>`))
+      if (singleLabel$.length > 0) {
+        singleLabel$.text(units[0].label);
+        singleLabel$.parent('.input-group-text').addClass('last');
+      } else {
+        unitSelect$.after($(`<div class="immutable_unit_label control-label d-inline-block">${units[0].label}</div>`))
+      }
     } else {
       unitSelect$.show();
+      if (singleLabel$.length > 0) {
+        singleLabel$.parent('.input-group-text').removeClass('last');
+      }
     }
   }
 
@@ -444,7 +457,7 @@ class ArticleForm {
 
     const supplierOrderUnitSet = !!this.unit$.val() || !!this.supplierUnitSelect$.val();
     const unitRatiosVisible = supplierOrderUnitSet || this.unitRatiosTable$.find('tbody tr').length > 0;
-    this.unitRatiosTable$.parents('.form-group').toggle(unitRatiosVisible);
+    this.unitRatiosTable$.parents('.mb-3').toggle(unitRatiosVisible);
 
     if (!unitRatiosVisible) {
       $('tbody tr', this.unitRatiosTable$).remove();
@@ -492,6 +505,7 @@ class ArticleForm {
   }
 
   initializeOrderedAndReceivedUnits() {
+    if (this.unitsToOrder$.length === 0 || this.unitsReceived$.length === 0) return;
     this.billingUnit$.change(() => {
       this.updateOrderedAndReceivedUnits();
       this.initializeOrderedAndReceivedUnitsConverters();
@@ -505,7 +519,7 @@ class ArticleForm {
     const inputs$ = mergeJQueryObjects([this.unitsToOrder$, this.unitsReceived$]);
     inputs$.parent().find('.unit_label').remove();
     if (billingUnitLabel.trim() !== '') {
-      inputs$.after($(`<span class="unit_label ml-1" style:"align-self:center">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
+      inputs$.after($(`<span class="unit_label input-group-text rounded-start-0">${this.getUnitsConverter().isUnitSiConversible(billingUnitKey) ? '' : 'x '}${billingUnitLabel}</span>`));
     }
     if (this.previousBillingUnit !== undefined) {
       this.convertOrderedAndReceivedUnits(this.previousBillingUnit, billingUnitKey);

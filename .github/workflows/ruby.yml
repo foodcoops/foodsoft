@@ -36,10 +36,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Install libmagic-dev
         run: sudo apt-get update && sudo apt-get install -y libmagic-dev
-      - name: Setup chromedriver
-        uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: '115.0.5790.170' # https://github.com/nanasess/setup-chromedriver/issues/200
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:

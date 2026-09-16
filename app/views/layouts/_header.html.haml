@@ -8,18 +8,18 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     //%link(href="images/favicon.ico" rel="shortcut icon")
+    = javascript_importmap_tags
     = yield(:head)
     = foodcoop_css_tag
 
 
-  %body
+  %body.d-flex.flex-column.min-vh-100
     = yield
 
     /
       Javascripts
       \==================================================
     / Placed at the end of the document so the pages load faster
-    = javascript_importmap_tags
     = javascript_include_tag "application_legacy"
 
     :javascript

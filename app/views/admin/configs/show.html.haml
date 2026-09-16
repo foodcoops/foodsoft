@@ -5,10 +5,12 @@
 
   = render 'tabs', url: nil
 
-  .tab-content.row.pt-5.pl-5
+  .tab-content
     - for tab in @tabs
-      .tab-pane{class: ('active' if @current_tab==tab), id: "tab-#{tab}"}= render "tab_#{tab}", form: f
+      .tab-pane.fade{id: "tab-#{tab}", role: "tabpanel", class: ('show active' if @current_tab==tab)}
+        = render "tab_#{tab}", form: f
 
-  .col-md-8.pull-right
-    = f.submit t('.submit'), class: 'btn btn-primary '
+  .col-md-6
+    .float-end
+      = f.submit t('.submit'), class: 'btn btn-primary'
 

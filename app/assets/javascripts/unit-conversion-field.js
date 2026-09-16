@@ -23,13 +23,11 @@
       // if there's less then two options, don't even bother showing the popover:
       this.disabled = this.unitSelectOptions.length < 2;
 
-      this.opener$ = $('<span class="input-group-btn overflow-hidden w-fit-content"></div>');
-      this.openerButton$ = $('<button type="button" class="conversion-popover-opener btn btn-default"><i class="glyphicon glyphicon-retweet"></i></button>');
-      this.opener$.append(this.openerButton$);
+      this.openerButton$ = $('<button type="button" class="conversion-popover-opener input-group-text rounded-start-0 rounded-end"><i class="fa fa-retweet"></i></button>');
       this.openerButton$.attr('title', this.popoverTemplate.dataset.title);
-      this.field$.after(this.opener$);
+      this.field$.after(this.openerButton$);
       if (this.field$.css('display') === 'none') {
-        this.opener$.hide();
+        this.openerButton$.hide();
       }
 
       if (this.disabled) {
@@ -38,7 +36,15 @@
         return;
       }
 
-      this.initializeOpenListener();
+      this.openerButton$.click((e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.openPopover();
+      });
+
+      this.field$[0].addEventListener('shown.bs.popover', () => {
+        if (this.popover && this.popover.tip) this.initializeConversionPopover($(this.popover.tip));
+      });
     }
 
     loadArticleUnitRatios() {
@@ -64,18 +70,22 @@
     }
 
     initializeOpenListener() {
-      this.field$.popover({title: this.popoverTemplate.dataset.title, placement: 'bottom', trigger: 'manual'});
-
-      this.openerButton$.click((e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.openPopover()
+      this.popover = new bootstrap.Popover(this.field$[0], {
+        title: this.popoverTemplate.dataset.title,
+        placement: 'bottom',
+        trigger: 'manual',
+        html: true,
+        container: this.field$.closest('.modal')[0] || 'body',
+        content: () => {
+          return document.importNode(this.popoverTemplate, true);
+        }
       });
-
-      this.field$.on('inserted.bs.popover', () => this.initializeConversionPopover(this.field$.next('.popover')));
     }
 
     openPopover() {
+      if (!this.popover) {
+        this.initializeOpenListener();
+      }
       $(document).on('mousedown.unit-conversion-field', (e) => {
         if ($(e.target).parents('.popover').length !== 0 || e.target === this.field$[0]) {
           return;
@@ -83,13 +93,13 @@
 
         this.closePopover();
       });
-      this.field$.popover('show');
+      this.popover.show();
     }
 
     closePopover() {
       $(document).off('mousedown.unit-conversion-field');
       this.field$.off('change.unit-conversion-field');
-      this.field$.popover('hide');
+      this.popover.hide();
     }
 
     initializeConversionPopover(popover$) {
@@ -97,20 +107,14 @@
         popover$.addClass('wide');
       }
 
-      const popoverContent$ = popover$.find('.popover-content');
-      popoverContent$.empty();
-
-      const contents$ = $(document.importNode(this.popoverTemplate, true));
-      popoverContent$.append(contents$);
-
-      this.quantityInput$ = contents$.find('input.quantity');
+      this.quantityInput$ = popover$.find('input.quantity');
       this.quantityInput$.val(String(this.field$.val()).replace(',', '.'));
       this.quantityInput$
         .focus()
         .select();
-      this.applyButton$ = contents$.find('input.apply');
-      this.conversionResult$ = contents$.find('.conversion-result');
-      this.unitSelect$ = contents$.find('select.unit');
+      this.applyButton$ = popover$.find('input.apply');
+      this.conversionResult$ = popover$.find('.conversion-result');
+      this.unitSelect$ = popover$.find('select.unit');
       this.unitSelect$.append(this.unitSelectOptions.map(option => $(`<option value${option.value === undefined ? '' : `="${option.value}"`}>${option.label}</option>`)))
       let initialUnitSelectValue = this.defaultUnit;
       if (initialUnitSelectValue === undefined) {
@@ -132,7 +136,7 @@
         this.unitSelect$.val(initialUnitSelectValue);
       });
 
-      contents$.find('input.cancel').click(() => this.closePopover());
+      popover$.find('input.cancel').click(() => this.closePopover());
       this.applyButton$.click(() => {
         this.applyConversion();
         this.closePopover();
@@ -183,8 +187,8 @@
       if (this.quantityInput$.is(':invalid')) {
         this.applyButton$.attr('disabled', 'disabled');
         const errorSpan$ = $(`<div class="numeric-step-error">${I18n.t('errors.step_error', {min: 0, granularity: this.quantityInput$.attr('step')})}</div>`);
-        errorSpan$.show();
         this.conversionResult$.after(errorSpan$);
+        errorSpan$.show();
       } else {
         this.applyButton$.removeAttr('disabled');
       }
@@ -256,7 +260,7 @@
         if (conversionField === undefined || conversionField.field$ === undefined) {
           break;
         }
-        conversionField.opener$.remove();
+        conversionField.openerButton$.remove();
         convertersMap.delete($(this)[0]);
         break;
       default: {

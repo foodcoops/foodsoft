@@ -1,14 +1,16 @@
 - title t('.title')
 
-.well
+.p-3.bg-body-secondary
   = form_tag foodcoop_ordergroups_path, :method => :get, :remote => true, 'data-submit-onchange' => true,
-    class: 'form-inline' do
-    = text_field_tag :name, params[:name], class: 'form-control search-query', placeholder: t('.name')
-    .checkbox
-      %label{:for => 'only_active'}
-        = check_box_tag 'only_active', 1, params[:only_active]
-        = t '.only_active'
-        %small= t '.only_active_desc'
+    class: 'row' do
+    .col-auto
+      = text_field_tag :name, params[:name], class: 'form-control search-query', placeholder: t('.name')
+    .col-auto
+      .checkbox
+        %label{:for => 'only_active'}
+          = check_box_tag 'only_active', 1, params[:only_active]
+          = t '.only_active'
+          %small= t '.only_active_desc'
 
-#ordergroups
+#ordergroups.mt-3
   = render :partial => "ordergroups"

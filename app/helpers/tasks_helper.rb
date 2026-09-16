@@ -9,7 +9,7 @@ module TasksHelper
   def highlighted_required_users(task)
     return if task.enough_users_assigned?
 
-    content_tag :span, task.still_required_users, class: 'badge badge-important',
+    content_tag :span, task.still_required_users, class: 'badge badge bg-danger',
                                                   title: I18n.t('helpers.tasks.required_users', count: task.still_required_users)
   end
 

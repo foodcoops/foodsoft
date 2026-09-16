@@ -32,5 +32,5 @@
           - unused_article_versions.each do |unused_article_version|
             %option{id: "add_article_#{unused_article_version.id}", value: unused_article_version.id}= article_label_with_unit(unused_article_version)
       %th{colspan: 4}
-        %button.btn#set_all_to_zero{type: :button}
+        %button.btn.btn-light#set_all_to_zero{type: :button}
           = t '.set_all_to_zero'

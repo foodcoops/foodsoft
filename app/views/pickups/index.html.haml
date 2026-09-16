@@ -9,9 +9,9 @@
       - else
         = t '.without_pickup'
       %span{style:'float:right'}
-        = submit_tag t('.article_pdf'), name: 'articles_pdf', class: 'btn'
-        = submit_tag t('.group_pdf'), name: 'groups_pdf', class: 'btn'
-        = submit_tag t('.matrix_pdf'), name: 'matrix_pdf', class: 'btn'
+        = submit_tag t('.article_pdf'), name: 'articles_pdf', class: 'btn btn-secondary'
+        = submit_tag t('.group_pdf'), name: 'groups_pdf', class: 'btn btn-secondary'
+        = submit_tag t('.matrix_pdf'), name: 'matrix_pdf', class: 'btn btn-secondary'
 
     %table.table.table-striped
       %thead
@@ -27,5 +27,5 @@
               = link_to order.name, order_path(order)
             %td= truncate order.note
             %td{style:'white-space:nowrap'}
-              = render 'shared/order_download_button', order: order, klass: 'btn-xs'
-              = receive_button order, class: 'btn-xs'
+              = render 'shared/order_download_button', order: order, klass: 'btn-sm'
+              = receive_button order, class: 'btn btn-secondary btn-sm'

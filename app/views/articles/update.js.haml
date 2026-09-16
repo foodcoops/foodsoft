@@ -1,2 +1,3 @@
 $('#article_#{@article.id}').replaceWith('#{escape_javascript(render(@article))}');
-$('#modalContainer').modal('hide');
+$('#modalContainer .modal-dialog').removeClass('modal-xl');
+bootstrap.Modal.getInstance('#modalContainer').hide();

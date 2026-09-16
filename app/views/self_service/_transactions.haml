@@ -10,9 +10,9 @@
     %tbody
       %tr
         %td
-        %td= form.input :amount, :label => false, :required => true
-        %td= form.text_field :note, :label => false, :required => true
-        %td= form.submit
+        %td= form.input_field :amount, required: true, class: 'form-control'
+        %td= form.text_field :note, required: true, class: 'form-control'
+        %td= form.submit class: 'btn btn-secondary'
       - @financial_transactions.each do |financial_transaction|
         %tr
           %td.date= format_time(financial_transaction.created_on)

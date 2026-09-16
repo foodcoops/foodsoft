@@ -2,8 +2,5 @@
 
 = t('.body').html_safe
 
-= render :partial => "workgroup", :collection => @workgroups
-        
-          
-            
-          
+.d-flex.flex-column.gap-3
+  = render :partial => "workgroup", :collection => @workgroups

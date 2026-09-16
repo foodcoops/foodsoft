@@ -30,14 +30,14 @@ feature 'product distribution', :js do
     find(".goa-quantity[data-e2e-order-article-id='#{oa.id}']").set '2'
     find(".goa-tolerance[data-e2e-order-article-id='#{oa.id}']").set '3'
     find('input[type=submit]').click
-    expect(page).to have_selector('body')
+    expect(page).to have_content(I18n.t('group_orders.create.notice'))
     # gruppe b bestellt 2(0)
     login user_b
     visit new_group_order_path(order_id: order.id)
     scrolldown
     find(".goa-quantity[data-e2e-order-article-id='#{oa.id}']").set '2'
     find('input[type=submit]').click
-    expect(page).to have_css('body')
+    expect(page).to have_content(I18n.t('group_orders.create.notice'))
     # gruppe a faellt ein dass sie doch noch mehr braucht von x und aendert auf 4(1).
     login user_a
     visit edit_group_order_path(id: order.group_order(user_a.ordergroup).id, order_id: order.id)
@@ -45,7 +45,7 @@ feature 'product distribution', :js do
     find(".goa-quantity[data-e2e-order-article-id='#{oa.id}']").set '4'
     find(".goa-tolerance[data-e2e-order-article-id='#{oa.id}']").set '1'
     find('input[type=submit]').click
-    expect(page).to have_css('body')
+    expect(page).to have_content(I18n.t('group_orders.update.notice'))
     # die zuteilung
     order.finish!(admin)
     oa.reload

@@ -97,8 +97,8 @@
     - send_method_collection = [:workgroup, :ordergroup, :messagegroup, :order, :recipients]
     - send_method_collection.unshift :all if FoodsoftConfig[:mailing_list].blank?
     .row
-      .col-md-3
-      .col-md-9
+      .col-sm-4
+      .col-sm-8
         = f.input :send_method, :as => :radio_buttons, :collection => send_method_collection, :label => false, :label_method => ->(obj){ t("activerecord.attributes.message.send_method.#{obj}") }
 
     #workgroup
@@ -115,9 +115,9 @@
     = f.input :private, inline_label: t('.hint_private')
     = f.input :subject
     .row
-      .col-md-3 
-      .col-md-9
+      .col-md-4 
+      .col-md-8
         = f.rich_text_area :body, input_html: {rows: 13}
-    %div
+    .mt-3
       = f.submit class: 'btn btn-primary'
       = link_to t('ui.or_cancel'), :back

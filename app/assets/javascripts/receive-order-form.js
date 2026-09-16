@@ -71,15 +71,15 @@
         // no value
         html = '';
       } else if (isNaN(units)) {
-        html = '<i class="glyphicon glyphicon-remove" style="color: red"></i>';
+        html = '<i class="fa fa-times" style="color: red"></i>';
       } else if (delta == 0) {
         // equal value
-        html = '<i class="glyphicon glyphicon-ok" style="color: green"></i>';
+        html = '<i class="fa fa-check" style="color: green"></i>';
       } else {
         if (delta < 0) {
-          html = '<span style="color: red" class="mr-1">- '+(-delta)+'</span>';
+          html = '<span style="color: red" class="me-1">- '+(-delta)+'</span>';
         } else /*if (units> expected)*/ {
-          html = '<span style="color: green" class="mr-1">+ '+(delta)+'</span>';
+          html = '<span style="color: green" class="me-1">+ '+(delta)+'</span>';
         }
         // show package icon only if the receive field has one
         if ($(input).hasClass('package')) {
@@ -132,8 +132,8 @@
 
     unlockReceiveInputField(unlockButton$) {
       $('.units_received', unlockButton$.closest('tr')).prop('disabled', false).focus();
-      unlockButton$.closest('.input-group-btn').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
-      unlockButton$.replaceWith('<i class="glyphicon glyphicon-warning-sign"></i>');
+      unlockButton$.closest('.input-group').prop('title', I18n.t('orders.edit_amount.field_unlocked_title'));
+      unlockButton$.replaceWith('<i class="fa fa-warning"></i>');
     }
   }
 

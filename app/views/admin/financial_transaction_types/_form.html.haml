@@ -2,8 +2,8 @@
   .modal-dialog
     .modal-content
       .modal-header
-        = close_button :modal
         %h3.modal-title= @financial_transaction_type.new_record? ? t('.title_new') : t('.title_edit')
+        = close_button :modal
       .modal-body
         = f.input :name
         = f.association :financial_transaction_class, :include_blank => false
@@ -12,5 +12,5 @@
           = f.association :bank_account
         %small= t '.name_short_desc'
       .modal-footer
-        = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
+        = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'
         = f.submit class: 'btn btn-primary'

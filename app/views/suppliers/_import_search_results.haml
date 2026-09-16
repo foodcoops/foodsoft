@@ -23,7 +23,7 @@
           %td= ArticleUnitsLib.get_translated_name_for_code(article[:supplier_order_unit])
           %td.actions.import-actions{:data => {order_number: article[:order_number]}}
             - article_exists = @supplier.articles.includes(:latest_article_version).undeleted.where(article_versions: {order_number: article[:order_number]}).exists?
-            %i.icon-ok{:style => article_exists ? '' : 'display:none;'}= t '.already_imported'
+            %i.fa.fa-check{:style => article_exists ? '' : 'display:none;'}= t '.already_imported'
             = link_to t('.action_import'), supplier_articles_path(@supplier),
               remote: true, class: 'btn btn-sm btn-success article_import_btn', data: {index: index},
               style: article_exists ? 'display:none;' : ''

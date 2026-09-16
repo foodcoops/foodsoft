@@ -1,14 +1,13 @@
 - title t('.title', number: @financial_link.id)
 
 - content_for :actionbar do
-  = link_to t('.add_bank_transaction'), index_bank_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
+  = link_to t('.add_bank_transaction'), index_bank_transaction_finance_link_path(@financial_link), remote: true, class: 'btn btn-secondary'
   .btn-group
-    = link_to t('.add_financial_transaction'), index_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'btn'
-    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn dropdown-toggle' do
-      %span.caret
+    = link_to t('.add_financial_transaction'), index_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'btn btn-secondary'
+    %button.btn.dropdown-toggle.dropdown-toggle-split.btn.btn-secondary(type="button" data-bs-toggle="dropdown" aria-expanded="false")
     %ul.dropdown-menu
-      %li= link_to t('.new_financial_transaction'), new_financial_transaction_finance_link_path(@financial_link), remote: true
-  = link_to t('.add_invoice'), index_invoice_finance_link_path(@financial_link), remote: true, class: 'btn'
+      %li= link_to t('.new_financial_transaction'), new_financial_transaction_finance_link_path(@financial_link), remote: true, class: 'dropdown-item'
+  = link_to t('.add_invoice'), index_invoice_finance_link_path(@financial_link), remote: true, class: 'btn btn-secondary'
 
 %table.table.table-striped
   %thead
@@ -30,7 +29,7 @@
         %td= sanitize item[:description]
         %td.numeric{style: 'width:5em'}= format_currency item[:amount]
         %td= link_to t('.remove_from_link'), item[:remove_path], :data => {:confirm => t('.remove_from_link_confirm')}, :method => :delete,
-          class: 'btn btn-danger btn-xs'
+          class: 'btn btn-danger btn-sm'
 
 %p
   = @financial_link.note

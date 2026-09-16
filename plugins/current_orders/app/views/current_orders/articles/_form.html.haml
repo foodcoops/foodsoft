@@ -8,7 +8,7 @@
             .input-append
               = f.text_field :article_name_cont, placeholder: t('.article_placeholder'), class: 'search-query form-control resettable'
               %button.add-on.btn.reset-search{type: 'button'}
-                %i.icon.icon-remove
+                %i.fa.fa-times
         = render 'articles', orders: @current_orders
 
   .col-md-8

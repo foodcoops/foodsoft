@@ -2,52 +2,54 @@
 
 - content_for :actionbar do
   .btn-group
-    = link_to '#', data: {toggle: 'dropdown'}, class: 'btn btn-default dropdown-toggle' do
+    %button.btn.btn-secondary.dropdown-toggle(type="button" data-bs-toggle="dropdown" aria-expanded="false")
       = t '.change_supplier'
-      %span.caret
     %ul.dropdown-menu
       - Supplier.undeleted.where.not(id: @supplier.id).order('suppliers.name ASC').each do |supplier|
-        %li= link_to supplier.name, supplier_articles_path(supplier), tabindex: -1
+        %li= link_to supplier.name, supplier_articles_path(supplier), tabindex: -1, class: 'dropdown-item'
 
-.well.well-small
-  .btn-toolbar
-    = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'pull-right',
-      'data-submit-onchange' => true do
-      = text_field_tag :query, params[:query], class: 'form-control',
-        placeholder: t('.search_placeholder')
+.card.bg-light.mb-3
+  .card-body
+    .row.g-2.align-items-start
+      .col.btn-toolbar.gap-2
+        - unless @supplier.supplier_remote_source.blank?
+          .btn-group
+            - if @supplier.shared_sync_method == 'import'
+              = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
+            = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
 
-    - unless @supplier.supplier_remote_source.blank?
-      .btn-group
-        - if @supplier.shared_sync_method == 'import'
-          = link_to t('.ext_db.import'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-primary'
-        = link_to t('.ext_db.sync'), sync_supplier_articles_path(@supplier), method: :post, class: 'btn btn-success'
-
-    .btn-group
-      = link_to t('.migrate_units') + '...', prepare_units_migration_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?
-    .btn-group
-      = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{'btn-primary' if @supplier.supplier_remote_source.nil?}"
-      = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn btn-default'
-      = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn btn-default'
-      = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn btn-default'
-      - if current_user.role_orders?
-        = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn btn-default'
+        .btn-group
+          = link_to t('.migrate_units') + '...', prepare_units_migration_supplier_articles_path(@supplier), class: 'btn btn-success' if @supplier.unit_migration_completed.nil?
+        .btn-group
+          = link_to t('.new'), new_supplier_article_path(@supplier), remote: true, class: "btn #{@supplier.supplier_remote_source.nil? ? 'btn-primary' : 'btn-secondary'}"
+          = link_to t('.edit_all'), edit_all_supplier_articles_path(@supplier), class: 'btn btn-secondary'
+          = link_to t('.upload'), upload_supplier_articles_path(@supplier), class: 'btn btn-secondary'
+          = link_to t('.download'), supplier_articles_path(@supplier, format: :csv), class: 'btn btn-secondary'
+          - if current_user.role_orders?
+            = link_to t('.new_order'), new_order_path(supplier_id: @supplier), class: 'btn btn-secondary'
+      .col-12.col-md-auto.ms-auto:
+        = form_tag supplier_articles_path(@supplier), method: :get, remote: true, class: 'float-end',
+          'data-submit-onchange' => true do
+          = text_field_tag :query, params[:query], class: 'form-control',
+            placeholder: t('.search_placeholder')
 
 - unless @supplier.supplier_remote_source.blank?
-  #import.well.well-small(style="display:none;")
-    = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true,
-      'data-submit-onchange' => true do
-      %h3{style: 'display: inline; vertical-align: middle; margin-right: 1em'}= t('.import.title') + ' '
-      = text_field_tag "name", "", class: 'form-control mt-1',
-        placeholder: t('.import.placeholder')
-      %label.checkbox{style: 'margin-left: 20px'}
-        = check_box_tag "origin", "REG", false
-        = t '.import.restrict_region'
-      .pull-right{style: 'line-height: 40px'}
-        = label_tag :article_category_id, t('.import.category')
-        = collection_select :article_category, :id, ArticleCategory.all, :id, :name,
-          {include_blank: true}, {'data-ignore-onchange' => true}
-      #search_results.clearfix
-    = link_to t('ui.close'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-default'
+  #import.card.bg-light(style="display:none;")
+    .card-body
+      = form_tag supplier_remote_articles_path(@supplier), method: :get, remote: true,
+        'data-submit-onchange' => true do
+        %h3.card-title{style: 'display: inline; vertical-align: middle; margin-right: 1em'}= t('.import.title') + ' '
+        = text_field_tag "name", "", class: 'form-control mt-1',
+          placeholder: t('.import.placeholder')
+        %label.checkbox{style: 'margin-left: 20px'}
+          = check_box_tag "origin", "REG", false
+          = t '.import.restrict_region'
+        .float-end{style: 'line-height: 40px'}
+          = label_tag :article_category_id, t('.import.category')
+          = collection_select :article_category, :id, ArticleCategory.all, :id, :name,
+            {include_blank: true}, {'data-ignore-onchange' => true}
+        #search_results.clearfix
+      = link_to t('ui.close'), "#import", 'data-toggle-this' => '#import', class: 'btn btn-secondary'
 
 = form_tag update_selected_supplier_articles_path(@supplier), id: "articlesInListForm",
   'data-submit-onchange' => true do

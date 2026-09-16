@@ -1,6 +1,5 @@
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
-//= require bootstrap-sprockets
 //= require select2-full
 //= require jquery.tokeninput
 //= require bootstrap-datepicker/core
@@ -28,7 +27,7 @@
 //= require delta_input
 //= require recurring_select
 
-$.fn.select2.defaults.set('theme', 'bootstrap');
+$.fn.select2.defaults.set('theme', 'bootstrap-5');
 
 // Load following statements, when DOM is ready
 $(function() {
@@ -158,17 +157,14 @@ $(function() {
     $('.datepicker').datepicker({format: 'yyyy-mm-dd', language: I18n.locale, todayHighlight: true});
 
     // bootstrap tooltips (for price)
-    //   Extra options don't work when using selector, so override defaults
-    //   https://github.com/twbs/bootstrap/issues/3875 . These can still be
-    //   overridden per tooltip using data-placement attributes and the like.
-    $.extend($.fn.tooltip.defaults, {
-      html: true,
-      animation: false,
-      placement: 'left',
-      container: 'body'
-    });
-    $(document).tooltip({
-      selector: '[data-toggle~="tooltip"]',
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+      new bootstrap.Tooltip(el, {
+        html: true,
+        animation: false,
+        placement: 'left',
+        container: 'body',
+        sanitize: false
+      });
     });
 
     // See stupidtable.js for initialization of local table sorting

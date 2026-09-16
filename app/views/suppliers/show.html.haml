@@ -1,14 +1,14 @@
 - title @supplier.name
 
 - content_for :actionbar do
-  = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn btn-default'
+  = link_to t('suppliers.index.articles', count: @supplier.articles.undeleted.count), supplier_articles_path(@supplier), class: 'btn btn-secondary'
   - if @supplier.stock_articles.undeleted.any?
-    = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn btn-default'
+    = link_to t('suppliers.index.stock', count: @supplier.stock_articles.undeleted.count), stock_articles_path, class: 'btn btn-secondary'
 
 .row
-  .col-md-6
+  .col-md-6.mb-3.mb-md-0
     - unless @supplier.shared_sync_method.nil?
-      .alert.alert-info
+      .alert.alert-light
         = t 'suppliers.shared_supplier_note'
         = t "suppliers.shared_supplier_methods.#{@supplier.shared_sync_method}"
 
@@ -46,20 +46,20 @@
       %dt= heading_helper(Supplier, :share_link) + ':'
       %dd
         %div#share_link= render partial: 'supplier_shares/share_link', locals: { external_uuid: @supplier.external_uuid }
-        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-default btn-xs', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
-        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-default btn-xs', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
+        = link_to t('.share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-sm', method: :post, style: @supplier.external_uuid.nil? ? nil : 'display: none;'
+        = link_to t('.remove_share'), supplier_share_path(@supplier), remote: true, class: 'btn btn-secondary btn-sm', method: :delete, data: { confirm: t('.confirm_remove_share') }, style: @supplier.external_uuid.nil? ? 'display: none;' : nil
 
     .clearfix
     - if @current_user.role_suppliers?
       %div
-        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn btn-default'
+        = link_to t('ui.edit'), edit_supplier_path(@supplier), class: 'btn btn-outline-secondary'
         = link_to t('ui.delete'), @supplier, :data => {:confirm => t('ui.confirm_delete', name: @supplier.name)}, :method => :delete, class: 'btn btn-danger'
 
-  - if @deliveries.any?
-    .col-md-6
-      .pull-right
-        = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn btn-default'
-        = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn btn-default'
+  .col-md-6
+    - if @deliveries.any?
+      .float-end
+        = link_to t('.show_deliveries'), supplier_deliveries_path(@supplier), class: 'btn btn-secondary'
+        = link_to t('.new_delivery'), new_supplier_delivery_path(@supplier), class: 'btn btn-secondary'
       %h2= t '.last_deliveries'
       %table.table.table-horizontal
         %thead
@@ -71,9 +71,7 @@
             %tr
               %td= link_to delivery.date, [@supplier, delivery]
               %td= link_to_invoice(delivery)
-
-  - if @orders.any?
-    .col-md-6
+    - if @orders.any?
       %h2= t '.last_orders'
       %table.table.table-horizontal
         %thead
@@ -89,7 +87,7 @@
                 %td= link_to format_time(order.starts), order_path(order)
               - else
                 %td= format_time(order.starts)
-              %td= format_time(order.ends) unless order.ends.nil?
+                %td= format_time(order.ends) unless order.ends.nil?
               - if current_user.role_finance? and not order.open?
                 %td= link_to I18n.t("orders.state.#{order.state}"), new_finance_order_path(order_id: order.id)
               - else

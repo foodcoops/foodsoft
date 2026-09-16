@@ -1,8 +1,8 @@
 .modal-dialog
   .modal-content
     .modal-header
-      = close_button :modal
       %h3.modal-title= t('.title')
+      = close_button :modal
     .modal-body
       %table.table.table-striped
         %thead
@@ -19,4 +19,4 @@
               %td= format_date invoice.date
               %td= number_to_currency invoice.amount
     .modal-footer
-      = link_to t('ui.close'), '#', class: 'btn btn-default', data: {dismiss: 'modal'}
+      = link_to t('ui.close'), '#', class: 'btn btn-secondary', 'data-bs-dismiss' => 'modal'

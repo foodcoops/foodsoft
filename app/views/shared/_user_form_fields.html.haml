@@ -17,7 +17,7 @@
   = f.fields_for [:ordergroup, f.object.ordergroup || Ordergroup.new] do |ogf|
     - address_hint = f.object.ordergroup.users.count > 1 ? t('.contact_address_hint') : nil
     = ogf.input :contact_address, label: t('activerecord.attributes.ordergroup.contact_address'), required: false,
-                input_html: { title: address_hint, data: {toggle: 'tooltip', placement: 'right'} }
+                input_html: { title: address_hint, data: {'bs-toggle': 'tooltip', 'bs-placement': 'right'} }
 
 = render 'shared/custom_form_fields', f: f, type: :user
 = f.simple_fields_for :settings_attributes do |s|
@@ -28,22 +28,22 @@
     .settings-group
     = s.simple_fields_for :profile, defaults: { inline_label: true } do |profile|
       .row
-        .col-sm-3.control-label
+        .col-sm-4.control-label
           %h5
             = t 'simple_form.labels.settings.settings_group.privacy'
       .row
-        = profile.input 'phone_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['phone_is_public']}, wrapper: :horizontal_boolean
-        = profile.input 'email_is_public',  as: :boolean, label: false, input_html: { checked: f.object.settings.profile['email_is_public'] }, wrapper: :horizontal_boolean
+        = profile.input 'phone_is_public',  as: :boolean, input_html: { checked: f.object.settings.profile['phone_is_public']}, wrapper: :horizontal_boolean
+        = profile.input 'email_is_public',  as: :boolean, input_html: { checked: f.object.settings.profile['email_is_public'] }, wrapper: :horizontal_boolean
         - if FoodsoftConfig[:use_nick]
-          = profile.input 'name_is_public',   as: :boolean, label: false, input_html: { checked: f.object.settings.profile['name_is_public'] }, wrapper: :horizontal_boolean
+          = profile.input 'name_is_public',   as: :boolean, input_html: { checked: f.object.settings.profile['name_is_public'] }, wrapper: :horizontal_boolean
 
     .settings-group
       .row
-        .col-sm-3.control-label
+        .col-sm-4.control-label
           %h5
             = t 'simple_form.labels.settings.settings_group.messages'
       .row
-        = s.simple_fields_for :notify, defaults: { inline_label: true, label: false } do |notify|
+        = s.simple_fields_for :notify, defaults: { inline_label: true } do |notify|
           = notify.input 'order_finished',    as: :boolean, input_html: { checked: f.object.settings.notify['order_finished'] }, wrapper: :horizontal_boolean
           = notify.input 'order_received',    as: :boolean, input_html: { checked: f.object.settings.notify['order_received'] }, wrapper: :horizontal_boolean
           = notify.input 'negative_balance',  as: :boolean, input_html: { checked: f.object.settings.notify['negative_balance'] }, wrapper: :horizontal_boolean

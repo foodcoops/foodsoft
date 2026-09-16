@@ -14,6 +14,14 @@ GIT
       rails (>= 6.1)
       sass-rails (>= 5.0)
 
+GIT
+  remote: https://github.com/jbox-web/simple_navigation_bootstrap.git
+  revision: 4a08bbff737c57e266ef09667e8e16e809baf049
+  specs:
+    simple_navigation_bootstrap (1.4.0)
+      simple-navigation (~> 4.0)
+      zeitwerk
+
 PATH
   remote: plugins/b85
   specs:
@@ -159,13 +167,8 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    apparition (0.6.0)
-      capybara (~> 3.13, < 4)
-      websocket-driver (>= 0.6.5)
     ast (2.4.2)
     attribute_normalizer (1.2.0)
-    autoprefixer-rails (10.4.19.0)
-      execjs (~> 2)
     base32 (0.3.4)
     base64 (0.3.0)
     benchmark (0.5.0)
@@ -179,11 +182,10 @@ GEM
       debug_inspector (>= 1.2.0)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
+    bootstrap (5.3.8)
+      popper_js (>= 2.11.8, < 3)
     bootstrap-datepicker-rails (1.10.0.1)
       railties (>= 3.0)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
     builder (3.3.0)
     bullet (8.0.0)
       activesupport (>= 3.0.0)
@@ -209,6 +211,12 @@ GEM
     crass (1.0.7)
     csv (3.3.2)
     daemons (1.4.1)
+    dartsass-sprockets (3.2.1)
+      railties (>= 4.0.0)
+      sassc-embedded (~> 1.80.1)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     database_cleaner (2.1.0)
       database_cleaner-active_record (>= 2, < 3)
     database_cleaner-active_record (2.2.0)
@@ -263,6 +271,27 @@ GEM
       rails (>= 4.0.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
+    google-protobuf (4.33.6)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-aarch64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-aarch64-linux-musl)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-x86_64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-x86_64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.33.6-x86_64-linux-musl)
+      bigdecimal
+      rake (>= 13)
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
@@ -406,6 +435,7 @@ GEM
       racc
     pdf-core (0.10.0)
     polyglot (0.3.5)
+    popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
     prawn (2.5.0)
@@ -594,10 +624,31 @@ GEM
       logger
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
+    sass-embedded (1.100.0)
+      google-protobuf (~> 4.31)
+      rake (>= 13)
+    sass-embedded (1.100.0-aarch64-linux-gnu)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-aarch64-linux-musl)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-arm-linux-gnueabihf)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-arm-linux-musleabihf)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-arm64-darwin)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-x86_64-darwin)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-x86_64-linux-gnu)
+      google-protobuf (~> 4.31)
+    sass-embedded (1.100.0-x86_64-linux-musl)
+      google-protobuf (~> 4.31)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc-embedded (1.80.8)
+      sass-embedded (~> 1.80)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
       sassc (>= 2.0)
@@ -606,14 +657,17 @@ GEM
       tilt
     securerandom (0.4.1)
     select2-rails (4.0.13)
+    selenium-webdriver (4.49.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 4.0)
+      websocket (~> 1.0)
     simple-navigation (4.4.0)
       activesupport (>= 2.3.2)
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    simple_navigation_bootstrap (1.3.0)
-      simple-navigation (~> 4.0)
-      zeitwerk
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -687,6 +741,7 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.9.1)
+    websocket (1.2.11)
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
@@ -723,19 +778,19 @@ DEPENDENCIES
   activerecord-nulldb-adapter
   acts_as_tree
   acts_as_versioned!
-  apparition
   attribute_normalizer
   better_errors
   binding_of_caller
   bootsnap
+  bootstrap (~> 5.3.3)
   bootstrap-datepicker-rails
-  bootstrap-sass (~> 3.4.1)
   bullet
   capybara
   concurrent-ruby (= 1.3.4)
   connection_pool
   csv
   daemons
+  dartsass-sprockets
   database_cleaner
   date_time_attribute
   doorkeeper
@@ -803,11 +858,11 @@ DEPENDENCIES
   rubocop-rspec_rails
   ruby-filemagic
   ruby-prof
-  sassc-rails (>= 2.1.0)
   select2-rails
+  selenium-webdriver
   simple-navigation
   simple_form
-  simple_navigation_bootstrap
+  simple_navigation_bootstrap!
   simplecov
   simplecov-lcov
   spreadsheet

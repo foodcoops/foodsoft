@@ -1,7 +1,7 @@
 / insert_after 'erb:contains("notify.input \'upcoming_tasks\'")'
 - if FoodsoftMessages.enabled?
-  = s.simple_fields_for :messages, defaults: { inline_label: true, label: false } do |messages|
-    = messages.input 'send_as_email',   as: :boolean, input_html: { checked: f.object.settings.messages['send_as_email'] }
+  = s.simple_fields_for :messages do |messages|
+    = messages.input 'send_as_email', as: :boolean, inline_label: t('.send_as_email'), input_html: { checked: f.object.settings.messages['send_as_email'] }
   - if Messagegroup.any?
     %div
       = link_to messagegroups_path do

@@ -1,5 +1,9 @@
 / insert_after ':root:last-child'
-.row
-  .col-md-4
-    = config_use_heading form, :use_documents do
-      = config_input form, :documents_allowed_extension, as: :string
+.row.col-md-6.mb-3
+  .col-sm-8.offset-sm-4
+    = config_tooltip form, :use_documents do
+      .form-check
+        = config_input_field form, :use_documents, as: :boolean, title: '', data: {'bs-toggle': 'collapse', 'bs-target': '#use-documents-fields'}, class: 'form-check-input'
+        = form.label :use_documents, config_input_label(form, :use_documents), class: 'form-check-label fw-bold'
+#use-documents-fields.collapse.col-md-6{class: ('show' if FoodsoftConfig[:use_documents])}
+  = config_input form, :documents_allowed_extension, as: :text, input_html: {class: 'form-control', rows: 2}

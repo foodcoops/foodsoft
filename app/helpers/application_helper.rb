@@ -47,7 +47,7 @@ module ApplicationHelper
 
     links = per_page_options.map do |per_page|
       params.merge!({ per_page: per_page })
-      link_class = 'btn btn-default'
+      link_class = 'btn btn-secondary'
       link_class << ' disabled' if per_page == current
       link_to(per_page, params, remote: true, class: link_class)
     end
@@ -55,7 +55,7 @@ module ApplicationHelper
     if options[:wrap] == false
       links.join.html_safe
     else
-      content_tag :div, class: 'btn-group btn-group-sm pull-right' do
+      content_tag :div, class: 'btn-group btn-group-sm float-end' do
         links.join.html_safe
       end
     end
@@ -112,7 +112,7 @@ module ApplicationHelper
   # Generates a link to the top of the website
   def link_to_top
     link_to '#' do
-      content_tag :i, nil, class: 'glyphicon glyphicon-arrow-up'
+      content_tag :i, nil, class: 'fa fa-arrow-up'
     end
   end
 
@@ -179,19 +179,18 @@ module ApplicationHelper
 
   # Returns flash messages html.
   #
-  # Use this instead of twitter-bootstrap's +bootstrap_flash+ method for safety, until
-  # CVE-2014-4920 is fixed.
-  #
   # @return [String] Flash message html.
-  # @see http://blog.nvisium.com/2014/03/reflected-xss-vulnerability-in-twitter.html
   def bootstrap_flash_patched
     flash_messages = []
     flash.each do |type, message|
       type = :success if type == 'notice'
       type = :danger if type == 'alert'
       text = content_tag(:div,
-                         content_tag(:button, I18n.t('ui.marks.close').html_safe, :class => 'close', 'data-dismiss' => 'alert') +
-                             message, class: "alert fade in alert-#{type}")
+                         safe_join([
+                                     message,
+                                     content_tag(:button, '', class: 'btn-close', 'data-bs-dismiss': 'alert', 'aria-label': 'close')
+                                   ]),
+                         class: "alert alert-dismissible fade show alert-#{type}", role: 'alert')
       flash_messages << text if message
     end
     flash_messages.join("\n").html_safe
@@ -250,9 +249,7 @@ module ApplicationHelper
   # @param dismiss [String, Symbol] Bootstrap dismiss value (modal, alert)
   # @return [String] HTML for close button dismissing
   def close_button(dismiss)
-    content_tag :button, type: 'button', class: 'close mt-1', data: { dismiss: dismiss } do
-      I18n.t('ui.marks.close').html_safe
-    end
+    content_tag(:button, '', class: 'btn-close', type: 'button', 'data-bs-dismiss': dismiss.to_s, 'aria-label': I18n.t('ui.marks.close'))
   end
 
   # @return [String] path to foodcoop CSS style (with MD5 parameter for caching)

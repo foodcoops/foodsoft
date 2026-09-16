@@ -3,18 +3,20 @@
 - content_for :sidebar do
   %p
     = link_to edit_page_path(@page), class: 'btn btn-primary' do
-      %i.icon-edit= t '.edit'
-  .well.well-small
-    %ul.nav
-      %li
-      %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
-      - unless @page.children.empty?
-        %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
+      = fa_icon :edit
+      =t('.edit')
+  .card.bg-light.mb-3
+    .card-body
+      %ul
+        %li= link_to t('.versions', count: @page.versions.count), "#versions", 'data-toggle-this' => '#versions'
+        - unless @page.children.empty?
+          %li= link_to t('.subpages'), "#subpages", 'data-toggle-this' => '#subpages'
 
-  #versions.well.well-small{:style => "display:none"}
-    = form_tag diff_page_path(@page), :method => :get do
-      %h3= t '.title_versions'
-      %ul.list-unstyled
+  #versions.card.bg-light{:style => "display:none"}
+    .card-body
+      = form_tag diff_page_path(@page), :method => :get do
+        %h5.card-title= t '.title_versions'
+        %ul.list-unstyled
         - @page.versions.reverse.each_with_index do |version, index|
           %li
             = radio_button_tag :old, version.lock_version, index == 1
@@ -24,32 +26,35 @@
       = submit_tag t('.diff'), class: 'btn'
 
   - unless @page.children.empty?
-    #subpages.well.well-small{:style => "display:none"}
-      %h3= t '.subpages'
+    #subpages.card.bg-light{:style => "display:none"}
+      .card-body
+        %h5.card-title= t '.subpages'
       %ul.list-unstyled
         - @page.children.each do |page|
           %li= link_to_wikipage(page)
 
-%ul.breadcrumb
-  %li
-    = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
-    %span.divider /
-  - for page in @page.ancestors.reverse
-    %li
-      = link_to_wikipage(page)
-      %span.divider /
-  %li.active= @page.title
+%nav(aria-label="breadcrumb")
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to_wikipage_by_permalink("Home", "Foodcoop-Wiki")
+    - for page in @page.ancestors.reverse
+      %li.breadcrumb-item
+        = link_to_wikipage(page)
+    %li.breadcrumb-item.active(aria-current="page")= @page.title
 
 
 #wikiContent
-  .page-header
-    %h1= @page.title
+  %h1= @page.title
   = render :partial => 'body'
 
-%hr.clear/
-%p
-  = link_to edit_page_path(@page), class: 'btn btn-primary' do
-    %i.icon-edit= t '.edit'
-  = link_to t('.delete'), @page, class: 'btn btn-danger', :method => :delete,
-    :data => {:confirm => t('.delete_confirm')}
-  != '| ' + t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))
+%hr
+
+.row
+  .col-4.d-flex.flex-column.flex-md-row.gap-1
+    = link_to edit_page_path(@page), class: 'btn btn-primary me-2' do
+      = fa_icon :edit
+      = t '.edit'
+    = link_to t('.delete'), @page, class: 'btn btn-danger me-2', :method => :delete,
+      :data => {:confirm => t('.delete_confirm')}
+  .col
+    %small!= t('.last_updated', user: show_user(@page.user), when: format_datetime(@page.updated_at))

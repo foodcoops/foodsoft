@@ -1,6 +1,6 @@
-.pull-right
+.float-end
   .btn-group
-    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-default' do
+    = link_to url_for(query: params[:query], format: :csv), class: 'btn btn-secondary' do
       = fa_icon :download
       CSV
   - if @invoices.total_pages > 1
@@ -19,7 +19,6 @@
         %th= heading_helper Invoice, :deliveries
       %th= heading_helper Invoice, :orders
       %th= heading_helper Invoice, :note
-      %th
       %th
   %tbody
     - for invoice in @invoices
@@ -40,9 +39,10 @@
             = link_to format_date(order.ends), new_finance_order_path(order_id: order)
         %td= truncate(invoice.note)
         %td
-          - if invoice.user_can_edit?(current_user)
-            = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-default btn-xs'
-        %td
-          - if invoice.user_can_edit?(current_user)
-            = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('ui.confirm_delete', name: invoice.number)}, :method => :delete,
-            class: 'btn btn-danger btn-xs'
+          .d-flex.flex-column.flex-md-row.gap-1
+            = link_to t('ui.show'), finance_invoice_path(invoice), class: 'btn btn-outline-secondary btn-sm'
+            - if invoice.user_can_edit?(current_user)
+              = link_to t('ui.edit'), edit_finance_invoice_path(invoice), class: 'btn btn-outline-secondary btn-sm'
+            - if invoice.user_can_edit?(current_user)
+              = link_to t('ui.delete'), finance_invoice_path(invoice), :data => {:confirm => t('ui.confirm_delete', name: invoice.number)}, :method => :delete,
+              class: 'btn btn-danger btn-sm'

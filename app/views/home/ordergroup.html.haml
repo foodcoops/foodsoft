@@ -3,32 +3,35 @@
 .row
   .col-md-4
     %h2= @ordergroup.name
-    .well
-      - unless @ordergroup.description.blank?
-        %p= @ordergroup.description
-      %p
-        %b= heading_helper(Ordergroup, :account_balance) + ':'
-        = number_to_currency(@ordergroup.account_balance)
-      - unless FoodsoftConfig[:charge_members_manually]
+    .card.bg-light
+      .card-body
+        - unless @ordergroup.description.blank?
+          %p= @ordergroup.description
         %p
-          %b= heading_helper(Ordergroup, :available_funds) + ':'
-          = number_to_currency(@ordergroup.get_available_funds())
-      - if FinancialTransactionClass.has_multiple_classes
-        - FinancialTransactionClass.sorted.each do |c|
+          %b= heading_helper(Ordergroup, :account_balance) + ':'
+          = number_to_currency(@ordergroup.account_balance)
+        - unless FoodsoftConfig[:charge_members_manually]
           %p
-            %b= c.display + ':'
-            = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
-      %p
-        %b= heading_helper(Ordergroup, :user_tokens) + ':'
-        = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')
-      - unless FoodsoftConfig[:disable_invite]
-        = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
-      - '<home_ordergroup_well_mark>'
+            %b= heading_helper(Ordergroup, :available_funds) + ':'
+            = number_to_currency(@ordergroup.get_available_funds())
+        - if FinancialTransactionClass.has_multiple_classes
+          - FinancialTransactionClass.sorted.each do |c|
+            %p
+              %b= c.display + ':'
+              = number_to_currency(@ordergroup["sum_of_class_#{c.id}"])
+        %div
+          %b= heading_helper(Ordergroup, :user_tokens) + ':'
+          = @ordergroup.memberships.map{|m| show_user m.user}.join(', ')
+        - unless FoodsoftConfig[:disable_invite]
+          .mb-2
+            = link_to t('.invite'), new_invite_path(:id => @ordergroup), :remote => true, class: 'btn btn-primary'
+          - '<home_ordergroup_well_mark>'
   .col-md-8
     %h2= t('.account_summary')
-    .well.well-small
-      = form_tag my_ordergroup_path, :method => :get, :remote => true,
-        'data-submit-onchange' => true, class: 'form-inline' do
-        = text_field_tag :query, params[:query], class: 'form-control search-query',
-          placeholder: t('.search')
+    .card.bg-light
+      .card-body
+        = form_tag my_ordergroup_path, :method => :get, :remote => true,
+          'data-submit-onchange' => true, class: 'form-inline' do
+          = text_field_tag :query, params[:query], class: 'form-control search-query',
+            placeholder: t('.search')
     #transactions= render "finance/financial_transactions/transactions", with_csv: false, with_grouporder_links: true
