@@ -1,0 +1,2 @@
+= link_to toggle_sepa_downloaded_ordergroup_invoice_path(ordergroup_invoice), remote: true, method: :patch do
+  = check_box_tag 'sepa_downloaded', '1', ordergroup_invoice.sepa_downloaded , class: 'form-check-input', id: "sepa_downloaded_multi_#{ordergroup_invoice.id}"

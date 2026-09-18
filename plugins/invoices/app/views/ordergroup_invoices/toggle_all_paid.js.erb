@@ -1,0 +1,4 @@
+<% @ordergroup_invoices.each do |ordergroup_invoice| %>
+  $("#paid_multi_<%= ordergroup_invoice.id %>").html("<%= escape_javascript(render partial: 'toggle_paid', locals: { ordergroup_invoice: ordergroup_invoice }) %>");
+<% end %>
+  $("#toggle_all_paid_multi_<%= @multi_order.id %>").html("<%= escape_javascript(render partial: 'toggle_all_paid', locals: { multi_order: @multi_order }) %>");

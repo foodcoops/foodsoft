@@ -196,8 +196,8 @@ class GroupOrderArticle < ApplicationRecord
   # Until the order is finished this will be the maximum price or
   # the minimum price depending on configuration. When the order is finished it
   # will be the value depending of the article results.
-  def total_price(order_article = self.order_article)
-    group_order_price = order_article.article_version.fc_group_order_price
+  def total_price(order_article = self.order_article, without_deposit = false)
+    group_order_price = without_deposit ? order_article.article_version.fc_group_order_price_without_deposit : order_article.article_version.fc_group_order_price
     if order_article.order.open?
       if FoodsoftConfig[:tolerance_is_costly]
         group_order_price * (quantity + tolerance)
