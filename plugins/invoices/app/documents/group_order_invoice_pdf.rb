@@ -287,7 +287,7 @@ class GroupOrderInvoicePdf < RenderPdf
     tax = order_article.price.tax
     goa_total_net = goa.result * order_article.price.price
 
-    goa_total_fc = separate_deposits ? goa.total_price_without_deposit : goa.total_price
+    goa_total_fc = goa.total_price(goa.order_article, separate_deposits)
     goa_total_gross = separate_deposits ? goa.result * order_article.price.gross_price_without_deposit : goa.result * order_article.price.gross_price
 
     data << [order_article.article_version.name,
