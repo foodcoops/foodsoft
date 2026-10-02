@@ -99,3 +99,7 @@ bundle exec rspec plugins/invoices/spec
 ## Acknowledgements
 
 Many thanks to @viehlieb for most of the original code. Port to this plugin: Robert (rw@roko.li). The plugin is part of the Foodsoft project. Origins may exist in the [Local‑IT Gitlab](https://git.local-it.org/Foodsoft/foodsoft/src/branch/automatic_group_order_invoice).
+
+## Maintainers
+
+  - Henning Schumann / UNI:CODE IT Solutions GmbH (henning.schumann@unicode-it.de)
