@@ -1,5 +1,5 @@
 - unless @orders.empty?
-  - if Order.finished.count > 20
+  - if @orders.total_count > 20
     = items_per_page
   = pagination_links_remote @orders
   %table.table.table-striped
@@ -12,18 +12,6 @@
         %th
     %tbody
       - @orders.each do |order|
-        %tr{:class => cycle("even","odd", :name => "order")}
-          %td= link_to truncate(order.name), new_finance_order_path(order_id: order.id)
-          %td=h format_time(order.ends) unless order.ends.nil?
-          %td= order.closed? ? t('.cleared', amount: number_to_currency(order.foodcoop_result)) : t('.ended')
-          %td= show_user(order.updated_by)
-          %td
-            - unless order.closed?
-              - if current_user.role_orders?
-                - unless order.stockit?
-                  = link_to t('orders.index.action_receive'), receive_order_path(order), class: 'btn btn-default btn-sm'
-                - else
-                  = link_to t('orders.index.action_receive'), '#', class: 'btn btn-sm disabled'
-              = link_to t('.clear'), new_finance_order_path(order_id: order.id), class: 'btn btn-sm btn-primary'
+        = render partial: 'order_row', locals: { order: order }
 - else
   %i= t('.no_closed_orders')
