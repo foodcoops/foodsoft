@@ -4,8 +4,8 @@
   %td{id: col_id}
     - if order.closed?
       -if FoodsoftConfig[:contact][:tax_number] && order.ordergroups.present?
-        = link_to I18n.t('activerecord.attributes.group_order_invoice.open_details_modal'), "#", class: 'btn btn-small expand-trigger'
+        = link_to I18n.t('activerecord.attributes.group_order_invoice.open_details_modal'), "#", remote: true, class: 'btn btn-default btn-xs expand-trigger'
       -else
-        = I18n.t('activerecord.attributes.group_order_invoice.tax_number_not_set')
+        %span.label.label-warning= I18n.t('activerecord.attributes.group_order_invoice.tax_number_not_set')
     - else
-      = t('orders.index.not_closed')
+      %span.label.label-default= t('orders.index.not_closed')

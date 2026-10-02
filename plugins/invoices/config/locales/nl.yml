@@ -158,6 +158,7 @@ nl:
     inconsistent_financial_transaction_type: "Financiële transactietypes van de samengevoegde bestellingen van %{ordergroup} zijn niet consistent"
 
   multi_orders:
+    resolve: Multi-bestelling ontbinden
     destroy:
       invoices_left: Verwijder eerst de facturen
     create:

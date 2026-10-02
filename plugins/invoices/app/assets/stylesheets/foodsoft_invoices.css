@@ -60,10 +60,10 @@
 .table.group-order-invoices-table tr:nth-child(even) > td{
     background-color: rgb(255, 255, 233);
     padding-right: 0;
-    .group-order-checkbox {
-        margin-left: 20px;
-    }
-    .form-check-input{
-        margin-left: 20px;
-    }
+}
+
+.group-order-invoices-table .ajax-update-sepa-select {
+    width: auto;
+    min-width: 10em;
+    margin-top: 4px;
 }
