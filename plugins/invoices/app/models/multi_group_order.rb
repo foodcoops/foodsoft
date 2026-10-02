@@ -18,4 +18,8 @@ class MultiGroupOrder < ApplicationRecord
   def order
     multi_order
   end
+
+  def financial_transaction
+    group_orders.first&.financial_transaction
+  end
 end
