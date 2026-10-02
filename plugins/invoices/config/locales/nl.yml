@@ -154,6 +154,9 @@ nl:
         
         Vriendelijke groeten van %{foodcoop}
 
+  multi_group_orders:
+    inconsistent_financial_transaction_type: "Financiële transactietypes van de samengevoegde bestellingen van %{ordergroup} zijn niet consistent"
+
   multi_orders:
     destroy:
       invoices_left: Verwijder eerst de facturen

@@ -157,6 +157,9 @@ de:
 
         Viele Grüße von %{foodcoop}
 
+  multi_group_orders:
+    inconsistent_financial_transaction_type: "Kontotransaktionstypen der zusammengefassten Bestellungen von %{ordergroup} sind nicht einheitlich"
+
   multi_orders:
     destroy:
       invoices_left: Lösche erst die Rechnungen

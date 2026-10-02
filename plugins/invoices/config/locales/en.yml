@@ -154,6 +154,9 @@ en:
         
         Best regards from %{foodcoop}
 
+  multi_group_orders:
+    inconsistent_financial_transaction_type: "Financial transaction types of the combined orders of %{ordergroup} are not consistent"
+
   multi_orders:
     destroy:
       invoices_left: Delete the invoices first
