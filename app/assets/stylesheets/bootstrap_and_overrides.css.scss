@@ -423,6 +423,17 @@ td.symbol, th.symbol {
   }
 }
 
+input[type=number].appear-as-textfield {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  -moz-appearance: textfield;
+}
+
 
 // hide symbols completely on small screens to save space
 @media (max-width: 768px) {
