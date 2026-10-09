@@ -82,6 +82,8 @@ class Finance::BalancingController < Finance::BaseController
     @type = FinancialTransactionType.find_by_id(params.permit(:type)[:type])
     @link = FinancialLink.new if params[:create_financial_link]
     @order.close!(@current_user, @type, @link, create_foodcoop_transaction: params[:create_foodcoop_transaction])
+    # Allow plugins to react on order close
+    ActiveSupport::Notifications.instrument('foodsoft.order.closed', order: @order)
     redirect_to finance_order_index_url, notice: t('.notice')
   rescue StandardError => e
     redirect_to new_finance_order_url(order_id: @order.id), alert: t('.alert', message: e.message)

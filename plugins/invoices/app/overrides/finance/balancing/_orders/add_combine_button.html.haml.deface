@@ -1,0 +1,3 @@
+/ insert_after 'table'
+- if FoodsoftInvoices.enabled?
+  = button_tag I18n.t('activerecord.attributes.ordergroup_invoice.merge'), class: 'btn btn-primary merge-orders-btn', type: 'button', data: { url: multi_orders_path }

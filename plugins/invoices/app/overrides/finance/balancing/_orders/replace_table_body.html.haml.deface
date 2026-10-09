@@ -1,0 +1,9 @@
+/ replace_contents 'tbody'
+- @orders.each do |order|
+  - unless FoodsoftInvoices.enabled?
+    = render partial: 'order_row', locals: { order: order }
+  - else
+    - if order.class == Order
+      = render partial: 'order_row', locals: { order: order }
+    - else
+      = render partial: 'multi_order_row', locals: { multi_order: order }
