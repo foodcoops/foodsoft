@@ -7,4 +7,4 @@
       = form.text_field :quantity, :size => 5, :autocomplete => 'off', :class => "form-control", :style => "width: 40px"
       %span{:data => {:toggle => :tooltip, :title => "#{render(:partial => 'shared/article_version_info', :locals => {:article => stock_change.stock_article})}"}}
         %b= stock_change.stock_article.name
-        = "(#{number_to_currency(stock_change.stock_article.price)} / #{stock_change.stock_article.unit})"
+        = "(#{number_to_currency(stock_change.stock_article.price)} / #{format_supplier_order_unit_with_ratios(stock_change.stock_article)})"
