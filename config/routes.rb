@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
     get   '/login' => 'sessions#new', as: 'login'
     get   '/logout' => 'sessions#destroy', as: 'logout'
+    get   '/oidc/initiate' => 'oidc_login#initiate', as: 'oidc_initiate'
+    get   '/oidc/callback' => 'oidc_login#callback', as: 'oidc_callback'
     get   '/login/forgot_password' => 'login#forgot_password', as: :forgot_password
     post  '/login/reset_password' => 'login#reset_password', as: :reset_password
     get   '/login/new_password' => 'login#new_password', as: :new_password
