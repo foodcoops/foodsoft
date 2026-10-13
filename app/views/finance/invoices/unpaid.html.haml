@@ -14,7 +14,12 @@
       = link_to finance_invoice_path(invoice) do
         = format_date invoice.date
         = ' ' + invoice.number
-      = ' ' + number_to_currency(invoice.amount)
+      = ' ' 
+      - if invoice.amount>0 && supplier.iban.present?
+        - url = "https://epc-qr.eu/?#{{iban: supplier.iban, euro: invoice.amount, bname: supplier.name, info: invoice.number}.to_query}"
+        = link_to(number_to_currency(invoice.amount), url)
+      - else
+        = number_to_currency(invoice.amount)
       - if invoice_amount_diff != 0
         %span{style: "color:#{invoice_amount_diff < 0 ? 'red' : 'green'}"}
           = invoice_amount_diff > 0 ? '+' : '-'
@@ -35,4 +40,8 @@
       = invoices_text.join(', ')
       %br/
       %b= t('.invoices_sum') + ':'
-      = number_to_currency invoices_sum
+      - if invoices_sum>0 && supplier.iban.present?
+        - url = "https://epc-qr.eu/?#{{iban: supplier.iban, euro: invoices_sum, bname: supplier.name, info: invoices_text.join(', ')}.to_query}"
+        = link_to number_to_currency(invoices_sum), url      
+      - else 
+        = number_to_currency(invoices_sum)
