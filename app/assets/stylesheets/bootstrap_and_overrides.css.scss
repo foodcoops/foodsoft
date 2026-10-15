@@ -254,10 +254,11 @@ table {
   left: 30px;
 
   .article-name {
-    text-align: center;
     margin: 2px 0;
     margin-bottom: 5px;
-    width: 100%;
+    width: 75%;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-weight: bold;
   }
   .pull-right {
@@ -301,6 +302,8 @@ tr.order-article .article-info {
     margin-bottom: 5px;
     border: 1px solid rgb(104,153,70);
     padding: 2px;
+    max-width: 90vw;
+    overflow: auto;
   }
 }
 
@@ -732,6 +735,10 @@ td.mr-1 > *:last-child {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
 
 .overflow-hidden {

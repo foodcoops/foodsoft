@@ -32,7 +32,7 @@
       .navbar-collapse.collapse
         = render_navigation expand_all: true, renderer: :bootstrap3
 
-  #main.container-fluid
+  #main.container-fluid.overflow-auto
     .row
       - if content_for?(:sidebar)
         .col-md-3

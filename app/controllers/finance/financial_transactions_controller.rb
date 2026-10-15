@@ -52,6 +52,7 @@ class Finance::FinancialTransactionsController < ApplicationController
     @financial_transaction = FinancialTransaction.new(params[:financial_transaction])
     @financial_transaction.user = current_user
     @financial_transaction.save!
+    find_ordergroup
 
     respond_to do |format|
       format.js
