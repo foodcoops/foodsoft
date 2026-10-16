@@ -37,17 +37,17 @@
               new ArticleForm(articleUnitRatioTemplate$, $('#article_row_#{field}_#{index}'), units, #{price_markup}, $('#article_row_#{field}_#{index}').closest('form'), '#{field}_#{index}', '#{field}[#{index}]');
           %td{:style => highlight_new(attrs, :availability)}= form.input 'availability', label: false
           %td{:style => highlight_new(attrs, :name)}
-            = form.text_field 'name', :size => 0
+            = form.text_field 'name', size: 0, class: 'form-control min-w-150'
             = form.input :id, as: :hidden unless changed_article.new_record?
             - hidden_fields.each do |field|
               = form.input field, as: :hidden
-          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'form-control'
+          %td{:style => highlight_new(attrs, :note)}= form.text_field 'note', class: 'form-control min-w-150'
           %td{:style => highlight_new(attrs, :manufacturer)}= form.text_field 'manufacturer', class: 'form-control'
           %td{:style => highlight_new(attrs, :origin)}= form.text_field 'origin', class: 'form-control'
           %td{:style => highlight_new(attrs, :supplier_order_unit)}
             .d-flex.gap-1.align-items-center
-              = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control'}
-              = form.input :unit, input_html: {class: 'form-control ml-1'}, label: false
+              = form.input :supplier_order_unit, as: :select, collection: @article_units, label: false, value: changed_article.supplier_order_unit, include_blank: t('.custom_unit'), input_html: {class: 'form-control w-150'}, wrapper: false
+              = form.input :unit, input_html: {class: 'form-control ml-1 w-150'}, label: false, wrapper: false
               %div.btn-link.toggle-extra-units.text-decoration-none.default-values
                 = fa_icon :cog, style: highlight_new(attrs, [:article_unit_ratio_attributes, :minimum_order_quantity, :billing_unit, :group_order_unit, :group_order_granularity])
             %div.extra-unit-fields.form-horizontal
@@ -94,18 +94,18 @@
             .d-flex.gap-1
               .input-group
                 %span.input-group-addon= t 'number.currency.format.unit'
-                = form.text_field 'price', class: 'form-control', style: 'width: 45px'
-              .input.d-flex.gap-1.unit-wrapper
+                = form.text_field 'price', class: 'form-control w-80'
+              .input.d-flex.gap-1.unit-wrapper.align-items-center
                 %label=t('articles.form.per')
-                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control'}
+                = form.select :price_unit, [], {include_blank: false}, {'data-initial-value': changed_article.price_unit, class: 'form-control min-w-150'}
           %td{:style => highlight_new(attrs, :tax)}
             .input-group
-              = form.text_field 'tax', class: 'form-control', style: 'width: 45px; margin-right: 0px'
+              = form.text_field 'tax', class: 'form-control w-80'
               %span.input-group-addon %
           %td{:style => highlight_new(attrs, :deposit)}
             .input-group
               %span.input-group-addon= t 'number.currency.format.unit'
-              = form.text_field 'deposit', class: 'form-control', style: 'width: 45px'
+              = form.text_field 'deposit', class: 'form-control w-80'
           %td= form.select :article_category_id, ArticleCategory.all.map {|a| [ a.name, a.id ] },
             {include_blank: true}, class: 'form-control'
       - unless changed_article.errors.empty?
