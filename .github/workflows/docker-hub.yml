@@ -1,0 +1,76 @@
+# This workflow simply builds a Docker image using Docker Buildx
+# and pushes it to Docker Hub upon pushes to the master branch or version tags.
+name: Docker Hub build
+
+on:
+  # This will run the workflow on pushes to master and version tags.
+  # Adjust to match your branching and tagging strategy.
+  push:
+    branches:
+      - master
+    tags:
+      - "v*.*.*"
+
+env:
+  # Define the context path and Dockerfile path.
+
+  # DOCKER_AUTOBUILDS_CONTEXT_PATH should be set to the "Build Context" in the Build Rules of your Docker Hub Automated Builds configuration.
+  DOCKER_AUTOBUILDS_CONTEXT_PATH: .
+
+  # DOCKER_AUTOBUILDS_DOCKERFILE_PATH should be set to the "Dockerfile Location" in the Build Rules of your Docker Hub Automated Builds configuration.
+  DOCKER_AUTOBUILDS_DOCKERFILE_PATH: Dockerfile
+
+  # DOCKER_REPOSITORY_NAME should be set to the name of the Docker Hub repository where the image will be pushed to.
+  DOCKER_REPOSITORY_NAME: foodcoops/foodsoft
+
+jobs:
+  autobuilds:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Set up paths
+        id: paths
+        run: |
+          echo "build_path=./${{ env.DOCKER_AUTOBUILDS_CONTEXT_PATH }}" >> $GITHUB_OUTPUT
+          echo "dockerfile_path=${{ env.DOCKER_AUTOBUILDS_DOCKERFILE_PATH }}" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+
+      # Configure the Docker image tags based on the Git reference.
+      # The configuration here will push the `master` branch as `latest` and version tags as semver tags.
+      # See https://github.com/docker/metadata-action?tab=readme-ov-file#semver
+      - name: Generate Docker image tags
+        id: meta
+        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5.8.0
+        with:
+          images: ${{ env.DOCKER_REPOSITORY_NAME }}
+          tags: |
+            # set latest tag for master branch
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+            type=semver,pattern={{version}}
+
+      # Configure Docker Buildx.
+      # To speed up your builds with Docker Build Cloud see https://docs.docker.com/build-cloud/ci/
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      # Log in to Docker Hub with your Docker Hub credentials stored in GitHub Secrets.
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: 7b532464-0e59-449c-ac0b-6ff4c133d88f
+        with:
+          username: foodcoops
+
+      # Build, tag, and push the Docker image
+      - name: Build and tag Docker image
+        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5
+        with:
+          context: ${{ steps.paths.outputs.build_path }}
+          file: ${{ steps.paths.outputs.dockerfile_path }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
