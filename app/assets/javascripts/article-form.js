@@ -30,7 +30,7 @@ class ArticleForm {
       const selectContainer$ = this.articleForm$.parents('#modalContainer');
       this.select2Config = {
         dropdownParent: selectContainer$.length === 0 ? undefined : selectContainer$,
-        dropdownAutoWidth : true
+        dropdownAutoWidth: true
       };
 
       this.loadAvailableUnits();
@@ -61,7 +61,7 @@ class ArticleForm {
       const tax = parseFloat(this.tax$.val());
       const deposit = parseFloat(this.deposit$.val());
       const grossPrice = (price + deposit) * (tax / 100 + 1);
-      const fcPrice = grossPrice  * (this.priceMarkup / 100 + 1);
+      const fcPrice = grossPrice * (this.priceMarkup / 100 + 1);
       const priceUnitLabel = this.getUnitLabel(this.priceUnit$.val());
       this.fcPrice$.find('.price_value').text(isNaN(fcPrice) ? '?' : I18n.l('currency', fcPrice));
       this.fcPrice$.find('.price_per_text').toggle(priceUnitLabel.trim() !== '');
@@ -89,7 +89,7 @@ class ArticleForm {
         this.loadRatios();
         this.undoPriceConversion();
         this.undoOrderAndReceivedUnitsConversion();
-      } catch(err) {
+      } catch (err) {
         e.preventDefault();
         throw err;
       }
@@ -172,7 +172,7 @@ class ArticleForm {
   }
 
   undoOrderAndReceivedUnitsConversion() {
-    this.convertOrderedAndReceivedUnits(this.billingUnit$.val(), this.supplierUnitSelect$.val());
+    this.convertOrderedAndReceivedUnits(this.billingUnit$.val(), this.supplierUnitSelect$.val(), true);
   }
 
   loadAvailableUnits() {
@@ -515,7 +515,7 @@ class ArticleForm {
     this.previousBillingUnit = billingUnitKey;
   }
 
-  convertOrderedAndReceivedUnits(fromUnit, toUnit) {
+  convertOrderedAndReceivedUnits(fromUnit, toUnit, fullPrecision) {
     const inputs$ = mergeJQueryObjects([this.unitsToOrder$, this.unitsReceived$]);
     inputs$.each((_, input) => {
       const input$ = $(input);
@@ -523,8 +523,12 @@ class ArticleForm {
 
       if (val !== '') {
         try {
-          const convertedValue = this.getUnitRatio(val, fromUnit, toUnit);
-          input$.val(round(convertedValue));
+          let convertedValue = this.getUnitRatio(val, fromUnit, toUnit);
+          if (!fullPrecision) {
+            convertedValue = round(convertedValue);
+          }
+          input$.val(convertedValue);
+          input$.attr('value', convertedValue);
         } catch (e) {
           // In some cases it's impossible to perform this conversion - just leave the original value
         }
