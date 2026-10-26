@@ -53,7 +53,7 @@ module OrdersHelper
     group_orders_sum_quantity = order_article.group_orders_sum[:quantity]
     if !order_article.units_received.nil?
       if isclose(price.convert_quantity(order_article.units_received, price.supplier_order_unit,
-                                price.group_order_unit), group_orders_sum_quantity)
+                                        price.group_order_unit), group_orders_sum_quantity)
         false
       else
         received_mark
@@ -62,7 +62,7 @@ module OrdersHelper
       order_article.units_billed == group_orders_sum_quantity ? false : billed_mark
     elsif !order_article.units_to_order.nil?
       if isclose(price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
-                                price.group_order_unit), group_orders_sum_quantity)
+                                        price.group_order_unit), group_orders_sum_quantity)
         false
       else
         ordered_mark
