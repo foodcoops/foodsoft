@@ -52,8 +52,8 @@ module OrdersHelper
     price = order_article.price
     group_orders_sum_quantity = order_article.group_orders_sum[:quantity]
     if !order_article.units_received.nil?
-      if price.convert_quantity(order_article.units_received, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
+      if isclose(price.convert_quantity(order_article.units_received, price.supplier_order_unit,
+                                        price.group_order_unit), group_orders_sum_quantity)
         false
       else
         received_mark
@@ -61,8 +61,8 @@ module OrdersHelper
     elsif !order_article.units_billed.nil?
       order_article.units_billed == group_orders_sum_quantity ? false : billed_mark
     elsif !order_article.units_to_order.nil?
-      if price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
+      if isclose(price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
+                                        price.group_order_unit), group_orders_sum_quantity)
         false
       else
         ordered_mark
@@ -219,5 +219,9 @@ module OrdersHelper
   def format_amount(amount, order_article, strip_insignificant_zeros: false)
     strip_insignificant_zeros = true unless order_article.article_version.supplier_order_unit_is_si_convertible
     number_with_precision(amount, precision: 3, strip_insignificant_zeros: strip_insignificant_zeros)
+  end
+
+  def isclose(a, b, rel_tol: 1e-9, abs_tol: 0.0)
+    (a - b).abs <= [rel_tol * [a.abs, b.abs].max, abs_tol].max
   end
 end
