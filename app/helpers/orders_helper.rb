@@ -51,18 +51,25 @@ module OrdersHelper
                                                       received_mark = '?')
     price = order_article.price
     group_orders_sum_quantity = order_article.group_orders_sum[:quantity]
+
+    conversion_factor = price.convert_quantity(1, price.supplier_order_unit, price.group_order_unit)
+    ratio_order_of_magnitude = Math.log10(conversion_factor).floor
+    frontend_precision = 3
+    allowed_deviation = 10.0**-(ratio_order_of_magnitude + 1 - frontend_precision)
+
     if !order_article.units_received.nil?
-      if price.convert_quantity(order_article.units_received, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
+      converted_received_quantity = price.convert_quantity(order_article.units_received, price.supplier_order_unit, price.group_order_unit)
+
+      if (converted_received_quantity - group_orders_sum_quantity).abs <= allowed_deviation
         false
       else
         received_mark
       end
     elsif !order_article.units_billed.nil?
-      order_article.units_billed == group_orders_sum_quantity ? false : billed_mark
+      (order_article.units_billed - group_orders_sum_quantity).abs <= allowed_deviation ? false : billed_mark
     elsif !order_article.units_to_order.nil?
-      if price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
+      converted_ordered_quantity = price.convert_quantity(order_article.units_to_order, price.supplier_order_unit, price.group_order_unit)
+      if (converted_ordered_quantity - group_orders_sum_quantity).abs <= allowed_deviation
         false
       else
         ordered_mark
