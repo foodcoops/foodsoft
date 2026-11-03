@@ -1,0 +1,1 @@
+$("#sepa_downloaded_multi_<%= @invoice.id %>").html("<%= escape_javascript(render partial: 'toggle_sepa_downloaded', locals: {ordergroup_invoice: @invoice}) %>");

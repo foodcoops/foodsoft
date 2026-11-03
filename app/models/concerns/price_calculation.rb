@@ -22,9 +22,20 @@ module PriceCalculation
     add_percent(price + deposit, tax)
   end
 
+  # Gross price without deposit = net price + tax.
+  # @return [Number] Gross price without deposit.
+  def gross_price_without_deposit
+    add_percent(price, tax)
+  end
+
   # @return [Number] Price for the foodcoop-member.
   def fc_price
     add_percent(gross_price, FoodsoftConfig[:price_markup].to_i)
+  end
+
+  # @return [Number] Price for the foodcoop-member without deposit.
+  def fc_price_without_deposit
+    add_percent(gross_price_without_deposit, FoodsoftConfig[:price_markup].to_i)
   end
 
   # get the unit ratio quantity in reference to the supplier_order_unit
@@ -70,6 +81,10 @@ module PriceCalculation
 
   def fc_group_order_price
     group_order_price(fc_price)
+  end
+
+  def fc_group_order_price_without_deposit
+    group_order_price(fc_price_without_deposit)
   end
 
   private

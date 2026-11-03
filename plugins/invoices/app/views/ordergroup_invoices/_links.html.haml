@@ -1,0 +1,71 @@
+- show_generate_with_date = true
+- multi_order.multi_group_orders.each do |mgo|
+  - if mgo.ordergroup_invoice.present?
+    - show_generate_with_date = false
+- if show_generate_with_date
+  = form_for :ordergroup_invoice, url: finance_ordergroup_invoice_path(foodcoop: FoodsoftConfig[:default_scope], protocol: :https), remote: true, html: { class: 'form-inline' } do |f|
+    .form-group
+      = f.label :invoice_date, I18n.t('activerecord.attributes.group_order_invoice.links.invoice_date')
+      = f.date_field :invoice_date, {value: Date.today, max: Date.today, required: true, class: 'form-control input-sm'}
+    = f.hidden_field :multi_order_id, value: multi_order.id
+    .form-group
+      = f.submit  I18n.t('activerecord.attributes.group_order_invoice.links.generate_with_date'), class: 'btn btn-primary btn-sm'
+
+.table-responsive
+  %table.table.table-condensed.group-order-invoices-table
+    %thead
+      %tr
+        %th{scope: 'col'}=I18n.t('activerecord.attributes.group_order_invoice.links.ordergroup')
+        %th.text-center{scope: 'col'}=I18n.t('activerecord.attributes.group_order_invoice.links.paid')
+        %th.text-center{scope: 'col'}=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_downloaded')
+        %th{scope: 'col'}=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_sequence_type')
+        %th.text-center{scope: 'col'}=I18n.t('activerecord.attributes.group_order_invoice.links.sepa_select')
+        %th{scope: 'col'}= I18n.t('activerecord.attributes.group_order_invoice.links.invoice_number')
+        %th{scope: 'col'}= t('ui.actions')
+    %tbody
+      - multi_order.multi_group_orders.each do |mgo|
+        -if mgo.ordergroup_invoice.present?
+          %tr.order-row{id: "multi_group_order_#{mgo.id}"}
+            %td
+              = link_to mgo.ordergroup&.name, edit_admin_ordergroup_path(mgo.ordergroup)
+            %td.text-center{id: "paid_multi_#{mgo.ordergroup_invoice.id}"}
+              = render :partial => "ordergroup_invoices/toggle_paid", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
+            %td.text-center{id: "sepa_downloaded_multi_#{mgo.ordergroup_invoice.id}"}
+              = render :partial => "ordergroup_invoices/toggle_sepa_downloaded", locals: { ordergroup_invoice: mgo.ordergroup_invoice }
+            %td{id: "select_sepa_sequence_type_multi_#{mgo.ordergroup_invoice.id}"}
+              =render :partial => 'ordergroup_invoices/select_sepa_sequence_type', locals:{ ordergroup_invoice: mgo.ordergroup_invoice, multi_group_order: mgo }
+            %td.text-center
+              = check_box_tag "group_order_ids_for_multi_order_#{multi_order.id}", mgo.id, false, class: "group-order-checkbox", id: "group_order_#{mgo.id}_included_in_sepa", data: { multi_group_order_id: mgo.id }
+            %td
+              %b= mgo.ordergroup_invoice.invoice_number
+              - if mgo.ordergroup_invoice.email_sent_at.present?
+                %div.text-muted.small
+                  = I18n.t('activerecord.attributes.ordergroup_invoice.email_sent')
+                  = I18n.l(mgo.ordergroup_invoice.email_sent_at, format: :short)
+            %td.text-nowrap
+              .btn-group
+                = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download'), ordergroup_invoice_path(mgo.ordergroup_invoice, :format => 'pdf'), class: 'btn btn-default btn-xs'
+                = link_to  I18n.t('activerecord.attributes.group_order_invoice.links.delete'), mgo.ordergroup_invoice, method: :delete, class: 'btn btn-danger btn-xs', remote: true, data: { confirm: I18n.t('ui.confirm_delete', name: I18n.t('activerecord.attributes.group_order_invoice.links.invoice_for_group', name: mgo.ordergroup.name)) }
+        - else
+          %tr
+            %td{colspan: 6}= mgo.group_orders.first.ordergroup&.name
+            %td.text-nowrap
+              = button_to I18n.t('activerecord.attributes.group_order_invoice.links.generate'), ordergroup_invoices_path(:method => :post, multi_group_order_id: mgo) ,class: 'btn btn-primary btn-xs', remote: true
+      - if multi_order.multi_group_orders.map(&:ordergroup_invoice).compact.present?
+        %tr.order-row
+          %td= I18n.t('activerecord.attributes.group_order_invoice.links.actions_for_all')
+          %td.text-center{id: "toggle_all_paid_multi_#{multi_order.id}"}
+            = render :partial => 'ordergroup_invoices/toggle_all_paid', locals: { multi_order: multi_order }
+          %td.text-center{id: "toggle_all_sepa_downloaded_multi_#{multi_order.id}"}
+            = render :partial => 'ordergroup_invoices/toggle_all_sepa_downloaded', locals: { multi_order: multi_order }
+          %td{id: "select_all_sepa_sequence_type_multi_#{multi_order.id}"}
+            = render :partial => 'ordergroup_invoices/select_all_sepa_sequence_type', locals: { multi_order: multi_order }
+          %td{id: "select_all_sepa_#{multi_order.id}"}
+            = render :partial => 'ordergroup_invoices/collective_direct_debit', locals: { multi_order: multi_order }
+          %td
+          %td.text-nowrap
+            - if multi_order.multi_group_orders.count == multi_order.multi_group_orders.map(&:ordergroup_invoice).compact&.count
+              .btn-group
+                = link_to I18n.t('activerecord.attributes.group_order_invoice.links.download_all_zip'), download_all_ordergroup_invoices_path(multi_order), class: 'btn btn-default btn-xs'
+                -# sends all ordergroup invoices to the ordergoups mail address via notifyjob
+                = link_to I18n.t('activerecord.attributes.group_order_invoice.links.send_all_by_email'), send_all_ordergroup_invoices_path(multi_order), class: 'btn btn-default btn-xs', method: :post, data: { confirm: I18n.t('activerecord.attributes.group_order_invoice.links.confirm_send_all', ordergroups: "#{multi_order.multi_group_orders.map(&:ordergroup).map(&:name).join(', ')}" ) }
