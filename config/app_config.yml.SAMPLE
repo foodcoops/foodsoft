@@ -179,6 +179,21 @@ default: &defaults
   # whether to display a "This is a demo instance." warning next to the foodsoft logo
   display_demo_warning: false
 
+  # OpenID Connect (OIDC) Single Sign-On Configuration
+  # oidc_enabled: true
+  # oidc_button_label: "Login with Single Sign-On"
+  # oidc_client_id: "foodsoft-client"
+  # oidc_client_secret: "super-secret-key"
+  # oidc_issuer: "https://keycloak.example.com/realms/foodsoft"
+  # oidc_authorization_endpoint: "https://keycloak.example.com/realms/foodsoft/protocol/openid-connect/auth"
+  # oidc_token_endpoint: "https://keycloak.example.com/realms/foodsoft/protocol/openid-connect/token"
+  # oidc_jwks_uri: "https://keycloak.example.com/realms/foodsoft/protocol/openid-connect/certs"
+  # oidc_auto_create_user: true
+  # oidc_groups_claim: "groups"
+  # oidc_auto_create_ordergroup: true
+  # oidc_default_ordergroup: "SSO Ordergroup"
+  # oidc_sync_groups_strictly: false
+
 development:
   <<: *defaults
 
