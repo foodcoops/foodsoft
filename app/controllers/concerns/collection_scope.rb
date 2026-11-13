@@ -41,7 +41,7 @@ module Concerns::CollectionScope
     {
       page: params[:page].to_i,
       per_page: per_page,
-      total_pages: (scope.total_count / [1, per_page].max).ceil,
+      total_pages: (scope.total_count.to_f / [1, per_page].max).ceil,
       total_count: scope.total_count
     }.merge(extra)
   end
