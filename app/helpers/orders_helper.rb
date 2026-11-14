@@ -51,22 +51,15 @@ module OrdersHelper
                                                       received_mark = '?')
     price = order_article.price
     group_orders_sum_quantity = order_article.group_orders_sum[:quantity]
+    ordergroups_payment = price.gross_group_order_price * group_orders_sum_quantity
     if !order_article.units_received.nil?
-      if price.convert_quantity(order_article.units_received, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
-        false
-      else
-        received_mark
-      end
+      supplier_receivable = price.gross_price * order_article.units_received
+      price_sums_differ_significantly?(supplier_receivable, ordergroups_payment) ? received_mark : false
     elsif !order_article.units_billed.nil?
       order_article.units_billed == group_orders_sum_quantity ? false : billed_mark
     elsif !order_article.units_to_order.nil?
-      if price.convert_quantity(order_article.units_to_order, price.supplier_order_unit,
-                                price.group_order_unit).round(3) == group_orders_sum_quantity
-        false
-      else
-        ordered_mark
-      end
+      supplier_receivable = price.gross_price * order_article.units_to_order
+      price_sums_differ_significantly?(supplier_receivable, ordergroups_payment) ? ordered_mark : false
     end
   end
 
@@ -219,5 +212,12 @@ module OrdersHelper
   def format_amount(amount, order_article, strip_insignificant_zeros: false)
     strip_insignificant_zeros = true unless order_article.article_version.supplier_order_unit_is_si_convertible
     number_with_precision(amount, precision: 3, strip_insignificant_zeros: strip_insignificant_zeros)
+  end
+
+  def price_sums_differ_significantly?(price_sum_a, price_sum_b)
+    # This is biased: Some currency systems may allow smaller fractions than one 'cent', but they are rare:
+    significance_threshold = 0.01
+
+    (price_sum_a - price_sum_b).abs >= significance_threshold
   end
 end
