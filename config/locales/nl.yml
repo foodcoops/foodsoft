@@ -958,7 +958,7 @@ nl:
     index:
       amount_fc: Bedrag(FC)
       end: Einde
-      everything_cleared: Mooi zo, alles is verrekend...
+      everything_cleared: Mooi zo, alles is verrekend…
       last_transactions: Recente transacties
       open_transactions: Nog niet afgerekend
       show_all: alle tonen
@@ -996,7 +996,7 @@ nl:
   foodcoop:
     ordergroups:
       index:
-        name: Naam ...
+        name: Naam …
         only_active: Alleen actieve
         only_active_desc: "(minstens eenmaal in de laatste 3 maanden besteld)"
         title: Huishoudens
@@ -1005,8 +1005,8 @@ nl:
     users:
       index:
         body: "<p>Hier kun je leden van deze foodcoop een bericht sturen. Om je eigen contactgegevens te laten zien, moet je die vrijgeven in je %{profile_link}.</p>"
-        ph_name: Naam ...
-        ph_ordergroup: Huishouden ...
+        ph_name: Naam …
+        ph_ordergroup: Huishouden …
         profile_link: profiel
         title: Leden
     workgroups:
@@ -1045,7 +1045,7 @@ nl:
       new_funds: Nieuw tegoed
       price: Prijs
       reset_article_search: Alles tonen
-      search_article: Artikelen zoeken...
+      search_article: Artikelen zoeken…
       sum_amount: Huidig totaalbedrag
       title: Bestellen
       total_sum_amount: Totaalbedrag
@@ -1055,7 +1055,7 @@ nl:
       units_total: Totaal aantal
     index:
       closed_orders:
-        more: meer...
+        more: meer…
         title: Afgerekende bestellingen
       finished_orders:
         title: Niet afgerekende bestellingen
@@ -1154,7 +1154,7 @@ nl:
     ordergroup:
       account_summary: Rekeningafschrift
       invite: Iemand uitnodigen
-      search: Zoeken ...
+      search: Zoeken …
       title: Mijn huishouden
     ordergroup_cancelled: Je bent geen lid meer van de groep %{group}.
     profile:
@@ -1194,7 +1194,7 @@ nl:
         edit_suppliers: Leveranciers wijzigen
         title: Producten
       tasks: Mijn taken
-      title: Direct naar ...
+      title: Direct naar …
   invites:
     errors:
       already_member: is al lid van de foodcoop.
@@ -1537,9 +1537,9 @@ nl:
       description2: "%{ordergroups} hebben %{article_count} artikelen besteld met een totale waarde van %{net_sum} / %{gross_sum} (netto / bruto)."
       group_orders: 'Ledenbestellingen:'
       search_placeholder:
-        articles: Artikelen zoeken...
-        default: Artikelen zoeken...
-        groups: Huishoudens zoeken...
+        articles: Artikelen zoeken…
+        default: Artikelen zoeken…
+        groups: Huishoudens zoeken…
       search_reset: Zoekopdracht wissen
       send_to_supplier: Verzenden naar leverancier
       show_invoice: Rekening tonen
@@ -1597,7 +1597,7 @@ nl:
       break: van %{start} tot %{end}
       deactivated: inactief
     group_form_fields:
-      search: Zoeken ...
+      search: Zoeken …
       search_user: Gebruiker zoeken
       user_not_found: Geen gebruiker gevonden
     open_orders:
@@ -1732,7 +1732,7 @@ nl:
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
-      new_delivery: Nieuwe levering ...
+      new_delivery: Nieuwe levering …
       new_stock_article: Nieuw voorraadartikel
       new_stock_taking: Inventaris nemen
       order_online: Voorraadbestelling openen
@@ -1811,7 +1811,7 @@ nl:
       search:
         hint: Gebruiker zoeken
         noresult: Geen gebruiker gevonden
-        placeholder: Zoeken ...
+        placeholder: Zoeken …
       submit:
         periodic: Terugkerende taak bewaren
     index:
@@ -1870,10 +1870,10 @@ nl:
       success: <i class="icon icon-ok"></i>
     move: Verplaatsen
     or_cancel: of annuleren
-    please_wait: Een moment alstublieft...
+    please_wait: Een moment alstublieft…
     restore: Herstellen
     save: Opslaan
-    search_placeholder: Zoeken ...
+    search_placeholder: Zoeken …
     show: Tonen
   views:
     pagination:
@@ -1881,7 +1881,7 @@ nl:
       last: "&raquo;"
       next: "&rsaquo;"
       previous: "&lsaquo;"
-      truncate: "..."
+      truncate: "…"
   workgroups:
     edit:
       title: Werkgroep bewerken
