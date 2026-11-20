@@ -1,0 +1,1 @@
+$("#select_sepa_sequence_type_multi_<%= @invoice.id %>").html("<%= j(render partial: 'select_sepa_sequence_type', locals: {ordergroup_invoice: @invoice, multi_group_order: @group_order}) %>");
