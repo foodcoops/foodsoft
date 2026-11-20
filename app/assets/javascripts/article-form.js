@@ -172,7 +172,21 @@ class ArticleForm {
   }
 
   undoOrderAndReceivedUnitsConversion() {
-    this.convertOrderedAndReceivedUnits(this.billingUnit$.val(), this.supplierUnitSelect$.val());
+    const inputs$ = mergeJQueryObjects([this.unitsToOrder$, this.unitsReceived$]);
+    inputs$.each((_, input) => {
+      const input$ = $(input);
+      const val = input$.val();
+
+      if (val !== '') {
+        try {
+          const convertedValue = this.getUnitRatio(val, this.billingUnit$.val(), this.supplierUnitSelect$.val());
+          const hiddenField$ = $(`<input type="hidden" name="${input$.attr('name')}" value="${convertedValue}" />`);
+          this.articleForm$.append(hiddenField$);
+        } catch (e) {
+          // In some cases it's impossible to perform this conversion - just leave the original value
+        }
+      }
+    });
   }
 
   loadAvailableUnits() {
@@ -524,7 +538,9 @@ class ArticleForm {
       if (val !== '') {
         try {
           const convertedValue = this.getUnitRatio(val, fromUnit, toUnit);
-          input$.val(round(convertedValue));
+          const roundedValue = round(convertedValue);
+          input$.val(roundedValue);
+          input$.attr('value', roundedValue);
         } catch (e) {
           // In some cases it's impossible to perform this conversion - just leave the original value
         }
