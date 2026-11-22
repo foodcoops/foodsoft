@@ -74,9 +74,11 @@
       %dt= heading_helper(Invoice, :note) + ':'
       %dd= simple_format(@invoice.note)
 
+      %dt= heading_helper(Invoice, :financial_link) + ':'
       - if @invoice.financial_link
-        %dt= heading_helper(Invoice, :financial_link) + ':'
         %dd= link_to t('ui.show'), finance_link_path(@invoice.financial_link)
+      - else 
+        %dd= link_to t('finance.bank_transactions.transactions.add_financial_link'), finance_links_path(invoice: @invoice.id),  method: :post, class: 'btn btn-success btn-mini'
 
     .clearfix
       %div
