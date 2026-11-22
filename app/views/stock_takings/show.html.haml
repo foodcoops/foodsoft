@@ -12,13 +12,27 @@
     %th= t '.article'
     %th= t '.supplier'
     %th= t '.unit'
+    %th
     %th= t '.amount'
+    %th
+  - balance = 0
   - for stock_change in @stock_taking.stock_changes
     %tr
       %td= stock_change.stock_article.name
       %td= stock_change.stock_article.supplier.name
       %td= stock_change.stock_article.unit
-      %td= stock_change.quantity
+      %td.numeric{style: 'width:5em'}= format_currency(stock_change.stock_article.gross_price)
+      %td.numeric{style: 'width:5em'}= stock_change.quantity
+      - amount = stock_change.quantity * stock_change.stock_article.gross_price
+      - balance += amount
+      %td.numeric{style: 'width:5em'}= format_currency(amount)
+  %tr
+    %th
+    %th
+    %th
+    %th
+    %th
+    %th.numeric{style: 'width:5em'}= format_currency(balance)
 
 .btn-group
   = link_to t('ui.edit'), edit_stock_taking_path(@stock_taking), class: 'btn btn-default'
