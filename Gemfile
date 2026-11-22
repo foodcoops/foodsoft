@@ -63,6 +63,7 @@ gem 'rswag-ui'
 gem 'ruby-filemagic'
 gem 'spreadsheet'
 gem 'terser', '~> 1.1'
+gem 'jwt'
 
 # Only needed for building assets and swagger docs in docker build
 gem 'activerecord-nulldb-adapter'
