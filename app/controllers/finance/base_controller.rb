@@ -8,4 +8,13 @@ class Finance::BaseController < ApplicationController
 
     render template: 'finance/index'
   end
+
+  def new_report; end
+
+  def create_report
+    date_start = params[:report][:date_start].to_date
+    date_end = params[:report][:date_end].to_date
+    pdf = FinanceReport.new date_start...date_end
+    send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf', disposition: :inline
+  end
 end

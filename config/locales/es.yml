@@ -737,6 +737,22 @@ es:
     update:
       notice: El envío ha sido actualizado.
   documents:
+    finance_report:
+      balance_new: Nuevo
+      balance_old: Anterior
+      bank_account: Cuenta bancaria %{name}
+      bank_accounts: Cuentas bancarias
+      carry_over: Arrastre de saldo
+      expense: Salidas
+      filename: Informe financiero %{begin}-%{end}
+      financial_transactions: 'Transacciones: %{name}'
+      general: General
+      group_transactions: Transacciones de los grupos de pedido
+      income: Entradas
+      invoices: Facturas
+      period: 'Periodo: del %{begin} al %{end}'
+      sum: Total
+      title: Informe financiero
     order_by_articles:
       filename: Pedido %{name}-%{date} - por artículos
       title: 'Pedido ordenado por artículos: %{name}, cerrado el %{date}'
@@ -872,6 +888,10 @@ es:
         in_ordergroup: en grupo de pedido
       transactions:
         add_financial_link: Agregar enlace
+    base:
+      report_form:
+        submit: Crear
+        title: Crear informe
     create:
       notice: Se ha creado la factura.
     financial_links:
@@ -951,6 +971,7 @@ es:
         show_hidden: Mostrar transacciones ocultas
     index:
       amount_fc: Importe(FC)
+      create_report: Crear informe
       end: Fin
       everything_cleared: Genial, todo está contabilizado...
       last_transactions: Transacciones recientes

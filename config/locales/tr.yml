@@ -736,6 +736,22 @@ tr:
     update:
       notice: Teslimat güncellendi.
   documents:
+    finance_report:
+      balance_new: Yeni
+      balance_old: Eski
+      bank_account: Banka hesabı %{name}
+      bank_accounts: Banka hesapları
+      carry_over: Devir bakiyesi
+      expense: Çıkışlar
+      filename: Finans raporu %{begin}-%{end}
+      financial_transactions: 'İşlemler: %{name}'
+      general: Genel
+      group_transactions: Sipariş gruplarının işlemleri
+      income: Girişler
+      invoices: Faturalar
+      period: 'Dönem: %{begin} - %{end}'
+      sum: Toplam
+      title: Finans raporu
     order_by_articles:
       filename: Sipariş %{name}-%{date} - ürünlere göre
       title: '%{name} için ürünlere göre sıralanmış sipariş, %{date} tarihinde kapanmıştır'
@@ -871,6 +887,10 @@ tr:
         in_ordergroup: sipariş grubunda
       transactions:
         add_financial_link: Bağlantı ekle
+    base:
+      report_form:
+        submit: Oluştur
+        title: Rapor oluştur
     create:
       notice: Fatura oluşturuldu.
     financial_links:
@@ -950,6 +970,7 @@ tr:
         show_hidden: Gizli işlemleri göster
     index:
       amount_fc: Tutar(FC)
+      create_report: Rapor oluştur
       end: Son
       everything_cleared: Harika, her şey hesaplandı...
       last_transactions: Son işlemler

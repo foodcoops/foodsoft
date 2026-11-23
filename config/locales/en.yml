@@ -804,6 +804,22 @@ en:
     update:
       notice: Delivery was updated.
   documents:
+    finance_report:
+      balance_new: New
+      balance_old: Old
+      bank_account: Bank account %{name}
+      bank_accounts: Bank accounts
+      carry_over: Carry over
+      expense: Outgoing
+      filename: Finance report %{begin}-%{end}
+      financial_transactions: 'Transactions: %{name}'
+      general: General
+      group_transactions: Transactions of the ordergroups
+      income: Incoming
+      invoices: Invoices
+      period: 'Period: %{begin} to %{end}'
+      sum: Sum
+      title: Finance report
     order_by_articles:
       filename: Order %{name}-%{date} - by articles
       title: 'Order sorted by articles: %{name}, closed at %{date}'
@@ -928,6 +944,10 @@ en:
         reload: Reload summary
         with_extra_charge: 'with extra charge:'
         without_extra_charge: 'without extra charge:'
+    base:
+      report_form:
+        submit: Create
+        title: Create report
     bank_accounts:
       assign_unlinked_transactions:
         notice: '%{count} transactions have been assigned'
@@ -1031,6 +1051,7 @@ en:
       transactions_search:
         show_hidden: Show hidden transactions
     index:
+      create_report: Create report
       amount_fc: Amount(FC)
       end: End
       everything_cleared: Great, everything is accounted...
