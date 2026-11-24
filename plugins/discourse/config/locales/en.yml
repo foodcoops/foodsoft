@@ -4,3 +4,5 @@ en:
       invalid_nonce: Invalid nonce
       invalid_signature: Invalid signature
       logged_in: Logged in!
+    redirect:
+      invalid_url: Redirect not allowed

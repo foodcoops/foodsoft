@@ -6,7 +6,11 @@ class DiscourseSsoController < DiscourseController
 
     payload = parse_payload
     nonce = payload[:nonce]
-    return_sso_url = payload[:return_sso_url] || "#{discourse_url}/session/sso_login"
+    # Default to the configured Discourse instance when the peer doesn't say where to
+    # return. A return_sso_url from the payload is only followed when it points to an
+    # allowed host (see DiscourseController#allowed_sso_url), so a signed payload
+    # cannot leak user data to an arbitrary host.
+    return_sso_url = payload[:return_sso_url].presence || "#{discourse_url}/session/sso_login"
 
     raise I18n.t('discourse.sso.nonce_missing') if nonce.blank?
 

@@ -4,3 +4,5 @@ de:
       invalid_nonce: Ungültige nonce
       invalid_signature: Ungültige Signature
       logged_in: Angemeldet!
+    redirect:
+      invalid_url: Weiterleitung nicht erlaubt
