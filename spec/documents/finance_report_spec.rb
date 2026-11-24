@@ -39,12 +39,51 @@ describe FinanceReport do
     expect(report).to include_text(transaction_class.name, label('carry_over'))
   end
 
+  it 'includes transactions on the last day of the period' do
+    create(:financial_transaction, ordergroup: ordergroup, financial_transaction_type: type,
+                                   created_on: range.end.midnight + 14.hours,
+                                   amount: 9.99, note: 'late on the last day')
+    create(:financial_transaction, ordergroup: ordergroup, financial_transaction_type: type,
+                                   created_on: (range.end + 1.day).midnight,
+                                   amount: 11.11, note: 'just after the period')
+
+    expect(report).to include_text('late on the last day')
+      .and not_include_text('just after the period')
+  end
+
+  it 'counts the last day of the period in the closing balance' do
+    # The closing balance is a sum, so assert on the transaction that must feed
+    # it rather than on formatted currency output.
+    create(:financial_transaction, ordergroup: ordergroup, financial_transaction_type: type,
+                                   created_on: range.end.midnight + 14.hours,
+                                   amount: 40, note: 'on the last day')
+
+    expect(report).to include_text('on the last day')
+  end
+
   it 'renders bank accounts and their transactions' do
     bank_account = create(:bank_account)
     create(:bank_transaction, bank_account: bank_account, date: range.begin,
                               amount: 7.77, text: 'bank text', reference: 'bank reference')
 
     expect(report).to include_text(bank_account.name, 'bank text', 'bank reference')
+  end
+
+  it 'includes bank transactions on the last day of the period' do
+    bank_account = create(:bank_account)
+    create(:bank_transaction, bank_account: bank_account, date: range.end,
+                              amount: 5.55, text: 'last day bank text')
+    create(:bank_transaction, bank_account: bank_account, date: range.end + 1.day,
+                              amount: 6.66, text: 'after period bank text')
+
+    expect(report).to include_text('last day bank text')
+      .and not_include_text('after period bank text')
+  end
+
+  it 'includes invoices paid on the last day of the period' do
+    invoice = create(:invoice, amount: 30, paid_on: range.end, number: 4321)
+
+    expect(report).to include_text(invoice.number.to_s)
   end
 
   it 'renders invoices paid within the period' do

@@ -1,11 +1,18 @@
 class FinanceReport < RenderPdf
   def initialize(range, options = {})
-    @range = range
+    # `range` is a range of Dates and is inclusive of its last calendar day.
+    @begin = range.begin
+    @end = range.max
+    # `created_on` is a datetime column: comparing it with a plain Date would
+    # truncate to midnight and drop everything after 00:00 on the last day, so
+    # queries use explicit datetime bounds spanning the whole period.
+    @from = @begin.beginning_of_day
+    @to = @end.end_of_day
     super(options)
   end
 
   def filename
-    I18n.t('documents.finance_report.filename', begin: @range.begin, end: @range.end) + '.pdf'
+    I18n.t('documents.finance_report.filename', begin: @begin, end: @end) + '.pdf'
   end
 
   def title
@@ -42,7 +49,7 @@ class FinanceReport < RenderPdf
 
   def body_overview
     text t('.title'), size: 32
-    text t('.period', begin: @range.begin, end: @range.end)
+    text t('.period', begin: @begin, end: @end)
     move_down 15
 
     body_overview_ordergroups
@@ -57,21 +64,21 @@ class FinanceReport < RenderPdf
       sums_begin = FinancialTransactionClass
                    .joins(financial_transaction_types: [:financial_transactions])
                    .where.not(financial_transactions: { ordergroup_id: nil })
-                   .where(financial_transactions: { created_on: ...@range.begin })
+                   .where(financial_transactions: { created_on: ...@from })
                    .group(:id)
                    .sum(:amount)
 
       sums_end = FinancialTransactionClass
                  .joins(financial_transaction_types: [:financial_transactions])
                  .where.not(financial_transactions: { ordergroup_id: nil })
-                 .where(financial_transactions: { created_on: ...@range.end })
+                 .where(financial_transactions: { created_on: ..@to })
                  .group(:id)
                  .sum(:amount)
 
       financial_transaction_classes = FinancialTransactionClass
                                       .joins(financial_transaction_types: [:financial_transactions])
                                       .where.not(financial_transactions: { ordergroup_id: nil })
-                                      .where(financial_transactions: { created_on: @range })
+                                      .where(financial_transactions: { created_on: @from..@to })
                                       .group(:id)
                                       .order(:name)
                                       .select(:id, :name,
@@ -91,13 +98,13 @@ class FinanceReport < RenderPdf
     nice_table_old_in_out_new heading_helper(BankAccount, :name) do |t|
       sums_begin = BankAccount
                    .joins(:bank_transactions)
-                   .where(bank_transactions: { date: ...@range.begin })
+                   .where(bank_transactions: { date: ...@begin })
                    .group(:id)
                    .sum(:amount)
 
       sums_transactions = BankAccount
                           .joins(:bank_transactions)
-                          .where(bank_transactions: { date: @range })
+                          .where(bank_transactions: { date: @begin..@end })
                           .group(:id)
                           .select(:id, :name,
                                   'SUM(CASE WHEN bank_transactions.amount > 0 THEN bank_transactions.amount ELSE 0 END) AS sum_amount_positive',
@@ -105,7 +112,7 @@ class FinanceReport < RenderPdf
 
       sums_end = BankAccount
                  .joins(:bank_transactions)
-                 .where(bank_transactions: { date: ...@range.end })
+                 .where(bank_transactions: { date: ..@end })
                  .group(:id)
                  .sum(:amount)
 
@@ -127,13 +134,13 @@ class FinanceReport < RenderPdf
       inital_sums = FinancialTransaction
                     .where(ordergroup_id: nil)
                     .includes(:financial_transaction_type)
-                    .where(created_on: ...@range.begin)
+                    .where(created_on: ...@from)
                     .group(:financial_transaction_class_id)
                     .sum(:amount)
 
       inital_invoices_sums = Invoice
                              .joins(supplier: [:supplier_category])
-                             .where(paid_on: ...@range.begin)
+                             .where(paid_on: ...@begin)
                              .group(:financial_transaction_class_id)
                              .sum(:amount)
                              .transform_values(&:-@)
@@ -142,7 +149,7 @@ class FinanceReport < RenderPdf
 
       financial_transactions = FinancialTransactionType
                                .joins(:financial_transactions)
-                               .where(financial_transactions: { created_on: @range, ordergroup_id: nil })
+                               .where(financial_transactions: { created_on: @from..@to, ordergroup_id: nil })
                                .group(:name)
                                .order(:name)
                                .pluck('financial_transaction_types.name',
@@ -152,7 +159,7 @@ class FinanceReport < RenderPdf
       invoices = Invoice
                  .joins(:supplier)
                  .joins('LEFT JOIN supplier_categories ON supplier_categories.id = suppliers.supplier_category_id')
-                 .where(invoices: { paid_on: @range })
+                 .where(invoices: { paid_on: @begin..@end })
                  .group(:supplier_category_id)
                  .pluck('supplier_categories.name',
                         'supplier_categories.financial_transaction_class_id',
@@ -190,7 +197,7 @@ class FinanceReport < RenderPdf
       invoices = Invoice
                  .includes(:supplier)
                  .references(:supplier)
-                 .where(paid_on: @range, suppliers: { supplier_category_id: supplier_category_id })
+                 .where(paid_on: @begin..@end, suppliers: { supplier_category_id: supplier_category_id })
                  .order(:paid_on)
                  .pluck(:paid_on, 'suppliers.name', :number, :amount)
 
@@ -220,7 +227,7 @@ class FinanceReport < RenderPdf
       FinancialTransactionType
         .joins(:financial_transactions)
         .where(financial_transaction_class: id)
-        .where(financial_transactions: { created_on: @range })
+        .where(financial_transactions: { created_on: @from..@to })
         .where.not(financial_transactions: { ordergroup_id: nil })
         .group(:name)
         .order(:name)
@@ -235,7 +242,7 @@ class FinanceReport < RenderPdf
 
   def body_groups
     Ordergroup.includes(:financial_transactions)
-              .where(financial_transactions: { created_on: @range })
+              .where(financial_transactions: { created_on: @from..@to })
               .where.not(id: 0).order(:name).group(:id).pluck(:id, :name).each do |og|
       body_group(og[0], "#{Ordergroup.model_name.human} #{og[1]}")
     end
@@ -252,14 +259,14 @@ class FinanceReport < RenderPdf
       if og_id
         inital_sums = FinancialTransaction.where(ordergroup_id: og_id)
                                           .includes(:financial_transaction_type)
-                                          .where(created_on: ...@range.begin)
+                                          .where(created_on: ...@from)
                                           .group(:financial_transaction_class_id)
                                           .sum(:amount)
 
         ta.row t('.carry_over'), nil, nil, inital_sums unless inital_sums.empty?
       end
 
-      FinancialTransaction.where(ordergroup_id: og_id, created_on: @range)
+      FinancialTransaction.where(ordergroup_id: og_id, created_on: @from..@to)
                           .includes(:financial_transaction_type).order(:created_on)
                           .pluck(:created_on, 'financial_transaction_types.name', :note, 'financial_transaction_types.financial_transaction_class_id', :amount).each do |t|
         ta.row(format_date(t[0]), t[1], t[2], { t[3] => t[4] })
@@ -270,7 +277,7 @@ class FinanceReport < RenderPdf
   def body_bank_accounts
     inital_sums = BankAccount
                   .includes(:bank_transactions)
-                  .where('bank_transactions.date': ...@range.begin)
+                  .where('bank_transactions.date': ...@begin)
                   .group(:id)
                   .sum(:amount)
 
@@ -286,7 +293,7 @@ class FinanceReport < RenderPdf
         inital_sum = inital_sums[bank_account.id]
         t.row t('.carry_over'), nil, nil, inital_sum if inital_sum
 
-        bank_transactions = bank_account.bank_transactions.where(date: @range).order(:date)
+        bank_transactions = bank_account.bank_transactions.where(date: @begin..@end).order(:date)
         bank_transactions.each do |bt|
           t.row format_date(bt.date), bt.text, bt.reference, bt.amount
         end
@@ -303,7 +310,7 @@ class FinanceReport < RenderPdf
   def general_rows?
     @general_rows ||= FinancialTransaction
                       .where(ordergroup_id: nil)
-                      .where(created_on: @range)
+                      .where(created_on: @from..@to)
                       .any?
   end
 

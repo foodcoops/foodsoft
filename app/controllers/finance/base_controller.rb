@@ -14,7 +14,9 @@ class Finance::BaseController < ApplicationController
   def create_report
     date_start = params[:report][:date_start].to_date
     date_end = params[:report][:date_end].to_date
-    pdf = FinanceReport.new date_start...date_end
+    # Inclusive: the user picks the last day to report on, so use `..` rather
+    # than `...`, which would drop that final day entirely.
+    pdf = FinanceReport.new date_start..date_end
     send_data pdf.to_pdf, filename: pdf.filename, type: 'application/pdf', disposition: :inline
   end
 end
