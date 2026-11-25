@@ -619,7 +619,6 @@ nl:
       tasks_period_days: Aantal dagen tussen twee periodieke taken (standaard 7, een week)
       tasks_upfront_days: Hoeveel dagen vantevoren je periodieke taken wil aanmaken.
       tax_default: Standaard BTW percentage voor nieuwe artikelen.
-      tolerance_is_costly: Bestel zoveel artikelen als mogelijk in de tolerantie (in plaats van net genoeg om de laatste doos te vullen). Dit zorgt er ook voor dat de tolerantie in de prijs van open ledenbestellingen wordt meegenomen.
       distribution_strategy: Hoe verder te gaan met het verdelen van artikelen nadat een bestelling is ontvangen.
       use_apple_points: Wanneer het appelpunten systeem is geactiveerd, kunnen leden slechts bestellen wanneer ze meewerken aan taken.
       use_boxfill: Wanneer dit aan staat, kunnen gebruikers aan het einde van de bestelfase hun bestelling alleen wijzigen als het de totale bestelling vergroot. Dit helpt om dozen te vullen. Bij de bestelling moet nog wel de dozen-vul-datum ingevuld worden.

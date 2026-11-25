@@ -618,7 +618,6 @@ tr:
       tasks_period_days: İki periyodik görev arasındaki gün sayısı (varsayılan olarak 7, yani bir hafta).
       tasks_upfront_days: Periyodik görevleri kaç gün önceden planlamak istediğinize bağlı olarak değişir.
       tax_default: Yeni ürünler için varsayılan KDV yüzdesi.
-      tolerance_is_costly: Üye toleransını maksimum dolduracak kadar sipariş edin (sadece son kutuyu dolduracak kadar ürün eklemek yerine). Açık siparişin toplam tutarına uygulanan tolerans da buna dahildir.
       distribution_strategy: Bir sipariş alındıktan sonra ürünlerin nasıl dağıtılacağı.
       use_apple_points: Elma puanı sistemi etkinleştirildiğinde, üyeler sipariş vermeye devam edebilmek için bazı görevleri yapmak zorundadırlar.
       use_boxfill: Etkinleştirildiğinde, siparişin sonuna doğru, üyeler yalnızca toplam sipariş tutarını artırdığında siparişlerini değiştirebilirler. Bu, kalan kutuları doldurmaya yardımcı olur. Siparişler için bir kutuları-doldurma tarihi belirlemelisiniz.
