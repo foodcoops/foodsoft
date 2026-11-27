@@ -53,6 +53,13 @@ PATH
       rails
 
 PATH
+  remote: plugins/pickup
+  specs:
+    foodsoft_pickup (0.1.0)
+      active_model_serializers
+      rails
+
+PATH
   remote: plugins/polls
   specs:
     foodsoft_polls (0.0.1)
@@ -749,6 +756,7 @@ DEPENDENCIES
   foodsoft_documents!
   foodsoft_links!
   foodsoft_messages!
+  foodsoft_pickup!
   foodsoft_polls!
   foodsoft_wiki!
   gaffe
