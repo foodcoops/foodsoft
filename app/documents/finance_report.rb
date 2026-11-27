@@ -15,23 +15,34 @@ class FinanceReport < RenderPdf
     I18n.t('documents.finance_report.filename', begin: @begin, end: @end) + '.pdf'
   end
 
+  # No running title: the report carries its own title on the first page.
+  # Returning `nil` (rather than `false`) also keeps the page footer at its
+  # normal height instead of reserving space for an empty header.
   def title
-    false
+    nil
   end
 
-  def new_page(title, layout = :portrait)
+  # A page with the given title. `layout` is passed on to prawn as a symbol
+  # (`:portrait`, `:landscape`), an unknown value makes prawn fall back to
+  # portrait, so `nil` may be used to keep the current orientation.
+  def new_page(page_title = nil, layout = :portrait)
     start_new_page(layout: layout)
-    text title, size: 18, style: :bold
-    move_down 15
+
+    if page_title
+      text page_title, size: 18, style: :bold
+      move_down 15
+    end
 
     @started_new_page = true
   end
 
-  def sub_page(title)
+  # A sub page title, i.e. a section on the current page unless the last
+  # heading already started a new one.
+  def sub_page(page_title, size: 14, style: :bold)
     move_down 15 unless @started_new_page
     @started_new_page = false
 
-    text title, size: 14, style: :bold
+    text page_title, size: size, style: style
   end
 
   def body
@@ -48,7 +59,9 @@ class FinanceReport < RenderPdf
   end
 
   def body_overview
-    text t('.title'), size: 32
+    new_page
+    sub_page t('.title'), size: 32, style: :normal
+
     text t('.period', begin: @begin, end: @end)
     move_down 15
 
@@ -195,14 +208,13 @@ class FinanceReport < RenderPdf
                  heading_helper(Invoice, :amount)
                ]) do |t|
       invoices = Invoice
-                 .includes(:supplier)
-                 .references(:supplier)
-                 .where(paid_on: @begin..@end, suppliers: { supplier_category_id: supplier_category_id })
+                 .where(paid_on: @begin..@end, supplier_id: Supplier.where(supplier_category_id: supplier_category_id).select(:id))
                  .order(:paid_on)
-                 .pluck(:paid_on, 'suppliers.name', :number, :amount)
+                 .pluck(:paid_on, :number, :amount, :supplier_id)
+      supplier_names = Supplier.where(id: invoices.map { |i| i[3] }).pluck(:id, :name).to_h
 
       invoices.each do |invoice|
-        t.row format_date(invoice[0]), invoice[1], invoice[2], invoice[3]
+        t.row format_date(invoice[0]), supplier_names[invoice[3]], invoice[1], invoice[2]
       end
     end
   end
@@ -275,9 +287,11 @@ class FinanceReport < RenderPdf
   end
 
   def body_bank_accounts
+    return unless BankAccount.count.positive?
+
     inital_sums = BankAccount
-                  .includes(:bank_transactions)
-                  .where('bank_transactions.date': ...@begin)
+                  .joins(:bank_transactions)
+                  .where(bank_transactions: { date: ...@begin })
                   .group(:id)
                   .sum(:amount)
 
@@ -293,8 +307,7 @@ class FinanceReport < RenderPdf
         inital_sum = inital_sums[bank_account.id]
         t.row t('.carry_over'), nil, nil, inital_sum if inital_sum
 
-        bank_transactions = bank_account.bank_transactions.where(date: @begin..@end).order(:date)
-        bank_transactions.each do |bt|
+        bank_account.bank_transactions.where(date: @begin..@end).order(:date).each do |bt|
           t.row format_date(bt.date), bt.text, bt.reference, bt.amount
         end
       end
@@ -342,13 +355,16 @@ class FinanceReport < RenderPdf
       @header = new_header
     end
 
-    def row(*args)
-      @data << args
+    def row(label, *rest)
+      # `nil` is allowed as a placeholder for any column, so the first hash is
+      # taken as the amounts per transaction class and everything else as
+      # plain columns.
+      amounts = rest.detect { |v| v.is_a?(Hash) }
+      columns = rest.reject { |v| v.equal?(amounts) }
 
-      return if @sum_cols
+      @data << [label, *columns, amounts]
 
-      ftc = args.last
-      ftc.each_key { |key| @found << key }
+      @found.merge(amounts.keys) if amounts
     end
 
     # Builds the table rows, including the sum row.
@@ -358,6 +374,8 @@ class FinanceReport < RenderPdf
     def data
       @rows ||= build_rows # rubocop:disable Naming/MemoizedInstanceVariableName
     end
+
+    private
 
     def build_rows
       raise 'missing table header' unless @header
@@ -370,11 +388,9 @@ class FinanceReport < RenderPdf
         end
         @sum_cols = ftc_map.size
 
-        @data.map! do |row|
-          ret = row[0..-2]
-          @sum_cols.times { ret << nil }
-
-          row[-1].each do |key, value|
+        @data.map! do |*cells, amounts|
+          ret = cells
+          Array(amounts).each do |key, value|
             col = ftc_map[key]
             ret[col] = value if col
           end
@@ -395,7 +411,7 @@ class FinanceReport < RenderPdf
       @data.each do |r|
         range.each do |idx|
           sum_row[idx] += r[idx] if r[idx]
-          r[idx] = number_to_currency(r[idx])
+          r[idx] = number_to_currency(r[idx]) if r[idx]
         end
       end
 
@@ -406,12 +422,11 @@ class FinanceReport < RenderPdf
 
       [@header, *@data, sum_row]
     end
-    private :build_rows
   end
 
   # Balance table with the columns <name> / old / incoming / outgoing / new.
   def nice_table_old_in_out_new(name, &)
-    nice_table(4, header: [name, *balance_headers], &)
+    nice_table(4, header: [name, nil, *balance_headers], &)
   end
 
   def nice_table(sum_count = nil, header: nil)
@@ -420,6 +435,8 @@ class FinanceReport < RenderPdf
     yield t
 
     data = t.data
+    # `sum_count` is nil when the transaction class columns are collected
+    # instead of being given up front.
     sum_cols = t.sum_cols
 
     table data, width: bounds.width,

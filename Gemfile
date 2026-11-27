@@ -125,6 +125,8 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
+  # text extraction for the pdf document specs, see spec/support/pdf_matchers.rb
+  gem 'pdf-reader'
   gem 'rspec-rails'
   # need to include rspec components before i18n-spec or rake fails in test environment
   gem 'i18n-spec'
