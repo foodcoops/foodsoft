@@ -57,14 +57,14 @@ class FinanceReport < RenderPdf
       sums_begin = FinancialTransactionClass
                    .joins(financial_transaction_types: [:financial_transactions])
                    .where.not(financial_transactions: { ordergroup_id: nil })
-                   .where('financial_transactions.created_on < ?', @range.begin)
+                   .where(financial_transactions: { created_on: ...@range.begin })
                    .group(:id)
                    .sum(:amount)
 
       sums_end = FinancialTransactionClass
                  .joins(financial_transaction_types: [:financial_transactions])
                  .where.not(financial_transactions: { ordergroup_id: nil })
-                 .where('financial_transactions.created_on < ?', @range.end)
+                 .where(financial_transactions: { created_on: ...@range.end })
                  .group(:id)
                  .sum(:amount)
 
@@ -91,7 +91,7 @@ class FinanceReport < RenderPdf
     nice_table_old_in_out_new heading_helper(BankAccount, :name) do |t|
       sums_begin = BankAccount
                    .joins(:bank_transactions)
-                   .where('bank_transactions.date < ?', @range.begin)
+                   .where(bank_transactions: { date: ...@range.begin })
                    .group(:id)
                    .sum(:amount)
 
@@ -105,7 +105,7 @@ class FinanceReport < RenderPdf
 
       sums_end = BankAccount
                  .joins(:bank_transactions)
-                 .where('bank_transactions.date < ?', @range.end)
+                 .where(bank_transactions: { date: ...@range.end })
                  .group(:id)
                  .sum(:amount)
 
@@ -127,13 +127,13 @@ class FinanceReport < RenderPdf
       inital_sums = FinancialTransaction
                     .where(ordergroup_id: nil)
                     .includes(:financial_transaction_type)
-                    .where('created_on < ?', @range.begin)
+                    .where(created_on: ...@range.begin)
                     .group(:financial_transaction_class_id)
                     .sum(:amount)
 
       inital_invoices_sums = Invoice
                              .joins(supplier: [:supplier_category])
-                             .where('paid_on < ?', @range.begin)
+                             .where(paid_on: ...@range.begin)
                              .group(:financial_transaction_class_id)
                              .sum(:amount)
                              .transform_values(&:-@)
@@ -182,11 +182,11 @@ class FinanceReport < RenderPdf
     sub_page name
 
     nice_table(1, header: [
-      heading_helper(Invoice, :paid_on),
-      heading_helper(Invoice, :supplier),
-      heading_helper(Invoice, :number),
-      heading_helper(Invoice, :amount)
-    ]) do |t|
+                 heading_helper(Invoice, :paid_on),
+                 heading_helper(Invoice, :supplier),
+                 heading_helper(Invoice, :number),
+                 heading_helper(Invoice, :amount)
+               ]) do |t|
       invoices = Invoice
                  .includes(:supplier)
                  .references(:supplier)
@@ -212,11 +212,11 @@ class FinanceReport < RenderPdf
     sub_page name
 
     nice_table(3, header: [
-      heading_helper(FinancialTransactionClass, :name),
-      t('.income'),
-      t('.expense'),
-      t('.sum')
-    ]) do |t|
+                 heading_helper(FinancialTransactionClass, :name),
+                 t('.income'),
+                 t('.expense'),
+                 t('.sum')
+               ]) do |t|
       FinancialTransactionType
         .joins(:financial_transactions)
         .where(financial_transaction_class: id)
@@ -245,14 +245,14 @@ class FinanceReport < RenderPdf
     new_page og_name, :landscape
 
     nice_table(header: [
-      heading_helper(FinancialTransaction, :created_on),
-      heading_helper(FinancialTransaction, :financial_transaction_type),
-      heading_helper(FinancialTransaction, :note)
-    ]) do |ta|
+                 heading_helper(FinancialTransaction, :created_on),
+                 heading_helper(FinancialTransaction, :financial_transaction_type),
+                 heading_helper(FinancialTransaction, :note)
+               ]) do |ta|
       if og_id
         inital_sums = FinancialTransaction.where(ordergroup_id: og_id)
                                           .includes(:financial_transaction_type)
-                                          .where('created_on < ?', @range.begin)
+                                          .where(created_on: ...@range.begin)
                                           .group(:financial_transaction_class_id)
                                           .sum(:amount)
 
@@ -270,7 +270,7 @@ class FinanceReport < RenderPdf
   def body_bank_accounts
     inital_sums = BankAccount
                   .includes(:bank_transactions)
-                  .where('date < ?', @range.begin)
+                  .where('bank_transactions.date': ...@range.begin)
                   .group(:id)
                   .sum(:amount)
 
@@ -278,11 +278,11 @@ class FinanceReport < RenderPdf
       new_page t('.bank_account', name: bank_account.name), :landscape
 
       nice_table(1, header: [
-        heading_helper(BankTransaction, :date),
-        heading_helper(BankTransaction, :text),
-        heading_helper(BankTransaction, :reference),
-        heading_helper(BankTransaction, :amount)
-      ]) do |t|
+                   heading_helper(BankTransaction, :date),
+                   heading_helper(BankTransaction, :text),
+                   heading_helper(BankTransaction, :reference),
+                   heading_helper(BankTransaction, :amount)
+                 ]) do |t|
         inital_sum = inital_sums[bank_account.id]
         t.row t('.carry_over'), nil, nil, inital_sum if inital_sum
 
@@ -331,17 +331,17 @@ class FinanceReport < RenderPdf
       @found = Set.new
     end
 
-    def header(h)
-      @header = h
+    def header(new_header)
+      @header = new_header
     end
 
     def row(*args)
       @data << args
 
-      unless @sum_cols
-        ftc = args.last
-        ftc.each_key { |key| @found << key }
-      end
+      return if @sum_cols
+
+      ftc = args.last
+      ftc.each_key { |key| @found << key }
     end
 
     # Builds the table rows, including the sum row.
@@ -349,7 +349,7 @@ class FinanceReport < RenderPdf
     # This is destructive (amounts are formatted in place and the transaction
     # class columns are appended to the header), so it is memoized.
     def data
-      @rows ||= build_rows
+      @rows ||= build_rows # rubocop:disable Naming/MemoizedInstanceVariableName
     end
 
     def build_rows
@@ -403,10 +403,8 @@ class FinanceReport < RenderPdf
   end
 
   # Balance table with the columns <name> / old / incoming / outgoing / new.
-  def nice_table_old_in_out_new(name)
-    nice_table(4, header: [name, *balance_headers]) do |t|
-      yield t
-    end
+  def nice_table_old_in_out_new(name, &)
+    nice_table(4, header: [name, *balance_headers], &)
   end
 
   def nice_table(sum_count = nil, header: nil)
