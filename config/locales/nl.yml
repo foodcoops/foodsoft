@@ -1600,7 +1600,7 @@ nl:
       break: van %{start} tot %{end}
       deactivated: inactief
     group_form_fields:
-      search: Zoeken ...
+      search: Zoeken …
       search_user: Gebruiker zoeken
       user_not_found: Geen gebruiker gevonden
     open_orders:
@@ -1610,13 +1610,13 @@ nl:
       total_sum: Totaalsom
       who_ordered: Wie heeft besteld?
     order_download_button:
-      article_pdf: Artikelen PDF
+      article_pdf: Artikelen-PDF
       download_file: Bestand downloaden
       fax_csv: Fax CSV
       fax_pdf: Fax PDF
       fax_txt: Fax tekst
-      group_pdf: Huishoudens PDF
-      matrix_pdf: Matrix PDF
+      group_pdf: Huishoudens-PDF
+      matrix_pdf: Matrix-PDF
       title: Downloaden
     task_list:
       accept_task: Taak accepteren
@@ -1630,13 +1630,13 @@ nl:
       contact_address_hint: Het adres van je huishouden. Als je dit wijzigt, verandert het ook voor de andere leden van je huishouden.
       messagegroups: Aan- en afmelden voor berichtengroepen
     workgroup_members:
-      title: Groepsleden
+      title: Groepslidmaatschappen
   simple_form:
     error_notification:
-      default_message: Problemen gevonden, controleer alsjeblieft de invoer.
+      default_message: Problemen gevonden, controleer de invoer.
     hints:
       article:
-        unit: 'Bijv.: KG of 1L of 500g'
+        unit: 'Bv.: kg of 1l of 500g'
       article_category:
         description: komma-gescheiden lijst van namen die herkend worden bij uploaden/synchroniseren
       order_article:
@@ -1648,18 +1648,18 @@ nl:
         edit_stock_article:
           price: "<ul><li>De prijs mag niet aangepast worden.</li><li>Indien nodig, %{stock_article_copy_link}.</li></ul>"
       supplier:
-        min_order_quantity: De minimum bestelhoeveelheid wordt getoond bij het bestellen en is bedoeld om leden te motiveren genoeg te bestellen.
+        min_order_quantity: De minimale bestelhoeveelheid wordt getoond bij het bestellen en is bedoeld om leden te motiveren genoeg te bestellen.
       task:
         duration: Hoe lang de taak duurt, 1-3 uur.
         required_users: Hoeveel mensen zijn in totaal nodig?
-      tax: Percentage
+      tax: Percentage, standaard is 7,0
     labels:
       settings:
         notify:
-          negative_balance: Informeer me wanneer mijn huishouden een negatief saldo krijgt.
-          order_finished: Informeer me over mijn bestelresultaat (wanneer de bestelling gesloten wordt).
-          order_received: Informeer me over mijn bestelresultaat (wanneer de bestelling ontvangen is).
-          upcoming_tasks: Herinner me aan aankomende taken.
+          negative_balance: Me informeren wanneer mijn huishouden een negatief saldo krijgt.
+          order_finished: Me over mijn bestelresultaat informeren (wanneer de bestelling gesloten wordt).
+          order_received: Me over mijn bestelresultaat informeren (wanneer de bestelling ontvangen is).
+          upcoming_tasks: Me aan aankomende taken herinneren.
         profile:
           email_is_public: E-mail is zichtbaar voor andere leden.
           language: Taal
@@ -1698,7 +1698,7 @@ nl:
       create: aanmaken
       stock_articles: Voorraadartikelen
       temp_inventory: tijdelijke inventaris
-      text_deviations: Vul alle afwijkingen in van de %{inv_link}. Als er minder is dan vermeld, gebruik dan een negatief getal.
+      text_deviations: Vul alle afwijkingen van de %{inv_link} in. Als er minder is dan vermeld, gebruik dan een negatief getal.
       text_need_articles: Je moet een nieuw voorraadartikel %{create_link} voordat je het hier kunt gebruiken.
       title: Inventaris opnemen
     show:
@@ -1716,14 +1716,14 @@ nl:
       date: Datum
       note: Notitie
     update:
-      notice: Inventarisatie is bijgewerkt.
+      notice: Inventaris is bijgewerkt.
   stockit:
     check:
       not_empty: "%{name} kon niet worden verwijderd, de inventaris is niet leeg."
     copy:
       title: kopieer het voorraadartikel
     create:
-      notice: Voorraadartikel "%{name}" is aangemaakt.
+      notice: Voorraadartikel “%{name}” is aangemaakt.
     derive:
       title: Voorraadartikel van product maken
     destroy:
@@ -1731,11 +1731,11 @@ nl:
     edit:
       title: Voorraadartikelen bewerken
     form:
-      copy_stock_article: vooraadartikel kopiëren
+      copy_stock_article: Voorraadartikel kopiëren
       price_hint: Om chaos te voorkomen, kun je de prijs van bestaande voorraadartikelen niet aanpassen.
     index:
       confirm_delete: Weet je zeker dat je dit wilt verwijderen?
-      new_delivery: Nieuwe levering ...
+      new_delivery: Nieuwe levering …
       new_stock_article: Nieuw voorraadartikel
       new_stock_taking: Inventaris nemen
       order_online: Voorraadbestelling openen
@@ -1755,10 +1755,10 @@ nl:
       reason: Reden
       stock_changes: Verloop
     update:
-      notice: Voorraadartikel "%{name}" is bijgewerkt.
+      notice: Voorraadartikel “%{name}” is bijgewerkt.
   suppliers:
     create:
-      notice: Leverancier is aangemaakt.
+      notice: Leverancier is aangemaakt
     destroy:
       notice: Leverancier is verwijderd
     edit:
@@ -1814,7 +1814,7 @@ nl:
       search:
         hint: Gebruiker zoeken
         noresult: Geen gebruiker gevonden
-        placeholder: Zoeken ...
+        placeholder: Zoeken …
       submit:
         periodic: Terugkerende taak bewaren
     index:
@@ -1827,10 +1827,10 @@ nl:
       group_tasks: Groepstaken
       my_tasks: Mijn taken
       new_task: Nieuwe taak
-      pages: Pagina's
+      pages: Pagina’s
     new:
       submit_periodic: Terugkerende taak aanmaken
-      title: Nieuwe taak maken
+      title: Nieuwe taak aanmaken
     repeated: Deze taak wordt herhaald.
     set_done:
       notice: De status van de taak is aangepast
@@ -1865,18 +1865,18 @@ nl:
     confirm_delete: Wil je %{name} echt verwijderen?
     confirm_restore: Wil je %{name} echt opnieuw actief maken?
     copy: Kopiëren
-    delete: Verwijder
-    download: Download
-    edit: Bewerk
+    delete: Verwijderen
+    download: Downloaden
+    edit: Bewerken
     marks:
       close: "&times;"
       success: <i class="icon icon-ok"></i>
     move: Verplaatsen
     or_cancel: of annuleren
-    please_wait: Een moment alstublieft...
+    please_wait: Een moment alstublieft …
     restore: Herstellen
     save: Opslaan
-    search_placeholder: Zoeken ...
+    search_placeholder: Zoeken …
     show: Tonen
   views:
     pagination:
@@ -1884,7 +1884,7 @@ nl:
       last: "&raquo;"
       next: "&rsaquo;"
       previous: "&lsaquo;"
-      truncate: "..."
+      truncate: "…"
   workgroups:
     edit:
       title: Werkgroep bewerken
