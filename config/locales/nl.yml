@@ -742,6 +742,22 @@ nl:
     update:
       notice: Levering is bijgewerkt.
   documents:
+    finance_report:
+      balance_new: Nieuw
+      balance_old: Oud
+      bank_account: Bankrekening %{name}
+      bank_accounts: Bankrekeningen
+      carry_over: Saldooverdracht
+      expense: Uitgaven
+      filename: Financieel overzicht %{begin}-%{end}
+      financial_transactions: 'Transacties: %{name}'
+      general: Algemeen
+      group_transactions: Transacties van de bestelgroepen
+      income: Ontvangsten
+      invoices: Facturen
+      period: 'Periode: %{begin} tot %{end}'
+      sum: Totaal
+      title: Financieel overzicht
     order_by_articles:
       filename: Bestelling %{name}-%{date} - Artikellijst
       title: 'Artikellijst van bestelling: %{name}, gesloten op %{date}'
@@ -877,6 +893,10 @@ nl:
         in_ordergroup: in huishouden
       transactions:
         add_financial_link: Link toevoegen
+    base:
+      report_form:
+        submit: Maken
+        title: Financieel overzicht maken
     create:
       notice: Rekening is gemaakt.
     financial_links:
@@ -959,6 +979,7 @@ nl:
         show_hidden: Toon verborgen transacties
     index:
       amount_fc: Bedrag(FC)
+      create_report: Overzicht maken
       end: Einde
       everything_cleared: Mooi zo, alles is verrekend...
       last_transactions: Recente transacties

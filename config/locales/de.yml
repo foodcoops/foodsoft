@@ -802,6 +802,22 @@ de:
     update:
       notice: Lieferung wurde aktualisiert.
   documents:
+    finance_report:
+      balance_new: Neu
+      balance_old: Alt
+      bank_account: Bankkonto %{name}
+      bank_accounts: Bankkonten
+      carry_over: Übertrag
+      expense: Ausgang
+      filename: Finanzbericht %{begin}-%{end}
+      financial_transactions: 'Kontotransaktionen: %{name}'
+      general: Allgemein
+      group_transactions: Kontotransaktionen der Bestellgruppen
+      income: Eingang
+      invoices: Rechnungen
+      period: 'Zeitraum: %{begin} bis %{end}'
+      sum: Summe
+      title: Finanzbericht
     order_by_articles:
       filename: Bestellung %{name}-%{date} - Artikelsortierung
       title: 'Artikelsortierung der Bestellung: %{name}, beendet am %{date}'
@@ -926,6 +942,10 @@ de:
         reload: Zusammenfassung neu laden
         with_extra_charge: 'mit Aufschlag:'
         without_extra_charge: 'ohne Aufschlag:'
+    base:
+      report_form:
+        submit: Erstellen
+        title: Bericht erstellen
     bank_accounts:
       assign_unlinked_transactions:
         notice: 'Es wurden %{count} Transaktionen zugeordnet.'
@@ -1029,6 +1049,7 @@ de:
       transactions_search:
         show_hidden: Versteckte anzeigen
     index:
+      create_report: Bericht erstellen
       amount_fc: Betrag(FC)
       end: Ende
       everything_cleared: Super, alles schon abgerechnet...

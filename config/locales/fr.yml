@@ -461,6 +461,22 @@ fr:
     update:
       notice: La commande a été actualisée
   documents:
+    finance_report:
+      balance_new: Nouveau
+      balance_old: Ancien
+      bank_account: Compte bancaire %{name}
+      bank_accounts: Comptes bancaires
+      carry_over: Report du solde
+      expense: Sorties
+      filename: Rapport financier %{begin}-%{end}
+      financial_transactions: 'Transactions : %{name}'
+      general: Général
+      group_transactions: Transactions des groupes de commande
+      income: Entrées
+      invoices: Factures
+      period: 'Période : du %{begin} au %{end}'
+      sum: Total
+      title: Rapport financier
     order_by_articles:
       filename: Commande %{name}-%{date} - Trier par
       title: 'Ordre des produits pour la commande: %{name}, clôturée le %{date}'
@@ -557,6 +573,10 @@ fr:
         reload: Actualiser le résumé
         with_extra_charge: 'avec supplément:'
         without_extra_charge: 'sans supplément:'
+    base:
+      report_form:
+        submit: Créer
+        title: Créer un rapport
     create:
       notice: La facture a bien été définie.
     financial_transactions:
@@ -588,6 +608,7 @@ fr:
         remove_group: Supprimer cette cellule
     index:
       amount_fc: Montant(boufcoop)
+      create_report: Créer un rapport
       end: Fin
       everything_cleared: Super, tout est a déjà été décompté!
       last_transactions: Dernières transactions
