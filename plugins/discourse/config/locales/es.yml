@@ -4,3 +4,5 @@ es:
       invalid_nonce: Nonce inválido
       invalid_signature: Firma inválida
       logged_in: Estás adentro!
+    redirect:
+      invalid_url: Redirección no permitida

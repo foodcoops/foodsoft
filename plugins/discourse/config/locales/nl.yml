@@ -4,3 +4,5 @@ nl:
       invalid_nonce: Onjuiste nonce
       invalid_signature: Onjuiste digitale handtekening
       logged_in: Ingelogd!
+    redirect:
+      invalid_url: Doorverwijzing niet toegestaan

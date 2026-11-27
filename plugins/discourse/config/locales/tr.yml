@@ -4,3 +4,5 @@ tr:
       invalid_nonce: Geçersiz nonce
       invalid_signature: Geçersiz imza
       logged_in: Giriş yapıldı!
+    redirect:
+      invalid_url: Yönlendirmeye izin verilmedi
