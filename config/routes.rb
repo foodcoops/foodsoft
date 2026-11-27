@@ -253,6 +253,7 @@ Rails.application.routes.draw do
       resources :supplier_categories
 
       resources :users do
+        delete 'delete_attachment/:attachment_id', to: 'users#delete_attachment', as: 'delete_attachment', on: :member
         post :restore, on: :member
         post :sudo, on: :member
       end

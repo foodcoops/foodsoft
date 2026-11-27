@@ -1,4 +1,6 @@
 class Invoice < ApplicationRecord
+  include Attachment
+
   include CustomFields
   include LocalizeInput
 
@@ -46,14 +48,5 @@ class Invoice < ApplicationRecord
     return net_amount unless orders.any?
 
     orders_sum + orders_transport_sum
-  end
-
-  protected
-
-  # validates that the attachments are jpeg, png or pdf
-  def valid_attachments
-    attachments.each do |attachment|
-      errors.add(:attachments, I18n.t('model.invoice.invalid_mime', mime: attachment.content_type)) unless attachment.content_type.in?(%w[image/jpeg image/png application/pdf])
-    end
   end
 end

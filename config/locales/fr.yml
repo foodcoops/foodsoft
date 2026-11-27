@@ -142,6 +142,7 @@ fr:
         user_list: Responsables inscritEs
         workgroup: Équipe
       user:
+        attachment: Appendice
         first_name: Prénom
         last_activity: dernière activité
         last_login: Dernière connection
@@ -935,6 +936,7 @@ fr:
     order_article:
       error_price: doit être saisi et avoir un prix à jour
     user:
+      invalid_mime: a un type MIME invalide (%{mime})
       no_ordergroup: aucune cellule
   navigation:
     admin:
